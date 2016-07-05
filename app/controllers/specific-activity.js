@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
                 var membershipID = this.get('model').membershipID;
                 Ember.$.ajax({
                     type: "DELETE",
-                    url: "https://ccttrain.gordon.edu/api/memberships/" + membershipID,
+                    url: "http://ccttrain.gordon.edu/api/memberships/" + membershipID,
                     contentType: "application/json",
                     async: false,
                     success: function(data) {
@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
                 var newMembershipID = null;
                 Ember.$.ajax({
                     type: "POST",
-                    url: "https://ccttrain.gordon.edu/api/memberships",
+                    url: "http://ccttrain.gordon.edu/api/memberships",
                     data: JSON.stringify(membership),
                     contentType: "application/json",
                     async: false,

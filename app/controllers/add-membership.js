@@ -9,7 +9,6 @@ export default Ember.Controller.extend({
         post: function(role) {
             var comments = this.get("comments");
             var roleID = this.get("role.ParticipationCode");
-            alert(comments);
             var data = {
                 "ACT_CDE": this.get("model.activityCode"),
                 "SESSION_CDE": this.get("model.sessionCode"),
@@ -25,7 +24,7 @@ export default Ember.Controller.extend({
                 data: data,
                 dataType: "json",
                 success: function(data) {
-                    alert("success");
+                    console.log(data);
                 },
                 error: function(errorThrown) {
                     console.log(errorThrown);
