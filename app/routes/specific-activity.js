@@ -69,6 +69,20 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
+
+            Ember.$.ajax({
+            type: "GET",
+            url: 'https://ccttrain.gordon.edu/api/activities/' + param.ActivityCode + "/memberships",
+            async: false,
+            success: function(data) {
+                model.memberships = data;
+                console.log(JSON.stringify(data));
+            },
+            error: function(errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+        
         console.log(model);
         return model;
     }

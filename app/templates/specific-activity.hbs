@@ -64,11 +64,31 @@
             </div>
         </div>
     </div>
-    {{#if model.leader}}
-        <div class="row">
-            <p>LEADER</p>
-            <table>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Current Activity Roster</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Role</th>
+                        <th>Editing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each model.memberships as |mems|}}
+                    <tr>
+                        <td> {{mems.IDNumber}} </td>
+                        <td> {{mems.FirstName}} </td>
+                        <td> {{mems.LastName}} </td>
+                        <td> {{mems.ParticipationDescription}} </td>
+                        <td><button>X</button></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
             </table>
         </div>
-    {{/if}}
+    </div>
 </div>
