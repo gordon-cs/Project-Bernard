@@ -1,1 +1,0 @@
-/Users/jameskempf/Project-Bernard/node_modules/qunitjs/LICENSE.txt

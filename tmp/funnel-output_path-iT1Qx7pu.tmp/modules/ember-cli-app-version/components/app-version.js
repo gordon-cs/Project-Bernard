@@ -1,1 +1,0 @@
-/Users/jameskempf/Project-Bernard/tmp/funnel-input_base_path-3ToFLs3r.tmp/0/components/app-version.js

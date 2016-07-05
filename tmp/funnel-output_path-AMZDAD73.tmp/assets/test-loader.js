@@ -1,1 +1,0 @@
-/Users/jameskempf/Project-Bernard/tmp/funnel-input_base_path-kE8LR4PE.tmp/0/bower_components/ember-cli-test-loader/test-loader.js

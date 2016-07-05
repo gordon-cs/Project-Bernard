@@ -1,1 +1,0 @@
-/Users/jameskempf/Project-Bernard/tmp/creator-output_path-nxGTIxfU.tmp/version.js

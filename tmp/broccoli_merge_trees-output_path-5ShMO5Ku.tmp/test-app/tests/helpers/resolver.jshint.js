@@ -1,1 +1,0 @@
-/Users/jameskempf/project-overworked/tmp/broccoli_merge_trees-input_base_path-HXCLhlQk.tmp/2/test-app/tests/helpers/resolver.jshint.js
