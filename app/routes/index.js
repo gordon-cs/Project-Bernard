@@ -9,7 +9,7 @@ export default Ember.Route.extend({
         };
         Ember.$.ajax({
             type: "GET",
-            url: "https://ccttrain.gordon.edu/api/sessions",
+            url: "http://ccttrain.gordon.edu/api/sessions",
             async: false,
             success: function(data) {
                 model.sessions = data;
@@ -20,7 +20,7 @@ export default Ember.Route.extend({
         });
         Ember.$.ajax({
             type: "GET",
-            url: "https://ccttrain.gordon.edu/api/sessions/current",
+            url: "http://ccttrain.gordon.edu/api/sessions/current",
             async: false,
             success: function(data) {
                 model.currentSession = data;
@@ -31,7 +31,7 @@ export default Ember.Route.extend({
         });
         Ember.$.ajax({
             type: "GET",
-            url: "https://ccttrain.gordon.edu/api/sessions/" + model.currentSession.SessionCode + "/activities",
+            url: "http://ccttrain.gordon.edu/api/sessions/" + model.currentSession.SessionCode + "/activities",
             async: false,
             success: function(data) {
                 model.activities = data;

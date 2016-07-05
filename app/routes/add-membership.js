@@ -2,31 +2,19 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
     model(param) {
-        var response = {};
+        var model = {
+            "activityCode": param.ActivityCode,
+            "sessionCode": param.SessionCode,
+            "roles": null
+        };
         Ember.$.ajax({
-            dataType: "json",
-            url: 'https://ccttrain.gordon.edu/api/activities/' + param.ACT_CDE,
+            type: "GET",
+            url: 'http://ccttrain.gordon.edu/api/participations',
             async: false,
             success: function(data) {
-                response.activity = data;
+                model.roles = data;
             }
         });
-        Ember.$.ajax({
-            dataType: "json",
-            url: 'https://ccttrain.gordon.edu/api/sessions',
-            async: false,
-            success: function(data) {
-                response.sessions = data;
-            }
-        });
-        Ember.$.ajax({
-            dataType: "json",
-            url: 'https://ccttrain.gordon.edu/api/roles',
-            async: false,
-            success: function(data) {
-                response.roles = data;
-            }
-        });
-        return response;
+        return model;
     }
 });

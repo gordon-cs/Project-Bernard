@@ -5,11 +5,10 @@ export default Ember.Controller.extend({
         toggleFollow() {
             var passed = false;
             if (this.get('model').following) {
-                var activityCode = this.get('model').activity.ActivityCode.trim();
                 var membershipID = this.get('model').membershipID;
                 Ember.$.ajax({
                     type: "DELETE",
-                    url: "https://ccttrain.gordon.edu/api/memberships/" + membershipID,
+                    url: "http://ccttrain.gordon.edu/api/memberships/" + membershipID,
                     contentType: "application/json",
                     async: false,
                     success: function(data) {
@@ -35,7 +34,7 @@ export default Ember.Controller.extend({
                 var newMembershipID = null;
                 Ember.$.ajax({
                     type: "POST",
-                    url: "https://ccttrain.gordon.edu/api/memberships",
+                    url: "http://ccttrain.gordon.edu/api/memberships",
                     data: JSON.stringify(membership),
                     contentType: "application/json",
                     async: false,

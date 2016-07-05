@@ -12,14 +12,16 @@
         <div class="col-sm-6">
             <div class="row">
                 {{#if model.leader}}
-                    <button type="button" class="btn btn-blue form-control col-sm-6" {{action 'toggleFollow'}}>Add Member</button>
+                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
+                        <button type="button" class="btn btn-blue form-control col-sm-6" {{action 'toggleFollow'}}>Add Member</button>
+                    {{/link-to}}
                 {{else}}
                     {{#if model.following}}
                         <button type="button" class="btn btn-blue form-control col-sm-6" {{action 'toggleFollow'}}>Unfollow</button>
                     {{else}}
                         <button type="button" class="btn btn-blue form-control col-sm-6" {{action 'toggleFollow'}}>Follow</button>
                     {{/if}}
-                    {{#link-to 'add-membership' model.activity.ActivityCode}}
+                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                         <button type="button" class="btn btn-blue form-control col-sm-6">Request Membership</button>
                     {{/link-to}}
                 {{/if}}

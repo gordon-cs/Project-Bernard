@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
             var activities = null;
             Ember.$.ajax({
                 type: "GET",
-                url: "https://ccttrain.gordon.edu/api/sessions/" + session.SessionCode.trim() + "/activities",
+                url: "http://ccttrain.gordon.edu/api/sessions/" + session.SessionCode.trim() + "/activities",
                 async: false,
                 success: function(data) {
                     activities = data;
