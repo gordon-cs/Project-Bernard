@@ -1,0 +1,1 @@
+/Users/jameskempf/Project-Bernard/tmp/funnel-input_base_path-ODkjXWLz.tmp/0/services/text-measurer.js

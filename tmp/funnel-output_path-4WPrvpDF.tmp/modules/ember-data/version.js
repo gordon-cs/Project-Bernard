@@ -1,0 +1,1 @@
+/Users/jameskempf/Project-Bernard/tmp/creator-output_path-pryEJ7X5.tmp/version.js

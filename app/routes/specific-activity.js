@@ -39,10 +39,10 @@ export default Ember.Route.extend({
                     if (data[i].ActivityCode === param.ActivityCode
                         && data[i].IDNumber === "50154997"
                         && data[i].SessionCode === param.SessionCode.trim()
+                        && data[i].Participation === "GUEST"
                     ) {
-                        if (data[i].Participation === "GUEST") {
-                            model.following = true;
-                        }
+                        model.membershipID = data[i].MembershipID;
+                        model.following = true;
                     }
                 }
             },
