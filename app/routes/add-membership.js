@@ -5,7 +5,7 @@ export default Ember.Route.extend({
         var response = {};
         Ember.$.ajax({
             dataType: "json",
-            url: 'https://ccttrain.gordon.edu/api/activities/' + param.ACT_CDE,
+            url: 'http://ccttrain.gordon.edu/api/activities/' + param.ACT_CDE,
             async: false,
             success: function(data) {
                 response.activity = data;
@@ -13,7 +13,7 @@ export default Ember.Route.extend({
         });
         Ember.$.ajax({
             dataType: "json",
-            url: 'https://ccttrain.gordon.edu/api/sessions',
+            url: 'http://ccttrain.gordon.edu/api/sessions',
             async: false,
             success: function(data) {
                 response.sessions = data;
@@ -21,7 +21,7 @@ export default Ember.Route.extend({
         });
         Ember.$.ajax({
             dataType: "json",
-            url: 'https://ccttrain.gordon.edu/api/roles',
+            url: 'http://ccttrain.gordon.edu/api/roles',
             async: false,
             success: function(data) {
                 response.roles = data;
