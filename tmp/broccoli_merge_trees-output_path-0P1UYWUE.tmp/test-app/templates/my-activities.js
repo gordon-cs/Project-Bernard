@@ -1,0 +1,1 @@
+/Users/jameskempf/Project-Bernard/tmp/broccoli_merge_trees-input_base_path-GqljreF5.tmp/1/test-app/templates/my-activities.js

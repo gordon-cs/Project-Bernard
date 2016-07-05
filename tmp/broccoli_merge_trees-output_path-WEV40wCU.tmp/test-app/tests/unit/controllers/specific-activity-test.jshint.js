@@ -1,0 +1,1 @@
+/Users/jameskempf/Project-Bernard/tmp/broccoli_merge_trees-input_base_path-ybNvD4SB.tmp/2/test-app/tests/unit/controllers/specific-activity-test.jshint.js
