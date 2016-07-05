@@ -30,8 +30,7 @@
                         <p class="activity-info-item">Leaders:</p>
                             {{#each model.leaders as |leader|}}
                                 <p class="activity-info-item-data">
-                                    {{leader.FirstName}}
-                                    {{leader.LastName}}
+                                    {{leader.FirstName}} {{leader.LastName}} (<a href="https://en.wikipedia.org/wiki/Potato">E.Mail@gordon.edu</a>)
                                 </p>
                             {{/each}}
                     </div>
@@ -66,7 +65,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <h3>Current Activity Roster</h3>
+            <h2>Current Activity Roster</h2>
             <table class="table">
                 <thead>
                     <tr>
@@ -74,7 +73,7 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Role</th>
-                        <th>Editing</th>
+                        <th>Leader/Advisor Control</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,7 +83,7 @@
                         <td> {{mems.FirstName}} </td>
                         <td> {{mems.LastName}} </td>
                         <td> {{mems.ParticipationDescription}} </td>
-                        <td><button>X</button></td>
+                        <td><button class="roster-button remove-button">Remove</button> <button class="roster-button edit-button">Edit</button></td>
                     </tr>
                     {{/each}}
                 </tbody>

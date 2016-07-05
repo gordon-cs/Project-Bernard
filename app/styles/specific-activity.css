@@ -17,3 +17,24 @@
     font-size: 150%;
     margin-left: 30px;
 }
+.roster-button {
+	text-align: center;
+	border-radius: 2px;
+	transition-duration: 0.4s;
+	padding: 2px;
+	margin-right: 5px;
+}
+.roster-button:active {
+	transform: translateY(4px);
+}
+.remove-button:hover {
+	background-color: #F44336; /* Red */
+	color: white;
+}
+.edit-button:hover {
+	background-color: #00AEEF; /* Gordon Cyan */
+	color: white;
+}
+tr:hover {
+	background-color: #F5F5F5; /* light gray */
+}
