@@ -19,10 +19,10 @@
                 </option>
             {{/each}}
         </select>
-        {{input valueBinding=student-id class="form-control" placeholder="Student ID"}}
-        {{input valueBinding=date-begin class="form-control" placeholder="Begin Date"}}
-        {{input valueBinding=date-end class="form-control" placeholder="End Date"}}
-        {{input valueBinding=comments class="form-control" placeholder="Comment (optional)"}}
+        {{input value=student-id class="form-control" placeholder="Student ID"}}
+        {{input value=date-begin class="form-control" placeholder="Begin Date"}}
+        {{input value=date-end class="form-control" placeholder="End Date"}}
+        {{input value=comments class="form-control" placeholder="Comment (optional)"}}
         <button class="form-control btn btn-blue" {{action 'post'}}>Add</button>
     </div>
 </div>
