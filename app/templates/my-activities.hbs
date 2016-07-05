@@ -1,0 +1,18 @@
+<link rel="stylesheet" type="text/css" href="assets/my-activities.css">
+
+<div class="container main-container">
+	<div class="row">
+		<div class="col-sm-6">
+			<h2 class="page-title">My Memberships</h2>
+		</div>
+	</div>
+	<div class="activity-list col-sm-6">
+		{{#each model as |membership|}}
+			{{#link-to 'specific-activity' membership.SessionCode ActivityCode membership.ActivityCode}}
+				<p>
+					{{membership.ActivityCode}} {{membership.Participation}} {{membership.StartDate}} {{membership.Description}}
+				</p>
+			{{/link-to}}
+		{{/each}}
+	</div>
+</div>
