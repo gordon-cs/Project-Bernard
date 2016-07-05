@@ -1,44 +1,36 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    role: null,
     actions: {
-
-        selectSession: function(session) {
-
+        setRole(role) {
+            this.set("role", role);
         },
-        selectRole: function(role) {
-
-        },
-        post: function() {
-            //var a = this.get('student-id');
-            //var b = this.get('student-id');
-            //var c = this.get('student-id');
-            //var d = this.get('student-id');
-            alert("hello");
-        }
-        /*post: function(activityCode, studentId, session, role, beginDate, endDate, comments) {
+        post: function(role) {
+            var comments = this.get("comments");
+            var roleID = this.get("role.ParticipationCode");
+            alert(comments);
             var data = {
-                //"MEMBERSHIP_ID"
-                "ACT_CDE": activityCode,
-                "SESSION_CDE": session,
-                "ID_NUM": studentId,
-                "PART_LVL": role,
-                "BEGIN_DTE": beginDate,
-                "END_DTE": endDate,
+                "ACT_CDE": this.get("model.activityCode"),
+                "SESSION_CDE": this.get("model.sessionCode"),
+                "ID_NUM": "50154997",
+                "PART_LVL": roleID,
+                "BEGIN_DTE": "1/1/2016",
                 "DESCRIPTION": comments
-                //"USER_NAME"
-                //"JOB_NAME"
-                //"JOB_TIME"
             };
+            console.log(data);
             Ember.$.ajax({
                 type: "POST",
-                url: 'https://ccttrain.gordon.edu/api/activities/' + param.ACT_CDE,
-                data, data,
+                url: "http://ccttrain.gordon.edu/api/memberships/",
+                data: data,
+                dataType: "json",
                 success: function(data) {
                     alert("success");
                 },
-                dataType: "json"
+                error: function(errorThrown) {
+                    console.log(errorThrown);
+                }
             });
-        }*/
+        }
     }
 });
