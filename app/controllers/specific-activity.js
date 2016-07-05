@@ -5,7 +5,6 @@ export default Ember.Controller.extend({
         toggleFollow() {
             var passed = false;
             if (this.get('model').following) {
-                var activityCode = this.get('model').activity.ActivityCode.trim();
                 var membershipID = this.get('model').membershipID;
                 Ember.$.ajax({
                     type: "DELETE",

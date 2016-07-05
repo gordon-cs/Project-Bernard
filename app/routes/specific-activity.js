@@ -5,8 +5,10 @@ export default Ember.Route.extend({
         var model = {
             "following": false,
             "leader": false,
+            "membershipID": null,
             "leaders": null,
-            session: null
+            "activity": null,
+            "session": null
         };
         Ember.$.ajax({
             type: "GET",
@@ -47,7 +49,7 @@ export default Ember.Route.extend({
                 }
             },
             error: function(errorThrown) {
-                console.log(errorTrown);
+                console.log(errorThrown);
             }
         });
         Ember.$.ajax({
@@ -69,14 +71,12 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
-
-            Ember.$.ajax({
+        Ember.$.ajax({
             type: "GET",
             url: 'http://ccttrain.gordon.edu/api/activities/' + param.ActivityCode + "/memberships",
             async: false,
             success: function(data) {
                 model.memberships = data;
-                console.log(JSON.stringify(data));
             },
             error: function(errorThrown) {
                 console.log(errorThrown);
