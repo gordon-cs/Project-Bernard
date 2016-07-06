@@ -9,10 +9,14 @@ export default Ember.Controller.extend({
         post: function(role) {
             var comments = this.get("comments");
             var roleID = this.get("role.ParticipationCode");
+            var studentID = "50154997";
+            if (this.get("model.leading")) {
+                studentID = this.get("studentID");
+            }
             var data = {
                 "ACT_CDE": this.get("model.activityCode"),
                 "SESSION_CDE": this.get("model.sessionCode"),
-                "ID_NUM": "50154997",
+                "ID_NUM": studentID,
                 "PART_LVL": roleID,
                 "BEGIN_DTE": "1/1/2016",
                 "DESCRIPTION": comments

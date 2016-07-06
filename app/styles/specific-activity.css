@@ -8,7 +8,7 @@
     height: 300px;
 }
 .activity-info {
-    margin-top: 20px;
+    margin-top: 50px;
 }
 .activity-info-item {
     font-size: 150%;
@@ -16,6 +16,9 @@
 .activity-info-item-data {
     font-size: 150%;
     margin-left: 30px;
+}
+.button-row {
+    margin-top: 20px;
 }
 .roster-button {
 	text-align: center;
