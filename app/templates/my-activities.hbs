@@ -1,11 +1,9 @@
 <link rel="stylesheet" href="assets/my-activities.css">
 
-<div class="container main-container">
-	<div class="row">
-		<div class="col-sm-6 section-title">
+<div class="main-container">
+		<div class="section-title">
 			<h2>Current Experience:</h2>
 		</div>
-	</div>
 	<div class="activity-list">
 		{{#each model as |mem|}}
 			{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well activity-list-item"}}

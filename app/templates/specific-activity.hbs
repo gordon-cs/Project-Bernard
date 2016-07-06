@@ -86,7 +86,12 @@
                           <td> {{mems.FirstName}} </td>
                           <td> {{mems.LastName}} </td>
                           <td> {{mems.ParticipationDescription}} </td>
-                          <td><button class="roster-button remove-button btn button-red {{if (notInArr mems.MembershipID model.allMyMembershipIDs) "disabled" }}">Remove</button> <button class="roster-button edit-button btn button-navy{{if (notInArr mems.MembershipID model.allMyMembershipIDs) "disabled" }}">Edit</button></td>
+                          {{#if (inArr mems.MembershipID model.allMyMembershipIDs)}}
+                          <td><button class="roster-button remove-button btn button-red">Remove</button> <button class="roster-button edit-button btn button-navy">Edit</button></td>
+                          {{else}}
+                          <td></td>
+                          {{/if}}
+
                       </tr>
                       {{/each}}
                   </tbody>
