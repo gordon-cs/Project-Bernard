@@ -85,7 +85,7 @@
                           <td> {{mems.LastName}} </td>
                           <td> {{mems.ParticipationDescription}} </td>
                           {{#if (inArr mems.MembershipID model.allMyMembershipIDs)}}
-                          <td><button class="roster-button remove-button btn button-red">Remove</button> <button class="roster-button edit-button btn button-navy">Edit</button></td>
+                          <td><button {{action 'removePerson'}} class="roster-button remove-button btn button-red">Remove</button> <button {{action 'editPerson'}}  class="roster-button edit-button btn button-navy">Edit</button></td>
                           {{else}}
                           <td></td>
                           {{/if}}

@@ -18,6 +18,9 @@
     font-size: 150%;
     margin-left: 30px;
 }
+tr:hover {
+	background-color: #F5F5F5; /* light gray */
+}
 .roster-button {
 	text-align: center;
 	border-radius: 4px;
@@ -28,12 +31,10 @@
   border: 1px solid #DDDDDD;*/
 
 }
-.roster-button:active {
+.roster-btn:active {
 	transform: translateY(4px);
 }
 .remove-button:hover {
-  /*background-color: #DE571F;*/ /* "Gordon" Red */
-	/*background-color: #F44336;*/ /* Red */
 	color: white;
 }
 .edit-button:hover {
