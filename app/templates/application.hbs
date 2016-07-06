@@ -4,32 +4,32 @@
             <h1 class="app-title">Student Clubs <span class="app-title-ampersand">&amp;</span> Organizations</h1>
         </div>
     </div>
-    <div class="row">
-		<nav class="navbar navbar-blue" role="navigation">
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li>
+	<nav class="navbar navbar-blue row" role="navigation">
+        <div class="container-fluid">
+    		<!-- <div class="collapse navbar-collapse"> -->
+    			<ul class="nav navbar-nav">
+    				<li>
                         {{#link-to 'index' class="button"}}
                             What's Available?
                         {{/link-to}}
-					</li>
-					<li>
+    				</li>
+    				<li>
                         {{#link-to 'my-activities' class="button"}}
                             My Involvments
                         {{/link-to}}
-					</li>
-					<li>
+    				</li>
+    				<li>
                         {{#link-to 'my-activities' class="button"}}
                             Co-Curricular Transcript
                         {{/link-to}}
-					</li>
-					<li>
+    				</li>
+    				<li class="nav-search-item">
                         <input type="text" class="form-control nav-search" placeholder="Search">
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</div>
+    				</li>
+    			</ul>
+    		<!-- </div> -->
+        </div>
+	</nav>
 </div>
 
 {{outlet}}
