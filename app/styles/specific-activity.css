@@ -17,6 +17,9 @@
     font-size: 150%;
     margin-left: 30px;
 }
+tr:hover {
+	background-color: #F5F5F5; /* light gray */
+}
 .roster-button {
 	text-align: center;
 	border-radius: 2px;
@@ -24,17 +27,16 @@
 	padding: 2px;
 	margin-right: 5px;
 }
-.roster-button:active {
+.roster-btn:active {
 	transform: translateY(4px);
 }
-.remove-button:hover {
+
+/* not used but kept in case */
+.remove-btn:hover {
 	background-color: #F44336; /* Red */
 	color: white;
 }
-.edit-button:hover {
+.edit-btn:hover {
 	background-color: #00AEEF; /* Gordon Cyan */
 	color: white;
-}
-tr:hover {
-	background-color: #F5F5F5; /* light gray */
 }
