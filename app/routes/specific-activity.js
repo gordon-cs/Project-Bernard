@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+
+    /*  Below is the model and calls to the api that retrieve data to fill the model */
     model(param) {
         var model = {
             "following": false,
@@ -9,7 +11,8 @@ export default Ember.Route.extend({
             "leaders": null,
             "activity": null,
             "session": null,
-            "memberships": null
+            "memberships": null,
+            "allMyMembershipIDs": []
         };
         // Set Activity Info
         Ember.$.ajax({
