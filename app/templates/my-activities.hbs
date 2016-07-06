@@ -1,17 +1,17 @@
-<link rel="stylesheet" href="assets/my-activities.css">
+
 
 <div class="main-container">
 		<div class="section-title">
 			<h2>Current Experience:</h2>
 		</div>
-	<div class="activity-list">
+	<div class="my-activity-list">
 		{{#each model as |mem|}}
-			{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well activity-list-item"}}
-				<img class="activity-list-item-img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
+			{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
+				<img class="my-activity-list-item-img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
 				<div class="membership-description">
 					<dl>
 						<dt>Activity</dt>
-						<dd>{{mem.ActivityCode}}</dd>
+						<dd>{{mem.ActivityDescription}}</dd>
 						<dt>Membership Role</dt>
 						<dd>{{mem.ParticipationDescription}}</dd>
 						<dt>Start Date</dt>
