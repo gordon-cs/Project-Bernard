@@ -39,18 +39,8 @@ tr:hover {
 	-webkit-transform: translateY(4px);
 	        transform: translateY(4px);
 }
-.remove-button:hover {
-	color: white;
-}
-.edit-button:hover {
-	/*background-color: #00AEEF;*/ /* Gordon Cyan */
-	/*color: white;*/
-}
-tr:hover {
-  /* Nice touch ! */
-	background-color: #F5F5F5; /* light gray */
-}
-/* FROM GORDON's CSS FILE */
+
+/* FROM GORDON's CSS FILE 
 .button-cyan {color: white; background: #00aeef;}
 .button-cyan:hover {background: #00bdec; color: white; text-decoration: none;}
 
@@ -76,3 +66,4 @@ tr:hover {
 
 .button-447 {background: #31342b; color: white;}
 .button-447:hover {background: #5A5D55; color: white; text-decoration: none;}
+*/

@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     actions: {
+
+        // Method that gets called when the follow button is clicked
         toggleFollow() {
             var passed = false;
             if (this.get('model').following) {
@@ -56,6 +58,7 @@ export default Ember.Controller.extend({
             }
         },
 
+        // Method that gets called when the Remove button is clicked
         removePerson() {
             if(confirm("Do you want to remove this person?")) {
                 alert("Deleted");
@@ -66,6 +69,7 @@ export default Ember.Controller.extend({
             }
         },
 
+        // Method that gets called when the Edit button is clicked
         editPerson() {
             alert("Edit");
             console.log("Edit Person");
