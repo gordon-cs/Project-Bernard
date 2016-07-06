@@ -2,8 +2,8 @@
 <div class="page-title">
 	<h2>{{model.currentSession.SessionDescription}}</h2>
 </div>
-<div class="container main-container">
-	<div class="row dropdown-container">
+<div class="main-container">
+	<div class="dropdown-container">
 		<div class="session-dropdown">
 			{{#power-select
 				placeholder="Select Session"
@@ -16,7 +16,7 @@
 			{{/power-select}}
 		</div>
 	</div>
-	<div class="activity-list row">
+	<div class="activity-list">
 		{{#each model.activities as |activity|}}
 			{{#link-to 'specific-activity' model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
 					<img class="activity-list-item-img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
