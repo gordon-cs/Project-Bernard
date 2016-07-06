@@ -1,3 +1,4 @@
+
 :root{
     --red: #B53227;
     --orange: #DE571F;
@@ -9,20 +10,27 @@
     --light-gray: #EBEAEA;
     --mid-gray: #6F6F6F;
     --dark-gray: #616161;
+
+}
+.app-title-container {
+  text-align: center;
 }
 .app-title {
-    font-size: 450%;
+    font-size: 200%;
     font-family: sans-serif;
-    margin-top: 15px;
-    margin-bottom: 15px;
+}
+.app-title-ampersand {
+  font-size: 60%;
+  font-weight: 100;
 }
 .main-container {
-    margin-top: 20px;
+
 }
 button.btn-blue {
     color: white;
     background-color: var(--blue);
     border: none;
+    margin: 3px;
 }
 button.btn-blue:hover,
 button.btn-blue:focus {
@@ -84,6 +92,26 @@ nav.navbar-blue .navbar-toggle:focus .icon-bar {
 .nav-search {
     margin-left: 8px;
     margin-top: 8px;
+}
+
+@media only screen and (min-width: 992px) {
+  .app-title-container {
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  .app-title {
+      font-size: 300%;
+      font-family: sans-serif;
+  }
+  .app-title-ampersand {
+    font-size: 80%;
+    font-weight: normal;;
+  }
+  .main-container {
+      background-color: #FFFFFF;
+  }
 }
 @media (max-width: 767px) {
     nav.navbar-blue {

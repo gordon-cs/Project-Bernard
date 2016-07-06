@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-sm-6 col-left">
             <div class="row">
-                <h2 class = "activity-name">{{model.activity.ActivityDescription}}</h2>
-                <img class = "activity-picture"
+                <h2 class = "activity-name lead text-center">{{model.activity.ActivityDescription}}</h2>
+                <img class = "activity-picture center-block img-circle"
                     src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
             </div>
         </div>
@@ -67,31 +67,34 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <h2>Current Activity Roster</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Role</th>
-                        <th>Leader/Advisor Control</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each model.memberships as |mems|}}
-                    <tr>
-                        <td> {{mems.IDNumber}} </td>
-                        <td> {{mems.FirstName}} </td>
-                        <td> {{mems.LastName}} </td>
-                        <td> {{mems.ParticipationDescription}} </td>
-                        <td>
-                            <button {{action 'removePerson'}} class="btn btn-blue roster-btn remove-btn">Remove</button> <button {{action 'editPerson'}} class="btn btn-blue roster-btn edit-btn">Edit</button>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+            <h2 >Current Activity Roster</h2>
+            <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Role</th>
+                          <th>Options</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {{#each model.memberships as |mems|}}
+                      <tr>
+                          <td> {{mems.FirstName}} </td>
+                          <td> {{mems.LastName}} </td>
+                          <td> {{mems.ParticipationDescription}} </td>
+                          {{#if (inArr mems.MembershipID model.allMyMembershipIDs)}}
+                          <td><button {{action 'removePerson'}} class="roster-button remove-button btn button-red">Remove</button> <button {{action 'editPerson'}}  class="roster-button edit-button btn button-navy">Edit</button></td>
+                          {{else}}
+                          <td></td>
+                          {{/if}}
+
+                      </tr>
+                      {{/each}}
+                  </tbody>
+              </table>
+          </div>
         </div>
     </div>
 </div>

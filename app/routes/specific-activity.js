@@ -10,7 +10,8 @@ export default Ember.Route.extend({
             "membershipID": null,
             "leaders": null,
             "activity": null,
-            "session": null
+            "session": null,
+            "allMyMembershipIDs": []
         };
         Ember.$.ajax({
             type: "GET",
@@ -40,6 +41,7 @@ export default Ember.Route.extend({
             async: false,
             success: function(data) {
                 for (var i = 0; i < data.length; i ++) {
+                    model["allMyMembershipIDs"].push(data[i].MembershipID);
                     if (data[i].ActivityCode === param.ActivityCode &&
                         data[i].IDNumber === "50154997" &&
                         data[i].SessionCode === param.SessionCode.trim() &&
