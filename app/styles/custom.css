@@ -1,20 +1,28 @@
+
 .invisible {
     visibility: hidden;
 }
+.app-title-container {
+  text-align: center;
+}
 .app-title {
-    font-size: 450%;
+    font-size: 200%;
     font-family: sans-serif;
-    margin-top: 15px;
-    margin-bottom: 15px;
+}
+.app-title-ampersand {
+  font-size: 60%;
+  font-weight: 100;
 }
 .main-container {
-    margin-top: 20px;
+    text-align: center;
+    background-color: #ebeaea;
 }
 button.btn-blue {
     color: #FFF;
     background-color: #064983;
     border-color: #064983;
     border: none;
+    margin: 3px;
 }
 button.btn-blue:hover,
 button.btn-blue:focus {

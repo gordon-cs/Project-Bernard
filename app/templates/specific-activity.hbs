@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-sm-6 col-left">
             <div class="row">
-                <h2 class = "activity-name">{{model.activity.ActivityDescription}}</h2>
-                <img class = "activity-picture"
+                <h2 class = "activity-name lead text-center">{{model.activity.ActivityDescription}}</h2>
+                <img class = "activity-picture center-block img-circle"
                     src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
             </div>
         </div>
@@ -67,7 +67,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <h2>Current Activity Roster</h2>
+            <h2 >Current Activity Roster</h2>
             <table class="table">
                 <thead>
                     <tr>
@@ -85,7 +85,7 @@
                         <td> {{mems.FirstName}} </td>
                         <td> {{mems.LastName}} </td>
                         <td> {{mems.ParticipationDescription}} </td>
-                        <td><button class="roster-button remove-button">Remove</button> <button class="roster-button edit-button">Edit</button></td>
+                        <td><button class="roster-button remove-button btn button-red {{if (notInArr mems.MembershipID model.allMyMembershipIDs) "disabled" }}">Remove</button> <button class="roster-button edit-button btn button-navy{{if (notInArr mems.MembershipID model.allMyMembershipIDs) "disabled" }}">Edit</button></td>
                     </tr>
                     {{/each}}
                 </tbody>

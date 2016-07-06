@@ -1,23 +1,31 @@
 .page-title {
-    font-size: 200%;
-    margin-top: 0px;
+  text-align: center;
+}
+.page-title > h2 {
+    font-size: 100%;
+    margin: 5px;
+}
+.session-dropdown {
+  margin: 5px;
 }
 .activity-list {
 }
 .activity-list > .activity-list-item {
     display: inline-block;
     background-color: white;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 2px;
+    padding: 2px;
+    vertical-align: top;
+    width: 30%;
 }
 .activity-list > .activity-list-item:hover {
     border: 1px solid #064983;
     cursor: pointer;
 }
 .activity-list > .activity-list-item > .activity-list-item-img  {
-    margin-left: 15px;
-    margin-bottom: 20px;
-    float: left;
+    max-width: 80%;
+    margin: 5px;
+    border-radius: 10%;
 }
 .activity-list > .activity-list-item > p {
     margin-top: 5px;
@@ -30,16 +38,13 @@
 .sort-list-item {
     font-size: 150%;
     display: inline;
-    margin-right: 5px;
 }
-.sort-list {
-    float: right;
-}
+
 .sort-list-item:hover {
     color: #7EA5C8;
     cursor: pointer;
 }
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
     img {
         width: 100px;
         height: 100px;
@@ -53,34 +58,48 @@
         margin-right: 20px;
         margin-left: 20px;
     }
-}
+}*/
 @media (min-width: 768px) {
-    img {
-        width: 80px;
-        height: 80px;
-    }
-    .activity-list > .activity-list-item > p {
-        font-size: 80%;
+    .page-title {
+      font-size: 140%;
+      margin: 15px;
     }
     .activity-list > .activity-list-item {
-        margin-right: 30px;
-        margin-left: 30px;
-        height: 225px;
+        width: 32%;
+        margin: 5px;
+    }
+    .activity-list > .activity-list-item > .activity-list-item-img  {
+        max-width: 70%;
+        margin: 10px;
+        border-radius: 10%;
+    }
+    .activity-list > .activity-list-item > p {
+         margin: 15px;
+         font-size: 140%;
     }
 }
 @media (min-width: 992px) {
-    img {
-        width: 115px;
-        height: 115px;
-    }
+
+  .page-title {
+    font-size: 180%;
+    margin: 15px;
+    text-align: left;
+  }
+  .page-title > h2 {
+
+  }
+  .activity-list > .activity-list-item {
+      margin-right: 40px;
+      margin-left: 40px;
+  }
+  .activity-list > .activity-list-item {
+      width: 20%;
+      margin: 5px;
+  }
     .activity-list > .activity-list-item > p {
-        font-size: 100%;
+        font-size: 140%;
     }
-    .activity-list > .activity-list-item {
-        margin-right: 40px;
-        margin-left: 40px;
-        height: 250px;
-    }
+
 }
 @media (min-width: 1200px) {
     img {

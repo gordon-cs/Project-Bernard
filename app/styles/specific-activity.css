@@ -3,9 +3,7 @@
     margin-top: 0;
 }
 .activity-picture {
-    margin-top: 10px;
-    width: 300px;
-    height: 300px;
+    max-width: 50%;
 }
 .activity-info {
     margin-top: 20px;
@@ -19,22 +17,54 @@
 }
 .roster-button {
 	text-align: center;
-	border-radius: 2px;
+	border-radius: 4px;
 	transition-duration: 0.4s;
-	padding: 2px;
-	margin-right: 5px;
+	/*padding: 5px;
+	margin-right: 5px;*/
+  /*background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;*/
+
 }
 .roster-button:active {
 	transform: translateY(4px);
 }
 .remove-button:hover {
-	background-color: #F44336; /* Red */
+  /*background-color: #DE571F;*/ /* "Gordon" Red */
+	/*background-color: #F44336;*/ /* Red */
 	color: white;
 }
 .edit-button:hover {
-	background-color: #00AEEF; /* Gordon Cyan */
-	color: white;
+	/*background-color: #00AEEF;*/ /* Gordon Cyan */
+	/*color: white;*/
 }
 tr:hover {
+  /* Nice touch ! */
 	background-color: #F5F5F5; /* light gray */
 }
+
+/* FROM GORDON's CSS FILE */
+.button-cyan {color: white; background: #00aeef;}
+.button-cyan:hover {background: #00bdec; color: white; text-decoration: underline;}
+
+.button-navy { background: #014983; color: white;}
+.button-navy:hover {background: #0159A0; text-decoration: underline; color: white;}
+
+.button-orange {background: #DE571F; color: white;}
+.button-orange:hover {background: #E2794C; text-decoration: underline; color: white;}
+
+.button-green {background: #b2bb1c;color: white;}
+.button-green:hover {background: #bcc61e; text-decoration: underline; color: white;}
+
+.button-darkgreen {background: #086d38; color: white;}
+.button-darkgreen:hover {background: #0a7a3d; text-decoration: underline; color: white;}
+
+.button-red {background: #b53228; color: white;}
+.button-red:hover {background: #d83c30; text-decoration: underline; color: white;}
+
+.button-yellow {background: #FDB913; color: #31342b;}
+.button-yellow:hover {background: #fdc233; text-decoration: underline; color: #31342b;}
+
+.button-gray {background: #D0D2D3; color: black;}
+
+.button-447 {background: #31342b; color: white;}
+.button-447:hover {background: #5A5D55; color: white; text-decoration: underline;}

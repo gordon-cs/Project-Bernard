@@ -1,11 +1,10 @@
 <link rel="stylesheet" href="assets/all-activities.css">
-
+<div class="page-title">
+	<h2>{{model.currentSession.SessionDescription}}</h2>
+</div>
 <div class="container main-container">
 	<div class="row">
-		<div class="col-sm-9">
-			<h2 class="page-title">{{model.currentSession.SessionDescription}}</h2>
-		</div>
-		<div class="col-sm-3">
+		<div class="session-dropdown">
 			{{#power-select
 				placeholder="Select Session"
 				searchField="SessionDescription"
@@ -19,10 +18,9 @@
 	</div>
 	<div class="activity-list row">
 		{{#each model.activities as |activity|}}
-			{{#link-to 'specific-activity' model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item col-sm-2"}}
-				<img src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
-				<p>{{activity.ActivityDescription}}</p>
-				<p>{{activity.ActivityCode}}</p>
+			{{#link-to 'specific-activity' model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
+					<img class="activity-list-item-img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
+					<p class="text-center">{{activity.ActivityDescription}}</p>
 			{{/link-to}}
 		{{/each}}
 	</div>
