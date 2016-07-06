@@ -3,8 +3,9 @@ import Ember from "ember";
 export default Ember.Route.extend({
     model() {
         var model = {
-            "activities": null,
-            "sessions": null,
+            "activities": [],
+            "activitesShown": [],
+            "sessions": [],
             "currentSession": null
         };
         Ember.$.ajax({
@@ -35,6 +36,7 @@ export default Ember.Route.extend({
             async: false,
             success: function(data) {
                 model.activities = data;
+                model.activitiesShown = data;
             },
             error: function(errorThrown) {
                 console.log(errorThrown);
