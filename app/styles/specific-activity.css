@@ -1,14 +1,15 @@
+.main-container {
+  background-color: #FFFFFF;
+}
 .activity-name {
     font-size: 250%;
     margin-top: 0;
 }
 .activity-picture {
-    margin-top: 10px;
-    width: 300px;
-    height: 300px;
+    max-width: 50%;
 }
 .activity-info {
-    margin-top: 20px;
+    margin-top: 50px;
 }
 .activity-info-item {
     font-size: 150%;
@@ -17,26 +18,61 @@
     font-size: 150%;
     margin-left: 30px;
 }
+.button-row {
+    margin-top: 20px;
+}
 tr:hover {
 	background-color: #F5F5F5; /* light gray */
 }
 .roster-button {
 	text-align: center;
-	border-radius: 2px;
-	transition-duration: 0.4s;
-	padding: 2px;
-	margin-right: 5px;
+	border-radius: 4px;
+	-webkit-transition-duration: 0.4s;
+	        transition-duration: 0.4s;
+	/*padding: 5px;
+	margin-right: 5px;*/
+  /*background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;*/
+
 }
 .roster-btn:active {
-	transform: translateY(4px);
+	-webkit-transform: translateY(4px);
+	        transform: translateY(4px);
 }
+.remove-button:hover {
+	color: white;
+}
+.edit-button:hover {
+	/*background-color: #00AEEF;*/ /* Gordon Cyan */
+	/*color: white;*/
+}
+tr:hover {
+  /* Nice touch ! */
+	background-color: #F5F5F5; /* light gray */
+}
+/* FROM GORDON's CSS FILE */
+.button-cyan {color: white; background: #00aeef;}
+.button-cyan:hover {background: #00bdec; color: white; text-decoration: none;}
 
-/* not used but kept in case */
-.remove-btn:hover {
-	background-color: #F44336; /* Red */
-	color: white;
-}
-.edit-btn:hover {
-	background-color: #00AEEF; /* Gordon Cyan */
-	color: white;
-}
+.button-navy { background: #014983; color: white;}
+.button-navy:hover {background: #0159A0; text-decoration: none; color: white;}
+
+.button-orange {background: #DE571F; color: white;}
+.button-orange:hover {background: #E2794C; text-decoration: none; color: white;}
+
+.button-green {background: #b2bb1c;color: white;}
+.button-green:hover {background: #bcc61e; text-decoration: none; color: white;}
+
+.button-darkgreen {background: #086d38; color: white;}
+.button-darkgreen:hover {background: #0a7a3d; text-decoration: none; color: white;}
+
+.button-red {background: #b53228; color: white;}
+.button-red:hover {background: #d83c30; text-decoration: none; color: white;}
+
+.button-yellow {background: #FDB913; color: #31342b;}
+.button-yellow:hover {background: #fdc233; text-decoration: none; color: #31342b;}
+
+.button-gray {background: #D0D2D3; color: black;}
+
+.button-447 {background: #31342b; color: white;}
+.button-447:hover {background: #5A5D55; color: white; text-decoration: none;}
