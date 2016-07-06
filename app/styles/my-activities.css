@@ -8,12 +8,23 @@
 }
 
 .activity-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;;
-  align-items: stretch;
-  align-content: stretch;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;;
+  -webkit-box-align: stretch;;
+      -ms-flex-align: stretch;;
+          align-items: stretch;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
 }
 .activity-list > .activity-list-item {
     display: inline-block;;
@@ -21,7 +32,8 @@
     margin-left: 2%;
     margin-right: 2%;
     width: 45%;
-    flex-basis: auto;
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
 }
 .activity-list > .activity-list-item:hover {
     border: 1px solid #064983;
