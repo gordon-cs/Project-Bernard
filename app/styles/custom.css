@@ -21,9 +21,6 @@
   font-size: 60%;
   font-weight: 100;
 }
-.main-container {
-
-}
 button.btn-blue {
     color: white;
     background-color: var(--blue);
@@ -91,11 +88,6 @@ nav.navbar-blue .navbar-toggle:hover .icon-bar,
 nav.navbar-blue .navbar-toggle:focus .icon-bar {
     background-color: var(--blue);
 }
-.nav-search {
-    margin-left: 8px;
-    margin-top: 8px;
-}
-
 @media only screen and (min-width: 992px) {
   .app-title-container {
     text-align: left;

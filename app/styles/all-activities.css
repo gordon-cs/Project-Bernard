@@ -8,6 +8,10 @@
 .session-dropdown {
   margin: 5px;
 }
+.search-bar > input {
+    width: 30%;
+    margin: auto;
+}
 .activity-list {
   display: -webkit-box;
   display: -ms-flexbox;
