@@ -1,5 +1,14 @@
-.invisible {
-    visibility: hidden;
+:root{
+    --red: #B53227;
+    --orange: #DE571F;
+    --yellow: #FDB913;
+    --green: #B2BB1C;
+    --cyan: #00AFEF;
+    --blue: #00498B;
+    --brown-gray: #31342B;
+    --light-gray: #EBEAEA;
+    --mid-gray: #6F6F6F;
+    --dark-gray: #616161;
 }
 .app-title {
     font-size: 450%;
@@ -11,70 +20,80 @@
     margin-top: 20px;
 }
 button.btn-blue {
-    color: #FFF;
-    background-color: #064983;
-    border-color: #064983;
+    color: white;
+    background-color: var(--blue);
     border: none;
 }
 button.btn-blue:hover,
 button.btn-blue:focus {
-    color: #FFF;
-    background-color: #7EA5C8;
-    border-color: #7EA5C8;
+    color: white;
+    background-color: var(--cyan);
+    border: none;
 }
 input[type="text"]:focus,
 select[type="text"]:focus {
-    border: 1px solid #064983;
+    border: 1px solid var(--cyan);
+    box-shadow: none;
 }
 /* Custom Nav Bar */
+nav.navbar-blue .navbar-header {
+    display: none;
+}
 nav.navbar-blue .navbar-brand {
-    color: rgba(255, 255, 255, 1);
+    color: var(--blue);
 }
 nav.navbar-blue {
     font-size: 14px;
-    background-color: rgba(6, 73, 131, 1);
+    background-color: var(--blue);
     border-width: 0px;
     border-radius: 6px;
 }
 nav.navbar-blue .navbar-nav > li > a {
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(6, 73, 131, 1);
+    color: white;
+    background-color: var(--blue);
+    -o-transition:.3s;
+    -ms-transition:.3s;
+    -moz-transition:.3s;
+    -webkit-transition:.3s;
 }
 nav.navbar-blue .navbar-nav > li > a:hover,
 nav.navbar-blue .navbar-nav > li > a:focus {
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(126, 165, 200, 1);
+    color: white;
+    background-color: var(--cyan);
 }
 nav.navbar-blue .navbar-nav > .active > a,
 nav.navbar-blue .navbar-nav > .active > a:hover,
 nav.navbar-blue .navbar-nav > .active > a:focus {
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(126, 165, 200, 1);
+    color: white;
+    background-color: var(--cyan);
 }
 nav.navbar-blue .navbar-toggle {
-    border-color: #7ea5c8;
+    border-color: var(--cyan);
 }
 nav.navbar-blue .navbar-toggle:hover,
 nav.navbar-blue .navbar-toggle:focus {
-    background-color: #7ea5c8;
+    background-color: var(--cyan);
 }
 nav.navbar-blue .navbar-toggle .icon-bar {
-    background-color: #7ea5c8;
+    background-color: var(--cyan);
 }
 nav.navbar-blue .navbar-toggle:hover .icon-bar,
 nav.navbar-blue .navbar-toggle:focus .icon-bar {
-    background-color: #064983;
+    background-color: var(--blue);
 }
 .nav-search {
     margin-left: 8px;
     margin-top: 8px;
 }
 @media (max-width: 767px) {
-    .navbar {
-        display: none;
+    nav.navbar-blue {
+        font-size: 14px;
+        border-radius: 0px;
     }
-    .invisible {
-        display: none;
+    .nav-search {
+        margin-top: 4px;
+        margin-left: 0px;
+        width: 80%;
     }
     button,
     select,
