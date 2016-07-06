@@ -59,7 +59,7 @@
         margin-left: 20px;
     }
 }*/
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
     .page-title {
       font-size: 140%;
       margin: 15px;
@@ -78,40 +78,56 @@
          font-size: 140%;
     }
 }
-@media (min-width: 992px) {
+@media only screen and (min-width: 992px) {
 
   .page-title {
-    font-size: 180%;
-    margin: 15px;
-    text-align: left;
+    font-size: 160%;
+    margin: 0px;
+    margin-left:30px;
+    margin-bottom: 20px;
   }
   .page-title > h2 {
+    font-size: 140%;
 
   }
-  .activity-list > .activity-list-item {
-      margin-right: 40px;
-      margin-left: 40px;
+  .activity-list {
   }
+
   .activity-list > .activity-list-item {
-      width: 20%;
+      width: 17%;
+      margin-right: 0px;
+      margin-left: 0px;
       margin: 5px;
+  }
+  .activity-list > .activity-list-item > .activity-list-item-img  {
+      max-width: 100%;
+      margin: 0px;
+      border-radius: 100%;
   }
     .activity-list > .activity-list-item > p {
         font-size: 140%;
     }
 
 }
-@media (min-width: 1200px) {
-    img {
-        width: 150px;
-        height: 150px;
+@media only screen and (min-width: 1024px) {
+
+  .dropdown-container {
+    text-align: right;
+  }
+  .session-dropdown {
+    display: inline-block;
+    text-align: left;
+    width : 30%;
+    margin: 5px;
+  }
+  .activity-list > .activity-list-item > .activity-list-item-img  {
+      max-width: 50%;
+      margin-top: 2%;
+  }
+    .activity-list > .activity-list-item {
+      width: 18%;
     }
     .activity-list > .activity-list-item > p {
         font-size: 150%;
-    }
-    .activity-list > .activity-list-item {
-        margin-right: 45px;
-        margin-left: 45px;
-        height: 350px;
     }
 }

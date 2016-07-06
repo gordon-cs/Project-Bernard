@@ -68,28 +68,30 @@
     <div class="row">
         <div class="col-sm-12">
             <h2 >Current Activity Roster</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Role</th>
-                        <th>Leader/Advisor Control</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each model.memberships as |mems|}}
-                    <tr>
-                        <td> {{mems.IDNumber}} </td>
-                        <td> {{mems.FirstName}} </td>
-                        <td> {{mems.LastName}} </td>
-                        <td> {{mems.ParticipationDescription}} </td>
-                        <td><button class="roster-button remove-button btn button-red {{if (notInArr mems.MembershipID model.allMyMembershipIDs) "disabled" }}">Remove</button> <button class="roster-button edit-button btn button-navy{{if (notInArr mems.MembershipID model.allMyMembershipIDs) "disabled" }}">Edit</button></td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Student ID</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Role</th>
+                          <th>Leader/Advisor Control</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {{#each model.memberships as |mems|}}
+                      <tr>
+                          <td> {{mems.IDNumber}} </td>
+                          <td> {{mems.FirstName}} </td>
+                          <td> {{mems.LastName}} </td>
+                          <td> {{mems.ParticipationDescription}} </td>
+                          <td><button class="roster-button remove-button btn button-red {{if (notInArr mems.MembershipID model.allMyMembershipIDs) "disabled" }}">Remove</button> <button class="roster-button edit-button btn button-navy{{if (notInArr mems.MembershipID model.allMyMembershipIDs) "disabled" }}">Edit</button></td>
+                      </tr>
+                      {{/each}}
+                  </tbody>
+              </table>
+          </div>
         </div>
     </div>
 </div>

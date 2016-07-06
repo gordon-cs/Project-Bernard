@@ -1,25 +1,33 @@
-<link rel="stylesheet" type="text/css" href="assets/all-activities.css">
+<link rel="stylesheet" href="assets/my-activities.css">
 
 <div class="container main-container">
 	<div class="row">
-		<div class="col-sm-6">
-			<h2 class="section-title">Current Experience:</h2>
+		<div class="col-sm-6 section-title">
+			<h2>Current Experience:</h2>
 		</div>
 	</div>
 	<div class="activity-list">
 		{{#each model as |mem|}}
-			{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well activity-list-item col-sm-5"}}
-				<img class="img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
-				<p>Activity: {{mem.ActivityCode}} </p>
-				<p>Membership Role: {{mem.Participation}}</p>
-				<p>Start Date: {{moment-format mem.StartDate 'MMMM Do YYYY'}}</p>
-				<p>End Date: {{moment-format mem.EndDate 'MMMM Do YYYY' allow-empty=true}}</p>
+			{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well activity-list-item"}}
+				<img class="activity-list-item-img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
+				<div class="membership-description">
+					<dl>
+						<dt>Activity</dt>
+						<dd>{{mem.ActivityCode}}</dd>
+						<dt>Membership Role</dt>
+						<dd>{{mem.ParticipationDescription}}</dd>
+						<dt>Start Date</dt>
+						<dd>{{moment-format mem.StartDate 'MMMM Do YYYY'}}</dd>
+						<dt>End Date</dt>
+						<dd>{{moment-format mem.EndDate 'MMMM Do YYYY' allow-empty=true}}</dd>
+					</dl>
+				</div>
 			{{/link-to}}
 		{{/each}}
 	</div>
 	<div class="row">
-		<div class="col-sm-12">
-			<h2 class="section-title">Past Experience:</h2>
+		<div class="col-sm-12 section-title">
+			<h2>Past Experience:</h2>
 		</div>
 	</div>
 </div>
