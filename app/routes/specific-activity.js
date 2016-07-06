@@ -6,13 +6,15 @@ export default Ember.Route.extend({
     model(param) {
         var model = {
             "following": false,
-            "leader": false,
+            "leading": false,
             "membershipID": null,
             "leaders": null,
             "activity": null,
             "session": null,
+            "memberships": null,
             "allMyMembershipIDs": []
         };
+        // Set Activity Info
         Ember.$.ajax({
             type: "GET",
             url: 'http://ccttrain.gordon.edu/api/activities/' + param.ActivityCode,
@@ -24,6 +26,7 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
+        // Set Session Info
         Ember.$.ajax({
             type: "GET",
             url: 'http://ccttrain.gordon.edu/api/sessions/' + param.SessionCode,
@@ -35,27 +38,7 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
-        Ember.$.ajax({
-            type: "GET",
-            url: 'http://ccttrain.gordon.edu/api/students/50154997/memberships',
-            async: false,
-            success: function(data) {
-                for (var i = 0; i < data.length; i ++) {
-                    model["allMyMembershipIDs"].push(data[i].MembershipID);
-                    if (data[i].ActivityCode === param.ActivityCode &&
-                        data[i].IDNumber === "50154997" &&
-                        data[i].SessionCode === param.SessionCode.trim() &&
-                        data[i].Participation === "GUEST"
-                    ) {
-                        model.membershipID = data[i].MembershipID;
-                        model.following = true;
-                    }
-                }
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
-            }
-        });
+        // Set Leading and Leaders
         Ember.$.ajax({
             type: "GET",
             url: 'http://ccttrain.gordon.edu/api/activities/' + param.ActivityCode + "/leaders",
@@ -63,10 +46,10 @@ export default Ember.Route.extend({
             success: function(data) {
                 model.leaders = [];
                 for (var i = 0; i < data.length; i ++) {
-                    if (data[i].SessionCode === model.session.SessionCode) {
+                    if (data[i].SessionCode === param.SessionCode) {
                         model.leaders.push(data[i]);
                         if (data[i].IDNumber === "50154997") {
-                            model.leader = true;
+                            model.leading = true;
                         }
                     }
                 }
@@ -75,19 +58,30 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
+        // Set Activity Memberships and Membership Info
         Ember.$.ajax({
             type: "GET",
             url: 'http://ccttrain.gordon.edu/api/activities/' + param.ActivityCode + "/memberships",
             async: false,
             success: function(data) {
-                model.memberships = data;
+                model.memberships = [];
+                for (var i = 0; i < data.length; i ++) {
+                    if (data[i].SessionCode === param.SessionCode) {
+                        model.memberships.push(data[i]);
+                        if (data[i].IDNumber === "50154997") {
+                            model.allMyMembershipIDs.push(data[i].MembershipID);
+                            if (data[i].Participation === "GUEST") {
+                                model.membershipID = data[i].MembershipID;
+                                model.following = true;
+                            }
+                        }
+                    }
+                }
             },
             error: function(errorThrown) {
                 console.log(errorThrown);
             }
         });
-
-        console.log(model);
         return model;
     }
 });

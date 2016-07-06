@@ -5,7 +5,8 @@ export default Ember.Route.extend({
         var model = {
             "activityCode": param.ActivityCode,
             "sessionCode": param.SessionCode,
-            "roles": null
+            "roles": null,
+            "leading": false
         };
         Ember.$.ajax({
             type: "GET",
@@ -15,6 +16,9 @@ export default Ember.Route.extend({
                 model.roles = data;
             }
         });
+        if (param.Leading === "true") {
+            model.leading = true;
+        }
         return model;
     }
 });
