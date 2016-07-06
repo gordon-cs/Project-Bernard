@@ -85,7 +85,9 @@
                         <td> {{mems.FirstName}} </td>
                         <td> {{mems.LastName}} </td>
                         <td> {{mems.ParticipationDescription}} </td>
-                        <td><button class="roster-button remove-button">Remove</button> <button class="roster-button edit-button">Edit</button></td>
+                        <td>
+                            <button {{action 'removePerson'}} class="btn btn-blue roster-btn remove-btn">Remove</button> <button {{action 'editPerson'}} class="btn btn-blue roster-btn edit-btn">Edit</button>
+                        </td>
                     </tr>
                     {{/each}}
                 </tbody>

@@ -54,6 +54,21 @@ export default Ember.Controller.extend({
                 console.log(this.get("model"));
                 this.set('model.following', !this.get('model').following);
             }
+        },
+
+        removePerson() {
+            if(confirm("Do you want to remove this person?")) {
+                alert("Deleted");
+                console.log("deleted person");
+            } else {
+                alert("not deleted");
+                console.log("did not delete person");
+            }
+        },
+
+        editPerson() {
+            alert("Edit");
+            console.log("Edit Person");
         }
     }
 });
