@@ -6,11 +6,11 @@ export default Ember.Route.extend({
 		var model = {
 			"currentMemberships": [],
 			"pastMemberships": []
-		}
+		};
 		var currentSession = null;
 		Ember.$.ajax({
 			type: "GET",
-			url: "http://ccttrain.gordon.edu/api/sessions/current",
+			url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions/current",
 			async: false,
 			success: function(data) {
 				currentSession = data;
@@ -21,7 +21,7 @@ export default Ember.Route.extend({
 		});
 		Ember.$.ajax({
 			type: "GET",
-			url: "http://ccttrain.gordon.edu/api/students/50154997/memberships",
+			url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/students/50154997/memberships",
 			async: false,
 			success: function(data) {
 				for (var i = 0; i < data.length; i ++) {

@@ -11,7 +11,7 @@ export default Ember.Route.extend({
         // Get Sessions Data
         Ember.$.ajax({
             type: "GET",
-            url: "http://ccttrain.gordon.edu/api/sessions",
+            url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions",
             async: false,
             success: function(data) {
                 for (var i = data.length; i > 0; i --) {
@@ -25,7 +25,7 @@ export default Ember.Route.extend({
         // Get Current Session
         Ember.$.ajax({
             type: "GET",
-            url: "http://ccttrain.gordon.edu/api/sessions/current",
+            url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions/current",
             async: false,
             success: function(data) {
                 model.currentSession = data;
@@ -37,7 +37,7 @@ export default Ember.Route.extend({
         // Get Activities in Session
         Ember.$.ajax({
             type: "GET",
-            url: "http://ccttrain.gordon.edu/api/sessions/" + model.currentSession.SessionCode + "/activities",
+            url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions/" + model.currentSession.SessionCode + "/activities",
             async: false,
             success: function(data) {
                 model.activities = data;
