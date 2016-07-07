@@ -1,14 +1,29 @@
 :root {
-    --red: #B53227;
+    --cyan: #00aeef;
+    --cyan-hover: #00bdec;
+    --navy: #014983;
+    --navy-hover: #0159A0;
     --orange: #DE571F;
-    --yellow: #FDB913;
-    --green: #B2BB1C;
-    --cyan: #00AFEF;
-    --blue: #00498B;
+    --orange-hover: #E2794C;
+    --green: #b2bb1c;
+    --green-hover: #bcc61e;
+    --dark-green: #086d38;
+    --dark-green-hover: #0a7a3d;
+    --red: #b53228;
+    --red-hover: #d83c30;
+    --yello: #FDB913;
+    --yello-hover: #fdc233;
+    --447: #31342b;
+    --447-hover: #5A5D55;
+
     --brown-gray: #31342B;
     --light-gray: #EBEAEA;
     --mid-gray: #6F6F6F;
-    --dark-gray: #616161;
+    --gray: #D0D2D3;
+    --dark-gray: #252525;
+}
+* {
+    color: var(--dark-gray);
 }
 .app-title-container {
   text-align: center;
@@ -22,46 +37,6 @@
   font-size: 60%;
   font-weight: 100;
 }
-/* Not responsive at all */
-.acknowledge-user {
-    display: inline-block;
-    font-family: sans-serif;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    margin-right: 15px;
-}
-/*                       */
-button.btn-blue {
-    color: white;
-    background-color: var(--blue);
-    border: none;
-    margin: 3px;
-}
-button.btn-blue:hover,
-button.btn-blue:focus {
-    color: white;
-    background-color: var(--cyan);
-    border: none;
-    -o-transition:.3s;
-    -ms-transition:.3s;
-    -moz-transition:.3s;
-    -webkit-transition:.3s;
-}
-button.btn-red {
-    background-color: var(--red);
-    color: white;
-}
-button.btn-red:hover,
-button.btn-red:focus {
-    color: white;
-    background-color: var(--orange);
-    border: none;
-    -o-transition:.3s;
-    -ms-transition:.3s;
-    -moz-transition:.3s;
-    -webkit-transition:.3s;
-}
 input[type="text"]:focus,
 select[type="text"]:focus {
     border: 1px solid var(--cyan);
@@ -71,18 +46,17 @@ select[type="text"]:focus {
 nav.navbar-blue .navbar-header {
     display: none;
 }
-nav.navbar-blue .navbar-brand {
+/*nav.navbar-blue .navbar-brand {
     color: var(--blue);
-}
+}*/
 nav.navbar-blue {
     font-size: 14px;
-    background-color: var(--blue);
+    background-color: var(--navy);
     border-width: 0px;
-    border-radius: 6px;
+    border-radius: 5px;
 }
 nav.navbar-blue .navbar-nav > li > a {
     color: white;
-    background-color: var(--blue);
     -o-transition:.3s;
     -ms-transition:.3s;
     -moz-transition:.3s;
@@ -93,7 +67,7 @@ nav.navbar-blue .navbar-nav > li > a:focus {
     color: white;
     background-color: var(--cyan);
 }
-nav.navbar-blue .navbar-nav > .active > a,
+/*nav.navbar-blue .navbar-nav > .active > a,
 nav.navbar-blue .navbar-nav > .active > a:hover,
 nav.navbar-blue .navbar-nav > .active > a:focus {
     color: white;
@@ -112,27 +86,76 @@ nav.navbar-blue .navbar-toggle .icon-bar {
 nav.navbar-blue .navbar-toggle:hover .icon-bar,
 nav.navbar-blue .navbar-toggle:focus .icon-bar {
     background-color: var(--blue);
+}*/
+button {
+    border: none;
 }
+button:hover {
+    -o-transition:.3s;
+    -ms-transition:.3s;
+    -moz-transition:.3s;
+    -webkit-transition:.3s;
+}
+/* FROM GORDON's CSS FILE */
+button.button-cyan {background: var(--cyan); color: white;}
+button.button-cyan:hover {background: var(--cyan-hover); color: white; text-decoration: none;}
+
+button.button-navy { background: var(--navy); color: white;}
+button.button-navy:hover {background: var(--navy-hover); text-decoration: none; color: white;}
+
+button.button-orange {background: var(--orange); color: white;}
+button.button-orange:hover {background: var(--orange-hover); text-decoration: none; color: white;}
+
+button.button-green {background: var(--green); color: white;}
+button.button-green:hover {background: var(--); text-decoration: none; color: white;}
+
+button.button-darkgreen {background: var(--darkgreen); color: white;}
+button.button-darkgreen:hover {background: var(--darkgreen-hover); text-decoration: none; color: white;}
+
+button.button-red {background-color: var(--red); border: none; color: white;}
+button.button-red:hover {background-color: var(--red-hover); text-decoration: none; color: white;}
+
+button.button-yellow {background: var(--yellow); color: #31342b;}
+button.button-yellow:hover {background: var(--yellow-hover); text-decoration: none; color: #31342b;}
+
+button.button-gray {background: var(--gray); color: black;}
+
+button.button-447 {background: var(--447); color: white;}
+button.button-447:hover {background: var(--447-hover); color: white; text-decoration: none;}
+
+/* Ember Power Select */
+.ember-power-select-option {
+    color: var(--dark-gray);
+}
+.ember-power-select-option[aria-current="true"] {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    -o-transition:.3s;
+    -ms-transition:.3s;
+    -moz-transition:.3s;
+    -webkit-transition:.3s;
+}
+
 @media only screen and (min-width: 992px) {
-  .app-title-container {
-    text-align: left;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-  }
-  .app-title {
-      font-size: 300%;
-      font-family: sans-serif;
-  }
-  .app-title-ampersand {
-    font-size: 80%;
-    font-weight: normal;
-  }
-  .main-container {
-      background-color: #FFFFFF;
-  }
+    .app-title-container {
+        text-align: left;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    .app-title {
+        font-size: 300%;
+        font-family: sans-serif;
+    }
+    .app-title-ampersand {
+        font-size: 80%;
+        font-weight: normal;
+    }
+    .main-container {
+        background-color: #FFFFFF;
+    }
 }
-@media (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     nav.navbar-blue {
         font-size: 14px;
         border-radius: 0px;
