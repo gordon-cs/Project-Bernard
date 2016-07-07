@@ -12,8 +12,10 @@ export default Ember.Route.extend({
             "activity": null,
             "session": null,
             "memberships": null,
+            "advisors": null,
             "allMyMembershipIDs": []
         };
+
         // Set Activity Info
         Ember.$.ajax({
             type: "GET",
@@ -26,6 +28,7 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
+
         // Set Session Info
         Ember.$.ajax({
             type: "GET",
@@ -38,6 +41,7 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
+        
         // Set Leading and Leaders
         Ember.$.ajax({
             type: "GET",
@@ -58,6 +62,7 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
+        
         // Set Activity Memberships and Membership Info
         Ember.$.ajax({
             type: "GET",

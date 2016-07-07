@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     actions: {
+
+        // Method that gets called when the follow button is clicked
         toggleFollow() {
             var passed = false;
             if (this.get('model').following) {
@@ -24,7 +26,8 @@ export default Ember.Controller.extend({
                 var membership = {
                     "ACT_CDE": this.get('model').activity.ActivityCode,
                     "SESSION_CDE": this.get('model').session.SessionCode.trim(),
-                    "ID_NUM": "50154997",
+                    // Dalton ID
+                    "ID_NUM": "50100155",
                     "PART_LVL": "GUEST",
                     "BEGIN_DTE": "1/1/2016",
                     "END_DTE": "2/2/2016",
@@ -56,6 +59,7 @@ export default Ember.Controller.extend({
             }
         },
 
+        // Method that gets called when the Remove button is clicked
         removePerson() {
             if(confirm("Do you want to remove this person?")) {
                 alert("Deleted");
@@ -66,6 +70,7 @@ export default Ember.Controller.extend({
             }
         },
 
+        // Method that gets called when the Edit button is clicked
         editPerson() {
             alert("Edit");
             console.log("Edit Person");
