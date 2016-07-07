@@ -12,6 +12,7 @@ export default Ember.Route.extend({
             "activity": null,
             "session": null,
             "memberships": null,
+            "advisors": null,
             "allMyMembershipIDs": []
         };
 
