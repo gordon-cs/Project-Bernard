@@ -17,7 +17,7 @@ export default Ember.Route.extend({
         // Set Activity Info
         Ember.$.ajax({
             type: "GET",
-            url: 'http://ccttrain.gordon.edu/api/activities/' + param.ActivityCode,
+            url: 'http://ccttrain.gordon.edu/KJzKJ6FOKx/api/activities/' + param.ActivityCode,
             async: false,
             success: function(data) {
                 model.activity = data;
@@ -29,7 +29,7 @@ export default Ember.Route.extend({
         // Set Session Info
         Ember.$.ajax({
             type: "GET",
-            url: 'http://ccttrain.gordon.edu/api/sessions/' + param.SessionCode,
+            url: 'http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions/' + param.SessionCode,
             async: false,
             success: function(data) {
                 model.session = data;
@@ -41,7 +41,7 @@ export default Ember.Route.extend({
         // Set Leading and Leaders
         Ember.$.ajax({
             type: "GET",
-            url: 'http://ccttrain.gordon.edu/api/activities/' + param.ActivityCode + "/leaders",
+            url: 'http://ccttrain.gordon.edu/KJzKJ6FOKx/api/activities/' + param.ActivityCode + "/leaders",
             async: false,
             success: function(data) {
                 model.leaders = [];
@@ -61,7 +61,7 @@ export default Ember.Route.extend({
         // Set Activity Memberships and Membership Info
         Ember.$.ajax({
             type: "GET",
-            url: 'http://ccttrain.gordon.edu/api/activities/' + param.ActivityCode + "/memberships",
+            url: 'http://ccttrain.gordon.edu/KJzKJ6FOKx/api/activities/' + param.ActivityCode + "/memberships",
             async: false,
             success: function(data) {
                 model.memberships = [];

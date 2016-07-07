@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
             console.log(data);
             Ember.$.ajax({
                 type: "POST",
-                url: "http://ccttrain.gordon.edu/api/memberships/",
+                url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships/",
                 data: data,
                 dataType: "json",
                 success: function(data) {

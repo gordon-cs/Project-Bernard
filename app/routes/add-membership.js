@@ -10,7 +10,7 @@ export default Ember.Route.extend({
         };
         Ember.$.ajax({
             type: "GET",
-            url: 'http://ccttrain.gordon.edu/api/participations',
+            url: 'http://ccttrain.gordon.edu/KJzKJ6FOKx/api/participations',
             async: false,
             success: function(data) {
                 model.roles = data;
