@@ -5,63 +5,65 @@
             <div class="row">
                 <h2 class = "activity-name lead text-center">{{model.activity.ActivityDescription}}</h2>
                 <img class = "activity-picture center-block img-circle"
-                    src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
+                    src={{model.activity.ActivityImage}}>
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="activity-info row">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p class="activity-info-item">Leaders:</p>
-                            {{#each model.leaders as |leader|}}
-                                <p class="activity-info-item-data">
-                                    {{leader.FirstName}} {{leader.LastName}} (<a href="https://en.wikipedia.org/wiki/Potato">E.Mail@gordon.edu</a>)
-                                </p>
-                            {{/each}}
+            <div class="row">
+                <div class="activity-info">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="activity-info-item">Leaders:</p>
+                                {{#each model.leaders as |leader|}}
+                                    <p class="activity-info-item-data">
+                                        {{leader.FirstName}} {{leader.LastName}} (<a href="https://en.wikipedia.org/wiki/Potato">E.Mail@gordon.edu</a>)
+                                    </p>
+                                {{/each}}
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p class="activity-info-item">Description: {{model.activity.ActivityCode}}</p>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="activity-info-item">Description: {{model.activity.ActivityCode}}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p class="activity-info-item">Session: {{model.session.SessionDescription}}</p>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="activity-info-item">Session: {{model.session.SessionDescription}}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p class="activity-info-item">Advisor: ...</p>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="activity-info-item">Advisor: ...</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p class="activity-info-item">Times: ...</p>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="activity-info-item">Times: ...</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p class="activity-info-item">Tags: ...</p>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="activity-info-item">Tags: ...</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row button-row">
                 {{#if model.leading}}
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "true"}}
-                        <button type="button" class="btn btn-blue form-control" {{action 'toggleFollow'}}>Add Member</button>
+                        <button class="roster-button remove-button btn button-navy form-control" {{action 'toggleFollow'}}>Add Member</button>
                     {{/link-to}}
                 {{else}}
                         <div class="col-sm-6">
                             {{#if model.following}}
-                                <button type="button" class="btn btn-blue form-control" {{action 'toggleFollow'}}>Unfollow</button>
+                                <button type="button" class="btn button-navy form-control" {{action 'toggleFollow'}}>Unfollow</button>
                             {{else}}
-                                <button type="button" class="btn btn-blue form-control" {{action 'toggleFollow'}}>Follow</button>
+                                <button type="button" class="btn button-navy form-control" {{action 'toggleFollow'}}>Follow</button>
                             {{/if}}
                         </div>
                         <div class="col-sm-6">
                             {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "false"}}
-                                <button type="button" class="btn btn-blue form-control">Join</button>
+                                <button type="button" class="btn button-navy form-control">Join</button>
                             {{/link-to}}
                         </div>
                 {{/if}}

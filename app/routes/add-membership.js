@@ -5,7 +5,7 @@ export default Ember.Route.extend({
         var model = {
             "activityCode": param.ActivityCode,
             "sessionCode": param.SessionCode,
-            "roles": null,
+            "roles": [],
             "leading": false
         };
         Ember.$.ajax({
