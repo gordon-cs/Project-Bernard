@@ -10,7 +10,7 @@ export default Ember.Route.extend({
 		var currentSession = null;
 		Ember.$.ajax({
 			type: "GET",
-			url: "http://ccttrain.gordon.edu/api/sessions/current",
+			url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions/current",
 			async: false,
 			success: function(data) {
 				currentSession = data;
