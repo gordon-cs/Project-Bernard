@@ -10,14 +10,12 @@
 				<img class="my-activity-list-item-img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
 				<div class="membership-description">
 					<dl>
-						<dt>Activity</dt>
-						<dd>{{mem.ActivityDescription}}</dd>
-						<dt>Membership Role</dt>
-						<dd>{{mem.ParticipationDescription}}</dd>
-						<dt>Start Date</dt>
-						<dd>{{moment-format mem.StartDate 'MMMM Do YYYY'}}</dd>
-						<dt>End Date</dt>
-						<dd>{{moment-format mem.EndDate 'MMMM Do YYYY' allow-empty=true}}</dd>
+						<dd>Activity</dd>
+						<dt>{{mem.ActivityDescription}}</dt>
+						<dd>Membership Role</dd>
+						<dt>{{mem.ParticipationDescription}}</dt>
+						<dd>Membership Session</dd>
+						<dt>{{mem.SessionDescription}}</dt>
 					</dl>
 				</div>
 			{{/link-to}}
