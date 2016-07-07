@@ -13,7 +13,7 @@
 		<div class="my-activity-list">
 		{{#each memType.activities as |mem|}}
 			{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
-				<img class="my-activity-list-item-img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
+				<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
 				<div class="membership-description">
 					<dl>
 						<dt>Activity</dt>
@@ -42,7 +42,7 @@
 		<div class="my-activity-list">
 			{{#each memSession.activities as |mem|}}
 				{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
-					<img class="my-activity-list-item-img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
+					<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
 					<div class="membership-description">
 						<dl>
 							<dt>Activity</dt>
