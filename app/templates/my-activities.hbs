@@ -4,14 +4,8 @@
 	<div class="section-title">
 		<h2>Current Experience:</h2>
 	</div>
-	{{#each model.currentMemberships as |memType|}}
-		<div class="row">
-			<div class="col-sm-12">
-				<h2 class="group-title">{{memType.participation}}</h2>
-			</div>
-		</div>
-		<div class="my-activity-list">
-		{{#each memType.activities as |mem|}}
+	<div class="my-activity-list">
+		{{#each model.currentMemberships as |mem|}}
 			{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
 				<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
 				<div class="membership-description">
@@ -28,8 +22,7 @@
 				</div>
 			{{/link-to}}
 		{{/each}}
-		</div>
-	{{/each}}
+	</div>
 	<div class="col-sm-12 section-title">
 		<h2>Past Experience:</h2>
 	</div>

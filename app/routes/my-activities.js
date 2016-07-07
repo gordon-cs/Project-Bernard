@@ -26,32 +26,7 @@ export default Ember.Route.extend({
 			success: function(data) {
 				for (var i = 0; i < data.length; i ++) {
 					if (data[i].SessionCode === currentSession.SessionCode) {
-						var partID = data[i].Participation;
-						var part = data[i].ParticipationDescription;
-						if (partID === 'CAPT' ||
-						partID === 'CODIR' ||
-						partID === 'CORD' ||
-						partID === 'DIREC' ||
-						partID === 'PRES' ||
-						partID === 'VICEC' ||
-						partID === 'VICEP') {
-							part = "Leader";
-						}
-						var place = null;
-						var length = model.currentMemberships.length;
-						for (var j = 0; j < length; j ++) {
-							if (model.currentMemberships[j].participation === part) {
-								place = j;
-							}
-						}
-						if (place === null) {
-							model.currentMemberships.push({
-								"participation": part,
-								"activities": []
-							});
-							place = length ++;
-						}
-						model.currentMemberships[place].activities.push(data[i]);
+						model.currentMemberships.push(data[i]);
 					}
 					else {
 						var session = data[i].SessionDescription;
