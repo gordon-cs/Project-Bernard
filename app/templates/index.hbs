@@ -2,7 +2,7 @@
 <div class="page-title">
 	<h2>{{model.currentSession.SessionDescription}}</h2>
 </div>
-<div class="main-container">
+<div class="container">
 	<div class="row">
 		<div class="dropdown-container">
 			<div class="session-dropdown">
@@ -23,12 +23,12 @@
 			{{input value=searchValue key-up=(action "filterActivities") placeholder="Search Activities" class="form-control"}}
 		</div>
 	</div>
-	<div class="activity-list">
-		{{#each model.activitiesShown as |activity|}}
-			{{#link-to 'specific-activity' model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
-					<img class="activity-list-item-img" src="http://whoopdirt.com/wp-content/uploads/2016/06/Gordon_Logo-294_bigger.gif">
-					<p class="text-center">{{activity.ActivityDescription}}</p>
-			{{/link-to}}
-		{{/each}}
-	</div>
+		<div class="activity-list">
+			{{#each model.activitiesShown as |activity|}}
+				{{#link-to 'specific-activity' model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
+						<img class="activity-list-item-img" src={{activity.ActivityImage}}>
+						<p class="text-center">{{activity.ActivityDescription}}</p>
+				{{/link-to}}
+			{{/each}}
+		</div>
 </div>

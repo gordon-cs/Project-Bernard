@@ -21,19 +21,26 @@ export default Ember.Controller.extend({
                 "BEGIN_DTE": "1/1/2016",
                 "DESCRIPTION": comments
             };
-            console.log(data);
+            var success = false;
             Ember.$.ajax({
                 type: "POST",
                 url: "http://ccttrain.gordon.edu/api/memberships/",
                 data: data,
                 dataType: "json",
+                async: false,
                 success: function(data) {
                     console.log(data);
+                    success = true;
                 },
                 error: function(errorThrown) {
                     console.log(errorThrown);
                 }
             });
+            if (success) {
+                var activityCode = this.get("model.activityCode");
+                var sessionCode = this.get("model.sessionCode");
+                this.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
+            }
         }
     }
 });
