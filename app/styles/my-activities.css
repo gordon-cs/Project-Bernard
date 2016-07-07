@@ -6,6 +6,10 @@
     font-size: 100%;
     margin: 5px;
 }
+.group-title {
+    margin-bottom: 20px;
+    font-size: 100%;
+}
 .my-activity-list{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -61,7 +65,9 @@
         font-size: 140%;
         margin: 15px;
     }
-
+    .group-title {
+        font-size: 140%;
+    }
     .my-activity-list{
         padding-left: 4%;
         padding-right: 4%;
@@ -77,12 +83,15 @@
         font-size: 140%;
     }
 }
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 992px) {
     .section-title {
         font-size: 160%;
         margin: 0px;
         margin-left:30px;
         margin-bottom: 20px;
+    }
+    .group-title {
+        font-size: 160%;
     }
     .section-title > h2 {
         font-size: 140%;
