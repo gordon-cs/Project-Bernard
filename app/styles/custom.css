@@ -16,11 +16,22 @@
 .app-title {
     font-size: 200%;
     font-family: sans-serif;
+    display: inline-block;
 }
 .app-title-ampersand {
   font-size: 60%;
   font-weight: 100;
 }
+/* Not responsive at all */
+.acknowledge-user {
+    display: inline-block;
+    font-family: sans-serif;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    margin-right: 15px;
+}
+/*                       */
 button.btn-blue {
     color: white;
     background-color: var(--blue);
