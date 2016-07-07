@@ -26,7 +26,8 @@ export default Ember.Controller.extend({
                 var membership = {
                     "ACT_CDE": this.get('model').activity.ActivityCode,
                     "SESSION_CDE": this.get('model').session.SessionCode.trim(),
-                    "ID_NUM": "50154997",
+                    // Dalton ID
+                    "ID_NUM": "50100155",
                     "PART_LVL": "GUEST",
                     "BEGIN_DTE": "1/1/2016",
                     "END_DTE": "2/2/2016",
