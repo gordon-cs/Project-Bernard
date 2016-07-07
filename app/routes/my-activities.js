@@ -6,7 +6,7 @@ export default Ember.Route.extend({
 		var model = {
 			"currentMemberships": [],
 			"pastMemberships": []
-		}
+		};
 		var currentSession = null;
 		Ember.$.ajax({
 			type: "GET",
