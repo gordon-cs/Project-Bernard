@@ -1,7 +1,7 @@
 
 
 <div class="container">
-	<div class="section-title">
+	<div class="highlight section-title">
 		<h2>Current Experience:</h2>
 	</div>
 	<div class="my-activity-list">
@@ -21,14 +21,12 @@
 			{{/link-to}}
 		{{/each}}
 	</div>
-	<div class="col-sm-12 section-title">
+	<div class="highlight section-title">
 		<h2>Past Experience:</h2>
 	</div>
 	{{#each model.pastMemberships as |memSession|}}
-		<div class="row">
-			<div class="col-sm-12">
-				<h2 class="group-title">{{memSession.session}}</h2>
-			</div>
+		<div class="cyanbox group-title">
+			<h2>{{memSession.session}}</h2>
 		</div>
 		<div class="my-activity-list">
 			{{#each memSession.activities as |mem|}}

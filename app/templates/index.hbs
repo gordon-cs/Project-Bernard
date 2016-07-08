@@ -1,9 +1,8 @@
 
-<div class="page-title">
+<div class="page-title cyanbox">
 	<h2>{{model.currentSession.SessionDescription}}</h2>
 </div>
 <div class="container">
-	<div class="row">
 		<div class="dropdown-container">
 			<div class="session-dropdown">
 				{{#power-select
@@ -17,7 +16,6 @@
 				{{/power-select}}
 			</div>
 		</div>
-	</div>
 	<div class="row">
 		<div class="search-bar">
 			{{input value=searchValue key-up=(action "filterActivities") placeholder="Search Activities" class="form-control"}}
@@ -27,7 +25,7 @@
 			{{#each model.activitiesShown as |activity|}}
 				{{#link-to 'specific-activity' model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
 						<img class="activity-list-item-img" src={{activity.ActivityImage}}>
-						<p class="text-center">{{activity.ActivityDescription}}</p>
+						<p class="activity-list-item-name">{{activity.ActivityDescription}}</p>
 				{{/link-to}}
 			{{/each}}
 		</div>
