@@ -22,10 +22,17 @@
     --gray: #D0D2D3;
     --dark-gray: #252525;
 }
+/* Application */
 * {
     color: var(--dark-gray);
     font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B', sans-serif;
 }
+input[type="text"]:focus,
+select[type="text"]:focus {
+    border: 1px solid var(--cyan);
+    box-shadow: none;
+}
+/* Header */
 .app-title-container {
     text-align: center;
 }
@@ -36,15 +43,18 @@
 .acknowledge-user {
     font-size: 100%;
     font-weight: 500;
+    display: inline;
 }
 .app-title-ampersand {
     font-size: 60%;
     font-weight: 100;
 }
-input[type="text"]:focus,
-select[type="text"]:focus {
-    border: 1px solid var(--cyan);
-    box-shadow: none;
+.acknowledge-user {
+    margin-top: 25px;
+    float: right;
+}
+.acknowledge-user > p {
+    margin-right: 10px;
 }
 /* Custom Nav Bar */
 nav.navbar-blue .navbar-header {
@@ -71,13 +81,13 @@ nav.navbar-blue .navbar-nav > li > a:focus {
     color: white;
     background-color: var(--cyan);
 }
-/*nav.navbar-blue .navbar-nav > .active > a,
+nav.navbar-blue .navbar-nav > .active > a,
 nav.navbar-blue .navbar-nav > .active > a:hover,
 nav.navbar-blue .navbar-nav > .active > a:focus {
     color: white;
     background-color: var(--cyan);
 }
-nav.navbar-blue .navbar-toggle {
+/*nav.navbar-blue .navbar-toggle {
     border-color: var(--cyan);
 }
 nav.navbar-blue .navbar-toggle:hover,
@@ -91,6 +101,7 @@ nav.navbar-blue .navbar-toggle:hover .icon-bar,
 nav.navbar-blue .navbar-toggle:focus .icon-bar {
     background-color: var(--blue);
 }*/
+/* Buttons */
 button {
     border: none;
 }
@@ -141,8 +152,8 @@ button.button-black:hover {background: var(--black-hover); color: white; text-de
 }
 
 @media only screen and (min-width: 768px) {
-    .acknowledge-user {
-        float: right;
+    .acknowledge-user > p {
+        display: inline;
     }
 }
 @media only screen and (min-width: 992px) {
@@ -177,5 +188,15 @@ button.button-black:hover {background: var(--black-hover); color: white; text-de
     h3 {
         margin-top: 5px;
         margin-bottom: 5px;
+    }
+    .acknowledge-user {
+        margin-right: 10px;
+        font-size: 80%;
+    }
+    .acknowledge-user > button {
+        font-size: 80%;
+    }
+    .greating {
+        display: none;
     }
 }
