@@ -41,7 +41,7 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
-        
+
         // Set Leading and Leaders
         Ember.$.ajax({
             type: "GET",
@@ -52,7 +52,7 @@ export default Ember.Route.extend({
                 for (var i = 0; i < data.length; i ++) {
                     if (data[i].SessionCode === param.SessionCode) {
                         model.leaders.push(data[i]);
-                        if (data[i].IDNumber === "50154997") {
+                        if (data[i].IDNumber === "50100155") {
                             model.leading = true;
                         }
                     }
@@ -62,7 +62,7 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
-        
+
         // Set Activity Memberships and Membership Info
         Ember.$.ajax({
             type: "GET",
@@ -73,7 +73,7 @@ export default Ember.Route.extend({
                 for (var i = 0; i < data.length; i ++) {
                     if (data[i].SessionCode === param.SessionCode) {
                         model.memberships.push(data[i]);
-                        if (data[i].IDNumber === "50154997") {
+                        if (data[i].IDNumber === "50100155") {
                             model.allMyMembershipIDs.push(data[i].MembershipID);
                             if (data[i].Participation === "GUEST") {
                                 model.membershipID = data[i].MembershipID;

@@ -125,11 +125,9 @@ Responsive Changes
     .activity-list-item > p {
     }
 }
-@media only screen and (min-width: 1440px) {
+@media only screen and (min-width: 1200px) {
     .activity-list {
         width: 100%;
-        padding-left: 9%;
-        padding-right: 9%;
     }
     .activity-list-item {
         width:17%;
