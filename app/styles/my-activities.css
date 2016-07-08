@@ -1,4 +1,29 @@
 /* All vendor prefixes were generated automatically via Autoprefixer */
+
+:root {
+    --cyan: #00aeef;
+    --cyan-hover: #00bdec;
+    --navy: #014983;
+    --navy-hover: #0159A0;
+    --orange: #DE571F;
+    --orange-hover: #E2794C;
+    --green: #b2bb1c;
+    --green-hover: #bcc61e;
+    --dark-green: #086d38;
+    --dark-green-hover: #0a7a3d;
+    --red: #b53228;
+    --red-hover: #d83c30;
+    --yello: #FDB913;
+    --yello-hover: #fdc233;
+    --447: #31342b;
+    --447-hover: #5A5D55;
+
+    --brown-gray: #31342B;
+    --light-gray: #EBEAEA;
+    --mid-gray: #6F6F6F;
+    --gray: #D0D2D3;
+    --dark-gray: #252525;
+}
 .section-title {
     text-align: center;
     margin-top: 10px;
@@ -31,7 +56,7 @@
     align-content: stretch;
 }
 .my-activity-list-item {
-    display: block;;
+    display: block;
     background-color: white;
     margin-left: 2%;
     margin-right: 2%;
@@ -41,7 +66,7 @@
 }
 .my-activity-list-item:hover {
     box-shadow: 1px 1px 20px var(--light-gray);
-    background-color: var(--light-gray);
+    background-color: var(--green-hover);
     cursor: pointer;
     -o-transition: .3s;
     -ms-transition: .3s;
