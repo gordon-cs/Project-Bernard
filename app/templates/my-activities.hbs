@@ -22,7 +22,8 @@
         </div>
 	</nav>
 
-	<div class="section-title">
+<div class="container">
+	<div class="highlight section-title">
 		<h2>Current Experience:</h2>
 	</div>
 	<div class="my-activity-list">
@@ -31,25 +32,23 @@
 				<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
 				<div class="membership-description">
 					<dl>
-						<dd>Activity</dd>
+						<dd>Activity:</dd>
 						<dt>{{mem.ActivityDescription}}</dt>
-						<dd>Membership Role</dd>
+						<dd>Membership Role:</dd>
 						<dt>{{mem.ParticipationDescription}}</dt>
-						<dd>Membership Session</dd>
+						<dd>Membership Session:</dd>
 						<dt>{{mem.SessionDescription}}</dt>
 					</dl>
 				</div>
 			{{/link-to}}
 		{{/each}}
 	</div>
-	<div class="col-sm-12 section-title">
+	<div class="highlight section-title">
 		<h2>Past Experience:</h2>
 	</div>
 	{{#each model.pastMemberships as |memSession|}}
-		<div class="row">
-			<div class="col-sm-12">
-				<h2 class="group-title">{{memSession.session}}</h2>
-			</div>
+		<div class="cyanbox group-title">
+			<h2>{{memSession.session}}</h2>
 		</div>
 		<div class="my-activity-list">
 			{{#each memSession.activities as |mem|}}
@@ -57,14 +56,12 @@
 					<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
 					<div class="membership-description">
 						<dl>
-							<dt>Activity</dt>
-							<dd>{{mem.ActivityDescription}}</dd>
-							<dt>Membership Role</dt>
-							<dd>{{mem.ParticipationDescription}}</dd>
-							<dt>Start Date</dt>
-							<dd>{{moment-format mem.StartDate 'MMMM Do YYYY'}}</dd>
-							<dt>End Date</dt>
-							<dd>{{moment-format mem.EndDate 'MMMM Do YYYY' allow-empty=true}}</dd>
+							<dd>Activity</dd>
+							<dt>{{mem.ActivityDescription}}</dt>
+							<dd>Membership Role</dd>
+							<dt>{{mem.ParticipationDescription}}</dt>
+							<dd>Membership Session</dd>
+							<dt>{{mem.SessionDescription}}</dt>
 						</dl>
 					</div>
 				{{/link-to}}

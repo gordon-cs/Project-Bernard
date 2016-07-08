@@ -1,3 +1,5 @@
+/* All vendor prefixes were generated automatically via Autoprefixer */
+
 :root {
     --cyan: #00aeef;
     --cyan-hover: #00bdec;
@@ -22,118 +24,183 @@
     --gray: #D0D2D3;
     --dark-gray: #252525;
 }
-/* Application */
+
+/************
+Global Styles
+*************/
+
 * {
     color: var(--dark-gray);
     font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B', sans-serif;
 }
+
+body {
+	font-size: 0.9em !important;
+  font-family: Verdana, Geneva, sans-serif !important;
+  background: #ebeaea !important;
+}
+
+p {
+	margin: 0.5em 0 1.25em 0 !important;
+	padding: 0;
+	line-height: 1.8em;
+}
+
+h1 {
+	font-size: 2em !important;
+	line-height: 1.2em !important;
+	margin: 0 0 0.2em 0 !important;
+	padding: 0px;
+	font-weight: 700 !important;
+	font-style: normal;
+}
+
+h2 {
+	font-size: 1.4em !important;
+	line-height: 1.2em !important;
+	margin: 0.5em 0 0.35em 0 !important;
+	padding: 0px !important;
+}
+
+
+/********************
+Colored Boxes
+********************/
+.highlight, .outlinebox {
+	padding: 22px 30px 22px 30px;
+	background: white;
+	border-left: 3px solid #00aeef;
+	border-radius: 0 6px 6px 0;
+	margin-bottom: 1.25em;
+	overflow: auto;
+}
+.cyanbox {
+	background: #00aeef;
+	padding: 12px 18px;
+	color: white;
+}
+
+.darkgreenbox {
+	background: #006D22;
+	padding: 12px 18px;
+	color: white;
+}
+
+.graybox {
+	background: #31342b;
+	padding: 12px 18px;
+	color: white;
+}
+
+.greenbox {
+	background: #b2bb1c;
+	padding: 12px 18px;
+	color: white;
+}
+
+.lightgraybox {
+	background: #cccccc;
+	padding: 12px 18px;
+}
+
+.navybox {
+	background: #014983;
+	padding: 12px 18px;
+	color: white;
+
+}
+
+.orangebox {
+	background: #de571f;
+	padding: 12px 18px;
+	color: white;
+}
+
+.redbox {
+	background: #b53228;
+	color: white;
+	padding: 12px 18px;
+}
+
+.yellowbox {
+	background: #fdb913;
+	padding: 12px 18px;
+}
+
+.whitebox {
+	background: white;
+	padding: 12px 18px;
+}
+
+.cyanbox a, .navybox a, .orangebox a, .redbox a, .greenbox a, darkgreenbox a, .darkgraybox a {
+	color: white;
+}
+.cyanbox a:hover, .navybox a:hover, .orangebox a:hover, .redbox a:hover, .greenbox a:hover, darkgreenbox a:hover, .darkgraybox a:hover {
+	color: black;
+}
+/***************
+Gordon Logo
+****************/
+
+#logo-box {
+	background:#014983;
+  margin: 0 auto 0 auto;
+  text-align: center;
+	padding: 2% 2%;
+  position: relative;
+}
+
+#logo-box img {
+  max-width: 20%;
+}
+
+/***********
+Title and Navigation
+************/
+header {
+	margin: 0 auto 0 auto;
+}
+
+.app-title-container {
+  text-align: center;
+}
+/* Navigation Menu */
+#primary-menu {
+	font-weight: 700;
+	font-style: normal;
+	font-size: 1.1em;
+	letter-spacing: 1px;
+	padding: 0;
+  text-align: center;
+}
+#primary-menu li {
+  list-style: none;
+  display: block;
+  padding: 5px 0px;
+}
+
+#primary-menu a {
+	color: #00aeef;
+	text-decoration: none;
+}
+#primary-menu a:hover {
+	color: #de571f;
+}
+
 input[type="text"]:focus,
 select[type="text"]:focus {
     border: 1px solid var(--cyan);
     box-shadow: none;
 }
-/* Header */
-.app-title-container {
-    text-align: center;
-}
-.app-title {
-    font-size: 200%;
-    margin-top: 0px;
-}
-.acknowledge-user {
-    font-size: 100%;
-    font-weight: 500;
-    display: inline;
-}
-.app-title-ampersand {
-    font-size: 60%;
-    font-weight: 100;
-}
-.acknowledge-user {
-    margin-top: 25px;
-    float: right;
-}
-.acknowledge-user > p {
-    margin-right: 10px;
-}
-/* Custom Nav Bar */
-nav.navbar-blue .navbar-header {
-    display: none;
-}
-/*nav.navbar-blue .navbar-brand {
-    color: var(--blue);
-}*/
-nav.navbar-blue {
-    font-size: 14px;
-    background-color: var(--navy);
-    border-width: 0px;
-    border-radius: 5px;
-}
-nav.navbar-blue .navbar-nav > li > a {
-    color: white;
-    -o-transition:.3s;
-    -ms-transition:.3s;
-    -moz-transition:.3s;
-    -webkit-transition:.3s;
-}
-nav.navbar-blue .navbar-nav > li > a:hover,
-nav.navbar-blue .navbar-nav > li > a:focus {
-    color: white;
-    background-color: var(--cyan);
-}
-nav.navbar-blue .navbar-nav > .active > a,
-nav.navbar-blue .navbar-nav > .active > a:hover,
-nav.navbar-blue .navbar-nav > .active > a:focus {
-    color: white;
-    background-color: var(--cyan);
-}
-/*nav.navbar-blue .navbar-toggle {
-    border-color: var(--cyan);
-}
-nav.navbar-blue .navbar-toggle:hover,
-nav.navbar-blue .navbar-toggle:focus {
-    background-color: var(--cyan);
-}
-nav.navbar-blue .navbar-toggle .icon-bar {
-    background-color: var(--cyan);
-}
-nav.navbar-blue .navbar-toggle:hover .icon-bar,
-nav.navbar-blue .navbar-toggle:focus .icon-bar {
-    background-color: var(--blue);
-}*/
-/* Buttons */
-button {
-    border: none;
-}
+
+
+button { border: none; }
 button:hover {
     -o-transition:.3s;
     -ms-transition:.3s;
     -moz-transition:.3s;
     -webkit-transition:.3s;
 }
-/* FROM GORDON's CSS FILE */
-button.button-cyan {background: var(--cyan); color: white;}
-button.button-cyan:hover {background: var(--cyan-hover); color: white; text-decoration: none;}
-
-button.button-navy { background: var(--navy); color: white;}
-button.button-navy:hover {background: var(--navy-hover); text-decoration: none; color: white;}
-
-button.button-orange {background: var(--orange); color: white;}
-button.button-orange:hover {background: var(--orange-hover); text-decoration: none; color: white;}
-
-button.button-green {background: var(--green); color: white;}
-button.button-green:hover {background: var(--); text-decoration: none; color: white;}
-
-button.button-darkgreen {background: var(--darkgreen); color: white;}
-button.button-darkgreen:hover {background: var(--darkgreen-hover); text-decoration: none; color: white;}
-
-button.button-red {background-color: var(--red); border: none; color: white;}
-button.button-red:hover {background-color: var(--red-hover); text-decoration: none; color: white;}
-
-button.button-yellow {background: var(--yellow); color: #31342b;}
-button.button-yellow:hover {background: var(--yellow-hover); text-decoration: none; color: #31342b;}
-
-button.button-gray {background: var(--gray); color: black;}
 
 button.button-black {background: var(--black); color: white;}
 button.button-black:hover {background: var(--black-hover); color: white; text-decoration: none;}
@@ -151,52 +218,58 @@ button.button-black:hover {background: var(--black-hover); color: white; text-de
     -webkit-transition:.1s;
 }
 
+/******************
+Responsive Changes
+******************/
+
+@media only screen and (min-width: 425px) {
+
+  #logo-box {
+  	position: absolute;
+  	top: 0;
+    padding: 3% 3%;
+    width: 20%;
+    margin-left: 2%;
+  }
+  #logo-box img {
+    max-width: 100%;
+  }
+  .app-title-container {
+    text-align: right;
+  }
+
+  #primary-menu li {
+    padding: 10px 0px;
+  }
+}
+
 @media only screen and (min-width: 768px) {
-    .acknowledge-user > p {
-        display: inline;
-    }
+  .app-title-container {
+    text-align: center;
+  }
+  .nav-bar {
+    overflow: hidden;
+  }
+  #primary-menu {
+  	float: right;
+    font-size: 1.2em;
+  }
+  #primary-menu li {
+  	display: inline;
+  	margin-left: 26px;
+  }
+  #primary-menu li:first-child {
+  	margin-left: 0;
+  }
 }
 @media only screen and (min-width: 992px) {
-    .app-title-container {
-        text-align: left;
-        margin-top: 10px;
-        margin-left: 10px;
-        margin-bottom: 10px;
-    }
-    .app-title {
-        font-size: 300%;
-        font-family: sans-serif;
-    }
-    .app-title-ampersand {
-        font-size: 80%;
-        font-weight: normal;
-    }
-}
-@media only screen and (max-width: 768px) {
-    nav.navbar-blue {
-        font-size: 14px;
-        border-radius: 0px;
-    }
-    .nav-search {
-        margin-top: 4px;
-        margin-left: 0px;
-        width: 80%;
-    }
-    button,
-    select,
-    input,
-    h3 {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    .acknowledge-user {
-        margin-right: 10px;
-        font-size: 80%;
-    }
-    .acknowledge-user > button {
-        font-size: 80%;
-    }
-    .greating {
-        display: none;
-    }
+  #logo-box {
+    max-width: 200px;
+    padding: 30px 30px;
+  }
+
+  #primary-menu {
+    float: none;
+    text-align: center;
+  }
 }
