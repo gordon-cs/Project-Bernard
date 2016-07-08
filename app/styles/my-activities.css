@@ -41,7 +41,7 @@
 }
 .my-activity-list-item:hover {
     box-shadow: 1px 1px 20px var(--light-gray);
-    background-color: var(--light-gray);
+    background-color: var(--green);
     cursor: pointer;
     -o-transition: .3s;
     -ms-transition: .3s;
