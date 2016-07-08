@@ -139,10 +139,10 @@ Gordon Logo
 
 #logo-box {
 	background:#014983;
-  margin: 0 auto 0 auto;
-  text-align: center;
+    margin: 0 auto 0 auto;
+    text-align: center;
 	padding: 2% 2%;
-  position: relative;
+    position: relative;
 }
 
 #logo-box img {
@@ -157,7 +157,7 @@ header {
 }
 
 .app-title-container {
-  text-align: center;
+    text-align: center;
 }
 /* Navigation Menu */
 #primary-menu {
@@ -165,13 +165,13 @@ header {
 	font-style: normal;
 	font-size: 1.1em;
 	letter-spacing: 1px;
-	padding: 0;
-  text-align: center;
+    padding: 0;
+    text-align: center;
 }
 #primary-menu li {
-  list-style: none;
-  display: block;
-  padding: 5px 0px;
+    list-style: none;
+    display: block;
+    padding: 5px 0px;
 }
 
 #primary-menu a {
@@ -265,4 +265,12 @@ Responsive Changes
     text-align: center;
   }
 
+}
+.active-user {
+    text-align: right;
+    color: white;
+}
+.log-out-btn {
+    color: var(--dark-gray);
+    text-align: center;
 }
