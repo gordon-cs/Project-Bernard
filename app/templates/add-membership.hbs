@@ -1,24 +1,16 @@
-<link rel="stylesheet" href="assets/add-membership.css">
-
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12">
+    <div class="add-form">
+        <div class="add-title">
             <h2>
                 Adding - {{model.activityCode}}
             </h2>
         </div>
-    </div>
-    {{#if model.leading}}
-        <div class="row">
-            <div class="invisible col-sm-3">.</div>
-            <div class="col-sm-6">
+        {{#if model.leading}}
+            <div class="row">
                 {{input value=studentID class="form-control" placeholder="Student ID"}}
             </div>
-        </div>
-    {{/if}}
-    <div class="row">
-        <div class="invisible col-sm-3">.</div>
-        <div class="col-sm-6">
+        {{/if}}
+        <div class="row">
             {{#power-select
                 placeholder="Select Participation"
                 selected=role
@@ -30,17 +22,11 @@
                 {{role.ParticipationDescription}}
             {{/power-select}}
         </div>
-    </div>
-    <div class="row">
-        <div class="invisible col-sm-3">.</div>
-        <div class="col-sm-6">
+        <div class="row">
             {{input value=comments class="form-control" placeholder="Comment (optional)"}}
         </div>
-    </div>
-    <div class="invisible col-sm-4">.</div>
-    <div class="row">
-        <div class="col-sm-4 button-div">
-            <button class="form-control btn button-navy" {{action 'post'}}>Add</button>
+        <div class="row">
+            <button class="btn button-navy add-button" {{action 'post'}}>Add</button>
         </div>
     </div>
 </div>

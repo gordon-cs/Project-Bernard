@@ -2,8 +2,10 @@
     <div class="row">
         <div class="col-sm-6 col-left">
             <div class="row">
-                <h2 class = "activity-name lead text-center">{{model.activity.ActivityDescription}}</h2>
-                <img class = "activity-picture center-block img-circle"
+                <div class="activity-name">
+                    <h1 class="lead text-center">{{model.activity.ActivityDescription}}</h1>
+                </div>
+                <img class="activity-picture center-block img-circle"
                     src={{model.activity.ActivityImage}}>
             </div>
         </div>
@@ -11,38 +13,39 @@
             <div class="row">
                 <div class="activity-info">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <p class="activity-info-item">Leaders:</p>
+                        <div class="col-sm-12 detail-item">
+                            <p class="detail-header">Leaders:</p>
+                            <div class="leaders">
                                 {{#each model.leaders as |leader|}}
                                     <p class="activity-info-item-data">
                                         {{leader.FirstName}} {{leader.LastName}} (<a href="https://en.wikipedia.org/wiki/Potato">E.Mail@gordon.edu</a>)
                                     </p>
                                 {{/each}}
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
-                            <p class="activity-info-item">Description: {{model.activity.ActivityCode}}</p>
+                        <div class="col-sm-12 detail-item">
+                            <p class="detail-header">Session: </p>
+                            <p class="detail-info">{{model.session.SessionDescription}}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
-                            <p class="activity-info-item">Session: {{model.session.SessionDescription}}</p>
+                        <div class="col-sm-12 detail-item">
+                            <p class="detail-header">Advisor: </p>
+                            <p class="detail-info">...</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
-                            <p class="activity-info-item">Advisor: ...</p>
+                        <div class="col-sm-12 detail-item">
+                            <p class="detail-header">Times: </p>
+                            <p class="detail-info">{{model.activity.MeetingDay}} {{model.activity.MeetingTime}}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
-                            <p class="activity-info-item">Times: ...</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p class="activity-info-item">Tags: ...</p>
+                        <div class="col-sm-12 detail-item">
+                            <p class="detail-header">Tags: </p>
+                            <p class="detail-info">...</p>
                         </div>
                     </div>
                 </div>
@@ -50,28 +53,24 @@
             <div class="row button-row">
                 {{#if model.leading}}
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "true"}}
-                        <button class="roster-button remove-button btn button-navy form-control" {{action 'toggleFollow'}}>Add Member</button>
+                        <button class="btn button-navy" {{action 'toggleFollow'}}>Add Member</button>
                     {{/link-to}}
                 {{else}}
-                        <div class="col-sm-6">
-                            {{#if model.following}}
-                                <button type="button" class="btn button-navy form-control" {{action 'toggleFollow'}}>Unfollow</button>
-                            {{else}}
-                                <button type="button" class="btn button-navy form-control" {{action 'toggleFollow'}}>Follow</button>
-                            {{/if}}
-                        </div>
-                        <div class="col-sm-6">
-                            {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "false"}}
-                                <button type="button" class="btn button-navy form-control">Join</button>
-                            {{/link-to}}
-                        </div>
+                    {{#if model.following}}
+                        <button type="button" class="btn button-navy" {{action 'toggleFollow'}}>Unfollow</button>
+                    {{else}}
+                        <button type="button" class="btn button-navy" {{action 'toggleFollow'}}>Follow</button>
+                    {{/if}}
+                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "false"}}
+                        <button type="button" class="btn button-navy">Join</button>
+                    {{/link-to}}
                 {{/if}}
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row table-row">
         <div class="col-sm-12">
-            <h2 >Current Activity Roster</h2>
+            <h2>Current Activity Roster</h2>
             <div class="table-responsive">
               <table class="table">
                   <thead>
@@ -89,11 +88,10 @@
                           <td> {{mems.LastName}} </td>
                           <td> {{mems.ParticipationDescription}} </td>
                           {{#if (inArr mems.MembershipID model.allMyMembershipIDs)}}
-                          <td> <button {{action 'editPerson'}}  class="roster-btn edit-button btn button-navy">Edit</button><!--  <button {{action 'removePerson'}} class="roster-btn remove-button btn btn-red">Remove</button> --> </td>
+                          <td> <button {{action 'editPerson'}} class="btn button-navy">Edit</button><!--  <button {{action 'removePerson'}} class="roster-btn remove-button btn btn-red">Remove</button> --> </td>
                           {{else}}
                           <td></td>
                           {{/if}}
-
                       </tr>
                       {{/each}}
                   </tbody>

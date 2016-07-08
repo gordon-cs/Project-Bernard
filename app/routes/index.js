@@ -14,9 +14,10 @@ export default Ember.Route.extend({
             url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions",
             async: false,
             success: function(data) {
-                for (var i = data.length; i > 0; i --) {
+                for (var i = data.length - 1; i >= 0; i --) {
                     model.sessions.push(data[i]);
                 }
+                console.log(model.sessions);
             },
             error: function(errorThrown) {
                 console.log(errorThrown);

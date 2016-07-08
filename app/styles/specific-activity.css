@@ -1,4 +1,4 @@
-/* All vendor prefixes were generated automatically via Autoprefixer */
+ /*All vendor prefixes were generated automatically via Autoprefixer */
 
 :root {
     --cyan: #00aeef;
@@ -25,51 +25,51 @@
     --dark-gray: #252525;
 }
 .main-container {
-  background-color: #FFFFFF;
+    background-color: white;
 }
 .activity-name {
-    font-size: 250%;
-    margin-top: 0;
+    margin-top: 50px;
+    font-size: 150%;
 }
 .activity-picture {
+    margin-top: 20px;
     max-width: 50%;
 }
 .activity-info {
     margin-top: 50px;
+    margin-left: 20px;
 }
-.activity-info-item {
-    font-size: 150%;
+.detail-item {
+    font-size: 200%;
 }
-.activity-info-item-data {
-    font-size: 150%;
-    margin-left: 30px;
+.detail-header {
+    display: inline;
+    font-weight: bold;
+}
+.detail-info {
+    display: inline;
+}
+.leaders {
+    margin-left: 20px;
 }
 .button-row {
     margin-top: 20px;
 }
-tr:hover {
-	background-color: var(--light-gray); /* light gray */
+.button-row button {
+    margin-left: 20px;
 }
-.roster-button {
-	text-align: center;
-	border-radius: 4px;
+.table-row {
+    font-size: 150%;
+    margin-top: 20px;
 }
-.roster-btn:active {
-	-webkit-transform: translateY(4px);
-    transform: translateY(4px);
-}
-.remove-button:hover {
-	color: white;
+@media only screen and (min-width: 768px) {
 }
 @media only screen and (max-width: 768px) {
-    .activity-info {
-        margin-left: 30px;
-    }
-    .button-row > button,
+    /*.button-row > button,
     .button-row > a > button {
         width: 95%;
         display: block;
         margin-left: auto;
         margin-right: auto;
-    }
+    }*/
 }

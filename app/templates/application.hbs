@@ -1,36 +1,35 @@
 <div class="main-container">
-  <header>
-    <div class="graybox app-title-container">
-      <h1 class="app-title">Student Clubs &amp; Organizations</h1>
-      <div class="user-info">
-        <h6>Dalton Weaner</h6>
-        <button class="logout-btn">Logout</button>
-      </div>
+    <header>
+        <div class="graybox app-title-container">
+            <h1 class="app-title">Student Clubs &amp; Organizations</h1>
+            <div class="user-info">
+                <h6>Dalton Weaner</h6>
+                <button class="logout-btn">Logout</button>
+            </div>
+        </div>
+        <div id="logo-box">
+            <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College">
+        </div>
+    </header>
+    <div class="nav-bar lightgraybox">
+        <ul id="primary-menu">
+            <li>
+                {{#link-to 'index' class="button"}}
+                    What's Available?
+                {{/link-to}}
+            </li>
+            <li>
+                {{#link-to 'my-activities' class="button"}}
+                    My Involvements
+                {{/link-to}}
+            </li>
+            <li>
+                {{#link-to 'transcript' class="button"}}
+                    Co-Curricular Transcript
+                {{/link-to}}
+            </li>
+        </ul>
     </div>
-    <div id="logo-box">
-      <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College">
-    </div>
-  </header>
-  <div class="nav-bar lightgraybox">
-
-    <ul id="primary-menu">
-      <li>
-        {{#link-to 'index' class="button"}}
-        What's Available?
-        {{/link-to}}
-      </li>
-      <li>
-        {{#link-to 'my-activities' class="button"}}
-        My Involvements
-        {{/link-to}}
-      </li>
-      <li>
-        {{#link-to 'transcript' class="button"}}
-        Co-Curricular Transcript
-        {{/link-to}}
-      </li>
-    </ul>
-  </div>
 </div>
 
 {{outlet}}
