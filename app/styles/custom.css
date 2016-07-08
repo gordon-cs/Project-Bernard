@@ -227,6 +227,16 @@ button.button-black:hover {background: var(--black-hover); color: white; text-de
     line-height: 2.5em;
     height: 200%;
 }
+.user-info {
+    text-align: right;
+    color: white;
+}
+.logout-btn {
+  background-color: var(--brown-gray);
+  border-color: white;
+  border-style: solid;
+  border-width: thin;
+}
 
 /******************
 Responsive Changes
