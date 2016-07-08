@@ -206,8 +206,14 @@ button.button-black {background: var(--black); color: white;}
 button.button-black:hover {background: var(--black-hover); color: white; text-decoration: none;}
 
 /* Ember Power Select */
+.ember-power-select-placeholder {
+    font-size: 150%;
+}
 .ember-power-select-option {
     color: var(--dark-gray);
+}
+.ember-power-select-option {
+    font-size: 150%;
 }
 .ember-power-select-option[aria-current="true"] {
     background-color: var(--light-gray);
@@ -216,6 +222,10 @@ button.button-black:hover {background: var(--black-hover); color: white; text-de
     -ms-transition:.1s;
     -moz-transition:.1s;
     -webkit-transition:.1s;
+}
+.ember-power-select-options {
+    line-height: 2.5em;
+    height: 200%;
 }
 
 /******************
