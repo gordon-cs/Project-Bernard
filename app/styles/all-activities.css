@@ -88,8 +88,8 @@
 /* Activity name */
 .activity-list-item-name {
     display: block;
-  	padding: 12px 3px;
-  	color: white;
+    padding: 12px 3px;
+    color: white;
 }
 .activity-list > a:hover {
     text-decoration: none;
