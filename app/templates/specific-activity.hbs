@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="col-sm-12 detail-item">
                             <p class="detail-header">Times: </p>
-                            <p class="detail-info">...</p>
+                            <p class="detail-info">{{model.activity.MeetingDay}} {{model.activity.MeetingTime}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -92,7 +92,6 @@
                           {{else}}
                           <td></td>
                           {{/if}}
-
                       </tr>
                       {{/each}}
                   </tbody>
