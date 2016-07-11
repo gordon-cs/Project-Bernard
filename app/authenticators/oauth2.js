@@ -6,6 +6,25 @@ export default Base.extend({
         console.log(data);
     },
     authenticate: function(username, password) {
+        var data = {
+            "username": username,
+            "password": password
+        };
+        var token = null;
+        Ember.$.ajax({
+            type: "POST",
+            url: "http://ccttrain.gordon.edu/api/token",
+            data: data,
+            dataType: "json",
+            asyn: false,
+            success: function(data) {
+                console.log(data);
+                token = data;
+            },
+            error: function(errorThrown) {
+                console.log(errorThrown);
+            }
+        });
         var promise = new Promise(function(resolve, reject) {
             if ((username.toLowerCase() === "dalton.weaner" ||
                     username.toLowerCase() === "dalton.weaner@gordon.edu") &&
