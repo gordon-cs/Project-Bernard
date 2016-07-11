@@ -243,6 +243,7 @@ button:active {
 /* Ember Power Select */
 .ember-power-select-placeholder {
     font-size: 150%;
+    line-height: 2.5em;
 }
 .ember-power-select-option {
     color: var(--dark-gray);
