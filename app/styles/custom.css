@@ -242,15 +242,16 @@ button:active {
 
 /* Ember Power Select */
 .ember-power-select-placeholder {
-    font-size: 150%;
+    font-size: 1.5em;
     line-height: 2.5em;
+    margin-left: 4px;
 }
 .ember-power-select-option {
     color: var(--dark-gray);
 }
 .ember-power-select-option,
 .ember-power-select-search {
-    font-size: 150%;
+    font-size: 1.5em;
 }
 .ember-power-select-option[aria-current="true"] {
     background-color: var(--light-gray);
@@ -259,10 +260,6 @@ button:active {
     -ms-transition:.1s;
     -moz-transition:.1s;
     -webkit-transition:.1s;
-}
-.ember-power-select-options {
-    line-height: 2.5em;
-    height: 200%;
 }
 .user-info {
     text-align: right;
