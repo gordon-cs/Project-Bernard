@@ -2,10 +2,12 @@
     <header>
         <div class="graybox app-title-container">
             <h1 class="app-title">Student Clubs &amp; Organizations</h1>
-            <div class="user-info">
-                <h6>Dalton Weaner</h6>
-                <button class="logout-btn">Logout</button>
-            </div>
+            {{#if session.isAuthenticated}}
+                <div class="user-info">
+                    <h6>Dalton Weaner</h6>
+                    <button {{action 'logout'}} class="logout-btn">Logout</button>
+                </div>
+            {{/if}}
         </div>
         <div id="logo-box">
             <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College">

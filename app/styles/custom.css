@@ -62,6 +62,13 @@ h2 {
 	padding: 0px !important;
 }
 
+input[type="text"]:focus,
+input[type="password"]:focus,
+select[type="text"]:focus {
+    border: 1px solid var(--cyan);
+    box-shadow: none;
+}
+
 
 /********************
 Colored Boxes
@@ -185,12 +192,6 @@ header {
 }
 #primary-menu a:hover {
 	color: #de571f;
-}
-
-input[type="text"]:focus,
-select[type="text"]:focus {
-    border: 1px solid var(--cyan);
-    box-shadow: none;
 }
 
 /***********
