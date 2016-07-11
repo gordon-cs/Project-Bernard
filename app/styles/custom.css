@@ -168,7 +168,7 @@ header {
 #primary-menu {
 	font-weight: 700;
 	font-style: normal;
-	font-size: 1.1em;
+	font-size: 1.5em;
 	letter-spacing: 1px;
 	padding: 0;
     text-align: center;
@@ -182,6 +182,7 @@ header {
 #primary-menu a {
 	color: #00aeef;
 	text-decoration: none;
+    padding: inherit;
 }
 #primary-menu a:hover {
 	color: #de571f;
@@ -299,14 +300,27 @@ Responsive Changes
 @media only screen and (min-width: 768px) {
     .app-title-container {
         text-align: center;
-        font-size: 150%;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
     }
-    .nav-bar {
-        overflow: hidden;
+    .app-title {
+        display: inline;
+        font-size: 200% !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+    .user-info {
+        display: inline;
+        float: right;
+    }
+    .user-info > h6 {
+        margin-top: 0;
     }
     #primary-menu {
         float: right;
         font-size: 1.2em;
+        margin-top: 12px;
+        margin-right: 20px;
     }
     #primary-menu li {
         display: inline;
@@ -322,9 +336,17 @@ Responsive Changes
         max-width: 200px;
         padding: 30px 30px;
     }
-
+    .app-title {
+        font-size: 300% !important;
+    }
     #primary-menu {
         float: none;
         text-align: center;
+        margin-right: 0;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .app-title {
+        font-size: 400% !important;
     }
 }
