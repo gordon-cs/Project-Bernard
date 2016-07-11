@@ -1,3 +1,5 @@
+import Ember from 'ember';
+import Promise from 'ember/rsvp';
 import Base from 'ember-simple-auth/authenticators/base';
 
 export default Base.extend({
@@ -45,8 +47,8 @@ export default Base.extend({
     },
     invalidate: function(data) {
         var promise = new Promise(function(resolve, reject) {
-            resolve("value");
-            reject(reason);
+            resolve("success");
+            reject("error");
         });
         promise.then(function(value) {
             }, function(reason) {
