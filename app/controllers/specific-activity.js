@@ -1,25 +1,27 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    actions: {
+    session: Ember.inject.service('session'),
 
+    actions: {
         // Method that gets called when the follow button is clicked
         toggleFollow() {
             var passed = false;
             if (this.get('model').following) {
                 var membershipID = this.get('model').membershipID;
-                Ember.$.ajax({
-                    type: "DELETE",
-                    url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships/" + membershipID,
-                    contentType: "application/json",
-                    async: false,
-                    success: function(data) {
-                        console.log(data);
-                        passed = true;
-                    },
-                    error: function(errorThrown) {
-                        console.log(errorThrown);
-                    }
+                this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+                    Ember.$.ajax({
+                        type: "DELETE",
+                        url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships/" + membershipID,
+                        contentType: "application/json",
+                        async: false,
+                        headers: {
+        					"Authorization": headerValue
+        				},
+                        success: function(data) {
+                            passed = true;
+                        }
+                    });
                 });
             }
             else {
@@ -33,32 +35,31 @@ export default Ember.Controller.extend({
                     "END_DTE": "2/2/2016",
                     "DESCRIPTION": "Basic Follower"
                 };
-                console.log(membership);
                 var newMembershipID = null;
-                Ember.$.ajax({
-                    type: "POST",
-                    url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships",
-                    data: JSON.stringify(membership),
-                    contentType: "application/json",
-                    async: false,
-                    success: function(data) {
-                        newMembershipID = data.MEMBERSHIP_ID;
-                        passed = true;
-                    },
-                    error: function(errorThrown) {
-                        console.log(errorThrown);
-                    }
+                this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+                    Ember.$.ajax({
+                        type: "POST",
+                        url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships",
+                        data: JSON.stringify(membership),
+                        contentType: "application/json",
+                        async: false,
+                        headers: {
+        					"Authorization": headerValue
+        				},
+                        success: function(data) {
+                            newMembershipID = data.MEMBERSHIP_ID;
+                            passed = true;
+                        }
+                    });
                 });
                 if (passed) {
                     this.set('model.membershipID', newMembershipID);
                 }
             }
             if (passed) {
-                console.log(this.get("model"));
                 this.set('model.following', !this.get('model').following);
             }
         },
-
         // Method that gets called when the Remove button is clicked
         removePerson() {
             if(confirm("Do you want to remove this person?")) {
@@ -69,7 +70,6 @@ export default Ember.Controller.extend({
                 console.log("did not delete person");
             }
         },
-
         // Method that gets called when the Edit button is clicked
         editPerson() {
             alert("Edit");

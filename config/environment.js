@@ -9,15 +9,21 @@ module.exports = function(environment) {
         locationType: 'auto',
         EmberENV: {
             FEATURES: {
-            // Here you can enable experimental features on an ember canary build
-            // e.g. 'with-controller': true
+                // Here you can enable experimental features on an ember canary build
+                // e.g. 'with-controller': true
             }
         },
-
         APP: {
-          // Here you can pass flags/options to your application instance
-          // when it is created
-
+            // Here you can pass flags/options to your application instance
+            // when it is created
+        },
+        'ember-simple-auth': {
+            authorizor: 'authorizor:token'
+        },
+        'ember-simple-auth-token': {
+            serverTokenEndpoint: 'http://gordon360api.gordon.edu/token',
+            authorizationPrefix: 'Bearer ',
+            authorizationHeaderName: 'Authorization'
         }
     };
 
@@ -45,5 +51,5 @@ module.exports = function(environment) {
         ENV.locationType = 'hash'
     }
 
-  return ENV;
+    return ENV;
 };

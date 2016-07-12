@@ -1,10 +1,10 @@
-// import Base from 'ember-simple-auth/authorizers/base';
-//
-// export default Base.extend({
-//   authorize(/*data, block*/) {
-//   }
-// });
+import Base from 'ember-simple-auth/authorizers/base';
 
-import OAuth2Bearer from 'ember-simple-auth/authorizers/oauth2-bearer';
-
-export default OAuth2Bearer.extend();
+export default Base.extend({
+    authorize: function(data, block) {
+        const accessToken = data['access_token'];
+        if (!Ember.isEmpty(accessToken)) {
+            block('Authorization', `Bearer ${accessToken}`);
+        }
+    }
+});

@@ -1,10 +1,18 @@
+// import OAuth2PasswordGrant from 'ember-simple-auth/authenticators/oauth2-password-grant';
+//
+// export default OAuth2PasswordGrant.extend({
+//     serverTokenEndpoint: 'http://gordon360api.gordon.edu/token'
+// });
+
+// Default
+// ——————————————————————————————————————————————————————————————————
+// Custom
+
 import Ember from 'ember';
 import Base from 'ember-simple-auth/authenticators/base';
 
 export default Base.extend({
     restore: function(data) {
-        console.log('restore');
-        console.log(data);
         return new Ember.RSVP.Promise(function(resolve, reject) {
             resolve(data);
             reject("Invalid Login");
@@ -19,10 +27,10 @@ export default Base.extend({
         var token = null;
         Ember.$.ajax({
             type: "POST",
-            url: "http://ccttrain.gordon.edu/api/token",
+            url: "http://gordon360api.gordon.edu/token",
             data: data,
             dataType: "json",
-            asyn: false,
+            async: false,
             success: function(data) {
                 console.log(data);
                 token = data;
@@ -32,10 +40,8 @@ export default Base.extend({
             }
         });
         var promise = new Ember.RSVP.Promise(function(resolve, reject) {
-            if ((username.toLowerCase() === "dalton.weaner" ||
-                    username.toLowerCase() === "dalton.weaner@gordon.edu") &&
-                    password === "123") {
-                resolve(data);
+            if (token !== null) {
+                resolve(token);
             }
             else {
                 reject("Invalid Login");
@@ -44,9 +50,6 @@ export default Base.extend({
         // promise.then(function(value) {
         //     }, function(reason) {
         // });
-        console.log('Authenticate');
-        console.log("Username: " + username);
-        console.log("Password: " + password);
         return promise;
     },
     invalidate: function(data) {

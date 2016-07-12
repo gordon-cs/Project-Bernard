@@ -10,11 +10,17 @@ export default Ember.Controller.extend({
                 this.set('errorMessage', reason.error || reason);
             });
 
-            // var credentials = this.getProperties('identification', 'password'),
-            //         authenticator = 'authenticator:token';
-            //     this.get('session').authenticate(authenticator, credentials);
-            
-            this.transitionToRoute('all-activities');
+            // var credentials = {
+            //     'identification': this.get('username'),
+            //     'password': this.get('password')
+            // }, authenticator = 'authenticator:token';
+            // var headers = {
+            //     'grant_type': 'password'
+            // };
+            // console.log(credentials);
+            // this.get('session').authenticate(authenticator, credentials, headers);
+
+            // this.transitionToRoute('all-activities');
         }
     }
 });

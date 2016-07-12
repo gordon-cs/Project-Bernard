@@ -9,13 +9,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "roles": [],
             "leading": false
         };
-        Ember.$.ajax({
-            type: "GET",
-            url: 'http://ccttrain.gordon.edu/KJzKJ6FOKx/api/participations',
-            async: false,
-            success: function(data) {
-                model.roles = data;
-            }
+        this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            Ember.$.ajax({
+                type: "GET",
+                url: 'http://gordon360api.gordon.edu/api/participations',
+                async: false,
+                headers: {
+					"Authorization": headerValue
+				},
+                success: function(data) {
+                    model.roles = data;
+                }
+            });
         });
         if (param.Leading === "true") {
             model.leading = true;

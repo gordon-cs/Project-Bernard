@@ -3,51 +3,52 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model() {
-        console.log(this.get('session'));
         var model = {
             "activities": [],
             "activitesShown": [],
             "sessions": [],
             "currentSession": null
         };
-        // Get Sessions Data
-        Ember.$.ajax({
-            type: "GET",
-            url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions",
-            async: false,
-            success: function(data) {
-                for (var i = data.length - 1; i >= 0; i --) {
-                    model.sessions.push(data[i]);
+        this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            // Get Sessions Data
+            Ember.$.ajax({
+                type: "GET",
+                url: "http://gordon360api.gordon.edu/api/sessions",
+                async: false,
+                headers: {
+					"Authorization": headerValue
+				},
+                success: function(data) {
+                    for (var i = data.length - 1; i >= 0; i --) {
+                        model.sessions.push(data[i]);
+                    }
                 }
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-        // Get Current Session
-        Ember.$.ajax({
-            type: "GET",
-            url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions/current",
-            async: false,
-            success: function(data) {
-                model.currentSession = data;
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-        // Get Activities in Session
-        Ember.$.ajax({
-            type: "GET",
-            url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions/" + model.currentSession.SessionCode + "/activities",
-            async: false,
-            success: function(data) {
-                model.activities = data;
-                model.activitiesShown = data;
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
-            }
+            });
+            // Get Current Session
+            Ember.$.ajax({
+                type: "GET",
+                url: "http://gordon360api.gordon.edu/api/sessions/current",
+                async: false,
+                headers: {
+					"Authorization": headerValue
+				},
+                success: function(data) {
+                    model.currentSession = data;
+                }
+            });
+            // Get Activities in Session
+            Ember.$.ajax({
+                type: "GET",
+                url: "http://gordon360api.gordon.edu/api/sessions/" + model.currentSession.SessionCode + "/activities",
+                async: false,
+                headers: {
+					"Authorization": headerValue
+				},
+                success: function(data) {
+                    model.activities = data;
+                    model.activitiesShown = data;
+                }
+            });
         });
         return model;
     }
