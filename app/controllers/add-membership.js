@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
             var comments = this.get("comments");
             var roleID = this.get("role.ParticipationCode");
             // Dalton ID Num
-            var studentID = "50100155";
+            var studentID = this.get('session.data.authenticated.token_data.id');;
             if (this.get("model.leading")) {
                 studentID = this.get("studentID");
             }
@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
                 Ember.$.ajax({
                     type: "POST",
-                    url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships/",
+                    url: "http://gordon360api.gordon.edu/api/memberships/",
                     data: data,
                     dataType: "json",
                     async: false,

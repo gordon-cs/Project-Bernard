@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
                 this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
                     Ember.$.ajax({
                         type: "DELETE",
-                        url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships/" + membershipID,
+                        url: "http://gordon360api.gordon.edu/api/memberships/" + membershipID,
                         contentType: "application/json",
                         async: false,
                         headers: {
@@ -28,8 +28,7 @@ export default Ember.Controller.extend({
                 var membership = {
                     "ACT_CDE": this.get('model').activity.ActivityCode,
                     "SESSION_CDE": this.get('model').session.SessionCode.trim(),
-                    // Dalton ID
-                    "ID_NUM": "50100155",
+                    "ID_NUM": this.get('session.data.authenticated.token_data.id'),
                     "PART_LVL": "GUEST",
                     "BEGIN_DTE": "1/1/2016",
                     "END_DTE": "2/2/2016",
@@ -39,7 +38,7 @@ export default Ember.Controller.extend({
                 this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
                     Ember.$.ajax({
                         type: "POST",
-                        url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships",
+                        url: "http://gordon360api.gordon.edu/api/memberships",
                         data: JSON.stringify(membership),
                         contentType: "application/json",
                         async: false,

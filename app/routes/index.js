@@ -5,6 +5,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 	model() {
 		var model = {
+            "currentSession": null,
 			"currentMemberships": [],
 			"pastMemberships": []
 		};
@@ -19,16 +20,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 				},
 				success: function(data) {
 					currentSession = data;
+                    model.currentSession = data;
 				}
 			});
 			Ember.$.ajax({
 				type: "GET",
-				url: "http://gordon360api.gordon.edu/api/students/50100155/memberships",
+				url: "http://gordon360api.gordon.edu/api/students/" + this.get('session.data.authenticated.token_data.id') + "/memberships",
 				async: false,
 				headers: {
 					"Authorization": headerValue
 				},
 				success: function(data) {
+                    console.log(data);
 					for (var i = 0; i < data.length; i ++) {
 						if (data[i].SessionCode === currentSession.SessionCode) {
 							model.currentMemberships.push(data[i]);
@@ -55,6 +58,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 				}
 			});
 		});
+        console.log(model);
 		return model;
 	}
 });

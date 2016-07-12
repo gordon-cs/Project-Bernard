@@ -4,7 +4,7 @@
             <h1 class="app-title">Student Clubs &amp; Organizations</h1>
             {{#if session.isAuthenticated}}
                 <div class="user-info">
-                    <h6>Dalton Weaner</h6>
+                    <h6>{{session.data.authenticated.token_data.name}}</h6>
                     <button {{action 'logout'}} class="logout-btn">Logout</button>
                 </div>
             {{/if}}

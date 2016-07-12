@@ -8,14 +8,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "following": false,
             "leading": false,
             "membershipID": null,
-            "leaders": null,
+            "leaders": [],
             "activity": null,
             "session": null,
-            "memberships": null,
-            "advisors": null,
+            "memberships": [],
+            "advisors": [],
             "allMyMembershipIDs": []
         };
         this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            var IDNumber = this.get('session.data.authenticated.token_data.id');
             // Set Activity Info
             Ember.$.ajax({
                 type: "GET",
@@ -53,7 +54,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     for (var i = 0; i < data.length; i ++) {
                         if (data[i].SessionCode === param.SessionCode) {
                             model.leaders.push(data[i]);
-                            if (data[i].IDNumber === "50100155") {
+                            if (data[i].IDNumber === IDNumber) {
                                 model.leading = true;
                             }
                         }
@@ -73,7 +74,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     for (var i = 0; i < data.length; i ++) {
                         if (data[i].SessionCode === param.SessionCode) {
                             model.memberships.push(data[i]);
-                            if (data[i].IDNumber === "50100155") {
+                            if (data[i].IDNumber === IDNumber) {
                                 model.allMyMembershipIDs.push(data[i].MembershipID);
                                 if (data[i].Participation === "GUEST") {
                                     model.membershipID = data[i].MembershipID;

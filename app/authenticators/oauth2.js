@@ -15,7 +15,6 @@ export default Base.extend({
     restore: function(data) {
         return new Ember.RSVP.Promise(function(resolve, reject) {
             resolve(data);
-            reject("Invalid Login");
         });
     },
     authenticate: function(username, password) {
@@ -32,11 +31,17 @@ export default Base.extend({
             dataType: "json",
             async: false,
             success: function(data) {
+                console.log("Authenticator")
                 console.log(data);
+
                 token = data;
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
+
+                var accessToken = data.access_token;
+                const payload = accessToken.split('.')[1];
+                const tokenData = JSON.parse(decodeURIComponent(window.escape(atob(payload))));
+                token.token_data = tokenData;
+
+                console.log(tokenData);
             }
         });
         var promise = new Ember.RSVP.Promise(function(resolve, reject) {
@@ -53,8 +58,6 @@ export default Base.extend({
         return promise;
     },
     invalidate: function(data) {
-        console.log('invalidate');
-        console.log(data);
         return new Promise(function(resolve, reject) {
             resolve();
         });;
