@@ -3,6 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model() {
+        console.log(this.get('session'));
         var model = {
             "activities": [],
             "activitesShown": [],
@@ -18,7 +19,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 for (var i = data.length - 1; i >= 0; i --) {
                     model.sessions.push(data[i]);
                 }
-                console.log(model.sessions);
             },
             error: function(errorThrown) {
                 console.log(errorThrown);
@@ -49,7 +49,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 console.log(errorThrown);
             }
         });
-        console.log(model);
         return model;
     }
 });

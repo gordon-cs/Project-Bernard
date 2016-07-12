@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('add-membership', { path: '/add-membership/:SessionCode/:ActivityCode/:Leading' });
   this.route('transcript');
   this.route('all-activities');
+  this.route('login');
 });
 
 export default Router;

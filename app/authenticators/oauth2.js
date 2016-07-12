@@ -1,16 +1,20 @@
 import Ember from 'ember';
-import Promise from 'ember/rsvp';
 import Base from 'ember-simple-auth/authenticators/base';
 
 export default Base.extend({
     restore: function(data) {
         console.log('restore');
         console.log(data);
+        return new Ember.RSVP.Promise(function(resolve, reject) {
+            resolve(data);
+            reject("Invalid Login");
+        });
     },
     authenticate: function(username, password) {
         var data = {
             "username": username,
-            "password": password
+            "password": password,
+            "grant_type": "password"
         };
         var token = null;
         Ember.$.ajax({
@@ -27,34 +31,29 @@ export default Base.extend({
                 console.log(errorThrown);
             }
         });
-        var promise = new Promise(function(resolve, reject) {
+        var promise = new Ember.RSVP.Promise(function(resolve, reject) {
             if ((username.toLowerCase() === "dalton.weaner" ||
                     username.toLowerCase() === "dalton.weaner@gordon.edu") &&
                     password === "123") {
-                resolve("Valid Login");
+                resolve(data);
             }
             else {
                 reject("Invalid Login");
             }
         });
-        promise.then(function(value) {
-            }, function(reason) {
-        });
+        // promise.then(function(value) {
+        //     }, function(reason) {
+        // });
         console.log('Authenticate');
         console.log("Username: " + username);
         console.log("Password: " + password);
         return promise;
     },
     invalidate: function(data) {
-        var promise = new Promise(function(resolve, reject) {
-            resolve("success");
-            reject("error");
-        });
-        promise.then(function(value) {
-            }, function(reason) {
-        });
         console.log('invalidate');
         console.log(data);
-        return promise;
+        return new Promise(function(resolve, reject) {
+            resolve();
+        });;
     }
 });
