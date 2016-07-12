@@ -13,7 +13,8 @@ export default Ember.Route.extend({
             "session": null,
             "memberships": null,
             "advisors": null,
-            "allMyMembershipIDs": []
+            "allMyMembershipIDs": [],
+            "roles": null
         };
 
         // Set Activity Info
@@ -87,6 +88,23 @@ export default Ember.Route.extend({
                 console.log(errorThrown);
             }
         });
+
+        // Get a list of all roles that can be assigned
+        Ember.$.ajax({
+            type: "GET",
+            url: 'http://ccttrain.gordon.edu/KJzKJ6FOKx/api/participations',
+            async: false,
+            success: function(data) {
+              model.roles = [];
+              for (var i = 0; i < data.length; i ++) {
+                  model.roles.push(data[i]);
+              }
+            },
+            error: function(errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+
         return model;
     }
 });

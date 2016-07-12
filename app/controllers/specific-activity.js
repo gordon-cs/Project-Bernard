@@ -68,12 +68,6 @@ export default Ember.Controller.extend({
                 alert("not deleted");
                 console.log("did not delete person");
             }
-        },
-
-        // Method that gets called when the Edit button is clicked
-        editPerson() {
-            alert("Edit");
-            console.log("Edit Person");
         }
     }
 });

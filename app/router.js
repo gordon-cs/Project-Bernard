@@ -10,6 +10,7 @@ Router.map(function() {
     this.route('specific-activity', { path: '/specific-activity/:SessionCode/:ActivityCode' });
     this.route('add-membership', { path: '/add-membership/:SessionCode/:ActivityCode/:Leading' });
     this.route('transcript');
+    this.route('edit-membership', { path: '/edit-membership/:MembershipID' });
 });
 
 export default Router;
