@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(param) {
         var model = {
             "activityCode": param.ActivityCode,
@@ -8,13 +9,18 @@ export default Ember.Route.extend({
             "roles": [],
             "leading": false
         };
-        Ember.$.ajax({
-            type: "GET",
-            url: 'http://ccttrain.gordon.edu/KJzKJ6FOKx/api/participations',
-            async: false,
-            success: function(data) {
-                model.roles = data;
-            }
+        this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            Ember.$.ajax({
+                type: "GET",
+                url: 'http://gordon360api.gordon.edu/api/participations',
+                async: false,
+                headers: {
+					"Authorization": headerValue
+				},
+                success: function(data) {
+                    model.roles = data;
+                }
+            });
         });
         if (param.Leading === "true") {
             model.leading = true;

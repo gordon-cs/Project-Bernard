@@ -1,54 +1,62 @@
-import Ember from "ember";
+import Ember from 'ember';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend({
-    model() {
-        var model = {
-            "activities": [],
-            "activitesShown": [],
-            "sessions": [],
-            "currentSession": null
-        };
-        // Get Sessions Data
-        Ember.$.ajax({
-            type: "GET",
-            url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions",
-            async: false,
-            success: function(data) {
-                for (var i = data.length - 1; i >= 0; i --) {
-                    model.sessions.push(data[i]);
-                }
-                console.log(model.sessions);
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-        // Get Current Session
-        Ember.$.ajax({
-            type: "GET",
-            url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions/current",
-            async: false,
-            success: function(data) {
-                model.currentSession = data;
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-        // Get Activities in Session
-        Ember.$.ajax({
-            type: "GET",
-            url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/sessions/" + model.currentSession.SessionCode + "/activities",
-            async: false,
-            success: function(data) {
-                model.activities = data;
-                model.activitiesShown = data;
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-        console.log(model);
-        return model;
-    }
+export default Ember.Route.extend(AuthenticatedRouteMixin, {
+
+	model() {
+		var model = {
+            "currentSession": null,
+			"currentMemberships": [],
+			"pastMemberships": []
+		};
+		this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+			var currentSession = null;
+			Ember.$.ajax({
+				type: "GET",
+				url: "http://gordon360api.gordon.edu/api/sessions/current",
+				async: false,
+				headers: {
+					"Authorization": headerValue
+				},
+				success: function(data) {
+					currentSession = data;
+                    model.currentSession = data;
+				}
+			});
+			Ember.$.ajax({
+				type: "GET",
+				url: "http://gordon360api.gordon.edu/api/students/" + this.get('session.data.authenticated.token_data.id') + "/memberships",
+				async: false,
+				headers: {
+					"Authorization": headerValue
+				},
+				success: function(data) {
+					for (var i = 0; i < data.length; i ++) {
+						if (data[i].SessionCode === currentSession.SessionCode) {
+							model.currentMemberships.push(data[i]);
+						}
+						else {
+							var session = data[i].SessionDescription;
+							var place = null;
+							var length = model.pastMemberships.length;
+							for (var j = 0; j < model.pastMemberships.length; j ++) {
+								if (model.pastMemberships[j].session === session) {
+									place = j;
+								}
+							}
+							if (place === null) {
+								model.pastMemberships.push({
+									"session": session,
+									"activities": []
+								});
+								place = length ++;
+							}
+							model.pastMemberships[place].activities.push(data[i]);
+						}
+					}
+				}
+			});
+		});
+		return model;
+	}
 });
