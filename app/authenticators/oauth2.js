@@ -2,7 +2,8 @@ import Ember from 'ember';
 import Base from 'ember-simple-auth/authenticators/base';
 
 export default Base.extend({
-    refreshLeeway: (1000 * (60 * 5)),
+    session: Ember.inject.service('session'),
+    refreshLeeway: (1000 * (60 * 2)),
     restore: function(data) {
         const now = (new Date()).getTime();
         let expiresAt = now + (data.expires_in * 1000);
@@ -56,7 +57,7 @@ export default Base.extend({
     },
     // Refresh Access Token
     accessTokenRefresh(credentials) {
-        this.makeRequest(credentials);
+        this.set('session.data.authenticated', this.makeRequest(credentials));
     },
     // Make Request for Access Token
     makeRequest(credentials) {
