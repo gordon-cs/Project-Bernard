@@ -60,7 +60,6 @@ export default Ember.Controller.extend({
             }
         },
         // Method that gets called when the Remove button is clicked
-<<<<<<< HEAD
         removePerson(membership) {
 
             // Variable declaration
@@ -99,21 +98,6 @@ export default Ember.Controller.extend({
                   console.log("did not delete person");
                 }
             }
-=======
-        removePerson() {
-            if(confirm("Do you want to remove this person?")) {
-                alert("Deleted");
-                console.log("deleted person");
-            } else {
-                alert("not deleted");
-                console.log("did not delete person");
-            }
-        },
-        // Method that gets called when the Edit button is clicked
-        editPerson() {
-            alert("Edit");
-            console.log("Edit Person");
->>>>>>> master
         }
     }
 });
