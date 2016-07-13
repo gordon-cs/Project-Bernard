@@ -1,0 +1,17 @@
+.left-menu {
+    width: 25%;
+    float: left;
+    text-align: center;
+    padding-bottom: 600px;
+    display: inline-block;
+}
+.right-menu {
+    width: 25%;
+    float: right;
+    text-align: center;
+    padding-bottom: 600px;
+    display: inline-block;
+}
+.center-menu {
+    display: inline-block;
+}
