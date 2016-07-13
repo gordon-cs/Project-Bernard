@@ -9,6 +9,8 @@ module.exports = function(defaults) {
       }
   });
 
+  app.import('bower_components/jsPDF-1.2.60/jspdf.js');
+
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //
