@@ -1,36 +1,36 @@
-<div class="main-container col-sm-12">
-    <header>
-        <div class="graybox app-title-container row">
-            <div class="col-sm-3"></div>
-            <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>
-            <div class="user-info col-sm-3">
-                <h5>Dalton Weaner</h5>
-                <button class="logout-btn btn button-gray">Logout</button>
-            </div>
+<header>
+    <div class="graybox app-title-container row">
+        <div class="col-sm-3"></div>
+        <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>
+        <div class="user-info col-sm-3">
+            {{#if session.isAuthenticated}}
+                <h6>{{session.data.authenticated.token_data.name}}</h6>
+                <button {{action 'logout'}} class="logout-btn btn button-gray">Logout</button>
+            {{/if}}
         </div>
-        <div id="logo-box">
-            <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College">
-        </div>
-    </header>
-    <div class="row lightgraybox">
-        <ul id="primary-menu">
-            <li>
-                {{#link-to 'index' class="button"}}
-                    What's Available?
-                {{/link-to}}
-            </li>
-            <li>
-                {{#link-to 'my-activities' class="button"}}
-                    My Involvements
-                {{/link-to}}
-            </li>
-            <li>
-                {{#link-to 'transcript' class="button"}}
-                    Gordon 360
-                {{/link-to}}
-            </li>
-        </ul>
     </div>
+    <div id="logo-box">
+        <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College">
+    </div>
+</header>
+<div class="row lightgraybox">
+    <ul id="primary-menu">
+        <li>
+            {{#link-to 'index' class="button"}}
+                My Involvements
+            {{/link-to}}
+        </li>
+        <li>
+            {{#link-to 'all-activities' class="button"}}
+                What's Available?
+            {{/link-to}}
+        </li>
+        <li>
+            {{#link-to 'transcript' class="button"}}
+                Gordon 360
+            {{/link-to}}
+        </li>
+    </ul>
 </div>
 
 {{outlet}}

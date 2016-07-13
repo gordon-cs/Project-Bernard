@@ -62,6 +62,13 @@ h2 {
 	padding: 0px !important;
 }
 
+input[type="text"]:focus,
+input[type="password"]:focus,
+select[type="text"]:focus {
+    border: 1px solid var(--cyan);
+    box-shadow: none;
+}
+
 
 /********************
 Colored Boxes
@@ -188,12 +195,6 @@ header {
 	color: #de571f;
 }
 
-input[type="text"]:focus,
-select[type="text"]:focus {
-    border: 1px solid var(--cyan);
-    box-shadow: none;
-}
-
 /***********
 Buttons
 ************/
@@ -244,7 +245,8 @@ button:active {
 .button-447:hover {background-color: #5A5D55; color: white;}
 
 /* Ember Power Select */
-.ember-power-select-placeholder {
+.ember-power-select-placeholder,
+.ember-power-select-selected-item {
     font-size: 1.5em;
     line-height: 2.5em;
     margin-left: 4px;
@@ -254,7 +256,7 @@ button:active {
 }
 .ember-power-select-option,
 .ember-power-select-search {
-    font-size: 1.5em;
+    font-size: 1.4em;
 }
 .ember-power-select-option[aria-current="true"] {
     background-color: var(--light-gray);

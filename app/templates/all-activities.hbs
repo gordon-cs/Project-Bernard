@@ -1,0 +1,31 @@
+<div class="page-title cyanbox row">
+	<h2>{{model.currentSession.SessionDescription}}</h2>
+</div>
+<div class="container">
+	<div class="dropdown-container row">
+		<div class="session-dropdown">
+			{{#power-select
+				placeholder="Select Session"
+				searchField="SessionDescription"
+				options=model.sessions
+				onchange=(action "selectSession")
+				as |session|
+			}}
+				{{session.SessionDescription}}
+			{{/power-select}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="search-bar">
+			{{input value=searchValue key-up=(action "filterActivities") placeholder="Search Activities" class="form-control"}}
+		</div>
+	</div>
+	<div class="activity-list">
+		{{#each model.activitiesShown as |activity|}}
+			{{#link-to 'specific-activity' model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
+					<img class="activity-list-item-img" src={{activity.ActivityImage}}>
+					<p class="activity-list-item-name">{{activity.ActivityDescription}}</p>
+			{{/link-to}}
+		{{/each}}
+	</div>
+</div>

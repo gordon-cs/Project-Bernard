@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    session: Ember.inject.service('session'),
     role: null,
     actions: {
         setRole(role) {
@@ -10,7 +11,7 @@ export default Ember.Controller.extend({
             var comments = this.get("comments");
             var roleID = this.get("role.ParticipationCode");
             // Dalton ID Num
-            var studentID = "50100155";
+            var studentID = this.get('session.data.authenticated.token_data.id');;
             if (this.get("model.leading")) {
                 studentID = this.get("studentID");
             }
@@ -23,19 +24,20 @@ export default Ember.Controller.extend({
                 "DESCRIPTION": comments
             };
             var success = false;
-            Ember.$.ajax({
-                type: "POST",
-                url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships/",
-                data: data,
-                dataType: "json",
-                async: false,
-                success: function(data) {
-                    console.log(data);
-                    success = true;
-                },
-                error: function(errorThrown) {
-                    console.log(errorThrown);
-                }
+            this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+                Ember.$.ajax({
+                    type: "POST",
+                    url: "http://gordon360api.gordon.edu/api/memberships/",
+                    data: data,
+                    dataType: "json",
+                    async: false,
+                    headers: {
+                        "Authorization": headerValue
+                    },
+                    success: function(data) {
+                        success = true;
+                    }
+                });
             });
             if (success) {
                 var activityCode = this.get("model.activityCode");
