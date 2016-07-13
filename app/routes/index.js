@@ -31,7 +31,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 					"Authorization": headerValue
 				},
 				success: function(data) {
-                    console.log(data);
 					for (var i = 0; i < data.length; i ++) {
 						if (data[i].SessionCode === currentSession.SessionCode) {
 							model.currentMemberships.push(data[i]);
@@ -58,7 +57,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 				}
 			});
 		});
-        console.log(model);
 		return model;
 	}
 });
