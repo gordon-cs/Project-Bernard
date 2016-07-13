@@ -6,13 +6,13 @@ export default Ember.Controller.extend({
         setRole(role) {
             this.set("role", role);
         },
-        put: function(role) {
+        update: function() {
             var comments = this.get("comments");
-            var membershipID = this.get("membership.MembershipID");
+            var membershipID = this.get("model.membership.MembershipID");
             var roleID = this.get("role.ParticipationCode");
             var studentID = this.get("memberships.IDNumber");
             var data = {
-              "MembershipID": this.get("model.membership.MembershipID"),
+              "MembershipID": membershipID,
               "ACT_CDE": this.get("model.membership.ActivityCode"),
               "SESSION_CDE": this.get("model.sessionCode"),
               "ID_NUM": studentID,

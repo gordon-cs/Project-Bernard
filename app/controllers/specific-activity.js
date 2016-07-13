@@ -1,6 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+
+    // Used to help refresh page on delete (not working)
+    observeSession: function() {
+        this.send("sessionChanged");
+    }.observes("session.isAuthenticated"),
+
     actions: {
 
         // Method that gets called when the follow button is clicked
@@ -60,13 +66,43 @@ export default Ember.Controller.extend({
         },
 
         // Method that gets called when the Remove button is clicked
-        removePerson() {
-            if(confirm("Do you want to remove this person?")) {
-                alert("Deleted");
-                console.log("deleted person");
-            } else {
-                alert("not deleted");
-                console.log("did not delete person");
+        removePerson(membership) {
+
+            // Variable declaration
+            var passed = false;
+            var first = membership.FirstName;
+            var last = membership.LastName;
+            var memId = membership.MembershipID;
+            var sessionCode = membership.SessionCode;
+            var activityCode = membership.ActivityCode;
+
+            console.log(membership);
+
+            if(confirm("Do you want to remove " + first + " " + last + " from this activity?")) {
+                Ember.$.ajax({
+                    type: "DELETE",
+                    url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships/" + memId,
+                    data: JSON.stringify(membership),
+                    contentType: "application/json",
+                    async: false,
+                    success: function(data) {
+                        passed = true;
+                    },
+                    error: function(errorThrown) {
+                      console.log(errorThrown);
+                    }
+                });
+
+                // Remove row from roster table
+                if (passed) {
+                  alert(first + " " + last + " removed.");
+                  console.log("deleted person");
+                }
+                // Do nothing
+                else {
+                  alert(first + " " + last + " not removed.");
+                  console.log("did not delete person");
+                }
             }
         }
     }

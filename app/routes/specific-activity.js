@@ -2,6 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
+    // Refresh the page (not working)
+    actions: {
+        sessionChanged: function() {
+            this.refresh();
+        }
+    },
+
     /*  Below is the model and calls to the api that retrieve data to fill the model */
     model(param) {
         var model = {
