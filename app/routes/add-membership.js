@@ -15,8 +15,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 url: 'http://gordon360api.gordon.edu/api/participations',
                 async: false,
                 headers: {
-					"Authorization": headerValue
-				},
+					          "Authorization": headerValue
+				        },
                 success: function(data) {
                     model.roles = data;
                 }

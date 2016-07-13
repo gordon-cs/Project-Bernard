@@ -10,8 +10,7 @@ export default Ember.Controller.extend({
         post: function(role) {
             var comments = this.get("comments");
             var roleID = this.get("role.ParticipationCode");
-            // Dalton ID Num
-            var studentID = this.get('session.data.authenticated.token_data.id');;
+            var studentID = this.get('session.data.authenticated.token_data.id');
             if (this.get("model.leading")) {
                 studentID = this.get("studentID");
             }

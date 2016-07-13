@@ -59,6 +59,7 @@ export default Ember.Controller.extend({
                 this.set('model.following', !this.get('model').following);
             }
         },
+
         // Method that gets called when the Remove button is clicked
         removePerson(membership) {
 
@@ -75,7 +76,7 @@ export default Ember.Controller.extend({
             if(confirm("Do you want to remove " + first + " " + last + " from this activity?")) {
                 Ember.$.ajax({
                     type: "DELETE",
-                    url: "http://ccttrain.gordon.edu/KJzKJ6FOKx/api/memberships/" + memId,
+                    url: "http://gordon360api.gordon.edu/api/memberships/" + memId,
                     data: JSON.stringify(membership),
                     contentType: "application/json",
                     async: false,
