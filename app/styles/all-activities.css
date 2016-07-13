@@ -25,21 +25,14 @@
 
 .page-title {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.session-dropdown {
-    margin: 5px;
-    padding: 10px 5px;
+.input-container {
+    margin-top: 20px;
 }
 
-.session-dropdown {
-    display: block;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 0.5%;
-    width: 96%;
-}
+.session-dropdown,
 .search-bar {
     display: block;
     text-align: left;
@@ -62,7 +55,7 @@
     text-align: center;
     padding: 0px !important;
     display: block;
-    background-color: #b2bb1c !important;
+    background-color: var(--green) !important;
     margin-left: 0.5%;
     margin-right: 0.5%;
     margin-top: 2%;
@@ -72,14 +65,12 @@
     flex-basis: auto;
 }
 .activity-list-item:hover {
-    box-shadow: 1px 1px 20px var(--light-gray);
-    background-color: var(--light-gray);
-    cursor: pointer;
-    -o-transition: .3s;
-    -ms-transition: .3s;
-    -moz-transition: .3s;
-    -webkit-transition: .3s;
-    transition: .3s;
+    background-color: var(--orange) !important;
+    -o-transition: .3s !important;
+    -ms-transition: .3s !important;
+    -moz-transition: .3s !important;
+    -webkit-transition: .3s !important;
+    transition: .3s !important;
 }
  .activity-list-item-img  {
     display: block;
@@ -100,21 +91,9 @@ Responsive Changes
 ******************/
 @media only screen and (min-width: 768px) {
 
-    .session-dropdown {
-        display: block;
-        text-align: left;
-        width: 32%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 0.5%;
-    }
+    .session-dropdown,
     .search-bar {
-        display: block;
-        text-align: left;
         width: 30%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 0.5%;
     }
     .activity-list {
         padding-left: 4%;
