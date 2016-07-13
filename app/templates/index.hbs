@@ -1,33 +1,50 @@
-<div class="page-title cyanbox col-sm-12">
-	<h2>{{model.currentSession.SessionDescription}}</h2>
-</div>
 <div class="container">
-	<div class="input-container">
-		<div class="dropdown-container row">
-			<div class="session-dropdown">
-				{{#power-select
-					placeholder="Select Session"
-					searchField="SessionDescription"
-					options=model.sessions
-					onchange=(action "selectSession")
-					as |session|
-				}}
-					{{session.SessionDescription}}
-				{{/power-select}}
-			</div>
-		</div>
-		<div class="row">
-			<div class="search-bar">
-				{{input value=searchValue key-up=(action "filterActivities") placeholder="Search Activities" class="form-control"}}
-			</div>
-		</div>
+	<div class="highlight section-title">
+		<h2>Current Experience:</h2>
 	</div>
-	<div class="activity-list">
-		{{#each model.activitiesShown as |activity|}}
-			{{#link-to 'specific-activity' model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
-					<img class="activity-list-item-img" src={{activity.ActivityImage}}>
-					<p class="activity-list-item-name">{{activity.ActivityDescription}}</p>
+	<div class="cyanbox group-title">
+		<h2>{{model.currentSession.SessionDescription}}</h2>
+	</div>
+	<div class="my-activity-list">
+		{{#each model.currentMemberships as |mem|}}
+			{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
+				<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
+				<div class="membership-description">
+					<dl>
+						<dd>Activity:</dd>
+						<dt>{{mem.ActivityDescription}}</dt>
+						<dd>Membership Role:</dd>
+						<dt>{{mem.ParticipationDescription}}</dt>
+						<dd>Membership Session:</dd>
+						<dt>{{mem.SessionDescription}}</dt>
+					</dl>
+				</div>
 			{{/link-to}}
 		{{/each}}
 	</div>
+	<div class="highlight section-title">
+		<h2>Past Experience:</h2>
+	</div>
+	{{#each model.pastMemberships as |memSession|}}
+		<div class="cyanbox group-title">
+			<h2>{{memSession.session}}</h2>
+		</div>
+		<div class="my-activity-list">
+			{{#each memSession.activities as |mem|}}
+				{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
+					<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
+					<div class="membership-description">
+						<dl>
+							<dd>Activity</dd>
+							<dt>{{mem.ActivityDescription}}</dt>
+							<dd>Membership Role</dd>
+							<dt>{{mem.ParticipationDescription}}</dt>
+							<dd>Membership Session</dd>
+							<dt>{{mem.SessionDescription}}</dt>
+						</dl>
+					</div>
+				{{/link-to}}
+			{{/each}}
+		</div>
+	{{/each}}
 </div>
