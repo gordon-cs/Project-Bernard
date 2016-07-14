@@ -2,6 +2,10 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+    beforeModel() {
+        this.set("comments", null);
+        this.set("role", null);
+    },
     model(param) {
         var model = {
             "membershipID": param.MembershipID,
@@ -39,5 +43,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         });
 
         return model;
+    },
+    afterModel() {
+        this.set("comments", null);
+        this.set("role", null);
     }
 });

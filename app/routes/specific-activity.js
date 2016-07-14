@@ -69,7 +69,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 async: false,
                 headers: {
 					          "Authorization": headerValue
-				        },
+				},
                 success: function(data) {
                     model.memberships = [];
                     for (var i = 0; i < data.length; i ++) {
@@ -86,24 +86,25 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     }
                 }
             });
+            // Get a list of all roles that can be assigned
+            Ember.$.ajax({
+                type: "GET",
+                url: 'http://gordon360api.gordon.edu/api/participations',
+                async: false,
+                headers: {
+                    "Authorization": headerValue
+                },
+                success: function(data) {
+                  model.roles = [];
+                  for (var i = 0; i < data.length; i ++) {
+                      model.roles.push(data[i]);
+                  }
+                },
+                error: function(errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
         });
-
-        // Get a list of all roles that can be assigned
-        Ember.$.ajax({
-            type: "GET",
-            url: 'http://ccttrain.gordon.edu/KJzKJ6FOKx/api/participations',
-            async: false,
-            success: function(data) {
-              model.roles = [];
-              for (var i = 0; i < data.length; i ++) {
-                  model.roles.push(data[i]);
-              }
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-
         return model;
     }
 });

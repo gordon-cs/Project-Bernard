@@ -9,15 +9,15 @@ export default Ember.Controller.extend({
         },
         update: function() {
             var comments = this.get("comments");
-            
+
             // There are no new comments
             if (comments.length === 0) {
               // Keep the old comments
               comments = this.get("model.membership.Description");
             }
 
-            var membershipID = this.get("model.membershipID");
             var roleID = this.get("role.ParticipationCode");
+            var membershipID = this.get("model.membershipID");
             var studentID = this.get("model.membership.IDNumber");
             var data = {
               "MEMBERSHIP_ID": membershipID,
@@ -33,8 +33,8 @@ export default Ember.Controller.extend({
                 Ember.$.ajax({
                     type: "PUT",
                     url: "http://gordon360api.gordon.edu/api/memberships/" + membershipID,
-                    data: data,
-                    dataType: "json",
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
                     async: false,
                     headers: {
                         "Authorization": headerValue

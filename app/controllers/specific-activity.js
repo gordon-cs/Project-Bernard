@@ -63,30 +63,36 @@ export default Ember.Controller.extend({
         // Method that gets called when the Remove button is clicked
         removePerson(membership) {
 
-            // Variable declaration
-            var passed = false;
-            var first = membership.FirstName;
-            var last = membership.LastName;
-            var memId = membership.MembershipID;
-            var sessionCode = membership.SessionCode;
-            var activityCode = membership.ActivityCode;
+            this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
 
-            console.log(membership);
+                // Variable declaration
+                var passed = false;
+                var first = membership.FirstName;
+                var last = membership.LastName;
+                var memId = membership.MembershipID;
+                var sessionCode = membership.SessionCode;
+                var activityCode = membership.ActivityCode;
 
-            if(confirm("Do you want to remove " + first + " " + last + " from this activity?")) {
-                Ember.$.ajax({
-                    type: "DELETE",
-                    url: "http://gordon360api.gordon.edu/api/memberships/" + memId,
-                    data: JSON.stringify(membership),
-                    contentType: "application/json",
-                    async: false,
-                    success: function(data) {
-                        passed = true;
-                    },
-                    error: function(errorThrown) {
-                      console.log(errorThrown);
-                    }
-                });
+                console.log(membership);
+
+                if(confirm("Do you want to remove " + first + " " + last + " from this activity?")) {
+                    Ember.$.ajax({
+                        type: "DELETE",
+                        url: "http://gordon360api.gordon.edu/api/memberships/" + memId,
+                        data: JSON.stringify(membership),
+                        dataType: "json",
+                        headers: {
+                            "Authorization": headerValue
+                        },
+                        async: false,
+                        success: function(data) {
+                            passed = true;
+                        },
+                        error: function(errorThrown) {
+                          console.log(errorThrown);
+                        }
+                    });
+                }
 
                 // Remove row from roster table
                 if (passed) {
@@ -98,7 +104,7 @@ export default Ember.Controller.extend({
                   alert(first + " " + last + " not removed.");
                   console.log("did not delete person");
                 }
-            }
+            })
         }
     }
 });
