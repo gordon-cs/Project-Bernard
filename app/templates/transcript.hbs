@@ -1,6 +1,8 @@
-<div class="container" style="width:50%;">
-    <center class="greenbox">
-        <h1>COMING SOON!</h1>
-        <p>A preview of a students Co-Curricular Transcript.</p>
-    </center>
+<div class="container">
+    <div class="col-sm-12">
+        <div class="row">
+            <button class="btn button-cyan transcript-button" onclick={{action 'getPDF'}}>Get Transcript</button>
+        </div>
+        <iframe src={{model.url}}></iframe>
+    </div>
 </div>

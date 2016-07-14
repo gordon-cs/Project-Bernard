@@ -10,6 +10,10 @@ module.exports = function(defaults) {
         tests: false
     });
 
+    app.import('bower_components/jspdf/jspdf.js');
+    app.import('bower_components/jspdf/plugins/addimage.js');
+    app.import('bower_components/file-saver/FileSaver.js');
+
     // Use `app.import` to add additional libraries to the generated
     // output files.
     //
