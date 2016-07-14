@@ -20,14 +20,15 @@ export default Ember.Controller.extend({
                 "SESSION_CDE": this.get("model.sessionCode"),
                 "ID_NUM": studentID,
                 "PART_LVL": roleID,
-                "BEGIN_DTE": "1/1/2016",
+                "BEGIN_DTE": new Date(),
+                "END_DTE": new Date(),
                 "DESCRIPTION": comments
             };
             var success = false;
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
                 Ember.$.ajax({
                     type: "POST",
-                    url: "http://gordon360api.gordon.edu/api/memberships/",
+                    url: "http://gordon360api.gordon.edu/api/memberships",
                     data: data,
                     dataType: "json",
                     async: false,

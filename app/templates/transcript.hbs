@@ -1,5 +1,8 @@
-<div class="container" style="width:50%;">
-    <center>
-        <button class="btn button-green" onclick={{action 'createPDF'}} style="margin-top: 50px">Get Transcript</button>
-    </center>
+<div class="container">
+    <div class="col-sm-12">
+        <div class="row">
+            <button class="btn button-cyan transcript-button" onclick={{action 'getPDF'}}>Get Transcript</button>
+        </div>
+        <iframe src={{model.url}}></iframe>
+    </div>
 </div>
