@@ -5,11 +5,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(param) {
         var model = {
             "activityCode": param.ActivityCode,
+            "activity": null,
             "sessionCode": param.SessionCode,
             "roles": [],
+            "student": null,
             "leading": false
         };
         this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            // Get all participations
             Ember.$.ajax({
                 type: "GET",
                 url: 'http://gordon360api.gordon.edu/api/participations',
@@ -19,6 +22,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 				        },
                 success: function(data) {
                     model.roles = data;
+                }
+            });
+            // Get the activity information
+            Ember.$.ajax({
+                type: "GET",
+                url: 'http://gordon360api.gordon.edu/api/activities/' + model.activityCode,
+                async: false,
+                headers: {
+                    "Authorization": headerValue
+                },
+                success: function(data) {
+                    model.activity = data;
                 }
             });
         });

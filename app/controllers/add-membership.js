@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
         post: function(role) {
             var comments = this.get("comments");
             var roleID = this.get("role.ParticipationCode");
+            var student = null;
             var studentID = this.get('session.data.authenticated.token_data.id');
             if (this.get("model.leading")) {
                 studentID = this.get("studentID");
@@ -24,6 +25,21 @@ export default Ember.Controller.extend({
             };
             var success = false;
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+                // Get a student by email
+                Ember.$.ajax({
+                    type: "GET",
+                    url: "http://gordon360api.gordon.edu/api/students/email/" + this.get("studentEmail") + "/",
+                    async: false,
+                    headers: {
+                        "Authorization": headerValue
+                    },
+                    success: function(data) {
+                        student = data;
+                    }
+                });
+                // Set the new membership's student ID to the one retreived from api call
+                data.ID_NUM = student.StudentID;
+                // Add the new membership
                 Ember.$.ajax({
                     type: "POST",
                     url: "http://gordon360api.gordon.edu/api/memberships/",

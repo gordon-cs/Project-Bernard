@@ -2,12 +2,12 @@
     <div class="add-form">
         <div class="add-title">
             <h2>
-                Adding - {{model.activityCode}}
+                Add Person To - ({{model.activityCode}}) {{model.activity.ActivityDescription}}
             </h2>
         </div>
         {{#if model.leading}}
             <div class="row">
-                {{input value=studentID class="form-control" placeholder="Student ID"}}
+                {{input value=studentEmail class="form-control" placeholder="Student Email Address"}}
             </div>
         {{/if}}
         <div class="row">
