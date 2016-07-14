@@ -49,9 +49,14 @@ export default Ember.Controller.extend({
         var ypos = MARGIN;
         var move = function(amout) {
             ypos += amout;
+            if (ypos > HEIGHT - MARGIN) {
+                doc.addPage();
+                ypos = MARGIN;
+            }
         }
 
         var doc = new jsPDF('p', 'mm', [WIDTH, HEIGHT]);
+        var img = "images/gordon-logo-vertical-white.svg";
         // Page Title
         doc.setFontSize(TITLE_FONT);
         doc.setFontType(TITLE_WEIGHT);
@@ -80,9 +85,13 @@ export default Ember.Controller.extend({
             move(LIST_SPACING);
             doc.text(MARGIN + (TAB * 2),
                 ypos,
-                memberships[i].StartDate + " - " + memberships[i].EndDate);
+                this.getDate(memberships[i].StartDate) + " - " + this.getDate(memberships[i].EndDate));
             move(LIST_SPACING);
         }
         return doc;
+    },
+    getDate(dateString) {
+        var date = new Date(dateString);
+        return ((date.getMonth() + 1) + '/' + date.getMonth() + '/' + date.getFullYear());
     }
 });
