@@ -8,7 +8,14 @@ export default Ember.Controller.extend({
             this.set("role", role);
         },
         update: function() {
-            var comments = this.get("model.membership.Description");
+            var comments = this.get("comments");
+            
+            // There are no new comments
+            if (comments.length === 0) {
+              // Keep the old comments
+              comments = this.get("model.membership.Description");
+            }
+
             var membershipID = this.get("model.membershipID");
             var roleID = this.get("role.ParticipationCode");
             var studentID = this.get("model.membership.IDNumber");
