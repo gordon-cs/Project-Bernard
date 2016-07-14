@@ -75,11 +75,16 @@ export default Base.extend({
             async: false,
             success: function(data) {
                 token = data;
+            },
+            error: function(errorThrown) {
+                token = null;
             }
         });
-        token.token_data = this.getTokenData(token.access_token);
-        token.credentials = credentials;
-        this.scheduleAccessTokenRefresh(credentials, token);
+        if (token !== null) {
+            token.token_data = this.getTokenData(token.access_token);
+            token.credentials = credentials;
+            this.scheduleAccessTokenRefresh(credentials, token);
+        }
         console.log(token);
         return token;
     }
