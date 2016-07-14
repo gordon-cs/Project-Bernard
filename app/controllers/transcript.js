@@ -27,16 +27,21 @@ export default Ember.Controller.extend({
         // Using https://parall.ax/products/jspdf
         // (x, y)
         // text (x, y, string)
-        // line (x, yleft, width, yright)
+        // line (x, yleft, length, yright)
+
+        // Document Variables
         const MARGIN = 20;
         const WIDTH = 216;
         const HEIGHT = 279;
         const PAGE_FONT = 12;
         const TAB = 10;
-        const LINE_SPACING = 8;
+        // Image Variables
+        const IMG_WIDTH = 28;
+        const IMG_HEIGHT = 25;
         // Title Variables
         const TITLE_FONT = 24;
         const TITLE_WEIGHT = 'bold';
+        const TITLE_LINE_WIDTH = 0.3;
         // Title Variables
         const HEADER_FONT = 16;
         const HEADER_WEIGHT = 'bold';
@@ -45,6 +50,10 @@ export default Ember.Controller.extend({
         const LIST_WEIGHT = 'normal';
         const LIST_START = 40;
         const LIST_SPACING = 7;
+        const LIST_LINE_WIDTH = 0.2;
+        const LIST_LINE_LENGTH = 125;
+        const LINE_SPACE_BEFORE = 6;
+        const LINE_SPACE_AFTER = 8;
 
         var ypos = MARGIN;
         var move = function(amout) {
@@ -53,16 +62,15 @@ export default Ember.Controller.extend({
                 doc.addPage();
                 ypos = MARGIN;
             }
-        }
+        };
 
         var doc = new jsPDF('p', 'mm', [WIDTH, HEIGHT]);
-        var img = "images/gordon-logo-vertical-white.svg";
         // Page Title
         doc.setFontSize(TITLE_FONT);
         doc.setFontType(TITLE_WEIGHT);
         doc.text(MARGIN, ypos, 'Gordon 360');
         move(5);
-        doc.setLineWidth(0.3);
+        doc.setLineWidth(TITLE_LINE_WIDTH);
         doc.line(MARGIN, ypos, WIDTH - MARGIN, ypos);
         move(8);
         // Page Header
@@ -73,8 +81,13 @@ export default Ember.Controller.extend({
         // Activity List
         doc.setFontSize(LIST_FONT);
         doc.setFontType(LIST_WEIGHT);
+        doc.setLineWidth(LIST_LINE_WIDTH);
         for (var i = 0; i < memberships.length; i ++) {
-            let pos = i * 3;
+            if (i !== 0) {
+                move(LINE_SPACE_BEFORE);
+                doc.line(MARGIN + TAB, ypos, LIST_LINE_LENGTH, ypos);
+                move(LINE_SPACE_AFTER);
+            }
             doc.text(MARGIN + TAB,
                 ypos,
                 memberships[i].ActivityDescription);
@@ -86,7 +99,6 @@ export default Ember.Controller.extend({
             doc.text(MARGIN + (TAB * 2),
                 ypos,
                 this.getDate(memberships[i].StartDate) + " - " + this.getDate(memberships[i].EndDate));
-            move(LIST_SPACING);
         }
         return doc;
     },
