@@ -30,8 +30,8 @@ export default Ember.Controller.extend({
                     "SESSION_CDE": this.get('model').session.SessionCode.trim(),
                     "ID_NUM": this.get('session.data.authenticated.token_data.id'),
                     "PART_LVL": "GUEST",
-                    "BEGIN_DTE": "1/1/2016",
-                    "END_DTE": "2/2/2016",
+                    "BEGIN_DTE": new Date().toLocaleDateString(),
+                    "END_DTE": new Date().toLocaleDateString(),
                     "DESCRIPTION": "Basic Follower"
                 };
                 var newMembershipID = null;

@@ -8,6 +8,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         var model = {
             "following": false,
             "leading": false,
+            "adminPriv": false,
             "membershipID": null,
             "leaders": [],
             "activity": null,
@@ -17,6 +18,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "allMyMembershipIDs": []
         };
         this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            // Determine if the person logged in has god mode capabilities
+            if(this.get('session.data.authenticated.token_data.college_role') === "god") {
+                model.adminPriv = true;
+                //console.log("Admin! -- " + this.get('session.data.authenticated.token_data.college_role'));
+            };
+
+            // Set the logged in user to be leader if they have admin priviledges
+            if (model.adminPriv) {
+                //console.log("Admin! part.2");
+                model.leading = true;
+            };
+
+            //console.log(this.get('session.data.authenticated'));
             var IDNumber = this.get('session.data.authenticated.token_data.id');
             // Set Activity Info
             Ember.$.ajax({

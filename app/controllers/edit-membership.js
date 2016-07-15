@@ -41,7 +41,7 @@ export default Ember.Controller.extend({
                         "Authorization": headerValue
                     },
                     success: function(data) {
-                        console.log(data);
+                        //console.log(data);
                         success = true;
                     },
                     error: function(errorThrown) {
