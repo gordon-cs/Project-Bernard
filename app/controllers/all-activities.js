@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
                 Ember.$.ajax({
                     type: "GET",
-                    url: "http://gordon360api.gordon.edu/api/sessions/" + session.SessionCode.trim() + "/activities",
+                    url: "https://gordon360api.gordon.edu/api/activities/session/" + session.SessionCode.trim(),
                     async: false,
                     headers: {
                         "Authorization": headerValue

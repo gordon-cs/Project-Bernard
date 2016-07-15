@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
                 Ember.$.ajax({
                     type: "POST",
-                    url: "http://gordon360api.gordon.edu/api/memberships",
+                    url: "https://gordon360api.gordon.edu/api/memberships",
                     data: JSON.stringify(data),
                     contentType: "application/json",
                     async: false,
