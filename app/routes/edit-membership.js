@@ -41,11 +41,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
               }
           });
         });
-
         return model;
-    },
-    afterModel() {
-        this.set("comments", null);
-        this.set("role", null);
     }
 });

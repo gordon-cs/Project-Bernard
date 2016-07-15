@@ -21,7 +21,9 @@ export default Ember.Controller.extend({
                 },
                 success: function(data) {
                     for (var i = 0; i < data.length; i ++) {
-                        var part = data[i].ParticipationCode;
+                        console.log(data[i].Participation);
+                        console.log(data[i]);
+                        var part = data[i].Participation;
                         if (part === "AC" ||
                             part === "CAPT" ||
                             part === "CODIR" ||

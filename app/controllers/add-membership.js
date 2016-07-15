@@ -11,22 +11,13 @@ export default Ember.Controller.extend({
             var comments = this.get("comments");
             var roleID = this.get("role.ParticipationCode");
             var student = null;
-            var studentID = this.get('session.data.authenticated.token_data.id');
+            var studentID = null;
             if (this.get("model.leading")) {
                 studentID = this.get("studentID");
             }
-            var data = {
-                "ACT_CDE": this.get("model.activityCode"),
-                "SESSION_CDE": this.get("model.sessionCode"),
-                "ID_NUM": studentID,
-                "PART_LVL": roleID,
-                "BEGIN_DTE": new Date().toLocaleDateString(),
-                "END_DTE": new Date().toLocaleDateString(),
-                "DESCRIPTION": comments
-            };
             var success = false;
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
-                // Get a student by email
+                // Get the student to be added by email lookup
                 Ember.$.ajax({
                     type: "GET",
                     url: "https://gordon360api.gordon.edu/api/students/email/" + this.get("studentEmail") + "/",
@@ -39,7 +30,17 @@ export default Ember.Controller.extend({
                     }
                 });
                 // Set the new membership's student ID to the one retreived from api call
-                data.ID_NUM = student.StudentID;
+                studentID = student.StudentID;
+                // Data to be sent in POST request
+                var data = {
+                    "ACT_CDE": this.get("model.activityCode"),
+                    "SESSION_CDE": this.get("model.sessionCode"),
+                    "ID_NUM": studentID,
+                    "PART_LVL": roleID,
+                    "BEGIN_DTE": new Date().toLocaleDateString(),
+                    "END_DTE": new Date().toLocaleDateString(),
+                    "DESCRIPTION": comments
+                };
                 // Add the new membership
                 Ember.$.ajax({
                     type: "POST",

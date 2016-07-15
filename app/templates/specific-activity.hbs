@@ -53,7 +53,7 @@
             <div class="row button-row">
                 {{#if model.leading}}
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "true"}}
-                        <button class="btn button-navy" {{action 'toggleFollow'}}>Add Member</button>
+                        <button class="btn button-navy">Add Member</button>
                     {{/link-to}}
                 {{else}}
                     {{#if model.following}}
@@ -78,6 +78,9 @@
                           <th>First Name</th>
                           <th>Last Name</th>
                           <th>Role</th>
+                          {{#if model.leading}}
+                            <th>Comments</th>
+                          {{/if}}
                           <th>Options</th>
                       </tr>
                   </thead>
@@ -88,9 +91,10 @@
                           <td> {{mems.LastName}} </td>
                           <td> {{mems.ParticipationDescription}} </td>
                           {{#if model.leading}}
-                                <td> {{#link-to 'edit-membership' mems.MembershipID}}<button class="btn button-navy roster-button">Edit</button>{{/link-to}} <button {{action 'removePerson' mems}} class="btn button-red roster-button">Remove</button></td>
-                                {{else}}
-                                    <td></td>
+                            <td>{{mems.Description}}</td>
+                            <td> {{#link-to 'edit-membership' mems.MembershipID}}<button class="btn button-navy roster-button">Edit</button>{{/link-to}} <button {{action 'removePerson' mems}} class="btn button-red roster-button">Remove</button></td>
+                            {{else}}
+                                <td></td>
                           {{/if}}
                       </tr>
                       {{/each}}

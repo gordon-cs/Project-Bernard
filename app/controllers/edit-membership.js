@@ -2,21 +2,24 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     session: Ember.inject.service('session'),
-    role: null,
+    //role: null,
     actions: {
         setRole(role) {
             this.set("role", role);
         },
-        update: function() {
+        update() {
             var comments = this.get("comments");
 
-            // The comments field is left empty
-            if (typeof comments == "undefined") {
+            // The comments field is left blank or returned to blank, handler
+            if (typeof comments == "undefined" || comments.length == 0) {
               // Keep the old comments
               comments = this.get("model.membership.Description");
             }
 
             var roleID = this.get("role.ParticipationCode");
+
+            console.log(roleID+"hello");
+
             var membershipID = this.get("model.membershipID");
             var studentID = this.get("model.membership.IDNumber");
             var data = {
@@ -28,7 +31,10 @@ export default Ember.Controller.extend({
               "BEGIN_DTE": new Date().toLocaleDateString(),
               "END_DTE": new Date().toLocaleDateString(),
               "DESCRIPTION": comments
+
             };
+            console.log(JSON.stringify(data));
+
             var success = false;
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
                 Ember.$.ajax({
@@ -41,11 +47,11 @@ export default Ember.Controller.extend({
                         "Authorization": headerValue
                     },
                     success: function(data) {
-                        //console.log(data);
                         success = true;
                     },
                     error: function(errorThrown) {
                         console.log(errorThrown);
+                        alert("Please select a position to assign.");
                     }
                 });
             });

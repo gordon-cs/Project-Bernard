@@ -70,12 +70,13 @@ export default Ember.Controller.extend({
                 var first = membership.FirstName;
                 var last = membership.LastName;
                 var memId = membership.MembershipID;
+                var role = membership.ParticipationDescription;
                 var sessionCode = membership.SessionCode;
                 var activityCode = membership.ActivityCode;
 
                 console.log(membership);
 
-                if(confirm("Do you want to remove " + first + " " + last + " from this activity?")) {
+                if(confirm("Are you sure you want to remove (" + role + ") " + first + " " + last + " from this activity?")) {
                     Ember.$.ajax({
                         type: "DELETE",
                         url: "https://gordon360api.gordon.edu/api/memberships/" + memId,
@@ -86,23 +87,14 @@ export default Ember.Controller.extend({
                         },
                         async: false,
                         success: function(data) {
+                            window.location.reload(true);
+                            console.log("deleted person");
                             passed = true;
                         },
                         error: function(errorThrown) {
                           console.log(errorThrown);
                         }
                     });
-                }
-
-                // Remove row from roster table
-                if (passed) {
-                  alert(first + " " + last + " removed.");
-                  console.log("deleted person");
-                }
-                // Do nothing
-                else {
-                  alert(first + " " + last + " not removed.");
-                  console.log("did not delete person");
                 }
             })
         }
