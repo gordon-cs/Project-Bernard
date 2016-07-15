@@ -15,7 +15,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Get all participations
             Ember.$.ajax({
                 type: "GET",
-                url: 'http://gordon360api.gordon.edu/api/participations',
+                url: 'https://gordon360api.gordon.edu/api/participations',
                 async: false,
                 headers: {
 					          "Authorization": headerValue

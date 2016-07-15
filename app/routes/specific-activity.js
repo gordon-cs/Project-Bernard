@@ -21,7 +21,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Set Activity Info
             Ember.$.ajax({
                 type: "GET",
-                url: 'http://gordon360api.gordon.edu/api/activities/' + param.ActivityCode,
+                url: 'https://gordon360api.gordon.edu/api/activities/' + param.ActivityCode,
                 async: false,
                 headers: {
 					"Authorization": headerValue
@@ -33,7 +33,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Set Session Info
             Ember.$.ajax({
                 type: "GET",
-                url: 'http://gordon360api.gordon.edu/api/sessions/' + param.SessionCode,
+                url: 'https://gordon360api.gordon.edu/api/sessions/' + param.SessionCode,
                 async: false,
                 headers: {
 					"Authorization": headerValue
@@ -45,7 +45,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Set Leading and Leaders
             Ember.$.ajax({
                 type: "GET",
-                url: 'http://gordon360api.gordon.edu/api/activities/' + param.ActivityCode + "/leaders",
+                url: 'https://gordon360api.gordon.edu/api/memberships/activity/' + param.ActivityCode + "/leaders",
                 async: false,
                 headers: {
 					"Authorization": headerValue
@@ -65,7 +65,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Set Activity Memberships and Membership Info
             Ember.$.ajax({
                 type: "GET",
-                url: 'http://gordon360api.gordon.edu/api/activities/' + param.ActivityCode + "/memberships",
+                url: 'https://gordon360api.gordon.edu/api/memberships/activity/' + param.ActivityCode,
                 async: false,
                 headers: {
 					          "Authorization": headerValue

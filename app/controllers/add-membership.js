@@ -20,7 +20,8 @@ export default Ember.Controller.extend({
                 "SESSION_CDE": this.get("model.sessionCode"),
                 "ID_NUM": studentID,
                 "PART_LVL": roleID,
-                "BEGIN_DTE": "1/1/2016",
+                "BEGIN_DTE": new Date(),
+                "END_DTE": new Date(),
                 "DESCRIPTION": comments
             };
             var success = false;
@@ -42,9 +43,9 @@ export default Ember.Controller.extend({
                 // Add the new membership
                 Ember.$.ajax({
                     type: "POST",
-                    url: "http://gordon360api.gordon.edu/api/memberships/",
-                    data: data,
-                    dataType: "json",
+                    url: "https://gordon360api.gordon.edu/api/memberships",
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
                     async: false,
                     headers: {
                         "Authorization": headerValue
