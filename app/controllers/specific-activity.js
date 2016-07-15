@@ -73,6 +73,54 @@ export default Ember.Controller.extend({
         editPerson() {
             alert("Edit");
             console.log("Edit Person");
+        },
+        // Approve specified membership request
+        approveRequest(request) {
+            var confirmation = confirm("Accept this request?");
+            if(confirmation) {
+                // var success = false;
+                // this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
+                //     Ember.$.ajax({
+                //         type: "POST",
+                //         url: "https://gordon360api.gordon.edu/api/requests/" + request.RequestID + "/approve",
+                //         contentType: "application/json",
+                //         async: false,
+                //         headers: {
+        		// 			"Authorization": headerValue
+        		// 		},
+                //         success: function(data) {
+                //             success = true;
+                //         }
+                //     });
+                // });
+                // if (success) {
+                    window.location.reload(true);
+                // }
+            }
+        },
+        // Deny specified membership request
+        denyRequest(request) {
+            var confirmation = confirm("Deny this request?");
+            if (confirmation) {
+                var success = false;
+                this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
+                    Ember.$.ajax({
+                        type: "POST",
+                        url: "https://gordon360api.gordon.edu/api/requests/" + request.RequestID + "/deny",
+                        contentType: "application/json",
+                        async: false,
+                        headers: {
+                            "Authorization": headerValue
+                        },
+                        success: function(data) {
+                            success = true;
+                        }
+                    });
+                });
+                if (success) {
+                    window.location.reload(true);
+                }
+            }
         }
     }
 });

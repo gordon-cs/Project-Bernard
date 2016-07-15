@@ -13,7 +13,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "session": null,
             "memberships": [],
             "advisors": [],
-            "allMyMembershipIDs": []
+            "allMyMembershipIDs": [],
+            "requests": []
         };
         this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
             var IDNumber = this.get("session.data.authenticated.token_data.id");
@@ -85,7 +86,28 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     }
                 }
             });
+            // Get all membership requests
+            if (model.leading) {
+                Ember.$.ajax({
+                    type: "GET",
+                    url: "https://gordon360api.gordon.edu/api/requests/activity/" + param.ActivityCode ,
+                    async: false,
+                    headers: {
+    					"Authorization": headerValue
+    				},
+                    success: function(data) {
+                        for (var i = 0; i < data.length; i ++) {
+                            if (data[i].RequestApproved === "Pending" &&
+                                data[i].SessionCode === param.SessionCode)
+                            {
+                                model.requests.push(data[i]);
+                            }
+                        }
+                    }
+                });
+            }
         });
+        console.log(model);
         return model;
     }
 });

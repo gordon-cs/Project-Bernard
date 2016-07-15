@@ -77,7 +77,7 @@
                       <tr>
                           <th>First Name</th>
                           <th>Last Name</th>
-                          <th>Role</th>
+                          <th>Participation</th>
                           <th>Options</th>
                       </tr>
                   </thead>
@@ -99,4 +99,36 @@
           </div>
         </div>
     </div>
+    {{#if model.leading}}
+        <div class="row table-row">
+            <div class="col-sm-12">
+                <h2>Membership Requests</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Participation</th>
+                                <th>Session</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each model.requests as |req|}}
+                                <tr>
+                                    <td> {{req.FirstName}} {{req.LastName}} </td>
+                                    <td> {{req.ParticipationDescription}} </td>
+                                    <td> {{req.SessionDescription}} </td>
+                                    <td>
+                                        <button {{action "approveRequest" req}} class="btn button-darkgreen">Approve</button>
+                                        <button {{action "denyRequest" req}} class="btn button-red">Deny</button>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {{/if}}
 </div>
