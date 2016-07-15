@@ -52,16 +52,16 @@
             </div>
             <div class="row button-row">
                 {{#if model.leading}}
-                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "true"}}
-                        <button class="btn button-navy" {{action 'toggleFollow'}}>Add Member</button>
+                    {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
+                        <button class="btn button-navy" {{action "toggleFollow"}}>Add Member</button>
                     {{/link-to}}
                 {{else}}
                     {{#if model.following}}
-                        <button type="button" class="btn button-navy" {{action 'toggleFollow'}}>Unfollow</button>
+                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
                     {{else}}
-                        <button type="button" class="btn button-navy" {{action 'toggleFollow'}}>Follow</button>
+                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
                     {{/if}}
-                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "false"}}
+                    {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
                         <button type="button" class="btn button-navy">Join</button>
                     {{/link-to}}
                 {{/if}}
@@ -88,7 +88,7 @@
                           <td> {{mems.LastName}} </td>
                           <td> {{mems.ParticipationDescription}} </td>
                           {{#if (inArr mems.MembershipID model.allMyMembershipIDs)}}
-                          <td> <button {{action 'editPerson'}} class="btn button-navy">Edit</button><!--  <button {{action 'removePerson'}} class="roster-btn remove-button btn btn-red">Remove</button> --> </td>
+                          <td> <button {{action "editPerson"}} class="btn button-navy">Edit</button><!--  <button {{action "removePerson"}} class="roster-btn remove-button btn btn-red">Remove</button> --> </td>
                           {{else}}
                           <td></td>
                           {{/if}}
