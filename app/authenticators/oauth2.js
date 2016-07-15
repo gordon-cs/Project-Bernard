@@ -3,7 +3,7 @@ import Base from 'ember-simple-auth/authenticators/base';
 
 export default Base.extend({
     session: Ember.inject.service('session'),
-    
+
     refreshLeeway: (1000 * (60 * 2)),
     restore: function(data) {
         const now = (new Date()).getTime();
@@ -70,7 +70,7 @@ export default Base.extend({
         var token = null;
         Ember.$.ajax({
             type: "POST",
-            url: "http://gordon360api.gordon.edu/token",
+            url: "https://gordon360api.gordon.edu/token",
             data: data,
             dataType: "json",
             async: false,
