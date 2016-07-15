@@ -89,7 +89,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Get a list of all roles that can be assigned
             Ember.$.ajax({
                 type: "GET",
-                url: 'http://gordon360api.gordon.edu/api/participations',
+                url: 'https://gordon360api.gordon.edu/api/participations',
                 async: false,
                 headers: {
                     "Authorization": headerValue

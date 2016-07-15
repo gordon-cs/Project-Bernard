@@ -27,7 +27,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Get the activity information
             Ember.$.ajax({
                 type: "GET",
-                url: 'http://gordon360api.gordon.edu/api/activities/' + model.activityCode,
+                url: 'https://gordon360api.gordon.edu/api/activities/' + model.activityCode,
                 async: false,
                 headers: {
                     "Authorization": headerValue

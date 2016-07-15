@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
                 // Get a student by email
                 Ember.$.ajax({
                     type: "GET",
-                    url: "http://gordon360api.gordon.edu/api/students/email/" + this.get("studentEmail") + "/",
+                    url: "https://gordon360api.gordon.edu/api/students/email/" + this.get("studentEmail") + "/",
                     async: false,
                     headers: {
                         "Authorization": headerValue

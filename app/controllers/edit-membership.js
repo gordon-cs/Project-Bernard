@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
                 Ember.$.ajax({
                     type: "PUT",
-                    url: "http://gordon360api.gordon.edu/api/memberships/" + membershipID,
+                    url: "https://gordon360api.gordon.edu/api/memberships/" + membershipID,
                     data: JSON.stringify(data),
                     contentType: "application/json",
                     async: false,

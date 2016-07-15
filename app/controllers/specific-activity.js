@@ -78,7 +78,7 @@ export default Ember.Controller.extend({
                 if(confirm("Do you want to remove " + first + " " + last + " from this activity?")) {
                     Ember.$.ajax({
                         type: "DELETE",
-                        url: "http://gordon360api.gordon.edu/api/memberships/" + memId,
+                        url: "https://gordon360api.gordon.edu/api/memberships/" + memId,
                         data: JSON.stringify(membership),
                         dataType: "json",
                         headers: {

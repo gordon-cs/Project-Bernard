@@ -17,7 +17,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           // Get all roles from DB
           Ember.$.ajax({
               type: "GET",
-              url: 'http://gordon360api.gordon.edu/api/participations',
+              url: 'https://gordon360api.gordon.edu/api/participations',
               async: false,
               headers: {
                   "Authorization": headerValue
@@ -30,7 +30,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           // Get membership item
           Ember.$.ajax({
               type: "GET",
-              url: 'http://gordon360api.gordon.edu/api/memberships/' + param.MembershipID,
+              url: 'https://gordon360api.gordon.edu/api/memberships/' + param.MembershipID,
               async: false,
               headers: {
                 "Authorization": headerValue
