@@ -20,8 +20,8 @@ export default Ember.Controller.extend({
                 "SESSION_CDE": this.get("model.sessionCode"),
                 "ID_NUM": studentID,
                 "PART_LVL": roleID,
-                "BEGIN_DTE": new Date(),
-                "END_DTE": new Date(),
+                "BEGIN_DTE": new Date().toLocaleDateString(),
+                "END_DTE": new Date().toLocaleDateString(),
                 "DESCRIPTION": comments
             };
             var success = false;

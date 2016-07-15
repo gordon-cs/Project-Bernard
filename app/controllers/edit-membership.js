@@ -10,8 +10,8 @@ export default Ember.Controller.extend({
         update: function() {
             var comments = this.get("comments");
 
-            // There are no new comments
-            if (comments.length === 0) {
+            // The comments field is left empty
+            if (typeof comments == "undefined") {
               // Keep the old comments
               comments = this.get("model.membership.Description");
             }
@@ -25,7 +25,8 @@ export default Ember.Controller.extend({
               "SESSION_CDE": this.get("model.membership.SessionCode"),
               "ID_NUM": studentID,
               "PART_LVL": roleID,
-              "BEGIN_DTE": "1/1/2016",
+              "BEGIN_DTE": new Date().toLocaleDateString(),
+              "END_DTE": new Date().toLocaleDateString(),
               "DESCRIPTION": comments
             };
             var success = false;
