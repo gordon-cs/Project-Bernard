@@ -27,6 +27,10 @@ export default Ember.Controller.extend({
                     },
                     success: function(data) {
                         student = data;
+                    },
+                    error: function(errorThrown) {
+                        console.log(errorThrown);
+                        alert("Please enter a valid student Email.")
                     }
                 });
                 // Set the new membership's student ID to the one retreived from api call
