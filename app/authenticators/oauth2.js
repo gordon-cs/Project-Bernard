@@ -25,11 +25,11 @@ export default Base.extend({
     authenticate: function(credentials) {
         var token = this.makeRequest(credentials);
         var promise = new Ember.RSVP.Promise(function(resolve, reject) {
-            if (token !== null) {
+            if (token.status === "success") {
                 resolve(token);
             }
             else {
-                reject("Invalid Login");
+                reject(token.error);
             }
         });
         return promise;
@@ -67,7 +67,7 @@ export default Base.extend({
             "password": credentials.password,
             "grant_type": "password"
         };
-        var token = null;
+        var token = {};
         Ember.$.ajax({
             type: "POST",
             url: "https://gordon360api.gordon.edu/token",
@@ -76,12 +76,15 @@ export default Base.extend({
             async: false,
             success: function(data) {
                 token = data;
+                token.status = "success";
             },
             error: function(errorThrown) {
-                token = null;
+                console.log(errorThrown);
+                token.error = errorThrown.statusText;
+                token.status = "error";
             }
         });
-        if (token !== null) {
+        if (token.status === "success") {
             token.token_data = this.getTokenData(token.access_token);
             token.credentials = credentials;
             this.scheduleAccessTokenRefresh(credentials, token);

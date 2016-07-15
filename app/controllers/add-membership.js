@@ -29,8 +29,8 @@ export default Ember.Controller.extend({
                 Ember.$.ajax({
                     type: "POST",
                     url: "https://gordon360api.gordon.edu/api/memberships",
-                    data: data,
-                    dataType: "json",
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
                     async: false,
                     headers: {
                         "Authorization": headerValue

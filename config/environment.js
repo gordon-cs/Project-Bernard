@@ -21,7 +21,7 @@ module.exports = function(environment) {
             authorizor: 'authorizor:token'
         },
         'ember-simple-auth-token': {
-            serverTokenEndpoint: 'http://gordon360api.gordon.edu/token',
+            serverTokenEndpoint: 'https://gordon360api.gordon.edu/token',
             authorizationPrefix: 'Bearer ',
             authorizationHeaderName: 'Authorization'
         }
