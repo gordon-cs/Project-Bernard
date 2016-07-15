@@ -13,7 +13,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Get Sessions Data
             Ember.$.ajax({
                 type: "GET",
-                url: "http://gordon360api.gordon.edu/api/sessions",
+                url: "https://gordon360api.gordon.edu/api/sessions",
                 async: false,
                 headers: {
 					"Authorization": headerValue
@@ -27,7 +27,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Get Current Session
             Ember.$.ajax({
                 type: "GET",
-                url: "http://gordon360api.gordon.edu/api/sessions/current",
+                url: "https://gordon360api.gordon.edu/api/sessions/current",
                 async: false,
                 headers: {
 					"Authorization": headerValue
@@ -39,7 +39,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Get Activities in Session
             Ember.$.ajax({
                 type: "GET",
-                url: "http://gordon360api.gordon.edu/api/sessions/" + model.currentSession.SessionCode + "/activities",
+                url: "https://gordon360api.gordon.edu/api/activities/session/" + model.currentSession.SessionCode,
                 async: false,
                 headers: {
 					"Authorization": headerValue
