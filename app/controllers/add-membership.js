@@ -30,11 +30,12 @@ export default Ember.Controller.extend({
                     },
                     error: function(errorThrown) {
                         console.log(errorThrown);
-                        alert("Please enter a valid student Email.")
+                        alert("Please enter a valid student email.")
                     }
                 });
                 // Set the new membership's student ID to the one retreived from api call
                 studentID = student.StudentID;
+
                 // Data to be sent in POST request
                 var data = {
                     "ACT_CDE": this.get("model.activityCode"),
@@ -57,6 +58,11 @@ export default Ember.Controller.extend({
                     },
                     success: function(data) {
                         success = true;
+                    },
+                    error: function(errorThrown) {
+                        console.log(errorThrown);
+                        console.log("ojv");
+                        alert("Make sure the student email is valid and select a participation level.");
                     }
                 });
             });

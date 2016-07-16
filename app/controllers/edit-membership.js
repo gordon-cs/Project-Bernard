@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
 
             var roleID = this.get("role.ParticipationCode");
 
-            console.log(roleID+"hello");
+            // ERROR TEST console.log(roleID+"hello");
 
             var membershipID = this.get("model.membershipID");
             var studentID = this.get("model.membership.IDNumber");
@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
               "DESCRIPTION": comments
 
             };
-            console.log(JSON.stringify(data));
+            // ERROR TEST console.log(JSON.stringify(data));
 
             var success = false;
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
