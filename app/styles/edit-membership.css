@@ -1,0 +1,26 @@
+.edit-title {
+    font-size: 200%;
+    text-align: center;
+}
+.edit-form {
+    margin-top: 40px;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.edit-form > .row {
+    margin-top: 10px;
+}
+.edit-button {
+    width: 100%;
+    margin-top: 5px;
+}
+@media only screen and (min-width: 768px) {
+    .edit-form {
+        width: 50%;
+    }
+    .edit-button {
+        float: right;
+        width: auto;
+    }
+}

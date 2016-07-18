@@ -6,21 +6,48 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(param) {
         var model = {
             "activityCode": param.ActivityCode,
+            "activity": null,
             "sessionCode": param.SessionCode,
             "roles": [],
+            "student": null,
             "leading": false,
+            "adminPriv": false,
             "id": this.get("session.data.authenticated.token_data.id")
         };
-        this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
+        this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            if(this.get('session.data.authenticated.token_data.college_role') === "god") {
+                model.adminPriv = true;
+                //ERROR CHECK - Should not show when deployed... console.log("Admin! -- " + this.get('session.data.authenticated.token_data.college_role'));
+            };
+
+            // Set the logged in user to be leader if they have admin priviledges
+            if (model.adminPriv) {
+                //ERROR CHECK - Should not show when deployed... console.log("Admin! part.2");
+                model.leading = true;
+            };
+
+            // Get all participations
             Ember.$.ajax({
                 type: "GET",
                 url: "https://gordon360api.gordon.edu/api/participations",
                 async: false,
                 headers: {
-					"Authorization": headerValue
-				},
+					          "Authorization": headerValue
+				        },
                 success: function(data) {
                     model.roles = data;
+                }
+            });
+            // Get the activity information
+            Ember.$.ajax({
+                type: "GET",
+                url: 'https://gordon360api.gordon.edu/api/activities/' + model.activityCode,
+                async: false,
+                headers: {
+                    "Authorization": headerValue
+                },
+                success: function(data) {
+                    model.activity = data;
                 }
             });
             Ember.$.ajax({

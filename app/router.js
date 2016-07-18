@@ -6,6 +6,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+    this.route('edit-membership', { path: '/edit-membership/:MembershipID' });
     this.route("specific-activity", { path: "/specific-activity/:SessionCode/:ActivityCode" });
     this.route("add-membership", { path: "/add-membership/:SessionCode/:ActivityCode" });
     this.route("transcript");

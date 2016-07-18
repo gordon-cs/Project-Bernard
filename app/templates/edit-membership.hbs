@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="edit-form">
+        <div class="edit-title row">
+            <h2>
+                {{model.membership.ActivityDescription}}
+            </h2>
+            <h4>
+                Edit
+            </h4>
+            <h4>
+                {{model.membership.FirstName}} {{model.membership.LastName}}: {{model.membership.ParticipationDescription}}
+            </h4>
+        </div>
+        <div class="row">
+            {{#power-select
+                placeholder="Select Participation"
+                selected=role
+                searchField="ParticipationDescription"
+                options=model.roles
+                onchange=(action "setRole")
+                as |role|
+            }}
+                {{role.ParticipationDescription}}
+            {{/power-select}}
+        </div>
+        <div class="row">
+            {{input value=comments class="form-control" placeholder="Comment (optional)"}}
+        </div>
+        <div class="row">
+            <button class="btn button-navy edit-button" {{action 'update'}}>Edit</button>
+        </div>
+    </div>
+</div>

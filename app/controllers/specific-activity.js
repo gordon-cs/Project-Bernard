@@ -30,8 +30,8 @@ export default Ember.Controller.extend({
                     "SESSION_CDE": this.get("model").session.SessionCode.trim(),
                     "ID_NUM": this.get("session.data.authenticated.token_data.id"),
                     "PART_LVL": "GUEST",
-                    "BEGIN_DTE": "1/1/2016",
-                    "END_DTE": "2/2/2016",
+                    "BEGIN_DTE": new Date().toLocaleDateString(),
+                    "END_DTE": new Date().toLocaleDateString(),
                     "DESCRIPTION": "Basic Follower"
                 };
                 var newMembershipID = null;
@@ -59,21 +59,44 @@ export default Ember.Controller.extend({
                 this.set("model.following", !this.get("model").following);
             }
         },
+
         // Method that gets called when the Remove button is clicked
-        removePerson() {
-            if(confirm("Do you want to remove this person?")) {
-                alert("Deleted");
-                console.log("deleted person");
-            } else {
-                alert("not deleted");
-                console.log("did not delete person");
-            }
+        removePerson(membership) {
+
+            this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+
+                // Variable declaration
+                var passed = false;
+                var first = membership.FirstName;
+                var last = membership.LastName;
+                var memId = membership.MembershipID;
+                var role = membership.ParticipationDescription;
+                var sessionCode = membership.SessionCode;
+                var activityCode = membership.ActivityCode;
+
+                if(confirm("Are you sure you want to remove (" + role + ") " + first + " " + last + " from this activity?")) {
+                    Ember.$.ajax({
+                        type: "DELETE",
+                        url: "https://gordon360api.gordon.edu/api/memberships/" + memId,
+                        data: JSON.stringify(membership),
+                        dataType: "json",
+                        headers: {
+                            "Authorization": headerValue
+                        },
+                        async: false,
+                        success: function(data) {
+                            window.location.reload(true);
+                            // ERROR CHECK - Should not show when deployed... console.log("deleted person");
+                            passed = true;
+                        },
+                        error: function(errorThrown) {
+                          console.log(errorThrown);
+                        }
+                    });
+                }
+            })
         },
-        // Method that gets called when the Edit button is clicked
-        editPerson() {
-            alert("Edit");
-            console.log("Edit Person");
-        },
+
         // Approve specified membership request
         approveRequest(request) {
             if(confirm("Accept this request?")) {
@@ -97,6 +120,7 @@ export default Ember.Controller.extend({
                 }
             }
         },
+        
         // Deny specified membership request
         denyRequest(request) {
             if (confirm("Deny this request?")) {

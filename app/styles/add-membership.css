@@ -1,4 +1,11 @@
-#add-box > h1 {
+.add-title {
+    font-size: 200%;
+    text-align: center;
+}
+.add-form {
+    margin-top: 40px;
+    width: 90%;
+    margin-right: auto;
     margin-left: auto;
     margin-right: auto;
 }

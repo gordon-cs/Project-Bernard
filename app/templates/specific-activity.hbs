@@ -52,8 +52,8 @@
             </div>
             <div class="row button-row">
                 {{#if model.leading}}
-                    {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
-                        <button class="btn button-navy" {{action "toggleFollow"}}>Add Member</button>
+                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
+                        <button class="btn button-navy">Add Member</button>
                     {{/link-to}}
                 {{else}}
                     {{#if model.following}}
@@ -77,7 +77,10 @@
                       <tr>
                           <th>First Name</th>
                           <th>Last Name</th>
-                          <th>Participation</th>
+                          <th>Role</th>
+                          {{#if model.leading}}
+                            <th>Comments</th>
+                          {{/if}}
                           <th>Options</th>
                       </tr>
                   </thead>
@@ -87,10 +90,11 @@
                           <td> {{mems.FirstName}} </td>
                           <td> {{mems.LastName}} </td>
                           <td> {{mems.ParticipationDescription}} </td>
-                          {{#if (inArr mems.MembershipID model.allMyMembershipIDs)}}
-                          <td> <button {{action "editPerson"}} class="btn button-navy">Edit</button><!--  <button {{action "removePerson"}} class="roster-btn remove-button btn btn-red">Remove</button> --> </td>
-                          {{else}}
-                          <td></td>
+                          {{#if model.leading}}
+                            <td>{{mems.Description}}</td>
+                            <td> {{#link-to 'edit-membership' mems.MembershipID}}<button class="btn button-navy roster-button">Edit</button>{{/link-to}} <button {{action 'removePerson' mems}} class="btn button-red roster-button">Remove</button></td>
+                            {{else}}
+                                <td></td>
                           {{/if}}
                       </tr>
                       {{/each}}

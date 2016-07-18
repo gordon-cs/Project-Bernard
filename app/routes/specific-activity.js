@@ -2,11 +2,13 @@ import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+
     /*  Below is the model and calls to the api that retrieve data to fill the model */
     model(param) {
         var model = {
             "following": false,
             "leading": false,
+            "adminPriv": false,
             "membershipID": null,
             "leaders": [],
             "activity": null,
@@ -16,8 +18,21 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "allMyMembershipIDs": [],
             "requests": []
         };
-        this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
-            var IDNumber = this.get("session.data.authenticated.token_data.id");
+        this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            // Determine if the person logged in has god mode capabilities
+            if(this.get('session.data.authenticated.token_data.college_role') === "god") {
+                model.adminPriv = true;
+                //ERROR CHECK - Should not show when deployed... console.log("Admin! -- " + this.get('session.data.authenticated.token_data.college_role'));
+            };
+
+            // Set the logged in user to be leader if they have admin priviledges
+            if (model.adminPriv) {
+                //ERROR CHECK - Should not show when deployed... console.log("Admin! part.2");
+                model.leading = true;
+            };
+
+            //ERROR CHECK - Should not show when deployed... console.log(this.get('session.data.authenticated'));
+            var IDNumber = this.get('session.data.authenticated.token_data.id');
             // Set Activity Info
             Ember.$.ajax({
                 type: "GET",
@@ -68,7 +83,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 url: "https://gordon360api.gordon.edu/api/memberships/activity/" + param.ActivityCode,
                 async: false,
                 headers: {
-					"Authorization": headerValue
+					          "Authorization": headerValue
 				},
                 success: function(data) {
                     model.memberships = [];
@@ -86,6 +101,26 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     }
                 }
             });
+
+            // Get a list of all roles that can be assigned
+            // Ember.$.ajax({
+            //     type: "GET",
+            //     url: 'https://gordon360api.gordon.edu/api/participations',
+            //     async: false,
+            //     headers: {
+            //         "Authorization": headerValue
+            //     },
+            //     success: function(data) {
+            //       model.roles = [];
+            //       for (var i = 0; i < data.length; i ++) {
+            //           model.roles.push(data[i]);
+            //       }
+            //     },
+            //     error: function(errorThrown) {
+            //         console.log(errorThrown);
+            //     }
+            // });
+
             // Get all membership requests
             if (model.leading) {
                 Ember.$.ajax({

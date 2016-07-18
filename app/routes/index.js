@@ -7,7 +7,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		var model = {
             "currentSession": null,
 			"currentMemberships": [],
-			"pastMemberships": []
+			"pastMemberships": [],
+			"nothingToShow": false
 		};
 		this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
 			var currentSession = null;
@@ -54,6 +55,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 							model.pastMemberships[place].activities.push(data[i]);
 						}
 					}
+					if (data.length === 0) {
+						// console.log("got nothing");
+						model.nothingToShow = true;
+					} else {
+						// console.log("got something");
+					}
+
 				}
 			});
 		});

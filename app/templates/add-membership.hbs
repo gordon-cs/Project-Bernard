@@ -1,8 +1,20 @@
-<div id="add-box" class="whitebox container">
-    <h1>Adding - {{model.activityCode}}</h1>
-    <form {{action "post" on="submit"}}>
+<div class="container">
+    <div class="add-form">
+        <div class="add-title">
+            {{#if model.leading}}
+                <h2>
+                    Add Person To - ({{model.activityCode}}) {{model.activity.ActivityDescription}}
+                </h2>
+            {{else}}
+                <h2>
+                    Join - ({{model.activityCode}}) {{model.activity.ActivityDescription}}
+                </h2>
+            {{/if}}
+        </div>
         {{#if model.leading}}
-            {{input value=studentID class="form-control" placeholder="Student ID"}}
+            <div class="row">
+                {{input value=studentEmail class="form-control" placeholder="Student Email Address"}}
+            </div>
         {{/if}}
         {{#power-select
             placeholder="Select Participation"
@@ -15,6 +27,6 @@
             {{role.ParticipationDescription}}
         {{/power-select}}
         {{input value=comments class="form-control" placeholder="Comment (optional)"}}
-        <button type="submit" class="btn button-navy add-button" {{action "post"}}>Add</button>
-    </form>
+        <button type="submit" class="btn button-navy add-button" {{action "post"}}>Add Member</button>
+    </div>
 </div>
