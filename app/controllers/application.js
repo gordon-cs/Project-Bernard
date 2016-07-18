@@ -33,21 +33,24 @@ export default Ember.Controller.extend({
                         leaderMemberships.push(memberships[i]);
                     }
                 }
-                for (var i = 0; i < leaderMemberships; i ++) {
+                for (var i = 0; i < leaderMemberships.length; i ++) {
+                    console.log("https://gordon360api.gordon.edu/api/requests/" + leaderMemberships[i].ActivityCode);
                     Ember.$.ajax({
                         type: "GET",
-                        url: "https://gordon360api.gorodn.edu/api/requests/" + leaderMemberships.ActivityCode + "/" + leaderMemberships.SessionCode,
+                        url: "https://gordon360api.gordon.edu/api/requests/" + leaderMemberships[i].ActivityCode,
                         headers: {
         					"Authorization": headerValue
         				},
                         success: function(data) {
-                            for (var i = 0; i < data.length; i ++) {
-                                requests.push(data[i]);
+                            for (var j = 0; j < data.length; j ++) {
+                                if (data[j].SessionCode === leaderMemberships[i].SessionCode) {
+                                    requests.push(data[i]);
+                                }
                             }
                         }
                     });
                 }
-                if (requests.lenth > 0) {
+                if (requests.length > 0) {
                     this.set("notificationsPresent", true);
                 }
                 console.log(memberships);

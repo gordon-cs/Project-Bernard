@@ -6,11 +6,11 @@
             {{#if session.isAuthenticated}}
                 <h6>{{session.data.authenticated.token_data.name}}</h6>
                 <div class="button-row">
-                    {{#if notificationsPresent}}
-                        <div class="dropdown request-notification-dropdown" {{action "getRequests"}}>
-                            <button class="btn button-gray dropdown-toggle request-button" data-toggle="dropdown">Requests
-                                {{!-- <span class="glyphicon glyphicon-bell"></span> --}}
-                            </button>
+                    <div class="dropdown request-notification-dropdown" {{action "getRequests"}}>
+                        <button class="btn button-gray dropdown-toggle request-button" data-toggle="dropdown">Requests
+                            {{!-- <span class="glyphicon glyphicon-bell"></span> --}}
+                        </button>
+                        {{#if notificationsPresent}}
                             <ul class="dropdown-menu dropdown-menu-right">
                                 {{#each requests as |req|}}
                                     <li>
@@ -20,9 +20,17 @@
                                     </li>
                                 {{/each}}
                             </ul>
-                        </div>
-                    {{/if}}
-                    <button {{action 'logout'}} class="logout-btn btn button-gray">Logout</button>
+                        {{else}}
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a>
+                                        No Pending Requests
+                                    </a>
+                                </li>
+                            </ul>
+                        {{/if}}
+                    </div>
+                <button {{action 'logout'}} class="logout-btn btn button-gray">Logout</button>
                 </div>
             {{/if}}
         </div>
