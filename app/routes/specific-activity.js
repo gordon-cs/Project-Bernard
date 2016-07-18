@@ -1,5 +1,5 @@
-import Ember from 'ember';
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import Ember from "ember";
+import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     /*  Below is the model and calls to the api that retrieve data to fill the model */
@@ -13,14 +13,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "session": null,
             "memberships": [],
             "advisors": [],
-            "allMyMembershipIDs": []
+            "allMyMembershipIDs": [],
+            "requests": []
         };
-        this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
-            var IDNumber = this.get('session.data.authenticated.token_data.id');
+        this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
+            var IDNumber = this.get("session.data.authenticated.token_data.id");
             // Set Activity Info
             Ember.$.ajax({
                 type: "GET",
-                url: 'https://gordon360api.gordon.edu/api/activities/' + param.ActivityCode,
+                url: "https://gordon360api.gordon.edu/api/activities/" + param.ActivityCode,
                 async: false,
                 headers: {
 					"Authorization": headerValue
@@ -32,7 +33,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Set Session Info
             Ember.$.ajax({
                 type: "GET",
-                url: 'https://gordon360api.gordon.edu/api/sessions/' + param.SessionCode,
+                url: "https://gordon360api.gordon.edu/api/sessions/" + param.SessionCode,
                 async: false,
                 headers: {
 					"Authorization": headerValue
@@ -44,7 +45,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Set Leading and Leaders
             Ember.$.ajax({
                 type: "GET",
-                url: 'https://gordon360api.gordon.edu/api/memberships/activity/' + param.ActivityCode + "/leaders",
+                url: "https://gordon360api.gordon.edu/api/memberships/activity/" + param.ActivityCode + "/leaders",
                 async: false,
                 headers: {
 					"Authorization": headerValue
@@ -64,7 +65,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Set Activity Memberships and Membership Info
             Ember.$.ajax({
                 type: "GET",
-                url: 'https://gordon360api.gordon.edu/api/memberships/activity/' + param.ActivityCode,
+                url: "https://gordon360api.gordon.edu/api/memberships/activity/" + param.ActivityCode,
                 async: false,
                 headers: {
 					"Authorization": headerValue
@@ -85,7 +86,28 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     }
                 }
             });
+            // Get all membership requests
+            if (model.leading) {
+                Ember.$.ajax({
+                    type: "GET",
+                    url: "https://gordon360api.gordon.edu/api/requests/activity/" + param.ActivityCode ,
+                    async: false,
+                    headers: {
+    					"Authorization": headerValue
+    				},
+                    success: function(data) {
+                        for (var i = 0; i < data.length; i ++) {
+                            if (data[i].RequestApproved === "Pending" &&
+                                data[i].SessionCode === param.SessionCode)
+                            {
+                                model.requests.push(data[i]);
+                            }
+                        }
+                    }
+                });
+            }
         });
+        console.log(model);
         return model;
     }
 });

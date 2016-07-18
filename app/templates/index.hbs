@@ -7,7 +7,7 @@
 	</div>
 	<div class="my-activity-list">
 		{{#each model.currentMemberships as |mem|}}
-			{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
+			{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
 				<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
 				<div class="membership-description">
 					<dl>
@@ -31,7 +31,7 @@
 		</div>
 		<div class="my-activity-list">
 			{{#each memSession.activities as |mem|}}
-				{{#link-to 'specific-activity' mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
+				{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
 					<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
 					<div class="membership-description">
 						<dl>
