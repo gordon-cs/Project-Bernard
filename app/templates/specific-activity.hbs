@@ -52,7 +52,7 @@
             </div>
             <div class="row button-row">
                 {{#if model.leading}}
-                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "true"}}
+                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Add Member</button>
                     {{/link-to}}
                 {{else}}
