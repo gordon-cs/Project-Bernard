@@ -62,19 +62,17 @@ export default Ember.Controller.extend({
 
         // Method that gets called when the Remove button is clicked
         removePerson(membership) {
+            // Variable declaration
+            var success = false;
+            var first = membership.FirstName;
+            var last = membership.LastName;
+            var memId = membership.MembershipID;
+            var role = membership.ParticipationDescription;
+            var sessionCode = membership.SessionCode;
+            var activityCode = membership.ActivityCode;
 
-            this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
-
-                // Variable declaration
-                var passed = false;
-                var first = membership.FirstName;
-                var last = membership.LastName;
-                var memId = membership.MembershipID;
-                var role = membership.ParticipationDescription;
-                var sessionCode = membership.SessionCode;
-                var activityCode = membership.ActivityCode;
-
-                if(confirm("Are you sure you want to remove (" + role + ") " + first + " " + last + " from this activity?")) {
+            if (confirm("Are you sure you want to remove (" + role + ") " + first + " " + last + " from this activity?")) {
+                this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
                     Ember.$.ajax({
                         type: "DELETE",
                         url: "https://gordon360api.gordon.edu/api/memberships/" + memId,
@@ -85,21 +83,19 @@ export default Ember.Controller.extend({
                         },
                         async: false,
                         success: function(data) {
-                            window.location.reload(true);
-                            // ERROR CHECK - Should not show when deployed... console.log("deleted person");
-                            passed = true;
-                        },
-                        error: function(errorThrown) {
-                          console.log(errorThrown);
+                            success = true;
                         }
                     });
+                });
+                if (success) {
+                    window.location.reload(true);
                 }
-            })
+            }
         },
 
         // Approve specified membership request
         approveRequest(request) {
-            if(confirm("Accept this request?")) {
+            if (confirm("Accept this request?")) {
                 var success = false;
                 this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
                     Ember.$.ajax({
@@ -120,7 +116,7 @@ export default Ember.Controller.extend({
                 }
             }
         },
-        
+
         // Deny specified membership request
         denyRequest(request) {
             if (confirm("Deny this request?")) {

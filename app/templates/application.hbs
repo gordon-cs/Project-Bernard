@@ -6,27 +6,25 @@
             <div class="user-info col-sm-3">
                 {{#if session.isAuthenticated}}
                     <h6>{{session.data.authenticated.token_data.name}}</h6>
-                        <div class="dropdown request-notification-dropdown" {{action "getRequests"}}>
-                            <button class="btn button-gray dropdown-toggle request-button" data-toggle="dropdown">Requests
-                                {{!-- <span class="glyphicon glyphicon-bell"></span> --}}
-                            </button>
-                            {{#if notificationsPresent}}
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    {{#each requests as |req|}}
-                                        <li>
-                                            {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                                {{req.FirstName}} {{req.LastName}} - {{req.ActivityDescription}}
-                                            {{/link-to}}
-                                        </li>
-                                    {{/each}}
-                                </ul>
-                            {{else}}
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a>No Pending Requests</a></li>
-                                </ul>
-                            {{/if}}
-                        </div>
+                    <div class="user-info-buttons">
+                        {{#if notificationsPresent}}
+                            <div class="dropdown request-notification-dropdown">
+                                {{!-- <button class="btn button-gray dropdown-toggle request-button" data-toggle="dropdown"> --}}
+                                    <span class="glyphicon glyphicon-bell request-button" data-toggle="dropdown"></span>
+                                {{!-- </button> --}}
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        {{#each requests as |req|}}
+                                            <li>
+                                                {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
+                                                    {{req.FirstName}} {{req.LastName}} - {{req.ActivityDescription}}
+                                                {{/link-to}}
+                                            </li>
+                                        {{/each}}
+                                    </ul>
+                            </div>
+                        {{/if}}
                         <button {{action "logout"}} class="logout-btn btn button-gray">Logout</button>
+                    </div>
                 {{/if}}
             </div>
         </div>

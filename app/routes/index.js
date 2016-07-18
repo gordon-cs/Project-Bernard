@@ -56,12 +56,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 						}
 					}
 					if (data.length === 0) {
-						// console.log("got nothing");
 						model.nothingToShow = true;
-					} else {
-						// console.log("got something");
 					}
-
 				}
 			});
 		});

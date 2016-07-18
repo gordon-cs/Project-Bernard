@@ -37,7 +37,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
               },
               success: function(data) {
                   model.membership = data;
-                  // ERROR TEST console.log(data);
               }
           });
         });

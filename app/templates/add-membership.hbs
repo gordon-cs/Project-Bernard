@@ -1,20 +1,16 @@
-<div class="container">
-    <div class="add-form">
-        <div class="add-title">
-            {{#if model.leading}}
-                <h2>
-                    Add Person To - ({{model.activityCode}}) {{model.activity.ActivityDescription}}
-                </h2>
-            {{else}}
-                <h2>
-                    Join - ({{model.activityCode}}) {{model.activity.ActivityDescription}}
-                </h2>
-            {{/if}}
-        </div>
+<div id="add-box" class="graybox container">
+    {{#if model.leading}}
+        <h1>
+            Add Person To - {{model.activity.ActivityDescription}}
+        </h1>
+    {{else}}
+        <h1>
+            Join - {{model.activity.ActivityDescription}}
+        </h1>
+    {{/if}}
+    <form {{action "post" on="submit"}}>
         {{#if model.leading}}
-            <div class="row">
-                {{input value=studentEmail class="form-control" placeholder="Student Email Address"}}
-            </div>
+            {{input value=studentEmail class="form-control" placeholder="Student Email Address"}}
         {{/if}}
         {{#power-select
             placeholder="Select Participation"
@@ -28,5 +24,8 @@
         {{/power-select}}
         {{input value=comments class="form-control" placeholder="Comment (optional)"}}
         <button type="submit" class="btn button-navy add-button" {{action "post"}}>Add Member</button>
-    </div>
+        {{#if errorMessage}}
+            <p id="error-message">{{errorMessage}}</p>
+        {{/if}}
+    </form>
 </div>

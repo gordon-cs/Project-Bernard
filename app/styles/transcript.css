@@ -1,8 +1,12 @@
-.transcript-button {
+#download-button {
     margin-top: 20px;
     margin-right: auto;
     margin-left: auto;
-    width: 100%;
+    float: right;
+    color: white;
+}
+#download-button > span {
+    color: white;
 }
 iframe {
     margin-top: 20px;

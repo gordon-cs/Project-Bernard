@@ -17,12 +17,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
             if(this.get('session.data.authenticated.token_data.college_role') === "god") {
                 model.adminPriv = true;
-                //ERROR CHECK - Should not show when deployed... console.log("Admin! -- " + this.get('session.data.authenticated.token_data.college_role'));
             };
 
             // Set the logged in user to be leader if they have admin priviledges
             if (model.adminPriv) {
-                //ERROR CHECK - Should not show when deployed... console.log("Admin! part.2");
                 model.leading = true;
             };
 
@@ -68,7 +66,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             });
         });
-        console.log(model);
         return model;
     }
 });

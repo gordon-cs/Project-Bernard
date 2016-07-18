@@ -199,6 +199,18 @@ header {
     text-align: right;
     color: white;
 }
+.request-button {
+    border: 0px !important;
+    font-size: 250%;
+}
+.request-button {
+    color: white;
+    margin-right: 20px;
+}
+.request-button:hover {
+    color: var(--mid-gray);
+    cursor: pointer;
+}
 .logout-btn {
     background-color: var(--brown-gray);
     border-color: white;
@@ -207,17 +219,12 @@ header {
     display: inline-block;
     font-size: 130% !important;
 }
-.request-notification-dropdown,
-.request-notification-dropdown > ul
-.request-notification-dropdown > ul > li {
+.request-notification-dropdown {
     display: inline-block;
+    margin-right: 20px;
 }
 .request-notification-dropdown > ul > li > a {
     font-size: 80%;
-}
-.request-notification-dropdown > button {
-    margin-right: 10px;
-    font-size: 130% !important;
 }
 .request-notification-dropdown > button:focus {
     border: 1px solid white !important;
