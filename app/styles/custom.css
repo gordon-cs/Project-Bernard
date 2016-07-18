@@ -151,14 +151,15 @@ Gordon Logo
 
 #logo-box {
 	background:#014983;
-  margin: 0 auto 0 auto;
-  text-align: center;
+    margin: 0 auto 0 auto;
+    text-align: center;
 	padding: 2% 2%;
-  position: relative;
+    position: relative;
+    z-index: 2;
 }
 
 #logo-box img {
-  max-width: 20%;
+    max-width: 20%;
 }
 
 /***********
@@ -194,7 +195,33 @@ header {
 #primary-menu a:hover {
 	color: #de571f;
 }
-
+.user-info {
+    text-align: right;
+    color: white;
+}
+.logout-btn {
+    background-color: var(--brown-gray);
+    border-color: white;
+    border-style: solid;
+    border-width: thin;
+    display: inline-block;
+    font-size: 130% !important;
+}
+.request-notification-dropdown,
+.request-notification-dropdown > ul
+.request-notification-dropdown > ul > li {
+    display: inline-block;
+}
+.request-notification-dropdown > ul > li > a {
+    font-size: 80%;
+}
+.request-notification-dropdown > button {
+    margin-right: 10px;
+    font-size: 130% !important;
+}
+.request-notification-dropdown > button:focus {
+    border: 1px solid white !important;
+}
 /***********
 Buttons
 ************/
@@ -269,16 +296,6 @@ button:active {
     -ms-transition:.1s;
     -moz-transition:.1s;
     -webkit-transition:.1s;
-}
-.user-info {
-    text-align: right;
-    color: white;
-}
-.logout-btn {
-  background-color: var(--brown-gray);
-  border-color: white;
-  border-style: solid;
-  border-width: thin;
 }
 
 /******************
