@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
 
     actions: {
+
         // Method that gets called when the follow button is clicked
         toggleFollow() {
             var passed = false;
