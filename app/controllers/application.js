@@ -2,23 +2,23 @@ import Ember from "ember";
 import { isLeader } from "test-app/helpers/is-leader"
 
 export default Ember.Controller.extend({
-    session: Ember.inject.service('session'),
+    session: Ember.inject.service("session"),
     requests: null,
     notificationsPresent: false,
     actions: {
         logout() {
-            this.get('session').invalidate();
+            this.get("session").invalidate();
         },
         getRequests() {
             if (this.requests === null) {
                 console.log(new Date());
-                this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+                this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
                     var memberships = [];
                     var leaderMemberships = [];
                     var requests = [];
                     Ember.$.ajax({
                         type: "GET",
-                        url: "https://gordon360api.gordon.edu/api/memberships/student/" + this.get('session.data.authenticated.token_data.id'),
+                        url: "https://gordon360api.gordon.edu/api/memberships/student/" + this.get("session.data.authenticated.token_data.id"),
                         async: false,
                         headers: {
         					"Authorization": headerValue
