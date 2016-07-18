@@ -21,10 +21,6 @@ export default Ember.Controller.extend({
                 },
                 success: function(data) {
                     for (var i = 0; i < data.length; i ++) {
-                        //ERROR CHECK - Should not show when deployed...
-                        console.log(data[i].Participation);
-                        //ERROR CHECK - Should not show when deployed...
-                        console.log(data[i]);
                         var part = data[i].Participation;
                         if (part === "AC" ||
                             part === "CAPT" ||
@@ -115,15 +111,15 @@ export default Ember.Controller.extend({
         doc.setLineWidth(LIST_LINE_WIDTH);
         for (var i = 0; i < memberships.length; i ++) {
             if (i !== 0) {
-                addLine(MARGIN, INNER_WIDTH / 3, LIST_LINE_WIDTH, 6);
+                addLine(MARGIN, INNER_WIDTH / 2, LIST_LINE_WIDTH, 6);
             }
             addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
                 memberships[i].ActivityDescription);
             move(LIST_SPACING);
-            addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
+            addText(MARGIN + (TAB * 2), LIST_FONT, LIST_WEIGHT,
                 memberships[i].ParticipationDescription);
             move(LIST_SPACING);
-            addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
+            addText(MARGIN + (TAB * 2), LIST_FONT, LIST_WEIGHT,
                 this.getDate(memberships[i].StartDate) + " - " + this.getDate(memberships[i].EndDate));
         }
         return doc;

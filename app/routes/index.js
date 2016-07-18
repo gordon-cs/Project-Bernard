@@ -56,14 +56,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 						}
 					}
 					if (data.length === 0) {
-						//ERROR CHECK - Should be removed later
-						console.log("got nothing");
 						model.nothingToShow = true;
-					} else {
-						// ERROR CHECK - Should be removed later
-						console.log("got something");
 					}
-
 				}
 			});
 		});

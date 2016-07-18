@@ -26,22 +26,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
             if(this.get('session.data.authenticated.token_data.college_role') === "god") {
                 model.adminPriv = true;
-                //ERROR CHECK - Should not show when deployed...
-                console.log("admin part 1");
             };
-
             // Set the logged in user to be leader if they have admin priviledges
             if (model.adminPriv) {
                 model.leading = true;
                 //ERROR CHECK - Should not show when deployed...
                 console.log("admin part 2");
             };
-
-            //ERROR CHECK - Should not show when deployed...
-            console.log("Finished admin section")
-            //ERROR CHECK - Should not show when deployed...
-            console.log(this.get('session.data.authenticated'));
-
             var IDNumber = this.get('session.data.authenticated.token_data.id');
             // Set Activity Info
             Ember.$.ajax({
@@ -111,26 +102,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     }
                 }
             });
-
-            // Get a list of all roles that can be assigned
-            // Ember.$.ajax({
-            //     type: "GET",
-            //     url: 'https://gordon360api.gordon.edu/api/participations',
-            //     async: false,
-            //     headers: {
-            //         "Authorization": headerValue
-            //     },
-            //     success: function(data) {
-            //       model.roles = [];
-            //       for (var i = 0; i < data.length; i ++) {
-            //           model.roles.push(data[i]);
-            //       }
-            //     },
-            //     error: function(errorThrown) {
-            //         console.log(errorThrown);
-            //     }
-            // });
-
             // Get all membership requests
             if (model.leading) {
                 Ember.$.ajax({
@@ -152,7 +123,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
             }
         });
-        console.log(model);
         return model;
     }
 });

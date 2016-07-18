@@ -1,16 +1,11 @@
-.add-title {
-    font-size: 200%;
-    text-align: center;
+#add-box {
+    border-radius: 3px;
 }
-.add-form {
-    margin-top: 40px;
-    width: 90%;
-    margin-right: auto;
+#add-box > h1 {
     margin-left: auto;
     margin-right: auto;
 }
-#add-box > form > input,
-#add-box > form > .ember-power-select-trigger {
+#add-box > form > input {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: auto;
@@ -20,6 +15,10 @@
     float: right;
     margin-left: auto;
     margin-right: auto;
+}
+#error-message {
+    color: white;
+    font-size: 125%;
 }
 @media only screen and (min-width: 768px) {
     #add-box {

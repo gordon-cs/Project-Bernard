@@ -1,57 +1,57 @@
 <div class="container">
-	<div class="highlight section-title">
-		<h2>Current Experience:</h2>
-	</div>
-	<div class="cyanbox group-title">
-		<h2>{{model.currentSession.SessionDescription}}</h2>
-	</div>
 	{{#if model.nothingToShow}}
 		<div class="empty-list">
-			<!-- The next line should be removed or changed -->
 			<h3>Looking for something to do?</h3>
 			<h3>Look at {{#link-to 'all-activities'}}what's available!{{/link-to}}</h3>
 		</div>
-	{{/if}}
-	<div class="my-activity-list">
-		{{#each model.currentMemberships as |mem|}}
-			{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
-				<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
-				<div class="membership-description">
-					<dl>
-						<dd>Activity:</dd>
-						<dt>{{mem.ActivityDescription}}</dt>
-						<dd>Membership Role:</dd>
-						<dt>{{mem.ParticipationDescription}}</dt>
-						<dd>Membership Session:</dd>
-						<dt>{{mem.SessionDescription}}</dt>
-					</dl>
-				</div>
-			{{/link-to}}
-		{{/each}}
-	</div>
-	<div class="highlight section-title">
-		<h2>Past Experience:</h2>
-	</div>
-	{{#each model.pastMemberships as |memSession|}}
+	{{else}}
+		<div class="highlight section-title">
+			<h2>Current Experience:</h2>
+		</div>
 		<div class="cyanbox group-title">
-			<h2>{{memSession.session}}</h2>
+			<h2>{{model.currentSession.SessionDescription}}</h2>
 		</div>
 		<div class="my-activity-list">
-			{{#each memSession.activities as |mem|}}
+			{{#each model.currentMemberships as |mem|}}
 				{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
 					<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
 					<div class="membership-description">
 						<dl>
-							<dd>Activity</dd>
+							<dd>Activity:</dd>
 							<dt>{{mem.ActivityDescription}}</dt>
-							<dd>Membership Role</dd>
+							<dd>Membership Role:</dd>
 							<dt>{{mem.ParticipationDescription}}</dt>
-							<dd>Membership Session</dd>
+							<dd>Membership Session:</dd>
 							<dt>{{mem.SessionDescription}}</dt>
 						</dl>
 					</div>
 				{{/link-to}}
 			{{/each}}
 		</div>
-	{{/each}}
+		<div class="highlight section-title">
+			<h2>Past Experience:</h2>
+		</div>
+		{{#each model.pastMemberships as |memSession|}}
+			<div class="cyanbox group-title">
+				<h2>{{memSession.session}}</h2>
+			</div>
+			<div class="my-activity-list">
+				{{#each memSession.activities as |mem|}}
+					{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
+						<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
+						<div class="membership-description">
+							<dl>
+								<dd>Activity</dd>
+								<dt>{{mem.ActivityDescription}}</dt>
+								<dd>Membership Role</dd>
+								<dt>{{mem.ParticipationDescription}}</dt>
+								<dd>Membership Session</dd>
+								<dt>{{mem.SessionDescription}}</dt>
+							</dl>
+						</div>
+					{{/link-to}}
+				{{/each}}
+			</div>
+		{{/each}}
+	{{/if}}
 </div>
