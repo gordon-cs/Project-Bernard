@@ -30,7 +30,7 @@
                             </ul>
                         {{/if}}
                     </div>
-                <button {{action 'logout'}} class="logout-btn btn button-gray">Logout</button>
+                    <button {{action 'logout'}} class="logout-btn btn button-gray">Logout</button>
                 </div>
             {{/if}}
         </div>
@@ -40,6 +40,7 @@
     </div>
 </header>
 <div class="row lightgraybox">
+<<<<<<< HEAD
     <div class="col-sm-12">
         <ul id="primary-menu">
             <li>
@@ -59,6 +60,25 @@
             </li>
         </ul>
     </div>
+=======
+    <ul id="primary-menu">
+        <li>
+            {{#link-to "index" class="button"}}
+                My Involvements
+            {{/link-to}}
+        </li>
+        <li>
+            {{#link-to "all-activities" class="button"}}
+                What's Available?
+            {{/link-to}}
+        </li>
+        <li>
+            {{#link-to "transcript" class="button"}}
+                Gordon 360
+            {{/link-to}}
+        </li>
+    </ul>
+>>>>>>> master
 </div>
 
 {{outlet}}

@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Controller.extend({
-    session: Ember.inject.service('session'),
+    session: Ember.inject.service("session"),
     actions: {
         selectSession: function(session) {
             var activities = null;
-            this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
                 Ember.$.ajax({
                     type: "GET",
                     url: "https://gordon360api.gordon.edu/api/activities/session/" + session.SessionCode.trim(),
@@ -18,9 +18,9 @@ export default Ember.Controller.extend({
                     }
                 });
             });
-            this.set('model.activities', activities);
-            this.set('model.activitiesShown', activities);
-            this.set('model.currentSession', session);
+            this.set("model.activities", activities);
+            this.set("model.activitiesShown", activities);
+            this.set("model.currentSession", session);
         },
         filterActivities: function() {
             var searchValue = this.get("searchValue");

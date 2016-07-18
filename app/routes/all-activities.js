@@ -1,5 +1,5 @@
 import Ember from "ember";
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model() {
@@ -9,7 +9,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "sessions": [],
             "currentSession": null
         };
-        this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+        this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
             // Get Sessions Data
             Ember.$.ajax({
                 type: "GET",

@@ -1,5 +1,5 @@
-import Ember from 'ember';
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import Ember from "ember";
+import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
@@ -9,7 +9,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			"currentMemberships": [],
 			"pastMemberships": []
 		};
-		this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+		this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
 			var currentSession = null;
 			Ember.$.ajax({
 				type: "GET",
@@ -25,7 +25,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			});
 			Ember.$.ajax({
 				type: "GET",
-				url: "https://gordon360api.gordon.edu/api/memberships/student/" + this.get('session.data.authenticated.token_data.id'),
+				url: "https://gordon360api.gordon.edu/api/memberships/student/" + this.get("session.data.authenticated.token_data.id"),
 				async: false,
 				headers: {
 					"Authorization": headerValue

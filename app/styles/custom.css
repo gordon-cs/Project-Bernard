@@ -31,7 +31,7 @@ Global Styles
 
 * {
     color: var(--dark-gray);
-    font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B', sans-serif;
+    font-family: "Gotham SSm 4r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 }
 
 body {
@@ -219,8 +219,12 @@ header {
 Buttons
 ************/
 
-button {
-    border: none;
+button,
+button:hover,
+button:focus,
+button:active {
+    border: none !important;
+    outline: none !important;
 }
 button:hover,
 button:focus {
@@ -235,34 +239,34 @@ button:active {
     transform: translateY(2px);
 }
 .button-black {background-color: var(--black); color: white;}
-.button-black:hover {background-color: var(--black-hover); color: white;}
+.button-black:hover {background-color: var(--black-hover);}
 
 .button-cyan {color: white; background-color: #00aeef;}
-.button-cyan:hover {background-color: #00bdec; color: white;}
+.button-cyan:hover {background-color: #00bdec;}
 
 .button-navy { background-color: #014983; color: white;}
-.button-navy:hover {background-color: #0159A0; color: white;}
+.button-navy:hover {background-color: #0159A0;}
 
 .button-orange {background-color: #DE571F; color: white;}
-.button-orange:hover {background-color: #E2794C; color: white;}
+.button-orange:hover {background-color: #E2794C;}
 
 .button-green {background-color: #b2bb1c; color: white;}
-.button-green:hover {background-color: #bcc61e; color: white;}
+.button-green:hover {background-color: #bcc61e;}
 
 .button-darkgreen {background-color: #086d38; color: white;}
-.button-darkgreen:hover {background-color: #0a7a3d; color: white;}
+.button-darkgreen:hover {background-color: #0a7a3d;}
 
 .button-red {background-color: #b53228; color: white;}
-.button-red:hover {background-color: #d83c30; color: white;}
+.button-red:hover {background-color: #d83c30;}
 
 .button-yellow {background-color: #FDB913; color: #31342b;}
-.button-yellow:hover {background-color: #fdc233; color: #31342b;}
+.button-yellow:hover {background-color: #fdc233; color: #31342b !important;}
 
 .button-gray {background-color: #31342b; border: 1px solid white !important; color: white;}
 .button-gray:hover {background-color: #31342b; border: 1px solid white !important; color: white;}
 
-.button-447 {background-color: #31342b; color: white;}
-.button-447:hover {background-color: #5A5D55; color: white;}
+.button-447 {background-color: #31342b;}
+.button-447:hover {background-color: #5A5D55;}
 
 /* Ember Power Select */
 .ember-power-select-placeholder,
