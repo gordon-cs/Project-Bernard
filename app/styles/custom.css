@@ -151,14 +151,15 @@ Gordon Logo
 
 #logo-box {
 	background:#014983;
-  margin: 0 auto 0 auto;
-  text-align: center;
+    margin: 0 auto 0 auto;
+    text-align: center;
 	padding: 2% 2%;
-  position: relative;
+    position: relative;
+    z-index: 2;
 }
 
 #logo-box img {
-  max-width: 20%;
+    max-width: 20%;
 }
 
 /***********
