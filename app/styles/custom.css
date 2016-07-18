@@ -182,7 +182,7 @@ header {
 }
 #primary-menu li {
   list-style: none;
-  /*display: block;*/
+  display: block;
   padding: 5px 0px;
 }
 
@@ -199,22 +199,28 @@ header {
     color: white;
 }
 .logout-btn {
-  background-color: var(--brown-gray);
-  border-color: white;
-  border-style: solid;
-  border-width: thin;
-  display: inline-block;
+    background-color: var(--brown-gray);
+    border-color: white;
+    border-style: solid;
+    border-width: thin;
+    display: inline-block;
+    font-size: 130% !important;
 }
 .request-notification-dropdown,
 .request-notification-dropdown > ul
 .request-notification-dropdown > ul > li {
-    /*float: right;*/
     display: inline-block;
 }
 .request-notification-dropdown > ul > li > a {
     font-size: 80%;
 }
-
+.request-notification-dropdown > button {
+    margin-right: 10px;
+    font-size: 130% !important;
+}
+.request-notification-dropdown > button:focus {
+    border: 1px solid white !important;
+}
 /***********
 Buttons
 ************/
