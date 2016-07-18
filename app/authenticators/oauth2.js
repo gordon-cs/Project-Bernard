@@ -53,7 +53,8 @@ export default Base.extend({
         let expiresIn = token.expires_in * 1000;
         let expiresAt = now + (token.expires_in * 1000);
         const wait = expiresAt - now - this.refreshLeeway;
-        //ERROR CHECK - should be removed later... console.log("Wait Time: " + (wait / 1000 / 60).toString());
+        //ERROR CHECK - should be removed later...
+        console.log("Wait Time: " + (wait / 1000 / 60).toString());
         Ember.run.later(this, this.accessTokenRefresh, credentials, wait);
     },
     // Refresh Access Token
@@ -89,7 +90,8 @@ export default Base.extend({
             token.credentials = credentials;
             this.scheduleAccessTokenRefresh(credentials, token);
         }
-        //ERROR CHECK - Should not show when deployed... console.log(token);
+        //ERROR CHECK - Should not show when deployed...
+        console.log(token);
         return token;
     }
 });

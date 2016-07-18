@@ -21,8 +21,10 @@ export default Ember.Controller.extend({
                 },
                 success: function(data) {
                     for (var i = 0; i < data.length; i ++) {
-                        //ERROR CHECK - Should not show when deployed... console.log(data[i].Participation);
-                        //ERROR CHECK - Should not show when deployed... console.log(data[i]);
+                        //ERROR CHECK - Should not show when deployed...
+                        console.log(data[i].Participation);
+                        //ERROR CHECK - Should not show when deployed...
+                        console.log(data[i]);
                         var part = data[i].Participation;
                         if (part === "AC" ||
                             part === "CAPT" ||

@@ -22,16 +22,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Determine if the person logged in has god mode capabilities
             if(this.get('session.data.authenticated.token_data.college_role') === "god") {
                 model.adminPriv = true;
-                //ERROR CHECK - Should not show when deployed... console.log("Admin! -- " + this.get('session.data.authenticated.token_data.college_role'));
+                //ERROR CHECK - Should not show when deployed...
+                console.log("Admin! -- " + this.get('session.data.authenticated.token_data.college_role'));
             };
 
             // Set the logged in user to be leader if they have admin priviledges
             if (model.adminPriv) {
-                //ERROR CHECK - Should not show when deployed... console.log("Admin! part.2");
+                //ERROR CHECK - Should not show when deployed...
+                console.log("Admin! part.2");
                 model.leading = true;
             };
 
-            //ERROR CHECK - Should not show when deployed... console.log(this.get('session.data.authenticated'));
+            //ERROR CHECK - Should not show when deployed...
+            console.log(this.get('session.data.authenticated'));
             var IDNumber = this.get('session.data.authenticated.token_data.id');
             // Set Activity Info
             Ember.$.ajax({

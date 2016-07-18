@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
 
     actions: {
+
         // Method that gets called when the follow button is clicked
         toggleFollow() {
             var passed = false;
@@ -73,6 +74,7 @@ export default Ember.Controller.extend({
                 var role = membership.ParticipationDescription;
                 var sessionCode = membership.SessionCode;
                 var activityCode = membership.ActivityCode;
+                // End - Variable declaration
 
                 if(confirm("Are you sure you want to remove (" + role + ") " + first + " " + last + " from this activity?")) {
                     Ember.$.ajax({
@@ -86,7 +88,8 @@ export default Ember.Controller.extend({
                         async: false,
                         success: function(data) {
                             window.location.reload(true);
-                            // ERROR CHECK - Should not show when deployed... console.log("deleted person");
+                            // ERROR CHECK - Should not show when deployed...
+                            console.log("deleted person");
                             passed = true;
                         },
                         error: function(errorThrown) {
@@ -120,7 +123,7 @@ export default Ember.Controller.extend({
                 }
             }
         },
-        
+
         // Deny specified membership request
         denyRequest(request) {
             if (confirm("Deny this request?")) {

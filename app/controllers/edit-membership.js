@@ -18,7 +18,8 @@ export default Ember.Controller.extend({
 
             var roleID = this.get("role.ParticipationCode");
 
-            //ERROR CHECK - Should not show when deployed... console.log(roleID+"hello");
+            //ERROR CHECK - Should not show when deployed...
+            console.log(roleID+"hello");
 
             var membershipID = this.get("model.membershipID");
             var studentID = this.get("model.membership.IDNumber");
@@ -33,7 +34,8 @@ export default Ember.Controller.extend({
               "DESCRIPTION": comments
 
             };
-            //ERROR CHECK - Should not show when deployed... console.log(JSON.stringify(data));
+            //ERROR CHECK - Should not show when deployed...
+            console.log(JSON.stringify(data));
 
             var success = false;
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
