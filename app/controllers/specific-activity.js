@@ -86,7 +86,7 @@ export default Ember.Controller.extend({
                         async: false,
                         success: function(data) {
                             window.location.reload(true);
-                            // Error Check, console.log("deleted person");
+                            // ERROR CHECK - Should not show when deployed... console.log("deleted person");
                             passed = true;
                         },
                         error: function(errorThrown) {

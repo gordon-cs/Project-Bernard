@@ -89,7 +89,7 @@ export default Base.extend({
             token.credentials = credentials;
             this.scheduleAccessTokenRefresh(credentials, token);
         }
-        console.log(token);
+        //ERROR CHECK - Should not show when deployed... console.log(token);
         return token;
     }
 });
