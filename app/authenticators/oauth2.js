@@ -1,8 +1,8 @@
-import Ember from 'ember';
-import Base from 'ember-simple-auth/authenticators/base';
+import Ember from "ember";
+import Base from "ember-simple-auth/authenticators/base";
 
 export default Base.extend({
-    session: Ember.inject.service('session'),
+    session: Ember.inject.service("session"),
 
     refreshLeeway: (1000 * (60 * 2)),
     restore: function(data) {
@@ -17,8 +17,8 @@ export default Base.extend({
         }
         else {
             return new Ember.RSVP.Promise(function(resolve, reject) {
-                reject(new Error('token is expired'));
-                this.transitionToRoute('login');
+                reject(new Error("token is expired"));
+                this.transitionToRoute("login");
             });
         }
     },
@@ -42,12 +42,12 @@ export default Base.extend({
     // Decode JWT
     // Returns Decoded JSON Object
     getTokenData(accessToken) {
-        const payload = accessToken.split('.')[1];
+        const payload = accessToken.split(".")[1];
         const tokenData = JSON.parse(decodeURIComponent(window.escape(atob(payload))));
         return tokenData;
     },
     // Schedule a Token Refresh
-    // Calls 'accessTokenRefresh' After a Period of Time
+    // Calls "accessTokenRefresh" After a Period of Time
     scheduleAccessTokenRefresh(credentials, token) {
         const now = (new Date()).getTime();
         let expiresIn = token.expires_in * 1000;
@@ -58,7 +58,7 @@ export default Base.extend({
     },
     // Refresh Access Token
     accessTokenRefresh(credentials) {
-        this.set('session.data.authenticated', this.makeRequest(credentials));
+        this.set("session.data.authenticated", this.makeRequest(credentials));
     },
     // Make Request for Access Token
     makeRequest(credentials) {

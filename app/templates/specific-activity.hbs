@@ -57,11 +57,11 @@
                     {{/link-to}}
                 {{else}}
                     {{#if model.following}}
-                        <button type="button" class="btn button-navy" {{action 'toggleFollow'}}>Unfollow</button>
+                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
                     {{else}}
-                        <button type="button" class="btn button-navy" {{action 'toggleFollow'}}>Follow</button>
+                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
                     {{/if}}
-                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "false"}}
+                    {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
                         <button type="button" class="btn button-navy">Join</button>
                     {{/link-to}}
                 {{/if}}
@@ -103,4 +103,36 @@
           </div>
         </div>
     </div>
+    {{#if model.leading}}
+        <div class="row table-row">
+            <div class="col-sm-12">
+                <h2>Membership Requests</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Participation</th>
+                                <th>Session</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each model.requests as |req|}}
+                                <tr>
+                                    <td> {{req.FirstName}} {{req.LastName}} </td>
+                                    <td> {{req.ParticipationDescription}} </td>
+                                    <td> {{req.SessionDescription}} </td>
+                                    <td>
+                                        <button {{action "approveRequest" req}} class="btn button-darkgreen">Approve</button>
+                                        <button {{action "denyRequest" req}} class="btn button-red">Deny</button>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {{/if}}
 </div>

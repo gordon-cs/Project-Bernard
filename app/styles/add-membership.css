@@ -7,19 +7,25 @@
     width: 90%;
     margin-right: auto;
     margin-left: auto;
+    margin-right: auto;
 }
-.add-form > .row {
-    margin-top: 10px;
+#add-box > form > input,
+#add-box > form > .ember-power-select-trigger {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
-.add-button {
-    width: 100%;
+#add-box > form > button {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
 }
 @media only screen and (min-width: 768px) {
-    .add-form {
-        width: 50%;
-    }
-    .add-button {
-        float: right;
-        width: auto;
+    #add-box {
+        margin-top: 100px;
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

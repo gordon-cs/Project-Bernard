@@ -1,20 +1,20 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Controller.extend({
-    session: Ember.inject.service('session'),
+    session: Ember.inject.service("session"),
     role: null,
     actions: {
         setRole(role) {
             this.set("role", role);
         },
-        post: function(role) {
+        post(role) {
             var comments = this.get("comments");
             var roleID = this.get("role.ParticipationCode");
             var student = null;
             var studentID = null;
-            if (this.get("model.leading")) {
-                studentID = this.get("studentID");
-            }
+            var success = false;
+            var data = {};
+            var url = null;
             var success = false;
             this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
                 // Get the student to be added by email lookup
@@ -33,23 +33,39 @@ export default Ember.Controller.extend({
                         alert("Please enter a valid student email.")
                     }
                 });
+            });
                 // Set the new membership's student ID to the one retreived from api call
                 studentID = student.StudentID;
 
-                // Data to be sent in POST request
-                var data = {
+            if (this.get("model.leading")) {
+                data = {
                     "ACT_CDE": this.get("model.activityCode"),
                     "SESSION_CDE": this.get("model.sessionCode"),
                     "ID_NUM": studentID,
                     "PART_LVL": roleID,
-                    "BEGIN_DTE": new Date().toLocaleDateString(),
-                    "END_DTE": new Date().toLocaleDateString(),
+                    "BEGIN_DTE": new Date(),
+                    "END_DTE": new Date(),
                     "DESCRIPTION": comments
                 };
-                // Add the new membership
+                url = "https://gordon360api.gordon.edu/api/memberships";
+            }
+            else {
+                data = {
+                    "ACT_CDE": this.get("model.activityCode"),
+                    "ID_NUM": this.get("session.data.authenticated.token_data.id"),
+                    "PART_LVL": roleID,
+                    "DATE_SENT": new Date(),
+                    "SESS_CDE": this.get("model.sessionCode"),
+                    "APPROVED": "Pending"
+                };
+                url = "https://gordon360api.gordon.edu/api/requests";
+            }
+            console.log(this.get("model"));
+            console.log(data);
+            this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
                 Ember.$.ajax({
                     type: "POST",
-                    url: "https://gordon360api.gordon.edu/api/memberships",
+                    url: url,
                     data: JSON.stringify(data),
                     contentType: "application/json",
                     async: false,

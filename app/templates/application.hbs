@@ -5,7 +5,7 @@
         <div class="user-info col-sm-3">
             {{#if session.isAuthenticated}}
                 <h6>{{session.data.authenticated.token_data.name}}</h6>
-                <button {{action 'logout'}} class="logout-btn btn button-gray">Logout</button>
+                <button {{action "logout"}} class="logout-btn btn button-gray">Logout</button>
             {{/if}}
         </div>
     </div>
@@ -16,17 +16,17 @@
 <div class="row lightgraybox">
     <ul id="primary-menu">
         <li>
-            {{#link-to 'index' class="button"}}
+            {{#link-to "index" class="button"}}
                 My Involvements
             {{/link-to}}
         </li>
         <li>
-            {{#link-to 'all-activities' class="button"}}
+            {{#link-to "all-activities" class="button"}}
                 What's Available?
             {{/link-to}}
         </li>
         <li>
-            {{#link-to 'transcript' class="button"}}
+            {{#link-to "transcript" class="button"}}
                 Gordon 360
             {{/link-to}}
         </li>
