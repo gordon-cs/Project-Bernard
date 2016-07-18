@@ -36,7 +36,7 @@ export default Ember.Controller.extend({
                         }
                     });
 
-                    // Set the new membership's student ID to the one retreived from api call
+                    // Set the new membership's student ID to the one retreived from the api call
                     studentID = student.StudentID;
 
                     data = {
