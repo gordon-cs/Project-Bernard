@@ -74,8 +74,6 @@ export default Ember.Controller.extend({
                 var sessionCode = membership.SessionCode;
                 var activityCode = membership.ActivityCode;
 
-                console.log(membership);
-
                 if(confirm("Are you sure you want to remove (" + role + ") " + first + " " + last + " from this activity?")) {
                     Ember.$.ajax({
                         type: "DELETE",
@@ -88,7 +86,7 @@ export default Ember.Controller.extend({
                         async: false,
                         success: function(data) {
                             window.location.reload(true);
-                            console.log("deleted person");
+                            // Error Check, console.log("deleted person");
                             passed = true;
                         },
                         error: function(errorThrown) {

@@ -55,6 +55,11 @@
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "true"}}
                         <button class="btn button-navy">Add Member</button>
                     {{/link-to}}
+                    {{#if model.adminPriv}}
+                        {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode "false"}}
+                            <button type="button" class="btn button-navy">Join</button>
+                        {{/link-to}}
+                    {{/if}}
                 {{else}}
                     {{#if model.following}}
                         <button type="button" class="btn button-navy" {{action 'toggleFollow'}}>Unfollow</button>

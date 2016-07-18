@@ -61,7 +61,6 @@ export default Ember.Controller.extend({
                     },
                     error: function(errorThrown) {
                         console.log(errorThrown);
-                        console.log("ojv");
                         alert("Make sure the student email is valid and select a participation level.");
                     }
                 });
