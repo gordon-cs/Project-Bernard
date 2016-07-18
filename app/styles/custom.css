@@ -182,7 +182,7 @@ header {
 }
 #primary-menu li {
   list-style: none;
-  display: block;
+  /*display: block;*/
   padding: 5px 0px;
 }
 
@@ -193,6 +193,26 @@ header {
 }
 #primary-menu a:hover {
 	color: #de571f;
+}
+.user-info {
+    text-align: right;
+    color: white;
+}
+.logout-btn {
+  background-color: var(--brown-gray);
+  border-color: white;
+  border-style: solid;
+  border-width: thin;
+  display: inline-block;
+}
+.request-notification-dropdown,
+.request-notification-dropdown > ul
+.request-notification-dropdown > ul > li {
+    /*float: right;*/
+    display: inline-block;
+}
+.request-notification-dropdown > ul > li > a {
+    font-size: 80%;
 }
 
 /***********
@@ -265,16 +285,6 @@ button:active {
     -ms-transition:.1s;
     -moz-transition:.1s;
     -webkit-transition:.1s;
-}
-.user-info {
-    text-align: right;
-    color: white;
-}
-.logout-btn {
-  background-color: var(--brown-gray);
-  border-color: white;
-  border-style: solid;
-  border-width: thin;
 }
 
 /******************

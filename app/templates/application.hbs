@@ -5,7 +5,25 @@
         <div class="user-info col-sm-3">
             {{#if session.isAuthenticated}}
                 <h6>{{session.data.authenticated.token_data.name}}</h6>
-                <button {{action 'logout'}} class="logout-btn btn button-gray">Logout</button>
+                <div class="button-row">
+                    {{#if notificationsPresent}}
+                        <div class="dropdown request-notification-dropdown" {{action "getRequests"}}>
+                            <button class="btn button-gray dropdown-toggle request-button" data-toggle="dropdown">Requests
+                                {{!-- <span class="glyphicon glyphicon-bell"></span> --}}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                {{#each requests as |req|}}
+                                    <li>
+                                        {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
+                                            {{req.FirstName}} {{req.LastName}} - {{req.ActivityDescription}}
+                                        {{/link-to}}
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    {{/if}}
+                    <button {{action 'logout'}} class="logout-btn btn button-gray">Logout</button>
+                </div>
             {{/if}}
         </div>
     </div>
@@ -14,23 +32,25 @@
     </div>
 </header>
 <div class="row lightgraybox">
-    <ul id="primary-menu">
-        <li>
-            {{#link-to 'index' class="button"}}
-                My Involvements
-            {{/link-to}}
-        </li>
-        <li>
-            {{#link-to 'all-activities' class="button"}}
-                What's Available?
-            {{/link-to}}
-        </li>
-        <li>
-            {{#link-to 'transcript' class="button"}}
-                Gordon 360
-            {{/link-to}}
-        </li>
-    </ul>
+    <div class="col-sm-12">
+        <ul id="primary-menu">
+            <li>
+                {{#link-to 'index' class="button"}}
+                    My Involvements
+                {{/link-to}}
+            </li>
+            <li>
+                {{#link-to 'all-activities' class="button"}}
+                    What's Available?
+                {{/link-to}}
+            </li>
+            <li>
+                {{#link-to 'transcript' class="button"}}
+                    Gordon 360
+                {{/link-to}}
+            </li>
+        </ul>
+    </div>
 </div>
 
 {{outlet}}
