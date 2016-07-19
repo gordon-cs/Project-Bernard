@@ -20,8 +20,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
         this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
 
-            
-
             // Determine if the person logged in has god mode capabilities
             if(this.get('session.data.authenticated.token_data.college_role') === "god") {
                 model.adminPriv = true;
