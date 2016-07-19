@@ -18,7 +18,7 @@
                             <div class="leaders">
                                 {{#each model.leaders as |leader|}}
                                     <p class="activity-info-item-data">
-                                        {{leader.FirstName}} {{leader.LastName}} (<a href="https://en.wikipedia.org/wiki/Potato">E.Mail@gordon.edu</a>)
+                                        {{leader.FirstName}} {{leader.LastName}} (<a>{{leader.Email}}</a>)
                                     </p>
                                 {{/each}}
                             </div>

@@ -4,6 +4,8 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     role: null,
     errorMessage: null,
+
+    /* All the actions that can be called from interaction with add-membership.hbs */
     actions: {
         setRole(role) {
             this.set("role", role);
@@ -17,9 +19,10 @@ export default Ember.Controller.extend({
             var url = null;
 
             if (this.get("model.leading")) {
-                // Get the student to be added by email lookup
+                // Get a student by their email
                 let success = true;
                 this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+                    // HTTP call to api for student information
                     Ember.$.ajax({
                         type: "GET",
                         url: "https://gordon360api.gordon.edu/api/students/email/" + this.get("studentEmail") + "/",
@@ -35,6 +38,7 @@ export default Ember.Controller.extend({
                         }
                     });
                 });
+                // Error Message
                 if (!success) {
                     this.set("errorMessage", "Please enter a valid student email")
                 }
@@ -42,6 +46,7 @@ export default Ember.Controller.extend({
                 // Set the new membership's student ID to the one retreived from api call
                 studentID = student.StudentID;
 
+                // Data to be posted as a new membership
                 data = {
                     "ACT_CDE": this.get("model.activityCode"),
                     "SESSION_CDE": this.get("model.sessionCode"),
@@ -54,6 +59,7 @@ export default Ember.Controller.extend({
                 url = "https://gordon360api.gordon.edu/api/memberships";
             }
             else {
+                // Data to be posted as new membership request
                 data = {
                     "ACT_CDE": this.get("model.activityCode"),
                     "ID_NUM": this.get("session.data.authenticated.token_data.id"),
