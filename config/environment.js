@@ -1,9 +1,8 @@
 /* jshint node: true */
 
-
 module.exports = function(environment) {
     var ENV = {
-        modulePrefix: 'test-app',
+        modulePrefix: 'gordon360',
         environment: environment,
         baseURL: '/',
         locationType: 'auto',

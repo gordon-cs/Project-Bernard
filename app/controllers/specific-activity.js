@@ -1,6 +1,6 @@
 import Ember from "ember";
-import deleteSync from "test-app/utils/delete-sync";
-import postSync from "test-app/utils/post-sync";
+import deleteSync from "gordon360/utils/delete-sync";
+import postSync from "gordon360/utils/post-sync";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),

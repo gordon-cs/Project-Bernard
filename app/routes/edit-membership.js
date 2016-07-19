@@ -1,6 +1,6 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import getSync from "test-app/"
+import getSync from "gordon360/"
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     beforeModel() {

@@ -1,5 +1,5 @@
 import Ember from "ember";
-import getSync from "test-app/utils/get-sync";
+import getSync from "gordon360/utils/get-sync";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),

@@ -1,11 +1,13 @@
 import Ember from "ember";
-import getSync from "test-app/utils/get-sync";
-import postSync from "test-app/utils/post-sync";
+import getSync from "gordon360/utils/get-sync";
+import postSync from "gordon360/utils/post-sync";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     role: null,
     errorMessage: null,
+
+    /* All the actions that can be called from interaction with add-membership.hbs */
     actions: {
         setRole(role) {
             this.set("role", role);
