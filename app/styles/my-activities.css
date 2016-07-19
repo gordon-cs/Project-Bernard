@@ -1,4 +1,9 @@
 /* All vendor prefixes were generated automatically via Autoprefixer */
+
+/* -----------------------------
+    Section Headers
+------------------------------- */
+
 .section-title {
     text-align: center;
     margin-top: 10px;
@@ -11,6 +16,11 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+/* -----------------------------
+    Activity List
+------------------------------- */
+
 .my-activity-list{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -62,8 +72,11 @@
 }
 .empty-list {
     text-align: center;
-    
 }
+
+/* -----------------------------
+    Responsive Changes
+------------------------------- */
 
 @media only screen and (min-width: 768px) {
     .section-title {
@@ -92,7 +105,6 @@
     }
 }
 @media only screen and (min-width: 992px) {
-
     .my-activity-list-item {
         width: 18%;
         margin-top: 1%;
@@ -101,7 +113,6 @@
     .my-activity-list-item-img  {
         max-width: 100%;
     }
-
 }
 @media only screen and (min-width: 1200px) {
     .my-activity-list{

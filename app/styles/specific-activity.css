@@ -1,4 +1,9 @@
  /*All vendor prefixes were generated automatically via Autoprefixer */
+
+/* -----------------------------
+    Title and Picture
+------------------------------- */
+
 .main-container {
     background-color: white;
 }
@@ -14,6 +19,11 @@
     margin-top: 50px;
     margin-left: 20px;
 }
+
+/* -----------------------------
+    Description
+------------------------------- */
+
 .detail-item {
     font-size: 200%;
 }
@@ -30,6 +40,11 @@
 .activity-info-item-data {
     margin: 0 !important;
 }
+
+/* -----------------------------
+    Tables
+------------------------------- */
+
 .button-row {
     margin-top: 20px;
 }

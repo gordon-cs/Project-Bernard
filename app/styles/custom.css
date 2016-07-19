@@ -1,5 +1,19 @@
 /* All vendor prefixes were generated automatically via Autoprefixer */
 
+/* CONTENTS
+
+ - Colors
+ - Global Styles
+ - Colored Boxes
+ - Buttons
+ - Ember Power Select
+
+*/
+
+/* -----------------------------
+    Colors
+------------------------------- */
+
 :root {
     --cyan: #00aeef;
     --cyan-hover: #00bdec;
@@ -13,39 +27,36 @@
     --dark-green-hover: #0a7a3d;
     --red: #b53228;
     --red-hover: #d83c30;
-    --yello: #FDB913;
-    --yello-hover: #fdc233;
+    --yellow: #FDB913;
+    --yellow-hover: #fdc233;
+    --gray: #31342B;
     --black: #31342b;
     --black-hover: #5A5D55;
 
     --brown-gray: #31342B;
     --light-gray: #EBEAEA;
     --mid-gray: #6F6F6F;
-    --gray: #D0D2D3;
     --dark-gray: #252525;
 }
 
-/************
-Global Styles
-*************/
+/* -----------------------------
+    Global Styles
+------------------------------- */
 
 * {
     color: var(--dark-gray);
     font-family: "Gotham SSm 4r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 }
-
 body {
 	font-size: 0.9em !important;
     font-family: Verdana, Geneva, sans-serif !important;
-    background: #ebeaea !important;
+    background: var(--light-gray) !important;
 }
-
 p {
 	margin: 0.5em 0 1.25em 0 !important;
 	padding: 0;
 	line-height: 1.8em;
 }
-
 h1 {
 	font-size: 2em !important;
 	line-height: 1.2em !important;
@@ -54,14 +65,12 @@ h1 {
 	font-weight: 700 !important;
 	font-style: normal;
 }
-
 h2 {
 	font-size: 1.4em !important;
 	line-height: 1.2em !important;
 	margin: 0.5em 0 0.35em 0 !important;
 	padding: 0px !important;
 }
-
 input[type="text"]:focus,
 input[type="password"]:focus,
 select[type="text"]:focus {
@@ -69,10 +78,10 @@ select[type="text"]:focus {
     box-shadow: none;
 }
 
+/* -----------------------------
+    Colored Boxes
+------------------------------- */
 
-/********************
-Colored Boxes
-********************/
 .highlight, .outlinebox {
 	padding: 22px 30px 22px 30px;
 	background: white;
@@ -86,152 +95,59 @@ Colored Boxes
 	padding: 12px 18px;
 	color: white;
 }
-
 .darkgreenbox {
 	background: #006D22;
 	padding: 12px 18px;
 	color: white;
 }
-
 .graybox {
 	background: #31342b;
 	padding: 12px 18px;
 	color: white;
 }
-
 .greenbox {
 	background: #b2bb1c;
 	padding: 12px 18px;
 	color: white;
 }
-
 .lightgraybox {
 	background: #cccccc;
 	padding: 12px 18px;
 }
-
 .navybox {
 	background: #014983;
 	padding: 12px 18px;
 	color: white;
 
 }
-
 .orangebox {
 	background: #de571f;
 	padding: 12px 18px;
 	color: white;
 }
-
 .redbox {
 	background: #b53228;
 	color: white;
 	padding: 12px 18px;
 }
-
 .yellowbox {
 	background: #fdb913;
 	padding: 12px 18px;
 }
-
 .whitebox {
 	background: white;
 	padding: 12px 18px;
 }
-
-.cyanbox a, .navybox a, .orangebox a, .redbox a, .greenbox a, darkgreenbox a, .darkgraybox a {
+.cyanbox a, .navybox a, .orangebox a, .redbox a, .greenbox a, .darkgreenbox a, .darkgraybox a {
 	color: white;
 }
-.cyanbox a:hover, .navybox a:hover, .orangebox a:hover, .redbox a:hover, .greenbox a:hover, darkgreenbox a:hover, .darkgraybox a:hover {
+.cyanbox a:hover, .navybox a:hover, .orangebox a:hover, .redbox a:hover, .greenbox a:hover, .darkgreenbox a:hover, .darkgraybox a:hover {
 	color: black;
 }
-/***************
-Gordon Logo
-****************/
 
-#logo-box {
-	background:#014983;
-    margin: 0 auto 0 auto;
-    text-align: center;
-	padding: 2% 2%;
-    position: relative;
-    z-index: 2;
-}
-
-#logo-box img {
-    max-width: 20%;
-}
-
-/***********
-Title and Navigation
-************/
-header {
-	margin: 0 auto 0 auto;
-}
-
-.app-title-container {
-    text-align: center;
-}
-/* Navigation Menu */
-#primary-menu {
-	font-weight: 700;
-	font-style: normal;
-	font-size: 1.5em;
-	letter-spacing: 1px;
-	padding: 0;
-    text-align: center;
-}
-#primary-menu li {
-  list-style: none;
-  display: block;
-  padding: 5px 0px;
-}
-
-#primary-menu a {
-	color: #00aeef;
-	text-decoration: none;
-    padding: inherit;
-}
-#primary-menu a:hover {
-	color: #de571f;
-}
-.user-info {
-    text-align: right;
-    color: white;
-}
-.request-button {
-    border: 0px !important;
-    font-size: 250%;
-}
-.request-button {
-    color: white;
-    margin-right: 20px;
-}
-.request-button:hover {
-    color: var(--mid-gray);
-    cursor: pointer;
-}
-.logout-btn {
-    background-color: var(--brown-gray);
-    border-color: white;
-    border-style: solid;
-    border-width: thin;
-    display: inline-block;
-    font-size: 130% !important;
-}
-.request-notification-dropdown {
-    display: inline-block;
-    margin-right: 20px;
-}
-.request-notification-dropdown > ul > li > a {
-    font-size: 80%;
-}
-.request-notification-dropdown > button:focus {
-    border: 1px solid white !important;
-}
-/***********
-Buttons
-************/
+/* -----------------------------
+    Buttons
+------------------------------- */
 
 button,
 button:hover,
@@ -252,37 +168,84 @@ button:active {
 	-webkit-transform: translateY(2px);
     transform: translateY(2px);
 }
-.button-black {background-color: var(--black); color: white;}
-.button-black:hover {background-color: var(--black-hover);}
+.button-black {
+    background-color: var(--black);
+    color: white;
+}
+.button-black:hover {
+    background-color: var(--black-hover);
+}
+.button-cyan {
+    background-color: var(--cyan);
+    color: white;
+}
+.button-cyan:hover {
+    background-color: var(--cyan-hover);
+}
+.button-navy {
+    background-color: var(--navy);
+    color: white;
+}
+.button-navy:hover {
+    background-color: var(--navy-hover);
+}
+.button-orange {
+    background-color: var(--orange);
+    color: white;
+}
+.button-orange:hover {
+    background-color: var(--orange-hover);
+}
+.button-green {
+    background-color: var(--green);
+    color: white;
+}
+.button-green:hover {
+    background-color: var(--green-hover);
+}
+.button-darkgreen {
+    background-color: var(--dark-green);
+    color: white;
+}
+.button-darkgreen:hover {
+    background-color: var(--dark-green-hover);
+}
+.button-red {
+    background-color: var(--red);
+    color: white;
+}
+.button-red:hover {
+    background-color: var(--red-hover);
+}
+.button-yellow {
+    background-color: var(--yellow);
+    color: #31342b;
+}
+.button-yellow:hover {
+    background-color: var(--yellow-hover);
+    color: #31342b !important;
+}
+.button-gray {
+    background-color: var(--gray);
+    border: 1px solid white !important;
+    color: white;
+}
+.button-gray:hover {
+    background-color: var(--gray);
+    border: 1px solid white !important;
+    color: white;
+}
+.button-447 {
+    background-color: #31342b;
+}
+.button-447:hover {
+    background-color: #5A5D55;
+}
 
-.button-cyan {color: white; background-color: #00aeef;}
-.button-cyan:hover {background-color: #00bdec;}
+/* -----------------------------
+    Ember Power Select
+------------------------------- */
 
-.button-navy { background-color: #014983; color: white;}
-.button-navy:hover {background-color: #0159A0;}
-
-.button-orange {background-color: #DE571F; color: white;}
-.button-orange:hover {background-color: #E2794C;}
-
-.button-green {background-color: #b2bb1c; color: white;}
-.button-green:hover {background-color: #bcc61e;}
-
-.button-darkgreen {background-color: #086d38; color: white;}
-.button-darkgreen:hover {background-color: #0a7a3d;}
-
-.button-red {background-color: #b53228; color: white;}
-.button-red:hover {background-color: #d83c30;}
-
-.button-yellow {background-color: #FDB913; color: #31342b;}
-.button-yellow:hover {background-color: #fdc233; color: #31342b !important;}
-
-.button-gray {background-color: #31342b; border: 1px solid white !important; color: white;}
-.button-gray:hover {background-color: #31342b; border: 1px solid white !important; color: white;}
-
-.button-447 {background-color: #31342b;}
-.button-447:hover {background-color: #5A5D55;}
-
-/* Ember Power Select */
 .ember-power-select-placeholder,
 .ember-power-select-selected-item {
     font-size: 1.5em;
@@ -303,82 +266,4 @@ button:active {
     -ms-transition:.1s;
     -moz-transition:.1s;
     -webkit-transition:.1s;
-}
-
-/******************
-Responsive Changes
-******************/
-
-@media only screen and (min-width: 425px) {
-    #logo-box {
-        position: absolute;
-        top: 0;
-        padding: 3% 3%;
-        width: 20%;
-        margin-left: 2%;
-    }
-    #logo-box img {
-        max-width: 100%;
-    }
-    .app-title-container {
-        text-align: right;
-    }
-
-    #primary-menu li {
-        padding: 10px 0px;
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    .app-title-container {
-        text-align: center;
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
-    }
-    .app-title {
-        display: inline;
-        font-size: 200% !important;
-        margin-top: 20px !important;
-        margin-bottom: 20px !important;
-    }
-    .user-info {
-        display: inline;
-        float: right;
-    }
-    .user-info > h6 {
-        margin-top: 0;
-    }
-    #primary-menu {
-        float: right;
-        font-size: 1.2em;
-        margin-top: 12px;
-        margin-right: 20px;
-    }
-    #primary-menu li {
-        display: inline;
-        margin-left: 26px;
-        font-size: 150%;
-    }
-    #primary-menu li:first-child {
-        margin-left: 0;
-    }
-}
-@media only screen and (min-width: 992px) {
-    #logo-box {
-        max-width: 200px;
-        padding: 30px 30px;
-    }
-    .app-title {
-        font-size: 300% !important;
-    }
-    #primary-menu {
-        float: none;
-        text-align: center;
-        margin-right: 0;
-    }
-}
-@media only screen and (min-width: 1200px) {
-    .app-title {
-        font-size: 400% !important;
-    }
 }
