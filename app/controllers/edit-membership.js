@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import Ember from "ember";
+import putSync from "test-app/util/put-sync";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service('session'),
@@ -7,20 +8,21 @@ export default Ember.Controller.extend({
         setRole(role) {
             this.set("role", role);
         },
+        // Function called to update a membership
         update() {
-            var comments = this.get("comments");
+            let comments = this.get("comments");
 
-            // The comments field is left blank or returned to blank, handler
+            // If the comments field is left blank or returned to blank keep the old comments
             if (typeof comments == "undefined" || comments.length == 0) {
-              // Keep the old comments
               comments = this.get("model.membership.Description");
             }
 
-            var roleID = this.get("role.ParticipationCode");
+            let roleID = this.get("role.ParticipationCode");
 
-            var membershipID = this.get("model.membershipID");
-            var studentID = this.get("model.membership.IDNumber");
-            var data = {
+            let membershipID = this.get("model.membershipID");
+            let studentID = this.get("model.membership.IDNumber");
+            // Data to be sent in API call
+            let data = {
               "MEMBERSHIP_ID": membershipID,
               "ACT_CDE": this.get("model.membership.ActivityCode"),
               "SESSION_CDE": this.get("model.membership.SessionCode"),
@@ -29,33 +31,47 @@ export default Ember.Controller.extend({
               "BEGIN_DTE": new Date().toLocaleDateString(),
               "END_DTE": new Date().toLocaleDateString(),
               "DESCRIPTION": comments
-
             };
 
-            var success = false;
-            this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
-                Ember.$.ajax({
-                    type: "PUT",
-                    url: "https://gordon360api.gordon.edu/api/memberships/" + membershipID,
-                    data: JSON.stringify(data),
-                    contentType: "application/json",
-                    async: false,
-                    headers: {
-                        "Authorization": headerValue
-                    },
-                    success: function(data) {
-                        success = true;
-                    },
-                    error: function() {
-                        alert("Please select a position to assign.");
-                    }
-                });
-            });
-            if(success) {
-                var activityCode = this.get("model.membership.ActivityCode");
-                var sessionCode = this.get("model.membership.SessionCode");
+            // API call to update a membership
+            let response = putSync("/memberships/" + membershipID, data, this);
+            if (response.success) {
+                let activityCode = this.get("model.membership.ActivityCode");
+                let sessionCode = this.get("model.membership.SessionCode");
                 this.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
+            } else {
+                alert("Please select a position to assign.");
             }
+
+
+            /* begin old way */
+
+            // let success = false;
+            // this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+            //     Ember.$.ajax({
+            //         type: "PUT",
+            //         url: "https://gordon360api.gordon.edu/api/memberships/" + membershipID,
+            //         data: JSON.stringify(data),
+            //         contentType: "application/json",
+            //         async: false,
+            //         headers: {
+            //             "Authorization": headerValue
+            //         },
+            //         success: function(data) {
+            //             success = true;
+            //         },
+            //         error: function() {
+            //             alert("Please select a position to assign.");
+            //         }
+            //     });
+            // });
+            // if(success) {
+            //     let activityCode = this.get("model.membership.ActivityCode");
+            //     let sessionCode = this.get("model.membership.SessionCode");
+            //     this.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
+            // }
+
+            /* end old way */
         }
     }
 });
