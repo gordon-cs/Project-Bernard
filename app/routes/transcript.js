@@ -3,9 +3,9 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model() {
-        var controller = this.controllerFor("transcript");
-        var doc = controller.createPDF();
-        var url = doc.output("dataurlstring");
+        let controller = this.controllerFor("transcript");
+        let doc = controller.createPDF();
+        let url = doc.output("dataurlstring");
         return {
             "doc": doc,
             "url": url

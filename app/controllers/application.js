@@ -1,5 +1,5 @@
 import Ember from "ember";
-import { isLeader } from "test-app/helpers/is-leader";
+import isLeader from "test-app/utils/is-leader";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),

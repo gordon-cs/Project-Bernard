@@ -1,71 +1,27 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
+import getSync from "test-app/utils/get-sync";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     model(param) {
-        var model = {
-            "activityCode": param.ActivityCode,
-            "activity": null,
-            "sessionCode": param.SessionCode,
-            "roles": [],
-            "student": null,
-            "leading": false,
-            "adminPriv": false,
-            "id": this.get("session.data.authenticated.token_data.id")
+        let roles = getSync("/participations", this).data;
+        let activity = getSync("/activities/" + param.ActivityCode, this).data;
+        // Check if user is a leader or admin
+        let leaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
+        let leading = this.get('session.data.authenticated.token_data.college_role') === "god";
+        let IDNumber = this.get("session.data.authenticated.token_data.id");
+        for (let i = 0; i < leaders.length; i ++) {
+            if (allLeaders[i].SessionCode === param.SessionCode &&
+                allLeaders[i].IDNumber === IDNumber)
+            {
+                leading = true;
+            }
+        }
+        return {
+            "activity": activity,
+            "roles": roles,
+            "leading": leading
         };
-        this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
-            if(this.get('session.data.authenticated.token_data.college_role') === "god") {
-                model.adminPriv = true;
-            };
-
-            // Set the logged in user to be leader if they have admin priviledges
-            if (model.adminPriv) {
-                model.leading = true;
-            };
-
-            // Get all participations
-            Ember.$.ajax({
-                type: "GET",
-                url: "https://gordon360api.gordon.edu/api/participations",
-                async: false,
-                headers: {
-					          "Authorization": headerValue
-				        },
-                success: function(data) {
-                    model.roles = data;
-                }
-            });
-            // Get the activity information
-            Ember.$.ajax({
-                type: "GET",
-                url: 'https://gordon360api.gordon.edu/api/activities/' + model.activityCode,
-                async: false,
-                headers: {
-                    "Authorization": headerValue
-                },
-                success: function(data) {
-                    model.activity = data;
-                }
-            });
-            Ember.$.ajax({
-                type: "GET",
-                url: "https://gordon360api.gordon.edu/api/memberships/activity/" + param.ActivityCode + "/leaders",
-                async: false,
-                headers: {
-					"Authorization": headerValue
-				},
-                success: function(data) {
-                    for (var i = 0; i < data.length; i ++) {
-                        if (data[i].SessionCode === param.SessionCode &&
-                            data[i].IDNumber === model.id)
-                        {
-                            model.leading = true;
-                        }
-                    }
-                }
-            });
-        });
-        return model;
     }
 });
