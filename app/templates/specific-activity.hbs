@@ -16,9 +16,9 @@
                         <div class="col-sm-12 detail-item">
                             <p class="detail-header">Leaders:</p>
                             <div class="leaders">
-                                {{#each model.leaders as |leader|}}
+                                {{#each model.leaderEmails as |leader|}}
                                     <p class="activity-info-item-data">
-                                        {{leader.FirstName}} {{leader.LastName}} (<a>{{leader.Email}}</a>)
+                                        {{leader.FirstName}} {{leader.LastName}} (<a href="mailto:{{leader.FirstName}}.{{leader.LastName}}@gordon.edu">{{leader.Email}}</a>)
                                     </p>
                                 {{/each}}
                             </div>
@@ -48,6 +48,9 @@
                 {{#if model.leading}}
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Add Member</button>
+                    {{/link-to}}
+                    {{#link-to 'add-supervisor' model.session.SessionCode model.activity.ActivityCode}}
+                        <button class="btn button-navy">Add Supervisor</button>
                     {{/link-to}}
                 {{else}}
                     {{#if model.following}}

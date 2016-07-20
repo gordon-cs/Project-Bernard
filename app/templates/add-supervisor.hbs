@@ -1,0 +1,14 @@
+<div id="add-box" class="graybox container">
+    <h1>
+        Add Supervisor To - {{model.activity.ActivityDescription}}
+    </h1>
+    <form {{action "post" on="submit"}}>
+
+        {{input value=supervisorEmail class="form-control" placeholder="Supervisor Email Address"}}
+        {{input value=comments class="form-control" placeholder="Comment (optional)"}}
+        <button type="submit" class="btn button-navy add-button" {{action "post"}}>Add Supervisor</button>
+        {{#if errorMessage}}
+            <p id="error-message">{{errorMessage}}</p>
+        {{/if}}
+    </form>
+</div>
