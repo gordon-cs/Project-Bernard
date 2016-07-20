@@ -1,13 +1,33 @@
-// Sorts an array of json object by specified key is ascending order
+// Quick sorts an array of json object by specified key is ascending order
 export default function sortJsonArray(array, key) {
-    for (let i = array.length - 1; i >= 0; i --) {
-        for (let j = 1; j <= i; j ++) {
-            if (array[j - 1][key] > array[j][key]) {
-                let temp = array[j - 1];
-                array[j - 1] = array[j];
-                array[j] = temp;
+    let swap = function swap(arr, i, j) {
+        let temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    };
+    let partition = function(arr, pivot, left, right) {
+        let pivotValue = arr[pivot][key],
+        partitionIndex = left;
+        for (let i = left; i < right; i ++) {
+            if (arr[i][key] < pivotValue) {
+                swap(arr, i, partitionIndex);
+                partitionIndex ++;
             }
         }
+        swap(arr, right, partitionIndex);
+        return partitionIndex;
+    };
+    let quickSort = function(arr, left, right) {
+        let len = arr.length,
+        pivot,
+        partitionIndex;
+        if (left < right) {
+            pivot = right;
+            partitionIndex = partition(arr, pivot, left, right);
+            quickSort(arr, left, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, right);
+        }
+        return arr;
     }
-    return array;
+    return quickSort(array, 0, array.length - 1);
 }
