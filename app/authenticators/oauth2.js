@@ -79,7 +79,7 @@ export default Base.extend({
             },
             error: function(errorThrown) {
                 console.log(errorThrown);
-                token.error = errorThrown.statusText;
+                token.error = JSON.parse(errorThrown.responseText).error_description;
                 token.status = "error";
             }
         });

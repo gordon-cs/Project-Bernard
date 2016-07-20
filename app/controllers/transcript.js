@@ -1,6 +1,7 @@
 import Ember from "ember";
 import getSync from "gordon360/utils/get-sync";
 import isTranscriptWorthy from "gordon360/utils/is-transcript-worthy";
+import sortJsonArray from "gordon360/utils/sort-json-array";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
@@ -21,6 +22,7 @@ export default Ember.Controller.extend({
                 }
             }
         }
+        sortJsonArray(memberships, "ActivityDescription");
         // Using https://parall.ax/products/jspdf
         // (x, y)
         // text (x, y, string)

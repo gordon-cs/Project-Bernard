@@ -1,6 +1,7 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import getSync from "gordon360/utils/get-sync";
+import sortJsonArray from "gordon360/utils/sort-json-array";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
@@ -24,6 +25,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Get current memberships, of membership IDs of user, following boolean and corresponding membership ID
         let allMemberships = getSync("/memberships/activity/" + param.ActivityCode, this).data;
         let memberships = [];
+        let rosterMemberships = [];
         let allMyMembershipIDs = [];
         let membershipID;
         let following = false;
@@ -36,6 +38,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         membershipID = allMemberships[i].MembershipID;
                         following = true;
                     }
+                }
+                if (allMemberships[i].Participation !== "GUEST") {
+                    rosterMemberships.push(allMemberships[i]);
                 }
             }
         }
@@ -57,8 +62,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "activity": activity,
             "session": session,
             "memberships": memberships,
+            "rosterMemberships": sortJsonArray(rosterMemberships, "LastName"),
             "allMyMembershipIDs": allMyMembershipIDs,
-            "requests": requests
+            "requests": sortJsonArray(requests, "LastName")
         };
     }
 });
