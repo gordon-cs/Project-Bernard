@@ -47,8 +47,7 @@ module.exports = function(environment) {
     }
 
     if (environment === 'production') {
-        ENV.baseURL = '/';
-        ENV.locationType = 'none'
+        ENV.locationType = 'hash';
     }
 
     return ENV;
