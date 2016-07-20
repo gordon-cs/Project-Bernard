@@ -1,4 +1,4 @@
-// Quick sorts an array of json object by specified key is ascending order
+// Quick sorts an array of json objects by specified key is ascending order
 export default function sortJsonArray(array, key) {
     let swap = function swap(arr, i, j) {
         let temp = arr[i];

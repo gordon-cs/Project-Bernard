@@ -11,8 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             reversedSessions.push(sessions[i]);
         }
         let currentSession = getSync("/sessions/current", this).data;
-        let activities = getSync("/activities", this).data;
-        sortJsonArray(activities, "ActivityDescription");
+        let activities = sortJsonArray(getSync("/activities", this).data, "ActivityDescription");
         return {
             "activities": activities,
             "activitiesShown": activities,
