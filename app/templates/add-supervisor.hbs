@@ -5,7 +5,6 @@
     <form {{action "post" on="submit"}}>
 
         {{input value=supervisorEmail class="form-control" placeholder="Supervisor Email Address"}}
-        {{input value=comments class="form-control" placeholder="Comment (optional)"}}
         <button type="submit" class="btn button-navy add-button" {{action "post"}}>Add Supervisor</button>
         {{#if errorMessage}}
             <p id="error-message">{{errorMessage}}</p>

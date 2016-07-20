@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
                         if (email.indexOf("@gordon.edu") === -1) {
                             email = email + "@gordon.edu";
                         }
-                        let response = getSync("/students/email/" + email + "/", this);
+                        let response = getSync("/accounts/email/" + email + "/", this);
                         let student = response.data;
                         if (!response.success) {
                             this.set("errorMessage", "Please enter a valid student email");

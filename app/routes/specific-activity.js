@@ -12,6 +12,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Get leaders for session and check if user is a leader or admin
         let allLeaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
         let leaders = [];
+        let allSupervisors = getSync("/supervisors/" + param.ActivityCode, this).data;
+        console.log(allSupervisors);
+        let supervisors = [];
         // Get leader email information
         let getLeaders = getSync("/emails/activity/" + param.ActivityCode + "/leaders", this).data;
         let leaderEmails = [];
@@ -19,7 +22,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             leaderEmails.push(getLeaders[i]);
         }
 
-        let leading = this.get('session.data.authenticated.token_data.college_role') === "god";
+        // If the logged in user has admin rights give them to him
+        let leading = false;
+        let godMode = this.get('session.data.authenticated.token_data.college_role') === "god";
+        if (godMode) {
+            leading = true;
+        }
         for (var i = 0; i < allLeaders.length; i ++) {
             if (allLeaders[i].SessionCode === param.SessionCode) {
                 leaders.push(allLeaders[i]);
@@ -66,7 +74,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "memberships": memberships,
             "allMyMembershipIDs": allMyMembershipIDs,
             "requests": requests,
-            "leaderEmails": leaderEmails
+            "leaderEmails": leaderEmails,
+            "godMode": godMode
         };
     }
 });
