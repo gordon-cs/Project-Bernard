@@ -1,9 +1,9 @@
-export default function isLeader(participationCode) {
-    return (participationCode === "CAPT" ||
-        participationCode === "CODIR" ||
-        participationCode === "CORD" ||
-        participationCode === "DIREC" ||
-        participationCode === "PRES" ||
-        participationCode === "VICEC" ||
-        participationCode === "VICEP");
+export default function isLeader(part) {
+    return (part === "CAPT" ||
+        part === "CODIR" ||
+        part === "CORD" ||
+        part === "DIREC" ||
+        part === "PRES" ||
+        part === "VICEC" ||
+        part === "VICEP");
 }

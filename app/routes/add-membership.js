@@ -12,14 +12,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let leading = this.get('session.data.authenticated.token_data.college_role') === "god";
         let IDNumber = this.get("session.data.authenticated.token_data.id");
         for (let i = 0; i < leaders.length; i ++) {
-            if (allLeaders[i].SessionCode === param.SessionCode &&
-                allLeaders[i].IDNumber === IDNumber)
-            {
+            if (leaders[i].SessionCode == param.SessionCode && leaders[i].IDNumber == IDNumber) {
                 leading = true;
             }
         }
         return {
             "activity": activity,
+            "sessionCode": param.SessionCode,
             "roles": roles,
             "leading": leading
         };

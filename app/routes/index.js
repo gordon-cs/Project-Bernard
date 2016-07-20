@@ -3,19 +3,20 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 import getSync from "gordon360/utils/get-sync";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-
+	activate() {
+		this.controllerFor("application").getRequests();
+	},
 	model() {
-		console.log(getSync("/activities", this));
 		// Get current session
 		let currentSession = getSync("/sessions/current", this).data;
 		// Get memberships of user
 		let memberships = getSync("/memberships/student/" + this.get("session.data.authenticated.token_data.id"), this).data;
 		// Sort memberships according to session
-		let currentMemberships = {};
-		let pastMemberships = {};
+		let currentMemberships = [];
+		let pastMemberships = [];
 		for (let i = 0; i < memberships.length; i ++) {
 			if (memberships[i].SessionCode === currentSession.SessionCode) {
-				currentMemberships.push(data[i]);
+				currentMemberships.push(memberships[i]);
 			}
 			else {
 				let session = memberships[i].SessionDescription;

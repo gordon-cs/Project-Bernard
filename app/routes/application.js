@@ -3,7 +3,6 @@ import ApplicationRouteMixin from "ember-simple-auth/mixins/application-route-mi
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
     activate() {
-        let controller = this.controllerFor("application");
-        controller.getRequests();
+        this.controllerFor("application").getRequests();
     }
 });

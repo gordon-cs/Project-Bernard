@@ -11,7 +11,7 @@ export default function postSync(urlExtension, data, context) {
             type: "POST",
             url: "https://gordon360api.gordon.edu/api" + urlExtension,
             contentType: "application/json",
-            data: data,
+            data: JSON.stringify(data),
             async: false,
             headers: {
                 "Authorization": headerValue
