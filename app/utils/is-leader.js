@@ -1,7 +1,4 @@
-import Ember from "ember";
-
-export function isLeader(params/*, hash*/) {
-    var part = params;
+export default function isLeader(part) {
     return (part === "CAPT" ||
         part === "CODIR" ||
         part === "CORD" ||
@@ -10,5 +7,3 @@ export function isLeader(params/*, hash*/) {
         part === "VICEC" ||
         part === "VICEP");
 }
-
-export default Ember.Helper.helper(isLeader);

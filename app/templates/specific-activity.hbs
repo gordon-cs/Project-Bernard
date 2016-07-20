@@ -93,10 +93,10 @@
                           {{#if model.leading}}
                             <td class="comments-table-data">{{mems.Description}}</td>
                             <td>
-                                    {{#link-to 'edit-membership' mems.MembershipID}}
-                                        <button class="btn button-navy roster-button">Edit</button>
-                                    {{/link-to}}
-                                    <button {{action 'removePerson' mems}} class="btn button-red roster-button">Remove</button>
+                                {{#link-to 'edit-membership' mems.MembershipID}}
+                                    <button class="btn button-navy roster-button">Edit</button>
+                                {{/link-to}}
+                                <button {{action 'removePerson' mems}} class="btn button-red roster-button">Remove</button>
                             </td>
                             {{else}}
                                 <td></td>

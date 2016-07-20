@@ -1,96 +1,82 @@
 import Ember from "ember";
+import getSync from "gordon360/utils/get-sync";
+import postSync from "gordon360/utils/post-sync";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     role: null,
     errorMessage: null,
-
     /* All the actions that can be called from interaction with add-membership.hbs */
     actions: {
         setRole(role) {
             this.set("role", role);
         },
         post(role) {
-            var comments = this.get("comments");
-            var roleID = this.get("role.ParticipationCode");
-            var student = null;
-            var studentID = null;
-            var data = {};
-            var url = null;
-
+            // Variable declaration
+            let comments = this.get("comments");
+            let roleID = this.get("role.ParticipationCode");
+            let student = null;
+            let studentID = null;
+            let data = {};
+            let url = null;
+            // If the person is a leader for the activity
             if (this.get("model.leading")) {
-                // Get a student by their email
-                let success = true;
-                this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
-                    // HTTP call to api for student information
-                    Ember.$.ajax({
-                        type: "GET",
-                        url: "https://gordon360api.gordon.edu/api/students/email/" + this.get("studentEmail") + "/",
-                        async: false,
-                        headers: {
-                            "Authorization": headerValue
-                        },
-                        success: function(data) {
-                            student = data;
-                        },
-                        error: function() {
-                            success = false;
-                        }
-                    });
-                });
-                // Error Message
-                if (!success) {
-                    this.set("errorMessage", "Please enter a valid student email")
+                // Get the student to be added by email lookup
+                let email = this.get("studentEmail");
+                if (email.indexOf("@gordon.edu") === -1) {
+                    email = email + "@gordon.edu";
                 }
-
+                let response = getSync("/students/email/" + email + "/", this);
+                let student = response.data;
+                if (!response.succcess) {
+                    this.set("errorMessage", "Please enter a valid student email");
+                }
                 // Set the new membership's student ID to the one retreived from api call
                 studentID = student.StudentID;
-
-                // Data to be posted as a new membership
+                // Data to be sent in POST
                 data = {
-                    "ACT_CDE": this.get("model.activityCode"),
-                    "SESSION_CDE": this.get("model.sessionCode"),
+                    "ACT_CDE": this.get("model.activity.ActivityCode"),
+                    "SESS_CDE": this.get("model.sessionCode"),
                     "ID_NUM": studentID,
-                    "PART_LVL": roleID,
+                    "PART_CDE": roleID,
                     "BEGIN_DTE": new Date().toLocaleString(),
                     "END_DTE": new Date().toLocaleString(),
-                    "DESCRIPTION": comments
+                    "COMMENT_TXT": comments
                 };
-                url = "https://gordon360api.gordon.edu/api/memberships";
+                // the new URL extension
+                url = "/memberships";
             }
+            // If the person is not a leader for the activity
             else {
-                // Data to be posted as new membership request
+                // Data to be sent in POST
                 data = {
-                    "ACT_CDE": this.get("model.activityCode"),
-                    "ID_NUM": this.get("session.data.authenticated.token_data.id"),
-                    "PART_LVL": roleID,
-                    "DATE_SENT": new Date(),
+                    "ACT_CDE": this.get("model.activity.ActivityCode"),
                     "SESS_CDE": this.get("model.sessionCode"),
+                    "ID_NUM": this.get("session.data.authenticated.token_data.id"),
+                    "PART_CDE": roleID,
+                    "DATE_SENT": new Date().toLocaleString(),
+                    "COMMENT_TXT": comments,
                     "APPROVED": "Pending"
+                    //
+                    // "ACT_CDE": this.get("model.activityCode"),
+                    // "ID_NUM": this.get("session.data.authenticated.token_data.id"),
+                    // "PART_CDE": roleID,
+                    // "DATE_SENT": new Date(),
+                    // "SESS_CDE": this.get("model.sessionCode"),
+                    // "APPROVED": "Pending"
                 };
-                url = "https://gordon360api.gordon.edu/api/requests";
+                // the new URL extension
+                url = "/requests";
             }
-            let success = true;
-            this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
-                Ember.$.ajax({
-                    type: "POST",
-                    url: url,
-                    data: JSON.stringify(data),
-                    contentType: "application/json",
-                    async: false,
-                    headers: {
-                        "Authorization": headerValue
-                    },
-                    error: function() {
-                        success = false;
-                    }
-                });
-            });
-
-            if (success) {
-                var activityCode = this.get("model.activityCode");
-                var sessionCode = this.get("model.sessionCode");
-                this.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
+            // Data returned back from API call
+            let response = postSync(url, data, this);
+            // If the call was successfull transition back to the activity
+            // Else set the proper error message
+            if (response.success) {
+                let activityCode = this.get("model.activityCode");
+                let sessionCode = this.get("model.sessionCode");
+                this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
+                    "/" + this.get("model.activity.ActivityCode"));
             }
             else {
                 this.set("errorMessage", "Please enter a participation level");

@@ -1,124 +1,64 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
+import getSync from "gordon360/utils/get-sync";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     /*  Below is the model and calls to the api that retrieve data to fill the model */
     model(param) {
-        var model = {
-            "following": false,
-            "leading": false,
-            "adminPriv": false,
-            "membershipID": null,
-            "leaders": [],
-            "activity": null,
-            "session": null,
-            "memberships": [],
-            "advisors": [],
-            "allMyMembershipIDs": [],
-            "requests": []
-        };
-        this.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
-
-            // Determine if the person logged in has god mode capabilities
-            if(this.get('session.data.authenticated.token_data.college_role') === "god") {
-                model.adminPriv = true;
-            };
-            // Set the logged in user to be leader if they have admin priviledges
-            if (model.adminPriv) {
-                model.leading = true;
-            };
-            var IDNumber = this.get('session.data.authenticated.token_data.id');
-
-            // Set Activity Info
-            Ember.$.ajax({
-                type: "GET",
-                url: "https://gordon360api.gordon.edu/api/activities/" + param.ActivityCode,
-                async: false,
-                headers: {
-					"Authorization": headerValue
-				},
-                success: function(data) {
-                    model.activity = data;
+        let IDNumber = this.get("session.data.authenticated.token_data.id");
+        let activity = getSync("/activities/" + param.ActivityCode, this).data;
+        let session = getSync("/sessions/" + param.SessionCode, this).data;
+        // Get leaders for session and check if user is a leader or admin
+        let allLeaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
+        let leaders = [];
+        let leading = this.get('session.data.authenticated.token_data.college_role') === "god";
+        for (var i = 0; i < allLeaders.length; i ++) {
+            if (allLeaders[i].SessionCode === param.SessionCode) {
+                leaders.push(allLeaders[i]);
+                if (allLeaders[i].IDNumber == IDNumber) {
+                    leading = true;
                 }
-            });
-            // Set Session Info
-            Ember.$.ajax({
-                type: "GET",
-                url: "https://gordon360api.gordon.edu/api/sessions/" + param.SessionCode,
-                async: false,
-                headers: {
-					"Authorization": headerValue
-				},
-                success: function(data) {
-                    model.session = data;
-                }
-            });
-            // Set Leading and Leaders
-            Ember.$.ajax({
-                type: "GET",
-                url: "https://gordon360api.gordon.edu/api/memberships/activity/" + param.ActivityCode + "/leaders",
-                async: false,
-                headers: {
-					"Authorization": headerValue
-				},
-                success: function(data) {
-                    model.leaders = [];
-                    for (var i = 0; i < data.length; i ++) {
-                        if (data[i].SessionCode === param.SessionCode) {
-                            model.leaders.push(data[i]);
-                            if (data[i].IDNumber === IDNumber) {
-                                model.leading = true;
-                            }
-                        }
-                    }
-                }
-            });
-            // Set Activity Memberships and Membership Info
-            Ember.$.ajax({
-                type: "GET",
-                url: "https://gordon360api.gordon.edu/api/memberships/activity/" + param.ActivityCode,
-                async: false,
-                headers: {
-					          "Authorization": headerValue
-				},
-                success: function(data) {
-                    model.memberships = [];
-                    for (var i = 0; i < data.length; i ++) {
-                        if (data[i].SessionCode === param.SessionCode) {
-                            model.memberships.push(data[i]);
-                            if (data[i].IDNumber === IDNumber) {
-                                model.allMyMembershipIDs.push(data[i].MembershipID);
-                                if (data[i].Participation === "GUEST") {
-                                    model.membershipID = data[i].MembershipID;
-                                    model.following = true;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-            // Get all membership requests
-            if (model.leading) {
-                Ember.$.ajax({
-                    type: "GET",
-                    url: "https://gordon360api.gordon.edu/api/requests/activity/" + param.ActivityCode ,
-                    async: false,
-                    headers: {
-    					"Authorization": headerValue
-    				},
-                    success: function(data) {
-                        for (var i = 0; i < data.length; i ++) {
-                            if (data[i].RequestApproved === "Pending" &&
-                                data[i].SessionCode === param.SessionCode)
-                            {
-                                model.requests.push(data[i]);
-                            }
-                        }
-                    }
-                });
             }
-        });
-        return model;
+        }
+        // Get current memberships, of membership IDs of user, following boolean and corresponding membership ID
+        let allMemberships = getSync("/memberships/activity/" + param.ActivityCode, this).data;
+        let memberships = [];
+        let allMyMembershipIDs = [];
+        let membershipID;
+        let following = false;
+        for (var i = 0; i < allMemberships.length; i ++) {
+            if (allMemberships[i].SessionCode === param.SessionCode) {
+                memberships.push(allMemberships[i]);
+                if (allMemberships[i].IDNumber == IDNumber) {
+                    allMyMembershipIDs.push(allMemberships[i].MembershipID);
+                    if (allMemberships[i].Participation === "GUEST") {
+                        membershipID = allMemberships[i].MembershipID;
+                        following = true;
+                    }
+                }
+            }
+        }
+        // If user is a leader, get all membership requests
+        let requests = [];
+        if (leading) {
+            let allRequests = getSync("/requests/activity/" + param.ActivityCode, this).data;
+            for (let i = 0; i < allRequests.length; i ++) {
+                if (allRequests[i].RequestApproved === "Pending" && allRequests[i].SessionCode === param.SessionCode) {
+                    requests.push(allRequests[i]);
+                }
+            }
+        }
+        return {
+            "following": following,
+            "leading": leading,
+            "membershipID": membershipID,
+            "leaders": leaders,
+            "activity": activity,
+            "session": session,
+            "memberships": memberships,
+            "allMyMembershipIDs": allMyMembershipIDs,
+            "requests": requests
+        };
     }
 });

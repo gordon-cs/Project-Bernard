@@ -1,23 +1,13 @@
 import Ember from "ember";
+import getSync from "gordon360/utils/get-sync";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {
+        // Gets all sessions from the server and gets the one chosen by the user in all-activities.hbs
         selectSession: function(session) {
-            var activities = null;
-            this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
-                Ember.$.ajax({
-                    type: "GET",
-                    url: "https://gordon360api.gordon.edu/api/activities/session/" + session.SessionCode.trim(),
-                    async: false,
-                    headers: {
-                        "Authorization": headerValue
-                    },
-                    success: function(data) {
-                        activities = data;
-                    }
-                });
-            });
+            let response = getSync("/activities/session/" + session.SessionCode.trim(), this);
+            let activities = response.data;
             this.set("model.activities", activities);
             this.set("model.activitiesShown", activities);
             this.set("model.currentSession", session);

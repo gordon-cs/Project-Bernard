@@ -1,37 +1,14 @@
-:root {
-    --cyan: #00aeef;
-    --cyan-hover: #00bdec;
-    --navy: #014983;
-    --navy-hover: #0159A0;
-    --orange: #DE571F;
-    --orange-hover: #E2794C;
-    --green: #b2bb1c;
-    --green-hover: #bcc61e;
-    --dark-green: #086d38;
-    --dark-green-hover: #0a7a3d;
-    --red: #b53228;
-    --red-hover: #d83c30;
-    --yello: #FDB913;
-    --yello-hover: #fdc233;
-    --447: #31342b;
-    --447-hover: #5A5D55;
-
-    --brown-gray: #31342B;
-    --light-gray: #EBEAEA;
-    --mid-gray: #6F6F6F;
-    --gray: #D0D2D3;
-    --dark-gray: #252525;
-}
+/* -----------------------------
+    Page Title and Inputs
+------------------------------- */
 
 .page-title {
     text-align: center;
     margin-bottom: 20px;
 }
-
 .input-container {
     margin-top: 20px;
 }
-
 .session-dropdown,
 .search-bar {
     display: block;
@@ -42,6 +19,10 @@
     width: 90%;
 }
 
+/* -----------------------------
+    Activity List
+------------------------------- */
+
 .activity-list {
     display: flex;
     flex-direction: row;
@@ -50,8 +31,7 @@
     align-items: stretch;
     align-content: stretch;
 }
-/* Tile */
- .activity-list-item {
+.activity-list-item {
     text-align: center;
     padding: 0px !important;
     display: block;
@@ -76,7 +56,6 @@
     display: block;
     max-width: 100%;
 }
-/* Activity name */
 .activity-list-item-name {
     display: block;
     padding: 12px 3px;
@@ -86,11 +65,11 @@
     text-decoration: none;
 }
 
-/*****************
-Responsive Changes
-******************/
-@media only screen and (min-width: 768px) {
+/* -----------------------------
+    Responsive Changes
+------------------------------- */
 
+@media only screen and (min-width: 768px) {
     .session-dropdown,
     .search-bar {
         width: 30%;
@@ -106,7 +85,6 @@ Responsive Changes
     }
 }
 @media only screen and (min-width: 992px) {
-
     .activity-list-item {
         width: 18%;
         margin-top: 1%;

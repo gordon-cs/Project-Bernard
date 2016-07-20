@@ -1,10 +1,10 @@
-import { isLeader } from 'test-app/helpers/is-leader';
+import getSync from 'test-app/utils/get-sync';
 import { module, test } from 'qunit';
 
-module('Unit | Helper | is leader');
+module('Unit | Utility | get sync');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = isLeader([42]);
+  let result = getSync();
   assert.ok(result);
 });

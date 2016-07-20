@@ -1,46 +1,26 @@
 import Ember from "ember";
+import getSync from "gordon360/utils/get-sync";
+import isTranscriptWorthy from "gordon360/utils/is-transcript-worthy";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
-
     actions: {
         getPDF() {
             this.get("model.doc").output("save", "Co-Curricular Transcipt.pdf");
         }
     },
+    // Create the PDF document that is shown and can be downloaded
     createPDF() {
-        var memberships = [];
-        this.get("session").authorize("authorizer:oauth2", (headerName, headerValue) => {
-            var currentSession = null;
-            Ember.$.ajax({
-                type: "GET",
-                url: "https://gordon360api.gordon.edu/api/memberships/student/" + this.get("session.data.authenticated.token_data.id"),
-                async: false,
-                headers: {
-                    "Authorization": headerValue
-                },
-                success: function(data) {
-                    for (var i = 0; i < data.length; i ++) {
-                        var part = data[i].Participation;
-                        if (part === "AC" ||
-                            part === "CAPT" ||
-                            part === "CODIR" ||
-                            part === "CORD" ||
-                            part === "DIREC" ||
-                            part === "PRES" ||
-                            part === "RA1" ||
-                            part === "RA2" ||
-                            part === "RA3" ||
-                            part === "SEC" ||
-                            part === "VICEC" ||
-                            part === "VICEP")
-                        {
-                            memberships.push(data[i]);
-                        }
-                    }
+        let memberships = [];
+        // API call via util function to get information about the logged in user
+        let response = getSync("/memberships/student/" + this.get("session.data.authenticated.token_data.id"), this);
+        if (response.success) {
+            for (var i = 0; i < response.data.length; i ++) {
+                if (isTranscriptWorthy(response.data[i].Participation)) {
+                    memberships.push(response.data[i]);
                 }
-            });
-        });
+            }
+        }
         // Using https://parall.ax/products/jspdf
         // (x, y)
         // text (x, y, string)
