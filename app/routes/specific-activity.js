@@ -9,12 +9,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let IDNumber = this.get("session.data.authenticated.token_data.id");
         let activity = getSync("/activities/" + param.ActivityCode, this).data;
         let session = getSync("/sessions/" + param.SessionCode, this).data;
+
         // Get leaders for session and check if user is a leader or admin
         let allLeaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
         let leaders = [];
-        let allSupervisors = getSync("/supervisors/" + param.ActivityCode, this).data;
-        console.log(allSupervisors);
+
+        // Get supervisors for activity
+        let allSupervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
         let supervisors = [];
+        // Put supervisor full names into a new array
+        for (var i = 0; i <allSupervisors.length; i++) {
+            let fullname = allSupervisors[i].FirstName + " " + allSupervisors[i].LastName;
+            supervisors.push(fullname);
+        }
+
         // Get leader email information
         let getLeaders = getSync("/emails/activity/" + param.ActivityCode + "/leaders", this).data;
         let leaderEmails = [];
@@ -75,7 +83,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "allMyMembershipIDs": allMyMembershipIDs,
             "requests": requests,
             "leaderEmails": leaderEmails,
-            "godMode": godMode
+            "godMode": godMode,
+            "supervisors": supervisors
         };
     }
 });

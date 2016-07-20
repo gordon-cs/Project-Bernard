@@ -33,7 +33,14 @@
                     <div class="row">
                         <div class="col-sm-12 detail-item">
                             <p class="detail-header">Supervisors: </p>
-                            <p class="detail-info">...</p>
+                            <div class="leaders">
+                                {{#each model.supervisors as |supervisor|}}
+                                    <p class="activity-info-item-data">
+                                        {{supervisor}}
+                                    </p>
+                                {{/each}}
+
+                            </div>
                         </div>
                     </div>
                     <div class="row">
