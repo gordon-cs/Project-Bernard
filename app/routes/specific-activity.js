@@ -39,6 +39,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             }
         }
+        console.log(memberships);
         // If user is a leader, get all membership requests
         let requests = [];
         if (leading) {

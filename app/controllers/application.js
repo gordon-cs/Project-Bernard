@@ -17,7 +17,6 @@ export default Ember.Controller.extend({
     getRequests() {
         if ((this.requestsRecieved === null || this.requestsSent === null) &&
                 this.get("session.data.authenticated.token_data")) {
-            let date = new Date();
             // Get recieved requests
             let leaderMemberships = [];
             let requestsRecieved = [];
@@ -37,7 +36,6 @@ export default Ember.Controller.extend({
                             if (response.data[j].Session === leaderMemberships[i].Session && response.data[j].RequestApproved === "Pending") {
                                 let diffDays = this.getDiffDays(response.data[j].DateSent);
                                 response.data[j].DiffDays = diffDays.diffString;
-                                console.log(response.data[j]);
                                 requestsRecieved.push(response.data[j]);
                             }
                         }
@@ -47,12 +45,9 @@ export default Ember.Controller.extend({
             // Get sent requests
             // Only show requests that are younger then 7 days or still pending
             let requestsSent = getSync("/requests/student/" + this.get("session.data.authenticated.token_data.id"), this).data;
-            date.setDate(date.getDate() - 7);
             for (let i = 0; i < requestsSent.length; i ++) {
                 let diffDays = this.getDiffDays(requestsSent[i].DateSent);
                 requestsSent[i].DiffDays = diffDays.diffString;
-                console.log(diffDays);
-                console.log(requestsSent[i].diffDays);
                 if (diffDays.diffInt > 7 && requestsSent[i].RequestApproved !== "Pending") {
                     requestsSent.splice(i, 1);
                     i --;
