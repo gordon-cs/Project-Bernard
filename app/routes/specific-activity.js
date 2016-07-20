@@ -1,6 +1,7 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import getSync from "gordon360/utils/get-sync";
+import sortJsonArray from "gordon360/utils/sort-json-array";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
@@ -39,7 +40,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             }
         }
-        console.log(memberships);
         // If user is a leader, get all membership requests
         let requests = [];
         if (leading) {
@@ -57,9 +57,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "leaders": leaders,
             "activity": activity,
             "session": session,
-            "memberships": memberships,
+            "memberships": sortJsonArray(memberships, "LastName"),
             "allMyMembershipIDs": allMyMembershipIDs,
-            "requests": requests
+            "requests": sortJsonArray(requests, "LastName")
         };
     }
 });

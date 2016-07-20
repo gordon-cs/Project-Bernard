@@ -1,6 +1,7 @@
 import Ember from "ember";
 import isLeader from "gordon360/utils/is-leader";
 import getSync from "gordon360/utils/get-sync";
+import sortJsonArray from "gordon360/utils/sort-json-array";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
@@ -36,6 +37,7 @@ export default Ember.Controller.extend({
                             if (response.data[j].Session === leaderMemberships[i].Session && response.data[j].RequestApproved === "Pending") {
                                 let diffDays = this.getDiffDays(response.data[j].DateSent);
                                 response.data[j].DiffDays = diffDays.diffString;
+                                response.data[j].DiffDaysInt = diffDays.diffInt;
                                 requestsRecieved.push(response.data[j]);
                             }
                         }
@@ -48,6 +50,7 @@ export default Ember.Controller.extend({
             for (let i = 0; i < requestsSent.length; i ++) {
                 let diffDays = this.getDiffDays(requestsSent[i].DateSent);
                 requestsSent[i].DiffDays = diffDays.diffString;
+                requestsSent[i].DiffDaysInt = diffDays.diffInt;
                 if (diffDays.diffInt > 7 && requestsSent[i].RequestApproved !== "Pending") {
                     requestsSent.splice(i, 1);
                     i --;
@@ -58,10 +61,10 @@ export default Ember.Controller.extend({
                 this.set("notificationsPresent", true);
             }
             if (requestsRecieved.length > 0) {
-                this.set("requestsRecieved", requestsRecieved);
+                this.set("requestsRecieved", sortJsonArray(requestsRecieved, "DiffDaysInt"));
             }
             if (requestsSent.length > 0) {
-                this.set("requestsSent", requestsSent);
+                this.set("requestsSent", sortJsonArray(requestsSent, "DiffDaysInt"));
             }
         }
     },

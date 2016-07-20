@@ -1,6 +1,7 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import getSync from "gordon360/utils/get-sync";
+import sortJsonArray from "gordon360/utils/sort-json-array";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model() {
@@ -11,6 +12,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
         let currentSession = getSync("/sessions/current", this).data;
         let activities = getSync("/activities", this).data;
+        sortJsonArray(activities, "ActivityDescription");
         return {
             "activities": activities,
             "activitiesShown": activities,
