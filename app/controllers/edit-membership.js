@@ -17,7 +17,6 @@ export default Ember.Controller.extend({
             }
             let roleID = this.get("role.ParticipationCode");
             if (roleID == null) {
-                console.log(this.get("model.membership.Participation"));
                 roleID = this.get("model.membership.Participation");
             }
             let membershipID = this.get("model.membership.MembershipID");
@@ -33,7 +32,6 @@ export default Ember.Controller.extend({
                 "END_DTE": new Date().toLocaleDateString(),
                 "COMMENT_TXT": comments
             };
-            console.log(data);
             // API call to update a membership
             let response = putSync("/memberships/" + membershipID, data, this);
             if (response.success) {
