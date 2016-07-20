@@ -17,13 +17,14 @@ export default Ember.Controller.extend({
                 // Data to be sent with API call
                 let membership = {
                     "ACT_CDE": this.get("model").activity.ActivityCode,
-                    "SESSION_CDE": this.get("model").session.SessionCode.trim(),
+                    "SESS_CDE": this.get("model").session.SessionCode.trim(),
                     "ID_NUM": this.get("session.data.authenticated.token_data.id"),
-                    "PART_LVL": "GUEST",
+                    "PART_CDE": "GUEST",
                     "BEGIN_DTE": new Date().toLocaleDateString(),
                     "END_DTE": new Date().toLocaleDateString(),
-                    "DESCRIPTION": "Basic Follower"
+                    "COMMENT_TXT": "Basic Follower"
                 };
+                console.log(membership);
                 let newMembershipID = null;
                 // API call via util function to add a new (GUEST) membership
                 let response = postSync("/memberships", membership, this);

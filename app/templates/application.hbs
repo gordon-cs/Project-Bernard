@@ -9,18 +9,29 @@
                     <div class="user-info-buttons">
                         {{#if notificationsPresent}}
                             <div class="dropdown request-notification-dropdown">
-                                {{!-- <button class="btn button-gray dropdown-toggle request-button" data-toggle="dropdown"> --}}
-                                    <span class="glyphicon glyphicon-bell request-button" data-toggle="dropdown"></span>
-                                {{!-- </button> --}}
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        {{#each requests as |req|}}
+                                <span class="glyphicon glyphicon-envelope request-button" data-toggle="dropdown"></span>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    {{#if requestsRecieved}}
+                                        <li><strong>Requests Recieved</strong></li>
+                                        {{#each requestsRecieved as |req|}}
                                             <li>
                                                 {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                                    {{req.FirstName}} {{req.LastName}} - {{req.ActivityDescription}}
+                                                    {{req.FirstName}} {{req.LastName}} - {{req.ActivityDescription}} - {{req.DiffDays}}
                                                 {{/link-to}}
                                             </li>
                                         {{/each}}
-                                    </ul>
+                                    {{/if}}
+                                    {{#if requestsSent}}
+                                        <li><strong>Requests Sent</strong></li>
+                                        {{#each requestsSent as |req|}}
+                                            <li>
+                                                {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
+                                                    {{req.ActivityDescription}} - {{req.RequestApproved}} - {{req.DiffDays}}
+                                                {{/link-to}}
+                                            </li>
+                                        {{/each}}
+                                    {{/if}}
+                                </ul>
                             </div>
                         {{/if}}
                         <button {{action "logout"}} class="logout-btn btn button-gray">Logout</button>
