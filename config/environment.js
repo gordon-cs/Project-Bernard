@@ -16,9 +16,6 @@ module.exports = function(environment) {
             // Here you can pass flags/options to your application instance
             // when it is created
         },
-        'ember-simple-auth': {
-            authorizor: 'authorizor:token'
-        },
         'ember-simple-auth-token': {
             serverTokenEndpoint: 'https://gordon360api.gordon.edu/token',
             authorizationPrefix: 'Bearer ',

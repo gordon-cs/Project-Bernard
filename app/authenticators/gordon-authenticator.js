@@ -23,6 +23,7 @@ export default Base.extend({
         }
     },
     authenticate: function(credentials) {
+        console.log("gordon-authenticator");
         var token = this.makeRequest(credentials);
         var promise = new Ember.RSVP.Promise(function(resolve, reject) {
             if (token.status === "success") {
