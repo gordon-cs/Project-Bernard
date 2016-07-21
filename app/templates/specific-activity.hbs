@@ -77,41 +77,45 @@
     <div class="row table-row">
         <div class="col-sm-12">
             <h2>Current Activity Roster</h2>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Role</th>
-                            {{#if model.leading}}
-                            <th>Comments</th>
-                            {{/if}}
-                            <th>Options</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each model.rosterMemberships as |mem|}}
+            {{#if model.rosterFilled}}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td> {{mem.FirstName}} </td>
-                                <td> {{mem.LastName}} </td>
-                                <td> {{mem.ParticipationDescription}} </td>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Role</th>
                                 {{#if model.leading}}
-                                    <td class="comments-table-data">{{mem.Description}}</td>
-                                    <td>
-                                    {{#link-to 'edit-membership' mem.MembershipID}}
-                                    <button class="btn button-navy roster-button">Edit</button>
-                                    {{/link-to}}
-                                    <button {{action "removePerson" mem}} class="btn button-red roster-button">Remove</button>
-                                    </td>
-                                {{else}}
-                                    <td></td>
+                                <th>Comments</th>
                                 {{/if}}
+                                <th>Options</th>
                             </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {{#each model.rosterMemberships as |mem|}}
+                                <tr>
+                                    <td> {{mem.FirstName}} </td>
+                                    <td> {{mem.LastName}} </td>
+                                    <td> {{mem.ParticipationDescription}} </td>
+                                    {{#if model.leading}}
+                                        <td class="comments-table-data">{{mem.Description}}</td>
+                                        <td>
+                                        {{#link-to 'edit-membership' mem.MembershipID}}
+                                        <button class="btn button-navy roster-button">Edit</button>
+                                        {{/link-to}}
+                                        <button {{action "removePerson" mem}} class="btn button-red roster-button">Remove</button>
+                                        </td>
+                                    {{else}}
+                                        <td></td>
+                                    {{/if}}
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            {{else}}
+                <p class="empty-table-reminder">There are no members here</p>
+            {{/if}}
         </div>
     </div>
     {{#if model.leading}}
@@ -119,31 +123,35 @@
         <div class="row table-row">
             <div class="col-sm-12">
                 <h2>Membership Requests</h2>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Participation</th>
-                                <th>Session</th>
-                                <th>Options</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each model.requests as |req|}}
+                {{#if requestsFilled}}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td> {{req.FirstName}} {{req.LastName}} </td>
-                                    <td> {{req.ParticipationDescription}} </td>
-                                    <td> {{req.SessionDescription}} </td>
-                                    <td>
-                                        <button {{action "approveRequest" req}} class="btn button-darkgreen">Approve</button>
-                                        <button {{action "denyRequest" req}} class="btn button-red">Deny</button>
-                                    </td>
+                                    <th>Name</th>
+                                    <th>Participation</th>
+                                    <th>Session</th>
+                                    <th>Options</th>
                                 </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                {{#each model.requests as |req|}}
+                                    <tr>
+                                        <td> {{req.FirstName}} {{req.LastName}} </td>
+                                        <td> {{req.ParticipationDescription}} </td>
+                                        <td> {{req.SessionDescription}} </td>
+                                        <td>
+                                            <button {{action "approveRequest" req}} class="btn button-darkgreen">Approve</button>
+                                            <button {{action "denyRequest" req}} class="btn button-red">Deny</button>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                {{else}}
+                    <p class="empty-table-reminder">There are no pending requests</p>
+                {{/if}}
             </div>
         </div>
     {{/if}}

@@ -5,45 +5,49 @@
 			<h3>Look at {{#link-to 'all-activities'}}<a class="empty-list-link">what's available!</a>{{/link-to}}</h3>
 		</div>
 	{{else}}
-		<div class="highlight section-title">
-			<h2>Current Experience:</h2>
-		</div>
-		<div class="cyanbox group-title">
-			<h2>{{model.currentSession.SessionDescription}}</h2>
-		</div>
-		<div class="my-activity-list">
-			{{#each model.currentMemberships as |mem|}}
-				{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
-					<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
-					<dl class="membership-description">
-						<dt class="my-activity-list-item-name">{{mem.ActivityDescription}}</dt>
-						<dt class="my-activity-list-item-info">{{mem.SessionDescription}}</dt>
-						<dt class="my-activity-list-item-info">{{mem.ParticipationDescription}}</dt>
-					</dl>
-				{{/link-to}}
-			{{/each}}
-		</div>
-		<div class="highlight section-title">
-			<h2>Past Experience:</h2>
-		</div>
-		{{#each model.pastMemberships as |memSession|}}
+		{{#if model.currentMembershipsFilled}}
+			<div class="highlight section-title">
+				<h2>Current Experience:</h2>
+			</div>
 			<div class="cyanbox group-title">
-				<h2>{{memSession.session}}</h2>
+				<h2>{{model.currentSession.SessionDescription}}</h2>
 			</div>
 			<div class="my-activity-list">
-				{{#each memSession.activities as |mem|}}
+				{{#each model.currentMemberships as |mem|}}
 					{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
 						<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
-						<div class="membership-description">
-							<dl>
-								<dt class="my-activity-list-item-name">{{mem.ActivityDescription}}</dt>
-								<dt class="my-activity-list-item-info">{{mem.SessionDescription}}</dt>
-								<dt class="my-activity-list-item-info">{{mem.ParticipationDescription}}</dt>
-							</dl>
-						</div>
+						<dl class="membership-description">
+							<dt class="my-activity-list-item-name">{{mem.ActivityDescription}}</dt>
+							<dt class="my-activity-list-item-info">{{mem.SessionDescription}}</dt>
+							<dt class="my-activity-list-item-info">{{mem.ParticipationDescription}}</dt>
+						</dl>
 					{{/link-to}}
 				{{/each}}
 			</div>
-		{{/each}}
+		{{/if}}
+		{{#if model.pastMembershipsFilled}}
+			<div class="highlight section-title">
+				<h2>Past Experience:</h2>
+			</div>
+			{{#each model.pastMemberships as |memSession|}}
+				<div class="cyanbox group-title">
+					<h2>{{memSession.session}}</h2>
+				</div>
+				<div class="my-activity-list">
+					{{#each memSession.activities as |mem|}}
+						{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
+							<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
+							<div class="membership-description">
+								<dl>
+									<dt class="my-activity-list-item-name">{{mem.ActivityDescription}}</dt>
+									<dt class="my-activity-list-item-info">{{mem.SessionDescription}}</dt>
+									<dt class="my-activity-list-item-info">{{mem.ParticipationDescription}}</dt>
+								</dl>
+							</div>
+						{{/link-to}}
+					{{/each}}
+				</div>
+			{{/each}}
+		{{/if}}
 	{{/if}}
 </div>
