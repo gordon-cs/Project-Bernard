@@ -59,19 +59,19 @@
                     {{#link-to 'add-supervisor' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Add Supervisor</button>
                     {{/link-to}}
-                    {{else if model.leading}}
-                        {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
-                            <button class="btn button-navy">Add Member</button>
-                        {{/link-to}}
+                {{else if model.leading}}
+                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
+                        <button class="btn button-navy">Add Member</button>
+                    {{/link-to}}
+                {{else}}
+                    {{#if model.following}}
+                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
                     {{else}}
-                        {{#if model.following}}
-                            <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
-                        {{else}}
-                            <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
-                        {{/if}}
-                        {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
-                            <button type="button" class="btn button-navy">Join</button>
-                        {{/link-to}}
+                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
+                    {{/if}}
+                    {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
+                        <button type="button" class="btn button-navy">Join</button>
+                    {{/link-to}}
                 {{/if}}
             </div>
         </div>
