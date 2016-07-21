@@ -10,10 +10,27 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let IDNumber = this.get("session.data.authenticated.token_data.id");
         let activity = getSync("/activities/" + param.ActivityCode, this).data;
         let session = getSync("/sessions/" + param.SessionCode, this).data;
+
         // Get leaders for session and check if user is a leader or admin
         let allLeaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
         let leaders = [];
-        let leading = this.get('session.data.authenticated.token_data.college_role') === "god";
+
+        // Get supervisors for activity
+        let allSupervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
+
+        // Get leader email information
+        let getLeaders = getSync("/emails/activity/" + param.ActivityCode + "/leaders", this).data;
+        let leaderEmails = [];
+        for (var i = 0; i < getLeaders.length; i++) {
+            leaderEmails.push(getLeaders[i]);
+        }
+
+        // If the logged in user has admin rights give them to him
+        let leading = false;
+        let godMode = this.get('session.data.authenticated.token_data.college_role') === "god";
+        if (godMode) {
+            leading = true;
+        }
         for (var i = 0; i < allLeaders.length; i ++) {
             if (allLeaders[i].SessionCode === param.SessionCode) {
                 leaders.push(allLeaders[i]);
@@ -22,7 +39,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             }
         }
-        // Get current memberships, of membership IDs of user, following boolean and corresponding membership ID
+        //Get current memberships, of membership IDs of user, following boolean and corresponding membership ID
         let allMemberships = getSync("/memberships/activity/" + param.ActivityCode, this).data;
         let memberships = [];
         let rosterMemberships = [];
@@ -64,6 +81,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "memberships": memberships,
             "rosterMemberships": sortJsonArray(rosterMemberships, "LastName"),
             "allMyMembershipIDs": allMyMembershipIDs,
+            "leaderEmails": leaderEmails,
+            "godMode": godMode,
+            "supervisors": allSupervisors,
             "requests": sortJsonArray(requests, "LastName")
         };
     }

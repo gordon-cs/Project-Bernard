@@ -16,9 +16,9 @@
                         <div class="col-sm-12 detail-item">
                             <p class="detail-header">Leaders:</p>
                             <div class="leaders">
-                                {{#each model.leaders as |leader|}}
+                                {{#each model.leaderEmails as |leader|}}
                                     <p class="activity-info-item-data">
-                                        {{leader.FirstName}} {{leader.LastName}} (<a>{{leader.Email}}</a>)
+                                        {{leader.FirstName}} {{leader.LastName}} (<a href="mailto:{{leader.FirstName}}.{{leader.LastName}}@gordon.edu">{{leader.Email}}</a>)
                                     </p>
                                 {{/each}}
                             </div>
@@ -32,8 +32,15 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 detail-item">
-                            <p class="detail-header">Advisor: </p>
-                            <p class="detail-info">...</p>
+                            <p class="detail-header">Supervisors: </p>
+                            <div class="leaders">
+                                {{#each model.supervisors as |supervisor|}}
+                                    <p class="activity-info-item-data">
+                                        <button type="button" class="btn btn-sm button-red" {{action "removeSupervisor" supervisor}}>x</button> {{supervisor.FirstName}} {{supervisor.LastName}}
+                                    </p>
+                                {{/each}}
+
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -45,19 +52,26 @@
                 </div>
             </div>
             <div class="row button-row">
-                {{#if model.leading}}
+                {{#if model.godMode}}
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Add Member</button>
                     {{/link-to}}
-                {{else}}
-                    {{#if model.following}}
-                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
-                    {{else}}
-                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
-                    {{/if}}
-                    {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
-                        <button type="button" class="btn button-navy">Join</button>
+                    {{#link-to 'add-supervisor' model.session.SessionCode model.activity.ActivityCode}}
+                        <button class="btn button-navy">Add Supervisor</button>
                     {{/link-to}}
+                    {{else if model.leading}}
+                        {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
+                            <button class="btn button-navy">Add Member</button>
+                        {{/link-to}}
+                    {{else}}
+                        {{#if model.following}}
+                            <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
+                        {{else}}
+                            <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
+                        {{/if}}
+                        {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
+                            <button type="button" class="btn button-navy">Join</button>
+                        {{/link-to}}
                 {{/if}}
             </div>
         </div>
@@ -90,7 +104,7 @@
                                 {{#link-to 'edit-membership' mems.MembershipID}}
                                     <button class="btn button-navy roster-button">Edit</button>
                                 {{/link-to}}
-                                <button {{action 'removePerson' mems}} class="btn button-red roster-button">Remove</button>
+                                <button {{action "removePerson" mems}} class="btn button-red roster-button">Remove</button>
                             </td>
                             {{else}}
                                 <td></td>
