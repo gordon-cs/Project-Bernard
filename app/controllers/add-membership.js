@@ -27,7 +27,6 @@ export default Ember.Controller.extend({
                         this.set("errorMessage", "Please enter a student email");
                     }
                     else {
-                        console.log("leader else");
                         if (email.indexOf("@gordon.edu") === -1) {
                             email = email + "@gordon.edu";
                         }
@@ -40,13 +39,12 @@ export default Ember.Controller.extend({
                         data = {
                             "ACT_CDE": this.get("model.activity.ActivityCode"),
                             "SESS_CDE": this.get("model.sessionCode"),
-                            "ID_NUM": student.StudentID,
+                            "ID_NUM": student.GordonID,
                             "PART_CDE": this.get("role.ParticipationCode"),
                             "BEGIN_DTE": new Date().toLocaleString(),
                             "END_DTE": new Date().toLocaleString(),
                             "COMMENT_TXT": this.get("comments")
                         };
-                        console.log(data);
                         // the new URL extension
                         url = "/memberships";
                     }

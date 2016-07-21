@@ -83,7 +83,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "allMyMembershipIDs": allMyMembershipIDs,
             "leaderEmails": leaderEmails,
             "godMode": godMode,
-            "supervisors": allSupervisors
+            "supervisors": allSupervisors,
             "requests": sortJsonArray(requests, "LastName")
         };
     }
