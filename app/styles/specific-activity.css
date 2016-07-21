@@ -56,6 +56,9 @@
     margin-left: auto;
     display: block;
 }
+.sup-btn {
+    margin-right: 5px !important;
+}
 
 /* -----------------------------
     Tables

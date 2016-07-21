@@ -5,13 +5,17 @@
                 <div class="activity-name">
                     <h1 class="lead text-center">{{model.activity.ActivityDescription}}</h1>
                 </div>
-                <img class="activity-picture center-block img-circle"
+                <img class="activity-picture center-block"
                     src={{model.activity.ActivityImage}}>
             </div>
         </div>
         <div class="col-sm-6 right-section">
             {{!-- Activity Information --}}
             <div class="row activity-info">
+                <div class="col-sm-12 detail-item">
+                    <p class="detail-header">Session: </p>
+                    <p class="detail-info">{{model.session.SessionDescription}}</p>
+                </div>
                 <div class="col-sm-12 detail-item">
                     <p class="detail-header">Leaders:</p>
                     <div class="leaders">
@@ -23,23 +27,17 @@
                     </div>
                 </div>
                 <div class="col-sm-12 detail-item">
-                    <p class="detail-header">Session: </p>
-                    <p class="detail-info">{{model.session.SessionDescription}}</p>
-                </div>
-                <div class="col-sm-12 detail-item">
                     <p class="detail-header">Supervisors: </p>
                     <div class="leaders">
                         {{#each model.supervisors as |supervisor|}}
                             <p class="activity-info-item-data">
-                                <button type="button" class="btn btn-sm button-red" {{action "removeSupervisor" supervisor}}>x</button> {{supervisor.FirstName}} {{supervisor.LastName}}
+                                {{#if model.leading}}
+                                    <button type="button" class="btn btn-sm button-red sup-btn" {{action "removeSupervisor" supervisor}}>Remove</button>
+                                {{/if}}
+                                {{supervisor.FirstName}} {{supervisor.LastName}}
                             </p>
                         {{/each}}
-
                     </div>
-                </div>
-                <div class="col-sm-12 detail-item">
-                    <p class="detail-header">Times: </p>
-                    <p class="detail-info">{{model.activity.MeetingDay}} {{model.activity.MeetingTime}}</p>
                 </div>
             </div>
             {{!-- Activity Buttons --}}
