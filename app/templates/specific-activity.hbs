@@ -10,6 +10,7 @@
             </div>
         </div>
         <div class="col-sm-6 right-section">
+            {{!-- Activity Information --}}
             <div class="row activity-info">
                 <div class="col-sm-12 detail-item">
                     <p class="detail-header">Leaders:</p>
@@ -41,6 +42,7 @@
                     <p class="detail-info">{{model.activity.MeetingDay}} {{model.activity.MeetingTime}}</p>
                 </div>
             </div>
+            {{!-- Activity Buttons --}}
             <div class="row button-row">
                 {{#if model.godMode}}
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
@@ -72,47 +74,50 @@
             </div>
         </div>
     </div>
+    {{!-- Activity Tables --}}
+    {{!-- Members --}}
     <div class="row table-row">
         <div class="col-sm-12">
             <h2>Current Activity Roster</h2>
             <div class="table-responsive">
-              <table class="table">
-                  <thead>
-                      <tr>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Role</th>
-                          {{#if model.leading}}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Role</th>
+                            {{#if model.leading}}
                             <th>Comments</th>
-                          {{/if}}
-                          <th>Options</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {{#each model.rosterMemberships as |mems|}}
-                      <tr>
-                          <td> {{mems.FirstName}} </td>
-                          <td> {{mems.LastName}} </td>
-                          <td> {{mems.ParticipationDescription}} </td>
-                          {{#if model.leading}}
-                            <td class="comments-table-data">{{mems.Description}}</td>
-                            <td>
-                                {{#link-to 'edit-membership' mems.MembershipID}}
+                            {{/if}}
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each model.rosterMemberships as |mem|}}
+                            <tr>
+                                <td> {{mem.FirstName}} </td>
+                                <td> {{mem.LastName}} </td>
+                                <td> {{mem.ParticipationDescription}} </td>
+                                {{#if model.leading}}
+                                    <td class="comments-table-data">{{mem.Description}}</td>
+                                    <td>
+                                    {{#link-to 'edit-membership' mem.MembershipID}}
                                     <button class="btn button-navy roster-button">Edit</button>
-                                {{/link-to}}
-                                <button {{action "removePerson" mems}} class="btn button-red roster-button">Remove</button>
-                            </td>
-                            {{else}}
-                                <td></td>
-                          {{/if}}
-                      </tr>
-                      {{/each}}
-                  </tbody>
-              </table>
-          </div>
+                                    {{/link-to}}
+                                    <button {{action "removePerson" mems}} class="btn button-red roster-button">Remove</button>
+                                    </td>
+                                {{else}}
+                                    <td></td>
+                                {{/if}}
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     {{#if model.leading}}
+        {{!-- Membership Requests --}}
         <div class="row table-row">
             <div class="col-sm-12">
                 <h2>Membership Requests</h2>

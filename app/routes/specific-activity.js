@@ -39,30 +39,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             }
         }
-        //Get current memberships, of membership IDs of user, following boolean and corresponding membership ID
-        let memberships = getSync("/memberships/activity/" + param.ActivityCode, this).data;
-        let rosterMemberships = [];
-        let allMyMembershipIDs = [];
-        let membershipID;
-        let following = false;
-        for (var i = 0; i < memberships.length; i ++) {
-            let mem = memberships[i];
-            if (mem.SessionCode === param.SessionCode) {
-                if (mem.IDNumber == IDNumber) {
-                    allMyMembershipIDs.push(mem.MembershipID);
-                    if (mem.Participation === "GUEST") {
-                        membershipID = mem.MembershipID;
-                        following = true;
-                    }
-                }
-                if (mem.Participation !== "GUEST") {
-                    rosterMemberships.push(mem);
-                }
-            }
-            else {
-                memberships.splice(i --, 1);
-            }
-        }
         // If user is a leader, get all membership requests and emial list
         let requests = [];
         let emails = "";
@@ -79,6 +55,30 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 if (i !== emailArray.length - 1) {
                     emails += ",";
                 }
+            }
+        }
+        //Get current memberships, of membership IDs of user, following boolean and corresponding membership ID
+        let memberships = getSync("/memberships/activity/" + param.ActivityCode, this).data;
+        let rosterMemberships = [];
+        let allMyMembershipIDs = [];
+        let membershipID;
+        let following = false;
+        for (var i = 0; i < memberships.length; i ++) {
+            let mem = memberships[i];
+            if (mem.SessionCode === param.SessionCode) {
+                if (mem.IDNumber == IDNumber) {
+                    allMyMembershipIDs.push(mem.MembershipID);
+                    if (mem.Participation === "GUEST") {
+                        membershipID = mem.MembershipID;
+                        following = true;
+                    }
+                }
+                if (mem.Participation !== "GUEST" || leading) {
+                    rosterMemberships.push(mem);
+                }
+            }
+            else {
+                memberships.splice(i --, 1);
             }
         }
         return {
