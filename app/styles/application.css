@@ -82,6 +82,9 @@ header {
 .request-notification-dropdown > button:focus {
     border: 1px solid white !important;
 }
+.notification-info {
+	margin-left: 15px;
+}
 
 /* -----------------------------
     Responsive Changes
@@ -139,6 +142,9 @@ header {
     #primary-menu li:first-child {
         margin-left: 0;
     }
+	#main-page-container {
+		margin-bottom: 50px;
+	}
 }
 @media only screen and (min-width: 992px) {
     #logo-box {

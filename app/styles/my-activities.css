@@ -10,7 +10,7 @@
     margin-bottom: 15px;
 }
 .section-title > h2 {
-    text-align:  center;
+    text-align: center;
 }
 .group-title {
     margin-top: 20px;
@@ -64,11 +64,22 @@
     border-radius: 100%;
 }
 .membership-description {
-    margin-top: 10px;
+    color: var(--dark-gray);
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 120%;
     text-align: center;
 }
 .my-activity-list > a:hover {
     text-decoration: none;
+}
+.my-activity-list-item-name {
+    font-weight: bold;
+    padding: 0;
+}
+.my-activity-list-item-info {
+    font-weight: normal;
+    margin-top: 5px;
 }
 .empty-list {
     text-align: center;
@@ -85,7 +96,11 @@
 /* -----------------------------
     Responsive Changes
 ------------------------------- */
-
+@media only screen and (min-width: 425px) {
+    .membership-description {
+        font-size: 130%;
+    }
+}
 @media only screen and (min-width: 768px) {
     .section-title {
         font-size: 1.3em;
@@ -102,14 +117,13 @@
         padding-left: 4%;
         padding-right: 4%;
     }
-    .my-activity-list> .my-activity-list-item {
+    .my-activity-list > .my-activity-list-item {
         width: 23%;
         margin-left: 1%;
         margin-right: 1%;
     }
-    .my-activity-list> .my-activity-list-item > dl {
-        margin: 7px;
-        font-size: 140%;
+    .membership-description {
+        font-size: 120%;
     }
 }
 @media only screen and (min-width: 992px) {
@@ -126,12 +140,9 @@
     .my-activity-list{
         width: 100%;
     }
-    .my-activity-list> .my-activity-list-item {
+    .my-activity-list > .my-activity-list-item {
         width: 17%;
         margin-left: 1.5%;
         margin-right: 1.5%;
-    }
-    .my-activity-list> .my-activity-list-item > p {
-        font-size: 150%;
     }
 }

@@ -5,7 +5,7 @@
 export default function getSync(urlExtension, context) {
     let success;
     let response = null;
-    context.get('session').authorize('authorizer:oauth2', (headerName, headerValue) => {
+    context.get('session').authorize('authorizer:gordon-authorizer', (headerName, headerValue) => {
         Ember.$.ajax({
             type: "GET",
             url: "https://gordon360api.gordon.edu/api" + urlExtension,

@@ -15,16 +15,11 @@
 			{{#each model.currentMemberships as |mem|}}
 				{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
 					<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
-					<div class="membership-description">
-						<dl>
-							<dd>Activity:</dd>
-							<dt>{{mem.ActivityDescription}}</dt>
-							<dd>Membership Role:</dd>
-							<dt>{{mem.ParticipationDescription}}</dt>
-							<dd>Membership Session:</dd>
-							<dt>{{mem.SessionDescription}}</dt>
-						</dl>
-					</div>
+					<dl class="membership-description">
+						<dt class="my-activity-list-item-name">{{mem.ActivityDescription}}</dt>
+						<dt class="my-activity-list-item-info">{{mem.SessionDescription}}</dt>
+						<dt class="my-activity-list-item-info">{{mem.ParticipationDescription}}</dt>
+					</dl>
 				{{/link-to}}
 			{{/each}}
 		</div>
@@ -41,12 +36,9 @@
 						<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
 						<div class="membership-description">
 							<dl>
-								<dd>Activity</dd>
-								<dt>{{mem.ActivityDescription}}</dt>
-								<dd>Membership Role</dd>
-								<dt>{{mem.ParticipationDescription}}</dt>
-								<dd>Membership Session</dd>
-								<dt>{{mem.SessionDescription}}</dt>
+								<dt class="my-activity-list-item-name">{{mem.ActivityDescription}}</dt>
+								<dt class="my-activity-list-item-info">{{mem.SessionDescription}}</dt>
+								<dt class="my-activity-list-item-info">{{mem.ParticipationDescription}}</dt>
 							</dl>
 						</div>
 					{{/link-to}}

@@ -40,29 +40,32 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         }
         //Get current memberships, of membership IDs of user, following boolean and corresponding membership ID
-        let allMemberships = getSync("/memberships/activity/" + param.ActivityCode, this).data;
-        let memberships = [];
+        let memberships = getSync("/memberships/activity/" + param.ActivityCode, this).data;
         let rosterMemberships = [];
         let allMyMembershipIDs = [];
         let membershipID;
         let following = false;
-        for (var i = 0; i < allMemberships.length; i ++) {
-            if (allMemberships[i].SessionCode === param.SessionCode) {
-                memberships.push(allMemberships[i]);
-                if (allMemberships[i].IDNumber == IDNumber) {
-                    allMyMembershipIDs.push(allMemberships[i].MembershipID);
-                    if (allMemberships[i].Participation === "GUEST") {
-                        membershipID = allMemberships[i].MembershipID;
+        for (var i = 0; i < memberships.length; i ++) {
+            let mem = memberships[i];
+            if (mem.SessionCode === param.SessionCode) {
+                if (mem.IDNumber == IDNumber) {
+                    allMyMembershipIDs.push(mem.MembershipID);
+                    if (mem.Participation === "GUEST") {
+                        membershipID = mem.MembershipID;
                         following = true;
                     }
                 }
-                if (allMemberships[i].Participation !== "GUEST") {
-                    rosterMemberships.push(allMemberships[i]);
+                if (mem.Participation !== "GUEST") {
+                    rosterMemberships.push(mem);
                 }
             }
+            else {
+                memberships.splice(i --, 1);
+            }
         }
-        // If user is a leader, get all membership requests
+        // If user is a leader, get all membership requests and emial list
         let requests = [];
+        let emails = "";
         if (leading) {
             let allRequests = getSync("/requests/activity/" + param.ActivityCode, this).data;
             for (let i = 0; i < allRequests.length; i ++) {
@@ -70,20 +73,33 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     requests.push(allRequests[i]);
                 }
             }
+            let emailArray = getSync("/emails/activity/" + param.ActivityCode + "/session/" + param.SessionCode, this).data;
+            for (let i = 0; i < emailArray.length; i ++) {
+                emails += emailArray[i].Email;
+                if (i !== emailArray.length - 1) {
+                    emails += ",";
+                }
+            }
         }
         return {
-            "following": following,
+            // Persmissions
             "leading": leading,
-            "membershipID": membershipID,
-            "leaders": leaders,
+            "godMode": godMode,
+            // Activity
             "activity": activity,
             "session": session,
+            "supervisors": allSupervisors,
+            // Memberships
+            "leaders": leaders,
             "memberships": memberships,
             "rosterMemberships": sortJsonArray(rosterMemberships, "LastName"),
-            "allMyMembershipIDs": allMyMembershipIDs,
             "leaderEmails": leaderEmails,
-            "godMode": godMode,
-            "supervisors": allSupervisors,
+            "emails": emails,
+            // User
+            "following": following,
+            "membershipID": membershipID,
+            "allMyMembershipIDs": allMyMembershipIDs,
+            // Misc
             "requests": sortJsonArray(requests, "LastName")
         };
     }
