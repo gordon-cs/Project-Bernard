@@ -66,6 +66,12 @@ export default Ember.Controller.extend({
                     // the new URL extension
                     url = "/requests";
                 }
+                let memberships = this.get("model.memberships")
+                for (let i = 0; i < memberships.length; i ++) {
+                    if (memberships[i].IDNumber == data.ID_NUM && memberships[i].Participation == data.PART_CDE) {
+                        this.set("errorMessage", "Already added as a " + this.role.ParticipationDescription);
+                    }
+                }
                 if (this.get("errorMessage") === null) {
                     // Data returned back from API call
                     let response = postSync(url, data, this);
