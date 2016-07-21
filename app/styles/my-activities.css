@@ -84,6 +84,14 @@
 .empty-list {
     text-align: center;
 }
+.empty-list-link {
+    color: var(--cyan);
+	text-decoration: none;
+    padding: inherit;
+}
+.empty-list-link:hover {
+    color: var(--orange);
+}
 
 /* -----------------------------
     Responsive Changes
