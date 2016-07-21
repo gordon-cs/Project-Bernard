@@ -75,6 +75,21 @@ export default Ember.Controller.extend({
                     window.location.reload(true);
                 }
             }
+        },
+        // Remove a supervisor from this activity
+        removeSupervisor(supervisor) {
+            // Variable declaration
+            let firstname = supervisor.FirstName;
+            let lastname = supervisor.LastName;
+            let id = supervisor.SupervisorID;
+
+            if(confirm("Do you want to remove " + firstname + " " + lastname + " as a supervisor?")) {
+                // API call to delete specified supervisor
+                let response = deleteSync("/supervisors/" + id, this);
+                if (response.success) {
+                    window.location.reload(true);
+                }
+            }
         }
     }
 });

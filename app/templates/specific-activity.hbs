@@ -36,7 +36,7 @@
                             <div class="leaders">
                                 {{#each model.supervisors as |supervisor|}}
                                     <p class="activity-info-item-data">
-                                        {{supervisor}}
+                                        <button type="button" class="btn btn-sm button-red" {{action "removeSupervisor" supervisor}}>x</button> {{supervisor.FirstName}} {{supervisor.LastName}}
                                     </p>
                                 {{/each}}
 
@@ -104,7 +104,7 @@
                                 {{#link-to 'edit-membership' mems.MembershipID}}
                                     <button class="btn button-navy roster-button">Edit</button>
                                 {{/link-to}}
-                                <button {{action 'removePerson' mems}} class="btn button-red roster-button">Remove</button>
+                                <button {{action "removePerson" mems}} class="btn button-red roster-button">Remove</button>
                             </td>
                             {{else}}
                                 <td></td>

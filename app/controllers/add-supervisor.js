@@ -27,7 +27,6 @@ export default Ember.Controller.extend({
                     "SESS_CDE": this.get("model.sessionCode"),
                     "ACT_CDE": this.get("model.activity.ActivityCode")
                 };
-                console.log(data);
                 // Set the URL extension
                 url = "/supervisors";
 

@@ -16,12 +16,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Get supervisors for activity
         let allSupervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
-        let supervisors = [];
-        // Put supervisor full names into a new array
-        for (var i = 0; i <allSupervisors.length; i++) {
-            let fullname = allSupervisors[i].FirstName + " " + allSupervisors[i].LastName;
-            supervisors.push(fullname);
-        }
 
         // Get leader email information
         let getLeaders = getSync("/emails/activity/" + param.ActivityCode + "/leaders", this).data;
@@ -84,7 +78,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "requests": requests,
             "leaderEmails": leaderEmails,
             "godMode": godMode,
-            "supervisors": supervisors
+            "supervisors": allSupervisors
         };
     }
 });
