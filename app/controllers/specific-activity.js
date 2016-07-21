@@ -43,6 +43,7 @@ export default Ember.Controller.extend({
         },
         // Method that gets called when the Remove button is clicked
         removePerson(membership) {
+            console.log(membership);
             // Variable declaration
             let first = membership.FirstName;
             let last = membership.LastName;
