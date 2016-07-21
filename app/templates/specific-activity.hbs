@@ -59,10 +59,16 @@
                     {{#link-to 'add-supervisor' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Add Supervisor</button>
                     {{/link-to}}
+                    <a href="mailto:{{model.emails}}">
+                        <button class="btn button-navy">Send Email to Group</button>
+                    </a>
                 {{else if model.leading}}
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Add Member</button>
                     {{/link-to}}
+                    <a href="mailto:{{model.emails}}">
+                        <button class="btn button-navy">Send Email to Group</button>
+                    </a>
                 {{else}}
                     {{#if model.following}}
                         <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>

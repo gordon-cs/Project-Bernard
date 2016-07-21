@@ -5,7 +5,8 @@
     margin-left: auto;
     margin-right: auto;
 }
-#add-box > form > input {
+#add-box > form > input,
+#add-box > form > .ember-power-select-trigger {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: auto;
