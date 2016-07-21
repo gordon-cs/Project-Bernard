@@ -36,9 +36,9 @@
                             <div class="leaders">
                                 {{#each model.supervisors as |supervisor|}}
                                     <p class="activity-info-item-data">
-                                        {{supervisor.FirstName}} {{supervisor.LastName}}
                                         {{#if model.leading}}
-                                            <button type="button" class="btn btn-sm button-red" {{action "removeSupervisor" supervisor}}>x</button>
+                                            <button type="button" class="btn btn-sm button-red sup-btn" {{action "removeSupervisor" supervisor}}>Remove</button>
+                                            {{supervisor.FirstName}} {{supervisor.LastName}}
                                         {{/if}}
                                     </p>
                                 {{/each}}

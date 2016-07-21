@@ -40,6 +40,9 @@
 .activity-info-item-data {
     margin: 0 !important;
 }
+.sup-btn {
+    margin-right: 5px !important;
+}
 
 /* -----------------------------
     Tables
