@@ -9,21 +9,43 @@
                     src={{model.activity.ActivityImage}}>
             </div>
         </div>
-        <div class="col-sm-6 right-section">
-            {{!-- Activity Information --}}
-            <div class="row activity-info">
-                <div class="col-sm-12 detail-item">
-                    <p class="detail-header">Session: </p>
-                    <p class="detail-info">{{model.session.SessionDescription}}</p>
-                </div>
-                <div class="col-sm-12 detail-item">
-                    <p class="detail-header">Leaders:</p>
-                    <div class="leaders">
-                        {{#each model.leaderEmails as |leader|}}
-                            <p class="activity-info-item-data">
-                                {{leader.FirstName}} {{leader.LastName}} (<a href="mailto:{{leader.FirstName}}.{{leader.LastName}}@gordon.edu">{{leader.Email}}</a>)
-                            </p>
-                        {{/each}}
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="activity-info">
+                    <div class="row">
+                        <div class="col-sm-12 detail-item">
+                            <p class="detail-header">Leaders:</p>
+                            <div class="leaders">
+                                {{#each model.leaderEmails as |leader|}}
+                                    <p class="activity-info-item-data">
+                                        {{leader.FirstName}} {{leader.LastName}} (<a href="mailto:{{leader.FirstName}}.{{leader.LastName}}@gordon.edu">{{leader.Email}}</a>)
+                                    </p>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 detail-item">
+                            <p class="detail-header">Session: </p>
+                            <p class="detail-info">{{model.session.SessionDescription}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 detail-item">
+                            <p class="detail-header">Supervisors: </p>
+                            <div class="leaders">
+                                {{#each model.supervisors as |supervisor|}}
+                                    <p class="activity-info-item-data">
+                                        {{#if model.godMode}}
+                                            <button type="button" class="btn btn-sm button-red" {{action "removeSupervisor" supervisor}}>Remove</button> {{supervisor.FirstName}} {{supervisor.LastName}}
+                                        {{else}}
+                                            {{supervisor.FirstName}} {{supervisor.LastName}}
+                                        {{/if}}
+                                    </p>
+                                {{/each}}
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-12 detail-item">
