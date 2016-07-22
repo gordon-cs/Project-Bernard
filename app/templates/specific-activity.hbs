@@ -17,27 +17,37 @@
                     <p class="detail-info">{{model.session.SessionDescription}}</p>
                 </div>
                 <div class="col-sm-12 detail-item">
-                    <p class="detail-header">Leaders:</p>
-                    <div class="leaders">
-                        {{#each model.leaderEmails as |leader|}}
-                            <p class="activity-info-item-data">
-                                {{leader.FirstName}} {{leader.LastName}} (<a href="mailto:{{leader.FirstName}}.{{leader.LastName}}@gordon.edu">{{leader.Email}}</a>)
-                            </p>
-                        {{/each}}
-                    </div>
+                    {{#if model.hasLeaders}}
+                        <p class="detail-header">Leaders: </p>
+                        <div class="leaders">
+                            {{#each model.leaderEmails as |leader|}}
+                                <p class="activity-info-item-data">
+                                    {{leader.FirstName}} {{leader.LastName}} (<a href="mailto:{{leader.FirstName}}.{{leader.LastName}}@gordon.edu">{{leader.Email}}</a>)
+                                </p>
+                            {{/each}}
+                        </div>
+                    {{else}}
+                        <p class="detail-header">Leaders:</p>
+                        <p class="detail-info">None</p>
+                    {{/if}}
                 </div>
                 <div class="col-sm-12 detail-item">
-                    <p class="detail-header">Supervisors: </p>
-                    <div class="leaders">
-                        {{#each model.supervisors as |supervisor|}}
-                            <p class="activity-info-item-data">
-                                {{#if model.godMode}}
-                                    <button type="button" class="btn btn-sm button-red sup-btn" {{action "removeSupervisor" supervisor}}>Remove</button>
-                                {{/if}}
-                                {{supervisor.FirstName}} {{supervisor.LastName}}
-                            </p>
-                        {{/each}}
-                    </div>
+                    {{#if model.hasSupervisors}}
+                        <p class="detail-header">Supervisors: </p>
+                        <div class="leaders">
+                            {{#each model.supervisors as |supervisor|}}
+                                <p class="activity-info-item-data">
+                                    {{#if model.godMode}}
+                                        <button type="button" class="btn btn-sm button-red sup-btn" {{action "removeSupervisor" supervisor}}>Remove</button>
+                                    {{/if}}
+                                    {{supervisor.FirstName}} {{supervisor.LastName}}
+                                </p>
+                            {{/each}}
+                        </div>
+                    {{else}}
+                        <p class="detail-header">Supervisors: </p>
+                        <p class="detail-info">None</p>
+                    {{/if}}
                 </div>
             </div>
             {{!-- Activity Buttons --}}
