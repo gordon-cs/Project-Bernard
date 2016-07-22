@@ -15,15 +15,17 @@
     margin-top: 20px;
     max-width: 50%;
 }
-.activity-info {
-    margin-top: 50px;
-    margin-left: 20px;
-}
 
 /* -----------------------------
     Description
 ------------------------------- */
 
+.activity-info {
+    margin-top: 50px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
 .detail-item {
     font-size: 200%;
 }
@@ -40,6 +42,17 @@
 .activity-info-item-data {
     margin: 0 !important;
 }
+.button-row {
+    margin-top: 20px;
+}
+.button-row > button,
+.button-row > a > button {
+    width: 90%;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
 .sup-btn {
     margin-right: 5px !important;
 }
@@ -48,12 +61,6 @@
     Tables
 ------------------------------- */
 
-.button-row {
-    margin-top: 20px;
-}
-.button-row button {
-    margin-left: 20px;
-}
 .table-row {
     font-size: 150%;
     margin-top: 20px;
@@ -63,4 +70,26 @@
 }
 td {
     max-width: 300px;
+}
+.empty-table-reminder {
+    margin-left: 20px !important;
+    font-size: 100%;
+}
+
+/* -----------------------------
+    Responsive Chagnes
+------------------------------- */
+@media only screen and (min-width: 768px) {
+    .button-row > button,
+    .button-row > a > button {
+        width: auto;
+        display: inline-block;
+        font-size: 12px;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .button-row > button,
+    .button-row > a > button {
+        font-size: 14px;
+    }
 }

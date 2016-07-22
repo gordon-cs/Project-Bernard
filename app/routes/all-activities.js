@@ -15,6 +15,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         return {
             "activities": activities,
             "activitiesShown": activities,
+            "activitiesFilled" : (activities.length > 0),
             "sessions": reversedSessions,
             "currentSession": currentSession
         };

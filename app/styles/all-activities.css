@@ -64,6 +64,11 @@
 .activity-list > a:hover {
     text-decoration: none;
 }
+.empty-list-reminder {
+    margin-top: 50px;
+    font-size: 120%;
+    text-align: center;
+}
 
 /* -----------------------------
     Responsive Changes

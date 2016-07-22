@@ -25,8 +25,8 @@
         {{input value=comments class="form-control" placeholder="Comment (optional)"}}
         {{#if model.leading}}
             <button type="submit" class="btn button-navy add-button" {{action "post"}}>Add Member</button>
-            {{else}}
-                <button type="submit" class="btn button-navy add-button" {{action "post"}}>Request Membership</button>
+        {{else}}
+            <button type="submit" class="btn button-navy add-button" {{action "post"}}>Request Membership</button>
         {{/if}}
         {{#if errorMessage}}
             <p id="error-message">{{errorMessage}}</p>

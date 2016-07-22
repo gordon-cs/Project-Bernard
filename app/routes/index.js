@@ -42,14 +42,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			sortJsonArray(pastMemberships[i].activities, "ActivityDescription");
 		}
 		// Check if the user has any current or past activites
-		let nothingToShow = false;
-		if (pastMemberships.length === 0 && currentMemberships.length === 0) {
-			nothingToShow = true;
-		}
+		let currentMembershipsFilled = (currentMemberships.length !== 0);
+		let pastMembershipsFilled = (pastMemberships.length !== 0);
+		let nothingToShow = !(currentMembershipsFilled || pastMembershipsFilled);
+		console.log(currentMembershipsFilled);
+		console.log(pastMembershipsFilled);
+		console.log(nothingToShow);
 		return {
             "currentSession": currentSession,
 			"currentMemberships": sortJsonArray(currentMemberships, "ActivityDescription"),
 			"pastMemberships":	pastMemberships,
+			"currentMembershipsFilled": currentMembershipsFilled,
+			"pastMembershipsFilled": pastMembershipsFilled,
 			"nothingToShow": nothingToShow
 		};
 	}
