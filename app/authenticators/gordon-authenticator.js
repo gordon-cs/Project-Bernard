@@ -3,8 +3,8 @@ import Base from "ember-simple-auth/authenticators/base";
 
 export default Base.extend({
     session: Ember.inject.service("session"),
-
-    refreshLeeway: (1000 * (60 * 2)),
+    refreshLeeway: (1000 * (60 * 2)), // Time (in milliseconds) between token refresh and token expire
+    // Restore token data when page is refreshed
     restore: function(data) {
         const now = (new Date()).getTime();
         let expiresAt = now + (data.expires_in * 1000);
@@ -22,6 +22,7 @@ export default Base.extend({
             });
         }
     },
+    // Authenticate credentials
     authenticate: function(credentials) {
         var token = this.makeRequest(credentials);
         var promise = new Ember.RSVP.Promise(function(resolve, reject) {
@@ -34,6 +35,7 @@ export default Base.extend({
         });
         return promise;
     },
+    // Invalidate session
     invalidate: function(data) {
         return new Promise(function(resolve, reject) {
             resolve();

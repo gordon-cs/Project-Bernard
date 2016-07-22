@@ -9,17 +9,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Check if user has permission
         let leading = this.get("session.data.authenticated.token_data.college_role") === "god";
         if (!leading) {
-            let supervisors = getSync("/supervisors/acivity/" + membership.ActivityCode, this).data;
+            let supervisors = getSync("/supervisors/activity/" + membership.ActivityCode, this).data;
             for (let i = 0; i < supervisors.length; i ++) {
-                if (supervisors[i].IDNumber === this.get("session.data.authenticated.token_data.id")) {
+                if (supervisors[i].IDNumber == this.get("session.data.authenticated.token_data.id")) {
                     leading = true;
                 }
             }
         }
         if (!leading) {
             let leaders = getSync("/memberships/activity/" + membership.ActivityCode + "/leaders", this).data;
+            console.log(leaders);
             for (let i = 0; i < leaders.length; i ++) {
-                if (leader[i].IDNumber === this.get("session.data.authenticated.token_data.id")) {
+                if (leaders[i].IDNumber == this.get("session.data.authenticated.token_data.id")) {
                     leading = true;
                 }
             }
