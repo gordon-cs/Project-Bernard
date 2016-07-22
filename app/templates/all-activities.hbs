@@ -24,8 +24,8 @@
     	<div class="activity-list">
     		{{#each model.activitiesShown as |activity|}}
     			{{#link-to "specific-activity" model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
-    					<img class="activity-list-item-img" src={{activity.ActivityImage}}>
-    					<p class="activity-list-item-name">{{activity.ActivityDescription}}</p>
+					<img class="activity-list-item-img" src={{activity.ActivityImage}}>
+					<p class="activity-list-item-name">{{activity.ActivityDescription}}</p>
     			{{/link-to}}
     		{{/each}}
     	</div>

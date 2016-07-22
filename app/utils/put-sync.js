@@ -6,7 +6,7 @@
 export default function putSync(urlExtension, data, context) {
     let success;
     let response = null;
-    context.get('session').authorize('authorizer:gordon-authorizer', (headerName, headerValue) => {
+    context.get("session").authorize("authorizer:gordon-authorizer", (headerName, headerValue) => {
         Ember.$.ajax({
             type: "PUT",
             url: "https://gordon360api.gordon.edu/api" + urlExtension,

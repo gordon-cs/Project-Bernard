@@ -32,6 +32,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Get leaders for session and check if user is a leader
         let leaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
+        console.log(leaders);
         for (var i = 0; i < leaders.length; i ++) {
             if (leaders[i].SessionCode !== param.SessionCode) {
                 leaders.splice(i --, 1);

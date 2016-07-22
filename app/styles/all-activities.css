@@ -52,9 +52,10 @@
     -webkit-transition: .3s !important;
     transition: .3s !important;
 }
- .activity-list-item-img  {
+.activity-list-item-img {
     display: block;
-    max-width: 100%;
+    width: 100%;
+    min-height: 100%;
 }
 .activity-list-item-name {
     display: block;
