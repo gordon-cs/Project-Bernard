@@ -15,6 +15,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		// Get supervisor data to show
 		let allSupervisions = getSync("/supervisors/person/" + this.get("session.data.authenticated.token_data.id"), this).data;
 		let currentSupervisions = [];
+		let pastSupervisions = [];
 		// Loop through each supervision
 		for (let i = 0; i < allSupervisions.length; i++) {
 			allSupervisions[i].SessionCode = allSupervisions[i].SessionCode.trim();
@@ -23,6 +24,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			// Set the current supervisorships
 			if (allSupervisions[i].SessionCode === currentSession.SessionCode) {
 				currentSupervisions.push(allSupervisions[i]);
+			}
+			// Set the past supervisions
+			else {
+				pastSupervisions.push(allSupervisions[i]);
 			}
 		}
 
@@ -59,11 +64,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		let currentMembershipsFilled = (currentMemberships.length !== 0);
 		let pastMembershipsFilled = (pastMemberships.length !== 0);
 		let currentSupervisionsFilled = (currentSupervisions.length !== 0);
-		let nothingToShow = !(currentMembershipsFilled || pastMembershipsFilled || currentSupervisionsFilled);
+		let pastSupervisionsFilled = (pastSupervisions.length !== 0);
+		let nothingToShow = !(currentMembershipsFilled || pastMembershipsFilled || currentSupervisionsFilled || pastSupervisionsFilled);
 		// Error checks
-		//console.log(currentMembershipsFilled);
+		// console.log(currentMembershipsFilled);
 		// console.log(pastMembershipsFilled);
 		// console.log(currentSupervisionsFilled);
+		// console.log(pastSupervisionsFilled);
+		// console.log(pastSupervisions);
 		// console.log(nothingToShow);
 		//
 		return {
@@ -74,6 +82,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			"pastMembershipsFilled": pastMembershipsFilled,
 			"currentSupervisionsFilled": currentSupervisionsFilled,
 			"currentSupervisions": currentSupervisions,
+			"pastSupervisionsFilled": pastSupervisionsFilled,
+			"pastSupervisions": pastSupervisions,
 			"nothingToShow": nothingToShow
 		};
 	}

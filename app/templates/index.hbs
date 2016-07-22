@@ -44,6 +44,25 @@
 				{{/each}}
 			</div>
 		{{/if}}
+		{{#if model.pastSupervisionsFilled}}
+			<div class="highlight section-title">
+				<h2>Past Supervisions:</h2>
+			</div>
+			<div class="cyanbox group-title">
+				<h2>All Past Sessions</h2>
+			</div>
+			<div class="my-activity-list">
+				{{#each model.pastSupervisions as |supervisor|}}
+					{{#link-to "specific-activity" supervisor.SessionCode supervisor.ActivityCode class="well my-activity-list-item"}}
+						<img class="my-activity-list-item-img" src="{{supervisor.ActivityImage}}">
+						<dl class="membership-description">
+							<dt class="my-activity-list-item-name">{{supervisor.ActivityDescription}}</dt>
+							<dt class="my-activity-list-item-info">{{supervisor.SessionDescription}}</dt>
+						</dl>
+					{{/link-to}}
+				{{/each}}
+			</div>
+		{{/if}}
 		{{#if model.pastMembershipsFilled}}
 			<div class="highlight section-title">
 				<h2>Past Experience:</h2>
