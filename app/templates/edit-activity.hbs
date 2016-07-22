@@ -1,0 +1,12 @@
+<div id="form-box" class="graybox container">
+    <h1>Edit - {{model.activity.ActivityDescription}}</h1>
+    <form {{action "update" on="submit"}}>
+        {{input value=description class="form-control" placeholder="Description"}}
+        {{input value=pageUrl class="form-control" placeholder="Activity Page"}}
+        {{input value=imageUrl class="form-control" placeholder="Image URL"}}
+        <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>
+        {{#if errorMessage}}
+            <p id="error-message">{{errorMessage}}</p>
+        {{/if}}
+    </form>
+</div>

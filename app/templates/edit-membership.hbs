@@ -1,4 +1,4 @@
-<div id="edit-box" class="graybox container">
+<div id="form-box" class="graybox container">
     <h1>Edit - {{model.membership.ActivityDescription}}</h1>
     <h1>{{model.membership.FirstName}} {{model.membership.LastName}}: {{model.membership.ParticipationDescription}}</h1>
     <form {{action "update" on="submit"}}>
@@ -13,7 +13,7 @@
             {{role.ParticipationDescription}}
         {{/power-select}}
         {{input value=comments class="form-control" placeholder="Comment (optional)"}}
-        <button class="btn button-navy edit-button" {{action 'update'}}>Edit</button>
+        <button class="btn button-navy form-button" {{action 'update'}}>Edit</button>
         {{#if errorMessage}}
             <p id="error-message">{{errorMessage}}</p>
         {{/if}}

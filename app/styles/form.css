@@ -1,19 +1,19 @@
-#edit-box {
+#form-box {
     border-radius: 3px;
 }
-#edit-box > h1 {
+#form-box > h1 {
     margin-left: auto;
     margin-right: auto;
     color: white;
 }
-#edit-box > form > input,
-#edit-box > form > .ember-power-select-trigger {
+#form-box > form > input,
+#form-box > form > .ember-power-select-trigger {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
 }
-#edit-box > form > button {
+#form-box > form > button {
     float: right;
     margin-left: auto;
     margin-right: auto;
@@ -28,7 +28,7 @@
 ------------------------------- */
 
 @media only screen and (min-width: 768px) {
-    #edit-box {
+    #form-box {
         margin-top: 100px;
         width: 400px;
         margin-left: auto;
