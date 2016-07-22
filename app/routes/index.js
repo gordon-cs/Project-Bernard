@@ -12,6 +12,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		let currentSession = getSync("/sessions/current", this).data;
 		// Get memberships of user
 		let memberships = getSync("/memberships/student/" + this.get("session.data.authenticated.token_data.id"), this).data;
+		// Get supervisor data to show
+		let allSupervisions = getSync("/supervisors/person/" + this.get("session.data.authenticated.token_data.id"), this).data;
+		let currentSupervisions = [];
+		// Loop through each supervision
+		for (let i = 0; i < allSupervisions.length; i++) {
+			allSupervisions[i].SessionCode = allSupervisions[i].SessionCode.trim();
+			allSupervisions[i].ActivityCode = allSupervisions[i].ActivityCode.trim();
+
+			// Set the current supervisorships
+			if (allSupervisions[i].SessionCode === currentSession.SessionCode) {
+				currentSupervisions.push(allSupervisions[i]);
+			}
+		}
+
 		// Sort memberships according to session
 		let currentMemberships = [];
 		let pastMemberships = [];
@@ -44,16 +58,22 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		// Check if the user has any current or past activites
 		let currentMembershipsFilled = (currentMemberships.length !== 0);
 		let pastMembershipsFilled = (pastMemberships.length !== 0);
-		let nothingToShow = !(currentMembershipsFilled || pastMembershipsFilled);
-		console.log(currentMembershipsFilled);
-		console.log(pastMembershipsFilled);
-		console.log(nothingToShow);
+		let currentSupervisionsFilled = (currentSupervisions.length !== 0);
+		let nothingToShow = !(currentMembershipsFilled || pastMembershipsFilled || currentSupervisionsFilled);
+		// Error checks
+		//console.log(currentMembershipsFilled);
+		// console.log(pastMembershipsFilled);
+		// console.log(currentSupervisionsFilled);
+		// console.log(nothingToShow);
+		//
 		return {
             "currentSession": currentSession,
 			"currentMemberships": sortJsonArray(currentMemberships, "ActivityDescription"),
 			"pastMemberships":	pastMemberships,
 			"currentMembershipsFilled": currentMembershipsFilled,
 			"pastMembershipsFilled": pastMembershipsFilled,
+			"currentSupervisionsFilled": currentSupervisionsFilled,
+			"currentSupervisions": currentSupervisions,
 			"nothingToShow": nothingToShow
 		};
 	}

@@ -5,6 +5,25 @@
 			<h3>Look at {{#link-to 'all-activities'}}<a class="empty-list-link">what's available!</a>{{/link-to}}</h3>
 		</div>
 	{{else}}
+		{{#if model.currentSupervisionsFilled}}
+			<div class="highlight section-title">
+				<h2>Current Supervisions:</h2>
+			</div>
+			<div class="cyanbox group-title">
+				<h2>{{model.currentSession.SessionDescription}}</h2>
+			</div>
+			<div class="my-activity-list">
+				{{#each model.currentSupervisions as |supervisor|}}
+					{{#link-to "specific-activity" supervisor.SessionCode supervisor.ActivityCode class="well my-activity-list-item"}}
+						<img class="my-activity-list-item-img" src="{{supervisor.ActivityImage}}">
+						<dl class="membership-description">
+							<dt class="my-activity-list-item-name">{{supervisor.ActivityDescription}}</dt>
+							<dt class="my-activity-list-item-info">{{supervisor.SessionDescription}}</dt>
+						</dl>
+					{{/link-to}}
+				{{/each}}
+			</div>
+		{{/if}}
 		{{#if model.currentMembershipsFilled}}
 			<div class="highlight section-title">
 				<h2>Current Experience:</h2>
