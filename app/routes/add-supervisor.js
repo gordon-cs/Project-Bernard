@@ -7,11 +7,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(param) {
         let activity = getSync("/activities/" + param.ActivityCode, this).data;
         // Check to see if user is an admin
-        let leading = this.get('session.data.authenticated.token_data.college_role') === "god";
+        if (this.get('session.data.authenticated.token_data.college_role') !== "god") {
+            this.transitionTo("index");
+        }
         return {
             "activity": activity,
-            "sessionCode": param.SessionCode,
-            "leading": leading
+            "sessionCode": param.SessionCode
         };
     }
 });

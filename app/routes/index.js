@@ -45,9 +45,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		let currentMembershipsFilled = (currentMemberships.length !== 0);
 		let pastMembershipsFilled = (pastMemberships.length !== 0);
 		let nothingToShow = !(currentMembershipsFilled || pastMembershipsFilled);
-		console.log(currentMembershipsFilled);
-		console.log(pastMembershipsFilled);
-		console.log(nothingToShow);
 		return {
             "currentSession": currentSession,
 			"currentMemberships": sortJsonArray(currentMemberships, "ActivityDescription"),
