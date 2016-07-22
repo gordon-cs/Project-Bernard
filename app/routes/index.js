@@ -20,6 +20,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		for (let i = 0; i < allSupervisions.length; i++) {
 			allSupervisions[i].SessionCode = allSupervisions[i].SessionCode.trim();
 			allSupervisions[i].ActivityCode = allSupervisions[i].ActivityCode.trim();
+			// Get the activity image
+			allSupervisions[i].ActivityImage = getSync("/activities/" + allSupervisions[i].ActivityCode, this).data.ActivityImage;
 
 			// Set the current supervisorships
 			if (allSupervisions[i].SessionCode === currentSession.SessionCode) {
@@ -66,14 +68,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		let currentSupervisionsFilled = (currentSupervisions.length !== 0);
 		let pastSupervisionsFilled = (pastSupervisions.length !== 0);
 		let nothingToShow = !(currentMembershipsFilled || pastMembershipsFilled || currentSupervisionsFilled || pastSupervisionsFilled);
-		// Error checks
-		// console.log(currentMembershipsFilled);
-		// console.log(pastMembershipsFilled);
-		// console.log(currentSupervisionsFilled);
-		// console.log(pastSupervisionsFilled);
-		// console.log(pastSupervisions);
-		// console.log(nothingToShow);
-		//
 		return {
             "currentSession": currentSession,
 			"currentMemberships": sortJsonArray(currentMemberships, "ActivityDescription"),

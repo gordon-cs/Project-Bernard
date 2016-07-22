@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
                 if (this.get("model.leading")) {
                     // Get the student to be added by email lookup
                     let email = this.get("studentEmail");
-                    if (email == null) {
+                    if (email == null || email == "") {
                         this.set("errorMessage", "Please enter a student email");
                     }
                     else {
@@ -75,12 +75,15 @@ export default Ember.Controller.extend({
                         this.set("errorMessage", "Already added as a " + this.role.ParticipationDescription);
                     }
                 }
-                if (this.get("errorMessage") === null) {
+                if (this.get("errorMessage") == null) {
                     // Data returned back from API call
                     let response = postSync(url, data, this);
                     // If the call was successfull transition back to the activity
                     // Else set the proper error message
                     if (response.success) {
+                        this.set("studentEmail", null);
+                        this.set("role", null);
+                        this.set("comments", null);
                         this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
                             "/" + this.get("model.activity.ActivityCode"));
                     }

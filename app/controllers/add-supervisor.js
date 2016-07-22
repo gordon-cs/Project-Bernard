@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
 
             // Get the new activity supervisor by email
             let email = this.get("supervisorEmail");
-            if (email == null) {
+            if (email == null || email == "") {
                 this.set("errorMessage", "Please enter an email");
             }
             else {

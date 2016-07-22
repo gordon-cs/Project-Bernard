@@ -6,7 +6,7 @@
                     <h1 class="lead text-center">{{model.activity.ActivityDescription}}</h1>
                 </div>
                 <img class="activity-picture center-block"
-                    src={{model.activity.ActivityImage}}>
+                    src={{model.activity.ActivityImage}} alt="IMAGE NOT FOUND">
             </div>
         </div>
         <div class="col-sm-6 right-section">
@@ -22,7 +22,7 @@
                         <div class="leaders">
                             {{#each model.leaderEmails as |leader|}}
                                 <p class="activity-info-item-data">
-                                    {{leader.FirstName}} {{leader.LastName}} (<a href="mailto:{{leader.FirstName}}.{{leader.LastName}}@gordon.edu">{{leader.Email}}</a>)
+                                    {{leader.FirstName}} {{leader.LastName}} <a href="mailto:{{leader.Email}}">{{leader.Email}}</a>
                                 </p>
                             {{/each}}
                         </div>
@@ -49,6 +49,17 @@
                         <p class="detail-info">None</p>
                     {{/if}}
                 </div>
+                {{#if model.activity.ActivityBlurb}}
+                    <div class="col-sm-12 detail-item">
+                        <p class="detail-header">Description: </p>
+                        <p class="detail-info">{{model.activity.ActivityBlurb}}</p>
+                    </div>
+                {{/if}}
+                {{#if model.activity.ActivityURL}}
+                    <div class="col-sm-12 detail-item">
+                        <a class="detial-header" href={{model.activity.ActivityURL}}>Website</a>
+                    </div>
+                {{/if}}
             </div>
             {{!-- Activity Buttons --}}
             <div class="row button-row">

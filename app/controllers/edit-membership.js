@@ -11,15 +11,15 @@ export default Ember.Controller.extend({
         },
         // Function called to update a membership
         update() {
-            let comments = this.get("comments");
+            let comments = this.get("comments") || "";
             // If the comments field is left blank or returned to blank keep the old comments
-            if (typeof comments == "undefined" || comments.length == 0) {
-                comments = this.get("model.membership.Description");
-            }
-            else if (comments.length > 45) {
+            if (comments.length > 45) {
                 this.set("errorMessage", "Comment is too long. Max length 45 characters");
             }
             else {
+                if (comments == null || comments == "") {
+                    comments = this.get("model.membership.Description");
+                }
                 let roleID = this.get("role.ParticipationCode");
                 if (roleID == null) {
                     roleID = this.get("model.membership.Participation");

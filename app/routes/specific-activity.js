@@ -24,7 +24,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let supervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
         for (let i = 0; i < supervisors.length; i ++) {
             if (supervisors[i].SessionCode.trim() !== param.SessionCode) {
-                console.log("REMOVE");
                 supervisors.splice(i --, 1);
                 hasSupervisors = true;
             }

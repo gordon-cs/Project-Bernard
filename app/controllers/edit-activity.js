@@ -8,15 +8,15 @@ export default Ember.Controller.extend({
             // Get all values
             // If not entered, use previous value
             let description = this.get("description");
-            if (description == null) {
+            if (description == null || description == "") {
                 description = this.get("model.activity.ActivityBlurb");
             }
             let pageUrl = this.get("pageUrl");
-            if (pageUrl == null) {
+            if (pageUrl == null || pageUrl == "") {
                 pageUrl = this.get("model.activity.ActivityURL");
             }
             let imageUrl = this.get("imageUrl");
-            if (imageUrl == null) {
+            if (imageUrl == null || imageUrl == "") {
                 imageUrl = this.get("model.activity.ActivityImage");
             }
             let data = {
@@ -29,6 +29,9 @@ export default Ember.Controller.extend({
             console.log(data);
             let response = putSync("/activities/" + this.get("model.activity.ActivityCode"), data, this);
             if (response.success) {
+                this.set("description", null);
+                this.set("pageUrl", null);
+                this.set("imageUrl", null);
                 this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
                         "/" + this.get("model.activity.ActivityCode"));
             }
