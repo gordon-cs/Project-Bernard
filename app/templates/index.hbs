@@ -12,14 +12,14 @@
 			<div class="cyanbox group-title">
 				<h2>{{model.currentSession.SessionDescription}}</h2>
 			</div>
-			<div class="my-activity-list">
+			<div class="activity-list">
 				{{#each model.currentMemberships as |mem|}}
-					{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
-						<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
-						<dl class="membership-description">
-							<dt class="my-activity-list-item-name">{{mem.ActivityDescription}}</dt>
-							<dt class="my-activity-list-item-info">{{mem.SessionDescription}}</dt>
-							<dt class="my-activity-list-item-info">{{mem.ParticipationDescription}}</dt>
+					{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="activity-list-item"}}
+						<img class="activity-list-item-img" src={{mem.ActivityImage}}>
+						<dl class="activity-list-item-details">
+							<dt class="activity-list-item-title">{{mem.ActivityDescription}}</dt>
+							<dt class="activity-list-item-info">{{mem.SessionDescription}}</dt>
+							<dt class="activity-list-item-info">{{mem.ParticipationDescription}}</dt>
 						</dl>
 					{{/link-to}}
 				{{/each}}
@@ -33,15 +33,15 @@
 				<div class="cyanbox group-title">
 					<h2>{{memSession.session}}</h2>
 				</div>
-				<div class="my-activity-list">
+				<div class="activity-list">
 					{{#each memSession.activities as |mem|}}
-						{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="well my-activity-list-item"}}
-							<img class="my-activity-list-item-img" src={{mem.ActivityImage}}>
-							<div class="membership-description">
+						{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="activity-list-item"}}
+							<img class="activity-list-item-img" src={{mem.ActivityImage}}>
+							<div class="activity-list-item-details">
 								<dl>
-									<dt class="my-activity-list-item-name">{{mem.ActivityDescription}}</dt>
-									<dt class="my-activity-list-item-info">{{mem.SessionDescription}}</dt>
-									<dt class="my-activity-list-item-info">{{mem.ParticipationDescription}}</dt>
+									<dt class="activity-list-item-title">{{mem.ActivityDescription}}</dt>
+									<dt class="activity-list-item-info">{{mem.SessionDescription}}</dt>
+									<dt class="activity-list-item-info">{{mem.ParticipationDescription}}</dt>
 								</dl>
 							</div>
 						{{/link-to}}

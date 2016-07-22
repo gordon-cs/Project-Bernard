@@ -4,6 +4,7 @@
 
  - Colors
  - Global Styles
+ - Activity List
  - Colored Boxes
  - Buttons
  - Ember Power Select
@@ -37,6 +38,80 @@
     --light-gray: #EBEAEA;
     --mid-gray: #6F6F6F;
     --dark-gray: #252525;
+}
+
+/* -----------------------------
+    Activity List
+------------------------------- */
+
+.activity-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    margin-top: 15px;
+}
+.activity-list-item {
+    text-align: center;
+    padding: 0px !important;
+    display: block;
+    background-color: white;
+    margin: 2%;
+    width: 46%;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+}
+.activity-list-item:hover {
+    background-color: var(--green) !important;
+    -o-transition: .3s !important;
+    -ms-transition: .3s !important;
+    -moz-transition: .3s !important;
+    -webkit-transition: .3s !important;
+    transition: .3s !important;
+}
+.activity-list-item-img {
+    display: block;
+    width: 100%;
+    min-height: 100%;
+}
+.activity-list-item-details {
+    display: block;
+    font-size: 11px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.activity-list-item-title {
+    font-weight: bold;
+}
+.activity-list-item-info {
+    font-weight: normal;
+    margin-top: 5px;
+}
+.activity-list > a:hover {
+    text-decoration: none;
+}
+@media only screen and (min-width: 768px) {
+    .activity-list-item {
+        width: 23%;
+        margin: 1%;
+    }
+    .activity-list {
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .activity-list-item {
+        width: 18%;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .activity-list-item {
+        width: 14.6%;
+    }
 }
 
 /* -----------------------------

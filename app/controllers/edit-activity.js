@@ -8,15 +8,15 @@ export default Ember.Controller.extend({
             // Get all values
             // If not entered, use previous value
             let description = this.get("description");
-            if (description == null) {
+            if (description == null || description == "") {
                 description = this.get("model.activity.ActivityBlurb");
             }
             let pageUrl = this.get("pageUrl");
-            if (pageUrl == null) {
+            if (pageUrl == null || pageUrl == "") {
                 pageUrl = this.get("model.activity.ActivityURL");
             }
             let imageUrl = this.get("imageUrl");
-            if (imageUrl == null) {
+            if (imageUrl == null || imageUrl == "") {
                 imageUrl = this.get("model.activity.ActivityImage");
             }
             let data = {
