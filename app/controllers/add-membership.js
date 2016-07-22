@@ -80,6 +80,9 @@ export default Ember.Controller.extend({
                     // If the call was successfull transition back to the activity
                     // Else set the proper error message
                     if (response.success) {
+                        this.set("studentEmail", null);
+                        this.set("role", null);
+                        this.set("comments", null);
                         this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
                             "/" + this.get("model.activity.ActivityCode"));
                     }

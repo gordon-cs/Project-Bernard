@@ -29,6 +29,9 @@ export default Ember.Controller.extend({
             console.log(data);
             let response = putSync("/activities/" + this.get("model.activity.ActivityCode"), data, this);
             if (response.success) {
+                this.set("description", null);
+                this.set("pageUrl", null);
+                this.set("imageUrl", null);
                 this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
                         "/" + this.get("model.activity.ActivityCode"));
             }

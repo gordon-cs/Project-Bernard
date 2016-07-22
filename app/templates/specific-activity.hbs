@@ -6,7 +6,7 @@
                     <h1 class="lead text-center">{{model.activity.ActivityDescription}}</h1>
                 </div>
                 <img class="activity-picture center-block"
-                    src={{model.activity.ActivityImage}}>
+                    src={{model.activity.ActivityImage}} alt="IMAGE NOT FOUND">
             </div>
         </div>
         <div class="col-sm-6 right-section">
@@ -39,6 +39,18 @@
                         {{/each}}
                     </div>
                 </div>
+                {{#if model.activity.ActivityURL}}
+                    <div class="col-sm-12 detail-item">
+                        <p class="detail-header">Website: </p>
+                        <a class="detial-info" href={{model.activity.ActivityURL}}>{{model.activity.ActivityURL}}</a>
+                    </div>
+                {{/if}}
+                {{#if model.activity.ActivityBlurb}}
+                    <div class="col-sm-12 detail-item">
+                        <p class="detail-header">Description: </p>
+                        <p class="detail-info">{{model.activity.ActivityBlurb}}</p>
+                    </div>
+                {{/if}}
             </div>
             {{!-- Activity Buttons --}}
             <div class="row button-row">

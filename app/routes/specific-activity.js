@@ -22,7 +22,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let supervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
         for (let i = 0; i < supervisors.length; i ++) {
             if (supervisors[i].SessionCode.trim() !== param.SessionCode) {
-                console.log("REMOVE");
                 supervisors.splice(i --, 1);
             }
             else if (supervisors[i].IDNumber == this.get("session.data.authenticated.token_data.id")) {
@@ -32,7 +31,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Get leaders for session and check if user is a leader
         let leaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
-        console.log(leaders);
         for (var i = 0; i < leaders.length; i ++) {
             if (leaders[i].SessionCode !== param.SessionCode) {
                 leaders.splice(i --, 1);
@@ -95,6 +93,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             }
         }
+        console.log(activity);
         return {
             // Persmissions
             "leading": leading,
