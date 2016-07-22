@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
     actions: {
         authenticate() {
             let credentials = {
-                "username": this.get("identification"),
+                "username": this.get("identification").replace("@gordon.edu",""),
                 "password": this.get("password")
             };
             this.get("session").authenticate("authenticator:gordon-authenticator", credentials).catch((reason) => {
