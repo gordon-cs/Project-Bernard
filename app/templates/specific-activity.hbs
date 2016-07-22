@@ -31,7 +31,7 @@
                     <div class="leaders">
                         {{#each model.supervisors as |supervisor|}}
                             <p class="activity-info-item-data">
-                                {{#if model.leading}}
+                                {{#if model.god}}
                                     <button type="button" class="btn btn-sm button-red sup-btn" {{action "removeSupervisor" supervisor}}>Remove</button>
                                 {{/if}}
                                 {{supervisor.FirstName}} {{supervisor.LastName}}
@@ -84,7 +84,7 @@
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Role</th>
+                                <th>Participation</th>
                                 {{#if model.leading}}
                                 <th>Comments</th>
                                 {{/if}}
@@ -123,14 +123,14 @@
         <div class="row table-row">
             <div class="col-sm-12">
                 <h2>Membership Requests</h2>
-                {{#if requestsFilled}}
+                {{#if model.requestsFilled}}
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Participation</th>
-                                    <th>Session</th>
+                                    <th>Email</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -139,7 +139,7 @@
                                     <tr>
                                         <td> {{req.FirstName}} {{req.LastName}} </td>
                                         <td> {{req.ParticipationDescription}} </td>
-                                        <td> {{req.SessionDescription}} </td>
+                                        <td> <a href="mailto:{{req.Email}}">{{req.Email}}</a> </td>
                                         <td>
                                             <button {{action "approveRequest" req}} class="btn button-darkgreen">Approve</button>
                                             <button {{action "denyRequest" req}} class="btn button-red">Deny</button>

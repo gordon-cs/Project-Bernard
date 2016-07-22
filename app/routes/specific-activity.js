@@ -12,9 +12,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let session = getSync("/sessions/" + param.SessionCode, this).data;
         let leading = false;
 
-        // Get leaders for session and check if user is a leader or admin
-        let allLeaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
-        let leaders = [];
+        // If the logged in user has admin rights give them to him
+        let godMode = this.get('session.data.authenticated.token_data.college_role') === "god";
+        if (godMode) {
+            leading = true;
+        }
 
         // Get supervisors for activity
         let supervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
@@ -28,34 +30,31 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         }
 
-        // Get leader email information
-        let getLeaders = getSync("/emails/activity/" + param.ActivityCode + "/leaders", this).data;
-        let leaderEmails = [];
-        for (var i = 0; i < getLeaders.length; i++) {
-            leaderEmails.push(getLeaders[i]);
-        }
-
-        // If the logged in user has admin rights give them to him
-        let godMode = this.get('session.data.authenticated.token_data.college_role') === "god";
-        if (godMode) {
-            leading = true;
-        }
-        for (var i = 0; i < allLeaders.length; i ++) {
-            if (allLeaders[i].SessionCode === param.SessionCode) {
-                leaders.push(allLeaders[i]);
-                if (allLeaders[i].IDNumber == IDNumber) {
-                    leading = true;
-                }
+        // Get leaders for session and check if user is a leader
+        let leaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
+        for (var i = 0; i < leaders.length; i ++) {
+            if (leaders[i].SessionCode !== param.SessionCode) {
+                leader.splice(i --, 1);
+            }
+            else if (leaders[i].IDNumber == IDNumber) {
+                leading = true;
             }
         }
+
+        // Get leader email information
+        let leaderEmails = getSync("/emails/activity/" + param.ActivityCode + "/leaders", this).data;
+
         // If user is a leader, get all membership requests and emial list
         let requests = [];
         let emails = "";
         if (leading) {
-            let allRequests = getSync("/requests/activity/" + param.ActivityCode, this).data;
-            for (let i = 0; i < allRequests.length; i ++) {
-                if (allRequests[i].RequestApproved === "Pending" && allRequests[i].SessionCode === param.SessionCode) {
-                    requests.push(allRequests[i]);
+            requests = getSync("/requests/activity/" + param.ActivityCode, this).data;
+            for (let i = 0; i < requests.length; i ++) {
+                if (requests[i].RequestApproved !== "Pending" || requests[i].SessionCode !== param.SessionCode) {
+                    requests.splice(i --, 1);
+                }
+                else {
+                    requests[i].Email = getSync("/students/" + requests[i].IDNumber, this).data.StudentEmail;
                 }
             }
             let emailArray = getSync("/emails/activity/" + param.ActivityCode + "/session/" + param.SessionCode, this).data;
@@ -66,7 +65,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             }
         }
-        //Get current memberships, of membership IDs of user, following boolean and corresponding membership ID
+
+        // Get current memberships, membership IDs of user, wether user is following and corresponding membership ID
         let memberships = [];
         let rosterMemberships = [];
         let allMyMembershipIDs = [];
