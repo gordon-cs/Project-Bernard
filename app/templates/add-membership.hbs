@@ -1,4 +1,4 @@
-<div id="add-box" class="graybox container">
+<div id="form-box" class="graybox container">
     {{#if model.leading}}
         <h1>
             Add Person To - {{model.activity.ActivityDescription}}
@@ -24,9 +24,9 @@
         {{/power-select}}
         {{input value=comments class="form-control" placeholder="Comment (optional)"}}
         {{#if model.leading}}
-            <button type="submit" class="btn button-navy add-button" {{action "post"}}>Add Member</button>
+            <button type="submit" class="btn button-navy form-button" {{action "post"}}>Add Member</button>
         {{else}}
-            <button type="submit" class="btn button-navy add-button" {{action "post"}}>Request Membership</button>
+            <button type="submit" class="btn button-navy form-button" {{action "post"}}>Request Membership</button>
         {{/if}}
         {{#if errorMessage}}
             <p id="error-message">{{errorMessage}}</p>

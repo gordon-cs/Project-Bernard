@@ -4,12 +4,10 @@ import getSync from "gordon360/utils/get-sync";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(param) {
-        let roles = getSync("/participations", this).data;
-        let membership = getSync("/memberships/" + param.MembershipID, this).data;
-        // Check if user has permission
+        // Check if user has persmission
         let leading = this.get("session.data.authenticated.token_data.college_role") === "god";
         if (!leading) {
-            let supervisors = getSync("/supervisors/activity/" + membership.ActivityCode, this).data;
+            let supervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
             for (let i = 0; i < supervisors.length; i ++) {
                 if (supervisors[i].IDNumber == this.get("session.data.authenticated.token_data.id")) {
                     leading = true;
@@ -17,8 +15,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         }
         if (!leading) {
-            let leaders = getSync("/memberships/activity/" + membership.ActivityCode + "/leaders", this).data;
-            console.log(leaders);
+            let leaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
             for (let i = 0; i < leaders.length; i ++) {
                 if (leaders[i].IDNumber == this.get("session.data.authenticated.token_data.id")) {
                     leading = true;
@@ -29,9 +26,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         if (!leading) {
             this.transitionTo("index");
         }
+        let activity = getSync("/activities/" + param.ActivityCode, this).data;
+        console.log(activity);
         return {
-            "roles": roles,
-            "membership": membership
-        };
+            "activity": activity,
+            "sessionCode": param.SessionCode
+        }
     }
 });
