@@ -1,6 +1,7 @@
 import Ember from "ember";
 import isLeader from "gordon360/utils/is-leader";
 import getSync from "gordon360/utils/get-sync";
+import deleteSync from "gordon360/utils/delete-sync";
 import sortJsonArray from "gordon360/utils/sort-json-array";
 
 export default Ember.Controller.extend({
@@ -12,6 +13,12 @@ export default Ember.Controller.extend({
         logout() {
             this.get("session").invalidate();
             this.set("requests", null);
+        },
+        deleteRequest(requestID) {
+          let response = deleteSync("/requests/" + requestID, this);
+          console.log(response);
+          window.location.reload(true);
+
         }
     },
     // Get requests a user may have to approve or deny
