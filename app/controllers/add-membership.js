@@ -45,8 +45,8 @@ export default Ember.Controller.extend({
                             "SESS_CDE": this.get("model.sessionCode"),
                             "ID_NUM": student.GordonID,
                             "PART_CDE": this.get("role.ParticipationCode"),
-                            "BEGIN_DTE": new Date().toLocaleString(),
-                            "END_DTE": new Date().toLocaleString(),
+                            "BEGIN_DTE": new Date().toJSON(),
+                            "END_DTE": new Date().toJSON(),
                             "COMMENT_TXT": this.get("comments")
                         };
                         // the new URL extension
@@ -61,7 +61,7 @@ export default Ember.Controller.extend({
                         "SESS_CDE": this.get("model.sessionCode"),
                         "ID_NUM": this.get("session.data.authenticated.token_data.id"),
                         "PART_CDE": this.get("role.ParticipationCode"),
-                        "DATE_SENT": new Date().toLocaleString(),
+                        "DATE_SENT": new Date().toJSON(),
                         "COMMENT_TXT": this.get("comments"),
                         "APPROVED": "Pending"
                     };
