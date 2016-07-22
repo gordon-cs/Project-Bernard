@@ -31,7 +31,7 @@
                     <div class="leaders">
                         {{#each model.supervisors as |supervisor|}}
                             <p class="activity-info-item-data">
-                                {{#if model.god}}
+                                {{#if model.godMode}}
                                     <button type="button" class="btn btn-sm button-red sup-btn" {{action "removeSupervisor" supervisor}}>Remove</button>
                                 {{/if}}
                                 {{supervisor.FirstName}} {{supervisor.LastName}}

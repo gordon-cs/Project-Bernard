@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
             this.set("errorMessage", null);
             let data = {};
             let url = null;
-            console.log(this.get("comments").length);
+            // console.log(this.get("comments").length);
             if (this.get("role.ParticipationCode") == null) {
                 this.set("errorMessage", "Please enter a participation level");
             }
