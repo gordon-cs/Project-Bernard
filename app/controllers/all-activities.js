@@ -11,6 +11,7 @@ export default Ember.Controller.extend({
             let activities = sortJsonArray(response.data, "ActivityDescription");
             this.set("model.activities", activities);
             this.set("model.activitiesShown", activities);
+            this.set("model.activitiesFilled", (activities.length > 0));
             this.set("model.currentSession", session);
         },
         // Filters list of activities shown when user types in the search bar

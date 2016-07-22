@@ -6,7 +6,8 @@
     margin-right: auto;
     color: white;
 }
-#edit-box > form > input {
+#edit-box > form > input,
+#edit-box > form > .ember-power-select-trigger {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: auto;

@@ -16,7 +16,9 @@
                                         {{#each requestsRecieved as |req|}}
                                             <li>
                                                 {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                                    {{req.FirstName}} {{req.LastName}} - {{req.ActivityDescription}} - {{req.DiffDays}}
+                                                    <div class="notification-name">{{req.FirstName}} {{req.LastName}}</div>
+                                                    <div class="notification-info">{{req.ActivityDescription}}</div>
+                                                    <div class="notification-info">{{req.DiffDays}}</div>
                                                 {{/link-to}}
                                             </li>
                                         {{/each}}
@@ -26,7 +28,9 @@
                                         {{#each requestsSent as |req|}}
                                             <li>
                                                 {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                                    {{req.ActivityDescription}} - {{req.RequestApproved}} - {{req.DiffDays}}
+                                                    <div class="notification-name">{{req.ActivityDescription}}</div>
+                                                    <div class="notification-info">{{req.RequestApproved}}</div>
+                                                    <div class="notification-info">{{req.DiffDays}}</div>
                                                 {{/link-to}}
                                             </li>
                                         {{/each}}
@@ -66,6 +70,6 @@
     </div>
 </div>
 
-<div class="col-sm-12">
+<div id="main-page-container" class="col-sm-12">
     {{outlet}}
 </div>

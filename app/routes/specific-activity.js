@@ -10,81 +10,112 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let IDNumber = this.get("session.data.authenticated.token_data.id");
         let activity = getSync("/activities/" + param.ActivityCode, this).data;
         let session = getSync("/sessions/" + param.SessionCode, this).data;
-
-        // Get leaders for session and check if user is a leader or admin
-        let allLeaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
-        let leaders = [];
-
-        // Get supervisors for activity
-        let allSupervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
-
-        // Get leader email information
-        let getLeaders = getSync("/emails/activity/" + param.ActivityCode + "/leaders", this).data;
-        let leaderEmails = [];
-        for (var i = 0; i < getLeaders.length; i++) {
-            leaderEmails.push(getLeaders[i]);
-        }
+        let leading = false;
 
         // If the logged in user has admin rights give them to him
-        let leading = false;
         let godMode = this.get('session.data.authenticated.token_data.college_role') === "god";
         if (godMode) {
             leading = true;
         }
-        for (var i = 0; i < allLeaders.length; i ++) {
-            if (allLeaders[i].SessionCode === param.SessionCode) {
-                leaders.push(allLeaders[i]);
-                if (allLeaders[i].IDNumber == IDNumber) {
-                    leading = true;
+
+        // Get supervisors for activity
+        let supervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
+        for (let i = 0; i < supervisors.length; i ++) {
+            if (supervisors[i].SessionCode.trim() !== param.SessionCode) {
+                console.log("REMOVE");
+                supervisors.splice(i --, 1);
+            }
+            else if (supervisors[i].IDNumber == this.get("session.data.authenticated.token_data.id")) {
+                leading = true;
+            }
+        }
+
+        // Get leaders for session and check if user is a leader
+        let leaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
+        for (var i = 0; i < leaders.length; i ++) {
+            if (leaders[i].SessionCode !== param.SessionCode) {
+                leader.splice(i --, 1);
+            }
+            else if (leaders[i].IDNumber == IDNumber) {
+                leading = true;
+            }
+        }
+
+        // Get leader email information
+        let leaderEmails = getSync("/emails/activity/" + param.ActivityCode + "/leaders", this).data;
+
+        // If user is a leader, get all membership requests and emial list
+        let requests = [];
+        let emails = "";
+        if (leading) {
+            requests = getSync("/requests/activity/" + param.ActivityCode, this).data;
+            for (let i = 0; i < requests.length; i ++) {
+                if (requests[i].RequestApproved !== "Pending" || requests[i].SessionCode !== param.SessionCode) {
+                    requests.splice(i --, 1);
+                }
+                else {
+                    requests[i].Email = getSync("/students/" + requests[i].IDNumber, this).data.StudentEmail;
+                }
+            }
+            let emailArray = getSync("/emails/activity/" + param.ActivityCode + "/session/" + param.SessionCode, this).data;
+            for (let i = 0; i < emailArray.length; i ++) {
+                emails += emailArray[i].Email;
+                if (i !== emailArray.length - 1) {
+                    emails += ",";
                 }
             }
         }
-        //Get current memberships, of membership IDs of user, following boolean and corresponding membership ID
-        let allMemberships = getSync("/memberships/activity/" + param.ActivityCode, this).data;
+
+        // Get current memberships, membership IDs of user, wether user is following and corresponding membership ID
         let memberships = [];
         let rosterMemberships = [];
         let allMyMembershipIDs = [];
         let membershipID;
         let following = false;
-        for (var i = 0; i < allMemberships.length; i ++) {
-            if (allMemberships[i].SessionCode === param.SessionCode) {
-                memberships.push(allMemberships[i]);
-                if (allMemberships[i].IDNumber == IDNumber) {
-                    allMyMembershipIDs.push(allMemberships[i].MembershipID);
-                    if (allMemberships[i].Participation === "GUEST") {
-                        membershipID = allMemberships[i].MembershipID;
-                        following = true;
+        let response = getSync("/memberships/activity/" + param.ActivityCode, this);
+        if (response.success) {
+            memberships = response.data;
+            for (var i = 0; i < memberships.length; i ++) {
+                let mem = memberships[i];
+                if (mem.SessionCode === param.SessionCode) {
+                    if (mem.IDNumber == IDNumber) {
+                        allMyMembershipIDs.push(mem.MembershipID);
+                        if (mem.Participation === "GUEST") {
+                            membershipID = mem.MembershipID;
+                            following = true;
+                        }
+                    }
+                    if (mem.Participation !== "GUEST" || leading) {
+                        rosterMemberships.push(mem);
                     }
                 }
-                if (allMemberships[i].Participation !== "GUEST") {
-                    rosterMemberships.push(allMemberships[i]);
-                }
-            }
-        }
-        // If user is a leader, get all membership requests
-        let requests = [];
-        if (leading) {
-            let allRequests = getSync("/requests/activity/" + param.ActivityCode, this).data;
-            for (let i = 0; i < allRequests.length; i ++) {
-                if (allRequests[i].RequestApproved === "Pending" && allRequests[i].SessionCode === param.SessionCode) {
-                    requests.push(allRequests[i]);
+                else {
+                    memberships.splice(i --, 1);
                 }
             }
         }
         return {
-            "following": following,
+            // Persmissions
             "leading": leading,
-            "membershipID": membershipID,
-            "leaders": leaders,
+            "godMode": godMode,
+            // Activity
             "activity": activity,
             "session": session,
+            "supervisors": supervisors,
+            // Memberships
+            "leaders": leaders,
             "memberships": memberships,
             "rosterMemberships": sortJsonArray(rosterMemberships, "LastName"),
-            "allMyMembershipIDs": allMyMembershipIDs,
+            "rosterFilled": (rosterMemberships.length > 0),
             "leaderEmails": leaderEmails,
-            "godMode": godMode,
-            "supervisors": allSupervisors,
-            "requests": sortJsonArray(requests, "LastName")
+            "emails": emails,
+            // User
+            "following": following,
+            "membershipID": membershipID,
+            "allMyMembershipIDs": allMyMembershipIDs,
+            // Misc
+            "requests": sortJsonArray(requests, "LastName"),
+            "requestsFilled": (requests.length > 0)
         };
     }
 });

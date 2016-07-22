@@ -20,12 +20,18 @@
 			{{input value=searchValue key-up=(action "filterActivities") placeholder="Search Activities" class="form-control"}}
 		</div>
 	</div>
-	<div class="activity-list">
-		{{#each model.activitiesShown as |activity|}}
-			{{#link-to "specific-activity" model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
-					<img class="activity-list-item-img" src={{activity.ActivityImage}}>
-					<p class="activity-list-item-name">{{activity.ActivityDescription}}</p>
-			{{/link-to}}
-		{{/each}}
-	</div>
+    {{#if model.activitiesFilled}}
+    	<div class="activity-list">
+    		{{#each model.activitiesShown as |activity|}}
+    			{{#link-to "specific-activity" model.currentSession.SessionCode activity.ActivityCode class="well activity-list-item"}}
+    					<img class="activity-list-item-img" src={{activity.ActivityImage}}>
+    					<p class="activity-list-item-name">{{activity.ActivityDescription}}</p>
+    			{{/link-to}}
+    		{{/each}}
+    	</div>
+    {{else}}
+		<div class="empty-list-reminder orangebox">
+    		<h2>There are no activities for this session</h2>
+		</div>
+    {{/if}}
 </div>

@@ -5,7 +5,7 @@
                 <div class="activity-name">
                     <h1 class="lead text-center">{{model.activity.ActivityDescription}}</h1>
                 </div>
-                <img class="activity-picture center-block img-circle"
+                <img class="activity-picture center-block"
                     src={{model.activity.ActivityImage}}>
             </div>
         </div>
@@ -47,14 +47,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 detail-item">
-                            <p class="detail-header">Times: </p>
-                            <p class="detail-info">{{model.activity.MeetingDay}} {{model.activity.MeetingTime}}</p>
-                        </div>
+                </div>
+                <div class="col-sm-12 detail-item">
+                    <p class="detail-header">Supervisors: </p>
+                    <div class="leaders">
+                        {{#each model.supervisors as |supervisor|}}
+                            <p class="activity-info-item-data">
+                                {{#if model.god}}
+                                    <button type="button" class="btn btn-sm button-red sup-btn" {{action "removeSupervisor" supervisor}}>Remove</button>
+                                {{/if}}
+                                {{supervisor.FirstName}} {{supervisor.LastName}}
+                            </p>
+                        {{/each}}
                     </div>
                 </div>
             </div>
+            {{!-- Activity Buttons --}}
             <div class="row button-row">
                 {{#if model.godMode}}
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
@@ -63,92 +71,109 @@
                     {{#link-to 'add-supervisor' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Add Supervisor</button>
                     {{/link-to}}
-                    {{else if model.leading}}
-                        {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
-                            <button class="btn button-navy">Add Member</button>
-                        {{/link-to}}
+                    <a href="mailto:{{model.emails}}">
+                        <button class="btn button-navy">Send Email to Group</button>
+                    </a>
+                {{else if model.leading}}
+                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
+                        <button class="btn button-navy">Add Member</button>
+                    {{/link-to}}
+                    <a href="mailto:{{model.emails}}">
+                        <button class="btn button-navy">Send Email to Group</button>
+                    </a>
+                {{else}}
+                    {{#if model.following}}
+                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
                     {{else}}
-                        {{#if model.following}}
-                            <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
-                        {{else}}
-                            <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
-                        {{/if}}
-                        {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
-                            <button type="button" class="btn button-navy">Join</button>
-                        {{/link-to}}
+                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
+                    {{/if}}
+                    {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
+                        <button type="button" class="btn button-navy">Join</button>
+                    {{/link-to}}
                 {{/if}}
             </div>
         </div>
     </div>
+    {{!-- Activity Tables --}}
+    {{!-- Members --}}
     <div class="row table-row">
         <div class="col-sm-12">
             <h2>Current Activity Roster</h2>
-            <div class="table-responsive">
-              <table class="table">
-                  <thead>
-                      <tr>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Role</th>
-                          {{#if model.leading}}
-                            <th>Comments</th>
-                          {{/if}}
-                          <th>Options</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {{#each model.rosterMemberships as |mems|}}
-                      <tr>
-                          <td> {{mems.FirstName}} </td>
-                          <td> {{mems.LastName}} </td>
-                          <td> {{mems.ParticipationDescription}} </td>
-                          {{#if model.leading}}
-                            <td class="comments-table-data">{{mems.Description}}</td>
-                            <td>
-                                {{#link-to 'edit-membership' mems.MembershipID}}
-                                    <button class="btn button-navy roster-button">Edit</button>
-                                {{/link-to}}
-                                <button {{action "removePerson" mems}} class="btn button-red roster-button">Remove</button>
-                            </td>
-                            {{else}}
-                                <td></td>
-                          {{/if}}
-                      </tr>
-                      {{/each}}
-                  </tbody>
-              </table>
-          </div>
-        </div>
-    </div>
-    {{#if model.leading}}
-        <div class="row table-row">
-            <div class="col-sm-12">
-                <h2>Membership Requests</h2>
+            {{#if model.rosterFilled}}
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Participation</th>
-                                <th>Session</th>
+                                {{#if model.leading}}
+                                <th>Comments</th>
+                                {{/if}}
                                 <th>Options</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each model.requests as |req|}}
+                            {{#each model.rosterMemberships as |mem|}}
                                 <tr>
-                                    <td> {{req.FirstName}} {{req.LastName}} </td>
-                                    <td> {{req.ParticipationDescription}} </td>
-                                    <td> {{req.SessionDescription}} </td>
-                                    <td>
-                                        <button {{action "approveRequest" req}} class="btn button-darkgreen">Approve</button>
-                                        <button {{action "denyRequest" req}} class="btn button-red">Deny</button>
-                                    </td>
+                                    <td> {{mem.FirstName}} </td>
+                                    <td> {{mem.LastName}} </td>
+                                    <td> {{mem.ParticipationDescription}} </td>
+                                    {{#if model.leading}}
+                                        <td class="comments-table-data">{{mem.Description}}</td>
+                                        <td>
+                                        {{#link-to 'edit-membership' mem.MembershipID}}
+                                        <button class="btn button-navy roster-button">Edit</button>
+                                        {{/link-to}}
+                                        <button {{action "removePerson" mem}} class="btn button-red roster-button">Remove</button>
+                                        </td>
+                                    {{else}}
+                                        <td></td>
+                                    {{/if}}
                                 </tr>
                             {{/each}}
                         </tbody>
                     </table>
                 </div>
+            {{else}}
+                <p class="empty-table-reminder">There are no members here</p>
+            {{/if}}
+        </div>
+    </div>
+    {{#if model.leading}}
+        {{!-- Membership Requests --}}
+        <div class="row table-row">
+            <div class="col-sm-12">
+                <h2>Membership Requests</h2>
+                {{#if model.requestsFilled}}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Participation</th>
+                                    <th>Email</th>
+                                    <th>Options</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each model.requests as |req|}}
+                                    <tr>
+                                        <td> {{req.FirstName}} {{req.LastName}} </td>
+                                        <td> {{req.ParticipationDescription}} </td>
+                                        <td> <a href="mailto:{{req.Email}}">{{req.Email}}</a> </td>
+                                        <td>
+                                            <button {{action "approveRequest" req}} class="btn button-darkgreen">Approve</button>
+                                            <button {{action "denyRequest" req}} class="btn button-red">Deny</button>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                {{else}}
+                    <p class="empty-table-reminder">There are no pending requests</p>
+                {{/if}}
             </div>
         </div>
     {{/if}}

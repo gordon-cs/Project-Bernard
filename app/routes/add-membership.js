@@ -14,12 +14,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 i --;
             }
         }
-        // Check if user is a leader or admin
+        // Check if user is a leader, supervisor or admin
         let leaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
         let leading = this.get('session.data.authenticated.token_data.college_role') === "god";
         let IDNumber = this.get("session.data.authenticated.token_data.id");
         for (let i = 0; i < leaders.length; i ++) {
             if (leaders[i].SessionCode == param.SessionCode && leaders[i].IDNumber == IDNumber) {
+                leading = true;
+            }
+        }
+        let supervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
+        for (let i = 0; i < supervisors.length; i ++) {
+            if (supervisors[i].IDNumber == this.get("session.data.authenticated.token_data.id")) {
                 leading = true;
             }
         }
