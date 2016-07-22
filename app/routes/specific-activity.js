@@ -11,6 +11,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let activity = getSync("/activities/" + param.ActivityCode, this).data;
         let session = getSync("/sessions/" + param.SessionCode, this).data;
         let leading = false;
+        let hasLeaders = false;
+        let hasSupervisors = false;
 
         // If the logged in user has admin rights give them to him
         let godMode = this.get('session.data.authenticated.token_data.college_role') === "god";
@@ -23,9 +25,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         for (let i = 0; i < supervisors.length; i ++) {
             if (supervisors[i].SessionCode.trim() !== param.SessionCode) {
                 supervisors.splice(i --, 1);
+                hasSupervisors = true;
             }
             else if (supervisors[i].IDNumber == this.get("session.data.authenticated.token_data.id")) {
                 leading = true;
+                hasSupervisors = true;
             }
         }
 
@@ -34,9 +38,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         for (var i = 0; i < leaders.length; i ++) {
             if (leaders[i].SessionCode !== param.SessionCode) {
                 leaders.splice(i --, 1);
+                hasLeaders = true;
             }
             else if (leaders[i].IDNumber == IDNumber) {
                 leading = true;
+                hasLeaders = true;
             }
         }
 
@@ -93,7 +99,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             }
         }
-        console.log(activity);
         return {
             // Persmissions
             "leading": leading,
@@ -115,6 +120,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "allMyMembershipIDs": allMyMembershipIDs,
             // Misc
             "requests": sortJsonArray(requests, "LastName"),
+            "hasLeaders": hasLeaders,
+            "hasSupervisors": hasSupervisors,
             "requestsFilled": (requests.length > 0)
         };
     }

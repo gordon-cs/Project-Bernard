@@ -5,6 +5,46 @@
 			<h3>Look at {{#link-to 'all-activities'}}<a class="empty-list-link">what's available!</a>{{/link-to}}</h3>
 		</div>
 	{{else}}
+		{{#if model.currentSupervisionsFilled}}
+			<div class="highlight section-title">
+				<h2>Activities Currently Advised:</h2>
+			</div>
+			<div class="cyanbox group-title">
+				<h2>{{model.currentSession.SessionDescription}}</h2>
+			</div>
+			<div class="activity-list">
+				{{#each model.currentSupervisions as |supervisor|}}
+					{{#link-to "specific-activity" supervisor.SessionCode supervisor.ActivityCode class="activity-list-item"}}
+						<img class="activity-list-item-img" src="{{supervisor.ActivityImage}}">
+						<dl class="activity-list-item-details">
+							<dt class="activity-list-item-title">{{supervisor.ActivityDescription}}</dt>
+							<dt class="activity-list-item-info">{{supervisor.SessionDescription}}</dt>
+						</dl>
+					{{/link-to}}
+				{{/each}}
+			</div>
+		{{/if}}
+
+		{{#if model.pastSupervisionsFilled}}
+			<div class="highlight section-title">
+				<h2>Activities Previously Advised:</h2>
+			</div>
+			<div class="cyanbox group-title">
+				<h2>All Past Sessions</h2>
+			</div>
+			<div class="activity-list">
+				{{#each model.pastSupervisions as |supervisor|}}
+					{{#link-to "specific-activity" supervisor.SessionCode supervisor.ActivityCode class="activity-list-item"}}
+						<img class="activity-list-item-img" src="{{supervisor.ActivityImage}}">
+						<dl class="activity-list-item-details">
+							<dt class="activity-list-item-name">{{supervisor.ActivityDescription}}</dt>
+							<dt class="activity-list-item-info">{{supervisor.SessionDescription}}</dt>
+						</dl>
+					{{/link-to}}
+				{{/each}}
+			</div>
+		{{/if}}
+
 		{{#if model.currentMembershipsFilled}}
 			<div class="highlight section-title">
 				<h2>Current Experience:</h2>
@@ -25,6 +65,7 @@
 				{{/each}}
 			</div>
 		{{/if}}
+
 		{{#if model.pastMembershipsFilled}}
 			<div class="highlight section-title">
 				<h2>Past Experience:</h2>

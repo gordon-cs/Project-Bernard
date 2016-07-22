@@ -15,11 +15,12 @@ export default Ember.Controller.extend({
             this.set("errorMessage", null);
             let data = {};
             let url = null;
-            console.log(this.get("comments").length);
+            let comments = this.get("comments") || "";
+
             if (this.get("role.ParticipationCode") == null) {
                 this.set("errorMessage", "Please enter a participation level");
             }
-            else if (this.get("comments").length > 45) {
+            else if (comments.length > 45) {
                 this.set("errorMessage", "Comment is too long. Max length 45 characters");
             }
             else {
@@ -47,7 +48,7 @@ export default Ember.Controller.extend({
                             "PART_CDE": this.get("role.ParticipationCode"),
                             "BEGIN_DTE": new Date().toJSON(),
                             "END_DTE": new Date().toJSON(),
-                            "COMMENT_TXT": this.get("comments")
+                            "COMMENT_TXT": comments
                         };
                         // the new URL extension
                         url = "/memberships";
