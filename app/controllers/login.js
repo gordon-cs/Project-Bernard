@@ -4,15 +4,9 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {
         authenticate() {
-            // Remove '@gordon.edu' if appended to username
-            var username = this.get("identification");
-            let index = username.indexOf("@gordon.edu");
-            if (index !== -1) {
-                username = username.slice(0, index);
-            }
             // Set credentials
             let credentials = {
-                "username": username,
+                "username": this.get("identification").replace("@gordon.edu",""),
                 "password": this.get("password")
             };
             // Get authentication token

@@ -33,8 +33,8 @@ export default Ember.Controller.extend({
                     "SESS_CDE": this.get("model.membership.SessionCode"),
                     "ID_NUM": studentID,
                     "PART_CDE": roleID,
-                    "BEGIN_DTE": new Date().toLocaleDateString(),
-                    "END_DTE": new Date().toLocaleDateString(),
+                    "BEGIN_DTE": new Date().toJSON(),
+                    "END_DTE": new Date().toJSON(),
                     "COMMENT_TXT": comments
                 };
                 // API call to update a membership
