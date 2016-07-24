@@ -8,13 +8,17 @@ export default Ember.Controller.extend({
         // Method that gets called when the follow button is clicked
         toggleFollow() {
             let passed = false;
+
+            /* If the person is already a follower - delete their guest (follower) membership
+             * Else create their guest membership to become a follower
+             */
             if (this.get("model").following) {
                 let membershipID = this.get("model").membershipID;
                 // API call via util function to delete a (GUEST) membership
                 passed = deleteSync("/memberships/" + membershipID, this).success;
             }
             else {
-                // Data to be sent with API call
+                // Data to be sent with API POST call
                 let membership = {
                     "ACT_CDE": this.get("model").activity.ActivityCode,
                     "SESS_CDE": this.get("model").session.SessionCode.trim(),
@@ -28,6 +32,8 @@ export default Ember.Controller.extend({
                 let newMembershipID = null;
                 // API call via util function to add a new (GUEST) membership
                 let response = postSync("/memberships", membership, this);
+
+                // If the call was successful
                 if (response.success) {
                     this.set("model.membershipID", response.data.MEMBERSHIP_ID);
                     passed = true;
@@ -36,6 +42,7 @@ export default Ember.Controller.extend({
                     this.set("model.membershipID", newMembershipID);
                 }
             }
+            // If the calls were successful reload the page
             if (passed) {
                 this.set("model.following", !this.get("model").following);
                 window.location.reload(true);

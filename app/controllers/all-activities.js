@@ -5,7 +5,7 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {
-        // Gets all sessions from the server and gets the one chosen by the user in the all-activities template
+        // Get all sessions from the server and gets the one chosen by the user in the all-activities template
         selectSession: function(session) {
             let response = getSync("/activities/session/" + session.SessionCode.trim(), this);
             let activities = sortJsonArray(response.data, "ActivityDescription");
@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
             this.set("model.activitiesFilled", (activities.length > 0));
             this.set("model.currentSession", session);
         },
-        // Filters list of activities shown when user types in the search bar
+        // Filter the list of activities shown when user types in the search bar
         filterActivities: function() {
             let searchValue = this.get("searchValue");
             if (searchValue) {
