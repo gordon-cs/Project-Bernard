@@ -23,7 +23,7 @@ export default Ember.Controller.extend({
             }
 
             let activityCode = this.get("model.activity.ActivityCode");
-            
+
             /* Image Upload */
             if(this.get('use_default_image')) {
               let response = postSync('/activities/'+activityCode+'/image/reset',null,this);
@@ -34,10 +34,10 @@ export default Ember.Controller.extend({
               if (imageValidation.isValid) {
                 let imageData = new FormData();
                 imageData.append(image.name, image); // Add the image to the FormData object
-                let response = postFileSync('/activities/'+activityCode+'/image', imageData, this);
+                let imageUpload = postFileSync('/activities/'+activityCode+'/image', imageData, this);
               }
               else{
-                // TODO alert the user that upload failed.
+                // TODO alert the user that upload validation failed.
                 console.log(imageValidation.validationMessage + '\nNo image will be uploaded.');
               }
             }
@@ -50,7 +50,6 @@ export default Ember.Controller.extend({
                 "ACT_URL": pageUrl,
                 "ACT_BLURB": description
             };
-            console.log(data);
             let response = putSync("/activities/" + this.get("model.activity.ActivityCode"), data, this);
             if (response.success) {
                 this.set("description", null);
