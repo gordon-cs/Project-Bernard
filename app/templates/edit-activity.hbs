@@ -3,7 +3,8 @@
     <form {{action "update" on="submit"}}>
         {{input value=description class="form-control" placeholder="Description"}}
         {{input value=pageUrl class="form-control" placeholder="Activity Page"}}
-        {{input value=imageUrl class="form-control" placeholder="Image URL"}}
+        <label class="file-label" for="file">Upload an image</label>
+        {{input id="file" name="activity-image" type="file" placeholder="YO" class="file-upload"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>
         {{#if errorMessage}}
             <p id="error-message">{{errorMessage}}</p>
