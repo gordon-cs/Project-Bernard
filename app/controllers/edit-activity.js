@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
             let activityCode = this.get("model.activity.ActivityCode");
 
             /* Image Upload */
-            if(this.get('use_default_image')) {
+            if(this.get("use_default_image")) {
               let response = postSync('/activities/'+activityCode+'/image/reset',null,this);
             }
             else {
@@ -55,6 +55,7 @@ export default Ember.Controller.extend({
                 this.set("description", null);
                 this.set("pageUrl", null);
                 this.set("imageUrl", null);
+                this.set("use_default_image", null);
                 this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
                         "/" + this.get("model.activity.ActivityCode"));
             }
