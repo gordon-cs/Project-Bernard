@@ -15,7 +15,7 @@
 			<div class="activity-list">
 				{{#each model.currentSupervisions as |supervisor|}}
 					{{#link-to "specific-activity" supervisor.SessionCode supervisor.ActivityCode class="activity-list-item"}}
-						<img class="activity-list-item-img" src="{{supervisor.ActivityImage}}">
+						<img class="activity-list-item-img" src="{{supervisor.ActivityImagePath}}">
 						<dl class="activity-list-item-details">
 							<dt class="activity-list-item-title">{{supervisor.ActivityDescription}}</dt>
 							<dt class="activity-list-item-info">{{supervisor.SessionDescription}}</dt>
@@ -35,7 +35,7 @@
 			<div class="activity-list">
 				{{#each model.pastSupervisions as |supervisor|}}
 					{{#link-to "specific-activity" supervisor.SessionCode supervisor.ActivityCode class="activity-list-item"}}
-						<img class="activity-list-item-img" src="{{supervisor.ActivityImage}}">
+						<img class="activity-list-item-img" src="{{supervisor.ActivityImagePath}}">
 						<dl class="activity-list-item-details">
 							<dt class="activity-list-item-name">{{supervisor.ActivityDescription}}</dt>
 							<dt class="activity-list-item-info">{{supervisor.SessionDescription}}</dt>
@@ -55,7 +55,7 @@
 			<div class="activity-list">
 				{{#each model.currentMemberships as |mem|}}
 					{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="activity-list-item"}}
-						<img class="activity-list-item-img" src={{mem.ActivityImage}}>
+						<img class="activity-list-item-img" src={{mem.ActivityImagePath}}>
 						<dl class="activity-list-item-details">
 							<dt class="activity-list-item-title">{{mem.ActivityDescription}}</dt>
 							<dt class="activity-list-item-info">{{mem.SessionDescription}}</dt>
@@ -77,7 +77,7 @@
 				<div class="activity-list">
 					{{#each memSession.activities as |mem|}}
 						{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode class="activity-list-item"}}
-							<img class="activity-list-item-img" src={{mem.ActivityImage}}>
+							<img class="activity-list-item-img" src={{mem.ActivityImagePath}}>
 							<div class="activity-list-item-details">
 								<dl>
 									<dt class="activity-list-item-title">{{mem.ActivityDescription}}</dt>
