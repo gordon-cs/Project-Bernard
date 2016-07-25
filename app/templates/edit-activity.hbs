@@ -7,7 +7,9 @@
         <label class="default-image-check">{{input type="checkbox" checked=use_default_image class="default-image-check"}} Use Default Image </label>
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>
         {{#if errorMessage}}
-            <p id="error-message">{{errorMessage}}</p>
+        <div>
+            <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>
+        </div>
         {{/if}}
     </form>
 </div>

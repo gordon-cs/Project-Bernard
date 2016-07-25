@@ -5,7 +5,7 @@
         {{input id="password" class="form-control" placeholder="Password" type="password" value=password}}
         <button type="submit" class="btn form-button button-navy">Login</button>
         {{#if errorMessage}}
-            <p id="error-message">{{errorMessage}}</p>
+            <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>
         {{/if}}
     </form>
 </div>
