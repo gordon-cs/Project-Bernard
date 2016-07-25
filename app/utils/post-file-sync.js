@@ -3,13 +3,15 @@
 // data - FormData to be sent. The file should be included in the FormData object
 // context - context function is being called from (use 'this')
 // returns json data with success boolean and reponse
+import apiConfig from "gordon360/config/api-config"
+
 export default function postFileSync(urlExtension, data, context) {
     let success;
     let response = null;
     context.get("session").authorize("authorizer:gordon-authorizer", (headerName, headerValue) => {
         Ember.$.ajax({
             type: "POST",
-            url: "https://gordon360api.gordon.edu/api" + urlExtension,
+            url: apiConfig.apiUrl + urlExtension,
             contentType: false,
             processData: false,
             data: data,

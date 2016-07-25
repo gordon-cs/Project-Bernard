@@ -3,13 +3,15 @@
 // data - json data to be updated
 // context - context function is being called from (use 'this')
 // returns json data with success boolean and reponse
+import apiConfig from "gordon360/config/api-config"
+
 export default function putSync(urlExtension, data, context) {
     let success;
     let response = null;
     context.get("session").authorize("authorizer:gordon-authorizer", (headerName, headerValue) => {
         Ember.$.ajax({
             type: "PUT",
-            url: "https://gordon360api.gordon.edu/api" + urlExtension,
+            url: apiConfig.apiUrl + urlExtension,
             contentType: "application/json",
             data: JSON.stringify(data),
             async: false,
