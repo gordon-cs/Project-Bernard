@@ -7,6 +7,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model() {
         let sessions = getSync("/sessions", this).data;
         let reversedSessions = [];
+        // Reverse the order of sessions to choose from
         for (let i = sessions.length - 1; i >= 0; i --) {
             reversedSessions.push(sessions[i]);
         }
