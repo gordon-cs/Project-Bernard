@@ -3,7 +3,7 @@
 ------------------------------- */
 
 #logo-box {
-	background: var(--navy);
+	background: #014983;
     margin: 0 auto 0 auto;
     text-align: center;
 	padding: 2% 2%;
@@ -38,12 +38,12 @@ header {
 	padding: 5px 0px;
 }
 #primary-menu a {
-	color: var(--cyan);
+	color: #00aeef;
 	text-decoration: none;
     padding: inherit;
 }
 #primary-menu a:hover {
-	color: var(--orange);
+	color: #DE571F;
 }
 .user-info {
     text-align: right;
@@ -58,11 +58,11 @@ header {
     margin-right: 20px;
 }
 .request-button:hover {
-    color: var(--mid-gray);
+    color: #6F6F6F;
     cursor: pointer;
 }
 .logout-btn {
-    background-color: var(--brown-gray);
+    background-color: #31342B;
     border-color: white;
     border-style: solid;
     border-width: thin;

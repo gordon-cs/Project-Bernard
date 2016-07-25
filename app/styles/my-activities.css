@@ -21,7 +21,7 @@
     text-align: center;
 }
 .empty-list-link {
-    color: var(--cyan);
+    color:  #00aeef;
 	text-decoration: none;
     padding: inherit;
 }

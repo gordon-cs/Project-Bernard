@@ -25,13 +25,13 @@
 .file-label {
   font-size: 150%;
   color: white;
-  background: var(--gray);
+  background: #31342B;
 }
 .file-upload {
   padding: 5px 10px;
   margin: 5px 0px 15px 0px !important;
   font-size: 100%;
-  background: var(--gray);
+  background: #31342B;
   width: 100%;
 }
 .default-image-check {

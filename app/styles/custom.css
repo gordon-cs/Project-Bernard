@@ -15,6 +15,7 @@
     Colors
 ------------------------------- */
 
+/* Using root colors does not work in all browsers... Microsoft Edge */
 :root {
     --cyan: #00aeef;
     --cyan-hover: #00bdec;
@@ -45,13 +46,13 @@
 ------------------------------- */
 
 * {
-    color: var(--dark-gray);
+    color: #252525;
     font-family: "Gotham SSm 4r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 }
 body {
 	font-size: 0.9em !important;
     font-family: Verdana, Geneva, sans-serif !important;
-    background: var(--light-gray) !important;
+    background: #EBEAEA !important;
 }
 p {
 	margin: 0.5em 0 1.25em 0 !important;
@@ -75,7 +76,7 @@ h2 {
 input[type="text"]:focus,
 input[type="password"]:focus,
 select[type="text"]:focus {
-    border: 1px solid var(--cyan);
+    border: 1px solid #00aeef;
     box-shadow: none;
 }
 
@@ -104,7 +105,7 @@ select[type="text"]:focus {
     overflow: hidden;
 }
 .activity-list-item:hover {
-    background-color: var(--green) !important;
+    background-color: #b2bb1c !important;
     -o-transition: .3s !important;
     -ms-transition: .3s !important;
     -moz-transition: .3s !important;
@@ -244,69 +245,69 @@ button:active {
     transform: translateY(2px);
 }
 .button-black {
-    background-color: var(--black);
+    background-color: #31342b;
     color: white;
 }
 .button-black:hover {
-    background-color: var(--black-hover);
+    background-color: #5A5D55;
 }
 .button-cyan {
-    background-color: var(--cyan);
+    background-color: #00aeef;
     color: white;
 }
 .button-cyan:hover {
-    background-color: var(--cyan-hover);
+    background-color: #00bdec;
 }
 .button-navy {
-    background-color: var(--navy);
+    background-color: #014983;
     color: white;
 }
 .button-navy:hover {
-    background-color: var(--navy-hover);
+    background-color: #0159A0;
 }
 .button-orange {
-    background-color: var(--orange);
+    background-color: #DE571F;
     color: white;
 }
 .button-orange:hover {
-    background-color: var(--orange-hover);
+    background-color: #E2794C;
 }
 .button-green {
-    background-color: var(--green);
+    background-color: #b2bb1c;
     color: white;
 }
 .button-green:hover {
-    background-color: var(--green-hover);
+    background-color: #bcc61e;
 }
 .button-darkgreen {
-    background-color: var(--dark-green);
+    background-color: #086d38;
     color: white;
 }
 .button-darkgreen:hover {
-    background-color: var(--dark-green-hover);
+    background-color: #0a7a3d;
 }
 .button-red {
-    background-color: var(--red);
+    background-color: #b53228;
     color: white;
 }
 .button-red:hover {
-    background-color: var(--red-hover);
+    background-color: #d83c30;
 }
 .button-yellow {
-    background-color: var(--yellow);
+    background-color: #FDB913;
     color: #31342b;
 }
 .button-yellow:hover {
-    background-color: var(--yellow-hover);
+    background-color: #fdc233;
     color: #31342b !important;
 }
 .button-gray {
-    background-color: var(--gray);
+    background-color: #31342B;
     border: 1px solid white !important;
     color: white;
 }
 .button-gray:hover {
-    background-color: var(--gray);
+    background-color: #31342B;
     border: 1px solid white !important;
     color: white;
 }
@@ -328,15 +329,15 @@ button:active {
     margin-left: 4px;
 }
 .ember-power-select-option {
-    color: var(--dark-gray);
+    color: #252525;
 }
 .ember-power-select-option,
 .ember-power-select-search {
     font-size: 1.4em;
 }
 .ember-power-select-option[aria-current="true"] {
-    background-color: var(--light-gray);
-    color: var(--dark-gray);
+    background-color: #EBEAEA;
+    color: #252525;
     -o-transition:.1s;
     -ms-transition:.1s;
     -moz-transition:.1s;
