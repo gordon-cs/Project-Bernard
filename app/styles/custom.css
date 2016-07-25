@@ -113,7 +113,6 @@ select[type="text"]:focus {
     transition: .3s !important;
 }
 .activity-list-item-img {
-    background-color: white;
     display: block;
     width: 100%;
 }
