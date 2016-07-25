@@ -5,7 +5,7 @@
 // returns json data with success boolean and reponse
 import apiConfig from "gordon360/config/api-config"
 
-export default function postSync(urlExtension, data, context) {
+export default function postFileSync(urlExtension, data, context) {
     let success;
     let response = null;
     context.get("session").authorize("authorizer:gordon-authorizer", (headerName, headerValue) => {
