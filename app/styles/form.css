@@ -7,7 +7,8 @@
     color: white;
 }
 #form-box > form > input,
-#form-box > form > .ember-power-select-trigger {
+#form-box > form > .ember-power-select-trigger,
+#form-box > form > .input-group {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: auto;
@@ -38,6 +39,15 @@
   color: white;
   margin-left: 5px;
   font-size: 150%;
+}
+#form-box > form > .input-group > label > span > input {
+    display: none;
+}
+.hidden-input {
+    /*display: none;*/
+}
+#file {
+    /*display: none;*/
 }
 
 
