@@ -103,6 +103,7 @@ select[type="text"]:focus {
     -ms-flex-preferred-size: auto;
     flex-basis: auto;
     overflow: hidden;
+    margin-bottom: 10px !important
 }
 .activity-list-item:hover {
     background-color: #b2bb1c !important;
