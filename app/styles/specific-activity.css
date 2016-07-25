@@ -87,8 +87,8 @@ td {
         font-size: 12px;
     }
     .activity-picture {
-        min-width: 300px;
-        min-height: 300px;
+        min-width: 256px;
+        min-height: 256px;
     }
 }
 @media only screen and (min-width: 992px) {
