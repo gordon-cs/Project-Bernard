@@ -5,6 +5,10 @@ import deleteSync from "gordon360/utils/delete-sync";
 import sortJsonArray from "gordon360/utils/sort-json-array";
 
 export default Ember.Controller.extend({
+    session: Ember.inject.service("session"),
+    notificationsPresent: false,
+    requestsRecieved: null,
+    requestsSent: null,
     actions: {
         logout() {
             this.get("session").invalidate();
