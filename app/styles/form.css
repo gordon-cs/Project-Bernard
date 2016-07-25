@@ -22,6 +22,9 @@
     color: white;
     font-size: 125%;
 }
+#error-message > span {
+    color: #d83c30;
+}
 .file-label {
   font-size: 150%;
   color: white;

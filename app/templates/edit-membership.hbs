@@ -15,7 +15,7 @@
         {{input value=comments class="form-control" placeholder="Comment (optional)"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Edit</button>
         {{#if errorMessage}}
-            <p id="error-message">{{errorMessage}}</p>
+            <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>
         {{/if}}
     </form>
 </div>
