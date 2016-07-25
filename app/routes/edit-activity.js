@@ -6,6 +6,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(param) {
         // Check if user has persmission
         let leading = this.get("session.data.authenticated.token_data.college_role") === "god";
+
+        // If they don't have god access check if they are a supervisor
         if (!leading) {
             let supervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
             for (let i = 0; i < supervisors.length; i ++) {
@@ -14,6 +16,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             }
         }
+        // If they don't have god access check if they are a leader
         if (!leading) {
             let leaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
             for (let i = 0; i < leaders.length; i ++) {
@@ -27,7 +30,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             this.transitionTo("index");
         }
         let activity = getSync("/activities/" + param.ActivityCode, this).data;
-        console.log(activity);
         return {
             "activity": activity,
             "sessionCode": param.SessionCode

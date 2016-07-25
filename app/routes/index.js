@@ -10,24 +10,29 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	model() {
 		// Get current session
 		let currentSession = getSync("/sessions/current", this).data;
+
 		// Get memberships of user
 		let memberships = getSync("/memberships/student/" + this.get("session.data.authenticated.token_data.id"), this).data;
+
 		// Get supervisor data to show
 		let allSupervisions = getSync("/supervisors/person/" + this.get("session.data.authenticated.token_data.id"), this).data;
 		let currentSupervisions = [];
 		let pastSupervisions = [];
+
 		// Loop through each supervision
 		for (let i = 0; i < allSupervisions.length; i++) {
 			allSupervisions[i].SessionCode = allSupervisions[i].SessionCode.trim();
 			allSupervisions[i].ActivityCode = allSupervisions[i].ActivityCode.trim();
+
 			// Get the activity image
 			allSupervisions[i].ActivityImage = getSync("/activities/" + allSupervisions[i].ActivityCode, this).data.ActivityImage;
 
-			// Set the current supervisorships
+			/* If the current session matches one of the supervision sessions - Set it as a current supervisorships
+			 * Else - Set it as a past supervision
+			 */
 			if (allSupervisions[i].SessionCode === currentSession.SessionCode) {
 				currentSupervisions.push(allSupervisions[i]);
 			}
-			// Set the past supervisions
 			else {
 				pastSupervisions.push(allSupervisions[i]);
 			}
@@ -36,7 +41,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		// Sort memberships according to session
 		let currentMemberships = [];
 		let pastMemberships = [];
+
+		// Loop through each membership
 		for (let i = 0; i < memberships.length; i ++) {
+			/* If the current session matches the membership session - Set it as a current membership
+			 * Else - Set it as a past membership
+			 */
 			if (memberships[i].SessionCode === currentSession.SessionCode) {
 				currentMemberships.push(memberships[i]);
 			}
@@ -62,12 +72,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		for (let i = 0; i < pastMemberships.length; i ++) {
 			sortJsonArray(pastMemberships[i].activities, "ActivityDescription");
 		}
-		// Check if the user has any current or past activites
+		// Check if the user has any current or past activity memberships or supervisions
 		let currentMembershipsFilled = (currentMemberships.length !== 0);
 		let pastMembershipsFilled = (pastMemberships.length !== 0);
 		let currentSupervisionsFilled = (currentSupervisions.length !== 0);
 		let pastSupervisionsFilled = (pastSupervisions.length !== 0);
+
+		// Variable if the user has no memberships or supervisions associated with them
 		let nothingToShow = !(currentMembershipsFilled || pastMembershipsFilled || currentSupervisionsFilled || pastSupervisionsFilled);
+
 		return {
             "currentSession": currentSession,
 			"currentMemberships": sortJsonArray(currentMemberships, "ActivityDescription"),

@@ -17,6 +17,10 @@ export default Ember.Controller.extend({
             let url = null;
             let comments = this.get("comments") || "";
 
+            /* If no participation was selected for the new membership - throw an error
+             * If the comments exceed the length allowed by the database - throw an error
+             * Else comments and participation are acceptable
+             */
             if (this.get("role.ParticipationCode") == null) {
                 this.set("errorMessage", "Please enter a participation level");
             }
@@ -24,37 +28,50 @@ export default Ember.Controller.extend({
                 this.set("errorMessage", "Comment is too long. Max length 45 characters");
             }
             else {
-                // If the person is a leader for the activity
+                /* If the person is a leader for the activity
+                 * Else the person is not a leader for the activity
+                 */
                 if (this.get("model.leading")) {
                     // Get the student to be added by email lookup
                     let email = this.get("studentEmail");
+
+                    /* If the email field is left empty
+                     * Else the email field is not left empty
+                     */
                     if (email == null || email == "") {
                         this.set("errorMessage", "Please enter a student email");
                     }
                     else {
+                        // If the entered email is missing the domain, add it in
                         if (email.indexOf("@gordon.edu") === -1) {
                             email = email + "@gordon.edu";
                         }
+                        // API call to get the person by email
                         let response = getSync("/accounts/email/" + email + "/", this);
                         let student = response.data;
-                        if (!response.success) {
+
+                        /* If the call to get a student was successfull
+                         * Else send an errorMessage
+                         */
+                        if (response.success) {
+                            // Data to be sent in POST
+                            data = {
+                                "ACT_CDE": this.get("model.activity.ActivityCode"),
+                                "SESS_CDE": this.get("model.sessionCode"),
+                                "ID_NUM": student.GordonID,
+                                "PART_CDE": this.get("role.ParticipationCode"),
+                                "BEGIN_DTE": new Date().toJSON(),
+                                "END_DTE": new Date().toJSON(),
+                                "COMMENT_TXT": comments
+                            };
+                            // the new URL extension
+                            url = "/memberships";
+                        }
+                        else {
                             this.set("errorMessage", "Please enter a valid student email");
                         }
-                        // Data to be sent in POST
-                        data = {
-                            "ACT_CDE": this.get("model.activity.ActivityCode"),
-                            "SESS_CDE": this.get("model.sessionCode"),
-                            "ID_NUM": student.GordonID,
-                            "PART_CDE": this.get("role.ParticipationCode"),
-                            "BEGIN_DTE": new Date().toJSON(),
-                            "END_DTE": new Date().toJSON(),
-                            "COMMENT_TXT": comments
-                        };
-                        // the new URL extension
-                        url = "/memberships";
                     }
                 }
-                // If the person is not a leader for the activity
                 else {
                     // Data to be sent in POST
                     data = {
@@ -66,20 +83,26 @@ export default Ember.Controller.extend({
                         "COMMENT_TXT": this.get("comments"),
                         "APPROVED": "Pending"
                     };
-                    // the new URL extension
+                    // The new URL extension for the API call
                     url = "/requests";
                 }
+                // Gets all memberships for this activity
                 let memberships = this.get("model.memberships")
+
+                // Checks the memberships to see if they have already been added with that role in that activity
                 for (let i = 0; i < memberships.length; i ++) {
                     if (memberships[i].IDNumber == data.ID_NUM && memberships[i].Participation == data.PART_CDE) {
                         this.set("errorMessage", "Already added as a " + this.role.ParticipationDescription);
                     }
                 }
+                // If no errors were returned thus far
                 if (this.get("errorMessage") == null) {
                     // Data returned back from API call
                     let response = postSync(url, data, this);
-                    // If the call was successfull transition back to the activity
-                    // Else set the proper error message
+
+                    /* If the call was successfull transition back to the activity
+                     * Else set the proper error message
+                     */
                     if (response.success) {
                         this.set("studentEmail", null);
                         this.set("role", null);

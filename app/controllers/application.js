@@ -16,7 +16,6 @@ export default Ember.Controller.extend({
         },
         deleteRequest(requestID) {
           let response = deleteSync("/requests/" + requestID, this);
-          console.log(response);
           window.location.reload(true);
 
         }

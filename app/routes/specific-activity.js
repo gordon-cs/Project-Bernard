@@ -71,7 +71,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         }
 
-        // Get current memberships, membership IDs of user, wether user is following and corresponding membership ID
+        // Get current memberships, membership IDs of user, whether user is following and corresponding membership ID
         let memberships = [];
         let rosterMemberships = [];
         let allMyMembershipIDs = [];

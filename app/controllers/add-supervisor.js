@@ -14,10 +14,15 @@ export default Ember.Controller.extend({
 
             // Get the new activity supervisor by email
             let email = this.get("supervisorEmail");
+
+            /* If the email field was left blank - throw an error
+             * Else carry on
+             */
             if (email == null || email == "") {
                 this.set("errorMessage", "Please enter an email");
             }
             else {
+                // If the entered email is missing the domain, add it in
                 if (email.indexOf("@gordon.edu") === -1) {
                     email = email + "@gordon.edu";
                 }
@@ -26,9 +31,11 @@ export default Ember.Controller.extend({
                 let getResponse = getSync("/accounts/email/" + email + "/", this);
                 let supervisor = getResponse.data;
 
-                // If the lookup was successful
+                /* If the lookup was successful - move forward with API calls
+                 * Else - throw an errorMessage
+                 */
                 if (getResponse.success) {
-                    // Set the data to be sent in post
+                    // Data to be sent in POST
                     data = {
                         "ID_NUM": supervisor.GordonID,
                         "SESS_CDE": this.get("model.sessionCode"),
@@ -40,17 +47,17 @@ export default Ember.Controller.extend({
                     // Make API POST call
                     let postResponse = postSync(url, data, this);
 
-                    // If the call was successful transition back to activity
+                    /* If the call was successful - transition back to activity
+                     * Else - throw an error
+                     */
                     if (postResponse.success) {
                         this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
                             "/" + this.get("model.activity.ActivityCode"));
                     }
-                    // If the call was unsuccessful give an error
                     else {
                         this.set("errorMessage", "An error has occured");
                     }
                 }
-                // If the lookup was unsuccessful give an error
                 else {
                     this.set("errorMessage", "Invalid email address");
                 }
