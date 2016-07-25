@@ -101,6 +101,7 @@ select[type="text"]:focus {
     width: 46%;
     -ms-flex-preferred-size: auto;
     flex-basis: auto;
+    overflow: hidden;
 }
 .activity-list-item:hover {
     background-color: var(--green) !important;
@@ -113,7 +114,6 @@ select[type="text"]:focus {
 .activity-list-item-img {
     display: block;
     width: 100%;
-    min-height: 100%;
 }
 .activity-list-item-details {
     display: block;
