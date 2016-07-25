@@ -3,7 +3,7 @@
 // data - FormData to be sent. The file should be included in the FormData object
 // context - context function is being called from (use 'this')
 // returns json data with success boolean and reponse
-export default function postSync(urlExtension, data, context) {
+export default function postFileSync(urlExtension, data, context) {
     let success;
     let response = null;
     context.get("session").authorize("authorizer:gordon-authorizer", (headerName, headerValue) => {
