@@ -4,7 +4,7 @@
         {{input value=description class="form-control" placeholder="Description"}}
         {{input value=pageUrl class="form-control" placeholder="Activity Page. Full URL starting with http://"}}
         <label class="file-label">Activity Image{{input id="file" name="activity-image" type="file" class="file-upload"}}</label>
-        <label class="default-image-check">{{input type="checkbox" checked=use_default_image class="default-image-check"}}Use Default Image </label>
+        <label class="default-image-check">{{input type="checkbox" checked=use_default_image class="default-image-check"}} Use Default Image </label>
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>
         {{#if errorMessage}}
             <p id="error-message">{{errorMessage}}</p>

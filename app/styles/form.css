@@ -22,7 +22,6 @@
     color: white;
     font-size: 125%;
 }
-
 .file-label {
   font-size: 150%;
   color: white;
@@ -35,7 +34,6 @@
   background: var(--gray);
   width: 100%;
 }
-
 .default-image-check {
   color: white;
   margin-left: 5px;
