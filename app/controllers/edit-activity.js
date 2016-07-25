@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
     actions: {
         update() {
             // Get all the values that can be entered in
-            // If not entered in, use the previous value associated with it
+            // If not entered in, use the value already being used
             let description = this.get("description");
             if (description == null || description == "") {
                 description = this.get("model.activity.ActivityBlurb");
@@ -51,11 +51,8 @@ export default Ember.Controller.extend({
                 "ACT_URL": pageUrl,
                 "ACT_BLURB": description
             };
-<<<<<<< HEAD
-            console.log(data);
+
             // Make the API call
-=======
->>>>>>> master
             let response = putSync("/activities/" + this.get("model.activity.ActivityCode"), data, this);
 
             /* If the call was successful - transition back to previous page

@@ -28,8 +28,9 @@ export default Ember.Controller.extend({
                     "END_DTE": new Date().toJSON(),
                     "COMMENT_TXT": "Basic Follower"
                 };
-                console.log(membership);
+
                 let newMembershipID = null;
+
                 // API call via util function to add a new (GUEST) membership
                 let response = postSync("/memberships", membership, this);
 
@@ -50,7 +51,6 @@ export default Ember.Controller.extend({
         },
         // Method that gets called when the Remove button is clicked
         removePerson(membership) {
-            console.log(membership);
             // Variable declaration
             let first = membership.FirstName;
             let last = membership.LastName;
