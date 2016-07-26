@@ -37,6 +37,7 @@ export default Ember.Controller.extend({
                         let imageData = new FormData();
                         imageData.append(image.name, image); // Add the image to the FormData object
                         let response = postFileSync("/activities/" + activityCode + "/image", imageData, this);
+                        this.set("file", null);
                     }
                     else {
                         this.set("errorMessage", imageValidation.validationMessage);
