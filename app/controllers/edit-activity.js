@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
             }
             else {
                 urlValid = false;
-                this.set("errorMessage", "Enter the full activity URL, beginning with http://");
+                this.set("errorMessage", "Enter the full activity URL: Beginning with http://");
             }
             let imageUrl = this.get("imageUrl");
             if (imageUrl == null || imageUrl == "") {
