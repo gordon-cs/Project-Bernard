@@ -112,12 +112,12 @@ function validateImage(file){
   // The extension is not in the list of valid extensions
   if(validFileExtensions.indexOf(fileExtentsion) === -1) {
     result.isValid = false;
-    result.validationMessage = 'Unacceptable image file extension.';
+    result.validationMessage = 'Unacceptable image file: Use only .png, .jpg, .jpeg, .bmp, or .gif images.';
   }
   // File is greater than 100KB
   if(file.size > 100000) {
     result.isValid = false;
-    result.validationMessage = 'Unacceptable file size.';
+    result.validationMessage = 'Unacceptable file size: May be no greater than 100KB.';
   }
 
   return result;
