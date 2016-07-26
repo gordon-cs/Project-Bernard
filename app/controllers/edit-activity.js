@@ -1,12 +1,13 @@
 import Ember from "ember";
-import putSync from "gordon360/utils/put-sync";
-import postFileSync from "gordon360/utils/post-file-sync";
-import postSync from "gordon360/utils/post-sync";
+import putAsync from "gordon360/utils/put-async";
+import postFileAsync from "gordon360/utils/post-file-async";
+import postAsync from "gordon360/utils/post-async";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {
         update() {
+            let context = this;
             // Get all the values that can be entered in
             // If not entered in, use the value already being used
             let description = this.get("description");
@@ -21,53 +22,61 @@ export default Ember.Controller.extend({
             if (imageUrl == null || imageUrl == "") {
                 imageUrl = this.get("model.activity.ActivityImage");
             }
-
-            let activityCode = this.get("model.activity.ActivityCode");
-
-            /* Image Upload */
-            if(this.get("use_default_image")) {
-              let response = postSync('/activities/'+activityCode+'/image/reset',null,this);
-            }
-            else {
-              let image = Ember.$("#file")[0].files[0];
-              let imageValidation = validateImage(image); // See helper method on the bottom
-              if (imageValidation.isValid) {
-                let imageData = new FormData();
-                imageData.append(image.name, image); // Add the image to the FormData object
-                let imageUpload = postFileSync('/activities/'+activityCode+'/image', imageData, this);
-              }
-              else{
-                // TODO alert the user that upload validation failed.
-                console.log(imageValidation.validationMessage + '\nNo image will be uploaded.');
-              }
-            }
-            /* End Image Upload */
-
-            // Set data to be sesnt in PUT API call
-            let data = {
-                "ACT_CDE": this.get("model.activity.ActivityCode"),
-                "ACT_DESC": this.get("model.activity.ActivityDescription"),
-                "ACT_IMAGE": imageUrl,
-                "ACT_URL": pageUrl,
-                "ACT_BLURB": description
+            // Reset image to default
+            let resetImage = function() {
+                return postAsync("/activities/" + activityCode + "/image/reset", null, context);
             };
+            // Upload image file
+            // Resturns resolved promise if no image was selected
+            let uploadImage = function() {
+                let response = new Ember.RSVP.Promise(function(resolve, reject) {
+                    resolve("No image");
+                });
+                let image = Ember.$("#file")[0].files[0];
+                if (image != null) {
+                    let imageValidation = validateImage(image); // See helper method on the bottom
+                    if (imageValidation.isValid) {
+                        let imageData = new FormData();
+                        imageData.append(image.name, image); // Add the image to the FormData object
+                        response = postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
+                                "/image", imageData, context);
+                    }
+                    else {
+                        context.set("errorMessage", imageValidation.validationMessage);
+                    }
+                }
+                return response;
+            };
+            // Post new information
+            let updateActivity = function() {
+                let data = {
+                    "ACT_CDE": context.get("model.activity.ActivityCode"),
+                    "ACT_DESC": context.get("model.activity.ActivityDescription"),
+                    "ACT_IMAGE": imageUrl,
+                    "ACT_URL": pageUrl,
+                    "ACT_BLURB": description
+                };
+                return putAsync("/activities/" + context.get("model.activity.ActivityCode"), data, context);
+            };
+            // Leave inputs blank and transition back to activity after post
+            let transition = function() {
+                context.set("description", null);
+                context.set("pageUrl", null);
+                context.set("imageUrl", null);
+                context.set("use_default_image", null);
+                context.transitionToRoute("/specific-activity/" + context.get("model.sessionCode") +
+                        "/" + context.get("model.activity.ActivityCode"));
+            }
 
-            // Make the API call
-            let response = putSync("/activities/" + this.get("model.activity.ActivityCode"), data, this);
-
-            /* If the call was successful - transition back to previous page
-             * Else - throw an error message
-             */
-            if (response.success) {
-                this.set("description", null);
-                this.set("pageUrl", null);
-                this.set("imageUrl", null);
-                this.set("use_default_image", null);
-                this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
-                        "/" + this.get("model.activity.ActivityCode"));
+            if (this.get("use_default_image")) {
+                resetImage()
+                .then(updateActivity)
+                .then(transition);
             }
             else {
-                this.set("errorMessage", JSON.parse(response.data.responseText).error_description);
+                uploadImage()
+                .then(updateActivity)
+                .then(transition);
             }
         }
     }
