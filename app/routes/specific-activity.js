@@ -113,8 +113,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         }
 
-        console.log(rosterMemberships);
-
         return {
             // Persmissions
             "leading": leading,
