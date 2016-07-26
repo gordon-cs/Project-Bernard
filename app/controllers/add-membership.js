@@ -1,5 +1,4 @@
 import Ember from "ember";
-import postSync from "gordon360/utils/post-sync";
 import getAsync from "gordon360/utils/get-async";
 import postAsync from "gordon360/utils/post-async";
 
@@ -82,32 +81,31 @@ export default Ember.Controller.extend({
                     "COMMENT_TXT": comments,
                     "APPROVED": "Pending"
                 };
-                return postSync("/requests", data, context);
-            }
-
-            // Checks after the post
-            let postErrorChecks = function(result) {
-                if (result) {
-                    context.set("studentEmail", null);
-                    context.set("role", null);
-                    context.set("comments", null);
-                    context.transitionToRoute("/specific-activity/" + sessionCode +
-                            "/" + activityCode);
-                }
-                else {
+                let response = postAsync("/requests", data, context);
+                if (response.status === 500) {
                     context.set("errorMessage", "An error has occured");
                 }
+                return response;
+            }
+
+            // Leave inputs blank and transition back to activity
+            let transition = function(result) {
+                context.set("studentEmail", null);
+                context.set("role", null);
+                context.set("comments", null);
+                context.transitionToRoute("/specific-activity/" + sessionCode +
+                        "/" + activityCode);
             }
 
             if (errorChecks()) {
                 if (this.get("model.leading")) {
                     getStudent()
                     .then(postMembership)
-                    .then(postErrorChecks);
+                    .then(transition);
                 }
                 else {
                     postRequest()
-                    .then(postErrorChecks);
+                    .then(transition);
                 }
             }
         }

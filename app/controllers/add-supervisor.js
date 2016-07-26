@@ -1,6 +1,6 @@
 import Ember from "ember";
 import getAsync from "gordon360/utils/get-async";
-import postSync from "gordon360/utils/post-sync";
+import postAsync from "gordon360/utils/post-async";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
@@ -15,8 +15,6 @@ export default Ember.Controller.extend({
             let email = this.supervisorEmail;
             let sessionCode = this.model.sessionCode;
             let activityCode = this.model.activity.ActivityCode;
-            // response
-            let postResponse;
 
             // Check if all the inputs are valid
             let errorChecks = function() {
@@ -31,18 +29,6 @@ export default Ember.Controller.extend({
                 return passed;
             }
 
-            // Check for error after post
-            let postErrorChecks = function() {
-                if (postResponse != null) {
-                    context.set("supervisorEmail", null);
-                    context.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
-                            "/" + this.get("model.activity.ActivityCode"));
-                }
-                else {
-                    context.set("errorMessage", "Invalid email address");
-                }
-            }
-
             // Get the student from email
             let getPerson = function() {
                 return getAsync("/accounts/email/" + email + "/", context);
@@ -55,13 +41,20 @@ export default Ember.Controller.extend({
                     "SESS_CDE": sessionCode,
                     "ACT_CDE": activityCode
                 };
-                postResponse = postSync("/supervisors", data, context);
+                return postAsync("/supervisors", data, context);
+            }
+
+            // Leave inputs blank and transition back to activity
+            let transition = function() {
+                context.set("supervisorEmail", null);
+                context.transitionToRoute("/specific-activity/" + sessionCode +
+                        "/" + activityCode);
             }
 
             if (errorChecks()) {
                 getPerson()
-                .then(postSupervisor);
-                postErrorChecks();
+                .then(postSupervisor)
+                .then(transition);
             }
         }
     }
