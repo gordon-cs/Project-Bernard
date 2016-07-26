@@ -233,6 +233,7 @@ button:focus,
 button:active {
     border: none !important;
     outline: none !important;
+    text-decoration: none;
 }
 button:hover,
 button:focus {
@@ -241,6 +242,7 @@ button:focus {
     -moz-transition:.3s;
     -webkit-transition:.3s;
     color: white !important;
+    text-decoration: none;
 }
 button:active {
 	-webkit-transform: translateY(2px);
