@@ -9,7 +9,8 @@ export default Ember.Controller.extend({
     actions: {
         update() {
 
-            let urlCheck = false;
+            let urlValid = false;
+            let imgValid = true;
 
             // Get all the values that can be entered in
             // If not entered in, use the value already being used
@@ -20,15 +21,13 @@ export default Ember.Controller.extend({
             let pageUrl = this.get("pageUrl");
             if (pageUrl == null || pageUrl == "") {
                 pageUrl = this.get("model.activity.ActivityURL");
-                urlCheck = true;
+                urlValid = true;
             }
             else if (pageUrl.includes("http://", 0) || pageUrl.includes("https://", 0)) {
-                console.log("good url");
-                urlCheck = true;
+                urlValid = true;
             }
             else {
-                console.log("bad");
-                urlCheck = false;
+                urlValid = false;
                 this.set("errorMessage", "Enter the full activity URL, beginning with http://");
             }
             let imageUrl = this.get("imageUrl");
@@ -52,7 +51,10 @@ export default Ember.Controller.extend({
               }
               else{
                 // TODO alert the user that upload validation failed.
-                console.log(imageValidation.validationMessage + '\nNo image will be uploaded.');
+                if (imageValidation.validationMessage != "No image file was selected.") {
+                    this.set("errorMessage", (imageValidation.validationMessage));
+                    imgValid = false;
+                }
               }
             }
             /* End Image Upload */
@@ -66,7 +68,7 @@ export default Ember.Controller.extend({
                 "ACT_BLURB": description
             };
 
-            if (urlCheck) {
+            if (urlValid && imgValid) {
                 // Make the API call
                 let response = putSync("/activities/" + this.get("model.activity.ActivityCode"), data, this);
 
@@ -110,7 +112,7 @@ function validateImage(file){
   // The extension is not in the list of valid extensions
   if(validFileExtensions.indexOf(fileExtentsion) === -1) {
     result.isValid = false;
-    result.validationMessage = 'Unacceptable file extension.';
+    result.validationMessage = 'Unacceptable image file extension.';
   }
   // File is greater than 100KB
   if(file.size > 100000) {
