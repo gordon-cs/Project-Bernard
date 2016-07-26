@@ -52,6 +52,8 @@ export default Ember.Controller.extend({
                 if (response.success) {
                     let activityCode = this.get("model.membership.ActivityCode");
                     let sessionCode = this.get("model.membership.SessionCode");
+                    this.set("role", null);
+                    this.set("comments", null);
                     this.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
                 }
                 else {
