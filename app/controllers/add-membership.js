@@ -84,6 +84,20 @@ export default Ember.Controller.extend({
                 postResponse = postSync("/requests", data, context);
             }
 
+            // Checks after the post
+            let postErrorChecks = function() {
+                if (postResponse.success) {
+                    context.set("studentEmail", null);
+                    context.set("role", null);
+                    context.set("comments", null);
+                    context.transitionToRoute("/specific-activity/" + sessionCode +
+                            "/" + activityCode);
+                }
+                else {
+                    context.set("errorMessage", "An error has occured");
+                }
+            }
+
             if (errorChecks()) {
                 if (this.get("model.leading")) {
                     getStudent()
@@ -92,16 +106,7 @@ export default Ember.Controller.extend({
                 else {
                     postRequest();
                 }
-                if (postResponse.success) {
-                    this.set("studentEmail", null);
-                    this.set("role", null);
-                    this.set("comments", null);
-                    this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
-                            "/" + this.get("model.activity.ActivityCode"));
-                }
-                else {
-                    this.set("errorMessage", "An error has occured");
-                }
+                postErrorChecks();
             }
         }
     }
