@@ -1,6 +1,7 @@
 import Ember from "ember";
 import postSync from "gordon360/utils/post-sync";
 import getAsync from "gordon360/utils/get-async";
+import postAsync from "gordon360/utils/post-async";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
@@ -23,8 +24,6 @@ export default Ember.Controller.extend({
             let activityCode = this.model.activity.ActivityCode;
             let sessionCode = this.model.sessionCode;
             let IDNumber = this.get("session.data.authenticated.token_data.id");
-            // Response
-            let postResponse;
 
             // Check if all the inputs are valid
             let errorChecks = function() {
@@ -56,18 +55,20 @@ export default Ember.Controller.extend({
 
             // Send data for membership
             let postMembership = function(result) {
-                if (result) {
-                    let data = {
-                        "ACT_CDE": activityCode,
-                        "SESS_CDE": sessionCode,
-                        "ID_NUM": result.GordonID,
-                        "PART_CDE": role.ParticipationCode,
-                        "BEGIN_DTE": new Date().toJSON(),
-                        "END_DTE": new Date().toJSON(),
-                        "COMMENT_TXT": comments
-                    };
-                    postResponse = postSync("/memberships", data, context);
+                let data = {
+                    "ACT_CDE": activityCode,
+                    "SESS_CDE": sessionCode,
+                    "ID_NUM": result.GordonID,
+                    "PART_CDE": role.ParticipationCode,
+                    "BEGIN_DTE": new Date().toJSON(),
+                    "END_DTE": new Date().toJSON(),
+                    "COMMENT_TXT": comments
+                };
+                let response = postAsync("/memberships", data, context);
+                if (response.status === 500) {
+                    context.set("errorMessage", "An error has occured");
                 }
+                return response;
             }
 
             // Send data for membership request
@@ -81,12 +82,12 @@ export default Ember.Controller.extend({
                     "COMMENT_TXT": comments,
                     "APPROVED": "Pending"
                 };
-                postResponse = postSync("/requests", data, context);
+                return postSync("/requests", data, context);
             }
 
             // Checks after the post
-            let postErrorChecks = function() {
-                if (postResponse.success) {
+            let postErrorChecks = function(result) {
+                if (result) {
                     context.set("studentEmail", null);
                     context.set("role", null);
                     context.set("comments", null);
@@ -101,12 +102,13 @@ export default Ember.Controller.extend({
             if (errorChecks()) {
                 if (this.get("model.leading")) {
                     getStudent()
-                    .then(postMembership);
+                    .then(postMembership)
+                    .then(postErrorChecks);
                 }
                 else {
-                    postRequest();
+                    postRequest()
+                    .then(postErrorChecks);
                 }
-                postErrorChecks();
             }
         }
     }
