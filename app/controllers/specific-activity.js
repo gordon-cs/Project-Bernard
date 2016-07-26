@@ -1,6 +1,8 @@
 import Ember from "ember";
 import deleteSync from "gordon360/utils/delete-sync";
 import postSync from "gordon360/utils/post-sync";
+import deleteAsync from "gordon360/utils/delete-async";
+import postAsync from "gordon360/utils/post-async";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
@@ -60,29 +62,24 @@ export default Ember.Controller.extend({
 
             if (confirm("Are you sure you want to remove (" + role + ") " + first + " " + last + " from this activity?")) {
                 // API call via util function to remove a membership
-                if (deleteSync("/memberships/" + membership.MembershipID, this).success) {
-                    window.location.reload(true);
-                }
+                deleteAsync("/memberships/" + membership.MembershipID, this)
+                .then(window.location.reload(true));
             }
         },
         // Approve specified membership request
         approveRequest(request) {
             if (confirm("Accept this request?")) {
                 // API call via util function to approve a pending membership request
-                let response = postSync("/requests/" + request.RequestID + "/approve", request, this);
-                if (response.success) {
-                    window.location.reload(true);
-                }
+                postAsync("/requests/" + request.RequestID + "/approve", request, this);
+                .then(window.location.reload(true));
             }
         },
         // Deny specified membership request
         denyRequest(request) {
             if (confirm("Deny this request?")) {
                 // API call via util function to deny a pending membership request
-                let response = postSync("/requests/" + request.RequestID + "/deny", request, this);
-                if (response.success) {
-                    window.location.reload(true);
-                }
+                postAsync("/requests/" + request.RequestID + "/deny", request, this);
+                .then(window.location.reload(true));
             }
         },
         // Remove a supervisor from this activity
@@ -92,12 +89,10 @@ export default Ember.Controller.extend({
             let lastname = supervisor.LastName;
             let id = supervisor.SupervisorID;
 
-            if(confirm("Do you want to remove " + firstname + " " + lastname + " as a supervisor?")) {
+            if (confirm("Do you want to remove " + firstname + " " + lastname + " as a supervisor?")) {
                 // API call to delete specified supervisor
-                let response = deleteSync("/supervisors/" + id, this);
-                if (response.success) {
-                    window.location.reload(true);
-                }
+                deleteAsync("/supervisors/" + id, this)
+                .then(window.location.reload(true));
             }
         }
     }

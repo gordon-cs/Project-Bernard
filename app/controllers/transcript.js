@@ -1,5 +1,4 @@
 import Ember from "ember";
-import getSync from "gordon360/utils/get-sync";
 import getAsync from "gordon360/utils/get-async";
 import isTranscriptWorthy from "gordon360/utils/is-transcript-worthy";
 import sortJsonArray from "gordon360/utils/sort-json-array";
