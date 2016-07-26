@@ -1,8 +1,7 @@
 import Ember from "ember";
 import isLeader from "gordon360/utils/is-leader";
-import getSync from "gordon360/utils/get-sync";
 import getAsync from "gordon360/utils/get-async";
-import deleteSync from "gordon360/utils/delete-sync";
+import deleteAsync from "gordon360/utils/delete-async";
 import sortJsonArray from "gordon360/utils/sort-json-array";
 
 export default Ember.Controller.extend({
@@ -16,8 +15,8 @@ export default Ember.Controller.extend({
             this.set("requests", null);
         },
         deleteRequest(requestID) {
-          let response = deleteSync("/requests/" + requestID, this);
-          window.location.reload(true);
+            deleteAsync("/requests/" + requestID, this)
+            .then(window.location.reload(true));
         }
     },
     // Get requests a user may have to approve or deny
