@@ -127,11 +127,13 @@
                                     {{#if model.leading}}
                                         <td class="comments-table-data">{{mem.Description}}</td>
                                         <td>
-                                        {{#link-to 'edit-membership' mem.MembershipID}}
-                                        <button class="btn button-navy roster-button">Edit</button>
-                                        {{/link-to}}
-                                        <button {{action "removePerson" mem}} class="btn button-red roster-button">Remove</button>
+                                            {{#link-to 'edit-membership' mem.MembershipID}}
+                                            <button class="btn button-navy roster-button">Edit</button>
+                                            {{/link-to}}
+                                            <button {{action "removePerson" mem}} class="btn button-red roster-button">Remove</button>
                                         </td>
+                                    {{else if mem.isLoggedInUser}}
+                                        <td><button {{action "removePerson" mem}} class="btn button-red roster-button">Remove</button></td>
                                     {{else}}
                                         <td></td>
                                     {{/if}}

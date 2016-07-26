@@ -99,6 +99,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             }
         }
+
+        // Checks to see if the logged in user has a membership with the given activity
+        for (var i = 0; i < rosterMemberships.length; i++) {
+            /* If the id number of the membership matches the one logged in - assign the variable of the membership isUser to true
+             * Else  - assign the same variable to false
+             */
+            if (rosterMemberships[i].IDNumber == IDNumber) {
+                rosterMemberships[i].isLoggedInUser = true;
+            }
+            else {
+                rosterMemberships[i].isLoggedInUser = false;
+            }
+        }
+
         return {
             // Persmissions
             "leading": leading,

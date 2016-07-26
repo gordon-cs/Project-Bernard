@@ -15,6 +15,9 @@
     margin-top: 20px;
     max-width: 50%;
 }
+a {
+    text-decoration: none !important;
+}
 
 /* -----------------------------
     Description
@@ -44,6 +47,7 @@
 }
 .button-row {
     margin-top: 20px;
+    text-decoration: inherit;
 }
 .button-row > button,
 .button-row > a > button {
@@ -52,9 +56,11 @@
     margin-right: auto;
     margin-left: auto;
     display: block;
+    text-decoration: inherit;
 }
 .sup-btn {
     margin-right: 5px !important;
+    text-decoration: inherit;
 }
 
 /* -----------------------------
@@ -67,9 +73,11 @@
 }
 .roster-button {
     margin-right: 5px;
+    text-decoration: inherit;
 }
-td {
+td > button {
     max-width: 300px;
+    text-decoration: inherit;
 }
 .empty-table-reminder {
     margin-left: 20px !important;
@@ -85,6 +93,7 @@ td {
         width: auto;
         display: inline-block;
         font-size: 12px;
+        text-decoration: inherit;
     }
     .activity-picture {
         min-width: 300px;
@@ -95,5 +104,6 @@ td {
     .button-row > button,
     .button-row > a > button {
         font-size: 14px;
+        text-decoration: inherit;
     }
 }
