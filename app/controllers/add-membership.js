@@ -1,5 +1,4 @@
 import Ember from "ember";
-import getSync from "gordon360/utils/get-sync";
 import postSync from "gordon360/utils/post-sync";
 import getAsync from "gordon360/utils/get-async";
 
@@ -55,7 +54,7 @@ export default Ember.Controller.extend({
                 return getAsync("/accounts/email/" + email + "/", context);
             }
 
-            // Get the data for membership
+            // Send data for membership
             let postMembership = function(result) {
                 if (result) {
                     let data = {
@@ -66,7 +65,7 @@ export default Ember.Controller.extend({
                         "BEGIN_DTE": new Date().toJSON(),
                         "END_DTE": new Date().toJSON(),
                         "COMMENT_TXT": comments
-                    }
+                    };
                     postResponse = postSync("/memberships", data, context);
                 }
             }
@@ -81,7 +80,7 @@ export default Ember.Controller.extend({
                     "DATE_SENT": new Date().toJSON(),
                     "COMMENT_TXT": comments,
                     "APPROVED": "Pending"
-                }
+                };
                 postResponse = postSync("/requests", data, context);
             }
 
