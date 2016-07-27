@@ -72,19 +72,20 @@ export default Ember.Controller.extend({
                 // Make the API call
                 let response = putSync("/activities/" + this.get("model.activity.ActivityCode"), data, this);
 
-            /* If the call was successful - transition back to previous page
-             * Else - throw an error message
-             */
-            if (response.success && this.errorMessage === null) {
-                this.set("description", null);
-                this.set("pageUrl", null);
-                this.set("imageUrl", null);
-                this.set("use_default_image", null);
-                this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
-                        "/" + this.get("model.activity.ActivityCode"));
-            }
-            else {
-                this.set("errorMessage", JSON.parse(response.data.responseText).error_description);
+                /* If the call was successful - transition back to previous page
+                 * Else - throw an error message
+                 */
+                if (response.success && this.errorMessage === null) {
+                    this.set("description", null);
+                    this.set("pageUrl", null);
+                    this.set("imageUrl", null);
+                    this.set("use_default_image", null);
+                    this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
+                            "/" + this.get("model.activity.ActivityCode"));
+                }
+                else {
+                    this.set("errorMessage", JSON.parse(response.data.responseText).error_description);
+                }
             }
         }
     }
