@@ -109,7 +109,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         return obj.Email;
                     });
                     model.emails = result.toString();
-                    console.log( 1, model );
                     return Ember.RSVP.hash( model );
                 });
             }
@@ -144,13 +143,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let populateRoster = function ( model ) {
             let membershipsToDisplay = [];
             for (var i = 0; i < model.memberships.length; i++) {
-                if (model.memberships[i].Participation !== "GUEST" || leading) {
+                if (model.memberships[i].Participation !== "GUEST" || model.leading) {
                     membershipsToDisplay.push(model.memberships[i]);
                 }
             }
             model.rosterMemberships = sortJsonArray(membershipsToDisplay, "LastName");
             model.rosterFilled = (model.rosterMemberships.length > 0);
-            console.log( model );
             return Ember.RSVP.hash(model);
         };
 
@@ -181,7 +179,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let loadModel = function ( model ) {
-            console.log( model );
             return Ember.RSVP.hash( model );
         };
 
