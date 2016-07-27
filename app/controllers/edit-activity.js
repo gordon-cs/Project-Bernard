@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
     errorMessage: null,
     actions: {
         update() {
-
+            this.set("errorMessage", null);
             let urlValid = false;
             let imgValid = true;
 
@@ -30,10 +30,6 @@ export default Ember.Controller.extend({
                 urlValid = false;
                 this.set("errorMessage", "Enter the full activity URL: Beginning with http://");
             }
-            let imageUrl = this.get("imageUrl");
-            if (imageUrl == null || imageUrl == "") {
-                imageUrl = this.get("model.activity.ActivityImage");
-            }
 
             let activityCode = this.get("model.activity.ActivityCode");
 
@@ -43,17 +39,19 @@ export default Ember.Controller.extend({
             }
             else {
                 let image = Ember.$("#file")[0].files[0];
-                let imageValidation = validateImage(image); // See helper method on the bottom
-                if (imageValidation.isValid) {
-                    let imageData = new FormData();
-                    imageData.append(image.name, image); // Add the image to the FormData object
-                    let imageUpload = postFileSync("/activities/" + activityCode + "/image", imageData, this);
-                }
-                else {
-                    // TODO alert the user that upload validation failed.
-                    if (imageValidation.validationMessage != "No image file was selected.") {
-                        this.set("errorMessage", (imageValidation.validationMessage));
-                        imgValid = false;
+                if (image != null) {
+                    let imageValidation = validateImage(image); // See helper method on the bottom
+                    if (imageValidation.isValid) {
+                        let imageData = new FormData();
+                        imageData.append(image.name, image); // Add the image to the FormData object
+                        let imageUpload = postFileSync("/activities/" + activityCode + "/image", imageData, this);
+                    }
+                    else {
+                        // TODO alert the user that upload validation failed.
+                        if (imageValidation.validationMessage != "No image file was selected.") {
+                            this.set("errorMessage", (imageValidation.validationMessage));
+                            imgValid = false;
+                        }
                     }
                 }
             }
@@ -63,7 +61,6 @@ export default Ember.Controller.extend({
             let data = {
                 "ACT_CDE": this.get("model.activity.ActivityCode"),
                 "ACT_DESC": this.get("model.activity.ActivityDescription"),
-                "ACT_IMAGE": imageUrl,
                 "ACT_URL": pageUrl,
                 "ACT_BLURB": description
             };
@@ -78,13 +75,14 @@ export default Ember.Controller.extend({
                 if (response.success && this.errorMessage === null) {
                     this.set("description", null);
                     this.set("pageUrl", null);
-                    this.set("imageUrl", null);
+                    this.set("file", "");
                     this.set("use_default_image", null);
                     this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
                             "/" + this.get("model.activity.ActivityCode"));
                 }
                 else {
-                    this.set("errorMessage", JSON.parse(response.data.responseText).error_description);
+                    console.log(response);
+                    this.set("errorMessage", new Error("An error has ocured"));
                 }
             }
         }
