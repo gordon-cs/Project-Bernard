@@ -12,13 +12,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let rolesPromise = getAsync("/participations", context);
         let membershipPromise = getAsync("/memberships/" + param.MembershipID, context);
-        let supervisorsPromise = getAsync("/supervisors/activity/" + theModel.ActivityCode, context);
-        let activiyLeadersPromise = getAsync("/memberships/activity/" + theModel.ActivityCode + "/leaders", context);
 
 
         let loadMembership  = function ( model ) {
             return membershipPromise
             .then( function ( result ) {
+                console.log(result);
                 model.membership = result;
                 model.ActivityCode = result.ActivityCode;
                 return Ember.RSVP.hash( model );
@@ -35,7 +34,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let checkIfSupervisor = function ( model ) {
             if (!model.leading) {
-                return supervisorsPromise
+                return getAsync("/supervisors/activity/" + model.ActivityCode, context)
                 .then( isIDInList )
                 .then( function ( bool ) {
                     model.leading = bool;
@@ -47,7 +46,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let checkIfActivityLeader = function ( model ) {
             if (!model.leading) {
-                return activityLeadersPromise
+                return getAsync("/memberships/activity/" + model.ActivityCode + "/leaders", context)
                 .then( isIDInList )
                 .then( function ( bool ) {
                     model.leading = bool;
@@ -59,7 +58,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let redirectIfNeither = function ( model ) {
             if (!model.leading) {
-                this.transitionTo("index");
+                context.transitionTo("index");
             }
             else {
                 return Ember.RSVP.hash(model);
@@ -68,16 +67,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Helper function
         let isIDInList = function ( result ) {
-            for (let item in result) {
-                if (item.IDNumber == id_number ) {
-                    return true
+            console.log( result );
+            for (let i = 0; i < result.length; i++)
+            {
+                if (result[i].IDNumber == id_number ) {
+                    return true;
                 }
             }
             return false;
         };
 
         let loadModel = function ( model ) {
-            console.log( model );
             return Ember.RSVP.hash( model );
         };
 
