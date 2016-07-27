@@ -170,18 +170,34 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         // Calculate number of guest memberships and regular memberships.
+        // Remove duplicates from counters.
         let calculateMemberships = function ( model ) {
             let guestCounter = 0;
             let membershipCounter = 0;
             let guestSingular = false;
             let membershipSingular = false;
+            let uniqueMemberships = [];
+            let uniqueGuests = [];
+
+            // Loop through all memberships
             for (var i = 0; i < model.memberships.length; i++) {
+                let first = model.memberships[i].FirstName;
+                let last = model.memberships[i].LastName;
+                let name = first + " " + last;
+                // If the memberships is a guest
                 if (model.memberships[i].Participation === "GUEST") {
-                    guestCounter ++;
+                    // Remove any duplications
+                    if (uniqueGuests.indexOf(name) === -1) {
+                        guestCounter ++;
+                        uniqueGuests.push(name);
+                    }
                 }
-                else {
+                // If the membership is not a guest - remove any duplications
+                else if (uniqueMemberships.indexOf(name) === -1) {
                     membershipCounter ++;
+                    uniqueMemberships.push(name);
                 }
+
             }
 
             // Checks the plurality of guest memberships
