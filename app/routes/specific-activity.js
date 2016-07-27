@@ -43,9 +43,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             if( model.supervisors.length > 0 )
             {
                 model.hasSupervisors = true;
-                for(let sup in model.supervisors)
+                for (var i = 0; i < model.supervisors.length; i++)
                 {
-                    if (sup.IDNumber == id_number)
+                    if (model.supervisors[i].IDNumber == id_number)
                     {
                         model.leading = true;
                     }
@@ -54,9 +54,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             if (model.leaders.length > 0)
             {
                 model.hasLeaders = true;
-                for(let ld in model.leaders)
+
+                for (var i = 0; i < model.leaders.length; i++)
                 {
-                    if (ld.IDNumber == id_number)
+                    if (model.leaders[i].IDNumber == id_number)
                     {
                         model.leading = true;
                     }

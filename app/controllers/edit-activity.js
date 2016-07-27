@@ -10,6 +10,8 @@ export default Ember.Controller.extend({
         update() {
 
             let context = this;
+            let urlValid = false;
+            let imgValid = true;
 
             // Get all the values that can be entered in
             // If not entered in, use the value already being used
@@ -32,7 +34,7 @@ export default Ember.Controller.extend({
 
             // Reset image to default
             let resetImage = function() {
-                return postAsync("/activities/" + activityCode + "/image/reset", null, context);
+                return postAsync("/activities/" + context.model.activity.ActivityCode + "/image/reset", null, context);
             };
             // Upload image file
             // Resturns resolved promise if no image was selected
@@ -59,8 +61,6 @@ export default Ember.Controller.extend({
             let updateActivity = function() {
                 let data = {
                     "ACT_CDE": context.get("model.activity.ActivityCode"),
-                    "ACT_DESC": context.get("model.activity.ActivityDescription"),
-                    "ACT_IMAGE": imageUrl,
                     "ACT_URL": pageUrl,
                     "ACT_BLURB": description
                 };

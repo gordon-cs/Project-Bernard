@@ -17,7 +17,6 @@ export default Ember.Controller.extend({
             let studentID = this.get("model.membership.IDNumber");
             let comments = this.get("comments") || "";
             if (comments == null || comments == "") {
-                passed = false;
                 comments = this.get("model.membership.Description");
             }
             let roleID = this.get("role.ParticipationCode");
