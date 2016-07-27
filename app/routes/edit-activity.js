@@ -1,6 +1,5 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import getSync from "gordon360/utils/get-sync";
 import getAsync from "gordon360/utils/get-async";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {

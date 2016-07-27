@@ -1,6 +1,5 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import getSync from "gordon360/utils/get-sync";
 import getAsync from "gordon360/utils/get-async";
 import sortJsonArray from "gordon360/utils/sort-json-array";
 
@@ -165,7 +164,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     following = true;
                 }
             }
-            
+
             model.membershipID = membershipID;
             model.following = following;
             return Ember.RSVP.hash( model );
