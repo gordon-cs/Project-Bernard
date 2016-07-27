@@ -39,23 +39,27 @@ export default Ember.Controller.extend({
             // Upload image file
             // Resturns resolved promise if no image was selected
             let uploadImage = function() {
-                let response = new Ember.RSVP.Promise(function(resolve, reject) {
-                    resolve("No image");
-                });
                 let image = Ember.$("#file")[0].files[0];
                 if (image != null) {
                     let imageValidation = validateImage(image); // See helper method on the bottom
                     if (imageValidation.isValid) {
                         let imageData = new FormData();
                         imageData.append(image.name, image); // Add the image to the FormData object
-                        response = postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
+                        return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
                                 "/image", imageData, context);
                     }
                     else {
                         context.set("errorMessage", imageValidation.validationMessage);
+                        return new Ember.RSVP.Promise(function(resolve, reject) {
+                            reject();
+                        });
                     }
                 }
-                return response;
+                else { // No image was selected
+                    return new Ember.RSVP.Promise(function(resolve, reject) {
+                        resolve();
+                    });
+                }
             };
             // Post new information
             let updateActivity = function() {
@@ -70,8 +74,8 @@ export default Ember.Controller.extend({
             let transition = function() {
                 context.set("description", null);
                 context.set("pageUrl", null);
-                context.set("imageUrl", null);
-                context.set("use_default_image", null);
+                context.set("file", "");
+                context.set("use_default_image", false);
                 context.transitionToRoute("/specific-activity/" + context.get("model.sessionCode") +
                         "/" + context.get("model.activity.ActivityCode"));
             }
