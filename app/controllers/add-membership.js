@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
                 this.set("errorMessage", "Please enter a participation level");
             }
             else if (comments.length > 45) {
-                this.set("errorMessage", "Comment is too long. Max length 45 characters");
+                this.set("errorMessage", "Comment is too long: Max length 45 characters");
             }
             else {
                 /* If the person is a leader for the activity

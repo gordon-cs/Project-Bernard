@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
              * Else carry on
              */
             if (email == null || email == "") {
-                this.set("errorMessage", "Please enter an email");
+                this.set("errorMessage", "Please enter a new supervisor email");
             }
             else {
                 // If the entered email is missing the domain, add it in
@@ -51,11 +51,12 @@ export default Ember.Controller.extend({
                      * Else - throw an error
                      */
                     if (postResponse.success) {
+                        this.set("supervisorEmail", null);
                         this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
                             "/" + this.get("model.activity.ActivityCode"));
                     }
                     else {
-                        this.set("errorMessage", "An error has occured");
+                        this.set("errorMessage", "Unable to add new supervisor");
                     }
                 }
                 else {

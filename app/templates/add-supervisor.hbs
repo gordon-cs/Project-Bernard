@@ -6,7 +6,7 @@
         {{input value=supervisorEmail class="form-control" placeholder="Supervisor Email Address"}}
         <button type="submit" class="btn button-navy form-button" {{action "post"}}>Add Supervisor</button>
         {{#if errorMessage}}
-            <p id="error-message">{{errorMessage}}</p>
+            <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>
         {{/if}}
     </form>
 </div>
