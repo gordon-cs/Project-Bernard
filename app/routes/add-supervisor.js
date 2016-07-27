@@ -1,6 +1,5 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import getSync from "gordon360/utils/get-sync";
 import getAsync from "gordon360/utils/get-async";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
@@ -14,30 +13,22 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         if (college_role !== "god") {
             this.transitionTo("index");
         }
-        //Variables we will need to fill
-        let activity;;
 
-        /* Promises */
+        // Wrapper for the activities promise.
         let loadActivity = function ( ) {
             return getAsync("/activities/" + param.ActivityCode, context);
         }
-        /* End Promises */
 
-        // Function expressions to be chained with the promises above.
-        let initializeActivity = function ( result ) {
-            activity = result;
-        };
-
-        let loadModel = function ( ) {
+        // Wrapper function to load the model objects.
+        let loadModel = function ( result ) {
             return {
-                "activity": activity,
+                "activity": result,
                 "sessionCode": param.SessionCode
             };
         }
 
         /* COMPOSE AWAY YO */
-        return loadActivity()
-        .then( initializeActivity )
+         return loadActivity()
         .then( loadModel );
 
 
