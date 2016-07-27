@@ -1,6 +1,4 @@
 import Ember from "ember";
-import deleteSync from "gordon360/utils/delete-sync";
-import postSync from "gordon360/utils/post-sync";
 import deleteAsync from "gordon360/utils/delete-async";
 import postAsync from "gordon360/utils/post-async";
 
@@ -9,46 +7,41 @@ export default Ember.Controller.extend({
     actions: {
         // Method that gets called when the follow button is clicked
         toggleFollow() {
-            let passed = false;
-
-            /* If the person is already a follower - delete their guest (follower) membership
-             * Else create their guest membership to become a follower
-             */
-            if (this.get("model").following) {
-                let membershipID = this.get("model").membershipID;
-                // API call via util function to delete a (GUEST) membership
-                passed = deleteSync("/memberships/" + membershipID, this).success;
-            }
-            else {
-                // Data to be sent with API POST call
-                let membership = {
-                    "ACT_CDE": this.get("model").activity.ActivityCode,
-                    "SESS_CDE": this.get("model").session.SessionCode.trim(),
-                    "ID_NUM": this.get("session.data.authenticated.token_data.id"),
+            let context = this;
+            // Post a new membership with 'GUEST' participation
+            let follow = function() {
+                let data = {
+                    "ACT_CDE": context.model.activity.ActivityCode,
+                    "SESS_CDE": context.model.session.SessionCode.trim(),
+                    "ID_NUM": context.get("session.data.authenticated.token_data.id"),
                     "PART_CDE": "GUEST",
                     "BEGIN_DTE": new Date().toJSON(),
                     "END_DTE": new Date().toJSON(),
                     "COMMENT_TXT": "Basic Follower"
                 };
-
-                let newMembershipID = null;
-
-                // API call via util function to add a new (GUEST) membership
-                let response = postSync("/memberships", membership, this);
-
-                // If the call was successful
-                if (response.success) {
-                    this.set("model.membershipID", response.data.MEMBERSHIP_ID);
-                    passed = true;
-                }
-                if (passed) {
-                    this.set("model.membershipID", newMembershipID);
-                }
+                return postAsync("/memberships", data, context);
+            };
+            // Delete follow membership
+            let unfollow = function() {
+                return deleteAsync("/memberships/" + context.model.membershipID, context);
+            };
+            // Get ID of new follow membership
+            let getNewMembership = function(result) {
+                return context.set("model.membershipID", result.MEMBERSHIP_ID);
             }
-            // If the calls were successful reload the page
-            if (passed) {
-                this.set("model.following", !this.get("model").following);
-                window.location.reload(true);
+            // Switch 'following' in model
+            let switchFollow = function() {
+                context.set("model.following", !context.model.following);
+            }
+
+            if (this.model.following) {
+                unfollow()
+                .then(switchFollow);
+            }
+            else {
+                follow()
+                .then(getNewMembership)
+                .then(switchFollow);
             }
         },
         // Method that gets called when the Remove button is clicked
@@ -57,9 +50,6 @@ export default Ember.Controller.extend({
             let first = membership.FirstName;
             let last = membership.LastName;
             let role = membership.ParticipationDescription;
-            let sessionCode = membership.SessionCode;
-            let activityCode = membership.ActivityCode;
-
             if (confirm("Are you sure you want to remove (" + role + ") " + first + " " + last + " from this activity?")) {
                 // API call via util function to remove a membership
                 deleteAsync("/memberships/" + membership.MembershipID, this)
@@ -70,7 +60,7 @@ export default Ember.Controller.extend({
         approveRequest(request) {
             if (confirm("Accept this request?")) {
                 // API call via util function to approve a pending membership request
-                postAsync("/requests/" + request.RequestID + "/approve", request, this);
+                postAsync("/requests/" + request.RequestID + "/approve", request, this)
                 .then(window.location.reload(true));
             }
         },
@@ -78,7 +68,7 @@ export default Ember.Controller.extend({
         denyRequest(request) {
             if (confirm("Deny this request?")) {
                 // API call via util function to deny a pending membership request
-                postAsync("/requests/" + request.RequestID + "/deny", request, this);
+                postAsync("/requests/" + request.RequestID + "/deny", request, this)
                 .then(window.location.reload(true));
             }
         },
