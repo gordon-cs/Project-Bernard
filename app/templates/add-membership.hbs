@@ -29,7 +29,7 @@
             <button type="submit" class="btn button-navy form-button" {{action "post"}}>Request Membership</button>
         {{/if}}
         {{#if errorMessage}}
-            <p id="error-message">{{errorMessage}}</p>
+            <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>
         {{/if}}
     </form>
 </div>

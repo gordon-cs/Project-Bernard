@@ -1,128 +1,202 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import getSync from "gordon360/utils/get-sync";
+import getAsync from "gordon360/utils/get-async";
 import sortJsonArray from "gordon360/utils/sort-json-array";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     /*  Below is the model and calls to the api that retrieve data to fill the model */
     model(param) {
-        let IDNumber = this.get("session.data.authenticated.token_data.id");
-        let activity = getSync("/activities/" + param.ActivityCode, this).data;
-        let session = getSync("/sessions/" + param.SessionCode, this).data;
-        let leading = false;
-        let hasLeaders = false;
-        let hasSupervisors = false;
+        let context = this;
+        let id_number = this.get("session.data.authenticated.token_data.id");
+        let college_role = this.get('session.data.authenticated.token_data.college_role');
 
-        // If the logged in user has admin rights give them to him
-        let godMode = this.get('session.data.authenticated.token_data.college_role') === "god";
-        if (godMode) {
-            leading = true;
-        }
+        let activityPromise = getAsync("/activities/" + param.ActivityCode, context);
+        let sessionPromise = getAsync("/sessions/" + param.SessionCode, context);
+        let supervisorsPromise = getAsync("/supervisors/activity/" + param.ActivityCode, context);
+        let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode + "/leaders", context);
+        let activityLeaderEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode + "/leaders", context);
+        let membershipsPromise = getAsync("/memberships/activity/" + param.ActivityCode, context);
+        let activityRequestsPromise = getAsync("/memberships/activity/" + param.ActivityCode, context);
 
-        // Get supervisors for activity
-        let supervisors = getSync("/supervisors/activity/" + param.ActivityCode, this).data;
-        for (let i = 0; i < supervisors.length; i ++) {
-            if (supervisors[i].SessionCode.trim() !== param.SessionCode) {
-                supervisors.splice(i --, 1);
-                hasSupervisors = true;
-            }
-            else if (supervisors[i].IDNumber == this.get("session.data.authenticated.token_data.id")) {
-                leading = true;
-                hasSupervisors = true;
-            }
-        }
+        // The model object the route will return.
+        let theModel = {};
+        // Set the god switch -- is this user an admin.
+        theModel.godMode = college_role === "god";
+        // If use is an admin, they have all the functionality that leaders and supervisors have.
+        theModel.leading = theModel.godMode === true;
 
-        // Get leaders for session and check if user is a leader
-        let leaders = getSync("/memberships/activity/" + param.ActivityCode + "/leaders", this).data;
-        for (var i = 0; i < leaders.length; i ++) {
-            if (leaders[i].SessionCode !== param.SessionCode) {
-                leaders.splice(i --, 1);
-                hasLeaders = true;
-            }
-            else if (leaders[i].IDNumber == IDNumber) {
-                leading = true;
-                hasLeaders = true;
-            }
-        }
-
-        // Get leader email information
-        let leaderEmails = getSync("/emails/activity/" + param.ActivityCode + "/leaders", this).data;
-
-        // If user is a leader, get all membership requests and emial list
-        let requests = [];
-        let emails = "";
-        if (leading) {
-            requests = getSync("/requests/activity/" + param.ActivityCode, this).data;
-            for (let i = 0; i < requests.length; i ++) {
-                if (requests[i].RequestApproved !== "Pending" || requests[i].SessionCode !== param.SessionCode) {
-                    requests.splice(i --, 1);
-                }
-                else {
-                    requests[i].Email = getSync("/students/" + requests[i].IDNumber, this).data.StudentEmail;
-                }
-            }
-            let emailArray = getSync("/emails/activity/" + param.ActivityCode + "/session/" + param.SessionCode, this).data;
-            for (let i = 0; i < emailArray.length; i ++) {
-                emails += emailArray[i].Email;
-                if (i !== emailArray.length - 1) {
-                    emails += ",";
-                }
-            }
-        }
-
-        // Get current memberships, membership IDs of user, whether user is following and corresponding membership ID
-        let memberships = [];
-        let rosterMemberships = [];
-        let allMyMembershipIDs = [];
-        let membershipID;
-        let following = false;
-        let response = getSync("/memberships/activity/" + param.ActivityCode, this);
-        if (response.success) {
-            memberships = response.data;
-            for (var i = 0; i < memberships.length; i ++) {
-                let mem = memberships[i];
-                if (mem.SessionCode === param.SessionCode) {
-                    if (mem.IDNumber == IDNumber) {
-                        allMyMembershipIDs.push(mem.MembershipID);
-                        if (mem.Participation === "GUEST") {
-                            membershipID = mem.MembershipID;
-                            following = true;
-                        }
-                    }
-                    if (mem.Participation !== "GUEST" || leading) {
-                        rosterMemberships.push(mem);
-                    }
-                }
-                else {
-                    memberships.splice(i --, 1);
-                }
-            }
-        }
-        return {
-            // Persmissions
-            "leading": leading,
-            "godMode": godMode,
-            // Activity
-            "activity": activity,
-            "session": session,
-            "supervisors": supervisors,
-            // Memberships
-            "leaders": leaders,
-            "memberships": memberships,
-            "rosterMemberships": sortJsonArray(rosterMemberships, "LastName"),
-            "rosterFilled": (rosterMemberships.length > 0),
-            "leaderEmails": leaderEmails,
-            "emails": emails,
-            // User
-            "following": following,
-            "membershipID": membershipID,
-            "allMyMembershipIDs": allMyMembershipIDs,
-            // Misc
-            "requests": sortJsonArray(requests, "LastName"),
-            "hasLeaders": hasLeaders,
-            "hasSupervisors": hasSupervisors,
-            "requestsFilled": (requests.length > 0)
+        // Supervisors and Activity leaders filtered by session code.
+        // Manager = supervisor or leader
+        let loadFilteredManagers = function ( model ) {
+            let promiseArray = [supervisorsPromise, activityLeadersPromise];
+            return Ember.RSVP.map(promiseArray, filterAccordingToCurrentSession)
+            .then( function ( results ) {
+                model.supervisors = Ember.RSVP.resolve(results[0]);
+                model.leaders = Ember.RSVP.resolve(results[1]);
+                return Ember.RSVP.hash( model );
+            });
         };
+
+        // Determine if the user is an activity leader or a supervisor
+        let setIfUserIsManager = function ( model ) {
+            if( model.supervisors.length > 0 )
+            {
+                model.hasSupervisors = true;
+                for(let sup in model.supervisors)
+                {
+                    if (sup.IDNumber == id_number)
+                    {
+                        model.leading = true;
+                    }
+                }
+            }
+            if (model.leaders.length > 0)
+            {
+                model.hasLeaders = true;
+                for(let ld in model.leaders)
+                {
+                    if (ld.IDNumber == id_number)
+                    {
+                        model.leading = true;
+                    }
+                }
+            }
+            return Ember.RSVP.hash(model);
+        };
+
+        // Load activity requests if this user is a leader.
+        let loadRequests = function ( model ) {
+            if ( model.leading ) {
+                return activityRequestsPromise
+                .then( filterAccordingToCurrentSession )
+                .then( filterRequestsToShow )
+                .then( function( result ) {
+                    model.requests = result;
+                    model.requestsFilled = (result.length > 0);
+                    return Ember.RSVP.hash(model);
+                });
+            }
+            else{
+                model.requests = [];
+                return model;
+            }
+        };
+
+        // Helper Function For LoadRequests
+        let filterRequestsToShow = function ( requests ) {
+            requests = requests.filter( function( request ) {
+                return request.RequestApproved === "Pending";
+            });
+            return requests;
+        };
+
+        // Helper Function for LoadRquests and LoadMemberships
+        let filterAccordingToCurrentSession = function ( listOfItems ) {
+            listOfItems = listOfItems.filter(function( item ) {
+                return item.SessionCode.trim() === param.SessionCode;
+            });
+            return listOfItems;
+        };
+
+        // Get the activity member emails if the user is a supervisor or activity leader
+        let loadActivityMemberEmails = function ( model ) {
+            if ( model.leading ) {
+                let memberEmails = getAsync("/emails/activity/" + param.ActivityCode + "/session/" + param.SessionCode, context);
+                return memberEmails
+                .then( function ( result ) {
+                    result = result.map(function( obj ) {
+                        return obj.Email;
+                    });
+                    model.emails = result.toString();
+                    console.log( 1, model );
+                    return Ember.RSVP.hash( model );
+                });
+            }
+            else {
+                let emptyEmails = "";
+                model.emails = "";
+                return Ember.RSVP.hash( model );
+            }
+        };
+
+        // Load the activity leader emails.
+        let loadActivityLeaderEmails = function ( model ) {
+            return activityLeaderEmailsPromise
+            .then( function ( result ) {
+                model.leaderEmails = result;
+                return Ember.RSVP.hash( model );
+            });
+        };
+
+        let loadMemberships = function ( model ) {
+            return membershipsPromise
+            .then( filterAccordingToCurrentSession )
+            .then( function( result ) {
+                model.memberships = result;
+                return Ember.RSVP.hash( model );
+            });
+        };
+
+        // Populate the roster that will be displayed.
+        // If you are leader/supervisor, you can see Guests who have followed
+        // You are activity.
+        let populateRoster = function ( model ) {
+            let membershipsToDisplay = [];
+            for (var i = 0; i < model.memberships.length; i++) {
+                if (model.memberships[i].Participation !== "GUEST" || leading) {
+                    membershipsToDisplay.push(model.memberships[i]);
+                }
+            }
+            model.rosterMemberships = sortJsonArray(membershipsToDisplay, "LastName");
+            model.rosterFilled = (model.rosterMemberships.length > 0);
+            console.log( model );
+            return Ember.RSVP.hash(model);
+        };
+
+        // Determine if the user is following the activity
+        let setIfFollowing = function ( model ) {
+            let membershipID;
+            let following = false;
+            for (var i = 0; i < model.memberships.length; i++) {
+                if (model.memberships[i].Participation === "GUEST") {
+                    membershipID = model.memberships[i].MembershipID;
+                    following = true;
+                }
+            }
+            
+            model.membershipID = membershipID;
+            model.following = following;
+            return Ember.RSVP.hash( model );
+        };
+
+        let loadSessions = function ( model ) {
+            model.activity = activityPromise;
+            return Ember.RSVP.hash( model );
+        };
+
+        let loadActivity = function ( model ) {
+            model.session = sessionPromise;
+            return Ember.RSVP.hash( model );
+        };
+
+        let loadModel = function ( model ) {
+            console.log( model );
+            return Ember.RSVP.hash( model );
+        };
+
+        return loadFilteredManagers( theModel )
+        .then( setIfUserIsManager )
+        .then( loadRequests )
+        .then( loadActivityMemberEmails )
+        .then( loadActivityLeaderEmails )
+        .then( loadMemberships )
+        .then( populateRoster )
+        .then( setIfFollowing )
+        .then( loadSessions )
+        .then( loadActivity )
+        .then( loadModel );
+
     }
 });

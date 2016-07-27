@@ -10,7 +10,7 @@ export default function putAsync(urlExtension, data, context) {
     context.get("session").authorize("authorizer:gordon-authorizer", (headerName, headerValue) => {
         authenticationHeader = headerValue
     });
-    
+
     let promise = Ember.$.ajax({
         type: "PUT",
         url: apiConfig.apiUrl + urlExtension,
@@ -20,5 +20,8 @@ export default function putAsync(urlExtension, data, context) {
             "Authorization": authenticationHeader
         }
     });
-    return promise;
+    // Wrapping jquery calls in Promise.resolve
+    // See https://www.promisejs.org/ under the Jquery section to see the reason why.
+    // TL;DR - Jquery has a weird implementation of Promises. This standerdizes it.
+    return Ember.RSVP.resolve(promise);
 }

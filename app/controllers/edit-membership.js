@@ -1,5 +1,4 @@
 import Ember from "ember";
-import putSync from "gordon360/utils/put-sync";
 import putAsync from "gordon360/utils/put-async";
 
 export default Ember.Controller.extend({
@@ -46,6 +45,7 @@ export default Ember.Controller.extend({
                     "END_DTE": new Date().toJSON(),
                     "COMMENT_TXT": comments
                 };
+
                 return putAsync("/memberships/" + membershipID, data, context);
             }
             // Transition back to activity

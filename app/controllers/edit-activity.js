@@ -5,9 +5,12 @@ import postAsync from "gordon360/utils/post-async";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
+    errorMessage: null,
     actions: {
         update() {
+
             let context = this;
+
             // Get all the values that can be entered in
             // If not entered in, use the value already being used
             let description = this.get("description");
@@ -17,11 +20,16 @@ export default Ember.Controller.extend({
             let pageUrl = this.get("pageUrl");
             if (pageUrl == null || pageUrl == "") {
                 pageUrl = this.get("model.activity.ActivityURL");
+                urlValid = true;
             }
-            let imageUrl = this.get("imageUrl");
-            if (imageUrl == null || imageUrl == "") {
-                imageUrl = this.get("model.activity.ActivityImage");
+            else if (pageUrl.includes("http://", 0) || pageUrl.includes("https://", 0)) {
+                urlValid = true;
             }
+            else {
+                urlValid = false;
+                this.set("errorMessage", "Enter the full activity URL: Beginning with http://");
+            }
+
             // Reset image to default
             let resetImage = function() {
                 return postAsync("/activities/" + activityCode + "/image/reset", null, context);
@@ -85,30 +93,28 @@ export default Ember.Controller.extend({
 
 /* HELPER METHODS */
 // Validate the selected image
-function validateImage(file){
-  let validFileExtensions = ['png','jpg','jpeg','bmp','gif'];
-  let result = {
-    isValid : true,
-    validationMessage : ''
-  };
+function validateImage(file) {
+    let validFileExtensions = ['png','jpg','jpeg','bmp','gif'];
+    let result = {
+        isValid : true,
+        validationMessage : ''
+    };
+    let fileExtentsion = file.name.split('.').pop() || '';
+    if (file == undefined) {
+        result.isValid = false;
+        result.validationMessage = "No image file was selected";
+        return result;
+    }
+    // The extension is not in the list of valid extensions
+    if(validFileExtensions.indexOf(fileExtentsion) === -1) {
+        result.isValid = false;
+        result.validationMessage = 'Unacceptable image file: Use only .png, .jpg, .jpeg, .bmp, or .gif images.';
+    }
+    // File is greater than 100KB
+    if(file.size > 100000) {
+        result.isValid = false;
+        result.validationMessage = 'Unacceptable file size: May be no greater than 100KB.';
+    }
 
-  if(file == undefined) {
-    result.isValid = false;
-    result.validationMessage = "No image file was selected.";
     return result;
-  }
-
-  let fileExtentsion = file.name.split('.').pop() || '';
-  // The extension is not in the list of valid extensions
-  if(validFileExtensions.indexOf(fileExtentsion) === -1) {
-    result.isValid = false;
-    result.validationMessage = 'Unacceptable file extension.';
-  }
-  // File is greater than 100KB
-  if(file.size > 100000) {
-    result.isValid = false;
-    result.validationMessage = 'Unacceptable file size.';
-  }
-
-  return result;
 }

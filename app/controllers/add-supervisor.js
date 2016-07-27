@@ -16,6 +16,7 @@ export default Ember.Controller.extend({
             let sessionCode = this.model.sessionCode;
             let activityCode = this.model.activity.ActivityCode;
 
+
             // Check if all the inputs are valid
             let errorChecks = function() {
                 let passed = true;

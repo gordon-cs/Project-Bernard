@@ -17,5 +17,8 @@ export default function deleteAsync(urlExtension, context) {
             "Authorization": authenticationHeader
         }
     });
-    return promise;
+    // Wrapping jquery calls in Promise.resolve
+    // See https://www.promisejs.org/ under the Jquery section to see the reason why.
+    // TL;DR - Jquery has a weird implementation of Promises. This standerdizes it.
+    return Ember.RSVP.resolve(promise);
 }
