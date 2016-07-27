@@ -17,7 +17,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode + "/leaders", context);
         let activityLeaderEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode + "/leaders", context);
         let membershipsPromise = getAsync("/memberships/activity/" + param.ActivityCode, context);
-        let activityRequestsPromise = getAsync("/memberships/activity/" + param.ActivityCode, context);
+        let activityRequestsPromise = getAsync("/requests/activity/" + param.ActivityCode, context);
 
         // The model object the route will return.
         let theModel = {};
@@ -40,7 +40,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Determine if the user is an activity leader or a supervisor
         let setIfUserIsManager = function ( model ) {
-            if( model.supervisors.length > 0 )
+            if (model.supervisors.length > 0)
             {
                 model.hasSupervisors = true;
                 for (var i = 0; i < model.supervisors.length; i++)
@@ -54,7 +54,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             if (model.leaders.length > 0)
             {
                 model.hasLeaders = true;
-
                 for (var i = 0; i < model.leaders.length; i++)
                 {
                     if (model.leaders[i].IDNumber == id_number)
