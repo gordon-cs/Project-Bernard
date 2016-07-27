@@ -11,10 +11,7 @@ export default Base.extend({
         let expiresAt = now + (data.expires_in * 1000);
 
         if (expiresAt > now) {
-            var token = this.makeRequest(data.credentials);
-            return new Ember.RSVP.Promise(function(resolve, reject) {
-                resolve(token);
-            });
+            return this.makeRequest(data.credentials);
         }
         else {
             return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -25,16 +22,15 @@ export default Base.extend({
     },
     // Authenticate credentials
     authenticate: function(credentials) {
-        var token = this.makeRequest(credentials);
-        var promise = new Ember.RSVP.Promise(function(resolve, reject) {
-            if (token.status === "success") {
-                resolve(token);
-            }
-            else {
-                reject(token.error);
-            }
+        let context = this;
+        return new Promise(function(resolve, reject) {
+            return context.makeRequest(credentials)
+            .then(function(result) {
+                    return resolve(result);
+                }, function(error) {
+                    return reject(error.error);
+            });
         });
-        return promise;
     },
     // Invalidate session
     invalidate: function(data) {
@@ -64,33 +60,33 @@ export default Base.extend({
     },
     // Make Request for Access Token
     makeRequest(credentials) {
+        let context = this;
         var data = {
             "username": credentials.username,
             "password": credentials.password,
             "grant_type": "password"
         };
-        var token = {};
-        Ember.$.ajax({
-            type: "POST",
-            url: apiConfig.tokenUrl,
-            data: data,
-            dataType: "json",
-            async: false,
-            success: function(data) {
-                token = data;
-                token.status = "success";
-            },
-            error: function(errorThrown) {
-                console.log(errorThrown);
-                token.error = JSON.parse(errorThrown.responseText).error_description;
-                token.status = "error";
-            }
-        });
-        if (token.status === "success") {
-            token.token_data = this.getTokenData(token.access_token);
-            token.credentials = credentials;
-            this.scheduleAccessTokenRefresh(credentials, token);
+        let makeCall = function() {
+            return Ember.$.ajax({
+                type: "POST",
+                url: apiConfig.tokenUrl,
+                data: data,
+                dataType: "json"
+            });
         }
-        return token;
+        let setToken = function(result) {
+            result.token_data = context.getTokenData(result.access_token);
+            result.credentials = credentials;
+            result.status = "success";
+            context.scheduleAccessTokenRefresh(credentials, result);
+            return result;
+        }
+        let setErrorToken = function(error) {
+            error.error = new Error (JSON.parse(error.responseText).error_description);
+            error.status = "error";
+            return error;
+        }
+        return makeCall()
+            .then(setToken, setErrorToken);
     }
 });

@@ -1,6 +1,6 @@
 import Ember from "ember";
-import getSync from "gordon360/utils/get-sync";
-import postSync from "gordon360/utils/post-sync";
+import getAsync from "gordon360/utils/get-async";
+import postAsync from "gordon360/utils/post-async";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
@@ -9,59 +9,53 @@ export default Ember.Controller.extend({
     actions: {
         post() {
             this.set("errorMessage", null);
+            let context = this;
+            // Data to be sent
             let data = {};
-            let url = null;
+            let email = this.supervisorEmail;
+            let sessionCode = this.model.sessionCode;
+            let activityCode = this.model.activity.ActivityCode;
 
-            // Get the new activity supervisor by email
-            let email = this.get("supervisorEmail");
 
-            /* If the email field was left blank - throw an error
-             * Else carry on
-             */
-            if (email == null || email == "") {
-                this.set("errorMessage", "Please enter a new supervisor email");
-            }
-            else {
-                // If the entered email is missing the domain, add it in
-                if (email.indexOf("@gordon.edu") === -1) {
+            // Check if all the inputs are valid
+            let errorChecks = function() {
+                let passed = true;
+                if (email == null || email == "") {
+                    passed = false;
+                    context.set("errorMessage", "Invalid email address");
+                }
+                else if (email.indexOf("@gordon.edu") === -1) {
                     email = email + "@gordon.edu";
                 }
+                return passed;
+            }
 
-                // Lookup the user by email
-                let getResponse = getSync("/accounts/email/" + email + "/", this);
-                let supervisor = getResponse.data;
+            // Get the student from email
+            let getPerson = function() {
+                return getAsync("/accounts/email/" + email + "/", context);
+            }
 
-                /* If the lookup was successful - move forward with API calls
-                 * Else - throw an errorMessage
-                 */
-                if (getResponse.success) {
-                    // Data to be sent in POST
-                    data = {
-                        "ID_NUM": supervisor.GordonID,
-                        "SESS_CDE": this.get("model.sessionCode"),
-                        "ACT_CDE": this.get("model.activity.ActivityCode")
-                    };
-                    // Set the URL extension
-                    url = "/supervisors";
+            // Send data for supervisor
+            let postSupervisor = function(result) {
+                let data = {
+                    "ID_NUM": result.GordonID,
+                    "SESS_CDE": sessionCode,
+                    "ACT_CDE": activityCode
+                };
+                return postAsync("/supervisors", data, context);
+            }
 
-                    // Make API POST call
-                    let postResponse = postSync(url, data, this);
+            // Leave inputs blank and transition back to activity
+            let transition = function() {
+                context.set("supervisorEmail", null);
+                context.transitionToRoute("/specific-activity/" + sessionCode +
+                        "/" + activityCode);
+            }
 
-                    /* If the call was successful - transition back to activity
-                     * Else - throw an error
-                     */
-                    if (postResponse.success) {
-                        this.set("supervisorEmail", null);
-                        this.transitionToRoute("/specific-activity/" + this.get("model.sessionCode") +
-                            "/" + this.get("model.activity.ActivityCode"));
-                    }
-                    else {
-                        this.set("errorMessage", "Unable to add new supervisor");
-                    }
-                }
-                else {
-                    this.set("errorMessage", "Invalid email address");
-                }
+            if (errorChecks()) {
+                getPerson()
+                .then(postSupervisor)
+                .then(transition);
             }
         }
     }

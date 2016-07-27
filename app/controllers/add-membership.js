@@ -1,5 +1,4 @@
 import Ember from "ember";
-import getSync from "gordon360/utils/get-sync";
 import postSync from "gordon360/utils/post-sync";
 
 export default Ember.Controller.extend({
