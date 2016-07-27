@@ -8,6 +8,10 @@ export default Ember.Controller.extend({
     errorMessage: null,
     actions: {
         update() {
+
+            let urlValid = false;
+            let imgValid = true;
+
             // Get all the values that can be entered in
             // If not entered in, use the value already being used
             let description = this.get("description");
@@ -17,6 +21,14 @@ export default Ember.Controller.extend({
             let pageUrl = this.get("pageUrl");
             if (pageUrl == null || pageUrl == "") {
                 pageUrl = this.get("model.activity.ActivityURL");
+                urlValid = true;
+            }
+            else if (pageUrl.includes("http://", 0) || pageUrl.includes("https://", 0)) {
+                urlValid = true;
+            }
+            else {
+                urlValid = false;
+                this.set("errorMessage", "Enter the full activity URL: Beginning with http://");
             }
             let imageUrl = this.get("imageUrl");
             if (imageUrl == null || imageUrl == "") {
@@ -31,16 +43,17 @@ export default Ember.Controller.extend({
             }
             else {
                 let image = Ember.$("#file")[0].files[0];
-                if (image != null) {
-                    let imageValidation = validateImage(image); // See helper method on the bottom
-                    if (imageValidation.isValid) {
-                        let imageData = new FormData();
-                        imageData.append(image.name, image); // Add the image to the FormData object
-                        let response = postFileSync("/activities/" + activityCode + "/image", imageData, this);
-                        this.set("file", null);
-                    }
-                    else {
-                        this.set("errorMessage", imageValidation.validationMessage);
+                let imageValidation = validateImage(image); // See helper method on the bottom
+                if (imageValidation.isValid) {
+                    let imageData = new FormData();
+                    imageData.append(image.name, image); // Add the image to the FormData object
+                    let imageUpload = postFileSync("/activities/" + activityCode + "/image", imageData, this);
+                }
+                else {
+                    // TODO alert the user that upload validation failed.
+                    if (imageValidation.validationMessage != "No image file was selected.") {
+                        this.set("errorMessage", (imageValidation.validationMessage));
+                        imgValid = false;
                     }
                 }
             }
@@ -55,8 +68,9 @@ export default Ember.Controller.extend({
                 "ACT_BLURB": description
             };
 
-            // Make the API call
-            let response = putSync("/activities/" + this.get("model.activity.ActivityCode"), data, this);
+            if (urlValid && imgValid) {
+                // Make the API call
+                let response = putSync("/activities/" + this.get("model.activity.ActivityCode"), data, this);
 
             /* If the call was successful - transition back to previous page
              * Else - throw an error message
@@ -92,14 +106,14 @@ function validateImage(file) {
         return result;
     }
     // The extension is not in the list of valid extensions
-    else if (validFileExtensions.indexOf(fileExtentsion) === -1) {
+    if(validFileExtensions.indexOf(fileExtentsion) === -1) {
         result.isValid = false;
-        result.validationMessage = 'Unacceptable file extension';
+        result.validationMessage = 'Unacceptable image file: Use only .png, .jpg, .jpeg, .bmp, or .gif images.';
     }
     // File is greater than 100KB
-    else if (file.size > 100000) {
+    if(file.size > 100000) {
         result.isValid = false;
-        result.validationMessage = 'Unacceptable file size';
+        result.validationMessage = 'Unacceptable file size: May be no greater than 100KB.';
     }
 
     return result;

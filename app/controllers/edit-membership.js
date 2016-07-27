@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
              * Else - continue on with API call
              */
             if (comments.length > 45) {
-                this.set("errorMessage", "Comment is too long. Max length 45 characters");
+                this.set("errorMessage", "Comment is too long: Max length 45 characters");
             }
             else {
                 // If no comments were entered use any old ones available
@@ -52,6 +52,8 @@ export default Ember.Controller.extend({
                 if (response.success) {
                     let activityCode = this.get("model.membership.ActivityCode");
                     let sessionCode = this.get("model.membership.SessionCode");
+                    this.set("role", null);
+                    this.set("comments", null);
                     this.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
                 }
                 else {

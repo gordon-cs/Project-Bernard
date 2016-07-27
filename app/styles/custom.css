@@ -103,6 +103,7 @@ select[type="text"]:focus {
     -ms-flex-preferred-size: auto;
     flex-basis: auto;
     overflow: hidden;
+    margin-bottom: 10px !important
 }
 .activity-list-item:hover {
     background-color: #b2bb1c !important;
@@ -236,6 +237,7 @@ button:active,
 .btn:active {
     border: none !important;
     outline: none !important;
+    text-decoration: none;
 }
 button:hover,
 button:focus,
@@ -246,6 +248,7 @@ button:focus,
     -moz-transition:.3s;
     -webkit-transition:.3s;
     color: white !important;
+    text-decoration: none;
 }
 button:active,
 .btn:active {

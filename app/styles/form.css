@@ -21,7 +21,11 @@
 }
 #error-message {
     color: white;
-    font-size: 125%;
+    font-size: 130%;
+}
+#error-message > span {
+    color: #d83c30;
+    font-size: 150%;
 }
 .file-label {
   font-size: 150%;
