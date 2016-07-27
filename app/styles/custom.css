@@ -230,13 +230,19 @@ select[type="text"]:focus {
 button,
 button:hover,
 button:focus,
-button:active {
+button:active,
+.btn,
+.btn:hover,
+.btn:focus,
+.btn:active {
     border: none !important;
     outline: none !important;
     text-decoration: none;
 }
 button:hover,
-button:focus {
+button:focus,
+.btn:hover,
+.btn:focus {
     -o-transition:.3s;
     -ms-transition:.3s;
     -moz-transition:.3s;
@@ -244,7 +250,8 @@ button:focus {
     color: white !important;
     text-decoration: none;
 }
-button:active {
+button:active,
+.btn:active {
 	-webkit-transform: translateY(2px);
     transform: translateY(2px);
 }

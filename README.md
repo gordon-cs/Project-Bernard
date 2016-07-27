@@ -1,7 +1,10 @@
 # Gordon360
 
 Gordon College Co-Curricular Transcript System
-* [Server Repository](https://github.com/gordon-cs/Project-Raymond)
+
+* Makes calls to [JSON Server](https://github.com/gordon-cs/Project-Raymond) at https://gordon360.gordon.edu
+
+* Uses [EmberJS](http://emberjs.com/) Framework
 
 ## Prerequisites
 
@@ -41,7 +44,8 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+* Currently running on PC `ccttrain.grodon.edu`
+* After `ember build --environment production` Copy contents of `dist/` into `\F:\Sites\CCTTrain`
 
 ## Further Reading / Useful Links
 

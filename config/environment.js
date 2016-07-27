@@ -5,6 +5,7 @@ module.exports = function(environment) {
         modulePrefix: 'gordon360',
         environment: environment,
         baseURL: '/',
+        locationType: 'auto',
         EmberENV: {
             FEATURES: {
                 // Here you can enable experimental features on an ember canary build
