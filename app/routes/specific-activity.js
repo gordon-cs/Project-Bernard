@@ -11,13 +11,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let id_number = this.get("session.data.authenticated.token_data.id");
         let college_role = this.get('session.data.authenticated.token_data.college_role');
 
+        // Requests to be called in the beginning
         let activityPromise = getAsync("/activities/" + param.ActivityCode, context);
         let sessionPromise = getAsync("/sessions/" + param.SessionCode, context);
         let supervisorsPromise = getAsync("/supervisors/activity/" + param.ActivityCode, context);
         let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode + "/leaders", context);
         let activityLeaderEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode + "/leaders", context);
         let membershipsPromise = getAsync("/memberships/activity/" + param.ActivityCode, context);
-        let activityRequestsPromise = getAsync("/requests/activity/" + param.ActivityCode, context);
+        // Requests to be called if needed
+        let activityRequestsPromise = function() {return getAsync("/requests/activity/" + param.ActivityCode, context);};
 
         // The model object the route will return.
         let theModel = {};
@@ -68,7 +70,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Load activity requests if this user is a leader.
         let loadRequests = function ( model ) {
             if ( model.leading ) {
-                return activityRequestsPromise
+                return activityRequestsPromise()
                 .then( filterAccordingToCurrentSession )
                 .then( filterRequestsToShow )
                 .then( function( result ) {
