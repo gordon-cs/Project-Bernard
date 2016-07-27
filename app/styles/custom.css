@@ -354,3 +354,9 @@ button:active,
     -moz-transition:.1s;
     -webkit-transition:.1s;
 }
+
+@media only screen and (min-width: 768px) {
+    #loading-box {
+        width: 30%;
+    }
+}
