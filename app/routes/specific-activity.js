@@ -143,6 +143,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let populateRoster = function ( model ) {
             let membershipsToDisplay = [];
             for (var i = 0; i < model.memberships.length; i++) {
+                if (model.memberships[i].IDNumber == id_number) {
+                    model.memberships[i].isLoggedInUser = true;
+                }
                 if (model.memberships[i].Participation !== "GUEST" || model.leading) {
                     membershipsToDisplay.push(model.memberships[i]);
                 }
