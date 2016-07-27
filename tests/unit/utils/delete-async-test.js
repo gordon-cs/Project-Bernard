@@ -1,10 +1,10 @@
-import postSync from 'test-app/utils/post-sync';
+import deleteAsync from 'gordon360/utils/delete-async';
 import { module, test } from 'qunit';
 
-module('Unit | Utility | post sync');
+module('Unit | Utility | delete async');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = postSync();
+  let result = deleteAsync();
   assert.ok(result);
 });

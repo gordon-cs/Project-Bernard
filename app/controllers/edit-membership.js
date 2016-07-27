@@ -1,5 +1,5 @@
 import Ember from "ember";
-import putSync from "gordon360/utils/put-sync";
+import putAsync from "gordon360/utils/put-async";
 
 export default Ember.Controller.extend({
     session: Ember.inject.service('session'),
@@ -11,54 +11,52 @@ export default Ember.Controller.extend({
         },
         // Function called to update a membership
         update() {
+            let context = this;
+
+            let membershipID = this.get("model.membership.MembershipID");
+            let studentID = this.get("model.membership.IDNumber");
             let comments = this.get("comments") || "";
-
-            /* If the comments entered into the field are too long - throw an error
-             * Else - continue on with API call
-             */
-            if (comments.length > 45) {
-                this.set("errorMessage", "Comment is too long: Max length 45 characters");
+            if (comments == null || comments == "") {
+                comments = this.get("model.membership.Description");
             }
-            else {
-                // If no comments were entered use any old ones available
-                if (comments == null || comments == "") {
-                    comments = this.get("model.membership.Description");
+            let roleID = this.get("role.ParticipationCode");
+            if (roleID == null) {
+                roleID = this.get("model.membership.Participation");
+            }
+            // Check for input errors
+            let errorChecks = function() {
+                let passed = true;
+                if (comments.length > 45) {
+                    passed = false;
+                    context.set("errorMessage", "Comment is too long. Max length 45 characters");
                 }
-
-                let roleID = this.get("role.ParticipationCode");
-                // If no role was selected use the role currently held by the person being edited
-                if (roleID == null) {
-                    roleID = this.get("model.membership.Participation");
-                }
-
-                let membershipID = this.get("model.membership.MembershipID");
-                let studentID = this.get("model.membership.IDNumber");
-                // Data to be sent in API call
+                return passed;
+            }
+            // Send updated data
+            let updateMembership = function() {
                 let data = {
                     "MEMBERSHIP_ID": membershipID,
-                    "ACT_CDE": this.get("model.membership.ActivityCode"),
-                    "SESS_CDE": this.get("model.membership.SessionCode"),
+                    "ACT_CDE": context.get("model.membership.ActivityCode"),
+                    "SESS_CDE": context.get("model.membership.SessionCode"),
                     "ID_NUM": studentID,
                     "PART_CDE": roleID,
                     "BEGIN_DTE": new Date().toJSON(),
                     "END_DTE": new Date().toJSON(),
                     "COMMENT_TXT": comments
                 };
-                // API call to update a membership
-                let response = putSync("/memberships/" + membershipID, data, this);
-                /* If the API call was successful - transition back to previous pageUrl
-                 * Else - throw an error
-                 */
-                if (response.success) {
-                    let activityCode = this.get("model.membership.ActivityCode");
-                    let sessionCode = this.get("model.membership.SessionCode");
-                    this.set("role", null);
-                    this.set("comments", null);
-                    this.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
-                }
-                else {
-                    this.set("errorMessage", JSON.parse(response.data.responseText).error_description);
-                }
+
+                return putAsync("/memberships/" + membershipID, data, context);
+            }
+            // Transition back to activity
+            let transition = function() {
+                let activityCode = context.get("model.membership.ActivityCode");
+                let sessionCode = context.get("model.membership.SessionCode");
+                context.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
+            }
+
+            if (errorChecks()) {
+                updateMembership()
+                .then(transition);
             }
         }
     }
