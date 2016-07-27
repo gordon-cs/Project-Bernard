@@ -22,7 +22,7 @@
                         <div class="leaders">
                             {{#each model.leaderEmails as |leader|}}
                                 <p class="activity-info-item-data">
-                                    {{leader.FirstName}} {{leader.LastName}} <a href="mailto:{{leader.Email}}"> (Email)</a>
+                                    <a href="mailto:{{leader.Email}}">{{leader.FirstName}} {{leader.LastName}}</a>
                                 </p>
                             {{/each}}
                         </div>
@@ -40,7 +40,7 @@
                                     {{#if model.godMode}}
                                         <button type="button" class="btn btn-sm button-red sup-btn" {{action "removeSupervisor" supervisor}}>Remove</button>
                                     {{/if}}
-                                    {{supervisor.FirstName}} {{supervisor.LastName}} <a href="mailto:{{supervisor.Email}}"> (Email)</a>
+                                    <a href="mailto:{{supervisor.Email}}">{{supervisor.FirstName}} {{supervisor.LastName}}</a>
                                 </p>
                             {{/each}}
                         </div>
@@ -103,7 +103,21 @@
     {{!-- Members --}}
     <div class="row table-row">
         <div class="col-sm-12">
-            <h2>Current Activity Roster</h2>
+            <h2>
+                Current Activity Roster: {{model.membershipCounter}}
+                {{#if model.membershipSingular}}
+                    Member
+                {{else}}
+                    Members
+                {{/if}}
+                and
+                {{model.guestCounter}}
+                {{#if model.guestSingular}}
+                    Guest
+                {{else}}
+                    Guests
+                {{/if}}
+            </h2>
             {{#if model.rosterFilled}}
                 <div class="table-responsive">
                     <table class="table">
