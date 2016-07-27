@@ -57,7 +57,8 @@
                 {{/if}}
                 {{#if model.activity.ActivityURL}}
                     <div class="col-sm-12 detail-item">
-                        <a class="detial-header" href={{model.activity.ActivityURL}}>Website</a>
+                        <p class="detail-header">Website: </p>
+                        <a class="detial-header" href={{model.activity.ActivityURL}}>{{model.activity.ActivityURL}}</a>
                     </div>
                 {{/if}}
             </div>
@@ -87,7 +88,9 @@
                         <button class="btn button-navy">Send Email to Group</button>
                     </a>
                 {{else}}
-                    {{#if model.following}}
+                    {{#if followLoad}}
+                        <button type="button" class="btn button-navy">Wait</button>
+                    {{else if model.following}}
                         <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
                     {{else}}
                         <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
