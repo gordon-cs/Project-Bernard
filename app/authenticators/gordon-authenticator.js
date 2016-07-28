@@ -4,7 +4,7 @@ import ENV from "gordon360/config/environment"
 
 export default Base.extend({
     session: Ember.inject.service("session"),
-    refreshLeeway: (1000 * (60 * 9.9)), // Time (in milliseconds) between token refresh and token expire
+    refreshLeeway: (1000 * (60 * 2)), // Time (in milliseconds) between token refresh and token expire
     // Restore token data when page is refreshed
     restore: function(data) {
         const now = (new Date()).getTime();
