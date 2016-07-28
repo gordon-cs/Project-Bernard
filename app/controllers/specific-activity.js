@@ -61,7 +61,9 @@ export default Ember.Controller.extend({
             if (confirm("Are you sure you want to remove (" + role + ") " + first + " " + last + " from this activity?")) {
                 // API call via util function to remove a membership
                 deleteAsync("/memberships/" + membership.MembershipID, this)
-                .then(window.location.reload(true));
+                .then(function() {
+                    window.location.reload(true);
+                });
             }
         },
         // Approve specified membership request
@@ -69,7 +71,9 @@ export default Ember.Controller.extend({
             if (confirm("Accept this request?")) {
                 // API call via util function to approve a pending membership request
                 postAsync("/requests/" + request.RequestID + "/approve", request, this)
-                .then(window.location.reload(true));
+                .then(function() {
+                    window.location.reload(true);
+                });
             }
         },
         // Deny specified membership request
@@ -77,7 +81,9 @@ export default Ember.Controller.extend({
             if (confirm("Deny this request?")) {
                 // API call via util function to deny a pending membership request
                 postAsync("/requests/" + request.RequestID + "/deny", request, this)
-                .then(window.location.reload(true));
+                .then(function() {
+                    window.location.reload(true);
+                });
             }
         },
         // Remove a supervisor from this activity
@@ -90,7 +96,9 @@ export default Ember.Controller.extend({
             if (confirm("Do you want to remove " + firstname + " " + lastname + " as a supervisor?")) {
                 // API call to delete specified supervisor
                 deleteAsync("/supervisors/" + id, this)
-                .then(window.location.reload(true));
+                .then(function() {
+                    window.location.reload(true);
+                });
             }
         }
     }

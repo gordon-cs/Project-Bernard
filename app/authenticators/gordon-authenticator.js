@@ -56,7 +56,11 @@ export default Base.extend({
     },
     // Refresh Access Token
     accessTokenRefresh(credentials) {
-        this.set("session.data.authenticated", this.makeRequest(credentials));
+        let context = this;
+        context.makeRequest(credentials)
+        .then( function( token ) {
+            context.set("session.data.authenticated", token);
+        });
     },
     // Make Request for Access Token
     makeRequest(credentials) {

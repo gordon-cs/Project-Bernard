@@ -69,6 +69,11 @@ header {
     display: inline-block;
     font-size: 130% !important;
 }
+
+/* -----------------------------
+    Notifications
+------------------------------- */
+
 .request-notification-dropdown {
     display: inline-block;
     margin-right: 40px;
@@ -85,11 +90,14 @@ header {
 .notification-info {
 	margin-left: 15px;
 }
-
 .notification-delete {
+	width: 60%;
 	border-radius: 3px;
 	font-size: 80%;
 	margin-left: 35px;
+}
+.notification-delete > span {
+	color: white;
 }
 
 /* -----------------------------

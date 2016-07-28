@@ -107,7 +107,7 @@
     <div class="row table-row">
         <div class="col-sm-12">
             <h2>
-                Current Activity Roster: {{model.membershipCounter}}
+                <strong>Current Activity Roster:</strong> {{model.membershipCounter}}
                 {{#if model.membershipSingular}}
                     Member
                 {{else}}
@@ -168,7 +168,9 @@
         {{!-- Membership Requests --}}
         <div class="row table-row">
             <div class="col-sm-12">
-                <h2>Membership Requests</h2>
+                <h2>
+                    <strong>Membership Requests</strong>
+                </h2>
                 {{#if model.requestsFilled}}
                     <div class="table-responsive">
                         <table class="table">
