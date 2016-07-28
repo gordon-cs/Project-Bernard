@@ -23,11 +23,14 @@ a {
     Description
 ------------------------------- */
 
+.right-section {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
 .activity-info {
     margin-top: 50px;
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
+    display: inline-block;
 }
 .detail-item {
     font-size: 200%;
@@ -51,16 +54,14 @@ a {
 }
 .button-row > button,
 .button-row > a > button {
-    width: 90%;
+    width: 100%;
     margin-top: 20px;
-    margin-right: auto;
-    margin-left: auto;
     display: block;
-    text-decoration: inherit;
+    text-decoration: none;
 }
 .sup-btn {
     margin-right: 5px !important;
-    text-decoration: inherit;
+    text-decoration: none;
 }
 
 /* -----------------------------
@@ -71,39 +72,33 @@ a {
     font-size: 150%;
     margin-top: 20px;
 }
-.roster-button {
+.table-button {
     margin-right: 5px;
-    text-decoration: inherit;
-}
-td > button {
-    max-width: 300px;
-    text-decoration: inherit;
+    text-decoration: none;
 }
 .empty-table-reminder {
     margin-left: 20px !important;
     font-size: 100%;
+}
+td {
+    max-width: 200px;
 }
 
 /* -----------------------------
     Responsive Chagnes
 ------------------------------- */
 @media only screen and (min-width: 768px) {
+    .right-section {
+        width: 100%;
+    }
     .button-row > button,
     .button-row > a > button {
         width: auto;
+        margin-right: 5px;
         display: inline-block;
-        font-size: 12px;
-        text-decoration: inherit;
     }
     .activity-picture {
         min-width: 256px;
         min-height: 256px;
-    }
-}
-@media only screen and (min-width: 992px) {
-    .button-row > button,
-    .button-row > a > button {
-        font-size: 14px;
-        text-decoration: inherit;
     }
 }
