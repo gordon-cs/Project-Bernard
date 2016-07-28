@@ -1,6 +1,6 @@
 import Ember from "ember";
 import Base from "ember-simple-auth/authenticators/base";
-import apiConfig from "gordon360/config/api-config"
+import ENV from "gordon360/config/environment"
 
 export default Base.extend({
     session: Ember.inject.service("session"),
@@ -69,7 +69,7 @@ export default Base.extend({
         let makeCall = function() {
             return Ember.$.ajax({
                 type: "POST",
-                url: apiConfig.tokenUrl,
+                url: ENV['ember-simple-auth-token'].serverTokenEndpoint,
                 data: data,
                 dataType: "json"
             });

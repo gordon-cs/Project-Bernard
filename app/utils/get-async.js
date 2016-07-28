@@ -2,7 +2,7 @@
 // urlExtension - location to send request
 // context - context function is being called from (use 'this')
 // returns json data with success boolean and reponse
-import apiConfig from "gordon360/config/api-config"
+import ENV from "gordon360/config/environment"
 
 export default function getAsync(urlExtension, context) {
   let authenticationHeader;
@@ -12,7 +12,7 @@ export default function getAsync(urlExtension, context) {
 
   var promise = Ember.$.ajax({
     type: "GET",
-    url: apiConfig.apiUrl + urlExtension,
+    url: ENV.APP.apiUrl + urlExtension,
     headers: {
       "Authorization": authenticationHeader
     }
