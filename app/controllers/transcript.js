@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {
         getPDF() {
-            this.get("model.doc").output("save", "Co-Curricular Transcipt.pdf");
+            this.get("model.doc").save("Co-Curricular Transcipt.pdf");
         }
     },
     // Create the PDF document that is shown and can be downloaded
