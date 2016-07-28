@@ -27,7 +27,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/sessions/current", context);
         };
         let loadActivities = function ( ) {
-            return getAsync("/activities", context);
+            return getAsync("/activities/session/" + currentSession.SessionCode, context);
         };
         /* End Promises */
 
