@@ -166,14 +166,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             let membershipID;
             let following = false;
             for (var i = 0; i < model.memberships.length; i++) {
-                if (model.memberships[i].Participation === "GUEST") {
+                if (model.memberships[i].Participation === "GUEST" && model.memberships[i].IDNumber === id_number) {
                     membershipID = model.memberships[i].MembershipID;
                     following = true;
                 }
             }
-
             model.membershipID = membershipID;
             model.following = following;
+            console.log(model);
             return Ember.RSVP.hash( model );
         };
 
