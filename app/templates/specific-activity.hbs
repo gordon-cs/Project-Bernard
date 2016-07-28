@@ -162,7 +162,6 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Participation</th>
-                                    <th>Email</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -171,7 +170,6 @@
                                     <tr>
                                         <td> {{req.FirstName}} {{req.LastName}} </td>
                                         <td> {{req.ParticipationDescription}} </td>
-                                        <td> <a href="mailto:{{req.Email}}">{{req.Email}}</a> </td>
                                         <td>
                                             <button {{action "approveRequest" req}} class="btn button-darkgreen table-button">Approve</button>
                                             <button {{action "denyRequest" req}} class="btn button-red table-button">Deny</button>

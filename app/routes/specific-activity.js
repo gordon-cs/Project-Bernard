@@ -79,7 +79,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     return Ember.RSVP.hash(model);
                 });
             }
-            else{
+            else {
                 model.requests = [];
                 return model;
             }
