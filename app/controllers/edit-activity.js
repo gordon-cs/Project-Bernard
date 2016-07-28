@@ -32,10 +32,16 @@ export default Ember.Controller.extend({
                 this.set("errorMessage", "Enter the full activity URL: Beginning with http://");
             }
 
+            // Display error message on the page
+            let showError = function(result) {
+                context.set("errorMessage", result.responseText);
+            };
+
             // Reset image to default
             let resetImage = function() {
                 return postAsync("/activities/" + context.model.activity.ActivityCode + "/image/reset", null, context);
             };
+
             // Upload image file
             // Resturns resolved promise if no image was selected
             let uploadImage = function() {
@@ -78,7 +84,7 @@ export default Ember.Controller.extend({
                 context.set("use_default_image", false);
                 context.transitionToRoute("/specific-activity/" + context.get("model.sessionCode") +
                         "/" + context.get("model.activity.ActivityCode"));
-            }
+            };
 
             if (this.get("use_default_image")) {
                 resetImage()

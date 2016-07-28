@@ -45,12 +45,17 @@ export default Ember.Controller.extend({
                     }
                 }
                 return passed;
-            }
+            };
+
+            // Display error message on the page
+            let showError = function(result) {
+                context.set("errorMessage", result.responseText);
+            };
 
             // Get the student from email
             let getStudent = function() {
-                return getAsync("/accounts/email/" + email + "/", context);
-            }
+                return getAsync("/accounts/email/" + email + "/", context).catch(showError);
+            };
 
             // Send data for membership
             let postMembership = function(result) {
@@ -63,12 +68,8 @@ export default Ember.Controller.extend({
                     "END_DTE": new Date().toJSON(),
                     "COMMENT_TXT": comments
                 };
-                let response = postAsync("/memberships", data, context);
-                if (response.status === 500) {
-                    context.set("errorMessage", "An error has occured");
-                }
-                return response;
-            }
+                return postAsync("/memberships", data, context).catch(showError);
+            };
 
             // Send data for membership request
             let postRequest = function() {
@@ -86,7 +87,7 @@ export default Ember.Controller.extend({
                     context.set("errorMessage", "An error has occured");
                 }
                 return response;
-            }
+            };
 
             // Leave inputs blank and transition back to activity
             let transition = function(result) {
@@ -95,7 +96,7 @@ export default Ember.Controller.extend({
                 context.set("comments", null);
                 context.transitionToRoute("/specific-activity/" + sessionCode +
                         "/" + activityCode);
-            }
+            };
 
             if (errorChecks()) {
                 if (this.get("model.leading")) {
