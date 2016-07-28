@@ -11,6 +11,7 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     notificationsPresent: false,
+    requestsCalled: false,
     requestsRecieved: [],
     requestsSent: [],
     actions: {
@@ -31,16 +32,81 @@ export default Ember.Controller.extend({
         let context = this;
         let IDNumber = this.get("session.data.authenticated.token_data.id");
 
-        let leaderMemberships = [];
+        // Get leader positions of user
+        let getLeaderPositions = function() {
+            let positions = [];
+            return getAsync("/memberships/student/" + IDNumber, context)
+            .then(function(result) {
+                for (var i = 0; i < result.length; i++) {
+                    if (isLeader(result[i].Participation)) {
+                        if (positions.indexOf(result[i].ActivityCode.trim()) === -1) {
+                            positions.push(result[i].ActivityCode.trim());
+                        }
+                    }
+                }
+                return positions;
+            });
+        }
 
-        // Get memberships of user
-        let getMemberships = function() {
-            return getAsync("/memberships/student/" + IDNumber, context);
+        // Get supervisor positions of user
+        let getSupervisorPositions = function(positions) {
+            return getAsync("/supervisors/person/" + IDNumber, context)
+            .then(function(result) {
+                for (var i = 0; i < result.length; i++) {
+                    if (!isLeader(result[i].Participation)) {
+                        if (positions.indexOf(result[i].ActivityCode.trim()) === -1) {
+                            positions.push(result[i].ActivityCode.trim());
+                        }
+                    }
+                }
+                return positions;
+            })
         };
-        // Get requests for an activity
-        let getActivityRequests = function() {
-            return getAsync("/requests/activity/" + leaderMemberships[i].ActivityCode, context);
+
+        // Get requests sent to specified activity
+        let getRecievedRequests = function(result) {
+            return getAsync("/requests/activity/" + result, context);
         };
+
+        // Get requests sent by user
+        let getSentRequests = function() {
+            return getAsync("/requests/student/" + IDNumber, context);
+        };
+
+        // Add pending recieved requests to list and calculate age
+        let addRecievedRequests = function(result) {
+            let requestsRecieved = [];
+            for (var i = 0; i < result.length; i++) {
+                let diffDays = getDiffDays(result[i].DateSent);
+                result[i].DiffDays = diffDays.diffString;
+                result[i].DiffDaysInt = diffDays.diffInt;
+                if (result[i].RequestApproved === "Pending") {
+                    requestsRecieved.push(result[i]);
+                }
+            }
+            if (requestsRecieved.length > 0) {
+                let allRequestsRecieved = context.requestsRecieved.concat(requestsRecieved);
+                context.set("requestsRecieved", allRequestsRecieved);
+                context.set("notificationsPresent", true);
+            }
+        };
+
+        // Add sent requests to list and calculate age
+        let addSentRequests = function(result) {
+            let requestsSent = [];
+            for (var i = 0; i < result.length; i++) {
+                let diffDays = getDiffDays(result[i].DateSent);
+                result[i].DiffDays = diffDays.diffString;
+                result[i].DiffDaysInt = diffDays.diffInt;
+                requestsSent.push(result[i]);
+            }
+            if (requestsSent.length > 0) {
+                let allRequestsSent = context.requestsSent.concat(requestsSent);
+                context.set("requestsSent", allRequestsSent);
+                context.set("notificationsPresent", true);
+            }
+        };
+
         // Get the difference in days bewteen today and specified date
         // Returns integer and printable string
         let getDiffDays = function(date) {
@@ -62,77 +128,21 @@ export default Ember.Controller.extend({
                 "diffInt": diffDays,
                 "diffString": diffString
             };
-        }
-        // Chooses requests that pending for the session that the user is a leader of
-        let setRecievedRequests = function(result) {
-            console.log(result);
-            let requestsRecieved = [];
-            for (let i = 0; i < result.length; i ++) {
-                if (result[i].RequestApproved === "Pending") {
-                    console.log("pending");
-                    for (let j = 0; j < leaderMemberships.length; j ++) {
-                        if (result[i].Session === leaderMemberships[j].Session &&
-                                result[i].ActivityCode === leaderMemberships[j].ActivityCode) {
-                            let diffDays = getDiffDays(result[i].DateSent);
-                            result[i].DiffDays = diffDays.diffString;
-                            result[i].DiffDaysInt = diffDays.diffInt;
-                            requestsRecieved.push(result[i]);
-                        }
-                    }
-                }
-            }
-            if (requestsRecieved.length > 0) {
-                console.log(requestsRecieved);
-                let array = this.requestsRecieved.concat(requestsRecieved);
-                context.set("requestsRecieved", sortJsonArray(array, "DiffDaysInt"));
-                context.set("notificationsPresent", true);
-            }
-        };
-        // Chooses requests that are newer then 7 days or still pending
-        let setSentRequests = function(result) {
-            let requestsSent = [];
-            for (let i = 0; i < result.length; i ++) {
-                let diffDays = getDiffDays(result[i].DateSent);
-                result[i].DiffDays = diffDays.diffString;
-                result[i].DiffDaysInt = diffDays.diffInt;
-                if (diffDays.diffInt <= 7 || result[i].RequestApproved === "Pending") {
-                    requestsSent.push(result[i]);
-                }
-            }
-            if (requestsSent.length > 0) {
-                context.set("requestsSent", sortJsonArray(requestsSent, "DiffDaysInt"));
-                context.set("notificationsPresent", true);
-            }
-        };
-        // Removes non-leadership postions and gets all requests for those activities
-        // Gets all requests user has sent
-        let getAllRequests = function(result) {
-            for (let i = 0; i < result.length; i ++) {
-                if (!isLeader(result[i].Participation)) {
-                    result.splice(i --, 1);
-                }
-            }
-            leaderMemberships = result;
-            for (let i = 0; i < leaderMemberships.length; i ++) {
-                getAsync("/requests/activity/" + leaderMemberships[i].ActivityCode, context)
-                .then(setRecievedRequests);
-            }
-            getAsync("/supervisors/person/" + context.get("session.data.authenticated.token_data.id"), context)
-            .then(function(result) {
-                for (var i = 0; i < result.length; i++) {
-                    console.log(result[i]);
-                    getAsync("/requests/activity/" + result[i].ActivityCode, context)
-                    .then(setRecievedRequests);
-                }
-            });
-            getAsync("/requests/student/" + IDNumber, context)
-            .then(setSentRequests);
         };
 
-        if ((this.requestsRecieved.length === 0 || this.requestsSent.length === 0) &&
-                this.get("session.data.authenticated.token_data")) {
-            getMemberships()
-            .then(getAllRequests)
+        if (!this.requestsCalled && this.get("session.data.authenticated.token_data")) {
+            this.set("requestsCalled", true);
+
+            getLeaderPositions()
+            .then(getSupervisorPositions)
+            .then(function(result) {
+                for (var i = 0; i < result.length; i++) {
+                    getRecievedRequests(result[i])
+                    .then(addRecievedRequests);
+                }
+            })
+            getSentRequests()
+            .then(addSentRequests);
         }
     },
 });
