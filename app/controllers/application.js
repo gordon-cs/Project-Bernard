@@ -20,7 +20,9 @@ export default Ember.Controller.extend({
         },
         deleteRequest(requestID) {
             deleteAsync("/requests/" + requestID, this)
-            .then(window.location.reload(true));
+            .then(function() {
+                window.location.reload(true);
+            });
         }
     },
     // Get requests a user may have to approve or deny
