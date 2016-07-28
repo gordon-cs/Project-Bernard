@@ -11,12 +11,13 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     notificationsPresent: false,
-    requestsRecieved: null,
-    requestsSent: null,
+    requestsRecieved: [],
+    requestsSent: [],
     actions: {
         logout() {
             this.get("session").invalidate();
-            this.set("requests", null);
+            this.set("requestsRecieved", []);
+            this.set("requestsSent", []);
         },
         deleteRequest(requestID) {
             deleteAsync("/requests/" + requestID, this)
@@ -64,9 +65,11 @@ export default Ember.Controller.extend({
         }
         // Chooses requests that pending for the session that the user is a leader of
         let setRecievedRequests = function(result) {
+            console.log(result);
             let requestsRecieved = [];
             for (let i = 0; i < result.length; i ++) {
                 if (result[i].RequestApproved === "Pending") {
+                    console.log("pending");
                     for (let j = 0; j < leaderMemberships.length; j ++) {
                         if (result[i].Session === leaderMemberships[j].Session &&
                                 result[i].ActivityCode === leaderMemberships[j].ActivityCode) {
@@ -79,7 +82,9 @@ export default Ember.Controller.extend({
                 }
             }
             if (requestsRecieved.length > 0) {
-                context.set("requestsRecieved", sortJsonArray(requestsRecieved, "DiffDaysInt"));
+                console.log(requestsRecieved);
+                let array = this.requestsRecieved.concat(requestsRecieved);
+                context.set("requestsRecieved", sortJsonArray(array, "DiffDaysInt"));
                 context.set("notificationsPresent", true);
             }
         };
@@ -112,11 +117,19 @@ export default Ember.Controller.extend({
                 getAsync("/requests/activity/" + leaderMemberships[i].ActivityCode, context)
                 .then(setRecievedRequests);
             }
+            getAsync("/supervisors/person/" + context.get("session.data.authenticated.token_data.id"), context)
+            .then(function(result) {
+                for (var i = 0; i < result.length; i++) {
+                    console.log(result[i]);
+                    getAsync("/requests/activity/" + result[i].ActivityCode, context)
+                    .then(setRecievedRequests);
+                }
+            });
             getAsync("/requests/student/" + IDNumber, context)
             .then(setSentRequests);
         };
 
-        if ((this.requestsRecieved === null || this.requestsSent === null) &&
+        if ((this.requestsRecieved.length === 0 || this.requestsSent.length === 0) &&
                 this.get("session.data.authenticated.token_data")) {
             getMemberships()
             .then(getAllRequests)
