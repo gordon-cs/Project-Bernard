@@ -173,7 +173,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
             model.membershipID = membershipID;
             model.following = following;
-            console.log(model);
             return Ember.RSVP.hash( model );
         };
 
