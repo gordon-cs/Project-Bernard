@@ -165,7 +165,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let setIfFollowing = function ( model ) {
             let membershipID;
             let following = false;
-            console.log( model );
             for (var i = 0; i < model.memberships.length; i++) {
                 if (model.memberships[i].Participation === "GUEST" && model.memberships[i].IDNumber == id_number) {
                     model.membershipID = model.memberships[i].MembershipID;
