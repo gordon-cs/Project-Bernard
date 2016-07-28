@@ -2,6 +2,10 @@ import Ember from "ember";
 import getAsync from "gordon360/utils/get-async";
 import sortJsonArray from "gordon360/utils/sort-json-array";
 
+/*  Controller for the what's available (all activities) page.
+ *  Handles user interaction with the page.
+ *  Sends requests to the model to retrieve and/or modify data.
+ */
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {

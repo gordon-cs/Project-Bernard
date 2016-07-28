@@ -3,6 +3,10 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 import getAsync from "gordon360/utils/get-async";
 import sortJsonArray from "gordon360/utils/sort-json-array";
 
+/*  Route for the what's available (all activities) page.
+ *  Defines the data that is shown/can be retrieved by the page.
+ *  Builds the data model that is used in the corresponding template (hbs) and controller (js) files.
+ */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model() {
 

@@ -3,6 +3,10 @@ import getAsync from "gordon360/utils/get-async";
 import isTranscriptWorthy from "gordon360/utils/is-transcript-worthy";
 import sortJsonArray from "gordon360/utils/sort-json-array";
 
+/*  Controller for the transcript page.
+ *  Handles user interaction with the page.
+ *  Sends requests to the model to retrieve and/or modify data.
+ */
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {
