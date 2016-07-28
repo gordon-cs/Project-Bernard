@@ -49,7 +49,7 @@ export default Ember.Controller.extend({
 
             // Display error message on the page
             let showError = function(result) {
-                context.set("errorMessage", result.responseText);
+                context.set("errorMessage", new Error(result.responseText));
             };
 
             // Get the student from email
@@ -82,11 +82,7 @@ export default Ember.Controller.extend({
                     "COMMENT_TXT": comments,
                     "APPROVED": "Pending"
                 };
-                let response = postAsync("/requests", data, context);
-                if (response.status === 500) {
-                    context.set("errorMessage", "An error has occured");
-                }
-                return response;
+                return postAsync("/requests", data, context).catch(showError);
             };
 
             // Leave inputs blank and transition back to activity

@@ -34,12 +34,12 @@ export default Ember.Controller.extend({
 
             // Display error message on the page
             let showError = function(result) {
-                context.set("errorMessage", result.responseText);
+                context.set("errorMessage", new Error(result.responseText));
             };
 
             // Reset image to default
             let resetImage = function() {
-                return postAsync("/activities/" + context.model.activity.ActivityCode + "/image/reset", null, context);
+                return postAsync("/activities/" + context.model.activity.ActivityCode + "/image/reset", null, context).catch(showError);
             };
 
             // Upload image file
@@ -52,7 +52,7 @@ export default Ember.Controller.extend({
                         let imageData = new FormData();
                         imageData.append(image.name, image); // Add the image to the FormData object
                         return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
-                                "/image", imageData, context);
+                                "/image", imageData, context).catch(showError);
                     }
                     else {
                         context.set("errorMessage", imageValidation.validationMessage);
@@ -74,7 +74,7 @@ export default Ember.Controller.extend({
                     "ACT_URL": pageUrl,
                     "ACT_BLURB": description
                 };
-                return putAsync("/activities/" + context.get("model.activity.ActivityCode"), data, context);
+                return putAsync("/activities/" + context.get("model.activity.ActivityCode"), data, context).catch(showError);
             };
             // Leave inputs blank and transition back to activity after post
             let transition = function() {

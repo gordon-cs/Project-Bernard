@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
 
             // Display error message on the page
             let showError = function(result) {
-                context.set("errorMessage", result.responseText);
+                context.set("errorMessage", new Error(result.responseText));
             };
 
             // Send updated data
