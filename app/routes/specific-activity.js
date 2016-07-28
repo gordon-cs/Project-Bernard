@@ -169,6 +169,54 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return Ember.RSVP.hash( model );
         };
 
+        // Calculate number of guest memberships and regular memberships.
+        // Remove duplicates from counters.
+        let calculateMemberships = function ( model ) {
+            let guestCounter = 0;
+            let membershipCounter = 0;
+            let guestSingular = false;
+            let membershipSingular = false;
+            let uniqueMemberships = [];
+            let uniqueGuests = [];
+
+            // Loop through all memberships
+            for (var i = 0; i < model.memberships.length; i++) {
+                let first = model.memberships[i].FirstName;
+                let last = model.memberships[i].LastName;
+                let name = first + " " + last;
+                // If the memberships is a guest
+                if (model.memberships[i].Participation === "GUEST") {
+                    // Remove any duplications
+                    if (uniqueGuests.indexOf(name) === -1) {
+                        guestCounter ++;
+                        uniqueGuests.push(name);
+                    }
+                }
+                // If the membership is not a guest - remove any duplications
+                else if (uniqueMemberships.indexOf(name) === -1) {
+                    membershipCounter ++;
+                    uniqueMemberships.push(name);
+                }
+
+            }
+
+            // Checks the plurality of guest memberships
+            if (guestCounter === 1) {
+                guestSingular = true;
+            }
+
+            // Checks the plurality of normal memberships
+            if (membershipCounter === 1) {
+                membershipSingular = true;
+            }
+
+            model.guestSingular = guestSingular;
+            model.membershipSingular = membershipSingular;
+            model.guestCounter = guestCounter;
+            model.membershipCounter = membershipCounter;
+            return Ember.RSVP.hash( model );
+        };
+
         let loadSessions = function ( model ) {
             model.activity = activityPromise;
             return Ember.RSVP.hash( model );
@@ -189,6 +237,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then( loadActivityMemberEmails )
         .then( loadActivityLeaderEmails )
         .then( loadMemberships )
+        .then( calculateMemberships )
         .then( populateRoster )
         .then( setIfFollowing )
         .then( loadSessions )
