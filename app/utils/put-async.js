@@ -3,7 +3,7 @@
 // data - json data to be updated
 // context - context function is being called from (use 'this')
 // returns json data with success boolean and reponse
-import apiConfig from "gordon360/config/api-config"
+import ENV from "gordon360/config/environment"
 
 export default function putAsync(urlExtension, data, context) {
     let authenticationHeader;
@@ -13,7 +13,7 @@ export default function putAsync(urlExtension, data, context) {
 
     let promise = Ember.$.ajax({
         type: "PUT",
-        url: apiConfig.apiUrl + urlExtension,
+        url: ENV.APP.apiUrl + urlExtension,
         contentType: "application/json",
         data: JSON.stringify(data),
         headers: {

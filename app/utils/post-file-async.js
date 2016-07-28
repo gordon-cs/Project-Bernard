@@ -3,7 +3,7 @@
 // data - FormData to be sent. The file should be included in the FormData object
 // context - context function is being called from (use 'this')
 // returns json data with success boolean and reponse
-import apiConfig from "gordon360/config/api-config"
+import ENV from "gordon360/config/environment"
 
 export default function postFileAsync(urlExtension, data, context) {
     let authenticationHeader;
@@ -13,7 +13,7 @@ export default function postFileAsync(urlExtension, data, context) {
 
     let promise = Ember.$.ajax({
         type: "POST",
-        url: apiConfig.apiUrl + urlExtension,
+        url: ENV.APP.apiUrl + urlExtension,
         contentType: false,
         processData: false,
         data: data,
