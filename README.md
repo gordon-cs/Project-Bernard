@@ -2,9 +2,33 @@
 
 Gordon College Co-Curricular Transcript System
 
-* Makes calls to [JSON Server](https://github.com/gordon-cs/Project-Raymond) at https://gordon360.gordon.edu
+##Contents
+  * [Indroduction](#introduction)
+  * [Sites](#sites)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+  * [Running and Development](#running-and-development)
+    * [Code Generators](#code-generators)
+    * [Running Tests](#running-tests)
+    * [Building](#building)
+    * [Deploying](#deploying)
+  * [Further Reading and Useful Links](#further-reading-and-useful-links)
 
-* Uses [EmberJS](http://emberjs.com/) Framework
+##Introduction
+
+* Poject running at https://360.gordon.edu
+* Using [EmberJS](http://emberjs.com/) Framework
+* Makes calls to JSON Server at https://360api.gordon.edu
+  * [Resopitory](https://github.com/gordon-cs/Project-Raymond)
+
+##Sites
+
+* Testing Sites
+  * Client: https://360train.gordon.edu
+  * Server: https://360apitrain.gordon.edu
+* Production Sites
+  * Client: https://360.gordon.edu
+  * Server: https://360api.gordon.edu
 
 ## Prerequisites
 
@@ -23,7 +47,7 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
-## Running / Development
+## Running and Development
 
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
@@ -45,9 +69,9 @@ Make use of the many generators for code, try `ember help generate` for more det
 ### Deploying
 
 * Currently running on PC `ccttrain.grodon.edu`
-* After `ember build --environment production` Copy contents of `dist/` into `\F:\Sites\CCTTrain`
+* After `ember build --environment production` Copy contents of `dist/` into `\F:\Sites\site_name`
 
-## Further Reading / Useful Links
+## Further Reading and Useful Links
 
 * [ember.js](http://emberjs.com/)
 * [ember-cli](http://ember-cli.com/)
