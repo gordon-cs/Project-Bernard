@@ -22,7 +22,7 @@
                         <div class="leaders">
                             {{#each model.leaderEmails as |leader|}}
                                 <p class="activity-info-item-data">
-                                    <a href="mailto:{{leader.Email}}">{{leader.FirstName}} {{leader.LastName}}</a>
+                                    <a href="mailto:{{leader.Email}}" target="_blank">{{leader.FirstName}} {{leader.LastName}}</a>
                                 </p>
                             {{/each}}
                         </div>
@@ -74,7 +74,7 @@
                     {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Edit Activity</button>
                     {{/link-to}}
-                    <a href="mailto:{{model.emails}}">
+                    <a href="mailto:{{model.emails}}" target="_blank">
                         <button class="btn button-navy">Send Email to Group</button>
                     </a>
                 {{else if model.leading}}
