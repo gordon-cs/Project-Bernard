@@ -8,12 +8,14 @@ import postAsync from "gordon360/utils/post-async";
  */
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
+    followLoad: false,
     actions: {
         // Method that gets called when the follow button is clicked
         toggleFollow() {
             let context = this;
             // Post a new membership with 'GUEST' participation
             let follow = function() {
+                context.set("followLoad", true);
                 let data = {
                     "ACT_CDE": context.model.activity.ActivityCode,
                     "SESS_CDE": context.model.session.SessionCode.trim(),
@@ -27,6 +29,7 @@ export default Ember.Controller.extend({
             };
             // Delete follow membership
             let unfollow = function() {
+                context.set("followLoad", true);
                 return deleteAsync("/memberships/" + context.model.membershipID, context);
             };
             // Get ID of new follow membership
@@ -36,6 +39,7 @@ export default Ember.Controller.extend({
             // Switch 'following' in model
             let switchFollow = function() {
                 context.set("model.following", !context.model.following);
+                context.set("followLoad", false);
             }
 
             if (this.model.following) {

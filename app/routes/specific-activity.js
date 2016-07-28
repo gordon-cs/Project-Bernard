@@ -15,13 +15,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let id_number = this.get("session.data.authenticated.token_data.id");
         let college_role = this.get('session.data.authenticated.token_data.college_role');
 
-        let activityPromise = getAsync("/activities/" + param.ActivityCode, context);
-        let sessionPromise = getAsync("/sessions/" + param.SessionCode, context);
-        let supervisorsPromise = getAsync("/supervisors/activity/" + param.ActivityCode, context);
-        let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode + "/leaders", context);
-        let activityLeaderEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode + "/leaders", context);
-        let membershipsPromise = getAsync("/memberships/activity/" + param.ActivityCode, context);
-        let activityRequestsPromise = getAsync("/memberships/activity/" + param.ActivityCode, context);
+        // Requests to be called in the beginning
+        let activityPromise = getAsync("/activities/" + param.ActivityCode.trim(), context);
+        let sessionPromise = getAsync("/sessions/" + param.SessionCode.trim(), context);
+        let supervisorsPromise = getAsync("/supervisors/activity/" + param.ActivityCode.trim(), context);
+        let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/leaders", context);
+        let activityLeaderEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/leaders/session/" + param.SessionCode.trim(), context);
+        let membershipsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim(), context);
+        // Requests to be called if needed
+        let activityRequestsPromise = function() {return getAsync("/requests/activity/" + param.ActivityCode.trim(), context);};
 
         // The model object the route will return.
         let theModel = {};
@@ -44,7 +46,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Determine if the user is an activity leader or a supervisor
         let setIfUserIsManager = function ( model ) {
-            if( model.supervisors.length > 0 )
+            if (model.supervisors.length > 0)
             {
                 model.hasSupervisors = true;
                 for (var i = 0; i < model.supervisors.length; i++)
@@ -58,7 +60,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             if (model.leaders.length > 0)
             {
                 model.hasLeaders = true;
-
                 for (var i = 0; i < model.leaders.length; i++)
                 {
                     if (model.leaders[i].IDNumber == id_number)
@@ -73,7 +74,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Load activity requests if this user is a leader.
         let loadRequests = function ( model ) {
             if ( model.leading ) {
-                return activityRequestsPromise
+                return activityRequestsPromise()
                 .then( filterAccordingToCurrentSession )
                 .then( filterRequestsToShow )
                 .then( function( result ) {
@@ -82,7 +83,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     return Ember.RSVP.hash(model);
                 });
             }
-            else{
+            else {
                 model.requests = [];
                 return model;
             }
@@ -148,6 +149,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let populateRoster = function ( model ) {
             let membershipsToDisplay = [];
             for (var i = 0; i < model.memberships.length; i++) {
+                if (model.memberships[i].IDNumber == id_number) {
+                    model.memberships[i].isLoggedInUser = true;
+                }
                 if (model.memberships[i].Participation !== "GUEST" || model.leading) {
                     membershipsToDisplay.push(model.memberships[i]);
                 }
