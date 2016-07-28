@@ -32,30 +32,40 @@ export default Ember.Controller.extend({
                 this.set("errorMessage", "Enter the full activity URL: Beginning with http://");
             }
 
+            // Display error message on the page
+            let showError = function(result) {
+                context.set("errorMessage", new Error(result.responseText));
+            };
+
             // Reset image to default
             let resetImage = function() {
-                return postAsync("/activities/" + context.model.activity.ActivityCode + "/image/reset", null, context);
+                return postAsync("/activities/" + context.model.activity.ActivityCode + "/image/reset", null, context).catch(showError);
             };
+
             // Upload image file
             // Resturns resolved promise if no image was selected
             let uploadImage = function() {
-                let response = new Ember.RSVP.Promise(function(resolve, reject) {
-                    resolve("No image");
-                });
                 let image = Ember.$("#file")[0].files[0];
                 if (image != null) {
                     let imageValidation = validateImage(image); // See helper method on the bottom
                     if (imageValidation.isValid) {
                         let imageData = new FormData();
                         imageData.append(image.name, image); // Add the image to the FormData object
-                        response = postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
-                                "/image", imageData, context);
+                        return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
+                                "/image", imageData, context).catch(showError);
                     }
                     else {
                         context.set("errorMessage", imageValidation.validationMessage);
+                        return new Ember.RSVP.Promise(function(resolve, reject) {
+                            reject();
+                        });
                     }
                 }
-                return response;
+                else { // No image was selected
+                    return new Ember.RSVP.Promise(function(resolve, reject) {
+                        resolve();
+                    });
+                }
             };
             // Post new information
             let updateActivity = function() {
@@ -64,17 +74,17 @@ export default Ember.Controller.extend({
                     "ACT_URL": pageUrl,
                     "ACT_BLURB": description
                 };
-                return putAsync("/activities/" + context.get("model.activity.ActivityCode"), data, context);
+                return putAsync("/activities/" + context.get("model.activity.ActivityCode"), data, context).catch(showError);
             };
             // Leave inputs blank and transition back to activity after post
             let transition = function() {
                 context.set("description", null);
                 context.set("pageUrl", null);
-                context.set("imageUrl", null);
-                context.set("use_default_image", null);
+                context.set("file", "");
+                context.set("use_default_image", false);
                 context.transitionToRoute("/specific-activity/" + context.get("model.sessionCode") +
                         "/" + context.get("model.activity.ActivityCode"));
-            }
+            };
 
             if (this.get("use_default_image")) {
                 resetImage()

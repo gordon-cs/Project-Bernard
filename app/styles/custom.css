@@ -8,6 +8,7 @@
  - Colored Boxes
  - Buttons
  - Ember Power Select
+ - Loading Screen
 
 */
 
@@ -353,4 +354,19 @@ button:active,
     -ms-transition:.1s;
     -moz-transition:.1s;
     -webkit-transition:.1s;
+}
+
+/* -----------------------------
+    Loading Screen
+------------------------------- */
+
+#loading-box {
+    text-align: center;
+}
+@media only screen and (min-width: 768px) {
+    #loading-box {
+        margin-left: auto;
+        margin-right: auto;
+        width: 30%;
+    }
 }

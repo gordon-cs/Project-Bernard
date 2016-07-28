@@ -31,7 +31,13 @@ export default Ember.Controller.extend({
                     context.set("errorMessage", "Comment is too long. Max length 45 characters");
                 }
                 return passed;
-            }
+            };
+
+            // Display error message on the page
+            let showError = function(result) {
+                context.set("errorMessage", new Error(result.responseText));
+            };
+
             // Send updated data
             let updateMembership = function() {
                 let data = {
@@ -45,14 +51,15 @@ export default Ember.Controller.extend({
                     "COMMENT_TXT": comments
                 };
 
-                return putAsync("/memberships/" + membershipID, data, context);
-            }
+                return putAsync("/memberships/" + membershipID, data, context).catch(showError);
+            };
+
             // Transition back to activity
             let transition = function() {
                 let activityCode = context.get("model.membership.ActivityCode");
                 let sessionCode = context.get("model.membership.SessionCode");
                 context.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
-            }
+            };
 
             if (errorChecks()) {
                 updateMembership()

@@ -28,12 +28,17 @@ export default Ember.Controller.extend({
                     email = email + "@gordon.edu";
                 }
                 return passed;
-            }
+            };
+
+            // Display error message on the page
+            let showError = function(result) {
+                context.set("errorMessage", new Error(result.responseText));
+            };
 
             // Get the student from email
             let getPerson = function() {
-                return getAsync("/accounts/email/" + email + "/", context);
-            }
+                return getAsync("/accounts/email/" + email + "/", context).catch(showError);
+            };
 
             // Send data for supervisor
             let postSupervisor = function(result) {
@@ -42,15 +47,15 @@ export default Ember.Controller.extend({
                     "SESS_CDE": sessionCode,
                     "ACT_CDE": activityCode
                 };
-                return postAsync("/supervisors", data, context);
-            }
+                return postAsync("/supervisors", data, context).catch(showError);
+            };
 
             // Leave inputs blank and transition back to activity
             let transition = function() {
                 context.set("supervisorEmail", null);
                 context.transitionToRoute("/specific-activity/" + sessionCode +
                         "/" + activityCode);
-            }
+            };
 
             if (errorChecks()) {
                 getPerson()
