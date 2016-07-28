@@ -2,6 +2,10 @@ import Ember from "ember";
 import deleteAsync from "gordon360/utils/delete-async";
 import postAsync from "gordon360/utils/post-async";
 
+/*  Controller for the specific activity page.
+ *  Handles user interaction with the page.
+ *  Sends requests to the model to retrieve and/or modify data.
+ */
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {

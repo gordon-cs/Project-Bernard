@@ -4,6 +4,10 @@ import getAsync from "gordon360/utils/get-async";
 import deleteAsync from "gordon360/utils/delete-async";
 import sortJsonArray from "gordon360/utils/sort-json-array";
 
+/*  Controller for the notification/logout bar.
+ *  Handles user interaction with the page.
+ *  Sends requests to the model to retrieve and/or modify data.
+ */
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     notificationsPresent: false,

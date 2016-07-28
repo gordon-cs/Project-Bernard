@@ -1,5 +1,9 @@
 import Ember from "ember";
 
+/*  Controller for the login page.
+ *  Handles user interaction with the page.
+ *  Sends requests to the model to retrieve and/or modify data.
+ */
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {
