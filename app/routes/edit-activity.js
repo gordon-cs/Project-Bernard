@@ -24,13 +24,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let activityLeadersPromise =  getAsync("/memberships/activity/" + activity_code + "/leaders", context);
 
         // Wrapper for the activity promise
-        let loadActivity = function ( ) {
+        let loadActivity = function () {
             return getAsync("/activities/" + activity_code, context);
         }
 
         // Function to determine if logged-in user owns any of the objects
         // passed to the function.
-        let checkIfInList = function ( result ) {
+        let checkIfInList = function (result) {
             for (let i = 0; i < result.length; i ++) {
                 if (result[i].IDNumber == id_number) {
                     return true;
@@ -40,7 +40,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         // Wrapper function to load the model object.
-        let loadModel = function ( result ) {
+        let loadModel = function (result) {
             return {
                 "activity": result,
                 "sessionCode": param.SessionCode
@@ -49,16 +49,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 
         /* COMPOSE PROMISES */
-        if ( leading ) {
-             return loadActivity( )
-            .then( loadModel );
+        if (leading) {
+             return loadActivity()
+            .then(loadModel);
         }
         else {
-            return Ember.RSVP.map( [supervisorsPromise, activityLeadersPromise], checkIfInList )
-            .then( function( results ) {
-                if( results[0] || results[1] ) {
-                    return loadActivity( )
-                    .then( loadModel );
+            return Ember.RSVP.map([supervisorsPromise, activityLeadersPromise], checkIfInList)
+            .then(function(results) {
+                if(results[0] || results[1]) {
+                    return loadActivity()
+                    .then(loadModel);
                 }
                 else {
                     context.transitionTo("index");

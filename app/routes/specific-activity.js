@@ -34,36 +34,30 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Supervisors and Activity leaders filtered by session code.
         // Manager = supervisor or leader
-        let loadFilteredManagers = function ( model ) {
+        let loadFilteredManagers = function (model) {
             let promiseArray = [supervisorsPromise, activityLeadersPromise];
             return Ember.RSVP.map(promiseArray, filterAccordingToCurrentSession)
-            .then( function ( results ) {
+            .then(function (results) {
                 model.supervisors = Ember.RSVP.resolve(results[0]);
                 model.leaders = Ember.RSVP.resolve(results[1]);
-                return Ember.RSVP.hash( model );
+                return Ember.RSVP.hash(model);
             });
         };
 
         // Determine if the user is an activity leader or a supervisor
-        let setIfUserIsManager = function ( model ) {
-            if (model.supervisors.length > 0)
-            {
+        let setIfUserIsManager = function (model) {
+            if (model.supervisors.length > 0) {
                 model.hasSupervisors = true;
-                for (var i = 0; i < model.supervisors.length; i++)
-                {
-                    if (model.supervisors[i].IDNumber == id_number)
-                    {
+                for (var i = 0; i < model.supervisors.length; i++) {
+                    if (model.supervisors[i].IDNumber == id_number) {
                         model.leading = true;
                     }
                 }
             }
-            if (model.leaders.length > 0)
-            {
+            if (model.leaders.length > 0) {
                 model.hasLeaders = true;
-                for (var i = 0; i < model.leaders.length; i++)
-                {
-                    if (model.leaders[i].IDNumber == id_number)
-                    {
+                for (var i = 0; i < model.leaders.length; i++) {
+                    if (model.leaders[i].IDNumber == id_number) {
                         model.leading = true;
                     }
                 }
@@ -72,12 +66,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         // Load activity requests if this user is a leader.
-        let loadRequests = function ( model ) {
-            if ( model.leading ) {
+        let loadRequests = function (model) {
+            if (model.leading) {
                 return activityRequestsPromise()
-                .then( filterAccordingToCurrentSession )
-                .then( filterRequestsToShow )
-                .then( function( result ) {
+                .then(filterAccordingToCurrentSession)
+                .then(filterRequestsToShow)
+                .then(function(result) {
                     model.requests = result;
                     model.requestsFilled = (result.length > 0);
                     return Ember.RSVP.hash(model);
@@ -90,63 +84,63 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         // Helper Function For LoadRequests
-        let filterRequestsToShow = function ( requests ) {
-            requests = requests.filter( function( request ) {
+        let filterRequestsToShow = function (requests) {
+            requests = requests.filter(function(request) {
                 return request.RequestApproved === "Pending";
             });
             return requests;
         };
 
         // Helper Function for LoadRquests and LoadMemberships
-        let filterAccordingToCurrentSession = function ( listOfItems ) {
-            listOfItems = listOfItems.filter(function( item ) {
+        let filterAccordingToCurrentSession = function (listOfItems) {
+            listOfItems = listOfItems.filter(function(item) {
                 return item.SessionCode.trim() === param.SessionCode;
             });
             return listOfItems;
         };
 
         // Get the activity member emails if the user is a supervisor or activity leader
-        let loadActivityMemberEmails = function ( model ) {
-            if ( model.leading ) {
+        let loadActivityMemberEmails = function (model) {
+            if (model.leading) {
                 let memberEmails = getAsync("/emails/activity/" + param.ActivityCode + "/session/" + param.SessionCode, context);
                 return memberEmails
-                .then( function ( result ) {
-                    result = result.map(function( obj ) {
+                .then(function (result) {
+                    result = result.map(function(obj) {
                         return obj.Email;
                     });
                     model.emails = result.toString();
-                    return Ember.RSVP.hash( model );
+                    return Ember.RSVP.hash(model);
                 });
             }
             else {
                 let emptyEmails = "";
                 model.emails = "";
-                return Ember.RSVP.hash( model );
+                return Ember.RSVP.hash(model);
             }
         };
 
         // Load the activity leader emails.
-        let loadActivityLeaderEmails = function ( model ) {
+        let loadActivityLeaderEmails = function (model) {
             return activityLeaderEmailsPromise
-            .then( function ( result ) {
+            .then(function (result) {
                 model.leaderEmails = result;
-                return Ember.RSVP.hash( model );
+                return Ember.RSVP.hash(model);
             });
         };
 
-        let loadMemberships = function ( model ) {
+        let loadMemberships = function (model) {
             return membershipsPromise
-            .then( filterAccordingToCurrentSession )
-            .then( function( result ) {
+            .then(filterAccordingToCurrentSession)
+            .then(function(result) {
                 model.memberships = result;
-                return Ember.RSVP.hash( model );
+                return Ember.RSVP.hash(model);
             });
         };
 
         // Populate the roster that will be displayed.
         // If you are leader/supervisor, you can see Guests who have followed
         // You are activity.
-        let populateRoster = function ( model ) {
+        let populateRoster = function (model) {
             let membershipsToDisplay = [];
             for (var i = 0; i < model.memberships.length; i++) {
                 if (model.memberships[i].IDNumber == id_number) {
@@ -162,7 +156,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         // Determine if the user is following the activity
-        let setIfFollowing = function ( model ) {
+        let setIfFollowing = function (model) {
             let membershipID;
             let following = false;
             for (var i = 0; i < model.memberships.length; i++) {
@@ -171,12 +165,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     model.following = true;
                 }
             }
-            return Ember.RSVP.hash( model );
+            return Ember.RSVP.hash(model);
         };
 
         // Calculate number of guest memberships and regular memberships.
         // Remove duplicates from counters.
-        let calculateMemberships = function ( model ) {
+        let calculateMemberships = function (model) {
             let guestCounter = 0;
             let membershipCounter = 0;
             let guestSingular = false;
@@ -219,35 +213,35 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             model.membershipSingular = membershipSingular;
             model.guestCounter = guestCounter;
             model.membershipCounter = membershipCounter;
-            return Ember.RSVP.hash( model );
+            return Ember.RSVP.hash(model);
         };
 
-        let loadSessions = function ( model ) {
+        let loadSessions = function (model) {
             model.activity = activityPromise;
-            return Ember.RSVP.hash( model );
+            return Ember.RSVP.hash(model);
         };
 
-        let loadActivity = function ( model ) {
+        let loadActivity = function (model) {
             model.session = sessionPromise;
-            return Ember.RSVP.hash( model );
+            return Ember.RSVP.hash(model);
         };
 
-        let loadModel = function ( model ) {
-            return Ember.RSVP.hash( model );
+        let loadModel = function (model) {
+            return Ember.RSVP.hash(model);
         };
 
-        return loadFilteredManagers( theModel )
-        .then( setIfUserIsManager )
-        .then( loadRequests )
-        .then( loadActivityMemberEmails )
-        .then( loadActivityLeaderEmails )
-        .then( loadMemberships )
-        .then( calculateMemberships )
-        .then( populateRoster )
-        .then( setIfFollowing )
-        .then( loadSessions )
-        .then( loadActivity )
-        .then( loadModel );
+        return loadFilteredManagers(theModel)
+        .then(setIfUserIsManager)
+        .then(loadRequests)
+        .then(loadActivityMemberEmails)
+        .then(loadActivityLeaderEmails)
+        .then(loadMemberships)
+        .then(calculateMemberships)
+        .then(populateRoster)
+        .then(setIfFollowing)
+        .then(loadSessions)
+        .then(loadActivity)
+        .then(loadModel);
 
     }
 });

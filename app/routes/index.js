@@ -35,38 +35,38 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let allMemberships;
 
         /* Promises */
-        let loadCurrentSession = function( ) {
+        let loadCurrentSession = function() {
             return getAsync("/sessions/current", context)
         };
 
-        let initializeCurrentSession = function ( result ) {
+        let initializeCurrentSession = function (result) {
             currentSession = result;
         }
 
-        let loadMemberships = function( ) {
+        let loadMemberships = function() {
             return getAsync("/memberships/student/" + id_number, context)
         };
 
-        let initializeMemberships = function( result ) {
+        let initializeMemberships = function(result) {
             allMemberships = result;
         };
 
-        let arrangeMemberships = function ( ) {
+        let arrangeMemberships = function () {
             sortMemberships(currentSession,allMemberships,currentMemberships,pastMemberships);
             for (let i = 0; i < pastMemberships.length; i ++) {
                 sortJsonArray(pastMemberships[i].activities, "ActivityDescription");
             }
         };
 
-        let loadSupervisions = function( ) {
+        let loadSupervisions = function() {
             return getAsync("/supervisors/person/" + id_number, context)
         };
 
-        let initializeSupervisions = function ( result ) {
+        let initializeSupervisions = function (result) {
             allSupervisions = result;
         };
 
-        let arrangeSupervisions = function ( ) {
+        let arrangeSupervisions = function () {
             sortSupervisions(currentSession,allSupervisions,currentSupervisions,pastSupervisions);
         };
 
@@ -103,15 +103,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         /* Compose the promises ♫♫♫♫♫♫ Music to my eyes*/
         return loadCurrentSession()
-        .then( initializeCurrentSession )
-        .then( loadSupervisions )
-        .then( initializeSupervisions )
-        .then( arrangeSupervisions )
-        .then( loadMemberships )
-        .then( initializeMemberships )
-        .then( arrangeMemberships )
-        .then( loadSwitches )
-        .then( loadModel );
+        .then(initializeCurrentSession)
+        .then(loadSupervisions)
+        .then(initializeSupervisions)
+        .then(arrangeSupervisions)
+        .then(loadMemberships)
+        .then(initializeMemberships)
+        .then(arrangeMemberships)
+        .then(loadSwitches)
+        .then(loadModel);
 
     }
 });

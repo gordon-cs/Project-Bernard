@@ -20,35 +20,35 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 
         /* Promises */
-        let loadSessions = function ( ) {
+        let loadSessions = function () {
             return getAsync("/sessions", context);
         };
-        let loadCurrentSession = function ( ) {
+        let loadCurrentSession = function () {
             return getAsync("/sessions/current", context);
         };
-        let loadActivities = function ( ) {
+        let loadActivities = function () {
             return getAsync("/activities/session/" + currentSession.SessionCode, context);
         };
         /* End Promises */
 
         // These functions expressions are to be chained to the promises above.
-        let initializeSessions = function ( result ) {
+        let initializeSessions = function (result) {
             sessions = result;
             for (let i = sessions.length - 1; i >= 0; i --) {
                 reversedSessions.push(sessions[i]);
             }
         };
 
-        let initializeCurrentSession = function ( result ) {
+        let initializeCurrentSession = function (result) {
             currentSession = result;
         };
 
-        let initializeActivities = function ( result ) {
+        let initializeActivities = function (result) {
             activities = result;
             sortJsonArray(activities , "ActivityDescription");
 
         }
-        let loadModel = function ( ) {
+        let loadModel = function () {
             // Return the resolved value
             return {
                 "activities": activities,
@@ -61,12 +61,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         /* Composing Promises like a composer yo ♬ ♭ ♮♬ ♭ ♮♬ ♭ ♮*/
         return loadSessions()
-        .then( initializeSessions )
-        .then( loadCurrentSession )
-        .then( initializeCurrentSession )
-        .then( loadActivities )
-        .then( initializeActivities )
-        .then( loadModel )
+        .then(initializeSessions)
+        .then(loadCurrentSession)
+        .then(initializeCurrentSession)
+        .then(loadActivities)
+        .then(initializeActivities)
+        .then(loadModel)
 
     }
 });

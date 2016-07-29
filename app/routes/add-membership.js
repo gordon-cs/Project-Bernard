@@ -25,51 +25,51 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let supervisors;
 
         /* Promises */
-        let loadRoles = function ( ) {
+        let loadRoles = function () {
             return getAsync("/participations", context);
         };
 
 
-        let loadActivity = function ( ) {
+        let loadActivity = function () {
             return getAsync("/activities/" + activity_code, context);
         };
 
-        let loadActivityLeaders = function ( ) {
+        let loadActivityLeaders = function () {
             return getAsync("/memberships/activity/" + activity_code + "/leaders", context);
         };
 
-        let loadMemberships = function ( ) {
+        let loadMemberships = function () {
             return getAsync("/memberships/activity/" + activity_code, context);
         };
 
-        let loadSupervisors = function ( ) {
+        let loadSupervisors = function () {
             return getAsync("/supervisors/activity/" + activity_code, context);
         };
         /* End Promises */
 
 
         // These functions expressions are to be chained to the promises above.
-        let initializeRoles = function ( result ) {
+        let initializeRoles = function (result) {
             roles = result;
         };
 
-        let initializeActivity = function ( result ) {
+        let initializeActivity = function (result) {
             activity = result;
         };
 
-        let initializeMemberships = function ( result ) {
+        let initializeMemberships = function (result) {
             memberships = result;
         };
 
-        let initializeActivityLeaders = function ( result ) {
+        let initializeActivityLeaders = function (result) {
             leaders = result;
         };
 
-        let initializeSupervisors = function ( result )  {
+        let initializeSupervisors = function (result)  {
             supervisors = result;
         };
 
-        let filterMemberships = function ( ) {
+        let filterMemberships = function () {
             // Ugly code that james wrote ...jk jk jk jk
             for (let i = 0; i < memberships.length; i ++) {
                 if (memberships[i].SessionCode !== param.SessionCode) {
@@ -79,7 +79,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         };
 
-        let setSwitches = function ( ) {
+        let setSwitches = function () {
             // Check if leader
             for (let i = 0; i < leaders.length; i ++) {
                 if (leaders[i].SessionCode == session_code && leaders[i].IDNumber == id_number) {
@@ -94,7 +94,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         }
 
-        let loadModel = function ( ) {
+        let loadModel = function () {
             return {
                 "activity": activity,
                 "sessionCode": param.SessionCode,
@@ -107,18 +107,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         /* Compose those promises like there is no tomorrow */
         return loadRoles()
-        .then( initializeRoles )
-        .then( loadActivity )
-        .then( initializeActivity )
-        .then( loadMemberships )
-        .then( initializeMemberships )
-        .then( filterMemberships )
-        .then( loadActivityLeaders )
-        .then( initializeActivityLeaders )
-        .then( loadSupervisors )
-        .then( initializeSupervisors )
-        .then( setSwitches )
-        .then( loadModel );
+        .then(initializeRoles)
+        .then(loadActivity)
+        .then(initializeActivity)
+        .then(loadMemberships)
+        .then(initializeMemberships)
+        .then(filterMemberships)
+        .then(loadActivityLeaders)
+        .then(initializeActivityLeaders)
+        .then(loadSupervisors)
+        .then(initializeSupervisors)
+        .then(setSwitches)
+        .then(loadModel);
 
         }
 });
