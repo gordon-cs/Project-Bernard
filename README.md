@@ -12,6 +12,7 @@ Gordon College Co-Curricular Transcript System
     * [Running Tests](#running-tests)
     * [Building](#building)
     * [Deploying](#deploying)
+  * [Addons](#addons)
   * [Further Reading and Useful Links](#further-reading-and-useful-links)
 
 ##Introduction
@@ -70,6 +71,12 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 * Currently running on PC `ccttrain.gordon.edu`
 * After `ember build --environment production` Copy contents of `dist/` into `\F:\Sites\site_name`
+
+### Addons
+
+* [Ember Simple Auth](https://ember-simple-auth.com/)
+* [jsPDF](https://parall.ax/products/jspdf)
+* [File Saver](https://github.com/eligrey/FileSaver.js/)
 
 ## Further Reading and Useful Links
 
