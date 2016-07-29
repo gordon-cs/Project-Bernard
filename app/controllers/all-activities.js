@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
             if (searchValue) {
                 let newList = [];
                 let oldList = this.get("model.activities");
-                for (let i = 0; i < oldList.length; i ++) {
+                for (let i = 0; i < oldList.length; i++) {
                     if (oldList[i].ActivityDescription.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
                     }

@@ -9,7 +9,6 @@ export default Base.extend({
     restore: function(data) {
         const now = (new Date()).getTime();
         let expiresAt = now + (data.expires_in * 1000);
-
         if (expiresAt > now) {
             return this.makeRequest(data.credentials);
         }
@@ -23,7 +22,7 @@ export default Base.extend({
     // Authenticate credentials
     authenticate: function(credentials) {
         let context = this;
-        return new Promise(function(resolve, reject) {
+        return new Ember.RSVP.Promise(function(resolve, reject) {
             return context.makeRequest(credentials)
             .then(function(result) {
                     return resolve(result);
@@ -34,7 +33,7 @@ export default Base.extend({
     },
     // Invalidate session
     invalidate: function(data) {
-        return new Promise(function(resolve, reject) {
+        return new Ember.RSVP.Promise(function(resolve, reject) {
             resolve();
         });
     },

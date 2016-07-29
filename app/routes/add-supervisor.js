@@ -19,12 +19,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         // Wrapper for the activities promise.
-        let loadActivity = function ( ) {
+        let loadActivity = function () {
             return getAsync("/activities/" + param.ActivityCode, context);
         }
 
         // Wrapper function to load the model objects.
-        let loadModel = function ( result ) {
+        let loadModel = function (result) {
             return {
                 "activity": result,
                 "sessionCode": param.SessionCode
@@ -33,7 +33,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         /* COMPOSE AWAY YO */
          return loadActivity()
-        .then( loadModel );
+        .then(loadModel);
 
 
 

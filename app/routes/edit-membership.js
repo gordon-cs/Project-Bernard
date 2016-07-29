@@ -18,48 +18,48 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let membershipPromise = getAsync("/memberships/" + param.MembershipID, context);
 
 
-        let loadMembership  = function ( model ) {
+        let loadMembership  = function (model) {
             return membershipPromise
-            .then( function ( result ) {
+            .then(function (result) {
                 model.membership = result;
                 model.ActivityCode = result.ActivityCode;
-                return Ember.RSVP.hash( model );
+                return Ember.RSVP.hash(model);
             });
         };
 
-        let loadRoles = function ( model ) {
+        let loadRoles = function (model) {
             return rolesPromise
-            .then( function ( result ) {
+            .then(function (result) {
                 model.roles = result;
-                return Ember.RSVP.hash( model );
+                return Ember.RSVP.hash(model);
             });
         };
 
-        let checkIfSupervisor = function ( model ) {
+        let checkIfSupervisor = function (model) {
             if (!model.leading) {
                 return getAsync("/supervisors/activity/" + model.ActivityCode, context)
-                .then( isIDInList )
-                .then( function ( bool ) {
+                .then(isIDInList)
+                .then(function (bool) {
                     model.leading = bool;
-                    return Ember.RSVP.hash( model );
+                    return Ember.RSVP.hash(model);
                 });
             }
             return model
         };
 
-        let checkIfActivityLeader = function ( model ) {
+        let checkIfActivityLeader = function (model) {
             if (!model.leading) {
                 return getAsync("/memberships/activity/" + model.ActivityCode + "/leaders", context)
-                .then( isIDInList )
-                .then( function ( bool ) {
+                .then(isIDInList)
+                .then(function (bool) {
                     model.leading = bool;
-                    return Ember.RSVP.hash( model );
+                    return Ember.RSVP.hash(model);
                 });
             }
-            return Ember.RSVP.hash( model) ;
+            return Ember.RSVP.hash(model) ;
         };
 
-        let redirectIfNeither = function ( model ) {
+        let redirectIfNeither = function (model) {
             if (!model.leading) {
                 context.transitionTo("index");
             }
@@ -69,25 +69,25 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         // Helper function
-        let isIDInList = function ( result ) {
+        let isIDInList = function (result) {
             for (let i = 0; i < result.length; i++)
             {
-                if (result[i].IDNumber == id_number ) {
+                if (result[i].IDNumber == id_number) {
                     return true;
                 }
             }
             return false;
         };
 
-        let loadModel = function ( model ) {
-            return Ember.RSVP.hash( model );
+        let loadModel = function (model) {
+            return Ember.RSVP.hash(model);
         };
 
-        return loadMembership ( theModel )
-        .then( loadRoles )
-        .then( checkIfSupervisor )
-        .then( checkIfActivityLeader )
-        .then( redirectIfNeither )
-        .then( loadModel );
+        return loadMembership (theModel)
+        .then(loadRoles)
+        .then(checkIfSupervisor)
+        .then(checkIfActivityLeader)
+        .then(redirectIfNeither)
+        .then(loadModel);
     }
 });

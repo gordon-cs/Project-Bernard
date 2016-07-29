@@ -35,38 +35,38 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let allMemberships;
 
         /* Promises */
-        let loadCurrentSession = function( ) {
+        let loadCurrentSession = function() {
             return getAsync("/sessions/current", context)
         };
 
-        let initializeCurrentSession = function ( result ) {
+        let initializeCurrentSession = function (result) {
             currentSession = result;
         }
 
-        let loadMemberships = function( ) {
+        let loadMemberships = function() {
             return getAsync("/memberships/student/" + id_number, context)
         };
 
-        let initializeMemberships = function( result ) {
+        let initializeMemberships = function(result) {
             allMemberships = result;
         };
 
-        let arrangeMemberships = function ( ) {
+        let arrangeMemberships = function () {
             sortMemberships(currentSession,allMemberships,currentMemberships,pastMemberships);
-            for (let i = 0; i < pastMemberships.length; i ++) {
+            for (let i = 0; i < pastMemberships.length; i++) {
                 sortJsonArray(pastMemberships[i].activities, "ActivityDescription");
             }
         };
 
-        let loadSupervisions = function( ) {
+        let loadSupervisions = function() {
             return getAsync("/supervisors/person/" + id_number, context)
         };
 
-        let initializeSupervisions = function ( result ) {
+        let initializeSupervisions = function (result) {
             allSupervisions = result;
         };
 
-        let arrangeSupervisions = function ( ) {
+        let arrangeSupervisions = function () {
             sortSupervisions(currentSession,allSupervisions,currentSupervisions,pastSupervisions);
         };
 
@@ -103,15 +103,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         /* Compose the promises ♫♫♫♫♫♫ Music to my eyes*/
         return loadCurrentSession()
-        .then( initializeCurrentSession )
-        .then( loadSupervisions )
-        .then( initializeSupervisions )
-        .then( arrangeSupervisions )
-        .then( loadMemberships )
-        .then( initializeMemberships )
-        .then( arrangeMemberships )
-        .then( loadSwitches )
-        .then( loadModel );
+        .then(initializeCurrentSession)
+        .then(loadSupervisions)
+        .then(initializeSupervisions)
+        .then(arrangeSupervisions)
+        .then(loadMemberships)
+        .then(initializeMemberships)
+        .then(arrangeMemberships)
+        .then(loadSwitches)
+        .then(loadModel);
 
     }
 });
@@ -142,7 +142,7 @@ function sortSupervisions(currentSession, allSupervisions, currentSupervisions, 
 function sortMemberships(currentSession, allMemberships, currentMemberships, pastMemberships) {
     // Loop through each membership
 
-    for (let i = 0; i < allMemberships.length; i ++) {
+    for (let i = 0; i < allMemberships.length; i++) {
         /* If the current session matches the membership session - Set it as a current membership
         * Else - Set it as a past membership
         */
@@ -153,7 +153,7 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
             let session = allMemberships[i].SessionDescription;
             let place = null;
             let length = pastMemberships.length;
-            for (let j = 0; j < pastMemberships.length; j ++) {
+            for (let j = 0; j < pastMemberships.length; j++) {
                 if (pastMemberships[j].session === session) {
                     place = j;
                 }
@@ -163,7 +163,7 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
                     "session": session,
                     "activities": []
                 });
-                place = length ++;
+                place = length++;
             }
             pastMemberships[place].activities.push(allMemberships[i]);
         }

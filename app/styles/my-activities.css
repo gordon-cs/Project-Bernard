@@ -20,6 +20,9 @@
 .empty-list {
     text-align: center;
 }
+.empty-list > h3 {
+    font-size: 14px !important;
+}
 .empty-list-link {
     color:  #00aeef;
 	text-decoration: none;
@@ -43,5 +46,8 @@
         width: 40%;
         margin-left: auto;
         margin-right: auto;
+    }
+    .empty-list > h3 {
+        font-size: 18px !important;
     }
 }
