@@ -31,7 +31,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Function to determine if logged-in user owns any of the objects
         // passed to the function.
         let checkIfInList = function (result) {
-            for (let i = 0; i < result.length; i ++) {
+            for (let i = 0; i < result.length; i++) {
                 if (result[i].IDNumber == id_number) {
                     return true;
                 }

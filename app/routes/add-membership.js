@@ -71,7 +71,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let filterMemberships = function () {
             // Ugly code that james wrote ...jk jk jk jk
-            for (let i = 0; i < memberships.length; i ++) {
+            for (let i = 0; i < memberships.length; i++) {
                 if (memberships[i].SessionCode !== param.SessionCode) {
                     memberships.splice(i, 1);
                     i --;
@@ -81,13 +81,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let setSwitches = function () {
             // Check if leader
-            for (let i = 0; i < leaders.length; i ++) {
+            for (let i = 0; i < leaders.length; i++) {
                 if (leaders[i].SessionCode == session_code && leaders[i].IDNumber == id_number) {
                     leading = true;
                 }
             }
             // Check if supervisor
-            for (let i = 0; i < supervisors.length; i ++) {
+            for (let i = 0; i < supervisors.length; i++) {
                 if (supervisors[i].IDNumber == id_number) {
                     leading = true;
                 }

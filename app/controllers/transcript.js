@@ -23,7 +23,7 @@ export default Ember.Controller.extend({
         }
         let sortMemberships = function(result) {
             let memberships = [];
-            for (let i = 0; i < result.length; i ++) {
+            for (let i = 0; i < result.length; i++) {
                 if (isTranscriptWorthy(result[i].Participation)) {
                     memberships.push(result[i]);
                 }
@@ -104,7 +104,7 @@ export default Ember.Controller.extend({
             move(10);
             // Activity List
             doc.setLineWidth(LIST_LINE_WIDTH);
-            for (var i = 0; i < memberships.length; i ++) {
+            for (var i = 0; i < memberships.length; i++) {
                 if (i !== 0) {
                     addLine(MARGIN, INNER_WIDTH / 2, LIST_LINE_WIDTH, 6);
                 }

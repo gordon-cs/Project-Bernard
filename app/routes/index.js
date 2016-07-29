@@ -53,7 +53,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let arrangeMemberships = function () {
             sortMemberships(currentSession,allMemberships,currentMemberships,pastMemberships);
-            for (let i = 0; i < pastMemberships.length; i ++) {
+            for (let i = 0; i < pastMemberships.length; i++) {
                 sortJsonArray(pastMemberships[i].activities, "ActivityDescription");
             }
         };
@@ -142,7 +142,7 @@ function sortSupervisions(currentSession, allSupervisions, currentSupervisions, 
 function sortMemberships(currentSession, allMemberships, currentMemberships, pastMemberships) {
     // Loop through each membership
 
-    for (let i = 0; i < allMemberships.length; i ++) {
+    for (let i = 0; i < allMemberships.length; i++) {
         /* If the current session matches the membership session - Set it as a current membership
         * Else - Set it as a past membership
         */
@@ -153,7 +153,7 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
             let session = allMemberships[i].SessionDescription;
             let place = null;
             let length = pastMemberships.length;
-            for (let j = 0; j < pastMemberships.length; j ++) {
+            for (let j = 0; j < pastMemberships.length; j++) {
                 if (pastMemberships[j].session === session) {
                     place = j;
                 }
@@ -163,7 +163,7 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
                     "session": session,
                     "activities": []
                 });
-                place = length ++;
+                place = length++;
             }
             pastMemberships[place].activities.push(allMemberships[i]);
         }

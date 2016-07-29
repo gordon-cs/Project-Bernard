@@ -187,13 +187,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 if (model.memberships[i].Participation === "GUEST") {
                     // Remove any duplications
                     if (uniqueGuests.indexOf(name) === -1) {
-                        guestCounter ++;
+                        guestCounter++;
                         uniqueGuests.push(name);
                     }
                 }
                 // If the membership is not a guest - remove any duplications
                 else if (uniqueMemberships.indexOf(name) === -1) {
-                    membershipCounter ++;
+                    membershipCounter++;
                     uniqueMemberships.push(name);
                 }
 
