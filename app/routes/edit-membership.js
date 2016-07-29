@@ -21,7 +21,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let loadMembership  = function ( model ) {
             return membershipPromise
             .then( function ( result ) {
-                console.log(result);
                 model.membership = result;
                 model.ActivityCode = result.ActivityCode;
                 return Ember.RSVP.hash( model );
@@ -71,7 +70,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Helper function
         let isIDInList = function ( result ) {
-            console.log( result );
             for (let i = 0; i < result.length; i++)
             {
                 if (result[i].IDNumber == id_number ) {
