@@ -1,6 +1,3 @@
-#form-box {
-    border-radius: 3px;
-}
 #form-box > h1 {
     margin-left: auto;
     margin-right: auto;
@@ -66,5 +63,6 @@
         width: 400px;
         margin-left: auto;
         margin-right: auto;
+        border-radius: 3px;
     }
 }

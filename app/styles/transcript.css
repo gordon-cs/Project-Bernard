@@ -1,4 +1,7 @@
 #download-button {
+    width: 100%;
+    height: 50px;
+    font-size: 16px !important;
     margin-top: 20px;
     margin-right: auto;
     margin-left: auto;
@@ -8,12 +11,8 @@
 #download-button > span {
     color: white;
 }
-iframe {
-    margin-top: 20px;
-    width: 100%;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
+#transcipt-view {
+    display: none;
 }
 
 /* -----------------------------
@@ -24,7 +23,12 @@ iframe {
     .transcript-button {
         width: auto;
     }
-    iframe {
+    #transcipt-view {
+        display: inline-block;
         height: 1000px;
+        margin-top: 20px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
