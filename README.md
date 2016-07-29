@@ -68,7 +68,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-* Currently running on PC `ccttrain.grodon.edu`
+* Currently running on PC `ccttrain.gordon.edu`
 * After `ember build --environment production` Copy contents of `dist/` into `\F:\Sites\site_name`
 
 ## Further Reading and Useful Links
