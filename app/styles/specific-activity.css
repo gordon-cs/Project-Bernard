@@ -89,6 +89,9 @@ a {
     .right-section {
         width: 100%;
     }
+    .button-row {
+        margin-right: 10px !important;
+    }
     .button-row > button,
     .button-row > a > button {
         width: auto;
