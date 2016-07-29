@@ -1,3 +1,7 @@
+# Git
+.gitkeep
+
+# Ember
 *.bpkg
 *.gem
 *.rbc
