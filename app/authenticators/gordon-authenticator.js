@@ -86,7 +86,6 @@ export default Base.extend({
             return result;
         }
         let setErrorToken = function(error) {
-            console.log(error);
             error.error = new Error (error.responseJSON.error_description);
             error.status = "error";
             return error;
