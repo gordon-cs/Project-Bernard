@@ -13,6 +13,7 @@ Gordon College Co-Curricular Transcript System
     * [Building](#building)
     * [Deploying](#deploying)
   * [Addons](#addons)
+  * [Source Code Guide](#source-code-guide)
   * [Further Reading and Useful Links](#further-reading-and-useful-links)
 
 ##Introduction
@@ -77,6 +78,18 @@ Make use of the many generators for code, try `ember help generate` for more det
 * [Ember Simple Auth](https://ember-simple-auth.com/)
 * [jsPDF](https://parall.ax/products/jspdf)
 * [File Saver](https://github.com/eligrey/FileSaver.js/)
+
+## Source Code Guide
+
+* Ember framework files are under the [app](https://github.com/gordon-cs/Project-Bernard/tree/master/app) sub-directory
+  * Template files are the HTML (handlebars) files with corresponding Style files (css)
+  * Route files dictate what API calls (util functions) are being made for each controller and template to then display to the user.    It creates a data model in the emper application to store the information recieved from any API call.
+  * Controller files handle function interaction within a specific page
+  * Util files are asynchronous calls to the API for post, put, get, and delete
+  * Authorizers and Authenticators are used to log a user in with their Gordon credentials via the server using LDAP, handles           security, page timeouts, and what each user has access to view/change
+  * Any application file is applied to the other files as well, e.g.(application.html is visible on every other html file along with    what is in that file)
+  * resolver.js is standard boilerplate
+  * route.js is where all paths to different pages are listed with any and all parameters needed
 
 ## Further Reading and Useful Links
 
