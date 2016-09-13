@@ -82,14 +82,14 @@ Make use of the many generators for code, try `ember help generate` for more det
 ## Source Code Guide
 
 * Ember framework files are under the [app](https://github.com/gordon-cs/Project-Bernard/tree/master/app) sub-directory
-  * Template files are the HTML (handlebars) files with corresponding Style files (css)
-  * Route files dictate what API calls (util functions) are being made for each controller and template to then display to the user.    It creates a data model in the emper application to store the information recieved from any API call.
-  * Controller files handle function interaction within a specific page
-  * Util files are asynchronous calls to the API for post, put, get, and delete
-  * Authorizers and Authenticators are used to log a user in with their Gordon credentials via the server using LDAP, handles           security, page timeouts, and what each user has access to view/change
-  * Any application file is applied to the other files as well, e.g.(application.html is visible on every other html file along with    what is in that file)
-  * resolver.js is standard boilerplate
-  * route.js is where all paths to different pages are listed with any and all parameters needed
+  * Template files are the HTML (Handlebars) files with corresponding Style files (css).
+  * Route files (JavaScript) dictate what API calls (util functions) are being made for each controller and template to then display    to the user. It creates a data model in the emper application to store the information recieved from any API call.
+  * Controller files (JavaScript) handle function interaction within a specific page.
+  * Util files (JavaScript) are asynchronous calls to the API for post, put, get, and delete HTTP functions.
+  * Authorizers and Authenticators (JavaScript) are used to log a user in with their Gordon credentials via the server using LDAP,      handles security, page timeouts, and what each user has access to view/change.
+  * Any application file, e.g.(application.hbs), is applied to the other files as well, e.g.(application.html is visible on every       other html file along with what is in that file).
+  * resolver.js is standard boilerplate.
+  * route.js is where all paths to different pages are listed with any and all parameters needed.  Any new page needs to have an        associated route with it.
 
 ## Further Reading and Useful Links
 
