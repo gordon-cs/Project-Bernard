@@ -24,10 +24,13 @@ header {
 .app-title-container {
     text-align: center;
 		background: #cccccb;
+		position: relative;
 }
 .app-title {
 	color: #31342b;
 	text-transform: uppercase;
+	display: inline-block;
+	vertical-align: middle;
 }
 #primary-menu {
 	font-weight: 700;
@@ -134,11 +137,12 @@ header {
     .app-title-container {
         text-align: center;
         padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-bottom: 10px !important;
     }
     .app-title {
         display: inline;
         font-size: 200% !important;
+				margin-top: 10px !important;
     }
     .user-info {
         display: inline;
@@ -169,6 +173,9 @@ header {
     #logo-box {
         max-width: 200px;
         padding: 30px 30px;
+    }
+		.app-title {
+        font-size: 225% !important;
     }
     #primary-menu {
         float: none;
