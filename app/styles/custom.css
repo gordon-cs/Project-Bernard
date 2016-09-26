@@ -48,7 +48,7 @@
 
 * {
     color: #252525;
-    font-family: "Gotham SSm 4r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 }
 body {
 	font-size: 0.9em !important;
@@ -190,7 +190,7 @@ select[type="text"]:focus {
 	color: white;
 }
 .lightgraybox {
-	background: #cccccc;
+	background: #ebeaea;
 	padding: 12px 18px;
 }
 .navybox {

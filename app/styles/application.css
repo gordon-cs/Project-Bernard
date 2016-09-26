@@ -23,14 +23,20 @@ header {
 }
 .app-title-container {
     text-align: center;
+		background: #cccccb;
+}
+.app-title {
+	color: #31342b;
+	text-transform: uppercase;
 }
 #primary-menu {
 	font-weight: 700;
 	font-style: normal;
-	font-size: 1.5em;
+	font-size: 1.1em;
 	letter-spacing: 1px;
 	padding: 0;
-    text-align: center;
+  text-align: center;
+	text-transform: uppercase;
 }
 #primary-menu li {
 	list-style: none;
@@ -47,7 +53,8 @@ header {
 }
 .user-info {
     text-align: right;
-    color: white;
+    color: #31342b;
+		text-transform: uppercase;
 }
 .request-button {
     border: 0px !important;
@@ -132,8 +139,6 @@ header {
     .app-title {
         display: inline;
         font-size: 200% !important;
-        margin-top: 20px !important;
-        margin-bottom: 20px !important;
     }
     .user-info {
         display: inline;
@@ -165,9 +170,6 @@ header {
         max-width: 200px;
         padding: 30px 30px;
     }
-    .app-title {
-        font-size: 300% !important;
-    }
     #primary-menu {
         float: none;
         text-align: center;
@@ -176,6 +178,6 @@ header {
 }
 @media only screen and (min-width: 1200px) {
     .app-title {
-        font-size: 400% !important;
+        font-size: 250% !important;
     }
 }
