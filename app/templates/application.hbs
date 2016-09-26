@@ -50,25 +50,27 @@
             </div>
         </div>
     </header>
-    <div class="row lightgraybox">
-        <ul id="primary-menu">
-            <li>
-                {{#link-to "index" class="button"}}
-                    My Involvements
-                {{/link-to}}
-            </li>
-            <li>
-                {{#link-to "all-activities" class="button"}}
-                    What's Available?
-                {{/link-to}}
-            </li>
-            <li>
-                {{#link-to "transcript" class="button"}}
-                    Gordon 360
-                {{/link-to}}
-            </li>
-        </ul>
-    </div>
+    {{#if session.isAuthenticated}}
+        <div class="row lightgraybox">
+            <ul id="primary-menu">
+                <li>
+                    {{#link-to "index" class="button"}}
+                        My Involvements
+                    {{/link-to}}
+                </li>
+                <li>
+                    {{#link-to "all-activities" class="button"}}
+                        What's Available?
+                    {{/link-to}}
+                </li>
+                <li>
+                    {{#link-to "transcript" class="button"}}
+                        Gordon 360
+                    {{/link-to}}
+                </li>
+            </ul>
+        </div>
+    {{/if}}
 </div>
 
 <div id="main-page-container" class="col-sm-12">
