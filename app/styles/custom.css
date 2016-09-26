@@ -239,6 +239,7 @@ button:active,
     border: none !important;
     outline: none !important;
     text-decoration: none;
+    border-radius: 0 !important;
 }
 button:hover,
 button:focus,
@@ -268,7 +269,7 @@ button:active,
     color: white;
 }
 .button-cyan:hover {
-    background-color: #00bdec;
+    background-color: #014983;
 }
 .button-navy {
     background-color: #014983;

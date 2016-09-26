@@ -72,12 +72,9 @@ header {
     cursor: pointer;
 }
 .logout-btn {
-    background-color: #31342B;
-    border-color: white;
-    border-style: solid;
-    border-width: thin;
     display: inline-block;
-    font-size: 130% !important;
+    font-size: 120% !important;
+		text-transform: uppercase;
 }
 
 /* -----------------------------
@@ -136,13 +133,14 @@ header {
 @media only screen and (min-width: 768px) {
     .app-title-container {
         text-align: center;
-        padding-top: 20px !important;
+        padding-top: 10px !important;
         padding-bottom: 10px !important;
     }
     .app-title {
         display: inline;
         font-size: 200% !important;
 				margin-top: 10px !important;
+				margin-bottom: 15px !important;
     }
     .user-info {
         display: inline;
