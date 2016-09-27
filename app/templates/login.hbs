@@ -1,7 +1,7 @@
 <div id="form-box" class="navybox row">
     <h1>Login</h1>
     <form {{action "authenticate" on="submit"}}>
-        {{input id="identification" class="form-control" placeholder="Username" value=identification}}
+        {{input id="identification" class="form-control" placeholder="Username" value=identification autofocus="autofocus"}}
         {{input id="password" class="form-control" placeholder="Password" type="password" value=password}}
         <button type="submit" class="btn form-button button-white login-button">Login</button>
         {{#if errorMessage}}
