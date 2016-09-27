@@ -197,7 +197,6 @@ select[type="text"]:focus {
 	background: #014983;
 	padding: 12px 18px;
 	color: white;
-
 }
 .orangebox {
 	background: #de571f;
@@ -269,7 +268,7 @@ button:active,
     color: white;
 }
 .button-cyan:hover {
-    background-color: #014983;
+    background-color: #00bdec;
 }
 .button-navy {
     background-color: #014983;
@@ -322,6 +321,14 @@ button:active,
 .button-gray:hover {
     background-color: #31342B;
     border: 1px solid white !important;
+    color: white;
+}
+.button-white {
+    background-color: white;
+    color: #808080;
+}
+.button-white:hover, .button-white:focus {
+    background-color: #00aeef;
     color: white;
 }
 .button-447 {
