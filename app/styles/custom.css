@@ -109,7 +109,8 @@ select[type="text"]:focus {
 .activity-list-item:hover {
     background-color: #DE571F !important;
 }
-.activity-list-item:hover .activity-list-item-title {
+.activity-list-item:hover .activity-list-item-title,
+.activity-list-item:hover .activity-list-item-info {
     color: #ffffff !important;
 }
 .activity-list-item-img {
@@ -128,6 +129,7 @@ select[type="text"]:focus {
 .activity-list-item-title {
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 .activity-list-item-info {
     font-weight: normal;

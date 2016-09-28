@@ -90,6 +90,11 @@ header {
 		text-transform: uppercase;
 		display: none;
 }
+.user-info > h6 {
+	color: #31342b;
+	letter-spacing: 1px;
+	font-size: 1.2em;
+}
 .user-info-mobile {
 		color: #fff;
 }
@@ -109,6 +114,8 @@ header {
     display: inline-block;
     font-size: 120% !important;
 		text-transform: uppercase;
+		font-weight: bold !important;
+		letter-spacing: .07em;
 }
 .mobile-menu-icon {
 		display: block;
@@ -193,7 +200,7 @@ header {
 		}
     #primary-menu {
         float: right;
-        font-size: 1em;
+        font-size: 0.95em;
         margin-top: 12px;
         margin-right: 20px;
     }

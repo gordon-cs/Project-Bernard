@@ -1,12 +1,16 @@
 <div class="col-sm-12">
     <header>
         <div class="app-title-container row">
-            <img src="images/gordon-logo-mobile.png" id="logo-mobile" />
+            {{#link-to "index"}}
+                <img src="images/gordon-logo-mobile.png" id="logo-mobile" />
+            {{/link-to}}
+            {{#if session.isAuthenticated}}
             <div class="mobile-menu-icon">
                 <button {{action 'showMenu'}}>
                   <img src="images/list.svg" id="icon-menu">
                 </button>
             </div>
+            {{/if}}
             <div class="col-sm-3"></div>
             <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>
             <div class="user-info col-sm-3">
@@ -51,9 +55,11 @@
             </div>
         </div>
         <div class="row">
-            <div id="logo-box">
-                <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College">
-            </div>
+            {{#link-to "index"}}
+                <div id="logo-box">
+                    <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College">
+                </div>
+            {{/link-to}}
         </div>
     </header>
     {{#if session.isAuthenticated}}

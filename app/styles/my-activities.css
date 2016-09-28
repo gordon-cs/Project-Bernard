@@ -8,6 +8,7 @@
     text-align: center;
     margin-top: 10px;
     margin-bottom: 15px;
+    font-size: 1.3em;
 }
 .section-title > h2 {
     text-align: center;
@@ -15,6 +16,8 @@
 .group-title {
     margin-top: 20px;
     margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.2em;
 }
 
 .empty-list {
