@@ -9,9 +9,17 @@
 	padding: 2% 2%;
     position: relative;
     z-index: 2;
+		display: none;
 }
 #logo-box img {
     max-width: 20%;
+}
+#logo-mobile {
+		display: block;
+		float: left;
+		width: 123px;
+		height: 31px;
+		margin: 15px 30px;
 }
 
 /* -----------------------------
@@ -27,15 +35,17 @@ header {
 		position: relative;
 }
 .app-title {
+	display: none;
 	color: #31342b;
 	text-transform: uppercase;
-	display: inline-block;
 	vertical-align: middle;
+	margin-top: 20px !important;
+	margin-bottom: 15px !important;
 }
 #primary-menu {
 	font-weight: 700;
 	font-style: normal;
-	font-size: 1.1em;
+	font-size: 1.7em;
 	letter-spacing: 1px;
 	padding: 0;
   text-align: center;
@@ -44,20 +54,44 @@ header {
 #primary-menu li {
 	list-style: none;
 	display: block;
-	padding: 5px 0px;
+	padding: 15px 0px;
+	border-bottom: 1px solid #3d3d3a;
 }
 #primary-menu a {
 	color: #00aeef;
-	text-decoration: none;
-    padding: inherit;
+  padding: inherit;
 }
 #primary-menu a:hover {
 	color: #DE571F;
+}
+#primary-menu button {
+	background: inherit;
+	color: #00aeef;
+	font-weight: inherit;
+	font-size: inherit;
+	text-transform: inherit;
+}
+#primary-menu button:hover {
+	color: #DE571F !important;
+	transition: color 0s;
+	-webkit-transition: color 0s;
+	-moz-transition: color 0s;
+}
+.showMenu {
+	display: block !important;
+	padding: 0;
+}
+.primary-menu-container {
+	display: none;
 }
 .user-info {
     text-align: right;
     color: #31342b;
 		text-transform: uppercase;
+		display: none;
+}
+.user-info-mobile {
+		color: #fff;
 }
 .request-button {
     border: 0px !important;
@@ -75,6 +109,17 @@ header {
     display: inline-block;
     font-size: 120% !important;
 		text-transform: uppercase;
+}
+.mobile-menu-icon {
+		display: block;
+		float: right;
+}
+.mobile-menu-icon button {
+		background: inherit;
+}
+#icon-menu {
+		width: 60px;
+		height: 60px;
 }
 
 /* -----------------------------
@@ -122,10 +167,6 @@ header {
     #logo-box img {
         max-width: 100%;
     }
-    .app-title-container {
-        text-align: right;
-    }
-
     #primary-menu li {
         padding: 10px 0px;
     }
@@ -135,12 +176,10 @@ header {
         text-align: center;
         padding-top: 10px !important;
         padding-bottom: 10px !important;
-    }
+		}
     .app-title {
         display: inline;
         font-size: 200% !important;
-				margin-top: 10px !important;
-				margin-bottom: 15px !important;
     }
     .user-info {
         display: inline;
@@ -149,9 +188,12 @@ header {
     .user-info > h6 {
         margin-top: 0;
     }
+		.user-info-mobile, .logout-mobile {
+				display: none !important;
+		}
     #primary-menu {
         float: right;
-        font-size: 1.2em;
+        font-size: 1em;
         margin-top: 12px;
         margin-right: 20px;
     }
@@ -159,13 +201,30 @@ header {
         display: inline;
         margin-left: 26px;
         font-size: 150%;
+				border: 0;
     }
     #primary-menu li:first-child {
         margin-left: 0;
     }
-	#main-page-container {
-		margin-bottom: 50px;
-	}
+		.primary-menu-container {
+			display: block;
+			background: #ebeaea;
+			padding-top: 1.5em;
+			padding-bottom: 1.5em;
+			border-bottom: 2px solid #cccccb;
+		}
+		#main-page-container {
+			margin-bottom: 50px;
+		}
+		#logo-mobile {
+			display: none;
+		}
+		#logo-box {
+			display: block;
+		}
+		#icon-menu {
+			display: none;
+		}
 }
 @media only screen and (min-width: 992px) {
     #logo-box {

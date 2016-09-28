@@ -1,6 +1,12 @@
 <div class="col-sm-12">
     <header>
         <div class="app-title-container row">
+            <img src="images/gordon-logo-mobile.png" id="logo-mobile" />
+            <div class="mobile-menu-icon">
+                <button {{action 'showMenu'}}>
+                  <img src="images/list.svg" id="icon-menu">
+                </button>
+            </div>
             <div class="col-sm-3"></div>
             <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>
             <div class="user-info col-sm-3">
@@ -51,8 +57,11 @@
         </div>
     </header>
     {{#if session.isAuthenticated}}
-        <div class="row lightgraybox">
+        <div class="row {{if showMenu 'graybox showMenu' 'lightgraybox'}} primary-menu-container">
             <ul id="primary-menu">
+                <li class="user-info-mobile">
+                  {{session.data.authenticated.token_data.name}}
+                </li>
                 <li>
                     {{#link-to "index" class="button uppercase"}}
                         My Involvements
@@ -67,6 +76,9 @@
                     {{#link-to "transcript" class="button uppercase"}}
                         Gordon 360
                     {{/link-to}}
+                </li>
+                <li class="logout-mobile">
+                    <button {{action "logout"}}>Logout</button>
                 </li>
             </ul>
         </div>
