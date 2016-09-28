@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
                 window.location.reload(true);
             });
         },
-        showMenu() {
+        toggleMenu() {
             this.set("showMenu", ! this.get("showMenu"));
         }
     },
