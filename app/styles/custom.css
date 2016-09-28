@@ -107,12 +107,10 @@ select[type="text"]:focus {
     margin-bottom: 10px !important
 }
 .activity-list-item:hover {
-    background-color: #b2bb1c !important;
-    -o-transition: .3s !important;
-    -ms-transition: .3s !important;
-    -moz-transition: .3s !important;
-    -webkit-transition: .3s !important;
-    transition: .3s !important;
+    background-color: #DE571F !important;
+}
+.activity-list-item:hover .activity-list-item-title {
+    color: #ffffff !important;
 }
 .activity-list-item-img {
     background-color: white;
@@ -129,6 +127,7 @@ select[type="text"]:focus {
 }
 .activity-list-item-title {
     font-weight: bold;
+    text-transform: uppercase;
 }
 .activity-list-item-info {
     font-weight: normal;
@@ -244,10 +243,6 @@ button:hover,
 button:focus,
 .btn:hover,
 .btn:focus {
-    -o-transition:.3s;
-    -ms-transition:.3s;
-    -moz-transition:.3s;
-    -webkit-transition:.3s;
     color: white !important;
     text-decoration: none;
 }

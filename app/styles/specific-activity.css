@@ -9,10 +9,10 @@
 }
 .activity-name {
     margin-top: 50px;
-    font-size: 150%;
+    font-size: 110%;
+    text-transform: uppercase;
 }
 .activity-picture {
-    margin-top: 20px;
     max-width: 50%;
 }
 a {
@@ -58,6 +58,8 @@ a {
     margin-top: 20px;
     display: block;
     text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 .sup-btn {
     margin-right: 5px !important;
