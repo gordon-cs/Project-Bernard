@@ -81,15 +81,83 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ## Source Code Guide
 
-* Ember framework files are under the [app](https://github.com/gordon-cs/Project-Bernard/tree/master/app) sub-directory
-  * Template files are the HTML (Handlebars) files with corresponding Style files (css).
-  * Route files (JavaScript) dictate what API calls (util functions) are being made for each controller and template to then display    to the user. It creates a data model in the emper application to store the information recieved from any API call.
-  * Controller files (JavaScript) handle function interaction within a specific page.
-  * Util files (JavaScript) are asynchronous calls to the API for post, put, get, and delete HTTP functions.
-  * Authorizers and Authenticators (JavaScript) are used to log a user in with their Gordon credentials via the server using LDAP,      handles security, page timeouts, and what each user has access to view/change.
-  * Any application file, e.g.(application.hbs), is applied to the other files as well, e.g.(application.html is visible on every       other html file along with what is in that file).
-  * resolver.js is standard boilerplate.
-  * route.js is where all paths to different pages are listed with any and all parameters needed.  Any new page needs to have an        associated route with it.
+### Files
+* /app
+	* Authenticators
+        * Makes request for authentication token from the server.
+        * Makes request when user logs in, page is reloaded or token expires.
+    * Authorizers
+        * Authorizes a block of code to send to the server.
+        * Used in ajax utils.
+    * Controllers
+        * Handles function interaction after the initial model is loaded.
+    * Helpers
+        * Functions to be called inside template files.
+    * Routes
+        * Loads initial data model with information from the server.
+        * Uses ajax utils to make calls.
+        * index.js
+            * Default route to be loaded
+        * login.js
+            * Route to be loaded if user is not logged in.
+    * Styles
+        * CSS files.
+    * Templates
+        * HTML (Handlebars) files for corresponding route.
+        * application.hbs
+            * Will appear in all routes.
+            * Contains menu bar.
+        * loading.hbs
+            * Loading screen to be displayed when transitioning between routes.
+    * Utils
+        * Functions to be called from JS files
+        * Use `import FUNCTION_NAME from "gordon360/utils/FILE_NAME"`
+        * Asynchronous ajax calls
+            * Uses authorizer to authorize call.
+            * delete, get, post and put.
+    * app.js
+        * Standard boilerplate.
+    * index.html
+        * Basic HTML file to go along with all routes.
+    * resolver.js
+        * Standard boilerplate.
+    * router.js
+        * Paths and parameters to each route are specified here.
+        * Any new page needs to have an associated route with it.
+    * Any application file, e.g.(application.hbs), is applied to the other files as well, e.g.(application.html is visible on every other html file along with what is in that file).
+* /config
+    * environment.js
+    	* app configuration
+    	* api urls are specified here
+    		* 360ApiTest.gordon.edu for development environmet.
+    		* 360Api.gordon.edu for production environmet.
+* /public
+    * /images
+        * Location for images.
+    * crossdomain.xml and robots.txt
+        * Boilerplate
+    * web.config
+        * Redirects http to https.
+* /tests
+    * Not Implemented
+* /vendor
+    * Ember addons
+* Other Boilerplate
+	* .bowerrc
+	* .editorconfig
+	* .jshintrc
+	* .travis.yml
+	* .watchmancinfig
+	* bower.json
+	* ember-cli-build.js
+	* package.JSON
+	* testem.js
+
+### Creating New Routes
+* Run `ember generate route ROUTE_NAME`
+	* Will generate template, route, test and add appropriate line to app/router.js.
+	* Each route can also have a controller.
+	* File are linked with similar same (e.g. login.hbs and login.js).
 
 ## Further Reading and Useful Links
 
