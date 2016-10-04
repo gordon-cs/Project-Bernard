@@ -367,4 +367,6 @@ button:active,
 
 #loading-box {
     text-align: center;
+    text-transform: uppercase;
+    font-size: 0.9em;
 }
