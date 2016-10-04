@@ -5,8 +5,8 @@
     margin-top: 10px !important;
     text-align: center;
     text-transform: uppercase;
-    font-weight: 300 !important;
-    font-size: 2.5em !important;
+    font-size: 2.3em !important;
+    color: #31342b;
 }
 #form-box > form > input,
 #form-box > form > .ember-power-select-trigger,
@@ -16,7 +16,7 @@
     margin-left: auto;
     margin-right: auto;
     border-radius: 0;
-    font-size: 1.8em;
+    color: #31342b;
 }
 #form-box > form > button {
     float: right;
@@ -24,8 +24,7 @@
     margin-right: auto;
     text-transform: uppercase;
 		font-weight: bold !important;
-    font-size: 1.7em;
-    letter-spacing: 1px;
+    font-size: 1.5em;
     padding: 8px 15px;
 }
 #form-box {
@@ -34,7 +33,7 @@
   padding: 15px 20px;
 }
 #error-message {
-    color: white;
+    color: red;
     font-size: 130%;
 }
 #error-message > span {
