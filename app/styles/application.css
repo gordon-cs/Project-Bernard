@@ -46,6 +46,7 @@ header {
 	vertical-align: middle;
 	margin-top: 20px !important;
 	margin-bottom: 15px !important;
+	margin-left: -185px !important;
 }
 #primary-menu {
 	font-weight: 700;
@@ -240,6 +241,7 @@ header {
 		}
 		.app-title {
         font-size: 225% !important;
+				margin-left: 0 !important;
     }
 		#primary-menu {
 			margin-left: 150px;
