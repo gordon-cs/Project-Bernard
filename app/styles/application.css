@@ -4,12 +4,13 @@
 
 #logo-box {
 	background: #014983;
-    margin: 0 auto 0 auto;
     text-align: center;
 	padding: 2% 2%;
     position: relative;
     z-index: 2;
 		display: none;
+		margin-left: 15px;
+		margin-right: 15px;
 }
 #logo-box img {
     max-width: 20%;
@@ -27,7 +28,11 @@
 ------------------------------- */
 
 header {
-	margin: 0 auto 0 auto;
+	background: #cccccb;
+	width: 100%;
+}
+.header {
+	background: #cccccb;
 }
 .app-title-container {
     text-align: center;
@@ -164,16 +169,6 @@ header {
 ------------------------------- */
 
 @media only screen and (min-width: 425px) {
-    #logo-box {
-        position: absolute;
-        top: 0;
-        padding: 3% 3%;
-        width: 20%;
-        margin-left: 2%;
-    }
-    #logo-box img {
-        max-width: 100%;
-    }
     #primary-menu li {
         padding: 10px 0px;
     }
@@ -186,7 +181,7 @@ header {
 		}
     .app-title {
         display: inline;
-        font-size: 200% !important;
+        font-size: 175% !important;
     }
     .user-info {
         display: inline;
@@ -199,14 +194,15 @@ header {
 				display: none !important;
 		}
     #primary-menu {
-        float: right;
-        font-size: 0.95em;
+        font-size: 1.2em;
         margin-top: 12px;
-        margin-right: 20px;
+        float: none;
+        text-align: center;
     }
     #primary-menu li {
         display: inline;
-        margin-left: 26px;
+        margin-left: 13px;
+				margin-right: 13px;
         font-size: 150%;
 				border: 0;
     }
@@ -223,32 +219,34 @@ header {
 		#main-page-container {
 			margin-bottom: 50px;
 		}
-		#logo-mobile {
-			display: none;
-		}
-		#logo-box {
-			display: block;
-		}
 		#icon-menu {
 			display: none;
 		}
 }
 @media only screen and (min-width: 992px) {
-    #logo-box {
-        max-width: 200px;
-        padding: 30px 30px;
+		#logo-box {
+      max-width: 200px;
+      padding: 20px 30px;
+			display: block;
+      position: absolute;
+      top: 0;
+      padding: 2% 3%;
+  	}
+    #logo-box img {
+      max-width: 100%;
     }
+		#logo-mobile {
+			display: none;
+		}
 		.app-title {
         font-size: 225% !important;
     }
-    #primary-menu {
-        float: none;
-        text-align: center;
-        margin-right: 0;
-    }
+		#primary-menu {
+			margin-left: 150px;
+		}
 }
 @media only screen and (min-width: 1200px) {
     .app-title {
-        font-size: 250% !important;
+        font-size: 225% !important;
     }
 }
