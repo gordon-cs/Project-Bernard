@@ -20,7 +20,7 @@
 		float: left;
 		width: 123px;
 		height: 31px;
-		margin: 15px 30px;
+		margin: 10px 30px;
 }
 
 /* -----------------------------
@@ -44,9 +44,11 @@ header {
 	color: #31342b;
 	text-transform: uppercase;
 	vertical-align: middle;
-	margin-top: 20px !important;
+	font-size: 1.4em !important;
+	letter-spacing: 1px;
+	font-weight: 400 !important;
+	margin-top: 15px !important;
 	margin-bottom: 15px !important;
-	margin-left: -185px !important;
 }
 #primary-menu {
 	font-weight: 700;
@@ -95,14 +97,22 @@ header {
     color: #31342b;
 		text-transform: uppercase;
 		display: none;
+		position: absolute !important;
+		right: 0;
+		margin-top: 11px;
 }
 .user-info > h6 {
 	color: #31342b;
 	letter-spacing: 1px;
 	font-size: 1.2em;
+	display: inline;
 }
 .user-info-mobile {
 		color: #fff;
+}
+.user-info-buttons {
+		display: inline;
+		margin-left: 15px;
 }
 .request-button {
     border: 0px !important;
@@ -117,7 +127,6 @@ header {
     cursor: pointer;
 }
 .logout-btn {
-    display: inline-block;
     font-size: 120% !important;
 		text-transform: uppercase;
 		font-weight: bold !important;
@@ -131,8 +140,8 @@ header {
 		background: inherit;
 }
 #icon-menu {
-		width: 60px;
-		height: 60px;
+		width: 50px;
+		height: 50px;
 }
 
 /* -----------------------------
@@ -175,21 +184,12 @@ header {
     }
 }
 @media only screen and (min-width: 768px) {
-    .app-title-container {
-        text-align: center;
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-		}
-    .app-title {
-        display: inline;
-        font-size: 175% !important;
-    }
     .user-info {
         display: inline;
-        float: right;
     }
     .user-info > h6 {
         margin-top: 0;
+				display: inline-block;
     }
 		.user-info-mobile, .logout-mobile {
 				display: none !important;
@@ -225,6 +225,12 @@ header {
 		}
 }
 @media only screen and (min-width: 992px) {
+    .app-title-container {
+        text-align: center;
+		}
+    .app-title {
+        display: inline;
+    }
 		#logo-box {
       max-width: 200px;
       padding: 20px 30px;
@@ -239,16 +245,10 @@ header {
 		#logo-mobile {
 			display: none;
 		}
-		.app-title {
-        font-size: 225% !important;
-				margin-left: 0 !important;
-    }
 		#primary-menu {
 			margin-left: 150px;
 		}
-}
-@media only screen and (min-width: 1200px) {
-    .app-title {
-        font-size: 225% !important;
-    }
+		.user-info {
+			margin-top: 10px;
+		}
 }
