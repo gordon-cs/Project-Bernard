@@ -19,9 +19,7 @@
     color: #31342b;
 }
 #form-box > form > button {
-    float: right;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
     text-transform: uppercase;
 		font-weight: bold !important;
     font-size: 1.5em;
@@ -82,5 +80,11 @@
         width: 450px;
         margin-left: auto;
         margin-right: auto;
+    }
+    #form-box > form > button {
+        float: right;
+        margin-left: auto;
+        margin-right: auto;
+        width: auto !important;
     }
 }
