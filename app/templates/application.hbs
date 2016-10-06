@@ -2,14 +2,14 @@
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
-                <img src="images/gordon-logo-mobile.png" id="logo-mobile" />
+                <img src="images/gordon-logo-mobile.png" id="logo-mobile" class="{{if session.isAuthenticated 'he' 'logo-mobile-center'}}"/>
             {{/link-to}}
             {{#if session.isAuthenticated}}
-            <div class="mobile-menu-icon">
-                <button {{action 'toggleMenu'}}>
-                  <img src="images/list.svg" id="icon-menu">
-                </button>
-            </div>
+                <div class="mobile-menu-icon">
+                    <button {{action 'toggleMenu'}}>
+                      <img src="images/list.svg" id="icon-menu">
+                    </button>
+                </div>
             {{/if}}
             <div class="col-sm-3"></div>
             <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>

@@ -20,7 +20,12 @@
 		float: left;
 		width: 123px;
 		height: 31px;
-		margin: 10px 30px;
+		margin: 10px;
+}
+.logo-mobile-center {
+		margin-left: auto !important;
+		margin-right: auto !important;
+		float: none !important;
 }
 
 /* -----------------------------
