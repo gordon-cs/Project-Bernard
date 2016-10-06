@@ -58,7 +58,6 @@ header {
 #primary-menu {
 	font-weight: 700;
 	font-style: normal;
-	font-size: 1.7em;
 	letter-spacing: 1px;
 	padding: 0;
   text-align: center;
@@ -200,7 +199,7 @@ header {
 				display: none !important;
 		}
     #primary-menu {
-        font-size: 1.2em;
+        font-size: 1em;
         margin-top: 12px;
         float: none;
         text-align: center;
@@ -255,5 +254,10 @@ header {
 		}
 		.user-info {
 			margin-top: 10px;
+		}
+}
+@media only screen and (min-width: 1200px) {
+		#primary-menu {
+			font-size: 1.2em;
 		}
 }
