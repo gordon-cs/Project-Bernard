@@ -80,6 +80,9 @@ select[type="text"]:focus {
     border: 1px solid #00aeef;
     box-shadow: none;
 }
+th {
+  text-transform: uppercase;
+}
 
 /* -----------------------------
     Activity List
