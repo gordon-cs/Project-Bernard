@@ -83,6 +83,9 @@ select[type="text"]:focus {
 th {
   text-transform: uppercase;
 }
+td {
+  vertical-align: middle !important;
+}
 
 /* -----------------------------
     Activity List

@@ -22,7 +22,7 @@
                                 <span class="glyphicon glyphicon-envelope request-button" data-toggle="dropdown"></span>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     {{#if requestsRecieved}}
-                                        <li><strong>Requests Recieved</strong></li>
+                                        <li><strong>Requests Received</strong></li>
                                         {{#each requestsRecieved as |req|}}
                                             <li>
                                                 {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}

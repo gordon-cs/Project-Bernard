@@ -121,13 +121,13 @@ header {
 .request-button {
     border: 0px !important;
     font-size: 250%;
-}
-.request-button {
     color: white;
     margin-right: 20px;
+		position: absolute !important;
+		top: -13px !important;
 }
 .request-button:hover {
-    color: #6F6F6F;
+    color: #31342b;
     cursor: pointer;
 }
 .logout-btn {
