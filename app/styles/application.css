@@ -56,6 +56,7 @@ header {
 	margin-bottom: 15px !important;
 }
 #primary-menu {
+	font-size: 1.5em;
 	font-weight: 700;
 	font-style: normal;
 	letter-spacing: 1px;
@@ -99,7 +100,6 @@ header {
 .user-info {
     text-align: right;
     color: #31342b;
-		text-transform: uppercase;
 		display: none;
 		position: absolute !important;
 		right: 0;
@@ -110,6 +110,7 @@ header {
 	letter-spacing: 1px;
 	font-size: 1.2em;
 	display: inline;
+	text-transform: uppercase;
 }
 .user-info-mobile {
 		color: #fff;
@@ -173,6 +174,8 @@ header {
 	border-radius: 3px;
 	font-size: 80%;
 	margin-left: 35px;
+	text-transform: uppercase;
+	font-weight: bold;
 }
 .notification-delete > span {
 	color: white;
