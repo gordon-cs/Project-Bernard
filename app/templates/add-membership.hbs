@@ -9,6 +9,9 @@
         </h1>
     {{/if}}
     <form {{action "post" on="submit"}}>
+        {{#if errorMessage}}
+            <p id="error-message">{{errorMessage}}</p>
+        {{/if}}
         <label for="email">Student Email</label>
         {{#if model.leading}}
             {{input value=studentEmail class="form-control"}}
@@ -31,8 +34,6 @@
         {{else}}
             <button type="submit" class="btn button-navy form-button" {{action "post"}}>Request Membership</button>
         {{/if}}
-        {{#if errorMessage}}
-            <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>
-        {{/if}}
+        <button class="btn button-cyan form-button form-cancel-button" {{action "cancel"}}>Cancel</button>
     </form>
 </div>

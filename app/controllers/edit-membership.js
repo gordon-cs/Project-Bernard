@@ -69,6 +69,12 @@ export default Ember.Controller.extend({
                 updateMembership()
                 .then(transition);
             }
+        },
+        cancel() {
+            this.set("comments", null);
+            let activityCode = this.get("model.membership.ActivityCode");
+            let sessionCode = this.get("model.membership.SessionCode");
+            this.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
         }
     }
 });

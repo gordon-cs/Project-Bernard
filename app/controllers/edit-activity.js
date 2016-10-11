@@ -101,6 +101,14 @@ export default Ember.Controller.extend({
                 .then(updateActivity)
                 .then(transition);
             }
+        },
+        cancel() {
+            this.set("description", null);
+            this.set("pageUrl", null);
+            this.set("file", "");
+            this.set("defaultImage", false);
+            this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
+                  "/" + this.model.activity.ActivityCode);
         }
     }
 });

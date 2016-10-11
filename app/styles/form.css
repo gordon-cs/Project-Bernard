@@ -44,12 +44,9 @@
   text-align: center;
 }
 #error-message {
-    color: red;
+    color: #b53228;
     font-size: 130%;
-}
-#error-message > span {
-    color: #d83c30;
-    font-size: 150%;
+    text-transform: uppercase;
 }
 .file-label {
   font-size: 150%;
@@ -67,6 +64,10 @@
   display: block;
   text-align: left;
   margin-bottom: 1em;
+}
+.form-cancel-button {
+  float: left !important;
+  margin-top: 1em;
 }
 #form-box > form > .input-group > label > span > input {
     display: none;
@@ -96,5 +97,8 @@
         margin-left: auto;
         margin-right: auto;
         width: auto !important;
+    }
+    .form-cancel-button {
+        margin-top: 0;
     }
 }

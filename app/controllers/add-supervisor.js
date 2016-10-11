@@ -66,6 +66,12 @@ export default Ember.Controller.extend({
                 .then(postSupervisor)
                 .then(transition);
             }
+        },
+
+        cancel() {
+            this.set("supervisorEmail", null);
+            this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
+                  "/" + this.model.activity.ActivityCode);
         }
     }
 });

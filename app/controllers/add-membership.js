@@ -109,6 +109,13 @@ export default Ember.Controller.extend({
                     .then(transition);
                 }
             }
+        },
+        cancel() {
+            this.set("studentEmail", null);
+            this.set("role", null);
+            this.set("comments", null);
+            this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
+                  "/" + this.model.activity.ActivityCode);
         }
     }
 });

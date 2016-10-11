@@ -1,13 +1,12 @@
 <div id="form-box" class="whitebox row">
     <h1>Edit {{model.activity.ActivityDescription}}</h1>
     <form {{action "update" on="submit"}}>
+        {{#if errorMessage}}
+            <p id="error-message">{{errorMessage}}</p>
+        {{/if}}
         <label for="activity page">Activity Page</label>
         {{input value=pageUrl class="form-control" placeholder="Full URL starting with http://"}}
-        <label class="default-image-check">
-            {{input type="checkbox" checked=defaultImage}}
-            Use Default Image
-        </label>
-        <label for="image" class="{{if defaultImage 'hidden'}}">Upload image</label>
+        <label for="image">Upload image</label>
         <div class="input-group {{if defaultImage 'hidden'}}">
             <label class="input-group-btn">
                 <span class="btn button-navy">
@@ -16,13 +15,13 @@
             </label>
             {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
         </div>
+        <label class="default-image-check">
+            {{input type="checkbox" checked=defaultImage}}
+            Use Default Image
+        </label>
         <label for="description">Description</label>
         {{textarea value=description class="form-control" rows="4"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>
-        {{#if errorMessage}}
-        <div>
-            <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>
-        </div>
-        {{/if}}
+        <button class="btn button-cyan form-button form-cancel-button" {{action "cancel"}}>Cancel</button>
     </form>
 </div>
