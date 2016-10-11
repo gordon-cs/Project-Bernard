@@ -1,9 +1,10 @@
 <div id="form-box" class="whitebox row">
     <h1>
-        Add Supervisor To - {{model.activity.ActivityDescription}}
+        Add Supervisor To {{model.activity.ActivityDescription}}
     </h1>
     <form {{action "post" on="submit"}}>
-        {{input value=supervisorEmail class="form-control" placeholder="Supervisor Email Address"}}
+      <label for="email">Supervisor Email</label>
+        {{input value=supervisorEmail class="form-control"}}
         <button type="submit" class="btn button-navy form-button" {{action "post"}}>Add Supervisor</button>
         {{#if errorMessage}}
             <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>

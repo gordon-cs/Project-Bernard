@@ -1,8 +1,13 @@
 <div id="form-box" class="whitebox row">
-    <h1>Edit - {{model.activity.ActivityDescription}}</h1>
+    <h1>Edit {{model.activity.ActivityDescription}}</h1>
     <form {{action "update" on="submit"}}>
-        {{input value=description class="form-control" placeholder="Description"}}
-        {{input value=pageUrl class="form-control" placeholder="Activity Page. Full URL starting with http://"}}
+        <label for="activity page">Activity Page</label>
+        {{input value=pageUrl class="form-control" placeholder="Full URL starting with http://"}}
+        <label class="default-image-check">
+            {{input type="checkbox" checked=use_default_image}}
+            Use Default Image
+        </label>
+        <label for="image">Upload image</label>
         <div class="input-group">
             <label class="input-group-btn">
                 <span class="btn button-navy">
@@ -11,7 +16,8 @@
             </label>
             {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
         </div>
-        <label class="default-image-check">{{input type="checkbox" checked=use_default_image class="default-image-check"}} Use Default Image </label>
+        <label for="description">Description</label>
+        {{textarea value=description class="form-control" rows="4"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>
         {{#if errorMessage}}
         <div>
