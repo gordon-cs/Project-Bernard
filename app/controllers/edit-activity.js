@@ -10,6 +10,7 @@ import postAsync from "gordon360/utils/post-async";
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     errorMessage: null,
+    defaultImage: false,
     actions: {
         update() {
 
@@ -85,12 +86,12 @@ export default Ember.Controller.extend({
                 context.set("description", null);
                 context.set("pageUrl", null);
                 context.set("file", "");
-                context.set("use_default_image", false);
+                context.set("defaultImage", false);
                 context.transitionToRoute("/specific-activity/" + context.get("model.sessionCode") +
                         "/" + context.get("model.activity.ActivityCode"));
             };
 
-            if (this.get("use_default_image")) {
+            if (this.get("defaultImage")) {
                 resetImage()
                 .then(updateActivity)
                 .then(transition);

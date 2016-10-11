@@ -2,7 +2,7 @@
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
-                <img src="images/gordon-logo-mobile.png" id="logo-mobile" class="{{if session.isAuthenticated 'he' 'logo-mobile-center'}}"/>
+                <img src="images/gordon-logo-mobile.png" id="logo-mobile" class="{{if session.isAuthenticated '' 'logo-mobile-center'}}"/>
             {{/link-to}}
             {{#if session.isAuthenticated}}
                 <div class="mobile-menu-icon">
