@@ -7,17 +7,15 @@
             {{input type="checkbox" checked=defaultImage}}
             Use Default Image
         </label>
-        {{#unless defaultImage}}
-            <label for="image">Upload image</label>
-            <div class="input-group">
-                <label class="input-group-btn">
-                    <span class="btn button-navy">
-                        Browse{{input id="file" type="file" value=file multiple="false"}}
-                    </span>
-                </label>
-                {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
-            </div>
-        {{/unless}}
+        <label for="image" class="{{if defaultImage 'hidden'}}">Upload image</label>
+        <div class="input-group {{if defaultImage 'hidden'}}">
+            <label class="input-group-btn">
+                <span class="btn button-navy">
+                    Browse{{input id="file" type="file" value=file multiple="false"}}
+                </span>
+            </label>
+            {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
+        </div>
         <label for="description">Description</label>
         {{textarea value=description class="form-control" rows="4"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>

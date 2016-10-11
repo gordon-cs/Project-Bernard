@@ -78,14 +78,18 @@ input[type="text"]:focus,
 input[type="password"]:focus,
 select[type="text"]:focus,
 textarea:focus {
-    border: 1px solid #00aeef;
-    box-shadow: none;
+    border: 1px solid #00aeef !important;
+    box-shadow: none !important;
 }
 th {
   text-transform: uppercase;
 }
 td {
   vertical-align: middle !important;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* -----------------------------
