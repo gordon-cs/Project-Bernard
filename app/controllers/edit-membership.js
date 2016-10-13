@@ -60,6 +60,8 @@ export default Ember.Controller.extend({
 
             // Transition back to activity
             let transition = function() {
+                this.set("role", null);
+                this.set("comments", null);
                 let activityCode = context.get("model.membership.ActivityCode");
                 let sessionCode = context.get("model.membership.SessionCode");
                 context.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
@@ -71,6 +73,7 @@ export default Ember.Controller.extend({
             }
         },
         cancel() {
+            this.set("role", null);
             this.set("comments", null);
             let activityCode = this.get("model.membership.ActivityCode");
             let sessionCode = this.get("model.membership.SessionCode");
