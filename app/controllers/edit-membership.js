@@ -60,8 +60,8 @@ export default Ember.Controller.extend({
 
             // Transition back to activity
             let transition = function() {
-                this.set("role", null);
-                this.set("comments", null);
+                context.set("role", null);
+                context.set("comments", null);
                 let activityCode = context.get("model.membership.ActivityCode");
                 let sessionCode = context.get("model.membership.SessionCode");
                 context.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);

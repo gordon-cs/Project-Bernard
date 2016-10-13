@@ -15,8 +15,6 @@ export default Ember.Controller.extend({
         update() {
 
             let context = this;
-            let urlValid = false;
-            let imgValid = true;
 
             // Get all the values that can be entered in
             // If not entered in, use the value already being used
@@ -27,14 +25,6 @@ export default Ember.Controller.extend({
             let pageUrl = this.get("pageUrl");
             if (pageUrl == null || pageUrl == "") {
                 pageUrl = this.get("model.activity.ActivityURL");
-                urlValid = true;
-            }
-            else if (pageUrl.includes("http://", 0) || pageUrl.includes("https://", 0)) {
-                urlValid = true;
-            }
-            else {
-                urlValid = false;
-                this.set("errorMessage", "Enter the full activity URL: Beginning with http://");
             }
 
             // Display error message on the page
@@ -72,6 +62,14 @@ export default Ember.Controller.extend({
                     });
                 }
             };
+            let errorChecks = function() {
+                let passed = true;
+                if (! pageUrl.includes("http://", 0) && ! pageUrl.includes("https://", 0)) {
+                    context.set("errorMessage", "Enter the full activity URL: Beginning with http://");
+                    passed = false;
+                }
+                return passed;
+            };
             // Post new information
             let updateActivity = function() {
                 let data = {
@@ -91,15 +89,17 @@ export default Ember.Controller.extend({
                         "/" + context.get("model.activity.ActivityCode"));
             };
 
-            if (this.get("defaultImage")) {
-                resetImage()
-                .then(updateActivity)
-                .then(transition);
-            }
-            else {
-                uploadImage()
-                .then(updateActivity)
-                .then(transition);
+            if (errorChecks()) {
+                if (this.get("defaultImage")) {
+                    resetImage()
+                    .then(updateActivity)
+                    .then(transition);
+                }
+                else {
+                    uploadImage()
+                    .then(updateActivity)
+                    .then(transition);
+                }
             }
         },
         cancel() {
