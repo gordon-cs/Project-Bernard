@@ -13,11 +13,28 @@
 .session-dropdown,
 .search-bar {
     display: block;
-    text-align: left;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0.5%;
     width: 90%;
+    font-weight: bold;
+}
+.session-dropdown > div,
+.search-bar input {
+    border-radius: 0;
+    letter-spacing: 1px;
+}
+.session-dropdown label,
+.search-bar label {
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 1.3em;
+    text-transform: uppercase;
+}
+.session-dropdown {
+  margin-bottom: 1.3em;
 }
 .empty-list-reminder {
     margin-top: 50px;

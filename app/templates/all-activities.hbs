@@ -4,8 +4,9 @@
 <div class="container">
 	<div class="dropdown-container row">
 		<div class="session-dropdown">
+			<label for="session">Session</label>
 			{{#power-select
-				placeholder="Select Session"
+				placeholder="Please Select"
 				searchField="SessionDescription"
 				options=model.sessions
 				onchange=(action "selectSession")
@@ -17,7 +18,8 @@
 	</div>
 	<div class="row">
 		<div class="search-bar">
-			{{input value=searchValue key-up=(action "filterActivities") placeholder="Search Activities" class="form-control"}}
+			<label for="search activities">Search Activities</label>
+			{{input value=searchValue key-up=(action "filterActivities") class="form-control"}}
 		</div>
 	</div>
     {{#if model.activitiesFilled}}
