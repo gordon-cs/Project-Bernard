@@ -94,6 +94,7 @@ export default Ember.Controller.extend({
                 context.set("studentEmail", null);
                 context.set("role", null);
                 context.set("comments", null);
+                context.set("errorMessage", null);
                 context.transitionToRoute("/specific-activity/" + sessionCode +
                         "/" + activityCode);
             };
@@ -114,6 +115,7 @@ export default Ember.Controller.extend({
             this.set("studentEmail", null);
             this.set("role", null);
             this.set("comments", null);
+            this.set("errorMessage", null);
             this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
                   "/" + this.model.activity.ActivityCode);
         }

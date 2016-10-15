@@ -85,6 +85,7 @@ export default Ember.Controller.extend({
                 context.set("pageUrl", null);
                 context.set("file", "");
                 context.set("defaultImage", false);
+                context.set("errorMessage", null);
                 context.transitionToRoute("/specific-activity/" + context.get("model.sessionCode") +
                         "/" + context.get("model.activity.ActivityCode"));
             };
@@ -107,6 +108,7 @@ export default Ember.Controller.extend({
             this.set("pageUrl", null);
             this.set("file", "");
             this.set("defaultImage", false);
+            this.set("errorMessage", null);
             this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
                   "/" + this.model.activity.ActivityCode);
         }

@@ -57,6 +57,7 @@ export default Ember.Controller.extend({
             // Leave inputs blank and transition back to activity
             let transition = function() {
                 context.set("supervisorEmail", null);
+                context.set("errorMessage", null);
                 context.transitionToRoute("/specific-activity/" + sessionCode +
                         "/" + activityCode);
             };
@@ -70,6 +71,7 @@ export default Ember.Controller.extend({
 
         cancel() {
             this.set("supervisorEmail", null);
+            this.set("errorMessage", null);
             this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
                   "/" + this.model.activity.ActivityCode);
         }
