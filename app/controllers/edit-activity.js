@@ -64,10 +64,17 @@ export default Ember.Controller.extend({
             };
             let errorChecks = function() {
                 let passed = true;
+                let regexUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+
                 if (! pageUrl.includes("http://", 0) && ! pageUrl.includes("https://", 0)) {
-                    context.set("errorMessage", "Enter the full activity URL: Beginning with http://");
+                    context.set("errorMessage", "URL must begin with http://");
                     passed = false;
                 }
+                else if (! regexUrl.test(pageUrl)) {
+                    context.set("errorMessage", "Invalid website URL");
+                    passed = false;
+                }
+
                 return passed;
             };
             // Post new information
