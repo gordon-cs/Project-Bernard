@@ -24,12 +24,17 @@ export default Ember.Controller.extend({
             // Check if all the inputs are valid
             let errorChecks = function() {
                 let passed = true;
+                let regexEmail = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
                 if (email == null || email == "") {
                     passed = false;
-                    context.set("errorMessage", "Invalid email address");
+                    context.set("errorMessage", "Email required");
                 }
                 else if (email.indexOf("@gordon.edu") === -1) {
                     email = email + "@gordon.edu";
+                }
+                if (! regexEmail.test(email)) {
+                    context.set("errorMessage", "Invalid email");
+                    passed = false;
                 }
                 return passed;
             };

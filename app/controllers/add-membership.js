@@ -31,21 +31,26 @@ export default Ember.Controller.extend({
             // Check if all the inputs are valid
             let errorChecks = function() {
                 let passed = true;
+                let regexEmail = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
                 if (role == null) {
                     passed = false;
-                    context.set("errorMessage", "Please enter a participation level");
+                    context.set("errorMessage", "Participation level required");
                 }
                 else if (comments.length > 45) {
                     passed = false;
-                    context.set("errorMessage", "Comment is too long. Max length 45 characters");
+                    context.set("errorMessage", "Comment too long. Max length 45 characters");
                 }
                 if (leading) {
                     if (email == null || email == "") {
                         passed = false;
-                        context.set("errorMessage", "Please enter a student email");
+                        context.set("errorMessage", "Email required");
                     }
                     if (email.indexOf("@gordon.edu") === -1) {
                         email = email + "@gordon.edu";
+                    }
+                    if (! regexEmail.test(email)) {
+                        context.set("errorMessage", "Invalid email");
+                        passed = false;
                     }
                 }
                 return passed;

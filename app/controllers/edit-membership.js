@@ -20,19 +20,17 @@ export default Ember.Controller.extend({
             let membershipID = this.get("model.membership.MembershipID");
             let studentID = this.get("model.membership.IDNumber");
             let comments = this.get("comments") || "";
-            if (comments == null || comments == "") {
-                comments = this.get("model.membership.Description");
-            }
             let roleID = this.get("role.ParticipationCode");
-            if (roleID == null) {
-                roleID = this.get("model.membership.Participation");
-            }
             // Check for input errors
             let errorChecks = function() {
                 let passed = true;
+                if (roleID == null) {
+                    passed = false;
+                    context.set("errorMessage", "Participation level required");
+                }
                 if (comments.length > 45) {
                     passed = false;
-                    context.set("errorMessage", "Comment is too long. Max length 45 characters");
+                    context.set("errorMessage", "Comment too long. Max length 45 characters");
                 }
                 return passed;
             };
