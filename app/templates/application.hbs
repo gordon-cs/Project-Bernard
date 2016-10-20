@@ -15,41 +15,8 @@
             <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>
             <div class="user-info col-sm-6">
                 {{#if session.isAuthenticated}}
-                    <h6>{{session.data.authenticated.token_data.name}}</h6>
                     <div class="user-info-buttons">
-                        {{#if notificationsPresent}}
-                            <div class="dropdown request-notification-dropdown">
-                                <span class="glyphicon glyphicon-envelope request-button" data-toggle="dropdown"></span>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    {{#if requestsRecieved}}
-                                        <li><strong>Requests Received</strong></li>
-                                        {{#each requestsRecieved as |req|}}
-                                            <li>
-                                                {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                                    <div class="notification-name">{{req.FirstName}} {{req.LastName}}</div>
-                                                    <div class="notification-info">{{req.ActivityDescription}}</div>
-                                                    <div class="notification-info">{{req.DiffDays}}</div>
-                                                {{/link-to}}
-                                            </li>
-                                        {{/each}}
-                                    {{/if}}
-                                    {{#if requestsSent}}
-                                        <li><strong>Requests Sent</strong></li>
-                                        {{#each requestsSent as |req|}}
-                                            <li>
-                                                {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                                    <div class="notification-name">{{req.ActivityDescription}}</div>
-                                                    <div class="notification-info">{{req.RequestApproved}}</div>
-                                                    <div class="notification-info">{{req.DiffDays}}</div>
-                                                {{/link-to}}
-                                            </li>
-                                            <button {{action "deleteRequest" req.RequestID}} class="notification-delete button-red">Delete</button>
-                                        {{/each}}
-                                    {{/if}}
-                                </ul>
-                            </div>
-                        {{/if}}
-                        <button {{action "logout"}} class="logout-btn btn button-cyan">Logout</button>
+                        <h6>{{session.data.authenticated.token_data.name}}</h6>
                     </div>
                 {{/if}}
             </div>
@@ -64,7 +31,7 @@
         <div class="row {{if showMenu 'graybox showMenu' 'lightgraybox'}} primary-menu-container">
             <ul id="primary-menu">
                 <li class="user-info-mobile">
-                  {{session.data.authenticated.token_data.name}}
+                    {{session.data.authenticated.token_data.name}}
                 </li>
                 <li>
                     {{#link-to "index" class="button uppercase"}}
@@ -81,8 +48,15 @@
                         Gordon 360
                     {{/link-to}}
                 </li>
-                <li class="logout-mobile">
-                    <button {{action "logout"}}>Logout</button>
+                <li>
+                    {{#link-to "profile" class="button uppercase"}}
+                        Profile
+                    {{/link-to}}
+                    {{#if requestsRecieved}}
+                        <span class="notification">
+                            {{requestsRecieved.length}}
+                        </span>
+                    {{/if}}
                 </li>
             </ul>
         </div>

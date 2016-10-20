@@ -103,21 +103,21 @@ header {
 		display: none;
 		position: absolute !important;
 		right: 0;
-		margin-top: 11px;
+		margin-top: 19px;
 }
-.user-info > h6 {
+.user-info h6 {
 	color: #31342b;
 	letter-spacing: 1px;
 	font-size: 1.2em;
 	display: inline;
 	text-transform: uppercase;
 }
-.user-info-mobile {
-		color: #fff;
-}
 .user-info-buttons {
 		display: inline;
 		margin-left: 15px;
+}
+.user-info-mobile {
+		color: white;
 }
 .request-button {
     border: 0px !important;
@@ -131,11 +131,19 @@ header {
     color: #31342b;
     cursor: pointer;
 }
-.logout-btn {
+.profile-btn {
     font-size: 120% !important;
 		text-transform: uppercase;
 		font-weight: bold !important;
 		letter-spacing: .07em;
+}
+.logout-btn {
+		margin-bottom: 20px !important;
+		margin-top: 20px;
+		text-transform: uppercase;
+		font-weight: bold !important;
+		float: right;
+		width: 100%;
 }
 .mobile-menu-icon {
 		display: block;
@@ -148,37 +156,15 @@ header {
 		width: 50px;
 		height: 50px;
 }
-
-/* -----------------------------
-    Notifications
-------------------------------- */
-
-.request-notification-dropdown {
-    display: inline-block;
-    margin-right: 40px;
-}
-.request-notification-dropdown > ul > li > strong {
-	margin-left: 10px;
-}
-.request-notification-dropdown > ul > li > a {
-    font-size: 80%;
-}
-.request-notification-dropdown > button:focus {
-    border: 1px solid white !important;
-}
-.notification-info {
-	margin-left: 15px;
-}
-.notification-delete {
-	width: 60%;
-	border-radius: 3px;
-	font-size: 80%;
-	margin-left: 35px;
-	text-transform: uppercase;
-	font-weight: bold;
-}
-.notification-delete > span {
-	color: white;
+.notification {
+		position: relative;
+		top: -5px;
+		background: red;
+		color: white;
+		font-size: 0.8em;
+		font-weight: bold;
+		padding: 2px 4px 2px 5px;
+		border-radius: 25px;
 }
 
 /* -----------------------------
@@ -230,6 +216,11 @@ header {
 		#icon-menu {
 			display: none;
 		}
+		.logout-btn {
+			margin-right: 20px;
+			float: right;
+			width: auto;
+		}
 }
 @media only screen and (min-width: 992px) {
     .app-title-container {
@@ -256,7 +247,7 @@ header {
 			margin-left: 150px;
 		}
 		.user-info {
-			margin-top: 10px;
+			margin-top: 17px;
 		}
 }
 @media only screen and (min-width: 1200px) {
