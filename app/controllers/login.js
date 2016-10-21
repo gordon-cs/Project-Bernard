@@ -13,10 +13,22 @@ export default Ember.Controller.extend({
                 "username": this.get("identification").replace("@gordon.edu",""),
                 "password": this.get("password")
             };
-            // Get authentication token
-            this.get("session").authenticate("authenticator:gordon-authenticator", credentials).catch((reason) => {
-                this.set("errorMessage", reason.error || reason);
-            });
+            let passed = true;
+
+            if (credentials.password == null || credentials.password == '') {
+                this.set("errorMessage", "Password required");
+                passed = false;
+            }
+            if (credentials.username == null || credentials.username == '') {
+                this.set("errorMessage", "Username required");
+                passed = false;
+            }
+            if (passed) {
+                // Get authentication token
+                this.get("session").authenticate("authenticator:gordon-authenticator", credentials).catch((reason) => {
+                    this.set("errorMessage", reason.error || reason);
+                });
+            }
         }
     }
 });

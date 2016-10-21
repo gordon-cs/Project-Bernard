@@ -24,12 +24,17 @@ export default Ember.Controller.extend({
             // Check if all the inputs are valid
             let errorChecks = function() {
                 let passed = true;
+                let regexEmail = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
                 if (email == null || email == "") {
                     passed = false;
-                    context.set("errorMessage", "Invalid email address");
+                    context.set("errorMessage", "Email required");
                 }
                 else if (email.indexOf("@gordon.edu") === -1) {
                     email = email + "@gordon.edu";
+                }
+                if (! regexEmail.test(email)) {
+                    context.set("errorMessage", "Invalid email");
+                    passed = false;
                 }
                 return passed;
             };
@@ -57,6 +62,7 @@ export default Ember.Controller.extend({
             // Leave inputs blank and transition back to activity
             let transition = function() {
                 context.set("supervisorEmail", null);
+                context.set("errorMessage", null);
                 context.transitionToRoute("/specific-activity/" + sessionCode +
                         "/" + activityCode);
             };
@@ -66,6 +72,13 @@ export default Ember.Controller.extend({
                 .then(postSupervisor)
                 .then(transition);
             }
+        },
+
+        cancel() {
+            this.set("supervisorEmail", null);
+            this.set("errorMessage", null);
+            this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
+                  "/" + this.model.activity.ActivityCode);
         }
     }
 });

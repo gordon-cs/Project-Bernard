@@ -1,9 +1,13 @@
-<div id="form-box" class="graybox row">
-    <h1>Edit - {{model.membership.ActivityDescription}}</h1>
+<div id="form-box" class="whitebox row">
+    <h1>Edit {{model.membership.ActivityDescription}}</h1>
     <h1>{{model.membership.FirstName}} {{model.membership.LastName}}: {{model.membership.ParticipationDescription}}</h1>
     <form {{action "update" on="submit"}}>
+        {{#if errorMessage}}
+            <p id="error-message">{{errorMessage}}</p>
+        {{/if}}
+        <label for="participation">Participation</label>
         {{#power-select
-            placeholder="Select Participation"
+            placeholder="Please Select"
             selected=role
             searchField="ParticipationDescription"
             options=model.roles
@@ -12,10 +16,9 @@
         }}
             {{role.ParticipationDescription}}
         {{/power-select}}
-        {{input value=comments class="form-control" placeholder="Comment (optional)"}}
+        <label for="comment">Comment (optional)</label>
+        {{input value=comments class="form-control"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Edit</button>
-        {{#if errorMessage}}
-            <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>
-        {{/if}}
+        <button class="btn button-cyan form-button form-cancel-button" {{action "cancel"}}>Cancel</button>
     </form>
 </div>

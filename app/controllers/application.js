@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
     requestsCalled: false,
     requestsRecieved: [],
     requestsSent: [],
+    showMenu: false,
     actions: {
         logout() {
             this.get("session").invalidate();
@@ -25,6 +26,9 @@ export default Ember.Controller.extend({
             .then(function() {
                 window.location.reload(true);
             });
+        },
+        toggleMenu() {
+            this.set("showMenu", ! this.get("showMenu"));
         }
     },
     // Get requests a user may have to approve or deny

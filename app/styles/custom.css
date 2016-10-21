@@ -48,7 +48,7 @@
 
 * {
     color: #252525;
-    font-family: "Gotham SSm 4r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 }
 body {
 	font-size: 0.9em !important;
@@ -74,11 +74,26 @@ h2 {
 	margin: 0.5em 0 0.35em 0 !important;
 	padding: 0px !important;
 }
+input {
+  border-radius: 0 !important;
+}
 input[type="text"]:focus,
 input[type="password"]:focus,
-select[type="text"]:focus {
-    border: 1px solid #00aeef;
-    box-shadow: none;
+input[type="search"]:focus,
+select[type="text"]:focus,
+textarea:focus {
+    border: 1px solid #00aeef !important;
+    box-shadow: none !important;
+}
+th {
+  text-transform: uppercase;
+}
+td {
+  vertical-align: middle !important;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* -----------------------------
@@ -107,12 +122,11 @@ select[type="text"]:focus {
     margin-bottom: 10px !important
 }
 .activity-list-item:hover {
-    background-color: #b2bb1c !important;
-    -o-transition: .3s !important;
-    -ms-transition: .3s !important;
-    -moz-transition: .3s !important;
-    -webkit-transition: .3s !important;
-    transition: .3s !important;
+    background-color: #DE571F !important;
+}
+.activity-list-item:hover .activity-list-item-title,
+.activity-list-item:hover .activity-list-item-info {
+    color: #ffffff !important;
 }
 .activity-list-item-img {
     background-color: white;
@@ -129,6 +143,8 @@ select[type="text"]:focus {
 }
 .activity-list-item-title {
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 .activity-list-item-info {
     font-weight: normal;
@@ -190,14 +206,13 @@ select[type="text"]:focus {
 	color: white;
 }
 .lightgraybox {
-	background: #cccccc;
+	background: #ebeaea;
 	padding: 12px 18px;
 }
 .navybox {
 	background: #014983;
 	padding: 12px 18px;
 	color: white;
-
 }
 .orangebox {
 	background: #de571f;
@@ -239,15 +254,12 @@ button:active,
     border: none !important;
     outline: none !important;
     text-decoration: none;
+    border-radius: 0 !important;
 }
 button:hover,
 button:focus,
 .btn:hover,
 .btn:focus {
-    -o-transition:.3s;
-    -ms-transition:.3s;
-    -moz-transition:.3s;
-    -webkit-transition:.3s;
     color: white !important;
     text-decoration: none;
 }
@@ -323,6 +335,14 @@ button:active,
     border: 1px solid white !important;
     color: white;
 }
+.button-white {
+    background-color: white;
+    color: #808080;
+}
+.button-white:hover, .button-white:focus {
+    background-color: #00aeef;
+    color: white;
+}
 .button-447 {
     background-color: #31342b;
 }
@@ -362,4 +382,6 @@ button:active,
 
 #loading-box {
     text-align: center;
+    text-transform: uppercase;
+    font-size: 0.9em;
 }

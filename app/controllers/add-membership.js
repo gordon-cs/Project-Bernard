@@ -31,21 +31,26 @@ export default Ember.Controller.extend({
             // Check if all the inputs are valid
             let errorChecks = function() {
                 let passed = true;
+                let regexEmail = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
                 if (role == null) {
                     passed = false;
-                    context.set("errorMessage", "Please enter a participation level");
+                    context.set("errorMessage", "Participation level required");
                 }
                 else if (comments.length > 45) {
                     passed = false;
-                    context.set("errorMessage", "Comment is too long. Max length 45 characters");
+                    context.set("errorMessage", "Comment too long. Max length 45 characters");
                 }
                 if (leading) {
                     if (email == null || email == "") {
                         passed = false;
-                        context.set("errorMessage", "Please enter a student email");
+                        context.set("errorMessage", "Email required");
                     }
                     if (email.indexOf("@gordon.edu") === -1) {
                         email = email + "@gordon.edu";
+                    }
+                    if (! regexEmail.test(email)) {
+                        context.set("errorMessage", "Invalid email");
+                        passed = false;
                     }
                 }
                 return passed;
@@ -94,6 +99,7 @@ export default Ember.Controller.extend({
                 context.set("studentEmail", null);
                 context.set("role", null);
                 context.set("comments", null);
+                context.set("errorMessage", null);
                 context.transitionToRoute("/specific-activity/" + sessionCode +
                         "/" + activityCode);
             };
@@ -109,6 +115,14 @@ export default Ember.Controller.extend({
                     .then(transition);
                 }
             }
+        },
+        cancel() {
+            this.set("studentEmail", null);
+            this.set("role", null);
+            this.set("comments", null);
+            this.set("errorMessage", null);
+            this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
+                  "/" + this.model.activity.ActivityCode);
         }
     }
 });

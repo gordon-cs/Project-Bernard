@@ -1,19 +1,24 @@
-<div id="form-box" class="graybox row">
+<div id="form-box" class="whitebox row">
     {{#if model.leading}}
         <h1>
-            Add Person To - {{model.activity.ActivityDescription}}
+            Add Person To {{model.activity.ActivityDescription}}
         </h1>
     {{else}}
         <h1>
-            Join - {{model.activity.ActivityDescription}}
+            Join {{model.activity.ActivityDescription}}
         </h1>
     {{/if}}
     <form {{action "post" on="submit"}}>
-        {{#if model.leading}}
-            {{input value=studentEmail class="form-control" placeholder="Student Email Address"}}
+        {{#if errorMessage}}
+            <p id="error-message">{{errorMessage}}</p>
         {{/if}}
+        <label for="email">Student Email</label>
+        {{#if model.leading}}
+            {{input value=studentEmail class="form-control"}}
+        {{/if}}
+        <label for="participation">Participation</label>
         {{#power-select
-            placeholder="Select Participation"
+            placeholder="Please select"
             selected=role
             searchField="ParticipationDescription"
             options=model.roles
@@ -22,14 +27,13 @@
         }}
             {{role.ParticipationDescription}}
         {{/power-select}}
-        {{input value=comments class="form-control" placeholder="Comment (optional)"}}
+        <label for="Comment (optional)">Comment (optional)</label>
+        {{input value=comments class="form-control"}}
         {{#if model.leading}}
             <button type="submit" class="btn button-navy form-button" {{action "post"}}>Add Member</button>
         {{else}}
             <button type="submit" class="btn button-navy form-button" {{action "post"}}>Request Membership</button>
         {{/if}}
-        {{#if errorMessage}}
-            <p id="error-message"><span class="glyphicon glyphicon-exclamation-sign"></span> {{errorMessage}}</p>
-        {{/if}}
+        <button class="btn button-cyan form-button form-cancel-button" {{action "cancel"}}>Cancel</button>
     </form>
 </div>

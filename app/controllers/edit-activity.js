@@ -10,12 +10,11 @@ import postAsync from "gordon360/utils/post-async";
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     errorMessage: null,
+    defaultImage: false,
     actions: {
         update() {
 
             let context = this;
-            let urlValid = false;
-            let imgValid = true;
 
             // Get all the values that can be entered in
             // If not entered in, use the value already being used
@@ -26,14 +25,6 @@ export default Ember.Controller.extend({
             let pageUrl = this.get("pageUrl");
             if (pageUrl == null || pageUrl == "") {
                 pageUrl = this.get("model.activity.ActivityURL");
-                urlValid = true;
-            }
-            else if (pageUrl.includes("http://", 0) || pageUrl.includes("https://", 0)) {
-                urlValid = true;
-            }
-            else {
-                urlValid = false;
-                this.set("errorMessage", "Enter the full activity URL: Beginning with http://");
             }
 
             // Display error message on the page
@@ -71,6 +62,21 @@ export default Ember.Controller.extend({
                     });
                 }
             };
+            let errorChecks = function() {
+                let passed = true;
+                let regexUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+
+                if (! pageUrl.includes("http://", 0) && ! pageUrl.includes("https://", 0)) {
+                    context.set("errorMessage", "URL must begin with http://");
+                    passed = false;
+                }
+                else if (! regexUrl.test(pageUrl)) {
+                    context.set("errorMessage", "Invalid website URL");
+                    passed = false;
+                }
+
+                return passed;
+            };
             // Post new information
             let updateActivity = function() {
                 let data = {
@@ -85,21 +91,33 @@ export default Ember.Controller.extend({
                 context.set("description", null);
                 context.set("pageUrl", null);
                 context.set("file", "");
-                context.set("use_default_image", false);
+                context.set("defaultImage", false);
+                context.set("errorMessage", null);
                 context.transitionToRoute("/specific-activity/" + context.get("model.sessionCode") +
                         "/" + context.get("model.activity.ActivityCode"));
             };
 
-            if (this.get("use_default_image")) {
-                resetImage()
-                .then(updateActivity)
-                .then(transition);
+            if (errorChecks()) {
+                if (this.get("defaultImage")) {
+                    resetImage()
+                    .then(updateActivity)
+                    .then(transition);
+                }
+                else {
+                    uploadImage()
+                    .then(updateActivity)
+                    .then(transition);
+                }
             }
-            else {
-                uploadImage()
-                .then(updateActivity)
-                .then(transition);
-            }
+        },
+        cancel() {
+            this.set("description", null);
+            this.set("pageUrl", null);
+            this.set("file", "");
+            this.set("defaultImage", false);
+            this.set("errorMessage", null);
+            this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
+                  "/" + this.model.activity.ActivityCode);
         }
     }
 });

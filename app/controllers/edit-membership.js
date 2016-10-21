@@ -20,19 +20,17 @@ export default Ember.Controller.extend({
             let membershipID = this.get("model.membership.MembershipID");
             let studentID = this.get("model.membership.IDNumber");
             let comments = this.get("comments") || "";
-            if (comments == null || comments == "") {
-                comments = this.get("model.membership.Description");
-            }
             let roleID = this.get("role.ParticipationCode");
-            if (roleID == null) {
-                roleID = this.get("model.membership.Participation");
-            }
             // Check for input errors
             let errorChecks = function() {
                 let passed = true;
+                if (roleID == null) {
+                    passed = false;
+                    context.set("errorMessage", "Participation level required");
+                }
                 if (comments.length > 45) {
                     passed = false;
-                    context.set("errorMessage", "Comment is too long. Max length 45 characters");
+                    context.set("errorMessage", "Comment too long. Max length 45 characters");
                 }
                 return passed;
             };
@@ -60,6 +58,9 @@ export default Ember.Controller.extend({
 
             // Transition back to activity
             let transition = function() {
+                context.set("role", null);
+                context.set("comments", null);
+                context.set("errorMessage", null);
                 let activityCode = context.get("model.membership.ActivityCode");
                 let sessionCode = context.get("model.membership.SessionCode");
                 context.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
@@ -69,6 +70,14 @@ export default Ember.Controller.extend({
                 updateMembership()
                 .then(transition);
             }
+        },
+        cancel() {
+            this.set("role", null);
+            this.set("comments", null);
+            this.set("errorMessage", null);
+            let activityCode = this.get("model.membership.ActivityCode");
+            let sessionCode = this.get("model.membership.SessionCode");
+            this.transitionToRoute("/specific-activity/" + sessionCode + "/" + activityCode);
         }
     }
 });
