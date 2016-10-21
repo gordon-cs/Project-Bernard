@@ -1,27 +1,23 @@
 import Ember from "ember";
 import isLeader from "gordon360/utils/is-leader";
+import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import getAsync from "gordon360/utils/get-async";
-import deleteAsync from "gordon360/utils/delete-async";
-import sortJsonArray from "gordon360/utils/sort-json-array";
 
-/*  Controller for the notification bar.
- *  Handles user interaction with the page.
- *  Sends requests to the model to retrieve and/or modify data.
- */
-export default Ember.Controller.extend({
-    session: Ember.inject.service("session"),
-    requestsCalled: false,
-    requestsRecieved: [],
-    showMenu: false,
-    actions: {
-        toggleMenu() {
-            this.set("showMenu", ! this.get("showMenu"));
-        }
+export default Ember.Route.extend(AuthenticatedRouteMixin, {
+
+    activate() {
+        this.controllerFor("application").getRequests();
     },
-    // Get requests a user may have to approve or deny
-    getRequests() {
+    /*  Below is the model and calls to the api that retrieve data to fill the model */
+    model() {
+        let college_role = this.get('session.data.authenticated.token_data.college_role');
+
+        // Set the god switch -- is this user an admin.
+        let godMode = college_role === "god";
+
         let context = this;
         let IDNumber = this.get("session.data.authenticated.token_data.id");
+        let requestsSent = [];
 
         // Get leader positions of user
         let getLeaderPositions = function() {
@@ -54,25 +50,18 @@ export default Ember.Controller.extend({
             })
         };
 
-        // Get requests sent to specified activity
-        let getRecievedRequests = function(result) {
-            return getAsync("/requests/activity/" + result, context);
+        // Get requests sent by user
+        let getSentRequests = function() {
+            return getAsync("/requests/student/" + IDNumber, context);
         };
 
-        // Add pending recieved requests to list and calculate age
-        let addRecievedRequests = function(result) {
-            let requestsRecieved = [];
+        // Add sent requests to list and calculate age
+        let addSentRequests = function(result) {
             for (var i = 0; i < result.length; i++) {
                 let diffDays = getDiffDays(result[i].DateSent);
                 result[i].DiffDays = diffDays.diffString;
                 result[i].DiffDaysInt = diffDays.diffInt;
-                if (result[i].RequestApproved === "Pending") {
-                    requestsRecieved.push(result[i]);
-                }
-            }
-            if (requestsRecieved.length > 0) {
-                let allRequestsRecieved = context.requestsRecieved.concat(requestsRecieved);
-                context.set("requestsRecieved", allRequestsRecieved);
+                requestsSent.push(result[i]);
             }
         };
 
@@ -99,17 +88,17 @@ export default Ember.Controller.extend({
             };
         };
 
-        if (!this.requestsCalled && this.get("session.data.authenticated.token_data")) {
-            this.set("requestsCalled", true);
+        let loadModel = function() {
+            return {
+                "requestsSent": requestsSent,
+                "godMode": godMode
+            };
+        };
 
-            getLeaderPositions()
-            .then(getSupervisorPositions)
-            .then(function(result) {
-                for (var i = 0; i < result.length; i++) {
-                    getRecievedRequests(result[i])
-                    .then(addRecievedRequests);
-                }
-            })
-        }
-    },
+        return getLeaderPositions()
+        .then(getSupervisorPositions)
+        .then(getSentRequests)
+        .then(addSentRequests)
+        .then(loadModel);
+    }
 });
