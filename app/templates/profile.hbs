@@ -105,7 +105,9 @@
                       </tbody>
                   </table>
               </div>
-              <button {{action "addAdmin"}} class="logout-btn btn button-navy">Add admin</button>
+              {{#link-to "add-admin"}}
+                  <button class="logout-btn btn button-navy">Add admin</button>
+              {{/link-to}}
           </div>
       </div>
     {{/if}}
