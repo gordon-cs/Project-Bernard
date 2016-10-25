@@ -12,6 +12,10 @@
         {{#if model.leading}}
             {{input value=email class="form-control"}}
         {{/if}}
+        <label class="checkbox-form">
+            {{input type="checkbox" checked=superAdmin}}
+            Make Super Admin <span>(Super admins can see, add and remove other admins)</span>
+        </label>
         <button type="submit" class="btn button-navy form-button" {{action "post"}}>Add Admin</button>
         <button class="btn button-cyan form-button form-cancel-button" {{action "cancel"}}>Cancel</button>
     </form>

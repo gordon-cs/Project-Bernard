@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
             this.set("requestsRecieved", []);
             this.set("requestsSent", []);
         },
-        deleteRequest(id) {
+        removeAdmin(id) {
             deleteAsync("/admins/" + id, this)
             .then(function() {
                 window.location.reload(true);

@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
                         passed = false;
                         context.set("errorMessage", "Email required");
                     }
-                    if (email.indexOf("@gordon.edu") === -1) {
+                    else if (email.indexOf("@gordon.edu") === -1) {
                         email = email + "@gordon.edu";
                     }
                     if (! regexEmail.test(email)) {
@@ -53,7 +53,11 @@ export default Ember.Controller.extend({
             let postAdmin = function(result) {
                 let data = {
                     "ID_NUM": result.GordonID,
+                    "EMAIL": result.Email,
+                    "USER_NAME": result.Email.split("@")[0],
+                    "SUPER_ADMIN": context.get("superAdmin")
                 };
+                    console.log(data);
                 return postAsync("/admins", data, context).catch(showError);
             };
 

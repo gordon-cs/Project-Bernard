@@ -88,15 +88,15 @@
                       <thead>
                           <tr>
                               <th>Name</th>
-                              <th>Role</th>
+                              <th>Super Admin</th>
                               <th>Options</th>
                           </tr>
                       </thead>
                       <tbody>
                           {{#each model.admins as |admin|}}
                               <tr>
-                                  <td> {{admin.name}} </td>
-                                  <td> {{admin.role}} </td>
+                                  <td> {{admin.Name}} </td>
+                                  <td> {{if admin.superAdmin 'Yes' 'No'}} </td>
                                   <td>
                                       <button {{action "removeAdmin" admin.id}} class="btn button-red table-button">Remove</button>
                                   </td>
