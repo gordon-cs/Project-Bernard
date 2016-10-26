@@ -14,24 +14,38 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Set the god switch -- is this user an admin.
         let godMode = college_role === "god";
+        let superGodMode = false;
 
         let context = this;
         let IDNumber = this.get("session.data.authenticated.token_data.id");
         let requestsSent = [];
         let admins = [];
 
+        let verifyAdmin = function() {
+            if (godMode) {
+                return getAsync("/admins/" + IDNumber, context)
+                .then(function(result) {
+                    if (result.SUPER_ADMIN) {
+                        superGodMode = true;
+                    }
+                });
+            }
+        };
+
         let getAdmins = function() {
-            return getAsync("/admins", context)
-            .then(function(result) {
-                for (var i = 0; i < result.length; i++) {
-                    admins.push({
-                        "ID": result[i].ADMIN_ID,
-                        "Name": result[i].USER_NAME.replace(".", " "),
-                        "Email": result[i].EMAIL,
-                        "superAdmin": result[i].SUPER_ADMIN
-                    });
-                }
-            });
+            if (superGodMode) {
+                return getAsync("/admins", context)
+                .then(function(result) {
+                    for (var i = 0; i < result.length; i++) {
+                        admins.push({
+                            "ID": result[i].ADMIN_ID,
+                            "Name": result[i].USER_NAME.replace(".", " "),
+                            "Email": result[i].EMAIL,
+                            "superAdmin": result[i].SUPER_ADMIN
+                        });
+                    }
+                });
+            }
         };
 
         // Get the account from email
@@ -112,6 +126,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return {
                 "requestsSent": requestsSent,
                 "godMode": godMode,
+                "superGodMode": superGodMode,
                 "admins": admins
             };
         };
@@ -120,6 +135,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(getSupervisorPositions)
         .then(getSentRequests)
         .then(addSentRequests)
+        .then(verifyAdmin)
         .then(getAdmins)
         .then(loadModel);
     }
