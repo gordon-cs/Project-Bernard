@@ -10,10 +10,10 @@
     {{/if}}
     <form {{action "post" on="submit"}}>
         {{#if errorMessage}}
-            <p id="error-message">{{errorMessage}}</p>
+            <p id="error-message" class="error-transition">{{errorMessage}}</p>
         {{/if}}
-        <label for="email">Student Email</label>
         {{#if model.leading}}
+            <label for="email">Student Email</label>
             {{input value=studentEmail class="form-control"}}
         {{/if}}
         <label for="participation">Participation</label>

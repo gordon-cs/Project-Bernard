@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
                 let regexEmail = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
                 if (role == null) {
                     passed = false;
-                    context.set("errorMessage", "Participation level required");
+                    context.set("errorMessage", "Participation required");
                 }
                 else if (comments.length > 45) {
                     passed = false;
