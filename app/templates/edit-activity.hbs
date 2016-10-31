@@ -15,6 +15,7 @@
             </label>
             {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
         </div>
+        <p class="form-note {{if defaultImage 'hidden'}}">Prefered image size: 320 x 320 px</p>
         <label class="checkbox-form">
             {{input type="checkbox" checked=defaultImage}}
             Use Default Image

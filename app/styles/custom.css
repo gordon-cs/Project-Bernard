@@ -132,6 +132,7 @@ td {
     background-color: white;
     display: block;
     width: 100%;
+    height: auto;
 }
 .activity-list-item-details {
     display: block;
@@ -160,6 +161,9 @@ td {
     }
     .activity-list {
         width: 100%;
+    }
+    .activity-list-item-img {
+        height: 166px;
     }
 }
 @media only screen and (min-width: 992px) {

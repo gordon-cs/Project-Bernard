@@ -73,6 +73,12 @@
 #form-box > form > .input-group > label > span > input {
     display: none;
 }
+.form-note {
+  text-align: left;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
 .hidden-input {
     /*display: none;*/
 }
