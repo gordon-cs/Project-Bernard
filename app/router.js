@@ -15,6 +15,7 @@ Router.map(function() {
     this.route("add-supervisor", { path: "/add-supervisor/:SessionCode/:ActivityCode" });
     this.route("edit-activity", { path: "/edit-activity/:SessionCode/:ActivityCode" });
     this.route("profile");
+    this.route('add-admin');
 });
 
 export default Router;
