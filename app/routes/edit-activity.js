@@ -43,7 +43,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let loadModel = function (result) {
             return {
                 "activity": result,
-                "sessionCode": param.SessionCode
+                "sessionCode": param.SessionCode,
+                "pageUrl": result.ActivityURL,
+                "description": result.ActivityBlurb
             };
         }
 

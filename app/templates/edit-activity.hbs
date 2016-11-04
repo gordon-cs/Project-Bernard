@@ -5,7 +5,7 @@
             <p id="error-message">{{errorMessage}}</p>
         {{/if}}
         <label for="activity page">Website</label>
-        {{input value=pageUrl class="form-control"}}
+        {{input value=model.pageUrl class="form-control"}}
         <label for="image">Upload image</label>
         <div class="input-group {{if defaultImage 'hidden'}}">
             <label class="input-group-btn">
@@ -21,7 +21,7 @@
             Use Default Image
         </label>
         <label for="description">Description</label>
-        {{textarea value=description class="form-control" rows="4"}}
+        {{textarea value=model.description class="form-control" rows="4"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>
         <button class="btn button-cyan form-button form-cancel-button" {{action "cancel"}}>Cancel</button>
     </form>

@@ -22,6 +22,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return membershipPromise
             .then(function (result) {
                 model.membership = result;
+                model.currentRole = {
+                  "ParticipationCode": result.Participation,
+                  "ParticipationDescription": result.ParticipationDescription
+                };
                 model.ActivityCode = result.ActivityCode;
                 return Ember.RSVP.hash(model);
             });

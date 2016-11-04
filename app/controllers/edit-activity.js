@@ -18,14 +18,8 @@ export default Ember.Controller.extend({
 
             // Get all the values that can be entered in
             // If not entered in, use the value already being used
-            let description = this.get("description");
-            if (description == null || description == "") {
-                description = this.get("model.activity.ActivityBlurb");
-            }
-            let pageUrl = this.get("pageUrl");
-            if (pageUrl == null || pageUrl == "") {
-                pageUrl = this.get("model.activity.ActivityURL");
-            }
+            let description = this.get("model.description");
+            let pageUrl = this.get("model.pageUrl");
 
             // Display error message on the page
             let showError = function(result) {
@@ -66,11 +60,11 @@ export default Ember.Controller.extend({
                 let passed = true;
                 let regexUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
 
-                if (! pageUrl.includes("http://", 0) && ! pageUrl.includes("https://", 0)) {
+                if (pageUrl != "" && ! pageUrl.includes("http://", 0) && ! pageUrl.includes("https://", 0)) {
                     context.set("errorMessage", "URL must begin with http://");
                     passed = false;
                 }
-                else if (! regexUrl.test(pageUrl)) {
+                else if (pageUrl != "" && ! regexUrl.test(pageUrl)) {
                     context.set("errorMessage", "Invalid website URL");
                     passed = false;
                 }
