@@ -9,7 +9,7 @@
         {{#power-select
             placeholder="Please Select"
             selected=role
-            searchField="ParticipationDescription"
+            searchEnabled=false
             options=model.roles
             onchange=(action "setRole")
             as |role|
