@@ -20,6 +20,12 @@ export default Ember.Controller.extend({
             .then(function() {
                 window.location.reload(true);
             });
+        },
+        deleteRequest(requestID) {
+            deleteAsync("/requests/" + requestID, this)
+            .then(function() {
+                 window.location.reload(true);
+             });
         }
     }
 });
