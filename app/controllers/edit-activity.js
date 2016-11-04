@@ -145,7 +145,7 @@ function validateImage(file) {
     // File is greater than 100KB
     if(file.size > 100000) {
         result.isValid = false;
-        result.validationMessage = 'Unacceptable file size: May be no greater than 100KB.';
+        result.validationMessage = 'File too large, must be < 100KB.';
     }
 
     return result;
