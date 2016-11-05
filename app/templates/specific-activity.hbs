@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-sm-12 detail-item">
                     {{#if model.hasSupervisors}}
-                        <p class="detail-header">Supervisors: </p>
+                        <p class="detail-header">Advisors: </p>
                         <div class="leaders">
                             {{#each model.supervisors as |supervisor|}}
                                 <p class="activity-info-item-data">
@@ -45,7 +45,7 @@
                             {{/each}}
                         </div>
                     {{else}}
-                        <p class="detail-header">Supervisors: </p>
+                        <p class="detail-header">Advisors: </p>
                         <p class="detail-info">None</p>
                     {{/if}}
                 </div>
@@ -69,7 +69,7 @@
                         <button class="btn button-navy">Add Member</button>
                     {{/link-to}}
                     {{#link-to 'add-supervisor' model.session.SessionCode model.activity.ActivityCode}}
-                        <button class="btn button-navy">Add Supervisor</button>
+                        <button class="btn button-navy">Add Advisor</button>
                     {{/link-to}}
                     {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Edit Activity</button>
