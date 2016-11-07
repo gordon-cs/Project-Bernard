@@ -19,6 +19,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let activityPromise = getAsync("/activities/" + param.ActivityCode.trim(), context);
         let sessionPromise = getAsync("/sessions/" + param.SessionCode.trim(), context);
         let supervisorsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/advisors", context);
+        let activitySupervisorEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/advisors/session/" + param.SessionCode.trim(), context);
         let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/leaders", context);
         let activityLeaderEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/leaders/session/" + param.SessionCode.trim(), context);
         let membershipsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim(), context);
@@ -124,6 +125,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return activityLeaderEmailsPromise
             .then(function (result) {
                 model.leaderEmails = result;
+                return Ember.RSVP.hash(model);
+            });
+        };
+
+        // Load the activity advisor emails.
+        let loadActivityAdvisorEmails = function (model) {
+            return activitySupervisorEmailsPromise
+            .then(function (result) {
+                model.supervisorEmails = result;
                 return Ember.RSVP.hash(model);
             });
         };
@@ -235,6 +245,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(loadRequests)
         .then(loadActivityMemberEmails)
         .then(loadActivityLeaderEmails)
+        .then(loadActivityAdvisorEmails)
         .then(loadMemberships)
         .then(calculateMemberships)
         .then(populateRoster)

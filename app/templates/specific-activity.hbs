@@ -35,7 +35,7 @@
                     {{#if model.hasSupervisors}}
                         <p class="detail-header">Advisors: </p>
                         <div class="leaders">
-                            {{#each model.supervisors as |supervisor|}}
+                            {{#each model.supervisorEmails as |supervisor|}}
                                 <p class="activity-info-item-data">
                                     <a href="mailto:{{supervisor.Email}}">{{supervisor.FirstName}} {{supervisor.LastName}}</a>
                                 </p>
