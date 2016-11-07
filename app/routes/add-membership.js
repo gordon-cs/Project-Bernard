@@ -22,7 +22,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let memberships;
         let leading = college_role === "god";
         let leaders;
-        let supervisors;
+        let advisors;
 
         /* Promises */
         let loadRoles = function () {
@@ -42,8 +42,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/memberships/activity/" + activity_code, context);
         };
 
-        let loadSupervisors = function () {
-            return getAsync("/supervisors/activity/" + activity_code, context);
+        let loadadvisors = function () {
+            return getAsync("/memberships/activity/" + activity_code + "/advisors", context);
         };
         /* End Promises */
 
@@ -65,8 +65,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             leaders = result;
         };
 
-        let initializeSupervisors = function (result)  {
-            supervisors = result;
+        let initializeadvisors = function (result)  {
+            advisors = result;
         };
 
         let filterMemberships = function () {
@@ -86,9 +86,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     leading = true;
                 }
             }
-            // Check if supervisor
-            for (let i = 0; i < supervisors.length; i++) {
-                if (supervisors[i].IDNumber == id_number) {
+            // Check if advisor
+            for (let i = 0; i < advisors.length; i++) {
+                if (advisors[i].IDNumber == id_number) {
                     leading = true;
                 }
             }
@@ -115,8 +115,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(filterMemberships)
         .then(loadActivityLeaders)
         .then(initializeActivityLeaders)
-        .then(loadSupervisors)
-        .then(initializeSupervisors)
+        .then(loadadvisors)
+        .then(initializeadvisors)
         .then(setSwitches)
         .then(loadModel);
 

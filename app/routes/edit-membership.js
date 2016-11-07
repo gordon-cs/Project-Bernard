@@ -22,6 +22,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return membershipPromise
             .then(function (result) {
                 model.membership = result;
+                model.currentRole = {
+                  "ParticipationCode": result.Participation,
+                  "ParticipationDescription": result.ParticipationDescription
+                };
                 model.ActivityCode = result.ActivityCode;
                 return Ember.RSVP.hash(model);
             });
@@ -35,9 +39,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             });
         };
 
-        let checkIfSupervisor = function (model) {
+        let checkIfadvisor = function (model) {
             if (!model.leading) {
-                return getAsync("/supervisors/activity/" + model.ActivityCode, context)
+                return getAsync("/memberships/activity/" + model.ActivityCode + "/advisors", context)
                 .then(isIDInList)
                 .then(function (bool) {
                     model.leading = bool;
@@ -85,7 +89,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         return loadMembership (theModel)
         .then(loadRoles)
-        .then(checkIfSupervisor)
+        .then(checkIfadvisor)
         .then(checkIfActivityLeader)
         .then(redirectIfNeither)
         .then(loadModel);

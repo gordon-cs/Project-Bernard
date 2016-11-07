@@ -39,21 +39,6 @@ export default Ember.Controller.extend({
             });
         }
 
-        // Get supervisor positions of user
-        let getSupervisorPositions = function(positions) {
-            return getAsync("/supervisors/person/" + IDNumber, context)
-            .then(function(result) {
-                for (var i = 0; i < result.length; i++) {
-                    if (!isLeader(result[i].Participation)) {
-                        if (positions.indexOf(result[i].ActivityCode.trim()) === -1) {
-                            positions.push(result[i].ActivityCode.trim());
-                        }
-                    }
-                }
-                return positions;
-            })
-        };
-
         // Get requests sent to specified activity
         let getRecievedRequests = function(result) {
             return getAsync("/requests/activity/" + result, context);
@@ -103,7 +88,6 @@ export default Ember.Controller.extend({
             this.set("requestsCalled", true);
 
             getLeaderPositions()
-            .then(getSupervisorPositions)
             .then(function(result) {
                 for (var i = 0; i < result.length; i++) {
                     getRecievedRequests(result[i])

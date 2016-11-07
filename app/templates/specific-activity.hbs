@@ -32,20 +32,17 @@
                     {{/if}}
                 </div>
                 <div class="col-sm-12 detail-item">
-                    {{#if model.hasSupervisors}}
-                        <p class="detail-header">Supervisors: </p>
+                    {{#if model.hasadvisors}}
+                        <p class="detail-header">Advisors: </p>
                         <div class="leaders">
-                            {{#each model.supervisors as |supervisor|}}
+                            {{#each model.advisorEmails as |advisor|}}
                                 <p class="activity-info-item-data">
-                                    {{#if model.godMode}}
-                                        <button type="button" class="btn btn-sm button-red sup-btn" {{action "removeSupervisor" supervisor}}>Remove</button>
-                                    {{/if}}
-                                    <a href="mailto:{{supervisor.Email}}">{{supervisor.FirstName}} {{supervisor.LastName}}</a>
+                                    <a href="mailto:{{advisor.Email}}">{{advisor.FirstName}} {{advisor.LastName}}</a>
                                 </p>
                             {{/each}}
                         </div>
                     {{else}}
-                        <p class="detail-header">Supervisors: </p>
+                        <p class="detail-header">Advisors: </p>
                         <p class="detail-info">None</p>
                     {{/if}}
                 </div>
@@ -67,9 +64,6 @@
                 {{#if model.godMode}}
                     {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Add Member</button>
-                    {{/link-to}}
-                    {{#link-to 'add-supervisor' model.session.SessionCode model.activity.ActivityCode}}
-                        <button class="btn button-navy">Add Supervisor</button>
                     {{/link-to}}
                     {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                         <button class="btn button-navy">Edit Activity</button>

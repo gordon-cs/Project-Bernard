@@ -8,8 +8,8 @@
         <label for="participation">Participation</label>
         {{#power-select
             placeholder="Please Select"
-            selected=role
-            searchField="ParticipationDescription"
+            selected=model.currentRole
+            searchEnabled=false
             options=model.roles
             onchange=(action "setRole")
             as |role|
@@ -17,7 +17,7 @@
             {{role.ParticipationDescription}}
         {{/power-select}}
         <label for="comment">Comment (optional)</label>
-        {{input value=comments class="form-control"}}
+        {{input value=model.membership.Description class="form-control"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>
         <button class="btn button-cyan form-button form-cancel-button" {{action "cancel"}}>Cancel</button>
     </form>

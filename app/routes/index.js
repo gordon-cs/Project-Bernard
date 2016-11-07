@@ -15,7 +15,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let id_number = this.get("session.data.authenticated.token_data.id");
         let context = this;
 
-        // Supervisor-related variables
+        // advisor-related variables
         let currentSupervisions = [];
         let pastSupervisions = [];
 
@@ -59,7 +59,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let loadSupervisions = function() {
-            return getAsync("/supervisors/person/" + id_number, context)
+            return getAsync("/memberships/student/" + id_number, context)
         };
 
         let initializeSupervisions = function (result) {
@@ -126,7 +126,7 @@ function sortSupervisions(currentSession, allSupervisions, currentSupervisions, 
         allSupervisions[i].SessionCode = allSupervisions[i].SessionCode.trim();
         allSupervisions[i].ActivityCode = allSupervisions[i].ActivityCode.trim();
 
-        /* If the current session matches one of the supervision sessions - Set it as a current supervisorships
+        /* If the current session matches one of the supervision sessions - Set it as a current advisorships
         * Else - Set it as a past supervision
         */
         if (allSupervisions[i].SessionCode === currentSession.SessionCode) {

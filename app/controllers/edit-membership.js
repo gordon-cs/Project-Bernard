@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
     errorMessage: null,
     actions: {
         setRole(role) {
-            this.set("role", role);
+            this.set("model.currentRole", role);
         },
         // Function called to update a membership
         update() {
@@ -19,8 +19,8 @@ export default Ember.Controller.extend({
 
             let membershipID = this.get("model.membership.MembershipID");
             let studentID = this.get("model.membership.IDNumber");
-            let comments = this.get("comments") || "";
-            let roleID = this.get("role.ParticipationCode");
+            let comments = this.get("model.membership.Description") || "";
+            let roleID = this.get("model.currentRole.ParticipationCode");
             // Check for input errors
             let errorChecks = function() {
                 let passed = true;

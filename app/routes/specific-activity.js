@@ -18,7 +18,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Requests to be called in the beginning
         let activityPromise = getAsync("/activities/" + param.ActivityCode.trim(), context);
         let sessionPromise = getAsync("/sessions/" + param.SessionCode.trim(), context);
-        let supervisorsPromise = getAsync("/supervisors/activity/" + param.ActivityCode.trim(), context);
+        let advisorsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/advisors", context);
+        let activityadvisorEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/advisors/session/" + param.SessionCode.trim(), context);
         let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/leaders", context);
         let activityLeaderEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/leaders/session/" + param.SessionCode.trim(), context);
         let membershipsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim(), context);
@@ -29,27 +30,27 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let theModel = {};
         // Set the god switch -- is this user an admin.
         theModel.godMode = college_role === "god";
-        // If use is an admin, they have all the functionality that leaders and supervisors have.
+        // If use is an admin, they have all the functionality that leaders and advisors have.
         theModel.leading = theModel.godMode === true;
 
-        // Supervisors and Activity leaders filtered by session code.
-        // Manager = supervisor or leader
+        // Advisors and Activity leaders filtered by session code.
+        // Manager = advisor or leader
         let loadFilteredManagers = function (model) {
-            let promiseArray = [supervisorsPromise, activityLeadersPromise];
+            let promiseArray = [advisorsPromise, activityLeadersPromise];
             return Ember.RSVP.map(promiseArray, filterAccordingToCurrentSession)
             .then(function (results) {
-                model.supervisors = Ember.RSVP.resolve(results[0]);
+                model.advisors = Ember.RSVP.resolve(results[0]);
                 model.leaders = Ember.RSVP.resolve(results[1]);
                 return Ember.RSVP.hash(model);
             });
         };
 
-        // Determine if the user is an activity leader or a supervisor
+        // Determine if the user is an activity leader or a advisor
         let setIfUserIsManager = function (model) {
-            if (model.supervisors.length > 0) {
-                model.hasSupervisors = true;
-                for (var i = 0; i < model.supervisors.length; i++) {
-                    if (model.supervisors[i].IDNumber == id_number) {
+            if (model.advisors.length > 0) {
+                model.hasadvisors = true;
+                for (var i = 0; i < model.advisors.length; i++) {
+                    if (model.advisors[i].IDNumber == id_number) {
                         model.leading = true;
                     }
                 }
@@ -99,7 +100,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return listOfItems;
         };
 
-        // Get the activity member emails if the user is a supervisor or activity leader
+        // Get the activity member emails if the user is a advisor or activity leader
         let loadActivityMemberEmails = function (model) {
             if (model.leading) {
                 let memberEmails = getAsync("/emails/activity/" + param.ActivityCode + "/session/" + param.SessionCode, context);
@@ -128,6 +129,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             });
         };
 
+        // Load the activity advisor emails.
+        let loadActivityAdvisorEmails = function (model) {
+            return activityadvisorEmailsPromise
+            .then(function (result) {
+                model.advisorEmails = result;
+                return Ember.RSVP.hash(model);
+            });
+        };
+
         let loadMemberships = function (model) {
             return membershipsPromise
             .then(filterAccordingToCurrentSession)
@@ -138,7 +148,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         // Populate the roster that will be displayed.
-        // If you are leader/supervisor, you can see Guests who have followed
+        // If you are leader/advisor, you can see Guests who have followed
         // You are activity.
         let populateRoster = function (model) {
             let membershipsToDisplay = [];
@@ -235,6 +245,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(loadRequests)
         .then(loadActivityMemberEmails)
         .then(loadActivityLeaderEmails)
+        .then(loadActivityAdvisorEmails)
         .then(loadMemberships)
         .then(calculateMemberships)
         .then(populateRoster)
