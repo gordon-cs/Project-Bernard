@@ -41,7 +41,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let checkIfSupervisor = function (model) {
             if (!model.leading) {
-                return getAsync("/supervisors/activity/" + model.ActivityCode, context)
+                return getAsync("/memberships/activity/" + model.ActivityCode + "/advisors", context)
                 .then(isIDInList)
                 .then(function (bool) {
                     model.leading = bool;

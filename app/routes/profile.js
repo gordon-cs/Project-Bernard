@@ -71,7 +71,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Get supervisor positions of user
         let getSupervisorPositions = function(positions) {
-            return getAsync("/supervisors/person/" + IDNumber, context)
+            return getAsync("/memberships/student/" + IDNumber, context)
             .then(function(result) {
                 for (var i = 0; i < result.length; i++) {
                     if (!isLeader(result[i].Participation)) {

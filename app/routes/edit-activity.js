@@ -18,7 +18,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let leading = college_role === "god";
 
         // Promise for supervisors
-        let supervisorsPromise =  getAsync("/supervisors/activity/" + activity_code, context);
+        let supervisorsPromise =  getAsync("/memberships/activity/" + activity_code + "/advisors", context);
 
         // Promise for activity leaders
         let activityLeadersPromise =  getAsync("/memberships/activity/" + activity_code + "/leaders", context);

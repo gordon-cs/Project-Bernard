@@ -43,7 +43,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let loadSupervisors = function () {
-            return getAsync("/supervisors/activity/" + activity_code, context);
+            return getAsync("/memberships/activity/" + activity_code + "/advisors", context);
         };
         /* End Promises */
 

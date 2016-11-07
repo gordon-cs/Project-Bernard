@@ -59,7 +59,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let loadSupervisions = function() {
-            return getAsync("/supervisors/person/" + id_number, context)
+            return getAsync("/memberships/student/" + id_number, context)
         };
 
         let initializeSupervisions = function (result) {
