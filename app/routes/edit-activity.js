@@ -17,8 +17,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Check if user has persmission
         let leading = college_role === "god";
 
-        // Promise for supervisors
-        let supervisorsPromise =  getAsync("/memberships/activity/" + activity_code + "/advisors", context);
+        // Promise for advisors
+        let advisorsPromise =  getAsync("/memberships/activity/" + activity_code + "/advisors", context);
 
         // Promise for activity leaders
         let activityLeadersPromise =  getAsync("/memberships/activity/" + activity_code + "/leaders", context);
@@ -56,7 +56,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(loadModel);
         }
         else {
-            return Ember.RSVP.map([supervisorsPromise, activityLeadersPromise], checkIfInList)
+            return Ember.RSVP.map([advisorsPromise, activityLeadersPromise], checkIfInList)
             .then(function(results) {
                 if(results[0] || results[1]) {
                     return loadActivity()

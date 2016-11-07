@@ -39,7 +39,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             });
         };
 
-        let checkIfSupervisor = function (model) {
+        let checkIfadvisor = function (model) {
             if (!model.leading) {
                 return getAsync("/memberships/activity/" + model.ActivityCode + "/advisors", context)
                 .then(isIDInList)
@@ -89,7 +89,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         return loadMembership (theModel)
         .then(loadRoles)
-        .then(checkIfSupervisor)
+        .then(checkIfadvisor)
         .then(checkIfActivityLeader)
         .then(redirectIfNeither)
         .then(loadModel);

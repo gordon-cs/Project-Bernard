@@ -32,12 +32,12 @@
                     {{/if}}
                 </div>
                 <div class="col-sm-12 detail-item">
-                    {{#if model.hasSupervisors}}
+                    {{#if model.hasadvisors}}
                         <p class="detail-header">Advisors: </p>
                         <div class="leaders">
-                            {{#each model.supervisorEmails as |supervisor|}}
+                            {{#each model.advisorEmails as |advisor|}}
                                 <p class="activity-info-item-data">
-                                    <a href="mailto:{{supervisor.Email}}">{{supervisor.FirstName}} {{supervisor.LastName}}</a>
+                                    <a href="mailto:{{advisor.Email}}">{{advisor.FirstName}} {{advisor.LastName}}</a>
                                 </p>
                             {{/each}}
                         </div>

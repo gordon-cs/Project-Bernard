@@ -13,12 +13,12 @@
 				<h2>{{model.currentSession.SessionDescription}}</h2>
 			</div>
 			<div class="activity-list">
-				{{#each model.currentSupervisions as |supervisor|}}
-					{{#link-to "specific-activity" supervisor.SessionCode supervisor.ActivityCode class="activity-list-item"}}
-						<img class="activity-list-item-img" src="{{supervisor.ActivityImagePath}}">
+				{{#each model.currentSupervisions as |advisor|}}
+					{{#link-to "specific-activity" advisor.SessionCode advisor.ActivityCode class="activity-list-item"}}
+						<img class="activity-list-item-img" src="{{advisor.ActivityImagePath}}">
 						<dl class="activity-list-item-details">
-							<dt class="activity-list-item-title">{{supervisor.ActivityDescription}}</dt>
-							<dt class="activity-list-item-info">{{supervisor.SessionDescription}}</dt>
+							<dt class="activity-list-item-title">{{advisor.ActivityDescription}}</dt>
+							<dt class="activity-list-item-info">{{advisor.SessionDescription}}</dt>
 						</dl>
 					{{/link-to}}
 				{{/each}}
@@ -33,12 +33,12 @@
 				<h2>All Past Sessions</h2>
 			</div>
 			<div class="activity-list">
-				{{#each model.pastSupervisions as |supervisor|}}
-					{{#link-to "specific-activity" supervisor.SessionCode supervisor.ActivityCode class="activity-list-item"}}
-						<img class="activity-list-item-img" src="{{supervisor.ActivityImagePath}}">
+				{{#each model.pastSupervisions as |advisor|}}
+					{{#link-to "specific-activity" advisor.SessionCode advisor.ActivityCode class="activity-list-item"}}
+						<img class="activity-list-item-img" src="{{advisor.ActivityImagePath}}">
 						<dl class="activity-list-item-details">
-							<dt class="activity-list-item-title">{{supervisor.ActivityDescription}}</dt>
-							<dt class="activity-list-item-info">{{supervisor.SessionDescription}}</dt>
+							<dt class="activity-list-item-title">{{advisor.ActivityDescription}}</dt>
+							<dt class="activity-list-item-info">{{advisor.SessionDescription}}</dt>
 						</dl>
 					{{/link-to}}
 				{{/each}}

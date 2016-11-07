@@ -69,8 +69,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             });
         };
 
-        // Get supervisor positions of user
-        let getSupervisorPositions = function(positions) {
+        // Get advisor positions of user
+        let getadvisorPositions = function(positions) {
             return getAsync("/memberships/student/" + IDNumber, context)
             .then(function(result) {
                 for (var i = 0; i < result.length; i++) {
@@ -132,7 +132,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         return getLeaderPositions()
-        .then(getSupervisorPositions)
+        .then(getadvisorPositions)
         .then(getSentRequests)
         .then(addSentRequests)
         .then(verifyAdmin)
