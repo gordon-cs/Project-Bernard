@@ -16,6 +16,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let sessions;
         let currentSession;
         let activities;
+        let types = [];
         let reversedSessions = [];
 
 
@@ -29,6 +30,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let loadActivities = function () {
             return getAsync("/activities/session/" + currentSession.SessionCode, context);
         };
+        let loadTypes = function() {
+            return getAsync("/activities/session/" + currentSession.SessionCode + "/types", context);
+        }
         /* End Promises */
 
         // These functions expressions are to be chained to the promises above.
@@ -47,6 +51,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             activities = result;
             sortJsonArray(activities , "ActivityDescription");
 
+        };
+
+        let initializeTypes = function (result) {
+            types = result;
+            types.push("All");
+            types = types.sort();
         }
         let loadModel = function () {
             // Return the resolved value
@@ -55,7 +65,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "activitiesShown": activities,
                 "activitiesFilled" : (activities.length > 0),
                 "sessions": reversedSessions,
-                "currentSession": currentSession
+                "currentSession": currentSession,
+                "activityTypes": types,
+                "selectedType": "All"
             };
         };
 
@@ -66,6 +78,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(initializeCurrentSession)
         .then(loadActivities)
         .then(initializeActivities)
+        .then(loadTypes)
+        .then(initializeTypes)
         .then(loadModel)
 
     }
