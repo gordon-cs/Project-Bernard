@@ -19,8 +19,36 @@ export default Ember.Controller.extend({
                 context.set("model.activitiesFilled", (activities.length > 0));
                 context.set("model.currentSession", session);
             }
+            let getTypes = function() {
+                return getAsync("/activities/session/" + session.SessionCode.trim() + "/types", context);
+            }
+            let setTypes = function(result) {
+                let types = result;
+                types.push("All");
+                types = types.sort();
+                context.set("model.activityTypes", types);
+            }
             getAsync("/activities/session/" + session.SessionCode.trim(), this)
-            .then(setSession);
+            .then(setSession)
+            .then(getTypes)
+            .then(setTypes);
+        },
+        selectType: function(type) {
+            this.set("model.selectedType", type);
+
+            if (type && type.toLowerCase() != "All".toLowerCase()) {
+                let newList = [];
+                let oldList = this.get("model.activities");
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].ActivityTypeDescription.toLowerCase() == type.toLowerCase()) {
+                        newList.push(oldList[i]);
+                    }
+                }
+                this.set("model.activitiesShown", newList);
+            }
+            else {
+                this.set("model.activitiesShown", this.get("model.activities"));
+            }
         },
         // Filter the list of activities shown when user types in the search bar
         filterActivities: function() {

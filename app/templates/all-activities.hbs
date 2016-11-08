@@ -16,6 +16,21 @@
 			{{/power-select}}
 		</div>
 	</div>
+	<div class="dropdown-container row">
+		<div class="session-dropdown">
+			<label for="type">Type</label>
+			{{#power-select
+				placeholder="Please Select"
+				searchEnabled=false
+				selected=model.selectedType
+				options=model.activityTypes
+				onchange=(action "selectType")
+				as |type|
+			}}
+				{{type}}
+			{{/power-select}}
+		</div>
+	</div>
 	<div class="row">
 		<div class="search-bar">
 			<label for="search activities">Search Activities</label>
