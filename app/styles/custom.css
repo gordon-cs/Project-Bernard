@@ -358,6 +358,10 @@ button:active,
     Ember Power Select
 ------------------------------- */
 
+.ember-power-select-dropdown {
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
 .ember-power-select-placeholder,
 .ember-power-select-selected-item {
     font-size: 1.5em;
@@ -366,13 +370,17 @@ button:active,
 }
 .ember-power-select-option {
     color: #252525;
+    text-align: center;
+    font-weight: bold;
 }
 .ember-power-select-option,
 .ember-power-select-search {
     font-size: 1.4em;
+    color: #252525;
+    font-weight: bold;
 }
 .ember-power-select-option[aria-current="true"] {
-    background-color: #EBEAEA;
+    background-color: #ebeaea;
     color: #252525;
     -o-transition:.1s;
     -ms-transition:.1s;
