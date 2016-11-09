@@ -3,9 +3,7 @@
 ------------------------------- */
 
 .page-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.3em;
+    margin-top: 20px;
 }
 .input-container {
     margin-top: 20px;
@@ -49,6 +47,6 @@
 @media only screen and (min-width: 768px) {
     .session-dropdown,
     .search-bar {
-        width: 30%;
+        width: 40%;
     }
 }
