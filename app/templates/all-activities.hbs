@@ -7,6 +7,7 @@
 			<label for="session">Session</label>
 			{{#power-select
 				placeholder="Please Select"
+				selected=model.currentSession
 				searchField="SessionDescription"
 				options=model.sessions
 				onchange=(action "selectSession")
