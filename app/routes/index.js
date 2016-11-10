@@ -31,8 +31,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let nothingToShow;
 
         let currentSession;
-        let allSupervisions;
-        let allMemberships;
+        let allSupervisions = [];
+        let allMemberships = [];
 
         /* Promises */
         let loadCurrentSession = function() {
@@ -48,7 +48,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let initializeMemberships = function(result) {
-            allMemberships = result;
+            for (let membership of result) {
+                if (membership.Participation == "ADV") {
+                    allSupervisions.push(membership);
+                }
+                else if (membership.Participation != "GUEST") {
+                    allMemberships.push(membership);
+                }
+            }
         };
 
         let arrangeMemberships = function () {
@@ -56,14 +63,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             for (let i = 0; i < pastMemberships.length; i++) {
                 sortJsonArray(pastMemberships[i].activities, "ActivityDescription");
             }
-        };
-
-        let loadSupervisions = function() {
-            return getAsync("/memberships/student/" + id_number, context)
-        };
-
-        let initializeSupervisions = function (result) {
-            allSupervisions = result;
         };
 
         let arrangeSupervisions = function () {
@@ -104,12 +103,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         /* Compose the promises ♫♫♫♫♫♫ Music to my eyes*/
         return loadCurrentSession()
         .then(initializeCurrentSession)
-        .then(loadSupervisions)
-        .then(initializeSupervisions)
-        .then(arrangeSupervisions)
         .then(loadMemberships)
         .then(initializeMemberships)
         .then(arrangeMemberships)
+        .then(arrangeSupervisions)
         .then(loadSwitches)
         .then(loadModel);
 
