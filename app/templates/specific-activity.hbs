@@ -81,7 +81,7 @@
                     <a href="mailto:{{model.emails}}">
                         <button class="btn button-navy">Send Email to Group</button>
                     </a>
-                {{else}}
+                {{else if model.notAMember}}
                     {{#if followLoad}}
                         <button type="button" class="btn button-navy">Wait</button>
                     {{else if model.following}}
