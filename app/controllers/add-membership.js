@@ -43,6 +43,7 @@ export default Ember.Controller.extend({
                     context.set("errorMessage", "Comment too long. Max length 45 characters");
                 }
                 if (leading) {
+                    email = email.toLowerCase(); // To make comparison ignore case
                     if (email == null || email == "") {
                         passed = false;
                         context.set("errorMessage", "Email required");
