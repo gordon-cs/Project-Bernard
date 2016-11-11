@@ -21,6 +21,8 @@ export default Ember.Controller.extend({
             let description = this.get("model.description");
             let pageUrl = this.get("model.pageUrl");
 
+            let error = false;
+
             // Display error message on the page
             let showError = function(result) {
                 context.set("errorMessage", new Error(result.responseText));
@@ -41,7 +43,10 @@ export default Ember.Controller.extend({
                         let imageData = new FormData();
                         imageData.append(image.name, image); // Add the image to the FormData object
                         return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
-                                "/image", imageData, context).catch(showError);
+                                "/image", imageData, context).catch((reason) => {
+                            error = true;
+                            showError(reason);
+                        });
                     }
                     else {
                         context.set("errorMessage", imageValidation.validationMessage);
@@ -57,6 +62,7 @@ export default Ember.Controller.extend({
                 }
             };
             let errorChecks = function() {
+                error = false;
                 let passed = true;
                 let regexUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
 
@@ -78,7 +84,10 @@ export default Ember.Controller.extend({
                     "ACT_URL": pageUrl,
                     "ACT_BLURB": description
                 };
-                return putAsync("/activities/" + context.get("model.activity.ActivityCode"), data, context).catch(showError);
+                return putAsync("/activities/" + context.get("model.activity.ActivityCode"), data, context).catch((reason) => {
+                    error = true;
+                    showError(reason);
+                });
             };
             // Leave inputs blank and transition back to activity after post
             let transition = function() {
@@ -95,12 +104,20 @@ export default Ember.Controller.extend({
                 if (this.get("defaultImage")) {
                     resetImage()
                     .then(updateActivity)
-                    .then(transition);
+                    .then(function() {
+                        if (! error) {
+                            transition();
+                        }
+                    });
                 }
                 else {
                     uploadImage()
                     .then(updateActivity)
-                    .then(transition);
+                    .then(function() {
+                        if (! error) {
+                            transition();
+                        }
+                    });
                 }
             }
         },
