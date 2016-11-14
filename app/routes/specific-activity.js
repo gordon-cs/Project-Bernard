@@ -65,6 +65,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     }
                 }
             }
+
             return Ember.RSVP.hash(model);
         };
 
@@ -141,7 +142,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let loadMemberships = function (model) {
-            if (model.notAMember) {
+            if (model.notAMember && ! model.leading) {
                 model.memberships = "";
 
                 // Load number of members and followers
