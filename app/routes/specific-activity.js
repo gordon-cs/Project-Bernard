@@ -22,7 +22,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let activityadvisorEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/advisors/session/" + param.SessionCode.trim(), context);
         let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/leaders", context);
         let activityLeaderEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/leaders/session/" + param.SessionCode.trim(), context);
-        let membershipsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim(), context);
+        let personsMembershipsPromise = getAsync("/memberships/student/" + id_number, context);
+        let followingCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/followers", context);
+        let memberCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/members", context);
         // Requests to be called if needed
         let activityRequestsPromise = function() {return getAsync("/requests/activity/" + param.ActivityCode.trim(), context);};
 
@@ -139,10 +141,46 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let loadMemberships = function (model) {
-            return membershipsPromise
-            .then(filterAccordingToCurrentSession)
+            if (model.notAMember) {
+                model.memberships = "";
+
+                // Load number of members and followers
+                followingCountPromise
+                .then(function(result) {
+                    model.followingCount = result;
+                });
+                return memberCountPromise
+                .then(function(result) {
+                    model.membershipCount = result;
+                    return Ember.RSVP.hash(model);
+                });
+            }
+            else {
+                return getAsync("/memberships/activity/" + param.ActivityCode.trim(), context)
+                .then(filterAccordingToCurrentSession)
+                .then(function(result) {
+                    model.memberships = result;
+                    return Ember.RSVP.hash(model);
+                });
+            }
+        };
+
+        let setRole = function(model) {
+            return personsMembershipsPromise
             .then(function(result) {
-                model.memberships = result;
+                model.notAMember = true;
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].Participation === "GUEST" &&
+                        result[i].SessionCode == param.SessionCode &&
+                        result[i].ActivityCode == param.ActivityCode) {
+                        model.membershipID = result[i].MembershipID;
+                        model.following = true;
+                    }
+                    else if (result[i].SessionCode == param.SessionCode &&
+                        result[i].ActivityCode == param.ActivityCode) {
+                        model.notAMember = false;
+                    }
+                }
                 return Ember.RSVP.hash(model);
             });
         };
@@ -162,23 +200,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
             model.rosterMemberships = sortJsonArray(membershipsToDisplay, "LastName");
             model.rosterFilled = (model.rosterMemberships.length > 0);
-            return Ember.RSVP.hash(model);
-        };
-
-        // Determine if the user is following the activity
-        let setIfFollowing = function (model) {
-            let membershipID;
-            let following = false;
-            model.notAMember = true;
-            for (var i = 0; i < model.memberships.length; i++) {
-                if (model.memberships[i].Participation === "GUEST" && model.memberships[i].IDNumber == id_number) {
-                    model.membershipID = model.memberships[i].MembershipID;
-                    model.following = true;
-                }
-                else if (model.memberships[i].IDNumber == id_number) {
-                    model.notAMember = false;
-                }
-            }
             return Ember.RSVP.hash(model);
         };
 
@@ -213,13 +234,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
             }
 
+            if (! model.notAMember) {
+                model.followingCount = guestCounter;
+                model.membershipCount = membershipCounter;
+            }
+
             // Checks the plurality of guest memberships
-            if (guestCounter === 1) {
+            if (guestCounter === 1 || guestCounter === 0) {
                 guestSingular = true;
             }
 
             // Checks the plurality of normal memberships
-            if (membershipCounter === 1) {
+            if (membershipCounter === 1 || membershipCounter === 0) {
                 membershipSingular = true;
             }
 
@@ -247,13 +273,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         return loadFilteredManagers(theModel)
         .then(setIfUserIsManager)
         .then(loadRequests)
-        .then(loadActivityMemberEmails)
         .then(loadActivityLeaderEmails)
         .then(loadActivityAdvisorEmails)
+        .then(setRole)
+        .then(loadActivityMemberEmails)
         .then(loadMemberships)
         .then(calculateMemberships)
         .then(populateRoster)
-        .then(setIfFollowing)
         .then(loadSessions)
         .then(loadActivity)
         .then(loadModel);

@@ -101,14 +101,14 @@
     <div class="row table-row">
         <div class="col-sm-12">
             <h2>
-                <strong>Current Activity Roster:</strong> {{model.membershipCounter}}
+                <strong>Current Activity Roster:</strong> {{model.membershipCount}}
                 {{#if model.membershipSingular}}
                     Member
                 {{else}}
                     Members
                 {{/if}}
                 and
-                {{model.guestCounter}}
+                {{model.followingCount}}
                 {{#if model.guestSingular}}
                     Guest
                 {{else}}
@@ -154,7 +154,9 @@
                     </table>
                 </div>
             {{else}}
-                <p class="empty-table-reminder">There are no members here</p>
+                {{#unless model.notAMember}}
+                    <p class="empty-table-reminder">There are no members here</p>
+                {{/unless}}
             {{/if}}
         </div>
     </div>
