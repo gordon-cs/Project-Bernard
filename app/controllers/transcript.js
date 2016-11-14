@@ -17,20 +17,41 @@ export default Ember.Controller.extend({
     // Create the PDF document that is shown and can be downloaded
     createPDF() {
         let context = this;
+        let memberships = [];
+        let sessions = [];
 
         let getMemberships = function() {
             return getAsync("/memberships/student/" + context.get("session.data.authenticated.token_data.id"), context);
         }
         let sortMemberships = function(result) {
-            let memberships = [];
             for (let i = 0; i < result.length; i++) {
                 if (isTranscriptWorthy(result[i].Participation)) {
                     memberships.push(result[i]);
                 }
             }
-            return sortJsonArray(memberships, "ActivityDescription");
+            memberships = sortJsonArray(memberships, "ActivityDescription");
         }
-        let generatePDF = function(memberships) {
+        let getSessions = function() {
+            return getAsync("/sessions", context)
+            .then(function(result) {
+                sessions = result;
+            });
+        }
+        let formatMembershipsDate = function() {
+            for (let i = 0; i < memberships.length; i ++) {
+                memberships[i].StartDate = findSession(memberships[i].SessionCode).SessionBeginDate;
+                memberships[i].EndDate = findSession(memberships[i].SessionCode).SessionEndDate;
+            }
+        }
+        let findSession = function(sessionCode) {
+            for (let i = 0; i < sessions.length; i ++) {
+                if (sessions[i].SessionCode == sessionCode) {
+                    console.log(sessions[i]);
+                    return sessions[i];
+                }
+            }
+        }
+        let generatePDF = function() {
             // Using https://parall.ax/products/jspdf
             // (x, y)
             // text (x, y, string)
@@ -91,7 +112,8 @@ export default Ember.Controller.extend({
             var getDate = function(dateString) {
                 var date = new Date(dateString);
                 return ((date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear());
-            }
+            };
+
 
             var doc = new jsPDF("p", "mm", [WIDTH, HEIGHT]);
             addText(MARGIN, TITLE_FONT, TITLE_WEIGHT, "Gordon 360");
@@ -122,6 +144,8 @@ export default Ember.Controller.extend({
         // Run all the functions
         return getMemberships()
         .then(sortMemberships)
+        .then(getSessions)
+        .then(formatMembershipsDate)
         .then(generatePDF);
     }
 });
