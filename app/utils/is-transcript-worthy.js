@@ -1,3 +1,3 @@
 export default function isTranscriptWorthy(part) {
-    return part === "LEAD";
+    return part !== "GUEST";
 }

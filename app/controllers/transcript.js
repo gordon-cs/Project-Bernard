@@ -18,6 +18,7 @@ export default Ember.Controller.extend({
     createPDF() {
         let context = this;
         let memberships = [];
+        let leaderships = [];
         let sessions = [];
 
         let getMemberships = function() {
@@ -26,10 +27,21 @@ export default Ember.Controller.extend({
         let sortMemberships = function(result) {
             for (let i = 0; i < result.length; i++) {
                 if (isTranscriptWorthy(result[i].Participation)) {
-                    memberships.push(result[i]);
+                    if (result[i].Participation == "MEMBR") {
+                        memberships.push(result[i]);
+                    }
+                    else {
+                        leaderships.push(result[i]);
+                    }
                 }
             }
+            // Sort in alphabetical order
             memberships = sortJsonArray(memberships, "ActivityDescription");
+            leaderships = sortJsonArray(leaderships, "ActivityDescription");
+
+            // Sort in chronological order
+            memberships = sortJsonArray(memberships, "SessionCode").reverse();
+            leaderships = sortJsonArray(leaderships, "SessionCode").reverse();
         }
         let getSessions = function() {
             return getAsync("/sessions", context)
@@ -42,11 +54,14 @@ export default Ember.Controller.extend({
                 memberships[i].StartDate = findSession(memberships[i].SessionCode).SessionBeginDate;
                 memberships[i].EndDate = findSession(memberships[i].SessionCode).SessionEndDate;
             }
+            for (let i = 0; i < leaderships.length; i ++) {
+                leaderships[i].StartDate = findSession(leaderships[i].SessionCode).SessionBeginDate;
+                leaderships[i].EndDate = findSession(leaderships[i].SessionCode).SessionEndDate;
+            }
         }
         let findSession = function(sessionCode) {
             for (let i = 0; i < sessions.length; i ++) {
                 if (sessions[i].SessionCode == sessionCode) {
-                    console.log(sessions[i]);
                     return sessions[i];
                 }
             }
@@ -123,21 +138,34 @@ export default Ember.Controller.extend({
             // Page Header
             addText(MARGIN, HEADER_FONT, HEADER_WEIGHT,
                 "Co-Curricular Transcript - " + context.get("session.data.authenticated.token_data.name"));
+
             move(10);
-            // Activity List
+            addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Leadership positions");
+
+            // Leaderships
             doc.setLineWidth(LIST_LINE_WIDTH);
-            for (var i = 0; i < memberships.length; i++) {
-                if (i !== 0) {
-                    addLine(MARGIN, INNER_WIDTH / 2, LIST_LINE_WIDTH, 6);
-                }
+            for (var i = 0; i < leaderships.length; i++) {
+                move(LIST_SPACING);
                 addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
-                    memberships[i].ActivityDescription);
-                move(LIST_SPACING);
-                addText(MARGIN + (TAB * 2), LIST_FONT, LIST_WEIGHT,
-                    memberships[i].ParticipationDescription);
-                move(LIST_SPACING);
-                addText(MARGIN + (TAB * 2), LIST_FONT, LIST_WEIGHT,
-                    getDate(memberships[i].StartDate) + " - " + getDate(memberships[i].EndDate));
+                    leaderships[i].ParticipationDescription +
+                    " - " + leaderships[i].ActivityDescription);
+                move(3);
+                addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
+                    getDate(leaderships[i].StartDate) + " - " + getDate(leaderships[i].EndDate));
+            }
+
+            move(10);
+            addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Regular positions");
+
+            // Memberships
+            for (var i = 0; i < memberships.length; i++) {
+              move(LIST_SPACING);
+              addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
+                  memberships[i].ParticipationDescription +
+                  " - " + memberships[i].ActivityDescription);
+              move(3);
+              addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
+                  getDate(memberships[i].StartDate) + " - " + getDate(memberships[i].EndDate));
             }
             return doc;
         }
