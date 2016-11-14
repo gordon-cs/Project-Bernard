@@ -44,12 +44,18 @@ export default Ember.Controller.extend({
 
             if (this.model.following) {
                 unfollow()
-                .then(switchFollow);
+                .then(switchFollow)
+                .then(function() {
+                    context.set("model.followingCount", context.get("model.followingCount") - 1);
+                });
             }
             else {
                 follow()
                 .then(getNewMembership)
-                .then(switchFollow);
+                .then(switchFollow)
+                .then(function() {
+                    context.set("model.followingCount", context.get("model.followingCount") + 1);
+                });
             }
         },
         // Method that gets called when the Remove button is clicked
