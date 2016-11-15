@@ -139,8 +139,10 @@ export default Ember.Controller.extend({
             addText(MARGIN, HEADER_FONT, HEADER_WEIGHT,
                 "Co-Curricular Transcript - " + context.get("session.data.authenticated.token_data.name"));
 
-            move(10);
-            addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Leadership positions");
+            if (leaderships.length > 0) {
+                move(10);
+                addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Leadership positions");
+            }
 
             // Leaderships
             doc.setLineWidth(LIST_LINE_WIDTH);
@@ -154,8 +156,10 @@ export default Ember.Controller.extend({
                     getDate(leaderships[i].StartDate) + " - " + getDate(leaderships[i].EndDate));
             }
 
-            move(10);
-            addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Regular positions");
+            if (memberships.length > 0) {
+                move(10);
+                addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Regular positions");
+            }
 
             // Memberships
             for (var i = 0; i < memberships.length; i++) {
