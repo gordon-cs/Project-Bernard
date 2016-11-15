@@ -235,7 +235,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
             }
 
-            if (! model.notAMember) {
+            if (! model.notAMember || model.leading) {
                 model.followingCount = guestCounter;
                 model.membershipCount = membershipCounter;
             }
