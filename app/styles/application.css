@@ -35,6 +35,7 @@
 header {
 	background: #cccccb;
 	width: 100%;
+	padding: 0 !important;
 }
 .header {
 	background: #cccccb;

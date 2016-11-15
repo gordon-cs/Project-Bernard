@@ -1,12 +1,10 @@
 <div class="container">
-    <div class="col-sm-12">
-        <div class="row">
-            <button id="download-button" class="btn button-cyan" onclick={{action "getPDF"}}>
-                Download Transcript
-            </button>
-        </div>
-        <div class="row">
-            <iframe id="transcipt-view" src={{model.url}}></iframe>
-        </div>
+    <div class="row reset-padding">
+        <button id="download-button" class="btn button-cyan" onclick={{action "getPDF"}}>
+            Download Transcript
+        </button>
+    </div>
+    <div class="row reset-padding">
+        <iframe id="transcipt-view" src={{model.url}}></iframe>
     </div>
 </div>

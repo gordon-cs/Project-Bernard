@@ -10,6 +10,9 @@
 #transcipt-view {
     display: none;
 }
+.reset-padding {
+    padding: 0 !important;
+}
 
 /* -----------------------------
     Responsive Changes
