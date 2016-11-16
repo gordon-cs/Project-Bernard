@@ -2,7 +2,7 @@
     Gordon logo
 ------------------------------- */
 
-#logo-box {
+#logo-box, #logo-box-horizontal {
 	background: #014983;
     text-align: center;
 	padding: 2% 2%;
@@ -241,6 +241,15 @@ header {
     #logo-box img {
       max-width: 100%;
     }
+		#logo-box-horizontal {
+				display: block;
+				position: absolute;
+				top: 0;
+				padding-top: 45px;
+				padding-bottom: 30px;
+				padding-left: 30px;
+				padding-right: 30px;
+		}
 		#logo-mobile {
 			display: none;
 		}

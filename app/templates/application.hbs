@@ -20,11 +20,19 @@
                     </div>
                 {{/if}}
             </div>
-            {{#link-to "index"}}
-                <div id="logo-box">
-                    <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College">
-                </div>
-            {{/link-to}}
+            {{#if session.isAuthenticated}}
+                {{#link-to "index"}}
+                    <div id="logo-box-horizontal">
+                        <img src="images/gordon-logo-horizontal.svg" alt="Gordon College logo"  width="150" height="38" />
+                    </div>
+                {{/link-to}}
+            {{else}}
+                {{#link-to "index"}}
+                    <div id="logo-box">
+                        <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College logo">
+                    </div>
+                {{/link-to}}
+            {{/if}}
         </div>
     </header>
     {{#if session.isAuthenticated}}
