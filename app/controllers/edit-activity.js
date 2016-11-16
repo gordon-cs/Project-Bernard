@@ -28,11 +28,6 @@ export default Ember.Controller.extend({
                 context.set("errorMessage", new Error(result.responseText));
             };
 
-            // Reset image to default
-            let resetImage = function() {
-                return postAsync("/activities/" + context.model.activity.ActivityCode + "/image/reset", null, context).catch(showError);
-            };
-
             // Upload image file
             // Resturns resolved promise if no image was selected
             let uploadImage = function() {
@@ -101,24 +96,13 @@ export default Ember.Controller.extend({
             };
 
             if (errorChecks()) {
-                if (this.get("defaultImage")) {
-                    resetImage()
-                    .then(updateActivity)
-                    .then(function() {
-                        if (! error) {
-                            transition();
-                        }
-                    });
-                }
-                else {
-                    uploadImage()
-                    .then(updateActivity)
-                    .then(function() {
-                        if (! error) {
-                            transition();
-                        }
-                    });
-                }
+                uploadImage()
+                .then(updateActivity)
+                .then(function() {
+                    if (! error) {
+                        transition();
+                    }
+                });
             }
         },
         cancel() {
