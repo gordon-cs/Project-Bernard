@@ -72,6 +72,13 @@ a {
     text-transform: uppercase;
     font-weight: bold !important;
 }
+.remove-image-btn {
+    text-align: center;
+}
+.remove-image-btn button {
+    text-transform: uppercase;
+    font-weight: bold !important;
+}
 
 /* -----------------------------
     Tables

@@ -267,6 +267,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return Ember.RSVP.hash(model);
         };
 
+        let setIfDefaultImage = function(model) {
+            if (model.activity.ActivityImagePath.includes("gordon.edu/browseable/uploads/Default/activityImage.png")) {
+                model.defaultImage = true;
+            }
+            else {
+                model.defaultImage = false;
+            }
+
+            return Ember.RSVP.hash(model);
+        };
+
         let loadModel = function (model) {
             return Ember.RSVP.hash(model);
         };
@@ -283,6 +294,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(populateRoster)
         .then(loadSessions)
         .then(loadActivity)
+        .then(setIfDefaultImage)
         .then(loadModel);
 
     }

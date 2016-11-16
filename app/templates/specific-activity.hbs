@@ -8,6 +8,13 @@
                 <img class="activity-picture center-block"
                     src={{model.activity.ActivityImagePath}} alt="activity image">
             </div>
+            {{#unless model.defaultImage}}
+                {{#if model.leading}}
+                    <div class="row remove-image-btn">
+                        <button {{action "resetImage"}} class="btn button-red">Remove Image</button>
+                    </div>
+                {{/if}}
+            {{/unless}}
         </div>
         <div class="col-sm-6 right-section">
             {{!-- Activity Information --}}

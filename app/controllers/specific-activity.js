@@ -91,6 +91,15 @@ export default Ember.Controller.extend({
                     window.location.reload(true);
                 });
             }
+        },
+        // Reset image to default
+        resetImage() {
+            postAsync("/activities/" + this.model.activity.ActivityCode + "/image/reset", null, this).catch(function(error) {
+                alert(error.responseText);
+            })
+            .then(function() {
+                window.location.reload(true);
+            });
         }
     }
 });
