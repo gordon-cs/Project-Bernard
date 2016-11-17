@@ -109,13 +109,16 @@ export default Ember.Controller.extend({
             var move = function(amout) {
                 ypos += amout;
                 if (ypos > HEIGHT - MARGIN - 30) {
-                    doc.addImage(IMG, "JPEG", (INNER_WIDTH + 21) / 2, 242, 21, 18.75);
-                    doc.setFontSize(FOOTER_FONT);
-                    doc.text(68, 265, "Gordon College, 255 Grapevine Road, Wenham, MA 01984");
+                    addFooter();
                     doc.addPage();
                     ypos = MARGIN;
                 }
             };
+            var addFooter = function() {
+                doc.addImage(IMG, "JPEG", (INNER_WIDTH + 21) / 2, 242, 21, 18.75);
+                doc.setFontSize(FOOTER_FONT);
+                doc.text(68, 265, "Gordon College, 255 Grapevine Road, Wenham, MA 01984");
+            }
             // Add text with specified x-position, size and weight
             // Moves ypos down the depending on the font size
             var addText = function(x, size, weight, string) {
@@ -178,9 +181,7 @@ export default Ember.Controller.extend({
                   getDate(memberships[i].StartDate) + " - " + getDate(memberships[i].EndDate));
             }
 
-            doc.addImage(IMG, "JPEG", (INNER_WIDTH + 21) / 2, 242, 21, 18.75);
-            doc.setFontSize(FOOTER_FONT);
-            doc.text(68, 265, "Gordon College, 255 Grapevine Road, Wenham, MA 01984");
+            addFooter();
 
             return doc;
         }
