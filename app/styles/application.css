@@ -264,4 +264,7 @@ header {
 		#primary-menu {
 			font-size: 1.2em;
 		}
+		#logo-box-horizontal {
+			padding-bottom: 34px;
+		}
 }
