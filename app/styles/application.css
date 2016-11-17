@@ -20,7 +20,8 @@
 		float: left;
 		width: 123px;
 		height: 31px;
-		margin: 10px;
+		margin: 11px;
+		margin-left: 15px;
 }
 .logo-mobile-center {
 		margin-left: auto !important;
@@ -254,7 +255,7 @@ header {
 			display: none;
 		}
 		#primary-menu {
-			margin-left: 150px;
+			margin-left: 200px;
 		}
 		.user-info {
 			margin-top: 17px;
