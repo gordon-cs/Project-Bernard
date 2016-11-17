@@ -2,6 +2,7 @@ import Ember from "ember";
 import getAsync from "gordon360/utils/get-async";
 import isTranscriptWorthy from "gordon360/utils/is-transcript-worthy";
 import sortJsonArray from "gordon360/utils/sort-json-array";
+import getEncodedtranscriptlogo from "gordon360/utils/transcript-logo";
 
 /*  Controller for the transcript page.
  *  Handles user interaction with the page.
@@ -100,11 +101,17 @@ export default Ember.Controller.extend({
             const LIST_LINE_LENGTH = 125;
             const LINE_SPACE_BEFORE = 6;
             const LINE_SPACE_AFTER = 8;
+            // Footer variables
+            const IMG = getEncodedtranscriptlogo();
+            const FOOTER_FONT = 9;
 
             var ypos = MARGIN;
             var move = function(amout) {
                 ypos += amout;
-                if (ypos > HEIGHT - MARGIN) {
+                if (ypos > HEIGHT - MARGIN - 30) {
+                    doc.addImage(IMG, "JPEG", (INNER_WIDTH + 21) / 2, 242, 21, 18.75);
+                    doc.setFontSize(FOOTER_FONT);
+                    doc.text(68, 265, "Gordon College, 255 Grapevine Road, Wenham, MA 01984");
                     doc.addPage();
                     ypos = MARGIN;
                 }
@@ -128,7 +135,6 @@ export default Ember.Controller.extend({
                 var date = new Date(dateString);
                 return ((date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear());
             };
-
 
             var doc = new jsPDF("p", "mm", [WIDTH, HEIGHT]);
             addText(MARGIN, TITLE_FONT, TITLE_WEIGHT, "Gordon 360");
@@ -171,6 +177,11 @@ export default Ember.Controller.extend({
               addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
                   getDate(memberships[i].StartDate) + " - " + getDate(memberships[i].EndDate));
             }
+
+            doc.addImage(IMG, "JPEG", (INNER_WIDTH + 21) / 2, 242, 21, 18.75);
+            doc.setFontSize(FOOTER_FONT);
+            doc.text(68, 265, "Gordon College, 255 Grapevine Road, Wenham, MA 01984");
+
             return doc;
         }
         // Run all the functions
