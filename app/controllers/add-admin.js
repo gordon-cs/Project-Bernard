@@ -14,9 +14,11 @@ export default Ember.Controller.extend({
             let email = this.email;
             let leading = this.model.leading;
             let IDNumber = this.get("session.data.authenticated.token_data.id");
+            let error = false;
 
             // Check if all the inputs are valid
             let errorChecks = function() {
+                error = false;
                 let passed = true;
                 let regexEmail = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
                 if (leading) {
@@ -57,8 +59,10 @@ export default Ember.Controller.extend({
                     "USER_NAME": result.Email.split("@")[0],
                     "SUPER_ADMIN": context.get("superAdmin")
                 };
-                    console.log(data);
-                return postAsync("/admins", data, context).catch(showError);
+                return postAsync("/admins", data, context).catch((reason) => {
+                    error = true;
+                    showError(reason);
+                });
             };
 
             // Leave inputs blank and transition back to activity
@@ -71,7 +75,11 @@ export default Ember.Controller.extend({
             if (errorChecks()) {
                 getAccount()
                 .then(postAdmin)
-                .then(transition);
+                .then(function() {
+                    if (! error) {
+                        transition();
+                    }
+                });
             }
         },
         cancel() {

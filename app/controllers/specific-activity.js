@@ -44,12 +44,18 @@ export default Ember.Controller.extend({
 
             if (this.model.following) {
                 unfollow()
-                .then(switchFollow);
+                .then(switchFollow)
+                .then(function() {
+                    context.set("model.followingCount", context.get("model.followingCount") - 1);
+                });
             }
             else {
                 follow()
                 .then(getNewMembership)
-                .then(switchFollow);
+                .then(switchFollow)
+                .then(function() {
+                    context.set("model.followingCount", context.get("model.followingCount") + 1);
+                });
             }
         },
         // Method that gets called when the Remove button is clicked
@@ -85,6 +91,15 @@ export default Ember.Controller.extend({
                     window.location.reload(true);
                 });
             }
+        },
+        // Reset image to default
+        resetImage() {
+            postAsync("/activities/" + this.model.activity.ActivityCode + "/image/reset", null, this).catch(function(error) {
+                alert(error.responseText);
+            })
+            .then(function() {
+                window.location.reload(true);
+            });
         }
     }
 });

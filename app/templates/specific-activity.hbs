@@ -1,13 +1,20 @@
 <div class="container main-container">
     <div class="row">
-        <div class="col-sm-6 col-left">
+        <div class="activity-name">
+            <h1>{{model.activity.ActivityDescription}}</h1>
+        </div>
+        <div class="col-sm-6">
             <div class="row">
-                <div class="activity-name">
-                    <h1 class="lead text-center">{{model.activity.ActivityDescription}}</h1>
-                </div>
                 <img class="activity-picture center-block"
                     src={{model.activity.ActivityImagePath}} alt="activity image">
             </div>
+            {{#unless model.defaultImage}}
+                {{#if model.leading}}
+                    <div class="row remove-image-btn">
+                        <button {{action "resetImage"}} class="btn button-red">Remove Image</button>
+                    </div>
+                {{/if}}
+            {{/unless}}
         </div>
         <div class="col-sm-6 right-section">
             {{!-- Activity Information --}}
@@ -59,56 +66,55 @@
                     </div>
                 {{/if}}
             </div>
-            {{!-- Activity Buttons --}}
-            <div class="row button-row">
-                {{#if model.godMode}}
-                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
-                        <button class="btn button-navy">Add Member</button>
-                    {{/link-to}}
-                    {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
-                        <button class="btn button-navy">Edit Activity</button>
-                    {{/link-to}}
-                    <a href="mailto:{{model.emails}}">
-                        <button class="btn button-navy">Send Email to Group</button>
-                    </a>
-                {{else if model.leading}}
-                    {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
-                        <button class="btn button-navy">Add Member</button>
-                    {{/link-to}}
-                    {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
-                        <button class="btn button-navy">Edit Activity</button>
-                    {{/link-to}}
-                    <a href="mailto:{{model.emails}}">
-                        <button class="btn button-navy">Send Email to Group</button>
-                    </a>
-                {{else}}
-                    {{#if followLoad}}
-                        <button type="button" class="btn button-navy">Wait</button>
-                    {{else if model.following}}
-                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
-                    {{else}}
-                        <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
-                    {{/if}}
-                    {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
-                        <button type="button" class="btn button-navy">Join</button>
-                    {{/link-to}}
-                {{/if}}
-            </div>
         </div>
+    </div>
+    <div class="row button-row col-sm-12">
+        {{#if model.godMode}}
+            {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
+                <button class="btn button-navy">Add Member</button>
+            {{/link-to}}
+            {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
+                <button class="btn button-navy">Edit Activity</button>
+            {{/link-to}}
+            <a href="mailto:{{model.emails}}">
+                <button class="btn button-navy">Send Email to Group</button>
+            </a>
+        {{else if model.leading}}
+            {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
+                <button class="btn button-navy">Add Member</button>
+            {{/link-to}}
+            {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
+                <button class="btn button-navy">Edit Activity</button>
+            {{/link-to}}
+            <a href="mailto:{{model.emails}}">
+                <button class="btn button-navy">Send Email to Group</button>
+            </a>
+        {{else if model.notAMember}}
+            {{#if followLoad}}
+                <button type="button" class="btn button-navy">Wait</button>
+            {{else if model.following}}
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
+            {{else}}
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
+            {{/if}}
+            {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
+                <button type="button" class="btn button-navy">Join</button>
+            {{/link-to}}
+        {{/if}}
     </div>
     {{!-- Activity Tables --}}
     {{!-- Members --}}
     <div class="row table-row">
         <div class="col-sm-12">
             <h2>
-                <strong>Current Activity Roster:</strong> {{model.membershipCounter}}
+                <strong>Current Activity Roster:</strong> {{model.membershipCount}}
                 {{#if model.membershipSingular}}
                     Member
                 {{else}}
                     Members
                 {{/if}}
                 and
-                {{model.guestCounter}}
+                {{model.followingCount}}
                 {{#if model.guestSingular}}
                     Guest
                 {{else}}
@@ -144,7 +150,7 @@
                                             <button {{action "removePerson" mem}} class="btn button-red table-button">Remove</button>
                                         </td>
                                     {{else if mem.isLoggedInUser}}
-                                        <td><button {{action "removePerson" mem}} class="btn button-red table-button">Remove</button></td>
+                                        <td><button {{action "removePerson" mem}} class="btn button-red table-button">Leave</button></td>
                                     {{else}}
                                         <td></td>
                                     {{/if}}
@@ -154,7 +160,9 @@
                     </table>
                 </div>
             {{else}}
-                <p class="empty-table-reminder">There are no members here</p>
+                {{#unless model.notAMember}}
+                    <p class="empty-table-reminder">There are no members here</p>
+                {{/unless}}
             {{/if}}
         </div>
     </div>

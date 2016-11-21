@@ -27,9 +27,11 @@ export default Ember.Controller.extend({
             let activityCode = this.model.activity.ActivityCode;
             let sessionCode = this.model.sessionCode;
             let IDNumber = this.get("session.data.authenticated.token_data.id");
+            let error = false;
 
             // Check if all the inputs are valid
             let errorChecks = function() {
+                error = false;
                 let passed = true;
                 let regexEmail = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
                 if (role == null) {
@@ -41,6 +43,7 @@ export default Ember.Controller.extend({
                     context.set("errorMessage", "Comment too long. Max length 45 characters");
                 }
                 if (leading) {
+                    email = email.toLowerCase(); // To make comparison ignore case
                     if (email == null || email == "") {
                         passed = false;
                         context.set("errorMessage", "Email required");
@@ -77,7 +80,10 @@ export default Ember.Controller.extend({
                     "END_DTE": new Date().toJSON(),
                     "COMMENT_TXT": comments
                 };
-                return postAsync("/memberships", data, context).catch(showError);
+                return postAsync("/memberships", data, context).catch((reason) => {
+                    error = true;
+                    showError(reason);
+                });
             };
 
             // Send data for membership request
@@ -91,7 +97,10 @@ export default Ember.Controller.extend({
                     "COMMENT_TXT": comments,
                     "APPROVED": "Pending"
                 };
-                return postAsync("/requests", data, context).catch(showError);
+                return postAsync("/requests", data, context).catch((reason) => {
+                    error = true;
+                    showError(reason);
+                });
             };
 
             // Leave inputs blank and transition back to activity
@@ -108,11 +117,19 @@ export default Ember.Controller.extend({
                 if (this.get("model.leading")) {
                     getStudent()
                     .then(postMembership)
-                    .then(transition);
+                    .then(function() {
+                        if (! error) {
+                            transition();
+                        }
+                    });
                 }
                 else {
                     postRequest()
-                    .then(transition);
+                    .then(function() {
+                        if (! error) {
+                            transition();
+                        }
+                    });
                 }
             }
         },

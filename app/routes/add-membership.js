@@ -29,17 +29,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/participations", context);
         };
 
-
         let loadActivity = function () {
             return getAsync("/activities/" + activity_code, context);
         };
 
         let loadActivityLeaders = function () {
             return getAsync("/memberships/activity/" + activity_code + "/leaders", context);
-        };
-
-        let loadMemberships = function () {
-            return getAsync("/memberships/activity/" + activity_code, context);
         };
 
         let loadadvisors = function () {
@@ -57,10 +52,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             activity = result;
         };
 
-        let initializeMemberships = function (result) {
-            memberships = result;
-        };
-
         let initializeActivityLeaders = function (result) {
             leaders = result;
         };
@@ -71,12 +62,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let filterMemberships = function () {
             // Ugly code that james wrote ...jk jk jk jk
-            for (let i = 0; i < memberships.length; i++) {
-                if (memberships[i].SessionCode !== param.SessionCode) {
-                    memberships.splice(i, 1);
-                    i --;
-                }
-            }
+
         };
 
         let setSwitches = function () {
@@ -110,9 +96,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(initializeRoles)
         .then(loadActivity)
         .then(initializeActivity)
-        .then(loadMemberships)
-        .then(initializeMemberships)
-        .then(filterMemberships)
         .then(loadActivityLeaders)
         .then(initializeActivityLeaders)
         .then(loadadvisors)

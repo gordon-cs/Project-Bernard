@@ -21,8 +21,11 @@ export default Ember.Controller.extend({
             let studentID = this.get("model.membership.IDNumber");
             let comments = this.get("model.membership.Description") || "";
             let roleID = this.get("model.currentRole.ParticipationCode");
+
+            let error = false;
             // Check for input errors
             let errorChecks = function() {
+                error = false;
                 let passed = true;
                 if (roleID == null) {
                     passed = false;
@@ -53,7 +56,10 @@ export default Ember.Controller.extend({
                     "COMMENT_TXT": comments
                 };
 
-                return putAsync("/memberships/" + membershipID, data, context).catch(showError);
+                return putAsync("/memberships/" + membershipID, data, context).catch((reason) => {
+                    error = true;
+                    showError(reason);
+                });
             };
 
             // Transition back to activity
@@ -68,7 +74,11 @@ export default Ember.Controller.extend({
 
             if (errorChecks()) {
                 updateMembership()
-                .then(transition);
+                .then(function() {
+                    if (! error) {
+                        transition();
+                    }
+                });
             }
         },
         cancel() {

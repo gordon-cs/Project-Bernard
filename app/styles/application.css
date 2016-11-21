@@ -2,7 +2,7 @@
     Gordon logo
 ------------------------------- */
 
-#logo-box {
+#logo-box, #logo-box-horizontal {
 	background: #014983;
     text-align: center;
 	padding: 2% 2%;
@@ -20,7 +20,8 @@
 		float: left;
 		width: 123px;
 		height: 31px;
-		margin: 10px;
+		margin: 11px;
+		margin-left: 15px;
 }
 .logo-mobile-center {
 		margin-left: auto !important;
@@ -35,6 +36,7 @@
 header {
 	background: #cccccb;
 	width: 100%;
+	padding: 0 !important;
 }
 .header {
 	background: #cccccb;
@@ -240,11 +242,20 @@ header {
     #logo-box img {
       max-width: 100%;
     }
+		#logo-box-horizontal {
+				display: block;
+				position: absolute;
+				top: 0;
+				padding-top: 45px;
+				padding-bottom: 30px;
+				padding-left: 30px;
+				padding-right: 30px;
+		}
 		#logo-mobile {
 			display: none;
 		}
 		#primary-menu {
-			margin-left: 150px;
+			margin-left: 200px;
 		}
 		.user-info {
 			margin-top: 17px;
@@ -253,5 +264,8 @@ header {
 @media only screen and (min-width: 1200px) {
 		#primary-menu {
 			font-size: 1.2em;
+		}
+		#logo-box-horizontal {
+			padding-bottom: 34px;
 		}
 }

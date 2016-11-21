@@ -35,6 +35,7 @@ export default Ember.Controller.extend({
         },
         selectType: function(type) {
             this.set("model.selectedType", type);
+            this.set("searchValue", "");
 
             if (type && type.toLowerCase() != "All".toLowerCase()) {
                 let newList = [];
