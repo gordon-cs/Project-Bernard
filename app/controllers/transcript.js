@@ -167,7 +167,7 @@ export default Ember.Controller.extend({
 
             if (memberships.length > 0) {
                 move(10);
-                addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Regular positions");
+                addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Memberships");
             }
 
             // Memberships
