@@ -93,7 +93,7 @@ export default Ember.Controller.extend({
             const HEADER_FONT = 16;
             const HEADER_WEIGHT = "bold";
             // List Variables
-            const LIST_FONT = 12;
+            const LIST_FONT = 11;
             const LIST_WEIGHT = "normal";
             const LIST_START = 40;
             const LIST_SPACING = 7;
@@ -157,11 +157,13 @@ export default Ember.Controller.extend({
             doc.setLineWidth(LIST_LINE_WIDTH);
             for (var i = 0; i < leaderships.length; i++) {
                 move(LIST_SPACING);
-                addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
-                    leaderships[i].ParticipationDescription +
-                    " - " + leaderships[i].ActivityDescription);
+                addText(MARGIN, LIST_FONT, LIST_WEIGHT,
+                    leaderships[i].ParticipationDescription);
                 move(3);
-                addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
+                addText(MARGIN, LIST_FONT, LIST_WEIGHT,
+                    leaderships[i].ActivityDescription);
+                move(3);
+                addText(MARGIN, LIST_FONT, LIST_WEIGHT,
                     getDate(leaderships[i].StartDate) + " - " + getDate(leaderships[i].EndDate));
             }
 
@@ -173,11 +175,10 @@ export default Ember.Controller.extend({
             // Memberships
             for (var i = 0; i < memberships.length; i++) {
               move(LIST_SPACING);
-              addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
-                  memberships[i].ParticipationDescription +
-                  " - " + memberships[i].ActivityDescription);
+              addText(MARGIN, LIST_FONT, LIST_WEIGHT,
+                  memberships[i].ActivityDescription);
               move(3);
-              addText(MARGIN + TAB, LIST_FONT, LIST_WEIGHT,
+              addText(MARGIN, LIST_FONT, LIST_WEIGHT,
                   getDate(memberships[i].StartDate) + " - " + getDate(memberships[i].EndDate));
             }
 
