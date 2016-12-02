@@ -50,16 +50,6 @@ export default Ember.Controller.extend({
                 sessions = result;
             });
         }
-        let formatMembershipsDate = function() {
-            for (let i = 0; i < memberships.length; i ++) {
-                memberships[i].StartDate = findSession(memberships[i].SessionCode).SessionBeginDate;
-                memberships[i].EndDate = findSession(memberships[i].SessionCode).SessionEndDate;
-            }
-            for (let i = 0; i < leaderships.length; i ++) {
-                leaderships[i].StartDate = findSession(leaderships[i].SessionCode).SessionBeginDate;
-                leaderships[i].EndDate = findSession(leaderships[i].SessionCode).SessionEndDate;
-            }
-        }
         let findSession = function(sessionCode) {
             for (let i = 0; i < sessions.length; i ++) {
                 if (sessions[i].SessionCode == sessionCode) {
@@ -92,6 +82,8 @@ export default Ember.Controller.extend({
             // Title Variables
             const HEADER_FONT = 16;
             const HEADER_WEIGHT = "bold";
+            const SUBHEADER_FONT = 12;
+            const SUBHEADER_WEIGHT = "bold";
             // List Variables
             const LIST_FONT = 11;
             const LIST_WEIGHT = "normal";
@@ -153,33 +145,49 @@ export default Ember.Controller.extend({
                 addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Leadership positions");
             }
 
+            let session = '';
+
             // Leaderships
             doc.setLineWidth(LIST_LINE_WIDTH);
             for (var i = 0; i < leaderships.length; i++) {
                 move(LIST_SPACING);
+
+                // If session is different than previous one, print session title
+                if (session !== leaderships[i].SessionDescription) {
+                    session = leaderships[i].SessionDescription;
+
+                    addText(MARGIN, SUBHEADER_FONT, SUBHEADER_WEIGHT,
+                        leaderships[i].SessionDescription);
+                    move(3);
+                }
+
                 addText(MARGIN, LIST_FONT, LIST_WEIGHT,
                     leaderships[i].ParticipationDescription);
                 move(3);
                 addText(MARGIN, LIST_FONT, LIST_WEIGHT,
                     leaderships[i].ActivityDescription);
-                move(3);
-                addText(MARGIN, LIST_FONT, LIST_WEIGHT,
-                    getDate(leaderships[i].StartDate) + " - " + getDate(leaderships[i].EndDate));
             }
 
             if (memberships.length > 0) {
                 move(10);
                 addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Memberships");
+
+                session = '';
             }
 
             // Memberships
             for (var i = 0; i < memberships.length; i++) {
               move(LIST_SPACING);
+
+              if (session !== memberships[i].SessionDescription) {
+                  session = memberships[i].SessionDescription;
+
+                  addText(MARGIN, SUBHEADER_FONT, SUBHEADER_WEIGHT,
+                      memberships[i].SessionDescription);
+                  move(3);
+              }
               addText(MARGIN, LIST_FONT, LIST_WEIGHT,
                   memberships[i].ActivityDescription);
-              move(3);
-              addText(MARGIN, LIST_FONT, LIST_WEIGHT,
-                  getDate(memberships[i].StartDate) + " - " + getDate(memberships[i].EndDate));
             }
 
             addFooter();
@@ -190,7 +198,6 @@ export default Ember.Controller.extend({
         return getMemberships()
         .then(sortMemberships)
         .then(getSessions)
-        .then(formatMembershipsDate)
         .then(generatePDF);
     }
 });
