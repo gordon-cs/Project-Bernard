@@ -10,11 +10,6 @@ export default Ember.Controller.extend({
     applicationController: Ember.inject.controller('application'),
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
     actions: {
-        logout() {
-            this.get("session").invalidate();
-            this.set("requestsRecieved", []);
-            this.set("requestsSent", []);
-        },
         removeAdmin(id) {
             deleteAsync("/admins/" + id, this)
             .then(function() {

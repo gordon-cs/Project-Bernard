@@ -15,8 +15,16 @@
             <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>
             <div class="user-info col-sm-6">
                 {{#if session.isAuthenticated}}
-                    <div class="user-info-buttons">
-                        <h6>{{session.data.authenticated.token_data.name}}</h6>
+                    <div class="user-info-buttons dropdown">
+                        <h6 class="dropdown-toggle" id=id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                        {{session.data.authenticated.token_data.name}}
+                        <span class="caret"></span></h6>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown1menu1">
+                          <li><a href="#" class="uppercase">Profile</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="#" class="uppercase" {{action "logout"}}>Logout</a></li>
+                        </ul>
                     </div>
                 {{/if}}
             </div>

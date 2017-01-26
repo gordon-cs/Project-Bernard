@@ -16,7 +16,12 @@ export default Ember.Controller.extend({
     actions: {
         toggleMenu() {
             this.set("showMenu", ! this.get("showMenu"));
-        }
+        },
+        logout() {
+            this.get("session").invalidate();
+            this.set("requestsRecieved", []);
+            this.set("requestsSent", []);
+        },
     },
     // Get requests a user may have to approve or deny
     getRequests() {

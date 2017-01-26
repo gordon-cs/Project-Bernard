@@ -99,6 +99,11 @@ header {
 .primary-menu-container {
 	display: none;
 }
+ul.dropdown-menu {
+	border-radius: 0;
+	letter-spacing: 1px;
+	margin-top: .65em;
+}
 .user-info {
     text-align: right;
     color: #31342b;
