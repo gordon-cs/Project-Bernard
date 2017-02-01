@@ -130,7 +130,7 @@ td {
 }
 .activity-list-item-img {
     background-color: white;
-    display: block;
+    display: none;
     width: 100%;
     height: auto;
 }
@@ -163,6 +163,7 @@ td {
         width: 100%;
     }
     .activity-list-item-img {
+        display: block;
         height: 166px;
     }
 }

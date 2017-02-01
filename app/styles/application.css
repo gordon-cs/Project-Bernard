@@ -173,6 +173,34 @@ ul.dropdown-menu {
 		padding: 2px 4px 2px 5px;
 		border-radius: 25px;
 }
+/* -----------------------------
+   HERO IMAGE
+ ------------------------------- */
+
+.hero-container {
+	width: 100%;
+	margin: 0px;
+	border-bottom: 2px solid #cccccb;
+}
+@media screen and (max-width:750px) {
+	.hero-container {
+		overflow: auto;
+	}
+}
+
+/* For providing image via background image and not royalslider */
+.hero-container-background-img {
+	width: 100%;
+	min-height: 175px;
+	max-height: 550px;
+	position: relative;
+	margin: 0px;
+	border-bottom: 2px solid #cccccb;
+	background-position: center center;
+	background-size: cover;
+	background-image: url(images/seascape.jpg);
+}
+
 
 /* -----------------------------
     Responsive Changes
@@ -197,8 +225,9 @@ ul.dropdown-menu {
     #primary-menu {
         font-size: 1em;
         margin-top: 12px;
+				margin-right: 22%;
         float: none;
-        text-align: center;
+        text-align: right;
     }
     #primary-menu li {
         display: inline;

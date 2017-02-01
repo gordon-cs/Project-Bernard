@@ -21,11 +21,22 @@
                         {{session.data.authenticated.token_data.name}}
                         <span class="caret"></span></h6>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown1menu1">
-                          <li><a href="#" class="uppercase">Profile</a></li>
+                          <li>{{#link-to "profile"}}Profile   
+                            {{#if requestsRecieved}}
+                                <span class="notification">
+                                    {{requestsRecieved.length}}
+                                </span>
+                            {{/if}}
+                            {{/link-to}}</li>
                           <li role="separator" class="divider"></li>
-                          <li><a href="#" class="uppercase" {{action "logout"}}>Logout</a></li>
+                          <li><a href="#" {{action "logout"}}>Logout</a></li>
                         </ul>
                     </div>
+                    {{#if requestsRecieved}}
+                        <span class="notification">
+                            {{requestsRecieved.length}}
+                        </span>
+                    {{/if}}
                 {{/if}}
             </div>
             {{#if session.isAuthenticated}}
@@ -64,7 +75,7 @@
                         Transcript
                     {{/link-to}}
                 </li>
-                <li>
+                <!-- <li>
                     {{#link-to "profile" class="button uppercase"}}
                         Profile
                     {{/link-to}}
@@ -73,6 +84,9 @@
                             {{requestsRecieved.length}}
                         </span>
                     {{/if}}
+                </li> -->
+                <li class="logout-mobile">
+                <a {{action "logout"}} class="button uppercase">Logout</a>
                 </li>
             </ul>
         </div>
