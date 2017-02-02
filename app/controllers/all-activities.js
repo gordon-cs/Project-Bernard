@@ -8,16 +8,26 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
  */
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
+    queryParams:
+      selectedSession:"",
+    selectedSession: null,
     actions: {
         // Get all sessions from the server and gets the one chosen by the user in the all-activities template
         selectSession: function(session) {
             let context = this;
+            let queryParams = this.get('queryParams');
+            console.log(queryParams);
+            let sessionCode = session.SessionCode;
+            console.log(sessionCode);
             let setSession = function(result) {
                 let activities = sortJsonArray(result, "ActivityDescription");
+                console.log(session);
+                console.log(session.SessionCode);
                 context.set("model.activities", activities);
                 context.set("model.activitiesShown", activities);
                 context.set("model.activitiesFilled", (activities.length > 0));
                 context.set("model.currentSession", session);
+                //context.set(context.selectedSession, sessionCode);
             }
             let getTypes = function() {
                 return getAsync("/activities/session/" + session.SessionCode.trim() + "/types", context);

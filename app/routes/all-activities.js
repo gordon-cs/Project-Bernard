@@ -25,7 +25,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/sessions", context);
         };
         let loadCurrentSession = function () {
-            return getAsync("/sessions/current", context);
+          // check if there is a queryParam, and if so, load /
+          // let sessionQueryParam = queryParams["SessionCode"];
+          // if (sessionQueryParam != null) {
+          //   return {
+          //     SessionCode: sessionQueryParam
+          //   };
+          // }
+          // else{
+          //   return getAsync("/sessions/current", context);
+          // }
+          return getAsync("/sessions/current", context);
         };
         let loadActivities = function () {
             return getAsync("/activities/session/" + currentSession.SessionCode, context);
