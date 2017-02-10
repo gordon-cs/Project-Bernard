@@ -32,7 +32,7 @@
 	<div class="row">
 		<div class="search-bar">
 			<label for="search activities">Search Activities</label>
-			{{input value=searchValue key-up=(action "filterActivities") class="form-control" }}
+				{{input value=model.searchValue key-up=(action "filterActivities") class="form-control" }}
 		</div>
 	</div>
     {{#if model.activitiesFilled}}

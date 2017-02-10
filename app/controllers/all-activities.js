@@ -10,8 +10,10 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     queryParams:['sessionCode'],
     sessionCode: "model.selectedSession",
+    searchValue: "model.searchValue",
     actions: {
-        // Get all sessions from the server and gets the one chosen by the user in the all-activities template
+        // Get all sessions from the server and gets the one chosen by the user in the all-activities templat
+
         selectSession: function(session) {
             let context = this;
             let setSession = function(result) {
@@ -56,7 +58,7 @@ export default Ember.Controller.extend({
         },
         // Filter the list of activities shown when user types in the search bar
         filterActivities: function() {
-            let searchValue = this.get("searchValue");
+            let searchValue = this.get("model.searchValue");;
             if (searchValue) {
                 let newList = [];
                 let oldList = this.get("model.activities");

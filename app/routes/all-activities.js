@@ -18,6 +18,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let activities;
         let types = [];
         let reversedSessions = [];
+        let searchValue;
 
 
         /* Promises */
@@ -40,7 +41,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
         let loadTypes = function() {
             return getAsync("/activities/session/" + selectedSession.SessionCode + "/types", context);
-        }
+        };
         /* End Promises */
 
         // These functions expressions are to be chained to the promises above.
@@ -53,7 +54,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let initializeSelectedSession = function (result) {
             selectedSession = result;
-            console.log("Selected session = result = " + result);
         };
 
         let initializeActivities = function (result) {
@@ -66,7 +66,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             types = result;
             types.push("All");
             types = types.sort();
-        }
+        };
+        // let clearSearchField = function () {
+        //   searchValue = "";
+        // };
         let loadModel = function () {
             // Return the resolved value
             return {
@@ -76,7 +79,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "sessions": reversedSessions,
                 "selectedSession": selectedSession,
                 "activityTypes": types,
-                "selectedType": "All"
+                "selectedType": "All",
+                "searchValue" : ""
             };
         };
 
