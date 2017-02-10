@@ -8,13 +8,13 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
  *  Builds the data model that is used in the corresponding template (hbs) and controller (js) files.
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-    model() {
+    model: function(params, transition) {
 
         let context = this;
 
         /* Variables to fill */
         let sessions;
-        let currentSession;
+        let selectedSession;
         let activities;
         let types = [];
         let reversedSessions = [];
@@ -25,23 +25,21 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/sessions", context);
         };
         let loadCurrentSession = function () {
-          // check if there is a queryParam, and if so, load /
-          // let sessionQueryParam = queryParams["SessionCode"];
-          // if (sessionQueryParam != null) {
-          //   return {
-          //     SessionCode: sessionQueryParam
-          //   };
-          // }
-          // else{
-          //   return getAsync("/sessions/current", context);
-          // }
-          return getAsync("/sessions/current", context);
+            let selectedSessionCode = transition.queryParams.sessionCode;
+            if (selectedSessionCode != null)
+            {
+              return getAsync("/sessions/"+selectedSessionCode, context);
+            }
+            else {
+              return getAsync("/sessions/current", context);
+            }
         };
+
         let loadActivities = function () {
-            return getAsync("/activities/session/" + currentSession.SessionCode, context);
+            return getAsync("/activities/session/" + selectedSession.SessionCode, context);
         };
         let loadTypes = function() {
-            return getAsync("/activities/session/" + currentSession.SessionCode + "/types", context);
+            return getAsync("/activities/session/" + selectedSession.SessionCode + "/types", context);
         }
         /* End Promises */
 
@@ -53,8 +51,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         };
 
-        let initializeCurrentSession = function (result) {
-            currentSession = result;
+        let initializeSelectedSession = function (result) {
+            selectedSession = result;
+            console.log("Selected session = result = " + result);
         };
 
         let initializeActivities = function (result) {
@@ -75,7 +74,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "activitiesShown": activities,
                 "activitiesFilled" : (activities.length > 0),
                 "sessions": reversedSessions,
-                "currentSession": currentSession,
+                "selectedSession": selectedSession,
                 "activityTypes": types,
                 "selectedType": "All"
             };
@@ -85,7 +84,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         return loadSessions()
         .then(initializeSessions)
         .then(loadCurrentSession)
-        .then(initializeCurrentSession)
+        .then(initializeSelectedSession)
         .then(loadActivities)
         .then(initializeActivities)
         .then(loadTypes)

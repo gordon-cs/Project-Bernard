@@ -4,7 +4,7 @@
 			<label for="session">Session</label>
 			{{#power-select
 				placeholder="Please Select"
-				selected=model.currentSession
+				selected=model.selectedSession
 				searchField="SessionDescription"
 				options=model.sessions
 				onchange=(action "selectSession")
@@ -38,7 +38,7 @@
     {{#if model.activitiesFilled}}
     	<div class="activity-list">
     		{{#each model.activitiesShown as |activity|}}
-    			{{#link-to "specific-activity" model.currentSession.SessionCode activity.ActivityCode class="activity-list-item"}}
+    			{{#link-to "specific-activity" model.selectedSession.SessionCode activity.ActivityCode class="activity-list-item"}}
 					<img class="activity-list-item-img" src={{activity.ActivityImagePath}}>
 					<div class="activity-list-item-details">
 						<p class="activity-list-item-title">{{activity.ActivityDescription}}</p>
