@@ -410,8 +410,6 @@ button:active,
 	text-align: center;
 }
 .about-header h1 {
-  line-height: 1.2em;
-  margin: 0 0 0.2em 0;
   padding: 0px;
   font-family: 'Gotham SSm 7r', 'Gotham SSm A', 'Gotham SSm B', sans-serif;
   font-weight: 700;
@@ -430,4 +428,9 @@ button:active,
 .about-content li, .about-content p {
   font-size: 1.5em !important;
   padding-bottom: 3px;
+}
+@media (min-width: 992px) {
+  .container.about-container {
+    width: 790px;
+  }
 }
