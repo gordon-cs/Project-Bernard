@@ -9,7 +9,7 @@
  - Buttons
  - Ember Power Select
  - Loading Screen
- - About page
+ - About & Help Pages
 
 */
 
@@ -403,7 +403,7 @@ button:active,
 
 
 /* -----------------------------
-    About Page
+    About & Help Pages
 ------------------------------- */
 
 .about-header {
@@ -429,4 +429,5 @@ button:active,
 }
 .about-content li, .about-content p {
   font-size: 1.5em !important;
+  padding-bottom: 3px;
 }

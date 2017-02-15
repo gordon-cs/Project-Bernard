@@ -21,6 +21,7 @@
                         {{session.data.authenticated.token_data.name}}
                         <span class="caret"></span></h6>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown1menu1">
+                          <li>{{#link-to "help"}} Help{{/link-to}} </li>
                           <li>{{#link-to "profile"}}Profile
                             {{#if requestsRecieved}}
                                 <span class="notification">
