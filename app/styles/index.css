@@ -1,0 +1,115 @@
+/* Styles for the Dashboard (My Involvements) Page */
+.dashboard .sidebar {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar li {
+  border: 2px #cccccc;
+  font-size: 1.75em !important;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+.sidebar ul {
+  list-style: none;
+  margin-bottom: 0;
+  padding: 0;
+}
+/*.sidebar .experience-sidebar {
+  border-top: solid 15px #cccccb;
+}*/
+ul.experience-sidebar li.experience-category {
+  background-color: #00aeef;
+  border-bottom: solid 1px #ebeaea;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: .5px;
+  padding: .75em;
+}
+ul.experience-sidebar li.no-activities-msg {
+  background-color: #fff;
+  line-height: 1.75em;
+  padding: 1.5em;
+}
+.sidebar .dropdown button.dropdown-toggle,
+.sidebar .dropdown.open>.dropdown-toggle.btn-default:focus,
+.sidebar .dropdown.open>.dropdown-toggle.btn-default:hover,
+.sidebar .dropdown.open>.dropdown-toggle.btn-default {
+  background-color: #ebeaea;
+  color: #000 !important;
+  letter-spacing: .5px;
+  padding: .65em;
+  width:100%;
+}
+/*.sidebar .caret {
+  color: #fff;
+}*/
+.sidebar .dropdown {
+   border-bottom: solid 1px #cccccb;
+}
+.sidebar .dropdown .dropdown-menu {
+  /*background-color: #fff;*/
+  box-shadow: none;
+  float: none;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+.sidebar .dropdown .dropdown-menu li a {
+  font-size: .55em !important;
+  padding: 1.25em;
+  /*padding-left: 1.25em;*/
+  text-align: left;
+  white-space: normal;
+}
+.session-description {
+  font-size: .8em;
+  font-style: italic;
+}
+.dashboard .col-sm-9.col-sm-offset-3.main-content {
+  padding-left:0;
+  padding-right: 0;
+}
+.banner img {
+  width: 100%;
+}
+.row.info-blocks {
+  margin: 0;
+}
+.dashboard .info-block {
+  background-color: #00aeef;
+  color: #fff;
+  padding: 40px 0;
+  text-align: center;
+  vertical-align: middle;
+}
+.dashboard .info-block:first-child, .dashboard .info-block:last-child {
+  background-color: #014983;
+}
+.dashboard .info-block h4 {
+  font-weight: bold;
+  letter-spacing: .65px;
+  margin: auto;
+}
+/*.experience-dropdown {
+  display: none;
+}
+.dropdown-header:active .experience-dropdown {
+  display: block;
+}*/
+
+@media (min-width: 768px) {
+  .row .sidebar {
+    display: block;
+    padding: 0;
+    position: absolute;;
+    top: 0; bottom: 0; left: 0;
+  }
+  .main-content {
+
+  }
+}
