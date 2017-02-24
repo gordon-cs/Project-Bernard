@@ -1,97 +1,113 @@
 <div class="row dashboard">
 	<div class="col-sm-3 sidebar">
-		{{#if model.nothingToShow}}
-			<ul class="experience-sidebar">
-				<li class="experience-category">Current Experience</li>
-				<li class="experience-category">Past Experience</li>
-				<li class="no-activities-msg">Looks like you don't have any activities yet! Check out
-					{{#link-to 'all-activities'}}
-						<a class="empty-list-link">what's available!</a>{{/link-to}}
-				</li>
-			</ul>
-		{{else}}
-			{{#if model.currentSupervisionsFilled}}
-				<ul class="experience-sidebar">
-					<li class="experience-category">Activities Currently Advising</li>
-					<li>
-						<div class="dropdown"> <button class="btn btn-default dropdown-toggle"
-							type="button" id="current-advising-menu" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="true"> {{model.currentSession.SessionDescription}}
-			<span class="caret"></span> </button>
-							<ul class="dropdown-menu" aria-labelledby="current-advising-menu">
-								{{#each model.currentSupervisions as |advisor|}}
-									<li>
-										{{#link-to "specific-activity" advisor.SessionCode advisor.ActivityCode}}
-											{{advisor.ActivityDescription}}{{/link-to}}
-									</li>
-								{{/each}}
-							</ul>
-						</div>
-					</li>
-				</ul>
-			{{/if}}
-			{{#if model.pastSupervisionsFilled}}
-				<ul class="experience-sidebar">
-					<li class="experience-category">Activities Previously Advised</li>
-					<li>
-						<div class="dropdown"> <button class="btn dropdown-toggle" type="button"
-							id="past-advising-menu" data-toggle="dropdown" aria-haspopup="true"
-							 aria-expanded="true"> All Past Sessions
-				<span class="caret"></span> </button>
-							<ul class="dropdown-menu" aria-labelledby="past-advising-menu">
-								{{#each model.pastSupervisions as |advisor|}}
-									<li>
-										{{#link-to "specific-activity" advisor.SessionCode advisor.ActivityCode}}
-											{{advisor.ActivityDescription}} <br><span class="session-description">{{advisor.SessionDescription}}</span>
-										{{/link-to}}
-									</li>
-								{{/each}}
-							</ul>
-						</div>
-					</li>
-				</ul>
-			{{/if}}
-
-			{{#if model.currentMembershipsFilled}}
-				<ul class="experience-sidebar">
-					<li class="experience-category">Current Experience</li>
-					<li>
-						<div class="dropdown"> <button class="btn btn-default dropdown-toggle" type="button" id="current-member-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> {{model.currentSession.SessionDescription}}
-						<span class="caret"></span> </button>
-							<ul class="dropdown-menu" aria-labelledby="current-member-menu">
-								{{#each model.currentMemberships as |mem|}}
-									<li>
-										{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode}}
-											{{mem.ActivityDescription}}{{/link-to}}
-									</li>
-								{{/each}}
-							</ul>
-						</div>
-					</li>
-				</ul>
-			{{/if}}
-			{{#if model.pastMembershipsFilled}}
-				<ul class="experience-sidebar">
-					<li class="experience-category">Past Experience</li>
-					{{#each model.pastMemberships as |memSession|}}
-						<li>
-							<div class="dropdown"> <button class="btn btn-default dropdown-toggle" type="button"
-								 data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> {{memSession.session}}
-					<span class="caret"></span> </button>
-								<ul class="dropdown-menu"> <!--- Note that for accessibility, we still need to find a way to set aria-lablledby attr -->
-									{{#each memSession.activities as |mem|}}
-										<li>
-											{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode}}
-												{{mem.ActivityDescription}}{{/link-to}}
-										</li>
-									{{/each}}
-								</ul>
-							</div>
+		<nav class="navbar">
+			<div class="navbar-header " data-toggle="collapse"
+			data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<button type="button" class="navbar-toggle collapsed">
+					<span class="glyphicon glyphicon-chevron-down"></span>
+				 </button>
+				 	<a class="navbar-brand uppercase" href="#">My Involvements</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				{{#if model.nothingToShow}}
+					<ul class="experience-sidebar">
+						<li class="experience-category">Current Experience</li>
+						<li class="experience-category">Past Experience</li>
+						<li class="no-activities-msg">Looks like you don't have any activities yet! Check out
+							{{#link-to 'all-activities'}}
+								<a class="empty-list-link">what's available!</a>{{/link-to}}
 						</li>
-					{{/each}}
-				</ul>
-			{{/if}}
-		{{/if}}
+					</ul>
+				{{else}}
+					{{#if model.currentSupervisionsFilled}}
+						<ul class="experience-sidebar">
+							<li class="experience-category">Activities Currently Advising</li>
+							<li>
+								<div class="dropdown"> <button class="btn btn-default dropdown-toggle"
+									 type="button" id="current-advising-menu" data-toggle="dropdown"
+									 aria-haspopup="true" aria-expanded="true"> {{truncate-text model.currentSession.SessionDescription 0 -14}}
+			<span class="glyphicon glyphicon-menu-down"></span> </button>
+									<ul class="dropdown-menu" aria-labelledby="current-advising-menu">
+										{{#each model.currentSupervisions as |advisor|}}
+											<li>
+												{{#link-to "specific-activity" advisor.SessionCode advisor.ActivityCode}}
+													{{advisor.ActivityDescription}}{{/link-to}}
+											</li>
+										{{/each}}
+									</ul>
+								</div>
+							</li>
+						</ul>
+					{{/if}}
+					{{#if model.pastSupervisionsFilled}}
+						<ul class="experience-sidebar">
+							<li class="experience-category">Activities Previously Advised</li>
+							<li>
+								<div class="dropdown"> <button class="btn dropdown-toggle" type="button"
+									id="past-advising-menu" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="true"> All Past Sessions
+				<span class="glyphicon glyphicon-menu-down"></span> </button>
+									<ul class="dropdown-menu" aria-labelledby="past-advising-menu">
+										{{#each model.pastSupervisions as |advisor|}}
+											<li>
+												{{#link-to "specific-activity" advisor.SessionCode advisor.ActivityCode}}
+													{{advisor.ActivityDescription}} <br><span class="session-description">{{advisor.SessionDescription}}</span>
+												{{/link-to}}
+											</li>
+										{{/each}}
+									</ul>
+								</div>
+							</li>
+						</ul>
+					{{/if}}
+
+					{{#if model.currentMembershipsFilled}}
+						<ul class="experience-sidebar">
+							<li class="experience-category">Current Experience</li>
+							<li>
+								<div class="dropdown"> <button class="btn btn-default dropdown-toggle"
+									type="button" id="current-member-menu" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="true">
+									{{truncate-text model.currentSession.SessionDescription 0 -14 }}
+						<span class="glyphicon glyphicon-menu-down"></span> </button>
+									<ul class="dropdown-menu" aria-labelledby="current-member-menu">
+										{{#each model.currentMemberships as |mem|}}
+											<li>
+												{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode}}
+													{{mem.ActivityDescription}}{{/link-to}}
+											</li>
+										{{/each}}
+									</ul>
+								</div>
+							</li>
+						</ul>
+					{{/if}}
+					{{#if model.pastMembershipsFilled}}
+						<ul class="experience-sidebar">
+							<li class="experience-category">Past Experience</li>
+							{{#each model.pastMemberships as |memSession|}}
+								<li>
+									<div class="dropdown"> <button class="btn btn-default dropdown-toggle"
+										type="button" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true"> {{truncate-text memSession.session 0 -14}}
+					<span class="glyphicon glyphicon-menu-down"></span> </button>
+										<ul class="dropdown-menu">
+											<!--- Note that for accessibility, we still need to find a way to set aria-lablledby attr -->
+											{{#each memSession.activities as |mem|}}
+												<li>
+													{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode}}
+														{{mem.ActivityDescription}}{{/link-to}}
+												</li>
+											{{/each}}
+										</ul>
+									</div>
+								</li>
+							{{/each}}
+						</ul>
+					{{/if}}
+				{{/if}}
+			</div>
+		</nav>
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 main-content">
 		<div class="banner">

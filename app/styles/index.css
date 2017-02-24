@@ -3,7 +3,30 @@
   padding-left: 0;
   padding-right: 0;
 }
-
+.dashboard .sidebar .navbar-collapse {
+  padding: 0;
+}
+.sidebar nav {
+  margin-bottom: 0;
+}
+.sidebar .navbar-header .glyphicon-chevron-down,
+.sidebar .navbar-brand {
+  color: #00aeef;
+  font-size: 150%;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.sidebar .navbar-header:hover .navbar-brand,
+.sidebar .navbar-header:hover .glyphicon-chevron-down{
+  color: #DE571F
+}
+.sidebar .navbar-header .caret {
+  font-size: 200%;
+  cursor: pointer;
+}
+.sidebar-header {
+  display: none;
+}
 .sidebar li {
   border: 2px #cccccc;
   font-size: 1.75em !important;
@@ -16,9 +39,6 @@
   margin-bottom: 0;
   padding: 0;
 }
-/*.sidebar .experience-sidebar {
-  border-top: solid 15px #cccccb;
-}*/
 ul.experience-sidebar li.experience-category {
   background-color: #00aeef;
   border-bottom: solid 1px #ebeaea;
@@ -42,14 +62,10 @@ ul.experience-sidebar li.no-activities-msg {
   padding: .65em;
   width:100%;
 }
-/*.sidebar .caret {
-  color: #fff;
-}*/
 .sidebar .dropdown {
    border-bottom: solid 1px #cccccb;
 }
 .sidebar .dropdown .dropdown-menu {
-  /*background-color: #fff;*/
   box-shadow: none;
   float: none;
   letter-spacing: 0;
@@ -83,9 +99,8 @@ ul.experience-sidebar li.no-activities-msg {
 .dashboard .info-block {
   background-color: #00aeef;
   color: #fff;
-  padding: 40px 0;
+  height: 100px;
   text-align: center;
-  vertical-align: middle;
 }
 .dashboard .info-block:first-child, .dashboard .info-block:last-child {
   background-color: #014983;
@@ -94,13 +109,10 @@ ul.experience-sidebar li.no-activities-msg {
   font-weight: bold;
   letter-spacing: .65px;
   margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
-/*.experience-dropdown {
-  display: none;
-}
-.dropdown-header:active .experience-dropdown {
-  display: block;
-}*/
 
 @media (min-width: 768px) {
   .row .sidebar {
@@ -109,7 +121,7 @@ ul.experience-sidebar li.no-activities-msg {
     position: absolute;;
     top: 0; bottom: 0; left: 0;
   }
-  .main-content {
-
+  .sidebar .navbar-header {
+    display: none;
   }
 }

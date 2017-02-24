@@ -96,7 +96,9 @@ td {
 .hidden {
   display: none !important;
 }
-
+.uppercase {
+  text-transform: uppercase;
+}
 /* -----------------------------
     Activity List
 ------------------------------- */
@@ -193,7 +195,7 @@ td {
   font-size: 1.5em;
 }
 .about-container .highlight {
-  margin-top: 1.5em !important; 
+  margin-top: 1.5em !important;
 }
 .cyanbox {
 	background: #00aeef;
