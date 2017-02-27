@@ -130,7 +130,29 @@ function sortSupervisions(currentSession, allSupervisions, currentSupervisions, 
             currentSupervisions.push(allSupervisions[i]);
         }
         else {
+            // Arrange past supervisions in order by session code
+            let placeFound = false;
+            let j = 0;
+
+            while (!placeFound && j < pastSupervisions.length) {
+
+              //console.log("Past session already listed: " + pastSupervisions[j].SessionCode);
+              if (allSupervisions[i].SessionCode >= pastSupervisions[j].SessionCode) {
+                //console.log("Session code: " + allSupervisions[i].SessionCode + " is greater than past session" +
+                 //pastSupervisions[j].SessionCode + " at index " + j );
+                pastSupervisions.splice(j, 0, allSupervisions[i]);
+                //console.log("Now at index " + j + ": " + pastSupervisions[j].SessionCode);
+                //console.log("Now at index " +(j+1) + ": " + pastSupervisions[j+1].SessionCode)
+                placeFound = true;
+              }
+              else {
+                j++;
+              }
+            }
+            if (!placeFound) {
+            // If it wasn't greater than any sessions already in the list, add it to the end
             pastSupervisions.push(allSupervisions[i]);
+          }
         }
     }
 }
@@ -148,6 +170,7 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
         }
         else {
             let session = allMemberships[i].SessionDescription;
+
             let place = null;
             let length = pastMemberships.length;
             for (let j = 0; j < pastMemberships.length; j++) {
