@@ -153,6 +153,7 @@ function sortSupervisions(currentSession, allSupervisions, currentSupervisions, 
             // If it wasn't greater than any sessions already in the list, add it to the end
             pastSupervisions.push(allSupervisions[i]);
           }
+          //pastSupervisions.push(allSupervisions[i]);
         }
     }
 }
@@ -169,21 +170,36 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
             currentMemberships.push(allMemberships[i]);
         }
         else {
-            let session = allMemberships[i].SessionDescription;
 
+            // Sort past activities into groups by sessionCode, starting with most recent (i.e. greatest sessionCode)
+            let session = allMemberships[i].SessionDescription;
+            let sessionCode = allMemberships[i].SessionCode;
             let place = null;
-            let length = pastMemberships.length;
-            for (let j = 0; j < pastMemberships.length; j++) {
-                if (pastMemberships[j].session === session) {
-                    place = j;
-                }
+            let j = 0;
+            while (place === null && j < pastMemberships.length) {
+              if (allMemberships[i].SessionCode > pastMemberships[j].sessionCode) {
+                pastMemberships.splice(j, 0, {
+                  "session": session,
+                  "sessionCode": sessionCode,
+                  "activities": []
+                });
+                place = j;
+              }
+              else if (allMemberships[i].SessionCode === pastMemberships[j].sessionCode) {
+                pastMemberships[j].activities.push(allMemberships[j]);
+                place = j;
+              }
+              else {
+                j++;
+              }
             }
             if (place === null) {
-                pastMemberships.push({
-                    "session": session,
-                    "activities": []
-                });
-                place = length++;
+              pastMemberships.push({
+                     "session": session,
+                     "sessionCode": sessionCode,
+                     "activities": []
+                 });
+              place = j++;
             }
             pastMemberships[place].activities.push(allMemberships[i]);
         }
