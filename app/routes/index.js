@@ -183,10 +183,8 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
                   "sessionCode": sessionCode,
                   "activities": []
                 });
-                place = j;
               }
               else if (allMemberships[i].SessionCode === pastMemberships[j].sessionCode) {
-                pastMemberships[j].activities.push(allMemberships[j]);
                 place = j;
               }
               else {
@@ -199,7 +197,7 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
                      "sessionCode": sessionCode,
                      "activities": []
                  });
-              place = j++;
+              place = j;
             }
             pastMemberships[place].activities.push(allMemberships[i]);
         }
