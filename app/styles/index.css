@@ -99,6 +99,7 @@ ul.experience-sidebar li.no-activities-msg {
 .dashboard .info-block {
   background-color: #00aeef;
   color: #fff;
+  cursor: pointer;
   height: 100px;
   text-align: center;
 }
@@ -113,7 +114,40 @@ ul.experience-sidebar li.no-activities-msg {
   top: 50%;
   transform: translateY(-50%);
 }
-
+.info-blocks.tab-content .tab-pane {
+  min-height: 208px;
+}
+.info-blocks .tab-pane {
+  background-color: #fff;
+  padding: 4em;
+  position: relative;
+}
+.info-blocks .tab-pane .glyphicon-triangle-bottom {
+  font-size: 4em;
+  position: absolute;
+}
+#info-block-content-1 .glyphicon-triangle-bottom {
+  color: #014983;
+  left: 5%;
+  top: -10px;
+}
+#info-block-content-2 .glyphicon-triangle-bottom {
+  color: #00aeef;
+  left: 37%;
+  top: -10px;
+}
+#info-block-content-3 .glyphicon-triangle-bottom {
+  color: #014983;
+  left: 71%;
+  top: -10px;
+}
+.info-blocks .tab-pane h4 {
+  color: #00aeef;
+  font-weight: bold;
+}
+.info-blocks .tab-pane p{
+  font-size: 1.5em !important;
+}
 @media (min-width: 768px) {
   .row .sidebar {
     display: block;
@@ -123,5 +157,15 @@ ul.experience-sidebar li.no-activities-msg {
   }
   .sidebar .navbar-header {
     display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .info-blocks.tab-content .tab-pane{
+    min-height: 245px;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .info-blocks.tab-content .tab-pane{
+    min-height: 240px;
   }
 }

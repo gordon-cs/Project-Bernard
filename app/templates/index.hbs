@@ -1,12 +1,11 @@
 <div class="row dashboard">
 	<div class="col-sm-3 sidebar">
 		<nav class="navbar">
-			<div class="navbar-header " data-toggle="collapse"
-			data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			<div class="navbar-header " data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 				<button type="button" class="navbar-toggle collapsed">
 					<span class="glyphicon glyphicon-chevron-down"></span>
 				 </button>
-				 	<a class="navbar-brand uppercase" href="#">My Involvements</a>
+				<a class="navbar-brand uppercase" href="#">My Involvements</a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				{{#if model.nothingToShow}}
@@ -23,9 +22,7 @@
 						<ul class="experience-sidebar">
 							<li class="experience-category">Activities Currently Advising</li>
 							<li>
-								<div class="dropdown"> <button class="btn btn-default dropdown-toggle"
-									 type="button" id="current-advising-menu" data-toggle="dropdown"
-									 aria-haspopup="true" aria-expanded="true"> {{truncate-text model.currentSession.SessionDescription 0 -14}}
+								<div class="dropdown"> <button class="btn btn-default dropdown-toggle" type="button" id="current-advising-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> {{truncate-text model.currentSession.SessionDescription 0 -14}}
 			<span class="glyphicon glyphicon-menu-down"></span> </button>
 									<ul class="dropdown-menu" aria-labelledby="current-advising-menu">
 										{{#each model.currentSupervisions as |advisor|}}
@@ -43,9 +40,7 @@
 						<ul class="experience-sidebar">
 							<li class="experience-category">Activities Previously Advised</li>
 							<li>
-								<div class="dropdown"> <button class="btn dropdown-toggle" type="button"
-									id="past-advising-menu" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="true"> All Past Sessions
+								<div class="dropdown"> <button class="btn dropdown-toggle" type="button" id="past-advising-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> All Past Sessions
 				<span class="glyphicon glyphicon-menu-down"></span> </button>
 									<ul class="dropdown-menu" aria-labelledby="past-advising-menu">
 										{{#each model.pastSupervisions as |advisor|}}
@@ -65,9 +60,7 @@
 						<ul class="experience-sidebar">
 							<li class="experience-category">Current Experience</li>
 							<li>
-								<div class="dropdown"> <button class="btn btn-default dropdown-toggle"
-									type="button" id="current-member-menu" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="true">
+								<div class="dropdown"> <button class="btn btn-default dropdown-toggle" type="button" id="current-member-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 									{{truncate-text model.currentSession.SessionDescription 0 -14 }}
 						<span class="glyphicon glyphicon-menu-down"></span> </button>
 									<ul class="dropdown-menu" aria-labelledby="current-member-menu">
@@ -87,9 +80,7 @@
 							<li class="experience-category">Past Experience</li>
 							{{#each model.pastMemberships as |memSession|}}
 								<li>
-									<div class="dropdown"> <button class="btn btn-default dropdown-toggle"
-										type="button" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="true"> {{truncate-text memSession.session 0 -14}}
+									<div class="dropdown"> <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> {{truncate-text memSession.session 0 -14}}
 					<span class="glyphicon glyphicon-menu-down"></span> </button>
 										<ul class="dropdown-menu">
 											<!--- Note that for accessibility, we still need to find a way to set aria-lablledby attr -->
@@ -112,16 +103,37 @@
 	<div class="col-sm-9 col-sm-offset-3 main-content">
 		<div class="banner">
 			<img src="/images/gordon-campus.jpg">
+
 		</div>
 		<div class="row info-blocks">
-			<div class="info-block col-xs-4">
+			<div class="info-block col-xs-4 active" data-toggle="tab" data-target="#info-block-content-1">
 				<h4>Get Involved</h4>
 			</div>
-			<div class="info-block col-xs-4">
+
+			<div class="info-block col-xs-4" data-toggle="tab" data-target="#info-block-content-2">
 				<h4>Get Connected</h4>
 			</div>
-			<div class="info-block col-xs-4">
+			<div class="info-block col-xs-4" data-toggle="tab" data-target="#info-block-content-3">
 				<h4>Build Experience</h4>
+			</div>
+		</div>
+		<div class="info-blocks tab-content">
+			<div id="info-block-content-1" class="tab-pane active">
+				<span class="glyphicon glyphicon-triangle-bottom"></span>
+				<h4>Get Involved | What Can I Do at Gordon?</h4>
+				<p>The 360.gordon.edu mobile-friendly activities platform allows connection to campus activities, clubs, organizations, programs and groups. Find a group, Subscribe to their email feed as a Guest, or join the group as a Member! Student Leaders and Advisors
+					maintain group information about meeting times and links o their web pages. Each semester there are usually over 100 connections you could make!</p>
+			</div>
+			<div id="info-block-content-2" class="tab-pane">
+				<span class="glyphicon glyphicon-triangle-bottom"></span>
+				<h4>Get Connected | Which Involvements Should I Choose?</h4>
+				<p>Follow your heart and your mind and use 360.gordon.edu to pick key activities and involvements that complement your academic plan, or join some just for fun. Busyness for its own sake is not a virtue, but becoming meaningfully involved in selected
+					activities can build campus connections and build experiences that lead to your own academic and professional success. Talk to your Academic Advisor about suggestions of activities that fit your goals, and talk to the Program Advisors in each group
+					to learn more about what involvement means.</p>
+			</div>
+			<div id="info-block-content-3" class="tab-pane">
+				<span class="glyphicon glyphicon-triangle-bottom"></span>
+				<h4> Build Experience | Can I Learn and Lead?</h4>
 			</div>
 		</div>
 	</div>
