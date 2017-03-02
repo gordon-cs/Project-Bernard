@@ -17,6 +17,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let selectedSession;
         let activities;
         let types = [];
+        let selectedType;
         let reversedSessions = [];
         let searchValue;
 
@@ -67,9 +68,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             types.push("All");
             types = types.sort();
         };
-        // let clearSearchField = function () {
-        //   searchValue = "";
-        // };
+
+        let initializeSelectedType = function() {
+          // check the query parameters to see if the user had previously filtered
+          // by an activity type
+          selectedType = transition.queryParams.activityType;
+          console.log(selectedType);
+          if (!selectedType) {
+            selectedType = "All";
+            console.log("Set selectedType = " + selectedType);
+          }
+        }
+
         let loadModel = function () {
             // Return the resolved value
             return {
@@ -79,7 +89,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "sessions": reversedSessions,
                 "selectedSession": selectedSession,
                 "activityTypes": types,
-                "selectedType": "All",
+                "selectedType": selectedType,
                 "searchValue" : ""
             };
         };
@@ -93,6 +103,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(initializeActivities)
         .then(loadTypes)
         .then(initializeTypes)
+        .then(initializeSelectedType)
         .then(loadModel)
 
     }
