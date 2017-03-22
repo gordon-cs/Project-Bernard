@@ -17,6 +17,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let selectedSession;
         let activities;
         let types = [];
+        let selectedType;
         let reversedSessions = [];
         let searchValue;
 
@@ -67,9 +68,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             types.push("All");
             types = types.sort();
         };
-        // let clearSearchField = function () {
-        //   searchValue = "";
-        // };
+
         let loadModel = function () {
             // Return the resolved value
             return {

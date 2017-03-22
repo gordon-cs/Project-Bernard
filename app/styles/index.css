@@ -1,0 +1,171 @@
+/* Styles for the Dashboard (My Involvements) Page */
+.dashboard .sidebar {
+  padding-left: 0;
+  padding-right: 0;
+}
+.dashboard .sidebar .navbar-collapse {
+  padding: 0;
+}
+.sidebar nav {
+  margin-bottom: 0;
+}
+.sidebar .navbar-header .glyphicon-chevron-down,
+.sidebar .navbar-brand {
+  color: #00aeef;
+  font-size: 150%;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.sidebar .navbar-header:hover .navbar-brand,
+.sidebar .navbar-header:hover .glyphicon-chevron-down{
+  color: #DE571F
+}
+.sidebar .navbar-header .caret {
+  font-size: 200%;
+  cursor: pointer;
+}
+.sidebar-header {
+  display: none;
+}
+.sidebar li {
+  border: 2px #cccccc;
+  font-size: 1.75em !important;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+.sidebar ul {
+  list-style: none;
+  margin-bottom: 0;
+  padding: 0;
+}
+ul.experience-sidebar li.experience-category {
+  background-color: #00aeef;
+  border-bottom: solid 1px #ebeaea;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: .5px;
+  padding: .75em;
+}
+ul.experience-sidebar li.no-activities-msg {
+  background-color: #fff;
+  line-height: 1.75em;
+  padding: 1.5em;
+}
+.sidebar .dropdown button.dropdown-toggle,
+.sidebar .dropdown.open>.dropdown-toggle.btn-default:focus,
+.sidebar .dropdown.open>.dropdown-toggle.btn-default:hover,
+.sidebar .dropdown.open>.dropdown-toggle.btn-default {
+  background-color: #ebeaea;
+  color: #000 !important;
+  letter-spacing: .5px;
+  padding: .65em;
+  width:100%;
+}
+.sidebar .dropdown {
+   border-bottom: solid 1px #cccccb;
+}
+.sidebar .dropdown .dropdown-menu {
+  box-shadow: none;
+  float: none;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+.sidebar .dropdown .dropdown-menu li a {
+  font-size: .55em !important;
+  padding: 1.25em;
+  /*padding-left: 1.25em;*/
+  text-align: left;
+  white-space: normal;
+}
+.session-description {
+  font-size: .8em;
+  font-style: italic;
+}
+.dashboard .col-sm-9.col-sm-offset-3.main-content {
+  padding-left:0;
+  padding-right: 0;
+}
+.banner img {
+  width: 100%;
+}
+.row.info-blocks {
+  margin: 0;
+}
+.dashboard .info-block {
+  background-color: #00aeef;
+  color: #fff;
+  cursor: pointer;
+  height: 100px;
+  text-align: center;
+}
+.dashboard .info-block:first-child, .dashboard .info-block:last-child {
+  background-color: #014983;
+}
+.dashboard .info-block h4 {
+  font-weight: bold;
+  letter-spacing: .65px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.info-blocks.tab-content .tab-pane {
+  min-height: 208px;
+}
+.info-blocks .tab-pane {
+  background-color: #fff;
+  padding: 4em;
+  position: relative;
+}
+.info-blocks .tab-pane .glyphicon-triangle-bottom {
+  font-size: 4em;
+  position: absolute;
+}
+#info-block-content-1 .glyphicon-triangle-bottom {
+  color: #014983;
+  left: 5%;
+  top: -10px;
+}
+#info-block-content-2 .glyphicon-triangle-bottom {
+  color: #00aeef;
+  left: 37%;
+  top: -10px;
+}
+#info-block-content-3 .glyphicon-triangle-bottom {
+  color: #014983;
+  left: 71%;
+  top: -10px;
+}
+.info-blocks .tab-pane h4 {
+  color: #00aeef;
+  font-weight: bold;
+}
+.info-blocks .tab-pane p{
+  font-size: 1.5em !important;
+}
+@media (min-width: 768px) {
+  .row .sidebar {
+    display: block;
+    padding: 0;
+    position: absolute;;
+    top: 0; bottom: 0; left: 0;
+  }
+  .sidebar .navbar-header {
+    display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .info-blocks.tab-content .tab-pane{
+    min-height: 245px;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .info-blocks.tab-content .tab-pane{
+    min-height: 240px;
+  }
+}
