@@ -69,17 +69,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             types = types.sort();
         };
 
-        let initializeSelectedType = function() {
-          // check the query parameters to see if the user had previously filtered
-          // by an activity type
-          selectedType = transition.queryParams.activityType;
-          console.log(selectedType);
-          if (!selectedType) {
-            selectedType = "All";
-            console.log("Set selectedType = " + selectedType);
-          }
-        }
-
         let loadModel = function () {
             // Return the resolved value
             return {
@@ -89,7 +78,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "sessions": reversedSessions,
                 "selectedSession": selectedSession,
                 "activityTypes": types,
-                "selectedType": selectedType,
+                "selectedType": "All",
                 "searchValue" : ""
             };
         };
@@ -103,7 +92,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(initializeActivities)
         .then(loadTypes)
         .then(initializeTypes)
-        .then(initializeSelectedType)
         .then(loadModel)
 
     }

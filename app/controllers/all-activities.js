@@ -8,9 +8,8 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
  */
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
-    queryParams:['sessionCode', 'activityType'],
+    queryParams:['sessionCode'],
     sessionCode: "model.selectedSession",
-    activityType: "model.selectedType",
     searchValue: "model.searchValue",
     actions: {
         // Get all sessions from the server and gets the one chosen by the user in the all-activities template
@@ -30,6 +29,7 @@ export default Ember.Controller.extend({
                 else {
                   context.set("model.activitiesShown", activities);
                 }
+                context.send("selectType", type);
                 context.set("model.activitiesFilled", (activities.length > 0));
                 context.set("model.selectedSession", session);
 
@@ -62,7 +62,6 @@ export default Ember.Controller.extend({
             // activities to only display that type
             this.set("model.selectedType", type);
             // set the activityType query params
-            this.set("activityType", type)
             this.set("searchValue", "");
 
             if (type && type.toLowerCase() != "All".toLowerCase()) {
