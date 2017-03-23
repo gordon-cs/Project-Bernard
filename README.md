@@ -2,7 +2,7 @@
 
 Gordon College Co-Curricular Transcript System
 
-##Contents
+## Contents
   * [Indroduction](#introduction)
   * [Sites](#sites)
   * [Prerequisites](#prerequisites)
@@ -16,14 +16,14 @@ Gordon College Co-Curricular Transcript System
   * [Source Code Guide](#source-code-guide)
   * [Further Reading and Useful Links](#further-reading-and-useful-links)
 
-##Introduction
+## Introduction
 
 * Poject running at https://360.gordon.edu
 * Using [EmberJS](http://emberjs.com/) Framework
 * Makes calls to JSON Server at https://360api.gordon.edu
   * [Resopitory](https://github.com/gordon-cs/Project-Raymond)
 
-##Sites
+## Sites
 
 * Testing Sites
   * Client: https://360train.gordon.edu
