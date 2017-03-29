@@ -1,6 +1,7 @@
 # Gordon360
 
-Gordon College Co-Curricular Transcript System
+Gordon College Co-Curricular Transcript System <br>
+Front-end for [Project Raymond](#https://github.com/gordon-cs/Project-Raymond)
 
 ## Contents
   * [Indroduction](#introduction)
@@ -21,7 +22,7 @@ Gordon College Co-Curricular Transcript System
 * Poject running at https://360.gordon.edu
 * Using [EmberJS](http://emberjs.com/) Framework
 * Makes calls to JSON Server at https://360api.gordon.edu
-  * [Resopitory](https://github.com/gordon-cs/Project-Raymond)
+  * [Repository](https://github.com/gordon-cs/Project-Raymond)
 
 ## Sites
 
