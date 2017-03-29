@@ -1,7 +1,7 @@
 # Gordon360
 
 Gordon College Co-Curricular Transcript System <br>
-Front-end for [Project Raymond](#https://github.com/gordon-cs/Project-Raymond)
+Front-end for [Project Raymond](https://github.com/gordon-cs/Project-Raymond)
 
 ## Contents
   * [Indroduction](#introduction)
