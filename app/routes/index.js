@@ -23,6 +23,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let currentMemberships = [];
         let pastMemberships = [];
 
+        // Dashboard slider content
+        let slides = [];
+
         // Switches
         let currentMembershipsFilled;
         let pastMembershipsFilled;
@@ -69,6 +72,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             sortSupervisions(currentSession,allSupervisions,currentSupervisions,pastSupervisions);
         };
 
+        let loadSlides = function () {
+          return getAsync("/cms/slider", context);
+        }
+
+        let initializeSlides = function (result) {
+          slides = result;
+        }
+
         let loadSwitches = function() {
             // Check if the user has any current or past activity memberships or supervisions
             currentMembershipsFilled = (currentMemberships.length !== 0);
@@ -94,7 +105,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "currentSupervisions": currentSupervisions,
                 "pastSupervisionsFilled": pastSupervisionsFilled,
                 "pastSupervisions": pastSupervisions,
-                "nothingToShow": nothingToShow
+                "nothingToShow": nothingToShow,
+                "slides" : slides
             };
         };
         /* End Promises */
@@ -107,6 +119,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(initializeMemberships)
         .then(arrangeMemberships)
         .then(arrangeSupervisions)
+        .then(loadSlides)
+        .then(initializeSlides)
         .then(loadSwitches)
         .then(loadModel);
 
