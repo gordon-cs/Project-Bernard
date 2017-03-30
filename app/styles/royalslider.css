@@ -341,7 +341,7 @@ img.rsImg {
 	max-width: 1920px;
 	margin: 0 auto 0 auto;
 	border-top: 2px solid #cccccb;
-	border-bottom: 10px solid #00aeef;
+	/*border-bottom: 10px solid #00aeef;*/
 }
 @media screen and (max-width:750px) {
 	.slide-container {
