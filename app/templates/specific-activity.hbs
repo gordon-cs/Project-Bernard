@@ -24,17 +24,22 @@
                     <p class="detail-info">{{model.session.SessionDescription}}</p>
                 </div>
                 <div class="col-sm-12 detail-item">
-                    {{#if model.hasLeaders}}
-                        <p class="detail-header">Leaders: </p>
+                    {{#if model.hasGroupAdmin}}
+                        <p class="detail-header">Group Contacts: </p>
                         <div class="leaders">
-                            {{#each model.leaderEmails as |leader|}}
+                          {{#each model.groupAdmins as |admin|}}
+                          <p class="activity-info-item-data">
+                              {{admin.FirstName}} {{admin.LastName}}
+                          </p>
+                          {{/each}}
+                            <!-- {{#each model.leaderEmails as |leader|}}
                                 <p class="activity-info-item-data">
                                     <a href="mailto:{{leader.Email}}">{{leader.FirstName}} {{leader.LastName}}</a>
                                 </p>
-                            {{/each}}
+                            {{/each}} -->
                         </div>
                     {{else}}
-                        <p class="detail-header">Leaders:</p>
+                        <p class="detail-header">Group Contacts:</p>
                         <p class="detail-info">None</p>
                     {{/if}}
                 </div>
