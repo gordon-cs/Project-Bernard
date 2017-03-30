@@ -448,9 +448,21 @@
 	display: block;
 	background: white; /*For old IE, no transparency*/
 	background: rgba(255, 255, 255, 0.8);
-	padding: 20px 20px 14px 20px;
+	padding: 20px 35px 14px 20px;
 	box-sizing: border-box;
 	-moz-box-sizing:border-box;
+}
+
+.rsCaption h3 {
+	font-weight: bold;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.rsCaption p {
+	color: #014983;
+	font-size: 1.6em;
+	margin-bottom: 5px !important;
 }
 
 @media screen and (max-width:500px) {
@@ -460,15 +472,17 @@
 		width: 100%;
 		background: #31342b;
 	}
-	.rsCaption {
+	.rsGCaption .rsCaption {
 		background: #31342b;
-		color: #ebeaea;
+		color: #ebeaea !important;
 		padding: 14px 20px 16px 20px;
 	}
 	.rsCaption h2 {
 		line-height: 1.4em;
 	}
 	.rsCaption p {
+		color: #ebeaea !important;
+		font-size: 1.5em;
 		line-height: 1.4em;
 	}
 	.rsCaption br {

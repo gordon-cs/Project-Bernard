@@ -5,20 +5,26 @@
       <div>
         <div class="royalSlider heroSlider rsMinW" id="full-width-slider">
           {{#each slides as |slide|}}
-          <div class="rsContent"><img alt="Business students talking" class="rsImg"
+
+          <div class="rsContent">
+            <a class="slidelink" href={{slide.ActionLink}}>
+            <img alt={{slide.AltTag}} class="rsImg"
             src={{slide.ImagePath}} />
+            {{#if slide.HasCaption}}
             <div class="rsCaption animated fadeInUp">
               <a class="slidelink" href={{slide.ActionLink}}>
-                <div>
-                  <h2>NEW: Master of Science in Financial Analysis</h2>
-                  <p>One-year CFA preparation<br />
-                    <span class="readmore">LEARN MORE &#10132;</span></p>
-                </div>
+                  <h3>{{slide.Title}}</h3>
+                  <p>{{slide.SubTitle}}<br />
+                    <span class="readmore">{{slide.Action}}</span></p>
               </a>
             </div>
+            {{else}}
+            <div class="rsCaption" style="display:none">
+            </div>
+            {{/if}}
+          </a>
           </div>
           {{/each}}
-
         </div>
       </div>
       <!--End royal slider -->
