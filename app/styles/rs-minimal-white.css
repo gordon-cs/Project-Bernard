@@ -415,7 +415,7 @@
 .rsMinW .rsPreloader {
 	width:20px;
 	height:20px;
-	background-image:url('images/royalslider/skins/preloaders/preloader-white.gif');
+	background-image:url('/images/royalslider/skins/preloaders/preloader-white.gif');
 
 	left:50%;
 	top:50%;
