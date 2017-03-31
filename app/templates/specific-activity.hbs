@@ -27,9 +27,9 @@
                     {{#if model.hasGroupAdmin}}
                         <p class="detail-header">Group Contacts: </p>
                         <div class="leaders">
-                          {{#each model.groupAdmins as |admin|}}
+                          {{#each model.contactEmails as |contact|}}
                           <p class="activity-info-item-data">
-                              {{admin.FirstName}} {{admin.LastName}}
+                              <a href="mailto:{{contact.Email}}">{{contact.FirstName}} {{contact.LastName}}</a>
                           </p>
                           {{/each}}
                             <!-- {{#each model.leaderEmails as |leader|}}
@@ -44,7 +44,7 @@
                     {{/if}}
                 </div>
                 <div class="col-sm-12 detail-item">
-                    {{#if model.hasadvisors}}
+                    <!-- {{#if model.hasadvisors}}
                         <p class="detail-header">Advisors: </p>
                         <div class="leaders">
                             {{#each model.advisorEmails as |advisor|}}
@@ -56,7 +56,7 @@
                     {{else}}
                         <p class="detail-header">Advisors: </p>
                         <p class="detail-info">None</p>
-                    {{/if}}
+                    {{/if}} -->
                 </div>
                 {{#if model.activity.ActivityBlurb}}
                     <div class="col-sm-12 detail-item">
