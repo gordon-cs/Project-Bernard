@@ -98,9 +98,12 @@ a {
     margin-left: 20px !important;
     font-size: 100%;
 }
+.group-admin-checkbox {
+  text-align: center;
+}
 
 /* -----------------------------
-    Responsive Chagnes
+    Responsive Changes
 ------------------------------- */
 
 @media only screen and (min-width: 768px) {

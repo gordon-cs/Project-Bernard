@@ -137,6 +137,7 @@
                                 {{#if model.leading}}
                                     <th>Title/Comment</th>
                                     <th>Options</th>
+                                    <th class="group-admin-checkbox">Group Admin</th>
                                 {{/if}}
                             </tr>
                         </thead>
@@ -147,6 +148,7 @@
                                     <td> {{mem.LastName}} </td>
                                     <td> {{mem.ParticipationDescription}} </td>
                                     {{#if model.leading}}
+
                                         <td class="comments-table-data">{{mem.Description}}</td>
                                         <td>
                                             {{#link-to 'edit-membership' mem.MembershipID}}
@@ -154,6 +156,7 @@
                                             {{/link-to}}
                                             <button {{action "removePerson" mem}} class="btn button-red table-button">Remove</button>
                                         </td>
+                                        <td class="group-admin-checkbox">{{input type="checkbox" name="groupAdmin"}}</td>
                                     {{else if mem.isLoggedInUser}}
                                         <td><button {{action "removePerson" mem}} class="btn button-red table-button">Leave</button></td>
                                     {{else}}
