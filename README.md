@@ -49,6 +49,7 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `npm install`
 * `bower install`
+* See [ember installation guides](https://guides.emberjs.com/v2.12.0/getting-started/) for the steps to install ember
 
 ## Running and Development
 
