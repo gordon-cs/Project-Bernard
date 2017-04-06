@@ -156,7 +156,9 @@
                                             {{/link-to}}
                                             <button {{action "removePerson" mem}} class="btn button-red table-button">Remove</button>
                                         </td>
-                                        <td class="group-admin-checkbox">{{input type="checkbox" name="groupAdmin"}}</td>
+                                        <td class="group-admin-checkbox">
+                                          {{input type="checkbox" name="groupAdmin" checked=mem.GroupAdmin change=(action 'toggleAdmin' mem)}}
+                                        </td>
                                     {{else if mem.isLoggedInUser}}
                                         <td><button {{action "removePerson" mem}} class="btn button-red table-button">Leave</button></td>
                                     {{else}}

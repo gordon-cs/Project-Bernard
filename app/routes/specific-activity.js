@@ -49,22 +49,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Determine if the user is an activity leader or a advisor
         let setIfUserIsManager = function (model) {
-            // if (model.advisors.length > 0) {
-            //     model.hasadvisors = true;
-            //     for (var i = 0; i < model.advisors.length; i++) {
-            //         if (model.advisors[i].IDNumber == id_number) {
-            //             model.leading = true;
-            //         }
-            //     }
-            // }
-            // if (model.leaders.length > 0) {
-            //     model.hasLeaders = true;
-            //     for (var i = 0; i < model.leaders.length; i++) {
-            //         if (model.leaders[i].IDNumber == id_number) {
-            //             model.leading = true;
-            //         }
-            //     }
-            // }
             if (model.groupAdmins.length > 0) {
               model.hasGroupAdmin = true;
               for (var i = 0; i < model.groupAdmins.length; i++) {

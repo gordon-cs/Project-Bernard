@@ -1,6 +1,7 @@
 import Ember from "ember";
 import deleteAsync from "gordon360/utils/delete-async";
 import postAsync from "gordon360/utils/post-async";
+import putAsync from "gordon360/utils/post-async";
 
 /*  Controller for the specific activity page.
  *  Handles user interaction with the page.
@@ -92,6 +93,22 @@ export default Ember.Controller.extend({
                 });
             }
         },
+        // Toggle the group admin boolean
+        toggleAdmin(membership) {
+          let context = this;
+          let membershipID = membership.MembershipID;
+          let error = false;
+          let data = {
+              "MEMBERSHIP_ID": membershipID,
+              "ACT_CDE": membership.ActivityCode,
+              "SESS_CDE": membership.SessionCode,
+              "ID_NUM": membership.IDNumber,
+              "PART_CDE":membership.PART_CDE
+          };
+
+          return putAsync("/memberships/" + membershipID, data, context);
+        },
+
         // Reset image to default
         resetImage() {
             postAsync("/activities/" + this.model.activity.ActivityCode + "/image/reset", null, this).catch(function(error) {
