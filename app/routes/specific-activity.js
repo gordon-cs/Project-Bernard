@@ -21,7 +21,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let advisorsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/advisors", context);
         let activityadvisorEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/advisors/session/" + param.SessionCode.trim(), context);
         let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/leaders", context);
-        let activityLeaderEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/leaders/session/" + param.SessionCode.trim(), context);
+        let groupAdminEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/group-admin/session/" + param.SessionCode.trim(), context);
+        let groupAdminPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/group-admin", context);
         let personsMembershipsPromise = getAsync("/memberships/student/" + id_number, context);
         let followingCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/followers", context);
         let memberCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/members", context);
@@ -38,32 +39,39 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Advisors and Activity leaders filtered by session code.
         // Manager = advisor or leader
         let loadFilteredManagers = function (model) {
-            let promiseArray = [advisorsPromise, activityLeadersPromise];
+            let promiseArray = [groupAdminPromise];
             return Ember.RSVP.map(promiseArray, filterAccordingToCurrentSession)
             .then(function (results) {
-                model.advisors = Ember.RSVP.resolve(results[0]);
-                model.leaders = Ember.RSVP.resolve(results[1]);
+                model.groupAdmins = Ember.RSVP.resolve(results[0]);
                 return Ember.RSVP.hash(model);
             });
         };
 
         // Determine if the user is an activity leader or a advisor
         let setIfUserIsManager = function (model) {
-            if (model.advisors.length > 0) {
-                model.hasadvisors = true;
-                for (var i = 0; i < model.advisors.length; i++) {
-                    if (model.advisors[i].IDNumber == id_number) {
-                        model.leading = true;
-                    }
+            // if (model.advisors.length > 0) {
+            //     model.hasadvisors = true;
+            //     for (var i = 0; i < model.advisors.length; i++) {
+            //         if (model.advisors[i].IDNumber == id_number) {
+            //             model.leading = true;
+            //         }
+            //     }
+            // }
+            // if (model.leaders.length > 0) {
+            //     model.hasLeaders = true;
+            //     for (var i = 0; i < model.leaders.length; i++) {
+            //         if (model.leaders[i].IDNumber == id_number) {
+            //             model.leading = true;
+            //         }
+            //     }
+            // }
+            if (model.groupAdmins.length > 0) {
+              model.hasGroupAdmin = true;
+              for (var i = 0; i < model.groupAdmins.length; i++) {
+                if (model.groupAdmins[i].IDNumber == id_number) {
+                  model.leading = true;
                 }
-            }
-            if (model.leaders.length > 0) {
-                model.hasLeaders = true;
-                for (var i = 0; i < model.leaders.length; i++) {
-                    if (model.leaders[i].IDNumber == id_number) {
-                        model.leading = true;
-                    }
-                }
+              }
             }
 
             return Ember.RSVP.hash(model);
@@ -122,6 +130,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 return Ember.RSVP.hash(model);
             }
         };
+
+        // Load the emails for primary contacts (group admin)
+        let loadGroupAdminEmails = function (model) {
+          return groupAdminEmailsPromise
+          .then(function (result) {
+            model.contactEmails = result;
+            return Ember.RSVP.hash(model);
+          })
+        }
 
         // Load the activity leader emails.
         let loadActivityLeaderEmails = function (model) {
@@ -292,8 +309,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         return loadFilteredManagers(theModel)
         .then(setIfUserIsManager)
         .then(loadRequests)
-        .then(loadActivityLeaderEmails)
-        .then(loadActivityAdvisorEmails)
+        .then(loadGroupAdminEmails)
         .then(setRole)
         .then(loadActivityMemberEmails)
         .then(loadMemberships)
