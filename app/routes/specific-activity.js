@@ -18,9 +18,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Requests to be called in the beginning
         let activityPromise = getAsync("/activities/" + param.ActivityCode.trim(), context);
         let sessionPromise = getAsync("/sessions/" + param.SessionCode.trim(), context);
-        let advisorsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/advisors", context);
+        //let advisorsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/advisors", context);
         let activityadvisorEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/advisors/session/" + param.SessionCode.trim(), context);
-        let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/leaders", context);
+        //let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/leaders", context);
         let groupAdminEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/group-admin/session/" + param.SessionCode.trim(), context);
         let groupAdminPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/group-admin", context);
         let personsMembershipsPromise = getAsync("/memberships/student/" + id_number, context);
@@ -141,22 +141,22 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         // Load the activity leader emails.
-        let loadActivityLeaderEmails = function (model) {
-            return activityLeaderEmailsPromise
-            .then(function (result) {
-                model.leaderEmails = result;
-                return Ember.RSVP.hash(model);
-            });
-        };
-
-        // Load the activity advisor emails.
-        let loadActivityAdvisorEmails = function (model) {
-            return activityadvisorEmailsPromise
-            .then(function (result) {
-                model.advisorEmails = result;
-                return Ember.RSVP.hash(model);
-            });
-        };
+        // let loadActivityLeaderEmails = function (model) {
+        //     return activityLeaderEmailsPromise
+        //     .then(function (result) {
+        //         model.leaderEmails = result;
+        //         return Ember.RSVP.hash(model);
+        //     });
+        // };
+        //
+        // // Load the activity advisor emails.
+        // let loadActivityAdvisorEmails = function (model) {
+        //     return activityadvisorEmailsPromise
+        //     .then(function (result) {
+        //         model.advisorEmails = result;
+        //         return Ember.RSVP.hash(model);
+        //     });
+        // };
 
         let loadMemberships = function (model) {
             if (model.notAMember && ! model.leading) {
