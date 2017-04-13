@@ -44,8 +44,8 @@ export default Ember.Component.extend({
         change: false
       },
       /* size of all images http://help.dimsemenov.com/kb/royalslider-jquery-plugin-faq/adding-width-and-height-properties-to-images */
-      imgWidth: 1800,
-      imgHeight: 860
+      imgWidth: 1500,
+      imgHeight: 600
     });
 
     $('#stretchmind-slider').royalSlider({
