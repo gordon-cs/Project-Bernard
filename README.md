@@ -1,6 +1,7 @@
 # Gordon360
 
-Gordon College Co-Curricular Transcript System
+Gordon College Co-Curricular Transcript System <br>
+Front-end for [Project Raymond](https://github.com/gordon-cs/Project-Raymond)
 
 ## Contents
   * [Indroduction](#introduction)
@@ -21,7 +22,7 @@ Gordon College Co-Curricular Transcript System
 * Poject running at https://360.gordon.edu
 * Using [EmberJS](http://emberjs.com/) Framework
 * Makes calls to JSON Server at https://360api.gordon.edu
-  * [Resopitory](https://github.com/gordon-cs/Project-Raymond)
+  * [Repository](https://github.com/gordon-cs/Project-Raymond)
 
 ## Sites
 
@@ -48,6 +49,7 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `npm install`
 * `bower install`
+* See [ember installation guides](https://guides.emberjs.com/v2.12.0/getting-started/) for the steps to install ember
 
 ## Running and Development
 

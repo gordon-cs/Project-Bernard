@@ -16,7 +16,6 @@ module.exports = function(defaults) {
     app.import('vendor/royalslider/jquery.event.frame.js');
     app.import('vendor/royalslider/jquery.royalslider.custom.min.js');
     app.import('vendor/royalslider/jquery.unveil.min.js');
-    app.import('vendor/royalslider/local.js');
 
     // Use `app.import` to add additional libraries to the generated
     // output files.
