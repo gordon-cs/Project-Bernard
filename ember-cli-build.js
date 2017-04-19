@@ -13,7 +13,9 @@ module.exports = function(defaults) {
     app.import('vendor/jsPDF-1.2.60/jspdf.js');
     app.import('vendor/jsPDF-1.2.60/plugins/addimage.js');
     app.import('vendor/file-saver/FileSaver.js');
-
+    app.import('vendor/royalslider/jquery.event.frame.js');
+    app.import('vendor/royalslider/jquery.royalslider.custom.min.js');
+    app.import('vendor/royalslider/jquery.unveil.min.js');
 
     // Use `app.import` to add additional libraries to the generated
     // output files.
