@@ -112,6 +112,15 @@ export default Ember.Controller.extend({
 
         },
 
+        closeOutSession() {
+          let context = this;
+          putAsync("/activities/" + context.model.activity.ActivityCode + "/session/"
+          + this.model.session.SessionCode + "/close", null, context)
+          .then(function() {
+            console.log("Session closed.");
+          });
+        },
+
         // Reset image to default
         resetImage() {
             postAsync("/activities/" + this.model.activity.ActivityCode + "/image/reset", null, this).catch(function(error) {

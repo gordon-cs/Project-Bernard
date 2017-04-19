@@ -32,31 +32,11 @@
                               <a href="mailto:{{contact.Email}}">{{contact.FirstName}} {{contact.LastName}}</a>
                           </p>
                           {{/each}}
-                            <!-- {{#each model.leaderEmails as |leader|}}
-                                <p class="activity-info-item-data">
-                                    <a href="mailto:{{leader.Email}}">{{leader.FirstName}} {{leader.LastName}}</a>
-                                </p>
-                            {{/each}} -->
                         </div>
                     {{else}}
                         <p class="detail-header">Group Contacts:</p>
                         <p class="detail-info">None</p>
                     {{/if}}
-                </div>
-                <div class="col-sm-12 detail-item">
-                    <!-- {{#if model.hasadvisors}}
-                        <p class="detail-header">Advisors: </p>
-                        <div class="leaders">
-                            {{#each model.advisorEmails as |advisor|}}
-                                <p class="activity-info-item-data">
-                                    <a href="mailto:{{advisor.Email}}">{{advisor.FirstName}} {{advisor.LastName}}</a>
-                                </p>
-                            {{/each}}
-                        </div>
-                    {{else}}
-                        <p class="detail-header">Advisors: </p>
-                        <p class="detail-info">None</p>
-                    {{/if}} -->
                 </div>
                 {{#if model.activity.ActivityBlurb}}
                     <div class="col-sm-12 detail-item">
@@ -84,6 +64,7 @@
             <a href="mailto:{{model.emails}}">
                 <button class="btn button-navy">Send Email to Group</button>
             </a>
+            <button {{action "closeOutSession"}} class="btn button-navy">Close Out Session</button>
         {{else if model.leading}}
             {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Add Member</button>
@@ -94,6 +75,7 @@
             <a href="mailto:{{model.emails}}">
                 <button class="btn button-navy">Send Email to Group</button>
             </a>
+            <button {{action "closeOutSession"}} class="btn button-navy">Close Out Session</button>
         {{else if model.notAMember}}
             {{#if followLoad}}
                 <button type="button" class="btn button-navy">Wait</button>

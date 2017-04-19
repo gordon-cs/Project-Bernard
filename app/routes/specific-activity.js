@@ -124,24 +124,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           })
         }
 
-        // Load the activity leader emails.
-        // let loadActivityLeaderEmails = function (model) {
-        //     return activityLeaderEmailsPromise
-        //     .then(function (result) {
-        //         model.leaderEmails = result;
-        //         return Ember.RSVP.hash(model);
-        //     });
-        // };
-        //
-        // // Load the activity advisor emails.
-        // let loadActivityAdvisorEmails = function (model) {
-        //     return activityadvisorEmailsPromise
-        //     .then(function (result) {
-        //         model.advisorEmails = result;
-        //         return Ember.RSVP.hash(model);
-        //     });
-        // };
-
         let loadMemberships = function (model) {
             if (model.notAMember && ! model.leading) {
                 model.memberships = "";
