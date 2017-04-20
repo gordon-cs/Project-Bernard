@@ -17,6 +17,7 @@ Router.map(function() {
   this.route('add-admin');
   this.route('about');
   this.route('help');
+  this.route('activities-status');
 });
 
 export default Router;

@@ -4,5 +4,6 @@ import ApplicationRouteMixin from "ember-simple-auth/mixins/application-route-mi
 export default Ember.Route.extend(ApplicationRouteMixin, {
     activate() {
         this.controllerFor("application").getRequests();
+        this.controllerFor("application").checkAdmin();
     }
 });
