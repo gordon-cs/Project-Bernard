@@ -107,18 +107,22 @@ export default Ember.Controller.extend({
 
           putAsync("/memberships/" + membershipID + "/group-admin", data, context)
           .then(function(result) {
-            membership.GroupAdmin = result.GRP_ADMIN;
+            // Refresh the page when a group admin is selected, so that the
+            // updated contact list shows
+          window.location.reload(true);
           });
 
         },
 
         closeOutSession() {
           let context = this;
-          putAsync("/activities/" + context.model.activity.ActivityCode + "/session/"
-          + this.model.session.SessionCode + "/close", null, context)
-          .then(function() {
-            console.log("Session closed.");
-          });
+          if (confirm("Are you sure you want to close out this activity for this session?")) {
+            putAsync("/activities/" + context.model.activity.ActivityCode + "/session/"
+            + this.model.session.SessionCode + "/close", null, context)
+            .then(function() {
+              console.log("Session closed.");
+            });
+          }
         },
 
         // Reset image to default
