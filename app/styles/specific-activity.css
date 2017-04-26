@@ -53,6 +53,14 @@ a {
 .activity-info-item-data {
     margin: 0 !important;
 }
+.status-message p {
+  font-size: 1.5em !important;
+  font-style: italic;
+}
+
+/* -----------------------------
+    Buttons
+------------------------------- */
 .button-row {
     text-decoration: inherit;
     margin-bottom: 20px;

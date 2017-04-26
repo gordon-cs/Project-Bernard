@@ -120,7 +120,7 @@ export default Ember.Controller.extend({
             putAsync("/activities/" + context.model.activity.ActivityCode + "/session/"
             + this.model.session.SessionCode + "/close", null, context)
             .then(function() {
-              console.log("Session closed.");
+              window.location.reload(true);
             });
           }
         },

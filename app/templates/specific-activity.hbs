@@ -56,26 +56,29 @@
     <div class="row button-row col-sm-12">
         {{#if model.godMode}}
             {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
-                <button class="btn button-navy">Add Member</button>
+                <button class="btn button-navy" disabled={{model.activityClosed}}>Add Member</button>
             {{/link-to}}
+            <button {{action "closeOutSession"}} class="btn button-navy"
+              disabled={{model.activityClosed}}>Close Out Session
+            </button>
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
             <a href="mailto:{{model.emails}}">
                 <button class="btn button-navy">Send Email to Group</button>
             </a>
-            <button {{action "closeOutSession"}} class="btn button-navy">Close Out Session</button>
         {{else if model.leading}}
             {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
-                <button class="btn button-navy">Add Member</button>
+                <button class="btn button-navy" disabled={{model.activityClosed}}>Add Member</button>
             {{/link-to}}
+            <button {{action "closeOutSession"}} class="btn button-navy"
+              disabled={{model.activityClosed}}>Close Out Session</button>
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
             <a href="mailto:{{model.emails}}">
                 <button class="btn button-navy">Send Email to Group</button>
             </a>
-            <button {{action "closeOutSession"}} class="btn button-navy">Close Out Session</button>
         {{else if model.notAMember}}
             {{#if followLoad}}
                 <button type="button" class="btn button-navy">Wait</button>
@@ -88,6 +91,9 @@
                 <button type="button" class="btn button-navy">Join</button>
             {{/link-to}}
         {{/if}}
+    </div>
+    <div class="status-message">
+      {{#if model.activityClosed}}<p>This activity has been closed for the current session.</p>{{/if}}
     </div>
     {{!-- Activity Tables --}}
     {{!-- Members --}}
