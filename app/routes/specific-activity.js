@@ -18,8 +18,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Requests to be called in the beginning
         let activityPromise = getAsync("/activities/" + param.ActivityCode.trim(), context);
         let sessionPromise = getAsync("/sessions/" + param.SessionCode.trim(), context);
-        let activityStatusPromise = getAsync("/activities/" + param.ActivityCode.trim() +
-            "/status", context);
+        let activityStatusPromise = getAsync("/activities/" + param.SessionCode + "/"
+            + param.ActivityCode.trim() +  "/status", context);
         //let advisorsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/advisors", context);
         let activityadvisorEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() +
             "/advisors/session/" + param.SessionCode.trim(), context);
