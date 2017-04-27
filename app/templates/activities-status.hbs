@@ -1,14 +1,56 @@
-<div class="container main-container">
-    <div class="row">
-        <div class="section-title">
-            <h1>Open Current Activities</h1>
+<div class="container main-container activities-status">
+  <div class="row table-row">
+      <div class="col-sm-12">
+        <h2>
+            <strong>Open Current Activities ({{model.session.SessionDescription}})</strong>
+        </h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Activity Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+            {{#each model.openActivities as |act| }}
+            <tr>
+                <td>{{act.ActivityDescription}}</td>
+                <td class="button-row">
+                  <button {{action "closeOutSession" act.ActivityCode}} class="btn button-red">Close Activity</button>
+                </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
         </div>
     </div>
+  </div>
 
-    <div class="row">
-        <div class="section-title">
-            <h1>Closed Current Activities</h1>
-        </div>
-    </div>
+    <div class="row table-row">
+        <div class="col-sm-12">
+          <h2>
+              <strong>Closed Current Activities ({{model.session.SessionDescription}})</strong>
+          </h2>
+          <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Activity Name</th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+              {{#each model.closedActivities as |act| }}
+              <tr>
+                  <td>{{act.ActivityDescription}}</td>
+                  <!-- <td class="button-row"> <button class="btn button-darkgreen">Open Activity</button></td> -->
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+          </div>
+          </div>
+      </div>
 
 </div>

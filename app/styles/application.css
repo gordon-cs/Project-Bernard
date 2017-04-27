@@ -152,6 +152,9 @@ ul.dropdown-menu {
 		float: right;
 		width: 100%;
 }
+.activities-status .btn {
+	margin-bottom: 10px;
+}
 .mobile-menu-icon {
 		display: block;
 		float: right;

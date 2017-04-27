@@ -88,7 +88,7 @@
                 <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
             {{/if}}
             {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
-                <button type="button" class="btn button-navy">Join</button>
+                <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Join</button>
             {{/link-to}}
         {{/if}}
     </div>
