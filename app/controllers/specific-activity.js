@@ -24,7 +24,8 @@ export default Ember.Controller.extend({
                     "PART_CDE": "GUEST",
                     "BEGIN_DTE": new Date().toJSON(),
                     "END_DTE": new Date().toJSON(),
-                    "COMMENT_TXT": "Basic Follower"
+                    "COMMENT_TXT": "Basic Follower",
+                    "GRP_ADMIN": false
                 };
                 return postAsync("/memberships", data, context);
             };

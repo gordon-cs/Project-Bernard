@@ -77,7 +77,8 @@ export default Ember.Controller.extend({
                     "ID_NUM": result.GordonID,
                     "PART_CDE": role.ParticipationCode,
                     "BEGIN_DTE": new Date().toJSON(),
-                    "COMMENT_TXT": comments
+                    "COMMENT_TXT": comments,
+                    "GRP_ADMIN": false
                 };
                 return postAsync("/memberships", data, context).catch((reason) => {
                     error = true;
