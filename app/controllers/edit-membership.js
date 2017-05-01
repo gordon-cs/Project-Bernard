@@ -52,7 +52,6 @@ export default Ember.Controller.extend({
                     "ID_NUM": studentID,
                     "PART_CDE": roleID,
                     "BEGIN_DTE": new Date().toJSON(),
-                    "END_DTE": new Date().toJSON(),
                     "COMMENT_TXT": comments
                 };
 

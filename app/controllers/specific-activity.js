@@ -23,7 +23,6 @@ export default Ember.Controller.extend({
                     "ID_NUM": context.get("session.data.authenticated.token_data.id"),
                     "PART_CDE": "GUEST",
                     "BEGIN_DTE": new Date().toJSON(),
-                    "END_DTE": new Date().toJSON(),
                     "COMMENT_TXT": "Basic Follower",
                     "GRP_ADMIN": false
                 };

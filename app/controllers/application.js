@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
     // regular admin, or super admin
     checkAdmin() {
       let context = this;
-      let responsibilities = {}; // a variable to keep track of which activities this user is some admin for
+      //let responsibilities = {}; // a variable to keep track of which activities this user is some admin for
 
       context.set("isSomeAdmin", false);
 
@@ -49,11 +49,11 @@ export default Ember.Controller.extend({
               for (var i = 0; i < result.length; i++) {
                   if (result[i].GroupAdmin) {
                     console.log("User is a leader for: " + result[i].ActivityCode);
-                    responsibilities.push(result[i].ActivityCode);
+                    //responsibilities.push(result[i].ActivityCode);
                     context.set("isSomeAdmin", true);
                   }
               }
-              context.set("responsibilities", responsibilities);
+            //  context.set("responsibilities", responsibilities);
           });
       }
 
