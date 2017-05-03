@@ -51,7 +51,6 @@ export default Ember.Controller.extend({
                     "SESS_CDE": context.get("model.membership.SessionCode"),
                     "ID_NUM": studentID,
                     "PART_CDE": roleID,
-                    "BEGIN_DTE": new Date().toJSON(),
                     "COMMENT_TXT": comments
                 };
 
