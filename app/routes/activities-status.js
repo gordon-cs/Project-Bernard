@@ -18,10 +18,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let openActivities;
         let closedActivities;
         let session;
+        let isSuperAdmin;
 
         /* User info */
         let id_number = this.get("session.data.authenticated.token_data.id");
         let college_role = this.get('session.data.authenticated.token_data.college_role');
+        isSuperAdmin = college_role === "god";
 
         /* Promises */
 
@@ -40,7 +42,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/activities/open", context);
           }
           else {
-            return {};
+            return getAsync("/activities/" + id_number +"/open", context);
           }
         };
 
@@ -54,7 +56,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/activities/closed", context);
           }
           else {
-            return {};
+            return getAsync("/activities/" + id_number +"/closed", context);
           }
         };
 
@@ -65,6 +67,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Populate the model
         let loadModel = function() {
           return {
+            "isSuperAdmin": isSuperAdmin,
             "session": session,
             "openActivities": openActivities,
             "closedActivities": closedActivities

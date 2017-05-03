@@ -12,6 +12,8 @@ export default Ember.Controller.extend({
     followLoad: false,
     actions: {
 
+      // Method that closes out the current session of a given activity,
+      // so that no more members can be added
       closeOutSession: function(activityCode) {
         let context = this;
 
@@ -21,7 +23,21 @@ export default Ember.Controller.extend({
             window.location.reload(true);
           });
         }
-    }
+      },
+
+      // Reopen a session that has already been closed for a specific activity
+      openSession: function(activityCode) {
+        let context = this;
+
+        if (confirm("Are you sure you want to open this activity for this session?")) {
+          putAsync("/activities/" + activityCode + "/session/" + this.model.session.SessionCode + "/open", null, context)
+          .then(function() {
+            window.location.reload(true);
+          });
+        }
+
+      }
+
   }
 
 });

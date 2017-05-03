@@ -44,6 +44,11 @@
               {{#each model.closedActivities as |act| }}
               <tr>
                   <td>{{act.ActivityDescription}}</td>
+                  {{#if model.isSuperAdmin}}
+                    <td class="button-row">
+                      <button {{action "openSession" act.ActivityCode}} class="btn button-darkgreen">Open Activity</button>
+                    </td>
+                  {{/if}}
                   <!-- <td class="button-row"> <button class="btn button-darkgreen">Open Activity</button></td> -->
               </tr>
               {{/each}}
