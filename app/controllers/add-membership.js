@@ -76,7 +76,7 @@ export default Ember.Controller.extend({
                     "SESS_CDE": sessionCode,
                     "ID_NUM": result.GordonID,
                     "PART_CDE": role.ParticipationCode,
-                    "BEGIN_DTE": new Date().toJSON(),
+                    "BEGIN_DTE": new Date().toLocaleString(),
                     "COMMENT_TXT": comments,
                     "GRP_ADMIN": false
                 };
@@ -93,7 +93,7 @@ export default Ember.Controller.extend({
                     "SESS_CDE": sessionCode,
                     "ID_NUM": IDNumber,
                     "PART_CDE": role.ParticipationCode,
-                    "DATE_SENT": new Date().toJSON(),
+                    "DATE_SENT": new Date().toLocaleString(),
                     "COMMENT_TXT": comments,
                     "APPROVED": "Pending"
                 };
