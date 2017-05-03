@@ -58,9 +58,7 @@
             {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy" disabled={{model.activityClosed}}>Add Member</button>
             {{/link-to}}
-            <button {{action "closeOutSession"}} class="btn button-navy"
-              disabled={{model.activityClosed}}>Close Out Session
-            </button>
+
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
@@ -71,8 +69,7 @@
             {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy" disabled={{model.activityClosed}}>Add Member</button>
             {{/link-to}}
-            <button {{action "closeOutSession"}} class="btn button-navy"
-              disabled={{model.activityClosed}}>Close Out Session</button>
+
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
@@ -199,6 +196,10 @@
                     <p class="empty-table-reminder">There are no pending requests</p>
                 {{/if}}
             </div>
+        </div>
+        <div class="row col-sm-4 button-row">
+          <button {{action "closeOutSession"}} class="btn button-navy"
+            disabled={{model.activityClosed}}>Close Out Activity for this Session</button>
         </div>
     {{/if}}
 </div>
