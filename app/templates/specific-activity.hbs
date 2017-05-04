@@ -29,7 +29,8 @@
                         <div class="leaders">
                           {{#each model.contactEmails as |contact|}}
                           <p class="activity-info-item-data">
-                              <a href="mailto:{{contact.Email}}">{{contact.FirstName}} {{contact.LastName}}</a>
+                              {{contact.FirstName}} {{contact.LastName}}
+                              <a href="mailto:{{contact.Email}}"> <span class="glyphicon glyphicon-envelope"></span></a>
                           </p>
                           {{/each}}
                         </div>
