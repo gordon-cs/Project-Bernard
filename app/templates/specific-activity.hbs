@@ -199,8 +199,17 @@
             </div>
         </div>
         <div class="row col-sm-4 button-row">
-          <button {{action "closeOutSession"}} class="btn button-navy"
-            disabled={{model.activityClosed}}>Close Out Activity for this Session</button>
+          {{#if model.godMode}}
+              {{#if model.activityClosed}}
+              <button {{action "openSession"}} class="btn button-orange">Reopen Roster</button>
+              {{else}}
+                <button {{action "closeOutSession"}} class="btn button-cyan">Confirm Final Roster</button>
+              {{/if}}
+          {{else}}
+            <button {{action "closeOutSession"}} class="btn button-cyan" disabled={{model.activityClosed}}>
+              Confirm Final Roster
+            </button>
+          {{/if}}
         </div>
     {{/if}}
 </div>

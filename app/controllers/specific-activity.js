@@ -125,6 +125,19 @@ export default Ember.Controller.extend({
           }
         },
 
+        // Reopen a session that has already been closed for a specific activity
+        openSession() {
+          let context = this;
+
+          if (confirm("Are you sure you want to open this activity for this session?")) {
+            putAsync("/activities/" + context.model.activity.ActivityCode+ "/session/" + this.model.session.SessionCode + "/open", null, context)
+            .then(function() {
+              window.location.reload(true);
+            });
+          }
+
+        },
+
         // Reset image to default
         resetImage() {
             postAsync("/activities/" + this.model.activity.ActivityCode + "/image/reset", null, this).catch(function(error) {

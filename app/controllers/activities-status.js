@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
       openSession: function(activityCode) {
         let context = this;
 
-        if (confirm("Are you sure you want to open this activity for this session?")) {
+        if (confirm("Are you sure you want to re-open this activity for this session?")) {
           putAsync("/activities/" + activityCode + "/session/" + this.model.session.SessionCode + "/open", null, context)
           .then(function() {
             window.location.reload(true);
