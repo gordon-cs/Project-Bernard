@@ -1,0 +1,67 @@
+<div class="container main-container activities-status">
+  <div class="row table-row">
+      <div class="col-sm-12">
+        <h2>
+            <strong>Open Current Activities ({{model.session.SessionDescription}})</strong>
+        </h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Activity Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+            {{#each model.openActivities as |act| }}
+            <tr>
+                <td>{{act.ActivityDescription}}</td>
+                <td class="button-row">
+                  <!-- <button {{action "closeOutSession" act.ActivityCode}} class="btn button-red">Close Activity</button> -->
+                  {{#link-to "specific-activity" model.session.SessionCode act.ActivityCode}}
+                  <button class="btn button-navy uppercase">Go to page <span class="glyphicon glyphicon-arrow-right"></span></button>
+                  {{/link-to}}
+                </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        </div>
+    </div>
+  </div>
+
+    <div class="row table-row">
+        <div class="col-sm-12">
+          <h2>
+              <strong>Closed Current Activities ({{model.session.SessionDescription}})</strong>
+          </h2>
+          <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Activity Name</th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+              {{#each model.closedActivities as |act| }}
+              <tr>
+                  <td>{{act.ActivityDescription}}</td>
+                  {{#if model.isSuperAdmin}}
+                    <td class="button-row">
+                      <!-- <button {{action "openSession" act.ActivityCode}} class="btn button-darkgreen">Open Activity</button> -->
+                      {{#link-to "specific-activity" model.session.SessionCode act.ActivityCode }}
+                      <button class="btn button-navy uppercase">Go to page <span class="glyphicon glyphicon-arrow-right"></span></button>
+                      {{/link-to}}
+                    </td>
+                  {{/if}}
+                  <!-- <td class="button-row"> <button class="btn button-darkgreen">Open Activity</button></td> -->
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+          </div>
+          </div>
+      </div>
+
+</div>

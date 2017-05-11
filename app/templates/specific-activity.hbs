@@ -29,34 +29,17 @@
                         <div class="leaders">
                           {{#each model.contactEmails as |contact|}}
                           <p class="activity-info-item-data">
-                              <a href="mailto:{{contact.Email}}">{{contact.FirstName}} {{contact.LastName}}</a>
+                              {{contact.FirstName}} {{contact.LastName}}
+                              <a href="mailto:{{contact.Email}}">
+                                <span class="glyphicon glyphicon-envelope cyan"></span>
+                              </a>
                           </p>
                           {{/each}}
-                            <!-- {{#each model.leaderEmails as |leader|}}
-                                <p class="activity-info-item-data">
-                                    <a href="mailto:{{leader.Email}}">{{leader.FirstName}} {{leader.LastName}}</a>
-                                </p>
-                            {{/each}} -->
                         </div>
                     {{else}}
                         <p class="detail-header">Group Contacts:</p>
                         <p class="detail-info">None</p>
                     {{/if}}
-                </div>
-                <div class="col-sm-12 detail-item">
-                    <!-- {{#if model.hasadvisors}}
-                        <p class="detail-header">Advisors: </p>
-                        <div class="leaders">
-                            {{#each model.advisorEmails as |advisor|}}
-                                <p class="activity-info-item-data">
-                                    <a href="mailto:{{advisor.Email}}">{{advisor.FirstName}} {{advisor.LastName}}</a>
-                                </p>
-                            {{/each}}
-                        </div>
-                    {{else}}
-                        <p class="detail-header">Advisors: </p>
-                        <p class="detail-info">None</p>
-                    {{/if}} -->
                 </div>
                 {{#if model.activity.ActivityBlurb}}
                     <div class="col-sm-12 detail-item">
@@ -76,8 +59,9 @@
     <div class="row button-row col-sm-12">
         {{#if model.godMode}}
             {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
-                <button class="btn button-navy">Add Member</button>
+                <button class="btn button-navy" disabled={{model.activityClosed}}>Add Member</button>
             {{/link-to}}
+
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
@@ -86,8 +70,9 @@
             </a>
         {{else if model.leading}}
             {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
-                <button class="btn button-navy">Add Member</button>
+                <button class="btn button-navy" disabled={{model.activityClosed}}>Add Member</button>
             {{/link-to}}
+
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
@@ -103,9 +88,12 @@
                 <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
             {{/if}}
             {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
-                <button type="button" class="btn button-navy">Join</button>
+                <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Join</button>
             {{/link-to}}
         {{/if}}
+    </div>
+    <div class="status-message">
+      {{#if model.activityClosed}}<p>This activity has been closed for the current session.</p>{{/if}}
     </div>
     {{!-- Activity Tables --}}
     {{!-- Members --}}
@@ -211,6 +199,19 @@
                     <p class="empty-table-reminder">There are no pending requests</p>
                 {{/if}}
             </div>
+        </div>
+        <div class="row col-sm-4 button-row">
+          {{#if model.godMode}}
+              {{#if model.activityClosed}}
+              <button {{action "openSession"}} class="btn button-orange">Reopen Roster</button>
+              {{else}}
+                <button {{action "closeOutSession"}} class="btn button-cyan">Confirm Final Roster</button>
+              {{/if}}
+          {{else}}
+            <button {{action "closeOutSession"}} class="btn button-cyan" disabled={{model.activityClosed}}>
+              Confirm Final Roster
+            </button>
+          {{/if}}
         </div>
     {{/if}}
 </div>

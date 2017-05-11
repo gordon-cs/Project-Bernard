@@ -29,6 +29,9 @@
                                 </span>
                             {{/if}}
                             {{/link-to}}</li>
+                          {{#if isSomeAdmin}}
+                          <li>{{#link-to "activities-status"}} Activities' Status{{/link-to}} </li>
+                          {{/if}}
                           <li role="separator" class="divider"></li>
                           <li><a href="#" {{action "logout"}}>Logout</a></li>
                         </ul>
@@ -92,6 +95,9 @@
                         </span>
                     {{/if}}
                 </li>
+                {{#if isSomeAdmin}}
+                <li class="user-info-mobile">{{#link-to "activities-status"}} Activities' Status{{/link-to}} </li>
+                {{/if}}
                 <li class="logout-mobile">
                 <a {{action "logout"}} class="button uppercase">Logout</a>
                 </li>

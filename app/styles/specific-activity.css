@@ -53,6 +53,14 @@ a {
 .activity-info-item-data {
     margin: 0 !important;
 }
+.status-message p {
+  font-size: 1.5em !important;
+  font-style: italic;
+}
+
+/* -----------------------------
+    Buttons
+------------------------------- */
 .button-row {
     text-decoration: inherit;
     margin-bottom: 20px;
@@ -79,7 +87,17 @@ a {
     text-transform: uppercase;
     font-weight: bold !important;
 }
-
+.glyphicon-envelope {
+  font-size: .9em;
+  padding-left: .35em;
+  padding-right: .6em;
+}
+.glyphicon-envelope.cyan {
+    color: #00aeef;
+}
+.glyphicon-envelope.cyan:hover {
+    color: #DE571F;
+}
 /* -----------------------------
     Tables
 ------------------------------- */

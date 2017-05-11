@@ -18,16 +18,24 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Requests to be called in the beginning
         let activityPromise = getAsync("/activities/" + param.ActivityCode.trim(), context);
         let sessionPromise = getAsync("/sessions/" + param.SessionCode.trim(), context);
+        let activityStatusPromise = getAsync("/activities/" + param.SessionCode + "/"
+            + param.ActivityCode.trim() +  "/status", context);
         //let advisorsPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/advisors", context);
-        let activityadvisorEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/advisors/session/" + param.SessionCode.trim(), context);
+        let activityadvisorEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() +
+            "/advisors/session/" + param.SessionCode.trim(), context);
         //let activityLeadersPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/leaders", context);
-        let groupAdminEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() + "/group-admin/session/" + param.SessionCode.trim(), context);
-        let groupAdminPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/group-admin", context);
+        let groupAdminEmailsPromise = getAsync("/emails/activity/" + param.ActivityCode.trim() +
+            "/group-admin/session/" + param.SessionCode.trim(), context);
+        let groupAdminPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() +
+            "/group-admin", context);
         let personsMembershipsPromise = getAsync("/memberships/student/" + id_number, context);
-        let followingCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/followers", context);
-        let memberCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() + "/members", context);
+        let followingCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() +
+            "/followers", context);
+        let memberCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() +
+            "/members", context);
         // Requests to be called if needed
-        let activityRequestsPromise = function() {return getAsync("/requests/activity/" + param.ActivityCode.trim(), context);};
+        let activityRequestsPromise = function() {return getAsync("/requests/activity/" +
+            param.ActivityCode.trim(), context);};
 
         // The model object the route will return.
         let theModel = {};
@@ -123,24 +131,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return Ember.RSVP.hash(model);
           })
         }
-
-        // Load the activity leader emails.
-        // let loadActivityLeaderEmails = function (model) {
-        //     return activityLeaderEmailsPromise
-        //     .then(function (result) {
-        //         model.leaderEmails = result;
-        //         return Ember.RSVP.hash(model);
-        //     });
-        // };
-        //
-        // // Load the activity advisor emails.
-        // let loadActivityAdvisorEmails = function (model) {
-        //     return activityadvisorEmailsPromise
-        //     .then(function (result) {
-        //         model.advisorEmails = result;
-        //         return Ember.RSVP.hash(model);
-        //     });
-        // };
 
         let loadMemberships = function (model) {
             if (model.notAMember && ! model.leading) {
@@ -275,6 +265,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return Ember.RSVP.hash(model);
         };
 
+        let loadActivityStatus = function (model) {
+          let result = activityStatusPromise;
+          if (result._result === "CLOSED") {
+            model.activityClosed = true;
+            console.log("Activity closed");
+          }
+          else {
+            console.log("Activity open");
+            model.activityClosed = false;
+          }
+          return Ember.RSVP.hash(model);
+        }
+
         let setIfDefaultImage = function(model) {
             if (model.activity.ActivityImagePath.includes("gordon.edu/browseable/uploads/Default/activityImage.png")) {
                 model.defaultImage = true;
@@ -301,6 +304,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(populateRoster)
         .then(loadSessions)
         .then(loadActivity)
+        .then(loadActivityStatus)
         .then(setIfDefaultImage)
         .then(loadModel);
 

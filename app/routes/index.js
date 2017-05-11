@@ -10,6 +10,7 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     activate() {
         this.controllerFor("application").getRequests();
+        this.controllerFor("application").checkAdmin();
     },
     model() {
         let id_number = this.get("session.data.authenticated.token_data.id");

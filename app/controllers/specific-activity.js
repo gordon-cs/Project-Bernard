@@ -22,9 +22,9 @@ export default Ember.Controller.extend({
                     "SESS_CDE": context.model.session.SessionCode.trim(),
                     "ID_NUM": context.get("session.data.authenticated.token_data.id"),
                     "PART_CDE": "GUEST",
-                    "BEGIN_DTE": new Date().toJSON(),
-                    "END_DTE": new Date().toJSON(),
-                    "COMMENT_TXT": "Basic Follower"
+                    "BEGIN_DTE": new Date().toLocaleString(),
+                    "COMMENT_TXT": "Basic Follower",
+                    "GRP_ADMIN": false
                 };
                 return postAsync("/memberships", data, context);
             };
@@ -107,8 +107,34 @@ export default Ember.Controller.extend({
 
           putAsync("/memberships/" + membershipID + "/group-admin", data, context)
           .then(function(result) {
-            membership.GroupAdmin = result.GRP_ADMIN;
+            // Refresh the page when a group admin is selected, so that the
+            // updated contact list shows
+          window.location.reload(true);
           });
+
+        },
+
+        closeOutSession() {
+          let context = this;
+          if (confirm("Are you sure you want to close out this activity for this session?")) {
+            putAsync("/activities/" + context.model.activity.ActivityCode + "/session/"
+            + this.model.session.SessionCode + "/close", null, context)
+            .then(function() {
+              window.location.reload(true);
+            });
+          }
+        },
+
+        // Reopen a session that has already been closed for a specific activity
+        openSession() {
+          let context = this;
+
+          if (confirm("Are you sure you want to open this activity for this session?")) {
+            putAsync("/activities/" + context.model.activity.ActivityCode+ "/session/" + this.model.session.SessionCode + "/open", null, context)
+            .then(function() {
+              window.location.reload(true);
+            });
+          }
 
         },
 
