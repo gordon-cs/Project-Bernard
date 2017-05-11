@@ -17,7 +17,10 @@
             <tr>
                 <td>{{act.ActivityDescription}}</td>
                 <td class="button-row">
-                  <button {{action "closeOutSession" act.ActivityCode}} class="btn button-red">Close Activity</button>
+                  <!-- <button {{action "closeOutSession" act.ActivityCode}} class="btn button-red">Close Activity</button> -->
+                  {{#link-to "specific-activity" model.session.SessionCode act.ActivityCode}}
+                  <button class="btn button-navy uppercase">Go to page <span class="glyphicon glyphicon-arrow-right"></span></button>
+                  {{/link-to}}
                 </td>
             </tr>
             {{/each}}
@@ -46,7 +49,10 @@
                   <td>{{act.ActivityDescription}}</td>
                   {{#if model.isSuperAdmin}}
                     <td class="button-row">
-                      <button {{action "openSession" act.ActivityCode}} class="btn button-darkgreen">Open Activity</button>
+                      <!-- <button {{action "openSession" act.ActivityCode}} class="btn button-darkgreen">Open Activity</button> -->
+                      {{#link-to "specific-activity" model.session.SessionCode act.ActivityCode }}
+                      <button class="btn button-navy uppercase">Go to page <span class="glyphicon glyphicon-arrow-right"></span></button>
+                      {{/link-to}}
                     </td>
                   {{/if}}
                   <!-- <td class="button-row"> <button class="btn button-darkgreen">Open Activity</button></td> -->

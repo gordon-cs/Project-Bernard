@@ -30,7 +30,13 @@
                           {{#each model.contactEmails as |contact|}}
                           <p class="activity-info-item-data">
                               {{contact.FirstName}} {{contact.LastName}}
-                              <a href="mailto:{{contact.Email}}"> <span class="glyphicon glyphicon-envelope"></span></a>
+                              <a href="mailto:{{contact.Email}}">
+                                {{#if model.activityClosed}}
+                                <span class="glyphicon glyphicon-envelope orange"></span>
+                                {{else}}
+                                <span class="glyphicon glyphicon-envelope cyan"></span>
+                                {{/if}}
+                                </a>
                           </p>
                           {{/each}}
                         </div>
