@@ -95,6 +95,9 @@ a {
 .glyphicon-envelope.cyan {
     color: #00aeef;
 }
+.glyphicon-envelope.cyan:hover {
+    color: #DE571F;
+}
 /* -----------------------------
     Tables
 ------------------------------- */
