@@ -15,6 +15,7 @@ Front-end for [Project Raymond](https://github.com/gordon-cs/Project-Raymond)
     * [Deploying](#deploying)
   * [Addons](#addons)
   * [Source Code Guide](#source-code-guide)
+  * [Styling](#styling)
   * [Further Reading and Useful Links](#further-reading-and-useful-links)
 
 ## Introduction
@@ -160,6 +161,10 @@ Make use of the many generators for code, try `ember help generate` for more det
 	* Will generate template, route, test and add appropriate line to app/router.js.
 	* Each route can also have a controller.
 	* File are linked with similar same (e.g. login.hbs and login.js).
+
+## Styling
+The site uses a blend of Bootrap components (referenced as `<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">` in the `index.html` file) and customized styling, found in the `/styles` folder in the ember app. <br>
+Bootstrap has pretty thorough documentation, which can be found [here](https://v4-alpha.getbootstrap.com/getting-started/introduction/).
 
 ## Further Reading and Useful Links
 
