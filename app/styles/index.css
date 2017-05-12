@@ -4,6 +4,7 @@
   padding-right: 0;
 }
 .dashboard .involvements-dropdown .collapse {
+  margin-top: 6em;
   padding: 0;
 }
 .involvements-dropdown nav {
@@ -84,6 +85,9 @@ ul.experience-involvements-dropdown li.no-activities-msg {
   position: relative;
   text-align: center;
   width: 100%;
+}
+.involvements-dropdown .navbar-collapse.collapse {
+  display: none !important;
 }
 .involvements-dropdown .dropdown .dropdown-menu li a {
   font-size: .55em !important;
@@ -167,8 +171,8 @@ ul.experience-involvements-dropdown li.no-activities-msg {
   }
   .involvements-dropdown .navbar-header {
     display: none;
-  }
-}*/
+  }*/
+}
 @media only screen and (max-width: 768px) {
   .info-blocks.tab-content .tab-pane{
     min-height: 245px;

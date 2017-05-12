@@ -1,16 +1,17 @@
 <div class="row dashboard">
-	<p>GOOD MORNING!</p>
 	<div class="involvements-dropdown">
-		<nav class="navbar">
-			<div class="header " data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<button type="button" class="involvements-dropdown-button collapsed">
+		<nav class="navbar navbar-toggleable-* bg-faded">
+			<!-- <div class="header " data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> -->
+				<button type="button" class="involvements-dropdown-button navbar-toggler navbar-toggler-right"
+				data-toggle="collapse" data-target="#involvements-navbar" aria-controls="involvements-navbar"
+				aria-expanded="false" aria-label="Toggle involvements dropdown">
 					<span class="glyphicon glyphicon-chevron-down"></span>
 				 </button>
 				<a class="navbar-brand uppercase" href="#">My Involvements</a>
-			</div>
-			<div class="collapse" id="bs-example-navbar-collapse-1">
+			<!-- </div> -->
+			<div class="collapse navbar-collapse" id="involvements-navbar">
 				{{#if model.nothingToShow}}
-					<ul class="experience-involvements-dropdown">
+					<ul class="experience-involvements-dropdown navbar-nav">
 						<li class="experience-category">Current Experience</li>
 						<li class="experience-category">Past Experience</li>
 						<li class="no-activities-msg">Looks like you don't have any activities yet! Check out
@@ -101,7 +102,7 @@
 			</div>
 		</nav>
 	</div>
-	<div class="col-sm-9 col-sm-offset-3 main-content">
+	<div class="main-content">
 		<div class="banner">
 			{{dashboard-slider slides=model.slides}}
 			<div class="row info-blocks">
