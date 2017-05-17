@@ -10,7 +10,7 @@
 .involvements-dropdown nav {
   margin-bottom: 0;
 }
-.involvements-dropdown .header .glyphicon-chevron-down,
+.involvements-dropdown .glyphicon-chevron-down,
 .involvements-dropdown .navbar-brand {
   color: #00aeef;
   font-size: 150%;
@@ -86,8 +86,9 @@ ul.experience-involvements-dropdown li.no-activities-msg {
   text-align: center;
   width: 100%;
 }
-.involvements-dropdown .navbar-collapse.collapse {
-  display: none !important;
+#involvements-navbar {
+  display: none;
+  margin-top:50px;
 }
 .involvements-dropdown .dropdown .dropdown-menu li a {
   font-size: .55em !important;
