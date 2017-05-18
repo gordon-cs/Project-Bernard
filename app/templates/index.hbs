@@ -1,14 +1,10 @@
 <div class="row dashboard">
 	<div class="involvements-dropdown">
 		<nav class="navbar navbar-toggleable-* bg-faded">
-			<!-- <div class="header " data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> -->
-				<button {{action "toggleDropdown"}} type="button" class="involvements-dropdown-button"
-
-				aria-expanded="false" aria-label="Toggle involvements dropdown">
-					<span class="glyphicon glyphicon-chevron-down"></span>
-				 </button>
+			<div {{action "toggleDropdown"}}>
+					<span class="glyphicon glyphicon-chevron-down involvements-dropdown-button"></span>
 				<a class="navbar-brand uppercase" href="#">My Involvements</a>
-			<!-- </div> -->
+			</div>
 			<div class="" id="involvements-navbar">
 				{{#if model.nothingToShow}}
 					<ul class="experience-involvements-dropdown navbar-nav">
