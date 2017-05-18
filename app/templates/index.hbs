@@ -1,11 +1,11 @@
 <div class="row dashboard">
 	<div class="involvements-dropdown">
 		<nav class="navbar navbar-toggleable-* bg-faded">
-			<div {{action "toggleDropdown"}}>
-					<span class="glyphicon glyphicon-chevron-down involvements-dropdown-button"></span>
+			<div {{action "toggleDropdown"}} class="involvements-div">
+				<span class="glyphicon glyphicon-chevron-down involvements-dropdown-button"></span>
 				<a class="navbar-brand uppercase" href="#">My Involvements</a>
 			</div>
-			<div class="" id="involvements-navbar">
+			<div id="involvements-navbar">
 				{{#if model.nothingToShow}}
 					<ul class="experience-involvements-dropdown">
 						<li class="experience-category">Current Experience</li>

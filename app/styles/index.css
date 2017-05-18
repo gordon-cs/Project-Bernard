@@ -38,6 +38,9 @@
   background-image: none;
   cursor: pointer;
 }
+.involvements-div {
+  cursor: pointer;
+}
 .involvements-dropdown li {
   border: 2px #cccccc;
   font-size: 1.75em !important;
