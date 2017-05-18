@@ -20,14 +20,14 @@ Front-end for [Project Raymond](https://github.com/gordon-cs/Project-Raymond)
 
 ## Introduction
 
-* Poject running at https://360.gordon.edu
+* Project running at https://360.gordon.edu
 * Using [EmberJS](http://emberjs.com/) Framework
 * Makes calls to JSON Server at https://360api.gordon.edu
   * [Repository](https://github.com/gordon-cs/Project-Raymond)
 
 ## Sites
 
-* Testing Sites
+* Development Sites
   * Client: https://360train.gordon.edu
   * Server: https://360apitrain.gordon.edu
 * Production Sites
@@ -75,6 +75,8 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 * Currently running on PC `ccttrain.gordon.edu`
 * After `ember build --environment production` Copy contents of `dist/` into `\F:\Sites\site_name`
+  * For deploying to development site: this means copying contents of `dist/` to `\F:\Sites\360Train`
+  * For deploying to production site: this means copying contents of `dist/` to `\F:\Sites\360`
 
 ### Addons
 
@@ -94,6 +96,11 @@ Make use of the many generators for code, try `ember help generate` for more det
         * Used in ajax utils.
     * Controllers
         * Handles function interaction after the initial model is loaded.
+    * Components
+        * Acts as a small unit of a page with its own javascript (e.g. a slider)
+        * [Read more about ember components](https://guides.emberjs.com/v2.13.0/components/the-component-lifecycle/)
+        * Note - the component for the slider was actually added because it was the simplest way to add some
+        3rd-party javascript that was also used on the gordon.edu home page.
     * Helpers
         * Functions to be called inside template files.
     * Routes
@@ -107,6 +114,8 @@ Make use of the many generators for code, try `ember help generate` for more det
         * CSS files.
     * Templates
         * HTML (Handlebars) files for corresponding route.
+        * /components 
+            * The html for the component
         * application.hbs
             * Will appear in all routes.
             * Contains menu bar.
@@ -137,6 +146,9 @@ Make use of the many generators for code, try `ember help generate` for more det
 * /public
     * /images
         * Location for images.
+    * /royalslider
+        * Images and styles used for the slider on the dashboard (home) page. 
+        This was taken from the gordon.edu home page, courtesy of Steve Dagley.
     * crossdomain.xml and robots.txt
         * Boilerplate
     * web.config
