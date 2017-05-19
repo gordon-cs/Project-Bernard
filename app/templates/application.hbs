@@ -65,27 +65,40 @@
                     {{session.data.authenticated.token_data.name}}
                 </li>
                 <li>
-                    {{#link-to "index" class="button uppercase" invokeAction="toggleMenu"}}
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "index" class="button uppercase"}}
                         My Home
                     {{/link-to}}
+                  </span>
                 </li>
                 <li>
+                  <span {{action "closeMenu"}}>
                     {{#link-to "all-activities" class="button uppercase"}}
                         All Activities
                     {{/link-to}}
+                  </span>
                 </li>
                 <li>
+                  <span {{action "closeMenu"}}>
                     {{#link-to "transcript" class="button uppercase"}}
                         Transcript
                     {{/link-to}}
+                  </span>
                 </li>
                 <li>
-                  {{#link-to "about" class="button uppercase"}}
-                        About
-                  {{/link-to}}
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "about" class="button uppercase"}}
+                          About
+                    {{/link-to}}
+                  </span>
+                </li {{action "closeMenu"}}>
+                <li class="user-info-mobile" >
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "help"}} Help{{/link-to}}
+                  </span>
                 </li>
-                <li class="user-info-mobile">{{#link-to "help"}} Help{{/link-to}} </li>
                 <li class="user-info-mobile">
+                  <span {{action "closeMenu"}}>
                     {{#link-to "profile" class="button uppercase"}}
                         Profile
                     {{/link-to}}
@@ -94,12 +107,21 @@
                             {{requestsRecieved.length}}
                         </span>
                     {{/if}}
+                  </span>
                 </li>
                 {{#if isSomeAdmin}}
-                <li class="user-info-mobile">{{#link-to "activities-status"}} Activities' Status{{/link-to}} </li>
+                <li class="user-info-mobile">
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "activities-status"}}
+                    Activities' Status
+                    {{/link-to}}
+                  </span>
+                </li>
                 {{/if}}
                 <li class="logout-mobile">
-                <a {{action "logout"}} class="button uppercase">Logout</a>
+                  <span {{action "closeMenu"}}>
+                    <a {{action "logout"}} class="button uppercase">Logout</a>
+                  </span>
                 </li>
             </ul>
         </div>
