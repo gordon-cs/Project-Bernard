@@ -13,6 +13,7 @@
 #transcipt-view {
   overflow: auto;
   padding: 0 !important;
+  height: 1000px;
 }
 
 /* -----------------------------
