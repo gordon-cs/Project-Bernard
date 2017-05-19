@@ -7,11 +7,12 @@
     color: white;
     text-transform: uppercase;
 }
-#transcipt-view {
-    display: none;
-}
 .reset-padding {
     padding: 0 !important;
+}
+#transcipt-view {
+  overflow: auto;
+  padding: 0 !important;
 }
 
 /* -----------------------------

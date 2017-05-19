@@ -79,6 +79,7 @@ export default Ember.Controller.extend({
             const TITLE_FONT = 24;
             const TITLE_WEIGHT = "bold";
             const TITLE_LINE_WIDTH = 0.3;
+            const TITLE_TEXT = "Co-Curricular Transcript - " + context.get("session.data.authenticated.token_data.name");
             // Title Variables
             const HEADER_FONT = 16;
             const HEADER_WEIGHT = "bold";
@@ -138,7 +139,7 @@ export default Ember.Controller.extend({
 
             // Page Header
             addText(MARGIN, HEADER_FONT, HEADER_WEIGHT,
-                "Co-Curricular Transcript - " + context.get("session.data.authenticated.token_data.name"));
+                TITLE_TEXT);
 
             if (leaderships.length > 0) {
                 move(10);
@@ -149,6 +150,9 @@ export default Ember.Controller.extend({
 
             // Leaderships
             doc.setLineWidth(LIST_LINE_WIDTH);
+            doc.setProperties({
+                title: TITLE_TEXT
+            });
             for (var i = 0; i < leaderships.length; i++) {
                 move(LIST_SPACING);
 
