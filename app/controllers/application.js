@@ -23,6 +23,8 @@ export default Ember.Controller.extend({
         logout() {
             this.get("session").invalidate();
             this.set("requestsRecieved", []);
+            console.log(this.get("requestsSent"));
+            console.log(this.get("requestsCalled"));
             this.set("requestsSent", []);
         },
     },
