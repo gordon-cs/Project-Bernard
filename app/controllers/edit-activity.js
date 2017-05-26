@@ -79,9 +79,9 @@ export default Ember.Controller.extend({
                     let dataUrl = $("#image-to-crop").cropper('getCroppedCanvas', {
                         width: 320,
                         height: 320
-                    }).toDataURL('image/jpeg', 0.7);
+                    }).toDataURL('image/png', 0.7);
                     let blob = dataURItoBlob(dataUrl);
-                    let file = new File( [blob], 'canvasImage.jpg', { type: 'image/jpeg' } );
+                    let file = new File( [blob], 'canvasImage.png', { type: 'image/png' } );
 
                     let imageValidation = validateImage(file); // See helper method on the bottom
                     if (imageValidation.isValid) {
