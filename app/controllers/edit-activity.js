@@ -56,72 +56,35 @@ export default Ember.Controller.extend({
             let uploadImage = function() {
                 let image = Ember.$("#file")[0].files[0];
                 if (image != null) {
-                    let imageValidation = validateImage(image); // See helper method on the bottom
-                    if (imageValidation.isValid) {
+                    function dataURItoBlob(dataURI) {
+                        // convert base64/URLEncoded data component to raw binary data held in a string
+                        var byteString;
+                        if (dataURI.split(',')[0].indexOf('base64') >= 0)
+                            byteString = atob(dataURI.split(',')[1]);
+                        else
+                            byteString = unescape(dataURI.split(',')[1]);
 
-                        // upload cropped image
+                        // separate out the mime component
+                        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
-                        // console.log($().cropper('getCroppedCanvas'));
-                        // let dataURL = $().cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
-                        // let blob = dataURItoBlob(dataURL);
-                        // let imageData = new FormData();
-                        //
-                        // imageData.append(image.name, blob);
-                        //
-                        // return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
-                        //         "/image", imageData, context).catch((reason) => {
-                        //     error = true;
-                        //     showError(reason);
-                        // });
-                        // //
-                        // $().cropper('getCroppedCanvas').toBlob(function (blob) {
-                        //   let imageData = new FormData();
-                        //
-                        //   imageData.append(image.name, blob);
-                        //
-                        //   return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
-                        //           "/image", imageData, context).catch((reason) => {
-                        //       error = true;
-                        //       showError(reason);
-                        //   });
-                        // });
-
-                        // let imageData = new FormData();
-                        // imageData.append(image.name, image); // Add the image to the FormData object
-                        // console.log(image.name);
-                        // console.log(image);
-                        // return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
-                        //         "/image", imageData, context).catch((reason) => {
-                        //     error = true;
-                        //     showError(reason);
-                        // });
-
-                        function dataURItoBlob(dataURI) {
-                            // convert base64/URLEncoded data component to raw binary data held in a string
-                            var byteString;
-                            if (dataURI.split(',')[0].indexOf('base64') >= 0)
-                                byteString = atob(dataURI.split(',')[1]);
-                            else
-                                byteString = unescape(dataURI.split(',')[1]);
-
-                            // separate out the mime component
-                            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-                            // write the bytes of the string to a typed array
-                            var ia = new Uint8Array(byteString.length);
-                            for (var i = 0; i < byteString.length; i++) {
-                                ia[i] = byteString.charCodeAt(i);
-                            }
-
-                            return new Blob([ia], {type:mimeString});
+                        // write the bytes of the string to a typed array
+                        var ia = new Uint8Array(byteString.length);
+                        for (var i = 0; i < byteString.length; i++) {
+                            ia[i] = byteString.charCodeAt(i);
                         }
 
-                        let dataUrl = $("#image-to-crop").cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.7);
-                        let blob = dataURItoBlob(dataUrl);
-                        let file = new File( [blob], 'canvasImage.jpg', { type: 'image/jpeg' } ); 
-                        console.log(dataUrl);
-                        console.log(context);
-                        console.log(blob);
+                        return new Blob([ia], {type:mimeString});
+                    }
+
+                    let dataUrl = $("#image-to-crop").cropper('getCroppedCanvas', {
+                        width: 320,
+                        height: 320
+                    }).toDataURL('image/jpeg', 0.7);
+                    let blob = dataURItoBlob(dataUrl);
+                    let file = new File( [blob], 'canvasImage.jpg', { type: 'image/jpeg' } );
+
+                    let imageValidation = validateImage(file); // See helper method on the bottom
+                    if (imageValidation.isValid) {
                         let imageData = new FormData();
 
                         imageData.append("canvasImage", file);
