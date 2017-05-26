@@ -2,6 +2,8 @@ import Ember from "ember";
 import putAsync from "gordon360/utils/put-async";
 import postFileAsync from "gordon360/utils/post-file-async";
 import postAsync from "gordon360/utils/post-async";
+import imageCropper from 'ember-cli-image-cropper/components/image-cropper';
+
 
 /*  Controller for the edit activity page.
  *  Handles user interaction with the page.
@@ -28,6 +30,27 @@ export default Ember.Controller.extend({
                 context.set("errorMessage", new Error(result.responseText));
             };
 
+            // convert data to blob
+            function dataURItoBlob(dataURI) {
+                // convert base64/URLEncoded data component to raw binary data held in a string
+                var byteString;
+                if (dataURI.split(',')[0].indexOf('base64') >= 0)
+                    byteString = atob(dataURI.split(',')[1]);
+                else
+                    byteString = unescape(dataURI.split(',')[1]);
+
+                // separate out the mime component
+                var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+                // write the bytes of the string to a typed array
+                var ia = new Uint8Array(byteString.length);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+
+                return new Blob([ia], {type:mimeString});
+            }
+
             // Upload image file
             // Resturns resolved promise if no image was selected
             let uploadImage = function() {
@@ -35,10 +58,76 @@ export default Ember.Controller.extend({
                 if (image != null) {
                     let imageValidation = validateImage(image); // See helper method on the bottom
                     if (imageValidation.isValid) {
+
+                        // upload cropped image
+
+                        // console.log($().cropper('getCroppedCanvas'));
+                        // let dataURL = $().cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
+                        // let blob = dataURItoBlob(dataURL);
+                        // let imageData = new FormData();
+                        //
+                        // imageData.append(image.name, blob);
+                        //
+                        // return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
+                        //         "/image", imageData, context).catch((reason) => {
+                        //     error = true;
+                        //     showError(reason);
+                        // });
+                        // //
+                        // $().cropper('getCroppedCanvas').toBlob(function (blob) {
+                        //   let imageData = new FormData();
+                        //
+                        //   imageData.append(image.name, blob);
+                        //
+                        //   return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
+                        //           "/image", imageData, context).catch((reason) => {
+                        //       error = true;
+                        //       showError(reason);
+                        //   });
+                        // });
+
+                        // let imageData = new FormData();
+                        // imageData.append(image.name, image); // Add the image to the FormData object
+                        // console.log(image.name);
+                        // console.log(image);
+                        // return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
+                        //         "/image", imageData, context).catch((reason) => {
+                        //     error = true;
+                        //     showError(reason);
+                        // });
+
+                        function dataURItoBlob(dataURI) {
+                            // convert base64/URLEncoded data component to raw binary data held in a string
+                            var byteString;
+                            if (dataURI.split(',')[0].indexOf('base64') >= 0)
+                                byteString = atob(dataURI.split(',')[1]);
+                            else
+                                byteString = unescape(dataURI.split(',')[1]);
+
+                            // separate out the mime component
+                            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+                            // write the bytes of the string to a typed array
+                            var ia = new Uint8Array(byteString.length);
+                            for (var i = 0; i < byteString.length; i++) {
+                                ia[i] = byteString.charCodeAt(i);
+                            }
+
+                            return new Blob([ia], {type:mimeString});
+                        }
+
+                        let dataUrl = $("#image-to-crop").cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.7);
+                        let blob = dataURItoBlob(dataUrl);
+                        let file = new File( [blob], 'canvasImage.jpg', { type: 'image/jpeg' } ); 
+                        console.log(dataUrl);
+                        console.log(context);
+                        console.log(blob);
                         let imageData = new FormData();
-                        imageData.append(image.name, image); // Add the image to the FormData object
+
+                        imageData.append("canvasImage", file);
+
                         return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
-                                "/image", imageData, context).catch((reason) => {
+                          "/image", imageData, context).catch((reason) => {
                             error = true;
                             showError(reason);
                         });
