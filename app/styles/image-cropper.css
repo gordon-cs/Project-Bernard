@@ -8,3 +8,7 @@
     overflow: hidden;
     margin-top: 20px;
 }
+
+#cropper-div {
+    display: none;
+}
