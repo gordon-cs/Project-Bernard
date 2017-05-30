@@ -62,16 +62,19 @@ export default Ember.Controller.extend({
                     let dataUrl = $("#image-to-crop").cropper('getCroppedCanvas', {
                         width: 320,
                         height: 320
-                    }).toDataURL('image/png');
+                    }).toDataURL('image/jpeg');
                     let blob = dataURItoBlob(dataUrl);
                     console.log(blob);
-                    let file = new File( [blob], 'canvasImage.png', { type: 'image/png' } );
+                    let file = new File( [blob], 'canvasImage.jpeg', { type: 'image/jpeg' } );
+
+                    console.log(file.size);
 
                     let imageValidation = validateImage(file); // See helper method on the bottom
                     if (imageValidation.isValid) {
                         let imageData = new FormData();
 
                         imageData.append("canvasImage", file);
+                        console.log(imageData);
 
                         return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
                           "/image", imageData, context).catch((reason) => {
