@@ -64,16 +64,14 @@ export default Ember.Controller.extend({
                         height: 320
                     }).toDataURL('image/jpeg');
                     let blob = dataURItoBlob(dataUrl);
+                    let blobName = "canvasImage.jpeg";
                     console.log(blob);
-                    let file = new File( [blob], 'canvasImage.jpeg', { type: 'image/jpeg' } );
 
-                    console.log(file.size);
-
-                    let imageValidation = validateImage(file); // See helper method on the bottom
+                    let imageValidation = validateImage(blob,blobName); // See helper method on the bottom
                     if (imageValidation.isValid) {
                         let imageData = new FormData();
 
-                        imageData.append("canvasImage", file);
+                        imageData.append("canvasImage", blob, "canvasImage.jpeg");
                         console.log(imageData);
 
                         return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
@@ -159,13 +157,13 @@ export default Ember.Controller.extend({
 
 /* HELPER METHODS */
 // Validate the selected image
-function validateImage(file) {
+function validateImage(file, fileName) {
     let validFileExtensions = ['png','jpg','jpeg','bmp','gif'];
     let result = {
         isValid : true,
         validationMessage : ''
     };
-    let fileExtentsion = file.name.split('.').pop() || '';
+    let fileExtentsion = fileName.split('.').pop() || '';
     if (file == undefined) {
         result.isValid = false;
         result.validationMessage = "No image file was selected";
