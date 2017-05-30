@@ -56,31 +56,15 @@ export default Ember.Controller.extend({
             let uploadImage = function() {
                 let image = Ember.$("#file")[0].files[0];
                 if (image != null) {
-                    function dataURItoBlob(dataURI) {
-                        // convert base64/URLEncoded data component to raw binary data held in a string
-                        var byteString;
-                        if (dataURI.split(',')[0].indexOf('base64') >= 0)
-                            byteString = atob(dataURI.split(',')[1]);
-                        else
-                            byteString = unescape(dataURI.split(',')[1]);
 
-                        // separate out the mime component
-                        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-                        // write the bytes of the string to a typed array
-                        var ia = new Uint8Array(byteString.length);
-                        for (var i = 0; i < byteString.length; i++) {
-                            ia[i] = byteString.charCodeAt(i);
-                        }
-
-                        return new Blob([ia], {type:mimeString});
-                    }
+                    console.log("uploading image");
 
                     let dataUrl = $("#image-to-crop").cropper('getCroppedCanvas', {
                         width: 320,
                         height: 320
-                    }).toDataURL('image/png', 0.7);
+                    }).toDataURL('image/png');
                     let blob = dataURItoBlob(dataUrl);
+                    console.log(blob);
                     let file = new File( [blob], 'canvasImage.png', { type: 'image/png' } );
 
                     let imageValidation = validateImage(file); // See helper method on the bottom
