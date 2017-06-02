@@ -12,7 +12,25 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {
         getPDF() {
-            this.get("model.doc").save("Co-Curricular Transcipt.pdf");
+            // this.get("model.doc").save("Co-Curricular Transcipt.pdf");
+            const WIDTH = 216;
+            const HEIGHT = 279;
+            var doc = new jsPDF("p", "mm", [WIDTH, HEIGHT]);
+            var elementHandler = {
+              '#download-div': function (element, renderer) {
+                return true;
+              }
+            };
+            let source = $(".main-container")[0];
+            doc.fromHTML(
+                source,
+                24.5,
+                24.5,
+                {
+                    'elementHandlers': elementHandler
+                }
+            );
+            doc.output("dataurlnewwindow");
         }
     },
     // Create the PDF document that is shown and can be downloaded
@@ -206,7 +224,8 @@ export default Ember.Controller.extend({
                 "leaderships": leaderships,
                 "hasLeaderships": hasLeaderships,
                 "hasMemberships": hasMemberships,
-                "title": TITLE_TEXT
+                "title": TITLE_TEXT,
+                "noActivity": !(hasLeaderships || hasMemberships)
             }
         }
         // Run all the functions

@@ -19,7 +19,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "leaderships": result.leaderships,
                 "hasLeaderships": result.hasLeaderships,
                 "hasMemberships": result.hasMemberships,
-                "title": result.title
+                "title": result.title,
+                "noActivity": result.noActivity
             };
         });
     }
