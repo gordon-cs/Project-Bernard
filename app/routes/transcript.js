@@ -8,12 +8,18 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model() {
         let controller = this.controllerFor("transcript");
+
         return controller.createPDF()
-        .then(function(doc) {
-            let url = doc.output("dataurlstring");
+        .then(function(result) {
+            let url = result.doc.output("dataurlstring");
             return {
-                "doc": doc,
-                "url": url
+                "doc": result.doc,
+                "url": url,
+                "memberships": result.memberships,
+                "leaderships": result.leaderships,
+                "hasLeaderships": result.hasLeaderships,
+                "hasMemberships": result.hasMemberships,
+                "title": result.title
             };
         });
     }

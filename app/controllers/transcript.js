@@ -20,7 +20,9 @@ export default Ember.Controller.extend({
         let context = this;
         let memberships = [];
         let leaderships = [];
-        let sessions = [];
+        let hasLeaderships = false;
+        let hasMemberships = false;
+        // let sessions = [];
 
         let getMemberships = function() {
             return getAsync("/memberships/student/" + context.get("session.data.authenticated.token_data.id"), context);
@@ -44,19 +46,19 @@ export default Ember.Controller.extend({
             memberships = sortJsonArray(memberships, "SessionCode").reverse();
             leaderships = sortJsonArray(leaderships, "SessionCode").reverse();
         }
-        let getSessions = function() {
-            return getAsync("/sessions", context)
-            .then(function(result) {
-                sessions = result;
-            });
-        }
-        let findSession = function(sessionCode) {
-            for (let i = 0; i < sessions.length; i ++) {
-                if (sessions[i].SessionCode == sessionCode) {
-                    return sessions[i];
-                }
-            }
-        }
+        // let getSessions = function() {
+        //     return getAsync("/sessions", context)
+        //     .then(function(result) {
+        //         sessions = result;
+        //     });
+        // }
+        // let findSession = function(sessionCode) {
+        //     for (let i = 0; i < sessions.length; i ++) {
+        //         if (sessions[i].SessionCode == sessionCode) {
+        //             return sessions[i];
+        //         }
+        //     }
+        // }
         let generatePDF = function() {
             // Using https://parall.ax/products/jspdf
             // (x, y)
@@ -144,6 +146,7 @@ export default Ember.Controller.extend({
             if (leaderships.length > 0) {
                 move(10);
                 addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Leadership positions");
+                hasLeaderships = true;
             }
 
             let session = '';
@@ -175,6 +178,7 @@ export default Ember.Controller.extend({
             if (memberships.length > 0) {
                 move(10);
                 addText(MARGIN, HEADER_FONT, HEADER_WEIGHT, "Memberships");
+                hasMemberships = true;
 
                 session = '';
             }
@@ -196,12 +200,19 @@ export default Ember.Controller.extend({
 
             addFooter();
 
-            return doc;
+            return {
+                "doc": doc,
+                "memberships": memberships,
+                "leaderships": leaderships,
+                "hasLeaderships": hasLeaderships,
+                "hasMemberships": hasMemberships,
+                "title": TITLE_TEXT
+            }
         }
         // Run all the functions
         return getMemberships()
         .then(sortMemberships)
-        .then(getSessions)
+        // .then(getSessions)
         .then(generatePDF);
     }
 });

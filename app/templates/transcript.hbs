@@ -1,10 +1,43 @@
-<div class="container">
-    <div class="row reset-padding">
+<div class="container main-container">
+    <div class="row">
         <button id="download-button" class="btn button-cyan" onclick={{action "getPDF"}}>
             Download Transcript
         </button>
     </div>
-    <div class="row reset-padding">
-        <iframe class="col-xs-12" id="transcipt-view" src={{model.url}}></iframe>
+    <h3>{{model.title}}</h3>
+    {{#if model.hasLeaderships}}
+    <div class="row" id="leaderships">
+        <h4>Leadership positions</h4>
+        <div class="position-title">
+            <span class="session">Session</span>
+            <span class="activity">Activity</span>
+            <span class="participation">Participation</span>
+        </div>
+        {{#each model.leaderships as |leadership|}}
+        <div class="position">
+            <span class="session">{{leadership.SessionDescription}}</span>
+            <span class="activity">{{leadership.ActivityDescription}}</span>
+            <span class="participation">{{leadership.ParticipationDescription}}</span>
+        </div>
+        {{/each}}
     </div>
+    {{/if}}
+    {{#if model.hasMemberships}}
+    <div class="row" id="memberships">
+        <h4>Memberships</h4>
+        <div class="position-title">
+            <span class="session">Session</span>
+            <span class="activity">Activity</span>
+        </div>
+        {{#each model.memberships as |membership|}}
+        <div class="position">
+            <span class="session">{{membership.SessionDescription}}</span>
+            <span class="activity">{{membership.ActivityDescription}}</span>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+    <!-- <div class="row reset-padding">
+        <iframe class="col-xs-12" id="transcipt-view" src={{model.url}}></iframe>
+    </div> -->
 </div>
