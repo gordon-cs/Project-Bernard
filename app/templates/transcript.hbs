@@ -5,6 +5,26 @@
         </button>
     </div>
     <h3>{{model.title}}</h3>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Session</th>
+                    <th>Activity</th>
+                    <th>Participation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each model.leaderships as |leadership|}}
+                <tr>
+                    <td>{{leadership.SessionDescription}}</td>
+                    <td>{{leadership.ActivityDescription}}</td>
+                    <td>{{leadership.ParticipationDescription}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
     {{#if model.hasLeaderships}}
     <div class="row" id="leaderships">
         <h4>Leadership positions</h4>
