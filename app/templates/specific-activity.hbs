@@ -145,7 +145,9 @@
                                             <button {{action "removePerson" mem}} class="btn button-red table-button">Remove</button>
                                         </td>
                                         <td class="group-admin-checkbox">
-                                        <input type="checkbox" name="groupAdmin" checked={{mem.GroupAdmin}} {{action "toggleAdmin" mem on="change"}}>
+                                            {{#if (not-eq mem.ParticipationDescription "Guest")}}
+                                            <input type="checkbox" name="groupAdmin" checked={{mem.GroupAdmin}} {{action "toggleAdmin" mem on="change"}}>
+                                            {{/if}}
                                         </td>
                                     {{else if mem.isLoggedInUser}}
                                         <td><button {{action "removePerson" mem}} class="btn button-red table-button">Leave</button></td>
