@@ -59,16 +59,17 @@ export default Ember.Controller.extend({
 
                     console.log("uploading image");
 
-                    let dataUrl = $("#image-to-crop").cropper('getCroppedCanvas', {
-                        width: 320,
-                        height: 320
-                    }).toDataURL('image/jpeg');
-                    let blob = dataURItoBlob(dataUrl);
-                    let blobName = "canvasImage.jpeg";
-                    console.log(blob);
+                    let imageValidation = validateImage(image);
 
-                    let imageValidation = validateImage(blob,blobName); // See helper method on the bottom
+                     // See helper method on the bottom
                     if (imageValidation.isValid) {
+                        let dataUrl = $("#image-to-crop").cropper('getCroppedCanvas', {
+                            width: 320,
+                            height: 320
+                        }).toDataURL('image/jpeg');
+                        let blob = dataURItoBlob(dataUrl);
+                        let blobName = "canvasImage.jpeg";
+                        console.log(blob);
                         let imageData = new FormData();
 
                         imageData.append("canvasImage", blob, "canvasImage.jpeg");
@@ -151,19 +152,36 @@ export default Ember.Controller.extend({
             this.transitionToRoute("/specific-activity/" + this.model.sessionCode +
                   "/" + this.model.activity.ActivityCode);
         }
+        // validate() {
+        //   let image = Ember.$("#file")[0].files[0];
+        //   if (image != null) {
+        //
+        //       console.log("uploading image");
+        //
+        //       let imageValidation = validateImage(image);
+        //
+        //        // See helper method on the bottom
+        //       if (!imageValidation.isValid) {
+        //           context.set("errorMessage", imageValidation.validationMessage);
+        //           return new Ember.RSVP.Promise(function(resolve, reject) {
+        //               reject();
+        //           });
+        //       }
+        //     }
+        //   }
     }
 });
 
 
 /* HELPER METHODS */
 // Validate the selected image
-function validateImage(file, fileName) {
+function validateImage(file) {
     let validFileExtensions = ['png','jpg','jpeg','bmp','gif'];
     let result = {
         isValid : true,
         validationMessage : ''
     };
-    let fileExtentsion = fileName.split('.').pop() || '';
+    let fileExtentsion = file.name.split('.').pop() || '';
     if (file == undefined) {
         result.isValid = false;
         result.validationMessage = "No image file was selected";
@@ -175,10 +193,11 @@ function validateImage(file, fileName) {
         result.validationMessage = 'Unacceptable image file: Use only .png, .jpg, .jpeg, .bmp, or .gif images.';
     }
     // File is greater than 100KB
-    if(file.size > 100000) {
-        result.isValid = false;
-        result.validationMessage = 'File too large, must be < 100KB.';
-    }
+    // if(file.size > 100000) {
+    //     result.isValid = false;
+    //     result.validationMessage = 'File too large, must be < 100KB.';
+    // }
+    console.log(result);
 
     return result;
 }
