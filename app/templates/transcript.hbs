@@ -5,7 +5,39 @@
         </button>
     </div>
     <h3><strong>{{model.title}}</strong></h3>
-    {{#if model.hasLeaderships}}
+
+    <div class="table-responsive">
+
+        <table class="table">
+            {{#each model.membershipsDictionary as |session|}}
+            <thead class="session-description"><tr><th><h4><strong>{{session.SessionDescription}}</strong></h4></th><th></th></tr></thead>
+            <thead>
+                <tr>
+                    <!-- <th>Session</th> -->
+                    <th>Activity</th>
+                    <th>Participation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each session.Activities as |membership|}}
+                <tr>
+                    <!-- <td>{{membership.SessionDescription}}</td> -->
+                    <td>{{membership.ActivityDescription}}</td>
+                    <td>{{membership.ParticipationDescription}}</td>
+                </tr>
+                {{/each}}
+                <tr class="end">
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+    </div>
+
+    <!-- {{#if model.hasLeaderships}}
     <div class="table-responsive">
         <h4><strong>Leadership positions</strong></h4>
         <table class="table">
@@ -48,10 +80,10 @@
             </tbody>
         </table>
     </div>
-    {{/if}}
-    {{#if model.noActivity}}
+    {{/if}} -->
+    <!-- {{#if model.noActivity}}
     <h4>There is no activity to report!</h4>
-    {{/if}}
+    {{/if}} -->
     <!-- <div class="row reset-padding">
         <iframe class="col-xs-12" id="transcipt-view" src={{model.url}}></iframe>
     </div> -->

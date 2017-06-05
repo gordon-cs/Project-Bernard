@@ -13,7 +13,13 @@
 .table-responsive {
     font-size: 1.6em;
 }
-#transcipt-view {
+.session-description {
+    background-color: #ddd;
+}
+.end {
+    height: 2.5em;
+}
+/*#transcipt-view {
   display: none;
 }
 .position, .position-title {
@@ -46,7 +52,7 @@
 
 .position:nth-child(even) {
     background-color: #ddd;
-}
+}*/
 
 /*.position:nth-child(odd) {
     background-color: white;
@@ -60,14 +66,13 @@
     background-color: #cdcdcd;
 }
 h4 {
-    padding-top: 0.5em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    font-style: normal;
+    margin: 0.2em !important;
 }
 h3 {
     text-align: center;
     padding-top: 0.5em;
-    margin-bottom: 0 !important;
+    margin-bottom: 1em !important;
 }
 /*
 .main-container {

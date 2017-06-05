@@ -11,14 +11,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         return controller.createPDF()
         .then(function(result) {
-            let url = result.doc.output("dataurlstring");
+            // let url = result.doc.output("dataurlstring");
             return {
-                "doc": result.doc,
-                "url": url,
+                // "doc": result.doc,
+                // "url": url,
                 "memberships": result.memberships,
-                "leaderships": result.leaderships,
-                "hasLeaderships": result.hasLeaderships,
-                "hasMemberships": result.hasMemberships,
+                "membershipsDictionary": result.membershipsDictionary,
+                // "leaderships": result.leaderships,
+                // "hasLeaderships": result.hasLeaderships,
+                // "hasMemberships": result.hasMemberships,
                 "title": result.title,
                 "noActivity": result.noActivity
             };
