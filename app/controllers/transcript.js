@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     actions: {
         getPDF() {
-            // this.get("model.doc").save("Co-Curricular Transcipt.pdf");
+            // this.get("model.doc").save("Experience Transcipt.pdf");
             // const WIDTH = 216;
             // const HEIGHT = 279;
             // var doc = new jsPDF("p", "mm", [WIDTH, HEIGHT]);
@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
             // var toPrint = document.getElementById('print');
             // var popupWin = window.open('', '_blank');
             // popupWin.document.open();
-            // popupWin.document.write('<html><title>Unofficial Co-Curricular Transcript</title><link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7763712/7875172/css/fonts.css" /><link rel="stylesheet" href="assets/transcript-print.css"></head><body onload="window.print()">')
+            // popupWin.document.write('<html><title>Unofficial Experience Transcript</title><link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7763712/7875172/css/fonts.css" /><link rel="stylesheet" href="assets/transcript-print.css"></head><body onload="window.print()">')
             // popupWin.document.write(toPrint.innerHTML);
             // popupWin.document.write('</html>');
             // popupWin.document.close();
@@ -159,7 +159,7 @@ export default Ember.Controller.extend({
             // const TITLE_FONT = 24;
             // const TITLE_WEIGHT = "bold";
             // const TITLE_LINE_WIDTH = 0.3;
-            const TITLE_TEXT = "Co-Curricular Transcript - " + context.get("session.data.authenticated.token_data.name");
+            const TITLE_TEXT = "Experience Transcript - " + context.get("session.data.authenticated.token_data.name");
             // // Title Variables
             // const HEADER_FONT = 16;
             // const HEADER_WEIGHT = "bold";

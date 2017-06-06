@@ -108,4 +108,13 @@ h3 {
     #download-div, .header {
         display: none;
     }
+    body {
+        width: 1000px;
+    }
+    .table>tbody>tr>td, .session-description>tr>th {
+        border: none !important;
+    }
+    /*.table-responsive {
+        font-size: 10pt !important;
+    }*/
 }
