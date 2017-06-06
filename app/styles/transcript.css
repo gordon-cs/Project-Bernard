@@ -7,12 +7,79 @@
     color: white;
     text-transform: uppercase;
 }
-#transcipt-view {
-    display: none;
-}
 .reset-padding {
     padding: 0 !important;
 }
+.table-responsive {
+    font-size: 1.6em;
+}
+.session-description {
+    background-color: #ddd;
+}
+.end {
+    height: 2.5em;
+}
+/*#transcipt-view {
+  display: none;
+}
+.position, .position-title {
+    display: flex;
+    flex-direction: row;
+    border-bottom: #cdcdcd 1px solid;
+}
+.position span, .position-title span {
+    font-size: 1.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+.session {
+    width: 30%;
+}
+
+.participation {
+    width: 20%;
+}
+
+#leaderships .activity {
+    width: 50%;
+}
+
+#memberships .activity {
+    width: 70%;
+}
+
+.position:nth-child(even) {
+    background-color: #ddd;
+}*/
+
+/*.position:nth-child(odd) {
+    background-color: white;
+}*/
+
+.position-title span{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.position-title {
+    background-color: #cdcdcd;
+}
+h4 {
+    font-style: normal;
+    margin: 0.2em !important;
+}
+h3 {
+    text-align: center;
+    padding-top: 0.5em;
+    margin-bottom: 1em !important;
+}
+/*
+.main-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-bottom: 5em !important;
+}*/
 
 /* -----------------------------
     Responsive Changes
@@ -30,4 +97,24 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .main-container {
+        padding-left: 5em !important;
+        padding-right: 5em !important;
+        padding-bottom: 5em !important;
+    }
+}
+
+@media print {
+    #download-div, .header {
+        display: none;
+    }
+    body {
+        width: 1000px;
+    }
+    .table>tbody>tr>td, .session-description>tr>th {
+        border: none !important;
+    }
+    /*.table-responsive {
+        font-size: 10pt !important;
+    }*/
 }
