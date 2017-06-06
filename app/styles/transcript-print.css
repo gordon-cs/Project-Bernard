@@ -1,0 +1,11 @@
+h4, h3 {
+    margin: 0.5em;
+    margin-top: 2em;
+    font-family: 'Open Sans',verdana,arial,sans-serif;
+}
+table {
+    font-family: 'Open Sans',verdana,arial,sans-serif;
+/*}
+td {
+    border-top: solid 1px black;
+}*/

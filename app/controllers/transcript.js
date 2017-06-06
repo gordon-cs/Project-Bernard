@@ -13,24 +13,32 @@ export default Ember.Controller.extend({
     actions: {
         getPDF() {
             // this.get("model.doc").save("Co-Curricular Transcipt.pdf");
-            const WIDTH = 216;
-            const HEIGHT = 279;
-            var doc = new jsPDF("p", "mm", [WIDTH, HEIGHT]);
-            var elementHandler = {
-              '#download-div': function (element, renderer) {
-                return true;
-              }
-            };
-            let source = $(".main-container")[0];
-            doc.fromHTML(
-                source,
-                24.5,
-                24.5,
-                {
-                    'elementHandlers': elementHandler
-                }
-            );
-            doc.output("dataurlnewwindow");
+            // const WIDTH = 216;
+            // const HEIGHT = 279;
+            // var doc = new jsPDF("p", "mm", [WIDTH, HEIGHT]);
+            // var elementHandler = {
+            //   '#download-div': function (element, renderer) {
+            //     return true;
+            //   }
+            // };
+            // let source = $(".main-container")[0];
+            // doc.fromHTML(
+            //     source,
+            //     24.5,
+            //     24.5,
+            //     {
+            //         'elementHandlers': elementHandler
+            //     }
+            // );
+            // doc.output("dataurlnewwindow");
+
+            var toPrint = document.getElementById('print');
+            var popupWin = window.open('', '_blank');
+            popupWin.document.open();
+            popupWin.document.write('<html><title>::Preview::</title><link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7763712/7875172/css/fonts.css" /><link rel="stylesheet" href="assets/transcript-print.css"></head><body onload="window.print()">')
+            popupWin.document.write(toPrint.innerHTML);
+            popupWin.document.write('</html>');
+            popupWin.document.close();
         }
     },
     // Create the PDF document that is shown and can be downloaded

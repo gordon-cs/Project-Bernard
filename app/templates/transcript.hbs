@@ -4,41 +4,40 @@
             Download Transcript
         </button>
     </div>
-    <h3><strong>{{model.title}}</strong></h3>
+    <div id="print">
+        <h3><strong>{{model.title}}</strong></h3>
 
-    <div class="table-responsive">
+        <div class="table-responsive">
 
-        <table class="table">
-            {{#each model.membershipsDictionary as |session|}}
-            <thead class="session-description"><tr><th><h4><strong>{{session.SessionDescription}}</strong></h4></th><th></th><th></th></tr></thead>
-            <thead>
-                <tr>
-                    <!-- <th>Session</th> -->
-                    <th>Activity</th>
-                    <th>Participation</th>
-                    <th>Total Semesters</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each session.Activities as |membership|}}
-                <tr>
-                    <!-- <td>{{membership.SessionDescription}}</td> -->
-                    <td>{{membership.ActivityDescription}}</td>
-                    <td>{{membership.ParticipationDescription}}</td>
-                    <td>{{membership.SemesterAcount}}</td>
-                </tr>
+            <table class="table">
+                <thead></thead>
+                {{#each model.membershipsDictionary as |session|}}
+                <thead class="session-description"><tr><th colspan="3"><h4><strong>{{session.SessionDescription}}</strong></h4></th></tr></thead>
+                <thead>
+                    <tr>
+                        <!-- <th>Session</th> -->
+                        <th>Activity</th>
+                        <th>Participation</th>
+                        <th>Total Semesters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each session.Activities as |membership|}}
+                    <tr>
+                        <!-- <td>{{membership.SessionDescription}}</td> -->
+                        <td>{{membership.ActivityDescription}}</td>
+                        <td>{{membership.ParticipationDescription}}</td>
+                        <td>{{membership.SemesterAcount}}</td>
+                    </tr>
+                    {{/each}}
+                    <tr class="end">
+                        <td colspan="3">
+                        </td>
+                    </tr>
+                </tbody>
                 {{/each}}
-                <tr class="end">
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </tbody>
-            {{/each}}
-        </table>
+            </table>
+        </div>
     </div>
 
     <!-- {{#if model.hasLeaderships}}
