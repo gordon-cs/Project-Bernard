@@ -72,9 +72,30 @@ export default Ember.Controller.extend({
             // Sort in chronological order
             memberships = sortJsonArray(result, "SessionCode").reverse();
 
+            var activityCount = {};
+
+            // Count number of times for each activity
+            for (var i = 0, mem; i < memberships.length; i++) {
+                mem = memberships[i];
+                if (activityCount[mem.ActivityCode] == undefined) {
+                    activityCount[mem.ActivityCode] = 1;
+                }
+                else {
+                    activityCount[mem.ActivityCode] ++;
+                }
+            }
+
+            // Group memberships in sessions
             for (var i = 0, mem; i < memberships.length; i++) {
                 mem = memberships[i];
                 let activitiesResult = $.grep(membershipsDictionary, function(e){ return e.SessionCode == mem.SessionCode; });
+                if (activityCount[mem.ActivityCode] != undefined) {
+                    mem.SemesterAcount = activityCount[mem.ActivityCode];
+                    activityCount[mem.ActivityCode] = undefined;
+                }
+                else {
+                    mem.SemesterAcount = "-";
+                }
                 if (activitiesResult.length == 0) {
                     // not found
                     membershipsDictionary.push({

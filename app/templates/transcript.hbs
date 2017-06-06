@@ -10,12 +10,13 @@
 
         <table class="table">
             {{#each model.membershipsDictionary as |session|}}
-            <thead class="session-description"><tr><th><h4><strong>{{session.SessionDescription}}</strong></h4></th><th></th></tr></thead>
+            <thead class="session-description"><tr><th><h4><strong>{{session.SessionDescription}}</strong></h4></th><th></th><th></th></tr></thead>
             <thead>
                 <tr>
                     <!-- <th>Session</th> -->
                     <th>Activity</th>
                     <th>Participation</th>
+                    <th>Total Semesters</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,9 +25,12 @@
                     <!-- <td>{{membership.SessionDescription}}</td> -->
                     <td>{{membership.ActivityDescription}}</td>
                     <td>{{membership.ParticipationDescription}}</td>
+                    <td>{{membership.SemesterAcount}}</td>
                 </tr>
                 {{/each}}
                 <tr class="end">
+                    <td>
+                    </td>
                     <td>
                     </td>
                     <td>
