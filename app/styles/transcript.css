@@ -103,3 +103,9 @@ h3 {
         padding-bottom: 5em !important;
     }
 }
+
+@media print {
+    #download-div, .header {
+        display: none;
+    }
+}

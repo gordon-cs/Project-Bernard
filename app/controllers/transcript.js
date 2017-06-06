@@ -32,13 +32,14 @@ export default Ember.Controller.extend({
             // );
             // doc.output("dataurlnewwindow");
 
-            var toPrint = document.getElementById('print');
-            var popupWin = window.open('', '_blank');
-            popupWin.document.open();
-            popupWin.document.write('<html><title>Unofficial Co-Curricular Transcript</title><link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7763712/7875172/css/fonts.css" /><link rel="stylesheet" href="assets/transcript-print.css"></head><body onload="window.print()">')
-            popupWin.document.write(toPrint.innerHTML);
-            popupWin.document.write('</html>');
-            popupWin.document.close();
+            // var toPrint = document.getElementById('print');
+            // var popupWin = window.open('', '_blank');
+            // popupWin.document.open();
+            // popupWin.document.write('<html><title>Unofficial Co-Curricular Transcript</title><link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7763712/7875172/css/fonts.css" /><link rel="stylesheet" href="assets/transcript-print.css"></head><body onload="window.print()">')
+            // popupWin.document.write(toPrint.innerHTML);
+            // popupWin.document.write('</html>');
+            // popupWin.document.close();
+            window.print();
         }
     },
     // Create the PDF document that is shown and can be downloaded
