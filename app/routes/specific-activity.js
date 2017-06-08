@@ -30,9 +30,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             "/group-admin", context);
         let personsMembershipsPromise = getAsync("/memberships/student/" + id_number, context);
         let followingCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() +
-            "/followers", context);
+            "/followers/"+ param.SessionCode.trim(), context);
         let memberCountPromise = getAsync("/memberships/activity/" + param.ActivityCode.trim() +
-            "/members", context);
+            "/members/"+ param.SessionCode.trim(), context);
         // Requests to be called if needed
         let activityRequestsPromise = function() {return getAsync("/requests/activity/" +
             param.ActivityCode.trim(), context);};
