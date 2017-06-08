@@ -83,9 +83,9 @@
             {{#if followLoad}}
                 <button type="button" class="btn button-navy">Wait</button>
             {{else if model.following}}
-                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unsubscribe</button>
             {{else}}
-                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Subscribe</button>
             {{/if}}
             {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
                 <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Join</button>
