@@ -122,6 +122,13 @@ ul.dropdown-menu {
 .user-info-buttons {
 		display: inline;
 		margin-left: 15px;
+		
+}
+#dropdownMenu1 {
+	cursor: pointer;
+}
+#dropdownMenu1:hover {
+	text-shadow: 2px 1px 1px #aaaaaa;
 }
 .user-info-mobile {
 		color: white;
