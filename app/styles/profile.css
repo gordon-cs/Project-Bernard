@@ -36,7 +36,7 @@ section {
 /****************************
  Media Queries 
 ****************************/
-/*
+
 @media only screen and (max-width: 1199px) { 
     .entry-columns {
         font-size: 1.3em;
@@ -65,4 +65,4 @@ section {
     .header-columns {
         text-align: center;
     }
-}*/
+}

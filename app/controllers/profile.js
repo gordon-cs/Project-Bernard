@@ -33,6 +33,14 @@ export default Ember.Controller.extend({
         toggleAdminTable() {
             $("#admin-table").slideToggle();
             $("#admin-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
+        },
+        toggleRequestSent(item){
+            let elements = $(item.target).nextAll();
+            for(var i=0; i < 3; i++){
+                if($(window).innerWidth() < 768){
+                    $(elements[i]).slideToggle();
+                }
+            }
         }
     }
 });

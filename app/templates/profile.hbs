@@ -57,7 +57,7 @@
                     </div>
                     {{#each model.requestsSent as |req|}}
                         <div class="row entry-columns">
-                            <div class="col-md-5 col-sm-8"> {{req.ActivityDescription}} </div>
+                            <div class="col-md-5 col-sm-8" onclick={{action "toggleRequestSent"}}> {{req.ActivityDescription}} </div>
                             <div class = "col-md-2 col-sm-hide"> {{req.RequestApproved}} </div>
                             <div class = "col-md-2 col-sm-hide"> {{req.DiffDays}} </div>
                             <div class = "col-md-3 col-sm-4 col-xs-hide">
