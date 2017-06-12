@@ -29,6 +29,7 @@
                                 </span>
                             {{/if}}
                             {{/link-to}}</li>
+                          <li>{{#link-to "transcript"}}Transcript{{/link-to}}</li>
                           {{#if isSomeAdmin}}
                           <li>{{#link-to "activities-status"}} Activities' Status{{/link-to}} </li>
                           {{/if}}
@@ -71,13 +72,13 @@
                 </li>
                 <li>
                     {{#link-to "all-activities" class="button uppercase"}}
-                        All Activities
+                        Activities
                     {{/link-to}}
                 </li>
                 <li>
-                    {{#link-to "transcript" class="button uppercase"}}
-                        Transcript
-                    {{/link-to}}
+                  {{#link-to "all-events" class="button uppercase"}}
+                        Events
+                  {{/link-to}}
                 </li>
                 <li>
                   {{#link-to "about" class="button uppercase"}}
