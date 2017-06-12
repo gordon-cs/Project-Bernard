@@ -1,19 +1,68 @@
-section{
+/*******************
+Request Tables
+*******************/
+
+section {
     font-size: 150%;
 }
-.header-columns{
+
+.header-columns {
     text-transform: uppercase;
     font-size: 1.6em;
     font-weight: bold;
     border-bottom: 2px solid rgb(221,221,221);
     padding: 8px;
 }
-.entry-columns{
+
+.entry-columns {
     border-top: 1px solid rgb(221,221,221);
     padding: 8px;
     font-size: 1.6em;
 }
-.activity-buttons{
+
+.activity-buttons {
     text-transform: uppercase;
     font-weight: bold;
 }
+
+.hidden-table {
+    display: none;
+}
+
+.toggleTableBtn {
+    cursor: pointer;
+}
+
+/****************************
+ Media Queries 
+****************************/
+/*
+@media only screen and (max-width: 1199px) { 
+    .entry-columns {
+        font-size: 1.3em;
+    }
+    .activity-buttons {
+        font-size: 0.7em;
+    }
+    .header-columns {
+        font-size: 1.3em;
+    }
+ }
+
+@media only screen and (max-width: 991px) {
+    .col-sm-hide {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .col-xs-hide {
+        display: none;
+    }
+    .entry-columns {
+        text-align: center;
+    }
+    .header-columns {
+        text-align: center;
+    }
+}*/

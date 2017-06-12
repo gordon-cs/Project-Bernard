@@ -21,6 +21,18 @@ export default Ember.Controller.extend({
             .then(function() {
                  window.location.reload(true);
              });
+        },
+        toggleRecievedTable() {
+            $("#membership-requests-recieved-table").slideToggle();
+            $("#recieved-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
+        },
+        toggleSentTable() {
+            $("#membership-requests-sent-table").slideToggle();
+            $("#sent-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
+        },
+        toggleAdminTable() {
+            $("#admin-table").slideToggle();
+            $("#admin-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         }
     }
 });
