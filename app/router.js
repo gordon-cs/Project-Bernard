@@ -18,6 +18,7 @@ Router.map(function() {
   this.route('about');
   this.route('help');
   this.route('activities-status');
+  this.route('all-events');
 });
 
 export default Router;
