@@ -42,7 +42,7 @@ header {
 	background: #cccccb;
 }
 .app-title-container {
-    text-align: center;
+    text-align: left;
 		background: #cccccb;
 		position: relative;
 }
@@ -63,13 +63,14 @@ header {
 	font-style: normal;
 	letter-spacing: 1px;
 	padding: 0;
-  text-align: center;
+  text-align: left;
 	text-transform: uppercase;
 }
 #primary-menu li {
 	list-style: none;
 	display: block;
 	padding: 15px 0px;
+	text-align: center;
 	border-bottom: 1px solid #3d3d3a;
 }
 #primary-menu a {

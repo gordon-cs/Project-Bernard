@@ -1,4 +1,8 @@
-h4 div:row-labels {
+.event-box {
+  background-color: #FFFFFF
+}
+
+.event-labels {
   background-color: #00477F;
   text-transform: UPPERCASE;
   color: white;
@@ -6,31 +10,13 @@ h4 div:row-labels {
 }
 .row-events div:nth-child(even){
   background: #ffffff;
-  padding: 12px 18px;
-  color: BLACK;
-  margin-bottom: 1.25em;
 }
 .row-events div:nth-child(odd){
   background: #DDD;
-	padding: 12px 18px;
-	color: BLACK;
-	margin-bottom: 1.25em;
 }
 
-@media (min-width: 768px) {
-    .row-events div:nth-child(4n), .row-events div:nth-child(4n-1) {
-        background: #ffffff;
-    }
-    .row-events div:nth-child(4n-2), .row-events div:nth-child(4n-3) {
-        background: #DDD;
-    }
-}
-
-@media (min-width: 992px) {
-    .row-events div:nth-child(6n), .row-events div:nth-child(6n-1), .row-events div:nth-child(6n-2) {
-        background: #ffffff;
-    }
-    .row-events div:nth-child(6n-3), .row-events div:nth-child(6n-4), .row-events div:nth-child(6n-5) {
-        background: #DDD;
-    }
+.row-events {
+  padding: 12px 18px;
+  color: BLACK;
+  margin-bottom: 0;
 }
