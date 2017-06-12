@@ -6,7 +6,7 @@ section {
     font-size: 150%;
 }
 
-.header-columns {
+.header-rows {
     text-transform: uppercase;
     font-size: 1.6em;
     font-weight: bold;
@@ -14,7 +14,7 @@ section {
     padding: 8px;
 }
 
-.entry-columns {
+.entry-rows {
     border-top: 1px solid rgb(221,221,221);
     padding: 8px;
     font-size: 1.6em;
@@ -38,13 +38,13 @@ section {
 ****************************/
 
 @media only screen and (max-width: 1199px) { 
-    .entry-columns {
+    .entry-rows {
         font-size: 1.3em;
     }
     .activity-buttons {
         font-size: 0.7em;
     }
-    .header-columns {
+    .header-rows {
         font-size: 1.3em;
     }
  }
@@ -59,10 +59,10 @@ section {
     .col-xs-hide {
         display: none;
     }
-    .entry-columns {
+    .entry-rows {
         text-align: center;
     }
-    .header-columns {
+    .header-rows {
         text-align: center;
     }
 }

@@ -17,18 +17,18 @@
                     </div>
                 </div>
                 <div id="membership-requests-recieved-table" class="hidden-table">
-                    <div class="row header-columns">
-                        <div class = "col-md-5">Name</div>
-                        <div class = "col-md-2">Activity</div>
-                        <div class = "col-md-2">Time</div>
-                        <div class = "col-md-3">Options</div>
+                    <div class="row header-rows">
+                        <div class = "col-md-4 col-sm-5">Name</div>
+                        <div class = "col-md-4 col-sm-5 col-xs-hide">Activity</div>
+                        <div class = "col-md-2 col-sm-hide">Time</div>
+                        <div class = "col-sm-2 col-xs-hide">Options</div>
                     </div>
                     {{#each requestsRecieved as |req|}}
-                        <div class="row entry-columns">
-                            <div class="col-md-5"> {{req.FirstName}} {{req.LastName}}</div>
-                            <div class = "col-md-2"> {{req.ActivityDescription}} </div>
-                            <div class = "col-md-2"> {{req.DiffDays}} </div>
-                            <div class = "col-md-3">
+                        <div class="row entry-rows">
+                            <div class="col-md-4 col-sm-5" onclick={{action "toggleRequestSent"}}> {{req.FirstName}} {{req.LastName}}</div>
+                            <div class ="col-md-4 col-sm-5 col-xs-hide"> {{req.ActivityDescription}} </div>
+                            <div class ="col-md-2 col-sm-hide"> {{req.DiffDays}} </div>
+                            <div class ="col-sm-2 col-xs-hide">
                                 {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
                                     <button class="btn button-navy  activity-buttons">See Activity</button>
                                 {{/link-to}}
@@ -49,14 +49,14 @@
             </div>
             <div id="membership-requests-sent-table" class="hidden-table">
                 {{#if model.requestsSent}}
-                    <div class="row header-columns">
+                    <div class="row header-rows">
                         <div class = "col-md-5 col-sm-8">Activity</div>
                         <div class = "col-md-2 col-sm-hide">Decision</div>
                         <div class = "col-md-2 col-sm-hide">Time</div>
                         <div class = "col-md-3 col-sm-4 col-xs-hide">Options</div>
                     </div>
                     {{#each model.requestsSent as |req|}}
-                        <div class="row entry-columns">
+                        <div class="row entry-rows">
                             <div class="col-md-5 col-sm-8" onclick={{action "toggleRequestSent"}}> {{req.ActivityDescription}} </div>
                             <div class = "col-md-2 col-sm-hide"> {{req.RequestApproved}} </div>
                             <div class = "col-md-2 col-sm-hide"> {{req.DiffDays}} </div>
@@ -84,16 +84,16 @@
                     </div>
                 </div>
                 <div id="admin-table"  class="hidden-table">
-                    <div class="row header-columns">
-                        <div class = "col-md-4">Name</div>
-                        <div class = "col-md-4">Super Admin</div>
-                        <div class = "col-md-4">Options</div>
+                    <div class="row header-rows">
+                        <div class = "col-sm-5 col-xs-6">Name</div>
+                        <div class = "col-sm-3 col-xs-hide">Super Admin</div>
+                        <div class = "col-sm-4 col-xs-6">Options</div>
                     </div>
                     {{#each model.admins as |admin|}}
-                        <div class="row entry-columns">
-                            <div class="col-md-6"> {{admin.Name}}</div>
-                            <div class = "col-md-2"> {{if admin.superAdmin 'Yes' 'No'}} </div>
-                            <div class = "col-md-4">
+                        <div class="row entry-rows">
+                            <div class="col-sm-5 col-xs-6"> {{admin.Name}}</div>
+                            <div class = "col-sm-3 col-xs-hide"> {{if admin.superAdmin 'Yes' 'No'}} </div>
+                            <div class = "col-sm-4 col-xs-6">
                                 <button {{action "removeAdmin" admin.ID}} class="btn button-red table-button">Remove</button>
                             </div>
                         </div>
