@@ -3,10 +3,8 @@
 }
 
 .event-labels {
-  background-color: #00477F;
   text-transform: UPPERCASE;
   color: white;
-
 }
 .row-events div:nth-child(even){
   background: #ffffff;
@@ -19,4 +17,5 @@
   padding: 12px 18px;
   color: BLACK;
   margin-bottom: 0;
+  margin-top: 0;
 }
