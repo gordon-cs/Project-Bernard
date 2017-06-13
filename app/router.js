@@ -19,6 +19,7 @@ Router.map(function() {
   this.route('help');
   this.route('activities-status');
   this.route('all-events');
+  this.route('chapel-credits');
 });
 
 export default Router;

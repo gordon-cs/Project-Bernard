@@ -1,0 +1,21 @@
+.event-box {
+  background-color: #FFFFFF
+}
+
+.event-labels {
+  text-transform: UPPERCASE;
+  color: white;
+}
+.row-events div:nth-child(even){
+  background: #ffffff;
+}
+.row-events div:nth-child(odd){
+  background: #DDD;
+}
+
+.row-events {
+  padding: 12px 18px;
+  color: BLACK;
+  margin-bottom: 0;
+  margin-top: 0;
+}
