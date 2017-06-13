@@ -105,13 +105,14 @@ ul.dropdown-menu {
 	letter-spacing: 1px;
 	margin-top: .65em;
 }
+
 .user-info {
     text-align: right;
     color: #31342b;
 		display: none;
 		position: absolute !important;
 		right: 0;
-		margin-top: 19px;
+		padding-bottom: 10px;
 }
 .user-info h6 {
 	color: #31342b;
@@ -119,6 +120,8 @@ ul.dropdown-menu {
 	font-size: 1.2em;
 	display: inline;
 	text-transform: uppercase;
+	margin-top: 19px;
+	margin-bottom: 19px;
 }
 .user-info-buttons {
 		display: inline;
@@ -265,6 +268,7 @@ ul.dropdown-menu {
 @media only screen and (min-width: 992px) {
     .app-title-container {
         text-align: center;
+				padding: 22px;
 		}
     .app-title {
         display: inline;
@@ -296,7 +300,7 @@ ul.dropdown-menu {
 			margin-left: 200px;
 		}
 		.user-info {
-			margin-top: 17px;
+			margin-top: 5px;
 		}
 }
 @media only screen and (min-width: 1200px) {

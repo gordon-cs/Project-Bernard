@@ -1,6 +1,6 @@
 <div class="col-sm-12 header">
     <header class="container">
-        <div class="app-title-container row">
+        <div class="vertical-center graybox app-title-container">
             {{#link-to "index"}}
                 <img src="images/gordon-logo-mobile.png" id="logo-mobile" class="{{if session.isAuthenticated '' 'logo-mobile-center'}}"/>
             {{/link-to}}
@@ -11,8 +11,6 @@
                     </button>
                 </div>
             {{/if}}
-            <div class="col-sm-3"></div>
-            <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>
             <div class="user-info col-sm-6">
                 {{#if session.isAuthenticated}}
                     <div class="user-info-buttons dropdown">
@@ -29,7 +27,7 @@
                                 </span>
                             {{/if}}
                             {{/link-to}}</li>
-                          <li>{{#link-to "transcript"}}Transcript{{/link-to}}</li>
+                            <li>{{#link-to "transcript"}}Transcript{{/link-to}}</li>
                           {{#if isSomeAdmin}}
                           <li>{{#link-to "activities-status"}} Activities' Status{{/link-to}} </li>
                           {{/if}}
