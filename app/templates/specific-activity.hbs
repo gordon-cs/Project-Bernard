@@ -83,9 +83,9 @@
             {{#if followLoad}}
                 <button type="button" class="btn button-navy">Wait</button>
             {{else if model.following}}
-                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unsubscribe</button>
             {{else}}
-                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Subscribe</button>
             {{/if}}
             {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
                 <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Join</button>
@@ -145,7 +145,9 @@
                                             <button {{action "removePerson" mem}} class="btn button-red table-button">Remove</button>
                                         </td>
                                         <td class="group-admin-checkbox">
-                                        <input type="checkbox" name="groupAdmin" checked={{mem.GroupAdmin}} {{action "toggleAdmin" mem on="change"}}>
+                                            {{#if (not-eq mem.ParticipationDescription "Guest")}}
+                                            <input type="checkbox" name="groupAdmin" checked={{mem.GroupAdmin}} {{action "toggleAdmin" mem on="change"}}>
+                                            {{/if}}
                                         </td>
                                     {{else if mem.isLoggedInUser}}
                                         <td><button {{action "removePerson" mem}} class="btn button-red table-button">Leave</button></td>
