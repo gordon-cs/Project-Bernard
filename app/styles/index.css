@@ -1,45 +1,59 @@
 /* Styles for the Dashboard (My Involvements) Page */
-.dashboard .sidebar {
+.dashboard .involvements-dropdown {
   padding-left: 0;
   padding-right: 0;
 }
-.dashboard .sidebar .navbar-collapse {
+.dashboard .involvements-dropdown .collapse {
+  margin-top: 6em;
   padding: 0;
 }
-.sidebar nav {
+.involvements-dropdown nav {
   margin-bottom: 0;
 }
-.sidebar .navbar-header .glyphicon-chevron-down,
-.sidebar .navbar-brand {
+.involvements-dropdown .glyphicon-chevron-down,
+.involvements-dropdown .navbar-brand {
   color: #00aeef;
   font-size: 150%;
   font-weight: bold;
   letter-spacing: 1px;
 }
-.sidebar .navbar-header:hover .navbar-brand,
-.sidebar .navbar-header:hover .glyphicon-chevron-down{
+.involvements-dropdown .navbar-header:hover .navbar-brand,
+.involvements-dropdown .navbar-header:hover .glyphicon-chevron-down{
   color: #DE571F
 }
-.sidebar .navbar-header .caret {
+.involvements-dropdown .navbar-header .caret {
   font-size: 200%;
   cursor: pointer;
 }
-.sidebar-header {
+.involvements-dropdown-header {
   display: none;
 }
-.sidebar li {
+.involvements-dropdown-button {
+  position: relative;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+}
+.involvements-div {
+  cursor: pointer;
+}
+.involvements-dropdown li {
   border: 2px #cccccc;
   font-size: 1.75em !important;
   margin: auto;
   text-align: center;
   width: 100%;
 }
-.sidebar ul {
+.involvements-dropdown ul {
   list-style: none;
   margin-bottom: 0;
   padding: 0;
 }
-ul.experience-sidebar li.experience-category {
+ul.experience-involvements-dropdown li.experience-category {
   background-color: #00aeef;
   border-bottom: solid 1px #ebeaea;
   color: #fff;
@@ -47,25 +61,25 @@ ul.experience-sidebar li.experience-category {
   letter-spacing: .5px;
   padding: .75em;
 }
-ul.experience-sidebar li.no-activities-msg {
+ul.experience-involvements-dropdown li.no-activities-msg {
   background-color: #fff;
   line-height: 1.75em;
   padding: 1.5em;
 }
-.sidebar .dropdown button.dropdown-toggle,
-.sidebar .dropdown.open>.dropdown-toggle.btn-default:focus,
-.sidebar .dropdown.open>.dropdown-toggle.btn-default:hover,
-.sidebar .dropdown.open>.dropdown-toggle.btn-default {
+.involvements-dropdown .dropdown button.dropdown-toggle,
+.involvements-dropdown .dropdown.open>.dropdown-toggle.btn-default:focus,
+.involvements-dropdown .dropdown.open>.dropdown-toggle.btn-default:hover,
+.involvements-dropdown .dropdown.open>.dropdown-toggle.btn-default {
   background-color: #ebeaea;
   color: #000 !important;
   letter-spacing: .5px;
   padding: .65em;
   width:100%;
 }
-.sidebar .dropdown {
+.involvements-dropdown .dropdown {
    border-bottom: solid 1px #cccccb;
 }
-.sidebar .dropdown .dropdown-menu {
+.involvements-dropdown .dropdown .dropdown-menu {
   box-shadow: none;
   float: none;
   letter-spacing: 0;
@@ -75,7 +89,10 @@ ul.experience-sidebar li.no-activities-msg {
   text-align: center;
   width: 100%;
 }
-.sidebar .dropdown .dropdown-menu li a {
+#involvements-navbar {
+  display: none;
+}
+.involvements-dropdown .dropdown .dropdown-menu li a {
   font-size: .55em !important;
   padding: 1.25em;
   /*padding-left: 1.25em;*/
@@ -149,15 +166,15 @@ ul.experience-sidebar li.no-activities-msg {
   font-size: 1.5em !important;
 }
 @media (min-width: 768px) {
-  .row .sidebar {
+  /*.row .involvements-dropdown {
     display: block;
     padding: 0;
     position: absolute;;
     top: 0; bottom: 0; left: 0;
   }
-  .sidebar .navbar-header {
+  .involvements-dropdown .navbar-header {
     display: none;
-  }
+  }*/
 }
 @media only screen and (max-width: 768px) {
   .info-blocks.tab-content .tab-pane{
