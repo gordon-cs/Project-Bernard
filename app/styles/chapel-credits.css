@@ -1,20 +1,20 @@
 .chapel-box {
-  background-color: white;
+  background-color: #FFFFFF;
   margin-top: 30px;
 }
 
 .chapel-labels {
   text-transform: UPPERCASE;
-  color: white;
+  color: #FFFFFF;
 }
-.row-chapels div:nth-child(even){
+.row-chapel div:nth-child(even){
   background: #ffffff;
 }
-.row-chapels div:nth-child(odd){
+.row-chapel div:nth-child(odd){
   background: #DDD;
 }
 
-.row-chapels {
+.row-chapel {
   padding: 12px 18px;
   color: BLACK;
   margin-bottom: 0;
