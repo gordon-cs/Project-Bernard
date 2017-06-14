@@ -8,6 +8,6 @@ import getAsync from "gordon360/utils/get-async";
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(param) {
-        
+        return param.EmailAdress;
     }
 });
