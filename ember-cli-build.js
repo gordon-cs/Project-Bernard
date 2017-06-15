@@ -8,8 +8,7 @@ module.exports = function(defaults) {
             theme: 'bootstrap'
         },
         'mediumEditorOptions': {
-            theme: 'bootstrap',
-            excludeBaseStyles: true
+            theme: 'bootstrap'
         },
         tests: false
     });
