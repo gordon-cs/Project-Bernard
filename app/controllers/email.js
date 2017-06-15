@@ -7,11 +7,18 @@ import putAsync from "gordon360/utils/put-async";
  */
 export default Ember.Controller.extend({
     session: Ember.inject.service('session'),
+    mediumEditorOptions: {
+        "toolbar": {
+        "buttons": ['bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'unorderedlist', 'orderedlist'],
+        },
+        "checkLinkFormat": true,
+        "forcePlainText": true
+    },
     actions: {
         send() {
             let context = this;
             let emailSubject = $("#email-subject").val();
-            let emailContent = $("#email-content").val();
+            let emailContent = $("#email-content").html();
             let password = $("#password").val();
             let fromAddress = context.get("session.data.authenticated.token_data.name") + "@gordon.edu";
             let toAddress = context.get("model");

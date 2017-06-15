@@ -4,7 +4,8 @@
         <p>{{model}}</p>
         <form class="email-form">
             <input type="text" class="form-control" placeholder="Subject" id="email-subject"/>
-            <textarea class="form-control" id="email-content" />
+            {{ medium-content-editable value="" options=mediumEditorOptions class="form-control" id="email-content"}}
+            <!-- <textarea class="form-control" id="email-content" /> -->
             <div id="submit-div">
                 <input type="password" class="form-control" placeholder="Password" id="password" autocomplete="new-password"/>
                 <button type="submit" class="btn pull-right" id="submit-email" {{action "send"}}>Submit</button>
