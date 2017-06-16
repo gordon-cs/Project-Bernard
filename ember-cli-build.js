@@ -7,6 +7,9 @@ module.exports = function(defaults) {
         'ember-power-select': {
             theme: 'bootstrap'
         },
+        'mediumEditorOptions': {
+            theme: 'bootstrap'
+        },
         tests: false
     });
 

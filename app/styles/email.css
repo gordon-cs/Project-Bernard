@@ -1,0 +1,21 @@
+#email-div {
+    padding: 30px;
+}
+#email-div p {
+    word-wrap: break-word;
+}
+#email-content {
+    margin-top: 20px;
+    height: 300px !important;
+}
+#success-msg {
+    display: none;
+}
+#submit-div {
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+}
+.medium-editor-action b, .medium-editor-action i, .medium-editor-action u {
+    color: white !important;
+}
