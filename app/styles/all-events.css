@@ -24,6 +24,14 @@
 
 }
 
+@media screen and (max-width:750px) {
+  .event-p, .highlight-box, .event-labels  { 
+    font-size: 15px;
+  }
+  .cyanbox{
+    display: none;
+  }
+}
 
 .event-labels {
   text-transform: UPPERCASE;
