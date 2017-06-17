@@ -23,9 +23,8 @@
     padding-top: 0px !important;
 
 }
-
-@media screen and (max-width:750px) {
-  .event-p, .highlight-box, .event-labels  { 
+@media screen and (max-width: 767px) {
+  .event-list, .event-p, .highlight-box, .event-labels  {
     font-size: 15px;
   }
   .cyanbox{

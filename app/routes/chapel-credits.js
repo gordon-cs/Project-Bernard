@@ -10,9 +10,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     let id_number = this.get("session.data.authenticated.token_data.id");
 
-
-
-
     let loadChapel =  getAsync("/chapel_event/Student/" + id_number, context);
 
 
