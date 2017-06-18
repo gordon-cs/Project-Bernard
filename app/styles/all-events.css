@@ -23,29 +23,56 @@
     padding-top: 0px !important;
 
 }
-@media screen and (max-width: 767px) {
-  .event-list, .event-p, .highlight-box, .event-labels  {
-    font-size: 15px;
-  }
-  .cyanbox{
-    display: none;
-  }
-}
 
 .event-labels {
   text-transform: UPPERCASE;
   color: white;
 }
-.row-events div:nth-child(even){
-  background: #ffffff;
-}
-.row-events div:nth-child(odd){
-  background: #DDD;
+.entry-rows {
+    border-top: 1px solid rgb(221,221,221);
+    padding: 8px;
+    font-size: 1.6em;
 }
 
-.row-events {
-  padding: 12px 18px;
-  color: BLACK;
-  margin-bottom: 0;
-  margin-top: 0;
+@media screen and (max-width: 767px) {
+   .highlight-box, .event-labels, .event-row {
+    font-size: 15px;
+  }
+  .event-id{
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+    color: #00aeef;
+    background-color: white;
+    border-bottom: 1px solid #3d3d3a;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: darkGrey;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  .cyanbox{
+    display: none;
+  }
+  .display-col{
+    display: none;
+    margin: 0;
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-align: center;
+    background-color: lightGrey;
+    border-bottom: 1px solid white;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+  	color: #00aeef;
+    }
+  }
+
+
+@media screen and (min-width: 768px) {
+.display-col{
+  display: block !important;
+  }
 }

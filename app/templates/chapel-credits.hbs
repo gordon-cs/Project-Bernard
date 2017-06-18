@@ -2,12 +2,11 @@
   <div class="highlight highlight-box ">
     <button type="button" class="btn pull-right ">All CL&W</button>
     <p class="event-p">
-      You currently have <i><b>30</b></i> Christian Life and Worship Credits
+      You currently have <i><b>{{model.numEvents}}</b></i> Christian Life and Worship Credits
     </p>
     <div class="progress">
-      <div class= "progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-        60%
-      </div>
+      <div class= "progress-bar" role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;">
+       {{model.eventsPercent}}%</div>
     </div>
 
   </div>
@@ -19,27 +18,15 @@
       <div class="event-labels col-xs-2 col-sm-2 col-md-2">Date</div>
     </div>
   </h4>
-  <div class="row-events">
+  <div class=".entry-rows">
     <div class="row event-row">
-      <h4 class="col-md-6 col-sm-5" onclick= {{action "toggleRequestSent"}}>Chapel: Tom Haugen </h4>
-      <h4 class="col-md-2 col-sm-3 col-xs-hide">A.J. Chapel</h4>
-      <h4 class="col-md-2 col-sm-2 col-xs-hide">11:05 AM</h4>
-      <h4 class="col-md-2 col-sm-2 col-xs-hide">Feb. 02</h4>
+      {{#each model.chapelEvents as |event|}}
+      <h4 class="col-md-6 col-sm-5 event-id" onclick= {{action "toggleRequestSent"}}>{{event.CHEventID}}</h4>
+      <h4 class="display-col col-md-2 col-sm-3 col-xs-hide">A.J. Chapel</h4>
+      <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.CHTime}}</h4>
+      <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.CHDate}}</h4>
+      {{/each}}
     </div>
-    <div class="row event-row">
-      <h4 class="col-md-6 col-sm-5" onclick= {{action "toggleRequestSent"}}>Chapel: Tom Haugen </h4>
-      <h4 class="col-md-2 col-sm-3 col-xs-hide">A.J. Chapel</h4>
-      <h4 class="col-md-2 col-sm-2 col-xs-hide">11:05 AM</h4>
-      <h4 class="col-md-2 col-sm-2 col-xs-hide">Feb. 02</h4>
-    </div>
-    <div class="row event-row">
-      <h4 class="col-xs-4 col-md-8">event01 </h4>
-    </div>
-    <div class="row event-row">
-      <h4 class="col-xs-4 col-md-8">event01 </h4>
-    </div>
-    <div class="row event-row">
-      <h4 class="col-xs-4 col-md-8">event01 </h4>
-    </div>
+
   </div>
 </div>
