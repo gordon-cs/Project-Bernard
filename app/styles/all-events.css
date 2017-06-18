@@ -9,6 +9,7 @@
   margin-bottom: 0px;
   padding-bottom: 5px !important;
   align-content: space-between;
+  font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 }
 
 .event-header{
@@ -24,6 +25,25 @@
 
 }
 
+.event-id{
+  border-bottom: 1px solid #3d3d3a;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(0, 174, 239);
+  padding-bottom: 5px;
+  padding-right: 0px;
+  v
+}
+.display-col{
+  border-bottom: 1px solid #3d3d3a;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(0, 174, 239);
+  padding-bottom: 5px;
+  padding-right: 0px;
+  font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+
+}
 .event-labels {
   text-transform: UPPERCASE;
   color: white;

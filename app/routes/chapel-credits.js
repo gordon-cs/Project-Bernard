@@ -49,10 +49,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let eventDate = new Date(chapelEvents[i].CHDate);
         let eventMonth = eventDate.getMonth();
         let eventDay = eventDate.getDate();
-        chapelEvents[i].CHDate = monthArry[eventMonth]+ ". "+ eventDay + "," ;
+        console.log(eventMonth);
+        chapelEvents[i].CHDate = monthArry[eventMonth]+ ". "+ eventDay ;
 
         let eventtime = new Date(chapelEvents[i].CHTime).getHours();
         let eventMin = new Date(chapelEvents[i].CHTime).getMinutes();
+        if (eventMin < 10){
+          eventMin = "0" + eventMin;
+        }
         if (eventtime > 12) {
           eventtime = eventtime - 12
           displayTime = eventtime + ":" + eventMin + "pm";
