@@ -3,6 +3,13 @@
   margin-top: 30px;
 }
 
+.entry-rows div:nth-child(even){
+  background: #ffffff;
+}
+.entry-rows div:nth-child(odd){
+  background: #DDD;
+}
+
 .highlight-box {
   font-size: 20px;
   margin-top: 10px;
@@ -10,6 +17,10 @@
   padding-bottom: 5px !important;
   align-content: space-between;
   font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+}
+
+.event-row{
+  margin-left: 25px
 }
 
 .event-header{
@@ -22,24 +33,15 @@
     margin-top: 0px !important;
     margin-bottom: 10px !important;
     padding-top: 0px !important;
-
 }
 
 .event-id{
-  border-bottom: 1px solid #3d3d3a;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: rgb(0, 174, 239);
-  padding-bottom: 5px;
+  padding-bottom: 0.px;
   padding-right: 0px;
   v
 }
 .display-col{
-  border-bottom: 1px solid #3d3d3a;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: rgb(0, 174, 239);
-  padding-bottom: 5px;
+  padding-bottom: 0px;
   padding-right: 0px;
   font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 
@@ -49,7 +51,6 @@
   color: white;
 }
 .entry-rows {
-    border-top: 1px solid rgb(221,221,221);
     padding: 8px;
     font-size: 1.6em;
 }
@@ -77,16 +78,23 @@
   .display-col{
     display: none;
     margin: 0;
+    font-size: 10;
     font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
-    padding-bottom: 15px;
-    padding-top: 15px;
+    padding-bottom: 5px;
+    padding-top: 5px;
     text-align: center;
-    background-color: lightGrey;
-    border-bottom: 1px solid white;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: white;
-  	color: #00aeef;
+    background-color: lightGray;
+  	color: black;
+    border-left: 1px solid #3d3d3a;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: darkGrey;
+
+    border-right: 1px solid #3d3d3a;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: darkGrey;
+
     }
   }
 
@@ -95,4 +103,5 @@
 .display-col{
   display: block !important;
   }
+
 }

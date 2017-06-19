@@ -1,12 +1,13 @@
 <div class="container event-box">
-  <div class="highlight highlight-box ">
-    <button type="button" class="btn pull-right ">All CL&W</button>
-    <p class="event-p">
-      You currently have <i><b>{{model.numEvents}}</b></i> Christian Life and Worship Credits
-    </p>
-    <div class="progress">
-      <div class= "progress-bar" role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;">
-       {{model.eventsPercent}}%</div>
+  <div class="whitebox ">
+    <h4 class="event-p">
+      You currently have <b>{{model.numEvents}}</b> Christian Life and Worship Credits
+    </h4>
+    <button type="button" class="btn pull-right ">UPCOMING CL&W</button>
+
+    <div class="progress" style="height: 32px; margin-bottom: 0px; width: 50%">
+      <div class= "progress-bar" role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%; height: 50px">
+     </div>
     </div>
 
   </div>
@@ -15,18 +16,17 @@
       <div class="event-labels col-xs-6 col-sm-5 col-md-6">Events Attended </div>
       <div class="event-labels col-xs-2 col-sm-3 col-md-2">Location</div>
       <div class="event-labels col-xs-2 col-sm-2 col-md-2">Time</div>
-      <div class="event-labels col-xs-2 col-sm-2 col-md-2">Date</div>
+      <div class="event-labels col-xs-2 col-sm-2 col-md-2"> Date</div>
     </div>
   </h4>
-  <div class=".entry-rows">
-    <div class="row event-row">
-      {{#each model.chapelEvents as |event|}}
+  <div class="entry-rows">
+    {{#each model.chapelEvents as |event|}}
+    <div class="row event-row" style= "margin-left:0px; margin-right:0px">
       <h4 class="col-md-6 col-sm-5 event-id" onclick= {{action "toggleRequestSent"}}>{{event.CHEventID}}</h4>
       <h4 class="display-col col-md-2 col-sm-3 col-xs-hide">A.J. Chapel</h4>
       <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.CHTime}}</h4>
       <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.CHDate}}</h4>
-      {{/each}}
     </div>
-
+    {{/each}}
   </div>
 </div>
