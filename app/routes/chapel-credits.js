@@ -14,7 +14,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let month = new Date().getMonth();
     let eventsPercent;
 
-    let monthArry = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let monthArry = ["Jan", "Feb", "Mar", "Apr", "May","Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     /*for( let i = 0; i<chapelEvents.length; ++i){
       let eventDate = new Date(chapelEvents[i].CHDate);
       let eventMonth = eventDate.getMonth();
