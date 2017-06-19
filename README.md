@@ -13,6 +13,7 @@ Front-end for [Project Raymond](https://github.com/gordon-cs/Project-Raymond)
     * [Running Tests](#running-tests)
     * [Building](#building)
     * [Deploying](#deploying)
+  * [Running Front And Back End Together](#running-front-and-back-end-together)
   * [Addons](#addons)
   * [Source Code Guide](#source-code-guide)
   * [Styling](#styling)
@@ -84,6 +85,23 @@ Make use of the many generators for code, try `ember help generate` for more det
 * [jsPDF](https://parall.ax/products/jspdf)
 * [File Saver](https://github.com/eligrey/FileSaver.js/)
 
+## Running Front And Back End Together
+
+* In order to connect the front end (Bernard) to the back end (Raymond) over local host, follow these steps:
+  * Log onto remote desktop virtual machine
+  * Open command prompt, git clone project Bernard and project Raymond
+  * Inside of Project Bernard folder, npm install && bower install
+  * Open Project Raymond over Visual Studio
+  * Right click on Gordon360, select Properties, change to your desired localhost:#### beside Project Url
+  * Create Virtual Directory. Remember this number. Start Project Raymond 
+  * Open Project Bernard. Open environment.js under config folder in a text editor.
+    * edit these three lines with back end localhost:####
+    * apiUrl: 'https://360ApiTrain.gordon.edu/api' to apiUrl: 'http://localhost:####/api'
+    * baseUrl: 'https://360ApiTrain.gordon.edu' to baseUrl: 'http://localhost:####'   
+    * serverTokenEndpoint: 'https://360ApiTrain.gordon.edu/token' to serverTokenEndpoint: 'http://localhost:####/token' 
+  * Save file. Open command prompt, ember server --live-reload-port #### --port ####
+  * For these two ports, you can choose any random number higher than 4000. This number has to be different from everyone else's port number.
+  
 ## Source Code Guide
 
 ### Files
