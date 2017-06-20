@@ -12,6 +12,8 @@
 		margin-left: 15px;
 		margin-right: 15px;
 }
+
+
 #logo-box img {
     max-width: 20%;
 }
@@ -123,12 +125,16 @@ ul.dropdown-menu {
 	margin-top: 19px;
 	margin-bottom: 19px;
 }
+.user-info:hover {
+	color: #DE571F;
+}
+
 .user-info-buttons {
 		display: inline;
 		margin-left: 15px;
 }
 .user-info-mobile {
-		color: white;
+		color: BLACK;
 }
 .request-button {
     border: 0px !important;
@@ -229,6 +235,10 @@ ul.dropdown-menu {
 		.user-info-mobile, .logout-mobile {
 				display: none !important;
 		}
+		.dropdown:hover .dropdown-menu {
+		    display: block;
+		    margin-top: 0; // remove the gap so it doesn't close
+		 }
     #primary-menu {
         font-size: 1em;
         margin-top: 12px;
