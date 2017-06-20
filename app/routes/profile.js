@@ -155,6 +155,24 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data;
         }
 
+        let setOnOffCampus = function(data){
+            if(data.OnOffCampus == "on"){
+                data.OnOffCampus = true;
+            }else {
+                data.OnOffCampus = false;
+            }
+            return data;
+        }
+
+        let setUserType = function(data) {
+            data.IsFaculty = (data.PersonType.includes("fac"));
+            data.IsAlumni = (data.PersonType.includes("alu"));
+            data.IsStudent = (data.PersonType.includes("stu"));
+            data.IsStudentOrAlumni = (data.IsStudent || data.isAlumni) ? true:false;
+            console.log(data);
+            return data
+        }
+
         let setuserInfo = function(data) {
             userInfo = data;
         }
@@ -195,6 +213,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(getAdmins)
         .then(getuserInfo)
         .then(setClass)
+        .then(setOnOffCampus)
+        .then(setUserType)
         .then(setuserInfo)
         .then(loadModel);
         // return testLoadModel;

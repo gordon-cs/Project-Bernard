@@ -8,7 +8,7 @@
         <div class="col-sm-9 profile-block-info bootstrap-tester">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}}</div>
+                    <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}} {{if  model.userInfo.NickName "({{model.userInfo.NickName}})"}}</div>
                 </div>
             </div>
             <div class="row">
@@ -34,19 +34,37 @@
             <div class="row">
                 <div class="col-sm-4 personal-info-list">
                     <ul>
-                        <li>Email: {{model.userInfo.Email}}</li>
-                        <li>Cell Phone: {{model.userInfo.MobilePhone}}</li>
-                        <li>Home Phone: {{model.userInfo.HomePhone}}</li>
-                        <li>Major: {{model.userInfo.Major}}</li>
+                        {{#if model.userInfo.IsStudentOrAlumni}}
+                            <li>Major: {{model.userInfo.Major}}</li>
+                            <li>Cell Phone: {{model.userInfo.MobilePhone}}</li> {{!-- TODO: add functionality to allow call on click --}}
+                        {{/if}}
+                        <li>Home Phone: {{model.userInfo.HomePhone}}</li>   {{!-- TODO: add functionality to allow call on click --}}
+                        <li>Email: {{model.userInfo.EmailUserName}}@gordon.edu</li>            {{!-- TODO: add functionality to allow email on click --}}
+                        {{#if model.userInfo.IsFaculty}}
+                            <li>Job Title: {{model.userInfo.JobTitle}}</li> 
+                            <li>Department: {{model.userInfo.OnCampusDepartment}}</li> 
+                        {{/if}}
                     </ul>
                 </div>
-                <div class="col-sm-4 personal-info-list">
-                    <div class="address-title">Campus Address</div>
-                    <ul>
-                        <li>Dorm: No info Yet</li>
-                        <li>Room: No info Yet</li>
-                    </ul>
-                </div>
+                {{#if model.userInfo.OnOffCampus}}
+                    <div class="col-sm-4 personal-info-list">
+                        <div class="address-title">Campus Address</div>
+                        <ul>
+                            <li>Dorm: {{model.userInfo.OnCampusBuilding}}</li>
+                            <li>Room: {{model.userInfo.OnCampusRoom}}</li>
+                        </ul>
+                    </div>
+                {{/if}}
+                {{#if model.userInfo.IsFaculty}}
+                    <div class="col-sm-4 personal-info-list">
+                        <div class="address-title">On Campus Info</div>
+                        <ul>
+                            <li>Office: {{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</li> {{!-- GET description of building from TmsEPrd.dbo.building_master (showperson.cfm line: 596) --}}
+                            <li>Office Phone: {{model.userInfo.OnCampusPhone}}</li>
+                            {{!TODO: add office hours}}
+                        </ul>
+                    </div>
+                {{/if}}
                 <div class="col-sm-4 personal-info-list">
                     <div class="address-title">Home Address</div>
                     <ul>
