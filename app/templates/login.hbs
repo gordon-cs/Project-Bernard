@@ -1,13 +1,17 @@
-<div id="form-box" class="whitebox row">
-    <h1>Login</h1>
-    <form {{action "authenticate" on="submit"}}>
-        {{#if errorMessage}}
-            <p id="error-message">{{errorMessage}}</p>
-        {{/if}}
-        <label for="username">Username</label>
-        {{input id="identification" class="form-control" value=identification autofocus="autofocus"}}
-        <label for="password">Password</label>
-        {{input id="password" class="form-control" type="password" value=password}}
-        <button type="submit" class="btn form-button button-navy login-button">Login</button>
-    </form>
+<div id="login-page-main">
+    <div id="form-box" class="whitebox row login-box">
+        <h1>Login</h1>
+        <form {{action "authenticate" on="submit"}}>
+            {{#if errorMessage}}
+                <p id="error-message">{{errorMessage}}</p>
+            {{/if}}
+            <label for="username">Username</label>
+            {{input id="identification" class="form-control" value=identification autofocus="autofocus"}}
+            <label for="password">Password</label>
+            {{input id="password" class="form-control" type="password" value=password}}
+            <button type="submit" class="btn form-button button-navy login-button">Login</button>
+        </form>
+    </div>
+    {{homepage-banner slides=model.slides}}
+
 </div>

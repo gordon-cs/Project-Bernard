@@ -23,11 +23,6 @@
 		margin: 11px;
 		margin-left: 15px;
 }
-.logo-mobile-center {
-		margin-left: auto !important;
-		margin-right: auto !important;
-		float: none !important;
-}
 
 /* -----------------------------
     Title and Navigation
@@ -176,6 +171,7 @@ ul.dropdown-menu {
 		padding: 2px 4px 2px 5px;
 		border-radius: 25px;
 }
+
 /* -----------------------------
    HERO IMAGE
  ------------------------------- */
@@ -215,6 +211,11 @@ ul.dropdown-menu {
     }
 }
 @media only screen and (min-width: 768px) {
+	.logo-mobile-center {
+			margin-left: auto !important;
+			margin-right: auto !important;
+			float: none !important;
+	}
     .user-info {
         display: inline;
     }

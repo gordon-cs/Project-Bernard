@@ -2,12 +2,18 @@
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
-                <img src="images/gordon-logo-mobile.png" id="logo-mobile" class="{{if session.isAuthenticated '' 'logo-mobile-center'}}"/>
+                <img src="images/gordon-logo-mobile.png" id="logo-mobile"  class="{{if session.isAuthenticated '' 'logo-mobile-center'}}"/>
             {{/link-to}}
             {{#if session.isAuthenticated}}
                 <div class="mobile-menu-icon">
                     <button {{action 'toggleMenu'}}>
                       <img src="images/list.svg" id="icon-menu">
+                    </button>
+                </div>
+            {{else}}
+                <div class="mobile-menu-icon">
+                    <button class="btn btn-lg login-toggle" {{action 'toggleLogin'}}>
+                        Log In
                     </button>
                 </div>
             {{/if}}
@@ -125,6 +131,8 @@
                 </li>
             </ul>
         </div>
+    {{else}}
+        {{login-block}}
     {{/if}}
 </div>
 

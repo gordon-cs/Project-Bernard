@@ -97,42 +97,6 @@
 		</nav>
 	</div>
 	<div class="main-content">
-		<div class="banner">
-			{{dashboard-slider slides=model.slides}}
-			<div class="row info-blocks">
-				<div class="info-block col-xs-4 active" data-toggle="tab" data-target="#info-block-content-1">
-					<h4>Get Involved</h4>
-				</div>
-
-				<div class="info-block col-xs-4" data-toggle="tab" data-target="#info-block-content-2">
-					<h4>Get Connected</h4>
-				</div>
-				<div class="info-block col-xs-4" data-toggle="tab" data-target="#info-block-content-3">
-					<h4>Build Experience</h4>
-				</div>
-			</div>
-			<div class="info-blocks tab-content">
-				<div id="info-block-content-1" class="tab-pane active">
-					<span class="glyphicon glyphicon-triangle-bottom"></span>
-					<h4>Get Involved | What Can I Do at Gordon?</h4>
-					<p>The 360.gordon.edu mobile-friendly activities platform allows connection to campus activities, clubs, organizations, programs, and groups. Find a group, Subscribe to their email feed as a Guest, or join the group as a Member! Student Leaders and
-						Advisors maintain group information about meeting times and links to their web pages. Each semester there are usually over 100 connections you could make!</p>
-				</div>
-				<div id="info-block-content-2" class="tab-pane">
-					<span class="glyphicon glyphicon-triangle-bottom"></span>
-					<h4>Get Connected | Which Involvements Should I Choose?</h4>
-					<p>Follow your heart and your mind and use 360.gordon.edu to pick key activities and involvements that complement your academic plan, or join some just for fun. Busyness for its own sake is not a virtue, but becoming meaningfully involved in selected
-						activities can build campus connections and build experiences that lead to your own academic and professional success. Talk to your Academic Advisor about suggestions of activities that fit your goals, and talk to the Program Advisors in each group
-						to learn more about what involvement means.</p>
-				</div>
-				<div id="info-block-content-3" class="tab-pane">
-					<span class="glyphicon glyphicon-triangle-bottom"></span>
-					<h4> Build Experience | Can I Learn and Lead?</h4>
-					<p>Build your complete Gordon Experience. Your membership and leadership in groups, clubs, and organizations, populates your
-						{{#link-to "transcript"}}Gordon Experience Transcript{{/link-to}}, helping you track where and how you have been engaged, so that when it's time to tell your story to an employer, internship placement, grad school or other social or professional network, you have a record
-						of your experiences!</p>
-				</div>
-			</div>
-		</div>
+		{{homepage-banner slides=model.slides}}
 	</div>
 </div>

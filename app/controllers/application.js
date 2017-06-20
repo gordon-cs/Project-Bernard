@@ -14,6 +14,14 @@ export default Ember.Controller.extend({
     requestsRecieved: [],
     showMenu: false,
     actions: {
+        toggleLogin() {
+            if($(".login-box").is(':visible')) {
+                $(".login-box").hide();
+            }
+            else {
+                $(".login-box").show();
+            }
+        },
         toggleMenu() {
             this.set("showMenu", ! this.get("showMenu"));
         },

@@ -1,0 +1,53 @@
+/*.col-sm-12 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}*/
+
+.login-box {
+    display: none;
+}
+
+.login-box {
+    margin-bottom: 15%;
+}
+
+#login-block {
+	width: 600px !important;
+	float: right;
+	margin-bottom: 1em;
+}
+
+#login-block input, #login-block button {
+    margin-right: 1em;
+    margin-left: 1em;
+}
+
+#login-page-main {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+
+.login-toggle {
+	display: none !important;
+}
+
+@media only screen and (max-width: 768px) {
+  #login-block {
+      display: none;
+  }
+  .login-toggle {
+      display: block !important;
+      margin-top: 0.2em;
+      color: #00aeef !important;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  #login-block {
+      float: none;
+  }
+  #login-block input, #login-block button {
+      margin-bottom: 1em;
+  }
+}
