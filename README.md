@@ -91,8 +91,9 @@ Make use of the many generators for code, try `ember help generate` for more det
   * Log onto remote desktop virtual machine
   * Open command prompt, git clone project Bernard and project Raymond
   * Inside of Project Bernard folder, npm install && bower install
-  * Open Project Raymond over Visual Studio
-  * Right click on Gordon360, select Properties, change to your desired localhost:#### beside Project Url
+    * (If Bower isn't already installed, install it with: npm install -g bower)
+  * Open Project-Raymond/Gordon360.sln in Visual Studio 2017
+  * Right click on Gordon360, select Properties and then Web, change Project URL to your desired localhost:####
   * Create Virtual Directory. Remember this number. Start Project Raymond 
   * Open Project Bernard. Open environment.js under config folder in a text editor.
     * edit these three lines with back end localhost:####
