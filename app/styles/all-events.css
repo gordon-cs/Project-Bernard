@@ -59,6 +59,9 @@
    .highlight-box, .event-labels, .event-row {
     font-size: 15px;
   }
+
+
+
   .event-id{
     font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
     color: #00aeef;
@@ -75,6 +78,9 @@
   .cyanbox{
     display: none;
   }
+  .btn-upComing{
+   margin-bottom: 5px;
+  }
   .display-col{
     display: none;
     margin: 0;
@@ -85,15 +91,10 @@
     text-align: center;
     background-color: lightGray;
   	color: black;
-    border-left: 1px solid #3d3d3a;
-    border-left-width: 1px;
+    border-left: 3px solid #00aeef;
+    border-left-width: 3px;
     border-left-style: solid;
-    border-left-color: darkGrey;
-
-    border-right: 1px solid #3d3d3a;
-    border-right-width: 1px;
-    border-right-style: solid;
-    border-right-color: darkGrey;
+    border-left-color: #00aeef;
 
     }
   }
@@ -103,5 +104,13 @@
 .display-col{
   display: block !important;
   }
+
+.btn-upComing{
+   float: right;
+}
+
+.event-progress{
+  width: 70% !important;
+}
 
 }
