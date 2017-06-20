@@ -1,14 +1,12 @@
-/*.col-sm-12 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}*/
-
-.login-box {
+#login-outer-box {
     display: none;
-}
-
-.login-box {
-    margin-bottom: 15%;
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /*margin-top: -140px;
+    margin-left: -200px;*/
+    z-index: 100;
 }
 
 #login-block {
@@ -32,9 +30,16 @@
 	display: none !important;
 }
 
+#login-outer-outer-box {
+    display: none;
+}
+
 @media only screen and (max-width: 768px) {
   #login-block {
       display: none;
+  }
+  #login-outer-outer-box {
+      display: block;
   }
   .login-toggle {
       display: block !important;

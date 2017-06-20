@@ -15,11 +15,11 @@ export default Ember.Controller.extend({
     showMenu: false,
     actions: {
         toggleLogin() {
-            if($(".login-box").is(':visible')) {
-                $(".login-box").hide();
+            if($("#login-outer-box").is(':visible')) {
+                $("#login-outer-box").hide();
             }
             else {
-                $(".login-box").show();
+                $("#login-outer-box").show();
             }
         },
         toggleMenu() {
