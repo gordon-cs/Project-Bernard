@@ -1,4 +1,61 @@
 /*******************
+Student Profile
+*******************/
+.user-name {
+    font-size: 6em;
+    /*padding-bottom: .2em;*/
+}
+
+.user-links {
+    font-size: 2em;
+}
+
+.student-class {
+    font-size: 4em;
+    padding-bottom: .5em;
+}
+
+.profile-block {
+    padding: 25px 0;
+    margin: 0;
+}
+
+.personal-info-list {
+     font-size: 2em;
+}
+
+.personal-info-list > ul {
+    list-style-type: none;
+    -webkit-padding-start: 0;
+}
+
+.address-title {
+    text-decoration: underline;
+}
+
+.block-header {
+    font-size: 4em;
+    text-decoration: underline;
+}
+
+.profile-block-info {
+    margin: auto 0;
+}
+
+.profile-container {
+    padding: 0 !important;
+    padding-bottom: 45px;
+}
+
+.profile-picture {
+    width: 75%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/*******************
 Request Tables
 *******************/
 
@@ -65,4 +122,11 @@ section {
     .header-rows {
         text-align: center;
     }
+}
+
+/***********************
+Development Helper
+***********************/
+.bootstrap-tester {
+    /*border: 1px solid purple;*/
 }

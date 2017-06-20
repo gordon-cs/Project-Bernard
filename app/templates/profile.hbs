@@ -1,11 +1,72 @@
-<main class="container main-container">
-    <div class="row">
-        <div class="section-title">
-            <h1>{{session.data.authenticated.token_data.name}}</h1>
+<link rel="stylesheet" href="assets/profile.css">
+<main class="container main-container profile-container">
+    {{!--Profile picture and information--}}
+    <div class="row profile-block bootstrap-tester">
+        <div class="col-sm-3">
+            <img src="http://hope4merton.com/wp-content/uploads/2015/12/profile-placeholder.gif" alt="profile placeholder" class="profile-picture">
+        </div>
+        <div class="col-sm-9 profile-block-info bootstrap-tester">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="student-class">{{model.userInfo.Class}}</div>
+                </div>
+            </div>
+            <div class="row user-links">
+                <a href="#/profile" class="col-sm-4">Facebook</a>
+                <a href="#/profile" class="col-sm-4">Twitter</a>
+                <a href="#/profile" class="col-sm-4">LinkedIn</a>
+            </div>
+            
         </div>
     </div>
-    {{!--Requests Recieved table--}}
-    {{!--TODO--}}
+
+    {{!--Personal Information--}}
+    <div class="row profile-block bootstrap-tester">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12 block-header">Personal Information</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 personal-info-list">
+                    <ul>
+                        <li>Email: {{model.userInfo.Email}}</li>
+                        <li>Cell Phone: {{model.userInfo.MobilePhone}}</li>
+                        <li>Home Phone: {{model.userInfo.HomePhone}}</li>
+                        <li>Major: {{model.userInfo.Major}}</li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 personal-info-list">
+                    <div class="address-title">Campus Address</div>
+                    <ul>
+                        <li>Dorm: No info Yet</li>
+                        <li>Room: No info Yet</li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 personal-info-list">
+                    <div class="address-title">Home Address</div>
+                    <ul>
+                        <li>Street: {{model.userInfo.HomeStreet1}}</li>
+                        <li>City: {{model.userInfo.HomeCity}}</li>
+                        <li>State: {{model.userInfo.HomeState}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{!--Activities--}}
+
+
+
+
+
+
+    {{!--Requests tables--}}
     <section>
         {{#if requestsRecieved}}
             <article>

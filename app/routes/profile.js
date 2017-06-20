@@ -18,8 +18,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let context = this;
         let IDNumber = this.get("session.data.authenticated.token_data.id");
+        let userName = this.get("session.data.authenticated.token_data.name");
         let requestsSent = [];
         let admins = [];
+        let userInfo;
 
         let verifyAdmin = function() {
             if (godMode) {
@@ -122,14 +124,51 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             };
         };
 
+        let getuserInfo = function() {
+            return getAsync("/profiles/" + userName + "/", context);
+        };
+
+        let setClass = function(data) {
+            switch(data.Class) {
+                case "1":
+                    data.Class = "Freshman";
+                    break;
+                case "2":
+                    data.Class = "Sophmore";
+                    break;
+                case "3":
+                    data.Class = "Junior";
+                    break;
+                case "4":
+                    data.Class = "Senior";
+                    break;
+                case "5":
+                    data.Class = "Graduate Student";
+                    break;
+                case "6":
+                    data.Class = "Undergraduate Conferred";
+                    break;
+                case "7":
+                    data.Class = "Graduate Conferred";
+                    break;
+            }
+            return data;
+        }
+
+        let setuserInfo = function(data) {
+            userInfo = data;
+        }
+
         let loadModel = function() {
             return {
                 "requestsSent": requestsSent,
                 "godMode": godMode,
                 "superGodMode": superGodMode,
-                "admins": admins
+                "admins": admins,
+                "userInfo": userInfo
             };
         };
+
 
         // Test setup
         let testLoadModel = function(){
@@ -154,6 +193,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(addSentRequests)
         .then(verifyAdmin)
         .then(getAdmins)
+        .then(getuserInfo)
+        .then(setClass)
+        .then(setuserInfo)
         .then(loadModel);
         // return testLoadModel;
     }
