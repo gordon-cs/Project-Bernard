@@ -13,7 +13,7 @@
         <div class="col-sm-9 profile-block-info bootstrap-tester">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}} {{if  model.userInfo.NickName "({{model.userInfo.NickName}})"}}</div>
+                    <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}} {{if  model.userInfo.NickName "("}}{{model.userInfo.NickName}}{{if model.userInfo.NickName ")"}}</div>
                 </div>
             </div>
             <div class="row">
@@ -91,6 +91,34 @@
     </section>
 
     {{!--Activities--}}
+    
+    <section class="row profile-block bootstrap-tester">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="block-header">Activities</div>
+                </div>
+            </div>
+            {{#each model.memberships as |activity|}}
+                <div class="row activity-entry bootstrap-tester">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="activity-entry-title">{{activity.ActivityDescription}}</div>
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="view-club-button">{{#link-to "specific-activity" activity.SessionCode activity.ActivityCode}}View Club{{/link-to}}</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-2"><img src="{{activity.ActivityImagePath}}" class="activity-image" alt="{{activity.ActivityDescription}} profile picture"></div>
+                        <div class="col-sm-5"></div>
+                        <div class="col-sm-5"></div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+
 
 
 
@@ -98,7 +126,7 @@
 
 
     {{!--Requests tables--}}
-    <section>
+    <section class="tables-section">
         {{#if requestsRecieved}}
             <article>
                 <div class="row">

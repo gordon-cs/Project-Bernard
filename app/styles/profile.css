@@ -23,6 +23,7 @@ Student Profile
 .profile-block {
     padding: 25px 0;
     margin: 0;
+    border-bottom: 2px solid lightgray;
 }
 
 .personal-info-list {
@@ -70,21 +71,23 @@ Profile Picture
 }
 
 .overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: rgba(23,80,236,.5);
+    display: none;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: rgba(23,80,236,.5);
 }
 
 .profile-picture-container:hover .overlay {
-  opacity: 1;
-  cursor: pointer;
+    opacity: 1;
+    cursor: pointer;
 }
 
 .text {
@@ -97,11 +100,31 @@ Profile Picture
   -ms-transform: translate(-50%, -50%);
 }
 
+/****************************
+Activities
+****************************/
+
+.activity-image {
+    width: 75%;
+    margin: 0 auto;
+    height: auto;
+}
+
+.activity-entry {
+    padding: 10px 0;
+    margin: 10px 10px;
+    border: 1px solid lightgray;
+}
+
+.activity-entry-title {
+    font-size: 2em;
+}
+
 /*******************
 Request Tables
 *******************/
 
-section {
+.tables-section{
     font-size: 150%;
 }
 
@@ -110,12 +133,14 @@ section {
     font-size: 1.6em;
     font-weight: bold;
     border-bottom: 2px solid rgb(221,221,221);
-    padding: 8px;
+    padding: 8px 0;
+    margin: 0;
 }
 
 .entry-rows {
     border-top: 1px solid rgb(221,221,221);
-    padding: 8px;
+    padding: 8px 0;
+    margin: 0;
     font-size: 1.6em;
 }
 
@@ -131,6 +156,7 @@ section {
 .toggleTableBtn {
     cursor: pointer;
 }
+
 
 /****************************
  Media Queries 
