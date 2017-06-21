@@ -116,7 +116,7 @@ ul.dropdown-menu {
 		right: 0;
 		padding-bottom: 10px;
 }
-.user-info h6 {
+.user-info h4 {
 	color: #31342b;
 	letter-spacing: 1px;
 	font-size: 1.2em;
@@ -228,6 +228,7 @@ ul.dropdown-menu {
     .user-info {
         display: inline;
     }
+
     .user-info > h6 {
         margin-top: 0;
 				display: inline-block;
@@ -279,6 +280,9 @@ ul.dropdown-menu {
     .app-title-container {
         text-align: center;
 				padding: 22px;
+		}
+		.mobile-row{
+			display:none;
 		}
     .app-title {
         display: inline;
