@@ -20,6 +20,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let IDNumber = this.get("session.data.authenticated.token_data.id");
         let userName = this.get("session.data.authenticated.token_data.user_name");
         let requestsSent = [];
+        let memberships = [];
         let admins = [];
         let userInfo;
 
@@ -169,7 +170,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             data.IsAlumni = (data.PersonType.includes("alu"));
             data.IsStudent = (data.PersonType.includes("stu"));
             data.IsStudentOrAlumni = (data.IsStudent || data.isAlumni) ? true:false;
-            console.log(data);
             return data
         }
 
@@ -177,13 +177,25 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             userInfo = data;
         }
 
+        let getUserActivities = function() {
+            return getAsync("/memberships/student/" + IDNumber, context);
+        }
+        
+        let setUserActivities = function(data) {
+            console.log(data);
+            memberships = data;
+        }
+
+        
+
         let loadModel = function() {
             return {
                 "requestsSent": requestsSent,
                 "godMode": godMode,
                 "superGodMode": superGodMode,
                 "admins": admins,
-                "userInfo": userInfo
+                "userInfo": userInfo,
+                "memberships": memberships
             };
         };
 
@@ -216,6 +228,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(setOnOffCampus)
         .then(setUserType)
         .then(setuserInfo)
+        .then(getUserActivities)
+        .then(setUserActivities)
         .then(loadModel);
         // return testLoadModel;
     }

@@ -1,9 +1,14 @@
 <link rel="stylesheet" href="assets/profile.css">
 <main class="container main-container profile-container">
     {{!--Profile picture and information--}}
-    <div class="row profile-block bootstrap-tester">
+    <section class="row profile-block bootstrap-tester">
         <div class="col-sm-3">
-            <img src="http://hope4merton.com/wp-content/uploads/2015/12/profile-placeholder.gif" alt="profile placeholder" class="profile-picture">
+            <div class="profile-picture-container">
+            <img src="https://www.pacifica.edu/wp-content/themes/pacifica-graduate-institute/images/profile-placeholder.png" alt="Avatar" class="image">
+            <div class="overlay" {{action "uploadImage"}}>
+                <div class="text">Click here to change profile picture</div>
+            </div>
+            </div>
         </div>
         <div class="col-sm-9 profile-block-info bootstrap-tester">
             <div class="row">
@@ -31,10 +36,10 @@
             </div>
             
         </div>
-    </div>
+    </section>
 
     {{!--Personal Information--}}
-    <div class="row profile-block bootstrap-tester">
+    <section class="row profile-block bootstrap-tester">
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-12 block-header">Personal Information</div>
@@ -83,7 +88,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     {{!--Activities--}}
 

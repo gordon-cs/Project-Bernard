@@ -41,6 +41,9 @@ export default Ember.Controller.extend({
                     $(elements[i]).slideToggle();
                 }
             }
+        },
+        uploadImage(){
+            console.log("This is my image");
         }
     }
 });

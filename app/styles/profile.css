@@ -1,6 +1,11 @@
 /*******************
 Student Profile
 *******************/
+
+.right-align-text{
+    float: right;
+}
+
 .user-name {
     font-size: 6em;
     /*padding-bottom: .2em;*/
@@ -47,13 +52,50 @@ Student Profile
     padding-bottom: 45px;
 }
 
-.profile-picture {
-    width: 75%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+
+/*******************
+Profile Picture
+*******************/
+.profile-picture-container {
+  position: relative;
+  width: 75%;
+  margin: 0 auto;
 }
 
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba(23,80,236,.5);
+}
+
+.profile-picture-container:hover .overlay {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
 
 /*******************
 Request Tables
