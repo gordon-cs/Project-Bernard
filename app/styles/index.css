@@ -114,15 +114,29 @@ ul.experience-involvements-dropdown li.no-activities-msg {
   margin: 0;
 }
 .dashboard .info-block {
-  background-color: #00aeef;
+  /*background-color: #00aeef;*/
+  background-color: #014983;
   color: #fff;
   cursor: pointer;
   height: 100px;
   text-align: center;
 }
-.dashboard .info-block:first-child, .dashboard .info-block:last-child {
-  background-color: #014983;
+
+.dashboard .info-block.active {
+    background-color: #00aeef;
 }
+
+.glyphicon-triangle-bottom {
+    color: #014983;
+}
+
+.glyphicon-triangle-bottom.active {
+    color: #00aeef;
+}
+
+/*.dashboard .info-block:first-child, .dashboard .info-block:last-child {
+  background-color: #014983;
+}*/
 .dashboard .info-block h4 {
   font-weight: bold;
   letter-spacing: .65px;
@@ -144,17 +158,17 @@ ul.experience-involvements-dropdown li.no-activities-msg {
   position: absolute;
 }
 #info-block-content-1 .glyphicon-triangle-bottom {
-  color: #014983;
+  /*color: #014983;*/
   left: 5%;
   top: -10px;
 }
 #info-block-content-2 .glyphicon-triangle-bottom {
-  color: #00aeef;
+  /*color: #00aeef;*/
   left: 37%;
   top: -10px;
 }
 #info-block-content-3 .glyphicon-triangle-bottom {
-  color: #014983;
+  /*color: #014983;*/
   left: 71%;
   top: -10px;
 }

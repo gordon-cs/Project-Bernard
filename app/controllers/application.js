@@ -21,6 +21,7 @@ export default Ember.Controller.extend({
             else {
                 $("#login-outer-box").show();
             }
+            $(".login-toggle").blur();
         },
         toggleMenu() {
             this.set("showMenu", ! this.get("showMenu"));
