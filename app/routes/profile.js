@@ -18,7 +18,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let context = this;
         let IDNumber = this.get("session.data.authenticated.token_data.id");
-        let userName = this.get("session.data.authenticated.token_data.user_name");
+        let userName = this.get("session.data.authenticated.token_data.user_name").toLowerCase(); 
         let requestsSent = [];
         let memberships = [];
         let admins = [];
