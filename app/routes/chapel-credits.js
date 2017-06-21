@@ -15,7 +15,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     //take away the first two digits of the year ie. (yyyy -> yy)
     //create termcode based on month,and shorten year
     let month = new Date().getMonth();
-    let date = new Date().getFullYear()-(month >=0&& month <=6? 2:0);
+    let date = new Date().getFullYear()-(month >=0&& month <=6? 1:0);
     let term = (month >=0 && month <=6? "SP": "FA");
     let subdate = date.toString().substr(-2);
     let termCode = subdate + term;
@@ -25,7 +25,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     //retreive the chapel information from the database
     let loadChapel =  function(){
-      return getAsync("/chapel_event/Student/" + id_number + "/" + "15FA" , context);};
+      return getAsync("/event/chapel/Student/" + id_number + "/" + termCode , context);};
 
     //Formate the information you want to display
     let loadModel = function(result) {
