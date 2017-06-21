@@ -113,6 +113,12 @@ ul.experience-involvements-dropdown li.no-activities-msg {
 .row.info-blocks {
   margin: 0;
 }
+.info-title:hover {
+  color: #de571f;
+}
+.info-block.active .info-title:hover {
+  color: white !important;
+}
 .dashboard .info-block {
   /*background-color: #00aeef;*/
   background-color: #014983;
