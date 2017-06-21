@@ -1,11 +1,11 @@
 <div class="container event-box">
-  <div class="whitebox ">
+  <div class="whitebox">
     <h4 class="event-p">
       You currently have <b>{{model.numEvents}}</b> Christian Life and Worship Credits
     </h4>
-    <button type="button" class="btn pull-right ">UPCOMING CL&W</button>
+    <button type="button" class="btn-upComing btn">UPCOMING CL&W</button>
 
-    <div class="progress" style="height: 32px; margin-bottom: 0px; width: 50%">
+    <div class="progress event-progress" style="height: 32px; margin-bottom: 0px; margin-top: 5px;">
       <div class= "progress-bar" role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%; height: 50px">
      </div>
     </div>
