@@ -17,8 +17,12 @@
                     </button>
                 </div>
             {{/if}}
-            <div class="col-sm-3"></div>
-            <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>
+            <div class="app-title col-sm-6 col-md-9">
+                <ul>
+                    <li><a>Student Clubs &amp; Organizations</a></li>
+                    <li><a href="https://my.gordon.edu/">My Gordon</a></li>
+                </ul>
+            </div>
             <div class="user-info col-sm-6">
                 {{#if session.isAuthenticated}}
                     <div class="user-info-buttons dropdown">
@@ -50,11 +54,11 @@
                 {{/if}}
             </div>
             {{#if session.isAuthenticated}}
-                {{#link-to "index"}}
+                <!-- {{#link-to "index"}}
                     <div id="logo-box-horizontal">
                         <img src="images/gordon-logo-horizontal.svg" alt="Gordon College logo"  width="150" height="38" />
                     </div>
-                {{/link-to}}
+                {{/link-to}} -->
             {{else}}
                 {{#link-to "index"}}
                     <div id="logo-box">
@@ -124,6 +128,11 @@
                   </span>
                 </li>
                 {{/if}}
+                <li class="user-info-mobile">
+                    <span>
+                        <a href="https://my.gordon.edu/">My Gordon</a>
+                    </span>
+                </li>
                 <li class="logout-mobile">
                   <span {{action "closeMenu"}}>
                     <a {{action "logout"}} href="#" class="button uppercase">Logout</a>

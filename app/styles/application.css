@@ -51,6 +51,26 @@ header {
 	font-weight: 400 !important;
 	margin-top: 15px !important;
 	margin-bottom: 15px !important;
+	padding-right: 3em !important;
+}
+.app-title ul {
+	list-style-type: none;
+	display: flex;
+	float: right;
+}
+.app-title ul li {
+	margin-right: 2em;
+}
+.app-title a {
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	padding: 2em;
+	margin: -2em;
+	color: #31342b;
+}
+.app-title a:hover {
+	color: #00aeef;
 }
 #primary-menu {
 	font-size: 1.5em;
@@ -172,6 +192,11 @@ ul.dropdown-menu {
 		border-radius: 25px;
 }
 
+/* Change autocomplete background to any color ;) */
+input:-webkit-autofill, input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
 /* -----------------------------
    HERO IMAGE
  ------------------------------- */
@@ -211,6 +236,12 @@ ul.dropdown-menu {
     }
 }
 @media only screen and (min-width: 768px) {
+	.app-title {
+		display: inline;
+	}
+	.app-title-container {
+        text-align: center;
+	}
 	.logo-mobile-center {
 			margin-left: auto !important;
 			margin-right: auto !important;
@@ -229,9 +260,11 @@ ul.dropdown-menu {
     #primary-menu {
         font-size: 1em;
         margin-top: 12px;
-				margin-right: 22%;
+				/*margin-right: 22%;*/
+		width: 500px;
+		margin-left: auto;
+		margin-right: auto;
         float: none;
-        text-align: right;
     }
     #primary-menu li {
         display: inline;
@@ -263,13 +296,7 @@ ul.dropdown-menu {
 		}
 }
 @media only screen and (min-width: 992px) {
-    .app-title-container {
-        text-align: center;
-		}
-    .app-title {
-        display: inline;
-    }
-		#logo-box {
+    #logo-box {
       max-width: 200px;
       padding: 20px 30px;
 			display: block;
@@ -289,12 +316,12 @@ ul.dropdown-menu {
 				padding-left: 30px;
 				padding-right: 30px;
 		}
-		#logo-mobile {
-			display: none;
+		.logo-mobile-center {
+			display: none !important;
 		}
-		#primary-menu {
+		/*#primary-menu {
 			margin-left: 200px;
-		}
+		}*/
 		.user-info {
 			margin-top: 17px;
 		}
