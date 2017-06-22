@@ -1,5 +1,5 @@
 <div class="row dashboard">
-	<div class="involvements-dropdown">
+	<!-- <div class="involvements-dropdown">
 		<nav class="navbar navbar-toggleable-* bg-faded">
 			<div {{action "toggleDropdown"}} class="involvements-div">
 				<span class="glyphicon glyphicon-chevron-down involvements-dropdown-button"></span>
@@ -78,9 +78,9 @@
 								<li>
 									<div class="dropdown"> <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> {{truncate-text memSession.session 0 -14}}
 					<span class="glyphicon glyphicon-menu-down"></span> </button>
-										<ul class="dropdown-menu">
+										<ul class="dropdown-menu"> -->
 											<!--- Note that for accessibility, we still need to find a way to set aria-lablledby attr -->
-											{{#each memSession.activities as |mem|}}
+											<!-- {{#each memSession.activities as |mem|}}
 												<li>
 													{{#link-to "specific-activity" mem.SessionCode mem.ActivityCode}}
 														{{mem.ActivityDescription}}{{/link-to}}
@@ -95,7 +95,7 @@
 				{{/if}}
 			</div>
 		</nav>
-	</div>
+	</div> -->
 	<div class="main-content">
 		{{homepage-banner slides=model.slides}}
 	</div>

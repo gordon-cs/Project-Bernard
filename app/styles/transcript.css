@@ -1,4 +1,4 @@
-#download-button {
+.transcript-page #download-button {
     width: 100%;
     height: 50px;
     font-size: 1.6em !important;
@@ -7,16 +7,16 @@
     color: white;
     text-transform: uppercase;
 }
-.reset-padding {
+.transcript-page .reset-padding {
     padding: 0 !important;
 }
-.table-responsive {
+.transcript-page .table-responsive {
     font-size: 1.6em;
 }
-.session-description {
+.transcript-page .session-description {
     background-color: #ddd;
 }
-.end {
+.transcript-page .end {
     height: 2.5em;
 }
 /*#transcipt-view {
@@ -58,18 +58,18 @@
     background-color: white;
 }*/
 
-.position-title span{
+.transcript-page .position-title span{
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
-.position-title {
+.transcript-page .position-title {
     background-color: #cdcdcd;
 }
-h4 {
+.transcript-page h4 {
     font-style: normal;
     margin: 0.2em !important;
 }
-h3 {
+.transcript-page h3 {
     text-align: center;
     padding-top: 0.5em;
     margin-bottom: 1em !important;
@@ -86,10 +86,10 @@ h3 {
 ------------------------------- */
 
 @media only screen and (min-width: 768px) {
-    .transcript-button {
+    .transcript-page .transcript-button {
         width: auto;
     }
-    #transcipt-view {
+    .transcript-page #transcipt-view {
         display: inline-block;
         height: 1000px;
         margin-top: 20px;
@@ -97,7 +97,7 @@ h3 {
         margin-left: auto;
         margin-right: auto;
     }
-    .main-container {
+    .transcript-page.main-container {
         padding-left: 5em !important;
         padding-right: 5em !important;
         padding-bottom: 5em !important;
@@ -105,13 +105,13 @@ h3 {
 }
 
 @media print {
-    #download-div, .header {
+    .transcript-page #download-div, .transcript-page .header {
         display: none;
     }
-    body {
+    .transcript-page body {
         width: 1000px;
     }
-    .table>tbody>tr>td, .session-description>tr>th {
+    .transcript-page .table>tbody>tr>td, .transcript-page .session-description>tr>th {
         border: none !important;
     }
     /*.table-responsive {

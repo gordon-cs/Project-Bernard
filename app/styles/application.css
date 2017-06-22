@@ -46,10 +46,10 @@ header {
 	color: #31342b;
 	text-transform: uppercase;
 	vertical-align: middle;
-	font-size: 1.4em !important;
+	font-size: 1.2em !important;
 	letter-spacing: 1px;
 	font-weight: 400 !important;
-	margin-top: 15px !important;
+	margin-top: 16px !important;
 	margin-bottom: 15px !important;
 	padding-right: 3em !important;
 }
@@ -261,7 +261,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
         font-size: 1em;
         margin-top: 12px;
 				/*margin-right: 22%;*/
-		width: 500px;
+		width: 700px;
 		margin-left: auto;
 		margin-right: auto;
         float: none;
