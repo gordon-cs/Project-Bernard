@@ -17,6 +17,7 @@ export default Ember.Controller.extend({
         toggleMenu() {
             this.set("showMenu", ! this.get("showMenu"));
         },
+
         logout() {
             this.get("session").invalidate();
             this.set("requestsRecieved", []);

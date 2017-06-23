@@ -186,6 +186,8 @@ ul.dropdown-menu {
 		padding: 2px 4px 2px 5px;
 		border-radius: 25px;
 }
+
+
 /* -----------------------------
    HERO IMAGE
  ------------------------------- */
@@ -199,6 +201,7 @@ ul.dropdown-menu {
 	.hero-container {
 		overflow: auto;
 	}
+
 }
 
 /* For providing image via background image and not royalslider */
@@ -228,6 +231,7 @@ ul.dropdown-menu {
     .user-info {
         display: inline;
     }
+
 
     .user-info > h6 {
         margin-top: 0;
@@ -324,4 +328,6 @@ ul.dropdown-menu {
 		#logo-box-horizontal {
 			padding-bottom: 34px;
 		}
+
+
 }

@@ -163,6 +163,9 @@ ul.experience-sidebar li.no-activities-msg {
   .info-blocks.tab-content .tab-pane{
     min-height: 245px;
   }
+
+
+
 }
 @media only screen and (max-width: 992px) {
   .info-blocks.tab-content .tab-pane{
