@@ -2,6 +2,7 @@ import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import getAsync from "gordon360/utils/get-async";
 
+
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function(params, transition) {
 
@@ -22,7 +23,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 
     console.log(termCode);
-
+    let load25 = $.ajax('https://25live.collegenet.com/25live/data/gordon/run/events.xml?/&event_id=636&scope=extended');
+    console.log(load25);
     //retreive the chapel information from the database
     let loadChapel =  function(){
       return getAsync("/event/chapel/Student/" + id_number + "/" + termCode , context);};
