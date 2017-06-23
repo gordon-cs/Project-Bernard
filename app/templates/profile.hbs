@@ -40,7 +40,7 @@
     </section>
 
 
-    <!-- The Modal -->
+    <!-- Edit profile picture modal -->
     <div id="toggleEditProfilePictureModal" class="modal">
 
         <!-- Modal content -->
@@ -59,11 +59,15 @@
                         </label>
                         {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
                     </div>
-                    {{!--{{#if file}}--}}
-                        {{image-cropper image=file}}
+                    {{!--{{#if showImageCropper}}--}}
+                    <div class="image-cropper-wrapper">
+                        <div class="image-cropper-container">
+                            {{image-cropper image=file}}
+                        </div>
+                    </div>
                     {{!--{{/if}}--}}
                     <p class="form-note">Files acceptable: png, jpg, jpeg, bmp, gif</p>
-                    <button class="btn button-navy form-button" {{action 'update'}}>Upload Profile Picture</button>
+                    <button class="btn button-navy form-button" {{action 'update'}}>Upload Picture</button>
                     <button class="btn button-cyan form-button form-cancel-button" {{action "cancelEditProfilePicture"}}>Cancel</button>
                 </form>
             </div>

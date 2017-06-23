@@ -48,7 +48,7 @@ export default Ember.Controller.extend({
         },
         toggleEditProfilePictureModal(){
              $("#toggleEditProfilePictureModal").addClass("showModal");
-              console.log("This is my image");
+
         },
         cancelEditProfilePicture(){
             console.log(this.get("file"));
