@@ -20,17 +20,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let subdate = date.toString().substr(-2);
     let termCode = subdate + term;
    
-   function sortDate(first, second){
+  function sortDate(first, second){
     if (first.CHDate === second.CHDate)  
         return 0;  
     if (first.CHDate < second.CHDate)  
-        return -1;  
+        return 1;  
     else  
-        return 1; 
+        return -1; 
    }
     
 
     console.log(termCode);
+    
 
     //retreive the chapel information from the database
     let loadChapel =  function(){
@@ -40,46 +41,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let loadModel = function(result) {
      console.log(result);
 
-//2017-05-05T11:11:16-04:00
-
-      let sortedChapel = [];
-      let sortedDate = [];
       let chapelEvents = result;
       let displayTime;
       let numEvents = chapelEvents.length;
       let eventsPercent = Math.round((numEvents*100)/30);
-      let date;
-      let hours;
 
-      for(let i = 0; i<numEvents; ++i){
-        date = chapelEvents[i].CHDate.toString().substr(0,10);
-        console.log(date);
-        hours = chapelEvents[i].CHTime.toString().substr(10,chapelEvents[i].CHTime.length);
-        let newDate = new Date(date + hours);
-        console.log(newDate);
-        chapelEvents[i].CHDate = newDate;
-      }
+     chapelEvents.sort(sortDate)
 
-      chapelEvents.sort(sortDate)
-
-      //chapelEvents.sort(chapelEvents);
-      //console.log(sortedDate);
-     
-    /* let k = 0;
-     for(let x = 0; x<numEvents; ++x){
-        if( chapelEvents[k] == sortedDate[x]){
-            sortedChapel.push(chapelEvents[k]);
-            delete sortedDate[x];
-            x = 0;
-            k += 1;
-        }
-
-     }
-
-
-      for( let i = 0; i<numEvents; ++i){
-        chapelEvents[i] = sortedChapel[i];
-      } */
 
       for( let  i = 0; i<numEvents; ++i){
 
@@ -87,8 +55,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let eventDate = new Date(chapelEvents[i].CHDate);
         let eventMonth = eventDate.getMonth();
         let eventDay = eventDate.getDate();
-        let eventHour = new Date(chapelEvents[i].CHTime).getHours();
-        let eventMin = new Date(chapelEvents[i].CHTime).getMinutes();
+        let eventHour = new Date(chapelEvents[i].CHDate).getHours();
+        let eventMin = new Date(chapelEvents[i].CHDate).getMinutes();
 
         //insert the formated date back into the JSON array
         chapelEvents[i].CHDate = monthArry[eventMonth]+ ". "+ eventDay;
