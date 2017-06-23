@@ -42,8 +42,12 @@ export default Ember.Controller.extend({
                 }
             }
         },
-        uploadImage(){
-            console.log("This is my image");
+        toggleEditProfilePictureModal(){
+             $("#toggleEditProfilePictureModal").addClass("showModal");
+              console.log("This is my image");
+        },
+        cancelEditProfilePicture(){
+             $("#toggleEditProfilePictureModal").removeClass("showModal");
         }
     }
 });

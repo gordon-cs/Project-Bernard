@@ -1,11 +1,12 @@
 <link rel="stylesheet" href="assets/profile.css">
+<link rel="stylesheet" href="assets/form.css">
 <main class="container main-container profile-container">
     {{!--Profile picture and information--}}
     <section class="row profile-block bootstrap-tester">
         <div class="col-sm-3">
-            <div class="profile-picture-container">
+            <div class="profile-picture-container" {{action "toggleEditProfilePictureModal"}}>
             <img src="https://www.pacifica.edu/wp-content/themes/pacifica-graduate-institute/images/profile-placeholder.png" alt="Avatar" class="image">
-            <div class="overlay" {{action "uploadImage"}}>
+            <div class="overlay">
                 <div class="text">Click here to change profile picture</div>
             </div>
             </div>
@@ -37,6 +38,36 @@
             
         </div>
     </section>
+
+
+    <!-- The Modal -->
+    <div id="toggleEditProfilePictureModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div id="modal-form-box" class="whitebox row">
+                <form {{action "update" on="submit"}}>
+                    {{#if errorMessage}}
+                        <p id="error-message">{{errorMessage}}</p>
+                    {{/if}}
+                    <label for="image">Upload new profile picture</label>
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn button-navy">
+                                Browse{{input id="file" type="file" value=file multiple="false"}}
+                            </span>
+                        </label>
+                        {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
+                    </div>
+                    {{image-cropper image=file}}
+                    <p class="form-note">Files acceptable: png, jpg, jpeg, bmp, gif</p>
+                    <button class="btn button-navy form-button" {{action 'update'}}>Upload Profile Picture</button>
+                    <button class="btn button-cyan form-button form-cancel-button" {{action "cancelEditProfilePicture"}}>Cancel</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
 
     {{!--Personal Information--}}
     <section class="row profile-block bootstrap-tester">

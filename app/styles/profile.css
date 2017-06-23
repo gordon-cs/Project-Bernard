@@ -101,6 +101,90 @@ Profile Picture
 }
 
 /****************************
+Edit profile picture modal
+****************************/
+
+.showModal {
+    display: block !important;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/**Form Styles**/
+
+#modal-form-box > form > input,
+#modal-form-box > form > .ember-power-select-trigger,
+#modal-form-box > form > .input-group,
+#modal-form-box > form > textarea {
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0;
+    color: #31342b;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+#modal-form-box > form > button {
+    text-transform: uppercase;
+		font-weight: bold !important;
+    font-size: 1.5em;
+    padding: 8px 15px;
+}
+#modal-form-box span {
+    font-weight: bold !important;
+}
+#modal-form-box label {
+    text-transform: uppercase;
+    font-size: 1.3em;
+}
+#modal-form-box {
+  letter-spacing: 1px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+#modal-form-box > form > .input-group > label > span > input {
+    display: none;
+}
+
+/****************************
 Activities
 ****************************/
 
