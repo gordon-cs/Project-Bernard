@@ -180,6 +180,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let getUserActivities = function() {
             return getAsync("/memberships/student/" + IDNumber, context);
         }
+
+        let getUserActivitiesInfo = function(data) {
+            for(var i = 0; i < data.length; i++) {
+                let Info = getAsync("/activities/" + data[i].ActivityCode.trim(), context);
+                console.log(Info);
+                data[i].activityInfo = Info;
+            }
+            return data;
+        }
         
         let setUserActivities = function(data) {
             console.log(data);
@@ -189,6 +198,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         
 
         let loadModel = function() {
+            console.log(userInfo);
             return {
                 "requestsSent": requestsSent,
                 "godMode": godMode,
@@ -229,6 +239,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(setUserType)
         .then(setuserInfo)
         .then(getUserActivities)
+        // .then(getUserActivitiesInfo)
         .then(setUserActivities)
         .then(loadModel);
         // return testLoadModel;

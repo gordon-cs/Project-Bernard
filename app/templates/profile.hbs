@@ -5,7 +5,7 @@
     <section class="row profile-block bootstrap-tester">
         <div class="col-sm-3">
             <div class="profile-picture-container" {{action "toggleEditProfilePictureModal"}}>
-            <img src="https://www.pacifica.edu/wp-content/themes/pacifica-graduate-institute/images/profile-placeholder.png" alt="Avatar" class="image">
+            <img src="{{model.userInfo.ImagePath}}" alt="Avatar" class="image" id="profilePicture">
             <div class="overlay">
                 <div class="text">Click here to change profile picture</div>
             </div>
@@ -31,9 +31,19 @@
                 </div>
             </div>
             <div class="row user-links">
-                <a href="#/profile" class="col-sm-4">Facebook</a>
-                <a href="#/profile" class="col-sm-4">Twitter</a>
-                <a href="#/profile" class="col-sm-4">LinkedIn</a>
+                {{#if model.userInfo.Facebook}}
+                    <a href="https://www.facebook.com/{{model.userInfo.Facebook}}" class="col-sm-2">Facebook</a>
+                {{/if}}
+                {{#if model.userInfo.Twitter}}
+                <a href="https://twitter.com/{{model.userInfo.Twitter}}" class="col-sm-2">Twitter</a>
+                {{/if}}
+                {{#if model.userInfo.LinkedIn}}
+                <a href="https://www.linkedin.com/in/{{mode.userInfo.LinkedIn}}" class="col-sm-2">LinkedIn</a>
+                {{/if}}
+                {{#if model.userInfo.Instagram}}
+                <a href="https://www.instagram.com/{{model.userInfo.Instagram}}" class="col-sm-2">Instagram</a>
+                {{/if}}
+                <a href="#/profile" class="col-sm-4">Edit your social media links</a>
             </div>
             
         </div>

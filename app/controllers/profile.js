@@ -4,6 +4,7 @@ import putAsync from "gordon360/utils/put-async";
 import postFileAsync from "gordon360/utils/post-file-async";
 import postAsync from "gordon360/utils/post-async";
 import imageCropper from 'ember-cli-image-cropper/components/image-cropper';
+import getAsync from "gordon360/utils/get-async";
 
 /*  Controller for the notification table.
  *  Handles user interaction with the page.
@@ -48,7 +49,7 @@ export default Ember.Controller.extend({
         },
         toggleEditProfilePictureModal(){
              $("#toggleEditProfilePictureModal").addClass("showModal");
-
+             $('body').css('overflow','hidden')
         },
         cancelEditProfilePicture(){
             console.log(this.get("file"));
@@ -59,6 +60,8 @@ export default Ember.Controller.extend({
             this.set("errorMessage", null);
              $("#toggleEditProfilePictureModal").removeClass("showModal");
             console.log(this.get("file"));
+            $('body').css('overflow','scroll')
+            //TODO Get cropper to disappear after canceling upload
         },
         update() {
 
@@ -117,7 +120,7 @@ export default Ember.Controller.extend({
                         imageData.append("canvasImage", blob, "canvasImage.jpeg");
                         console.log(imageData);
 
-                        return postFileAsync("/profile/" + context.get("model.userInfo.EmailUserName") +
+                        return postFileAsync("/profiles/" + context.get("model.userInfo.EmailUserName") +
                           "/image", imageData, context).catch((reason) => {
                             error = true;
                             showError(reason);
@@ -145,11 +148,16 @@ export default Ember.Controller.extend({
             let transition = function() {
                 context.set("file", "");
                 context.set("errorMessage", null);
-                transitionModal();
+                return getUserInfo()
+                .then(transitionModal);
             };
 
-            let transitionModal = function(){
+            let transitionModal = function(user){
                 $("#toggleEditProfilePictureModal").removeClass("showModal");
+                $("#profilePicture").attr("src", user.ImagePath);
+            }
+            let getUserInfo = function() {
+                return  getAsync("/profiles/" + context.get("session.data.authenticated.token_data.user_name").toLowerCase() + "/", context);
             }
 
             let askAgain = function(){
