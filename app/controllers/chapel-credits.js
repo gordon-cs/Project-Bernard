@@ -21,7 +21,15 @@ export default Ember.Controller.extend({
     },
 
     toggleEventDetailsModal(){
-      $("#toogleEventDetailsModal").addClass("showModal");
+      $("#toggleEventDetailsModal").addClass("showModal");
+      $('.container').addClass('blur');
+      $('body').css('overflow','hidden');
+    },
+
+    cancelEventDetailsModal(){
+      $("#toggleEventDetailsModal").removeClass("showModal");
+      $('.container').removeClass('blur');
+      $('body').css('overflow','scroll');
     }
   }
 });

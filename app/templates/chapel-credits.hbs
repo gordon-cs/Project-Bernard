@@ -21,8 +21,8 @@
   </h4>
   <div class="entry-rows">
     {{#each model.chapelEvents as |event|}}
-    <div class="row event-row" style= "margin-left:0px; margin-right:0px">
-      <h4 class="col-md-6 col-sm-5 event-id" {{ action "toggleEventDetailsModal" event.CHEventID }} onclick= {{action "toggleRequestSent"}} >{{event.CHEventID}}</h4>
+    <div class="row event-row" style= "margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event.CHEventID }}>
+      <h4 class="col-md-6 col-sm-5 event-id"  onclick= {{action "toggleRequestSent"}} >{{event.CHEventID}}</h4>
       <h4 class="display-col col-md-2 col-sm-3 col-xs-hide">A.J. Chapel</h4>
       <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.CHTime}}</h4>
       <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.CHDate}}</h4>
@@ -30,12 +30,19 @@
     {{/each}}
   </div>
 
-  <!-- Event Details Modal -->
-  <div id="toggleEventDetailsModal" class="modal">
 
-    <!-- Modal Content -->
-    <div class="modal-content">
-      <h3 class="navybox"> {{event.CHEventID}} </h3>
+
+</div>
+
+<!-- Event Details Modal -->
+<div id="toggleEventDetailsModal" class="modal">
+
+  <!-- Modal Content -->
+  <div class="modal-content">
+    <h3 class="navybox"> </h3>
+    <div class="modal-body"> Description <br /> and other stuff <br /> or whatever <br /> </div>
+    <div class="modal-footer">
+      <button class="btn button-cyan form-button form-cancel-button" {{action "cancelEventDetailsModal"}}>Cancel</button>
     </div>
   </div>
 

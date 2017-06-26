@@ -7,7 +7,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     //initialize variables
     let context = this;
-    let id_name = this.get("session.data.authenticated.token_data.user_name").toLowercase();
+    let id_name = this.get("session.data.authenticated.token_data.user_name");
     let monthArry = ["Jan", "Feb", "Mar", "Apr", "May","Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 
@@ -19,19 +19,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let term = (month >=0 && month <=6? "SP": "FA");
     let subdate = date.toString().substr(-2);
     let termCode = subdate + term;
-   
+
   function sortDate(first, second){
-    if (first.CHDate === second.CHDate)  
-        return 0;  
-    if (first.CHDate < second.CHDate)  
-        return 1;  
-    else  
-        return -1; 
+    if (first.CHDate === second.CHDate)
+        return 0;
+    if (first.CHDate < second.CHDate)
+        return 1;
+    else
+        return -1;
    }
-    
+
 
     console.log(termCode);
-    
+
 
     //retreive the chapel information from the database
     let loadChapel =  function(){
