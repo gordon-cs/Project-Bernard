@@ -18,6 +18,10 @@ export default Ember.Controller.extend({
           $(elements[i]).slideToggle();
         }
       }
+    },
+
+    toggleEventDetailsModal(){
+      $("#toogleEventDetailsModal").addClass("showModal");
     }
   }
 });
