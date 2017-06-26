@@ -1,0 +1,8 @@
+#login-block {
+    display: inline;
+}
+#login-info {
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+}

@@ -81,11 +81,11 @@
             </a>
         {{else if model.notAMember}}
             {{#if followLoad}}
-                <button type="button" class="btn button-navy">Wait</button>
+                <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Wait</button>
             {{else if model.following}}
-                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unsubscribe</button>
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}} disabled={{model.activityClosed}}>Unsubscribe</button>
             {{else}}
-                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Subscribe</button>
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}} disabled={{model.activityClosed}}>Subscribe</button>
             {{/if}}
             {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
                 <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Join</button>
