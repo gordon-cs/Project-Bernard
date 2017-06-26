@@ -82,30 +82,29 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="#">Home</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">All Events <span class="caret"></span></a>
+          <a class="dropdown-toggle button uppercase  main-font" data-toggle="dropdown">All Events <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li>{{#link-to "chapel-credits"  }}
-              <center>Chapel </center>
+            <li >{{#link-to "chapel-credits" class ="drop-font"}}
+              Chapel 
             {{/link-to}}</li>
-            <li>{{#link-to "all-events"}}
-              <center>All Events </center>
+            <li>{{#link-to "all-events" class ="drop-font"}}
+              All Events 
             {{/link-to}}</li>
           </ul>
         </li>
-        <li>{{#link-to "index" class="button uppercase"}}
+        <li>{{#link-to "index" class="button uppercase main-font"}}
             My Home
         {{/link-to}}</li>
-        <li>{{#link-to "all-activities" class="button uppercase"}}
+        <li>{{#link-to "all-activities" class="button uppercase main-font"}}
             Activities
         {{/link-to}}</li>
 
-        <li>{{#link-to "about" class="button uppercase"}}
+        <li>{{#link-to "about" class="button uppercase main-font"}}
               About
         {{/link-to}}</li>
-        <li>{{#link-to "help"}} Help{{/link-to}}</li>
-        <li>{{#link-to "profile" class="button uppercase" }}
+        <li>{{#link-to "help" class="button uppercase main-font"}} Help{{/link-to}}</li>
+        <li>{{#link-to "profile" class="button uppercase main-font" }}
               Profile
             {{/link-to}}
             {{#if requestsRecieved}}
