@@ -2,14 +2,14 @@
     Page Title and Inputs
 ------------------------------- */
 
-.page-title {
+.all-activities.page-title {
     margin-top: 20px;
 }
-.input-container {
+.all-activities .input-container {
     margin-top: 20px;
 }
-.session-dropdown,
-.search-bar {
+.all-activities .session-dropdown,
+.all-activities .search-bar {
     display: block;
     text-align: center;
     margin-left: auto;
@@ -18,23 +18,23 @@
     width: 90%;
     font-weight: bold;
 }
-.session-dropdown > div,
-.search-bar input {
+.all-activities .session-dropdown > div,
+.all-activities .search-bar input {
     border-radius: 0;
     letter-spacing: 1px;
 }
-.session-dropdown label,
-.search-bar label {
+.all-activities .session-dropdown label,
+.all-activities .search-bar label {
     text-align: center;
     letter-spacing: 1px;
     font-weight: bold;
     font-size: 1.3em;
     text-transform: uppercase;
 }
-.session-dropdown {
+.all-activities .session-dropdown {
   margin-bottom: 1.3em;
 }
-.empty-list-reminder {
+.all-activities .empty-list-reminder {
     margin-top: 50px;
     font-size: 120%;
     text-align: center;
@@ -45,8 +45,8 @@
 ------------------------------- */
 
 @media only screen and (min-width: 768px) {
-    .session-dropdown,
-    .search-bar {
+    .all-activities .session-dropdown,
+    .all-activities .search-bar {
         width: 40%;
     }
 }

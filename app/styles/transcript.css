@@ -1,4 +1,8 @@
-.transcript-page #download-button {
+.transcript.main-container {
+    background-color: white;
+    margin-top: 15px;
+}
+.transcript #download-button {
     width: 100%;
     height: 50px;
     font-size: 1.6em !important;
@@ -7,16 +11,16 @@
     color: white;
     text-transform: uppercase;
 }
-.transcript-page .reset-padding {
+.transcript .reset-padding {
     padding: 0 !important;
 }
-.transcript-page .table-responsive {
+.transcript .table-responsive {
     font-size: 1.6em;
 }
-.transcript-page .session-description {
+.transcript .session-description {
     background-color: #ddd;
 }
-.transcript-page .end {
+.transcript .end {
     height: 2.5em;
 }
 /*#transcipt-view {
@@ -58,18 +62,18 @@
     background-color: white;
 }*/
 
-.transcript-page .position-title span{
+.transcript .position-title span{
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
-.transcript-page .position-title {
+.transcript .position-title {
     background-color: #cdcdcd;
 }
-.transcript-page h4 {
+.transcript h4 {
     font-style: normal;
     margin: 0.2em !important;
 }
-.transcript-page h3 {
+.transcript h3 {
     text-align: center;
     padding-top: 0.5em;
     margin-bottom: 1em !important;
@@ -86,10 +90,10 @@
 ------------------------------- */
 
 @media only screen and (min-width: 768px) {
-    .transcript-page .transcript-button {
+    .transcript .transcript-button {
         width: auto;
     }
-    .transcript-page #transcipt-view {
+    .transcript #transcipt-view {
         display: inline-block;
         height: 1000px;
         margin-top: 20px;
@@ -97,7 +101,7 @@
         margin-left: auto;
         margin-right: auto;
     }
-    .transcript-page.main-container {
+    .transcript.main-container {
         padding-left: 5em !important;
         padding-right: 5em !important;
         padding-bottom: 5em !important;
@@ -105,13 +109,13 @@
 }
 
 @media print {
-    .transcript-page #download-div, .transcript-page .header {
+    .transcript #download-div, .transcript .header {
         display: none;
     }
-    .transcript-page body {
+    .transcript body {
         width: 1000px;
     }
-    .transcript-page .table>tbody>tr>td, .transcript-page .session-description>tr>th {
+    .transcript .table>tbody>tr>td, .transcript .session-description>tr>th {
         border: none !important;
     }
     /*.table-responsive {
