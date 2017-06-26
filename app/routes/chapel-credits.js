@@ -19,9 +19,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let term = (month >=0 && month <=6? "SP": "FA");
     let subdate = date.toString().substr(-2);
     let termCode = subdate + term;
-
+   
+  function sortDate(first, second){
+    if (first.CHDate === second.CHDate)  
+        return 0;  
+    if (first.CHDate < second.CHDate)  
+        return 1;  
+    else  
+        return -1; 
+   }
+    
 
     console.log(termCode);
+    
 
     //retreive the chapel information from the database
     let loadChapel =  function(){
@@ -29,27 +39,29 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     //Formate the information you want to display
     let loadModel = function(result) {
-      console.log(result);
-
+     console.log(result);
 
       let chapelEvents = result;
       let displayTime;
       let numEvents = chapelEvents.length;
       let eventsPercent = Math.round((numEvents*100)/30);
 
-      for( let i = 0; i<numEvents; ++i){
+     chapelEvents.sort(sortDate)
+
+
+      for( let  i = 0; i<numEvents; ++i){
 
         //get the date information
         let eventDate = new Date(chapelEvents[i].CHDate);
         let eventMonth = eventDate.getMonth();
         let eventDay = eventDate.getDate();
-        let eventHour = new Date(chapelEvents[i].CHTime).getHours();
-        let eventMin = new Date(chapelEvents[i].CHTime).getMinutes();
+        let eventHour = new Date(chapelEvents[i].CHDate).getHours();
+        let eventMin = new Date(chapelEvents[i].CHDate).getMinutes();
 
         //insert the formated date back into the JSON array
         chapelEvents[i].CHDate = monthArry[eventMonth]+ ". "+ eventDay;
 
-        console.log(eventMonth);
+        //console.log(eventMonth);
 
         //create a 12 hour clock
         if (eventMin < 10){
