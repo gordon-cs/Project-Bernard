@@ -7,7 +7,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     //initialize variables
     let context = this;
-    let id_number = this.get("session.data.authenticated.token_data.id");
+    let id_name = this.get("session.data.authenticated.token_data.user_name").toLowercase();
     let monthArry = ["Jan", "Feb", "Mar", "Apr", "May","Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 
@@ -25,7 +25,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     //retreive the chapel information from the database
     let loadChapel =  function(){
-      return getAsync("/event/chapel/Student/" + id_number + "/" + termCode , context);};
+      return getAsync("/events/chapel/Student/" + id_name + "/" + termCode , context);};
 
     //Formate the information you want to display
     let loadModel = function(result) {
