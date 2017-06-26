@@ -48,8 +48,8 @@ export default Ember.Controller.extend({
             }
         },
         toggleEditProfilePictureModal(){
-             $("#toggleEditProfilePictureModal").addClass("showModal");
-             $('body').css('overflow','hidden')
+             $("#editProfilePictureModal").addClass("showModal");
+             $('body').css('overflow','hidden');
         },
         cancelEditProfilePicture(){
             console.log(this.get("file"));
@@ -58,10 +58,21 @@ export default Ember.Controller.extend({
             this.set("file", null);
             this.set("defaultImage", false);
             this.set("errorMessage", null);
-             $("#toggleEditProfilePictureModal").removeClass("showModal");
+             $("#editProfilePictureModal").removeClass("showModal");
             console.log(this.get("file"));
-            $('body').css('overflow','scroll')
+            $('body').css('overflow','scroll');
             //TODO Get cropper to disappear after canceling upload
+        },
+        showEditLinksModal(){
+            $("#editLinksModal").addClass("showModal");
+            $('body').css('overflow','hidden');
+        },
+        closeEditLinksModal(){
+            $("#editLinksModal").addClass("showModal");
+            $('body').css('overflow','scroll');
+        },
+        changeSocialMediaLink(){
+            console.log("Update");
         },
         update() {
 
@@ -153,7 +164,8 @@ export default Ember.Controller.extend({
             };
 
             let transitionModal = function(user){
-                $("#toggleEditProfilePictureModal").removeClass("showModal");
+                $("#editProfilePictureModal").removeClass("showModal");
+                $('body').css('overflow','scroll');
                 $("#profilePicture").attr("src", user.ImagePath);
             }
             let getUserInfo = function() {

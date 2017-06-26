@@ -43,7 +43,7 @@
                 {{#if model.userInfo.Instagram}}
                 <a href="https://www.instagram.com/{{model.userInfo.Instagram}}" class="col-sm-2">Instagram</a>
                 {{/if}}
-                <a href="#/profile" class="col-sm-4">Edit your social media links</a>
+                <a href="#/profile" class="col-sm-4" {{action "showEditLinksModal"}}>Edit your social media links</a>
             </div>
             
         </div>
@@ -51,8 +51,7 @@
 
 
     <!-- Edit profile picture modal -->
-    <div id="toggleEditProfilePictureModal" class="modal">
-
+    <div id="editProfilePictureModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
             <div id="modal-form-box" class="whitebox row">
@@ -82,6 +81,36 @@
                 </form>
             </div>
         </div>
+    </div>
+
+
+    <!-- The Modal -->
+    <div id="editLinksModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="row">
+            <div class="col-sm-12 modal-title">Edit your links</div>
+        </div>
+        {{#each model.links as |link|}}
+            <div class="row">
+                <div class="col-sm-6 social-media-title bootstrap-tester">{{link.type}}: </div>
+                {{#if link.link}}
+                    <div class="col-sm-3 edit-social-media-button-containers bootstrap-tester">
+                        <button class="btn btn-primary edit-social-media-button" {{action "changeSocialMediaLink"}}>Edit</button>
+                    </div>
+                    <div class="col-sm-3 edit-social-media-button-containers bootstrap-tester">
+                        <button class="btn button-cyan edit-social-media-button">Remove</button>
+                    </div>
+                {{else}}
+                    <div class="col-sm-3 edit-social-media-button-containers bootstrap-tester">
+                        <button class="btn btn-success edit-social-media-button" {{action "changeSocialMediaLink"}}>Add</button>
+                    </div>
+                {{/if}}
+            </div>
+        {{/each}}
+        
+    </div>
 
     </div>
 

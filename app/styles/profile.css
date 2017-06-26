@@ -192,6 +192,28 @@ Edit profile picture modal
 }
 
 /****************************
+Edit social media modal
+****************************/
+
+.edit-social-media-button-containers {
+    padding: 0;
+}
+
+.edit-social-media-button {
+    display: block;
+    margin: 0 auto;
+    /*padding: 6px 0;*/
+    width: 90%;
+}
+.modal-title {
+    font-size: 3em;
+}
+
+.social-media-title {
+    font-size: 2.5em;
+}
+
+/****************************
 Activities
 ****************************/
 
@@ -290,5 +312,5 @@ Request Tables
 Development Helper
 ***********************/
 .bootstrap-tester {
-    /*border: 1px solid purple;*/
+    border: 1px solid purple;
 }

@@ -22,6 +22,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let requestsSent = [];
         let memberships = [];
         let admins = [];
+        let links = [];
         let userInfo;
 
         let verifyAdmin = function() {
@@ -195,17 +196,39 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             memberships = data;
         }
 
-        
+        let loadLinks = function() {
+            links = [
+                {
+                    "type": "Facebook",
+                    "link": userInfo.Facebook
+                },
+                {
+                    "type": "Twitter",
+                    "link": userInfo.Twitter
+                },
+                {
+                    "type": "LinkedIn",
+                    "link": userInfo.LinkedIn
+                },
+                {
+                    "type": "Instagram",
+                    "link": userInfo.Instagram
+                }
+            ]
+        }   
+ 
 
         let loadModel = function() {
             console.log(userInfo);
+            console.log(links);
             return {
                 "requestsSent": requestsSent,
                 "godMode": godMode,
                 "superGodMode": superGodMode,
                 "admins": admins,
                 "userInfo": userInfo,
-                "memberships": memberships
+                "memberships": memberships,
+                "links" : links
             };
         };
 
@@ -226,7 +249,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "admins":[]
             }
         }
-
         return getLeaderPositions()
         .then(getadvisorPositions)
         .then(getSentRequests)
@@ -241,6 +263,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(getUserActivities)
         // .then(getUserActivitiesInfo)
         .then(setUserActivities)
+        .then(loadLinks)
         .then(loadModel);
         // return testLoadModel;
     }
