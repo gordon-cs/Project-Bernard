@@ -12,6 +12,7 @@ export default Ember.Controller.extend({
     actions: {
 
         toggleRequestSent(item) {
+            $(item.target).addClass("onclickOrange");
             let elements = $(item.target).nextAll();
             for (var i = 0; i < 3; i++) {
                 if ($(window).innerWidth() < 768) {
