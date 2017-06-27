@@ -24,6 +24,12 @@
   #login-block input, #login-block button {
       margin-bottom: 1em;
   }
+  #login-block {
+      width: 100% !important;
+  }
+  #login-block #login-info {
+      margin-top: 1em;
+  }
 }
 
 /* ----------------------------------

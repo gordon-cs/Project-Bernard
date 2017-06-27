@@ -51,6 +51,11 @@
     font-size: 2em;
 }
 
+.my-involvements #no-activity a {
+    padding-left: 0;
+    color: #00aeef;
+}
+
 .my-involvements a {
     padding: 1em;
     color: black;

@@ -38,15 +38,15 @@ header {
 }
 .app-title-container {
     text-align: center;
-		background: #cccccb;
-		position: relative;
+	background: #cccccb;
+	position: relative;
 }
 .app-title {
 	display: none;
 	color: #31342b;
 	text-transform: uppercase;
 	vertical-align: middle;
-	font-size: 1.2em !important;
+	font-size: 8pt !important;
 	letter-spacing: 1px;
 	font-weight: 400 !important;
 	margin-top: 16px !important;
@@ -68,9 +68,11 @@ header {
 	padding: 2em;
 	margin: -2em;
 	color: #31342b;
+	text-decoration: none;
 }
 .app-title a:hover {
 	color: #00aeef;
+	text-decoration: none;
 }
 #primary-menu {
 	font-size: 1.5em;
@@ -90,6 +92,7 @@ header {
 #primary-menu a {
 	color: #00aeef;
   padding: inherit;
+  text-decoration: none;
 }
 #primary-menu a:hover {
 	color: #DE571F;
@@ -130,13 +133,25 @@ ul.dropdown-menu {
 .user-info h6 {
 	color: #31342b;
 	letter-spacing: 1px;
-	font-size: 1.2em;
+	font-size: 8pt;
+	font-weight: bold;
 	display: inline;
 	text-transform: uppercase;
 }
 .user-info-buttons {
-		display: inline;
-		margin-left: 15px;
+	display: inline;
+	margin-left: 15px;
+}
+.user-info-unauth {
+	padding-right: 0em !important;
+	float: right !important;
+}
+.user-info-wrapper {
+	display: inline;
+	float: right;
+}
+.user-info-wrapper h6 {
+	cursor: pointer;
 }
 .user-info-mobile {
 		color: white;
