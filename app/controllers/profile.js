@@ -80,6 +80,7 @@ export default Ember.Controller.extend({
             if(lastForm){
                 lastForm.addClass("hide");
             }
+            this.set("model.link", "");
             let form = $(item.target).parent().parent().next();
             this.set("lastForm", form);
             form.removeClass("hide");
@@ -89,11 +90,68 @@ export default Ember.Controller.extend({
             let username = context.get("session.data.authenticated.token_data.user_name");
             let link = context.get("model.link");
             let type = item.type.toLowerCase();
-            console.log(item.link.indexOf("https://www.facebook.com/"));
-            let uploadLink = function(){
-                return putAsync("/profiles/" + username + "/" + item.type.toLowerCase() + "/" + "profile.php?id=100007230048375" + "/", link, context);
+            let linkPrefixes = ["https://www.facebook.com/", "https://twitter.com/","https://www.linkedin.com/in/","https://www.instagram.com/"];
+            let linkToSend;
+
+            let prepareLink = function() {
+                switch(type) {
+                case "facebook":
+                    if(link.indexOf("https://www.facebook.com/") === 0){
+                        linkToSend = link.substring(25);
+                        return true;
+                    } else {
+                        errorHandler("Please enter your Facebook profile link");
+                        return false;
+                    }
+                case "twitter":
+                    if(link.indexOf("https://twitter.com/") === 0){
+                        linkToSend = link.substring(20);
+                        return true;
+                    } else {
+                        errorHandler("Please enter your Twitter profile link");
+                        return false;
+                    }
+                case "linkedin":
+                    if(link.indexOf("https://www.linkedin.com/in/") === 0){
+                        linkToSend = link.substring(28);
+                        return true;
+                    } else {
+                        errorHandler("Please enter your LinkedIn profile link");
+                        return false;
+                    }
+                case "instagram":
+                    if(link.indexOf("https://www.instagram.com/") === 0){
+                        linkToSend = link.substring(26);
+                        return true;
+                    } else {
+                        errorHandler("Please enter your Instagram profile link");
+                        return false;
+                    }
+                }
+            };
+
+            let errorHandler = function(error){
+                console.log(error);
+            };
+
+            let uploadLink = function() {
+                return putAsync("/profiles/" + username + "/" + item.type.toLowerCase() + "/" + "id=100007230048375" + "/", link, context);
+            };
+
+            let errorChecks = function(){
+                let passed = false;
+                for(i = 0; i < linkPrefixes.length; i++) {
+                    if(link.indexOf(linkPrefixes[i]) === 0) {
+                        passed = true;
+                    }
+                }
+                return passed;
+            };
+
+            if(errorChecks){
+                console.log("GOOD LINK");
             }
-            uploadLink();
+            // uploadLink();
         },
         updatePicture() {
 
