@@ -27,18 +27,22 @@ export default Ember.Controller.extend({
                  window.location.reload(true);
              });
         },
+        // Shows and hides the table that shows membership requests recieved
         toggleRecievedTable() {
             $("#membership-requests-recieved-table").slideToggle();
             $("#recieved-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         },
+        // Shows and hides the table that shows membership requests sent
         toggleSentTable() {
             $("#membership-requests-sent-table").slideToggle();
             $("#sent-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         },
+        // Shows and hides the table that shows the system admins
         toggleAdminTable() {
             $("#admin-table").slideToggle();
             $("#admin-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         },
+        // On mobile displays dropdown with more info about the selected membership request
         toggleRequestSent(item){
             let elements = $(item.target).nextAll();
             for(var i=0; i < 3; i++){
@@ -47,26 +51,26 @@ export default Ember.Controller.extend({
                 }
             }
         },
-        toggleEditProfilePictureModal(){
+        // Shows the modal that holds the information to update profile picture
+        showEditProfilePictureModal(){
              $("#editProfilePictureModal").addClass("showModal");
              $('body').css('overflow','hidden');
         },
+        // Hides the modal that holds the information to update profile picture
         cancelEditProfilePicture(){
-            console.log(this.get("file"));
-            this.set("description", null);
-            this.set("pageUrl", null);
             this.set("file", null);
             this.set("defaultImage", false);
             this.set("errorMessage", null);
              $("#editProfilePictureModal").removeClass("showModal");
-            console.log(this.get("file"));
             $('body').css('overflow','scroll');
             //TODO Get cropper to disappear after canceling upload
         },
+        // Shows the modal that allows users to update social media links
         showEditLinksModal(){
             $("#editLinksModal").addClass("showModal");
             $('body').css('overflow','hidden');
         },
+        // hides the modal that allows 
         hideEditLinksModal(){
             $("#editLinksModal").removeClass("showModal");
             $('body').css('overflow','scroll');
@@ -75,6 +79,8 @@ export default Ember.Controller.extend({
                 lastForm.addClass("hide");
             }
         },
+        // Displays the form to change a specific social media link
+        // Also hides the last open form
         changeSocialMediaLink(item){
             let lastForm = this.get("lastForm");
             if(lastForm){
@@ -85,6 +91,7 @@ export default Ember.Controller.extend({
             this.set("lastForm", form);
             form.removeClass("hide");
         },
+        // Logic to update a social media link
         updateLinks(item) {
             let context = this;
             let username = context.get("session.data.authenticated.token_data.user_name");
@@ -94,65 +101,94 @@ export default Ember.Controller.extend({
             let linkToSend;
 
             let prepareLink = function() {
+                
                 switch(type) {
                 case "facebook":
-                    if(link.indexOf("https://www.facebook.com/") === 0){
                         linkToSend = link.substring(25);
-                        return true;
-                    } else {
-                        errorHandler("Please enter your Facebook profile link");
-                        return false;
-                    }
+                        break;
                 case "twitter":
-                    if(link.indexOf("https://twitter.com/") === 0){
                         linkToSend = link.substring(20);
-                        return true;
-                    } else {
-                        errorHandler("Please enter your Twitter profile link");
-                        return false;
-                    }
+                        break;
                 case "linkedin":
-                    if(link.indexOf("https://www.linkedin.com/in/") === 0){
                         linkToSend = link.substring(28);
-                        return true;
-                    } else {
-                        errorHandler("Please enter your LinkedIn profile link");
-                        return false;
-                    }
+                        break;
                 case "instagram":
-                    if(link.indexOf("https://www.instagram.com/") === 0){
                         linkToSend = link.substring(26);
-                        return true;
-                    } else {
-                        errorHandler("Please enter your Instagram profile link");
-                        return false;
-                    }
+                        break;
+                };
+
+
+            };
+
+            let uploadLink = function(data) {
+                console.log(data);
+                let url = {
+                    [type]: data
                 }
+                return putAsync("/profiles/" + username + "/" + type, url, context).catch((reason) => {
+                    showError(reason);
+                });
             };
 
-            let errorHandler = function(error){
-                console.log(error);
-            };
-
-            let uploadLink = function() {
-                return putAsync("/profiles/" + username + "/" + item.type.toLowerCase() + "/" + "id=100007230048375" + "/", link, context);
-            };
-
+            // Make sure link passed 
             let errorChecks = function(){
                 let passed = false;
-                for(i = 0; i < linkPrefixes.length; i++) {
-                    if(link.indexOf(linkPrefixes[i]) === 0) {
-                        passed = true;
+                if(type === "facebook"){
+                    if((link.indexOf(linkPrefixes[0]) === 0)){
+                        passed = true
+                    }
+                }
+                if(type === "twitter"){
+                    if((link.indexOf(linkPrefixes[1]) === 0)){
+                        passed = true
+                    }
+                }
+                if(type === "linkedin"){
+                    if((link.indexOf(linkPrefixes[2]) === 0)){
+                        passed = true
+                    }
+                }
+                if(type === "instagram"){
+                    if((link.indexOf(linkPrefixes[3]) === 0)){
+                        passed = true
                     }
                 }
                 return passed;
             };
 
+            let askAgain = function(){
+                let reason = {
+                    responseText: "Please use your " + type + " profile link"
+                }
+                showError(reason);
+            };
+
+            let showError = function(result) {
+                context.set("linksErrorMessage", new Error(result.responseText));
+            };
+
+            let showSuccess = function() {
+                context.set("linksSuccessMessage", "You have updated your " + item.type + " profile link!");
+            };
+
+            let transition = function() {
+                context.set("model.userInfo."+item.type, linkToSend);
+                console.log(context);
+                let form = context.get("lastForm");
+                form.addClass("hide");
+                showSuccess();
+            };
+
             if(errorChecks){
                 console.log("GOOD LINK");
+                prepareLink();
+                uploadLink(linkToSend)
+                .then(transition);
+            } else {
+                askAgain();
             }
-            // uploadLink();
         },
+        // Logic to update profile picture
         updatePicture() {
 
             let context = this;
@@ -242,28 +278,29 @@ export default Ember.Controller.extend({
                 .then(transitionModal);
             };
 
+            // Gets the user info so that the new profile image can be displayed.
+            let getUserInfo = function() {
+                return  getAsync("/profiles/" + context.get("session.data.authenticated.token_data.user_name").toLowerCase() + "/", context);
+            }
+
+            // hides the modal and changes the picture on page to reflect the new change
             let transitionModal = function(user){
                 $("#editProfilePictureModal").removeClass("showModal");
                 $('body').css('overflow','scroll');
                 $("#profilePicture").attr("src", user.ImagePath);
             }
-            let getUserInfo = function() {
-                return  getAsync("/profiles/" + context.get("session.data.authenticated.token_data.user_name").toLowerCase() + "/", context);
-            }
-
+            
+            // Show error
             let askAgain = function(){
                 let reason = {
                     responseText: "Please upload one of the supported image types"
                 }
                 showError(reason);
             };
-            console.log("Starting");
+
             if (errorChecks()) {
-                console.log("errorChecks passed");
                 uploadImage()
-                // .then(updateProfile)
                 .then(function() {
-                    console.log("uploaded image");
                     if (! error) {
                         transition();
                     }

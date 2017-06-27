@@ -237,6 +237,11 @@ Edit social media modal
     margin: 3px 0;
 }
 
+.links-success-message {
+    font-size: 1.9em;
+    color: green;
+}
+
 
 /****************************
 Activities

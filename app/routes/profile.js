@@ -126,10 +126,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             };
         };
 
+        // Gets user info from server
         let getuserInfo = function() {
             return getAsync("/profiles/" + userName + "/", context);
         };
 
+        // Changes class from the number value set in the table to the corresponding string
         let setClass = function(data) {
             switch(data.Class) {
                 case "1":
@@ -157,6 +159,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data;
         }
 
+        // Set whether student is on or off campus 
+        // TODO will need to be changed if live data is in different format
         let setOnOffCampus = function(data){
             if(data.OnOffCampus == "on"){
                 data.OnOffCampus = true;
@@ -166,6 +170,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data;
         }
 
+        // Adds data to model to determine the type of user
         let setUserType = function(data) {
             data.IsFaculty = (data.PersonType.includes("fac"));
             data.IsAlumni = (data.PersonType.includes("alu"));
@@ -174,14 +179,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data
         }
 
+        // Sets userInfo to be the edited data about the person
         let setuserInfo = function(data) {
             userInfo = data;
         }
 
+        // Gets all the activities a user is a member of
         let getUserActivities = function() {
             return getAsync("/memberships/student/" + IDNumber, context);
         }
 
+        // Gets more information about the activites that a user is a member of
+        // TODO need more info 
+        // TODO not working
         let getUserActivitiesInfo = function(data) {
             for(var i = 0; i < data.length; i++) {
                 let Info = getAsync("/activities/" + data[i].ActivityCode.trim(), context);
@@ -191,11 +201,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data;
         }
         
+        // Sets memberships to be the information about all of a users activities
         let setUserActivities = function(data) {
             console.log(data);
             memberships = data;
         }
 
+        // sets social media links to seperate array that defines the type of the link along with the link
         let loadLinks = function() {
             links = [
                 {

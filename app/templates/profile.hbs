@@ -1,16 +1,17 @@
 <link rel="stylesheet" href="assets/profile.css">
-<link rel="stylesheet" href="assets/form.css">
-<main class="container main-container profile-container">
+<main class="container main-container profile-container profile">
     {{!--Profile picture and information--}}
     <section class="row profile-block">
+        {{! Profile picture and overlay }}
         <div class="col-sm-3">
-            <div class="profile-picture-container" {{action "toggleEditProfilePictureModal"}}>
+            <div class="profile-picture-container" {{action "showEditProfilePictureModal"}}>
             <img src="{{model.userInfo.ImagePath}}" alt="Avatar" class="image" id="profilePicture">
             <div class="overlay">
                 <div class="text">Click here to change profile picture</div>
             </div>
             </div>
         </div>
+        {{! User main info }}
         <div class="col-sm-9 profile-block-info">
             <div class="row">
                 <div class="col-sm-12">
@@ -30,6 +31,7 @@
                     </div>
                 </div>
             </div>
+            {{! Display users social media links if provided }}
             <div class="row user-links">
                 {{#if model.userInfo.Facebook}}
                     <a href="https://www.facebook.com/{{model.userInfo.Facebook}}" class="col-sm-2">Facebook</a>
@@ -68,13 +70,11 @@
                         </label>
                         {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
                     </div>
-                    {{!--{{#if showImageCropper}}--}}
                     <div class="image-cropper-wrapper">
                         <div class="image-cropper-container">
                             {{image-cropper image=file}}
                         </div>
                     </div>
-                    {{!--{{/if}}--}}
                     <p class="form-note">Files acceptable: png, jpg, jpeg, bmp, gif</p>
                     <button class="btn button-navy form-button" {{action 'updatePicture'}}>Upload Picture</button>
                     <button class="btn button-cyan form-button form-cancel-button" {{action "cancelEditProfilePicture"}}>Cancel</button>
@@ -84,7 +84,7 @@
     </div>
 
 
-    <!-- The Modal -->
+    <!-- Edit social media links modal -->
     <div id="editLinksModal" class="modal">
 
     <!-- Modal content -->
@@ -92,6 +92,12 @@
         <div class="row">
             <div class="col-sm-12 modal-title">Edit your links</div>
         </div>
+        {{#if linksErrorMessage}}
+            <p id="error-message">{{linksErrorMessage}}</p>
+        {{/if}}
+        {{#if linksSuccessMessage}}
+            <div class="links-success-message">{{linksSuccessMessage}}</div>
+        {{/if}}
         {{#each model.links as |link|}}
             <div class="row edit-links-row">
                 <div class="col-sm-6 links-title">{{link.type}}: </div>
@@ -108,6 +114,7 @@
                     </div>
                 {{/if}}
             </div>
+            {{! form for entering data }}
             <div class="row edit-links-form-container hide">
                 <form class="edit-links-form" {{action "updateLinks" link on="submit"}}>
                         <div class="col-sm-9 edit-links-button-containers">
