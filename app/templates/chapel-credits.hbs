@@ -35,14 +35,14 @@
 </div>
 
 <!-- Event Details Modal -->
-<div id="toggleEventDetailsModal" class="modal">
+<div id="toggleEventDetailsModal" class="modal" onclick={{action "cancelEventDetailsModal"}}>
 
   <!-- Modal Content -->
   <div class="modal-content">
     <h3 class="navybox"> </h3>
     <div class="modal-body"> Description <br /> and other stuff <br /> or whatever <br /> </div>
     <div class="modal-footer">
-      <button class="btn button-cyan form-button form-cancel-button" {{action "cancelEventDetailsModal"}}>Cancel</button>
+      <button class="btn button-cyan form-button form-cancel-button">Cancel</button>
     </div>
   </div>
 
