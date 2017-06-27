@@ -2,7 +2,7 @@
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
-                <img src="images/gordon-logo-mobile.png" id="logo-mobile"  class="{{if session.isAuthenticated '' 'logo-mobile-center'}}"/>
+                <img src="images/gordon-logo-mobile.png" id="logo-mobile"/>
             {{/link-to}}
             {{#if session.isAuthenticated}}
                 <div class="mobile-menu-icon">
@@ -17,14 +17,9 @@
                     </button>
                 </div>
             {{/if}}
-            <div class="app-title col-sm-6 col-md-9">
-                <ul>
-                    <li><a>Student Clubs &amp; Organizations</a></li>
-                    <li><a href="https://my.gordon.edu/">My Gordon</a></li>
-                </ul>
-            </div>
-            <div class="user-info col-sm-6">
+            <div class="user-info col-sm-9 {{if session.isAuthenticated '' 'user-info-unauth'}}">
                 {{#if session.isAuthenticated}}
+                <div class="user-info-wrapper">
                     <div class="user-info-buttons dropdown">
                         <h6 class="dropdown-toggle" id=id="dropdownMenu1" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true">
@@ -51,8 +46,17 @@
                             {{requestsRecieved.length}}
                         </span>
                     {{/if}}
+                </div>
                 {{/if}}
+                <div class="app-title">
+                    <ul>
+                        <li><a>Student Clubs &amp; Organizations</a></li>
+                        <li><a href="https://my.gordon.edu/">My Gordon</a></li>
+                    </ul>
+                </div>
+
             </div>
+
             {{#if session.isAuthenticated}}
                 <!-- {{#link-to "index"}}
                     <div id="logo-box-horizontal">

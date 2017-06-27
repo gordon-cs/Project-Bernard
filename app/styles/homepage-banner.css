@@ -1,6 +1,92 @@
+.homepage-banner img {
+  width: 100%;
+}
+.homepage-banner .row.info-blocks {
+  margin: 0;
+}
+.homepage-banner .info-title:hover {
+  color: #de571f;
+}
+.homepage-banner .info-block.active .info-title:hover {
+  color: white !important;
+}
+.homepage-banner .info-block {
+  /*background-color: #00aeef;*/
+  background-color: #014983;
+  color: #fff;
+  cursor: pointer;
+  height: 100px;
+  text-align: center;
+}
+
+.homepage-banner .info-block.active {
+    background-color: #00aeef;
+}
+
+.homepage-banner .glyphicon-triangle-bottom {
+    color: #014983;
+}
+
+.homepage-banner .glyphicon-triangle-bottom.active {
+    color: #00aeef;
+}
+
+.homepage-banner .info-block h4 {
+  font-weight: bold;
+  letter-spacing: .65px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.homepage-banner .info-blocks.tab-content .tab-pane {
+  min-height: 208px;
+}
+.homepage-banner .info-blocks .tab-pane {
+  background-color: #fff;
+  padding: 4em;
+  position: relative;
+}
+.homepage-banner .info-blocks .tab-pane .glyphicon-triangle-bottom {
+  font-size: 4em;
+  position: absolute;
+}
+.homepage-banner #info-block-content-1 .glyphicon-triangle-bottom {
+  /*color: #014983;*/
+  left: 5%;
+  top: -10px;
+}
+.homepage-banner #info-block-content-2 .glyphicon-triangle-bottom {
+  /*color: #00aeef;*/
+  left: 37%;
+  top: -10px;
+}
+.homepage-banner #info-block-content-3 .glyphicon-triangle-bottom {
+  /*color: #014983;*/
+  left: 71%;
+  top: -10px;
+}
+.homepage-banner .info-blocks .tab-pane h4 {
+  color: #00aeef;
+  font-weight: bold;
+}
+.homepage-banner .info-blocks .tab-pane p{
+  font-size: 1.5em !important;
+}
 
 @media only screen and (max-width: 480px) {
-  .info-title {
+  .homepage-banner .info-title {
       font-size: 9pt;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .homepage-banner .info-blocks.tab-content .tab-pane{
+    min-height: 245px;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .homepage-banner .info-blocks.tab-content .tab-pane{
+    min-height: 240px;
   }
 }
