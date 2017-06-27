@@ -67,14 +67,35 @@ export default Ember.Controller.extend({
             $("#editLinksModal").addClass("showModal");
             $('body').css('overflow','hidden');
         },
-        closeEditLinksModal(){
-            $("#editLinksModal").addClass("showModal");
+        hideEditLinksModal(){
+            $("#editLinksModal").removeClass("showModal");
             $('body').css('overflow','scroll');
+            let lastForm = this.get("lastForm");
+            if(lastForm){
+                lastForm.addClass("hide");
+            }
         },
-        changeSocialMediaLink(){
-            console.log("Update");
+        changeSocialMediaLink(item){
+            let lastForm = this.get("lastForm");
+            if(lastForm){
+                lastForm.addClass("hide");
+            }
+            let form = $(item.target).parent().parent().next();
+            this.set("lastForm", form);
+            form.removeClass("hide");
         },
-        update() {
+        updateLinks(item) {
+            let context = this;
+            let username = context.get("session.data.authenticated.token_data.user_name");
+            let link = context.get("model.link");
+            let type = item.type.toLowerCase();
+            console.log(item.link.indexOf("https://www.facebook.com/"));
+            let uploadLink = function(){
+                return putAsync("/profiles/" + username + "/" + item.type.toLowerCase() + "/" + "profile.php?id=100007230048375" + "/", link, context);
+            }
+            uploadLink();
+        },
+        updatePicture() {
 
             let context = this;
 

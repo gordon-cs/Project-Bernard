@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="assets/form.css">
 <main class="container main-container profile-container">
     {{!--Profile picture and information--}}
-    <section class="row profile-block bootstrap-tester">
+    <section class="row profile-block">
         <div class="col-sm-3">
             <div class="profile-picture-container" {{action "toggleEditProfilePictureModal"}}>
             <img src="{{model.userInfo.ImagePath}}" alt="Avatar" class="image" id="profilePicture">
@@ -11,7 +11,7 @@
             </div>
             </div>
         </div>
-        <div class="col-sm-9 profile-block-info bootstrap-tester">
+        <div class="col-sm-9 profile-block-info">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}} {{if  model.userInfo.NickName "("}}{{model.userInfo.NickName}}{{if model.userInfo.NickName ")"}}</div>
@@ -55,7 +55,7 @@
         <!-- Modal content -->
         <div class="modal-content">
             <div id="modal-form-box" class="whitebox row">
-                <form {{action "update" on="submit"}}>
+                <form {{action "updatePicture" on="submit"}}>
                     {{#if errorMessage}}
                         <p id="error-message">{{errorMessage}}</p>
                     {{/if}}
@@ -76,7 +76,7 @@
                     </div>
                     {{!--{{/if}}--}}
                     <p class="form-note">Files acceptable: png, jpg, jpeg, bmp, gif</p>
-                    <button class="btn button-navy form-button" {{action 'update'}}>Upload Picture</button>
+                    <button class="btn button-navy form-button" {{action 'updatePicture'}}>Upload Picture</button>
                     <button class="btn button-cyan form-button form-cancel-button" {{action "cancelEditProfilePicture"}}>Cancel</button>
                 </form>
             </div>
@@ -93,29 +93,40 @@
             <div class="col-sm-12 modal-title">Edit your links</div>
         </div>
         {{#each model.links as |link|}}
-            <div class="row">
-                <div class="col-sm-6 social-media-title bootstrap-tester">{{link.type}}: </div>
+            <div class="row edit-links-row">
+                <div class="col-sm-6 links-title">{{link.type}}: </div>
                 {{#if link.link}}
-                    <div class="col-sm-3 edit-social-media-button-containers bootstrap-tester">
-                        <button class="btn btn-primary edit-social-media-button" {{action "changeSocialMediaLink"}}>Edit</button>
+                    <div class="col-sm-3 edit-links-button-containers">
+                        <button class="btn btn-primary edit-links-button" onclick={{action "changeSocialMediaLink"}}>Edit</button>
                     </div>
-                    <div class="col-sm-3 edit-social-media-button-containers bootstrap-tester">
-                        <button class="btn button-cyan edit-social-media-button">Remove</button>
+                    <div class="col-sm-3 edit-links-button-containers">
+                        <button class="btn button-danger edit-links-button">Remove</button>
                     </div>
                 {{else}}
-                    <div class="col-sm-3 edit-social-media-button-containers bootstrap-tester">
-                        <button class="btn btn-success edit-social-media-button" {{action "changeSocialMediaLink"}}>Add</button>
+                    <div class="col-sm-3 edit-links-button-containers">
+                        <button class="btn btn-success edit-links-button" onclick={{action "changeSocialMediaLink"}}>Add</button>
                     </div>
                 {{/if}}
             </div>
+            <div class="row edit-links-form-container hide">
+                <form class="edit-links-form" {{action "updateLinks" link on="submit"}}>
+                        <div class="col-sm-9 edit-links-button-containers">
+                                {{input value=model.link class="edit-links-input"}}
+                        </div>
+                        <div class="col-sm-3 edit-links-button-containers">
+                            <input class="btn btn-primary edit-links-button" type="submit">
+                        </div>
+                </form>
+            </div>
         {{/each}}
+        <button class="btn btn-primary"{{action "hideEditLinksModal"}}>Done</button>
         
     </div>
 
     </div>
 
     {{!--Personal Information--}}
-    <section class="row profile-block bootstrap-tester">
+    <section class="row profile-block">
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-12 block-header">Personal Information</div>
@@ -168,7 +179,7 @@
 
     {{!--Activities--}}
     
-    <section class="row profile-block bootstrap-tester">
+    <section class="row profile-block">
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -176,7 +187,7 @@
                 </div>
             </div>
             {{#each model.memberships as |activity|}}
-                <div class="row activity-entry bootstrap-tester">
+                <div class="row activity-entry">
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-8">

@@ -195,11 +195,11 @@ Edit profile picture modal
 Edit social media modal
 ****************************/
 
-.edit-social-media-button-containers {
+.edit-links-button-containers {
     padding: 0;
 }
 
-.edit-social-media-button {
+.edit-links-button {
     display: block;
     margin: 0 auto;
     /*padding: 6px 0;*/
@@ -209,9 +209,30 @@ Edit social media modal
     font-size: 3em;
 }
 
-.social-media-title {
+.links-title {
     font-size: 2.5em;
 }
+
+.hide {
+    display: none;
+}
+
+.edit-links-input {
+    display: block;
+    width: 100%;
+    height: 32px;
+    margin: auto 0;
+    font-size: 20px;
+}
+
+.edit-links-form {
+    margin: 3px 0;
+}
+
+.edit-links-row {
+    margin: 3px 0;
+}
+
 
 /****************************
 Activities
