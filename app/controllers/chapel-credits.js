@@ -12,11 +12,51 @@ export default Ember.Controller.extend({
     actions: {
 
         toggleRequestSent(item) {
-            let elements = $(item.target).nextAll();
-            for (var i = 0; i < 3; i++) {
-                if ($(window).innerWidth() < 768) {
-                    $(elements[i]).slideToggle();
+
+
+            /*let lastForm = this.get("lastForm");
+             if(lastForm){
+                 lastForm.addClass("hide");
+             }
+             let form = $(item.target).parent().parent().next();
+             this.set("lastForm", form);
+             form.removeClass("hide");*/
+
+            let lastForm = this.get("lastForm");
+
+            if (lastForm && $(item.target).hasClass("onclickOrange")) {
+                let elements = $(lastForm).nextAll();
+                for (var i = 0; i < 3; i++) {
+                    if ($(window).innerWidth() < 768) {
+                        $(elements[i]).slideUp();
+                        console.log("twice");
+                    }
                 }
+                let form = $(item.target);
+                this.set("lastForm", form);
+            } else {
+                if (lastForm) {
+                    $(lastForm).removeClass("onclickOrange");
+
+                    let elements = $(lastForm).nextAll();
+                    for (var i = 0; i < 3; i++) {
+
+                        if ($(window).innerWidth() < 768) {
+                            $(elements[i]).slideUp();
+                            console.log("once");
+                        }
+                    }
+                }
+                let form = $(item.target);
+                $(form).addClass("onclickOrange");
+                let elements = $(form).nextAll();
+                for (var i = 0; i < 3; i++) {
+                    if ($(window).innerWidth() < 768) {
+                        $(elements[i]).slideDown();
+                        console.log("twice");
+                    }
+                }
+                this.set("lastForm", form);
             }
         },
 

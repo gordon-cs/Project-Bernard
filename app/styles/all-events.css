@@ -1,162 +1,173 @@
 /* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-.showModal {
-  display: block !important;
-}
-
-.blur {
-    -webkit-filter: blur(5px) grayscale(70%);
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 
 .event-box {
-  background-color: #FFFFFF;
-  margin-top: 30px;
+    background-color: #FFFFFF;
+    margin-top: 30px;
 }
 
-.entry-rows div:nth-child(even){
-  background: #ffffff;
+.entry-rows div:nth-child(even) {
+    background: #ffffff;
 }
-.entry-rows div:nth-child(odd){
-  background: #DDD;
+
+.entry-rows div:nth-child(odd) {
+    background: #DDD;
 }
 
 .highlight-box {
-  font-size: 20px;
-  margin-top: 10px;
-  margin-bottom: 0px;
-  padding-bottom: 5px !important;
-  align-content: space-between;
-  font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding-bottom: 5px !important;
+    align-content: space-between;
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 }
 
-.event-row{
-  margin-left: 25px
+.event-row {
+    margin-left: 25px
 }
 
-.event-header{
-  font-size: 25px;
-  margin-top: 0px;
-  background-color: white;
+.event-row:hover {
+    background-color: #E2794C !important;
+    color: white;
 }
 
-.event-p{
+.event-header {
+    font-size: 25px;
+    margin-top: 0px;
+    background-color: white;
+}
+
+.event-p {
     margin-top: 0px !important;
     margin-bottom: 10px !important;
     padding-top: 0px !important;
 }
 
-.event-id{
-  padding-bottom: 0.px;
-  padding-right: 0px;
-  v
+.event-id {
+    padding-bottom: 0.px;
+    padding-right: 0px;
+    v
 }
-.display-col{
-  padding-bottom: 0px;
-  padding-right: 0px;
-  font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 
+.display-col {
+    padding-bottom: 0px;
+    padding-right: 0px;
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 }
+
 .event-labels {
-  text-transform: UPPERCASE;
-  color: white;
+    text-transform: UPPERCASE;
+    color: white;
 }
+
 .entry-rows {
     padding: 8px;
     font-size: 1.6em;
 }
 
 @media screen and (max-width: 767px) {
-   .highlight-box, .event-labels, .event-row {
-    font-size: 15px;
-  }
-
-
-
-  .event-id{
-    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
-    color: #00aeef;
-    background-color: white;
-    border-bottom: 1px solid #3d3d3a;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: darkGrey;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-  .cyanbox{
-    display: none;
-  }
-  .btn-upComing{
-   margin-bottom: 5px;
-  }
-  .display-col{
-    display: none;
-    margin: 0;
-    font-size: 10;
-    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    text-align: center;
-    background-color: lightGray;
-  	color: black;
-    border-left: 3px solid #00aeef;
-    border-left-width: 3px;
-    border-left-style: solid;
-    border-left-color: #00aeef;
-
+    .highlight-box,
+    .event-labels,
+    .event-row {
+        font-size: 15px;
     }
-  }
-
+    .onclickOrange {
+        background-color: #E2794C !important;
+        color: white !important;
+    }
+    .event-id {
+        font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+        color: #00aeef;
+        background-color: white;
+        border-bottom: 1px solid #3d3d3a;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: darkGrey;
+        padding-bottom: 15px;
+        padding-top: 15px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .cyanbox {
+        display: none;
+    }
+    .btn-upComing {
+        margin-bottom: 5px;
+    }
+    .display-col {
+        display: none;
+        margin: 0;
+        font-size: 10;
+        font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        text-align: center;
+        background-color: white;
+        color: black;
+    }
+}
 
 @media screen and (min-width: 768px) {
-.display-col{
-  display: block !important;
-  }
-
-.btn-upComing{
-   float: right;
-}
-
-.event-progress{
-  width: 70% !important;
-}
-
+    .display-col {
+        display: block !important;
+    }
+    .btn-upComing {
+        float: right;
+    }
+    .event-progress {
+        width: 70% !important;
+    }
+    .modal-content {
+        width: 35%;
+        height: 40%;
+    }
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%;
+        /* Could be more or less, depending on screen size */
+    }
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .blur {
+        -webkit-filter: blur(5px) grayscale(70%);
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .showModal {
+        display: block !important;
+    }
 }
