@@ -1,4 +1,4 @@
-<div class="container event-box">
+<div class="container events event-box">
   <div class="whitebox">
     <h4 class="event-p">
       You currently have <b>{{model.numEvents}}</b> Christian Life and Worship Credits
@@ -11,7 +11,7 @@
     </div>
 
   </div>
-  <h4 class="cyanbox">
+  <h4 class="event-cyanbox cyanbox">
     <div id = "category-bar" class="row">
       <div class="event-labels col-xs-6 col-sm-5 col-md-6">Events Attended </div>
       <div class="event-labels col-xs-2 col-sm-3 col-md-2">Location</div>
@@ -33,11 +33,11 @@
 </div>
 
 <!-- Event Details Modal -->
-<div id="toggleEventDetailsModal" class="modal" onclick={{action "cancelEventDetailsModal"}}>
+<div id="toggleEventDetailsModal" class="modal event-modal" onclick={{action "cancelEventDetailsModal"}}>
 
   <!-- Modal Content -->
-  <div class="modal-content">
-      <h3 class="whitebox modal-header"> {{ displayEvent.CHEventID }} </h3>
+  <div class="modal-content event-modal-content">
+      <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.CHEventID }} </h3>
     <div class="modal-body">
       <h4> A.J Chapel <br> {{ displayEvent.CHTime }} <br> {{ displayEvent.CHDate}} </h4>
     </div>

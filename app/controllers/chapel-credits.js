@@ -62,7 +62,7 @@ export default Ember.Controller.extend({
 
         toggleEventDetailsModal(item) {
 
-            $("#toggleEventDetailsModal").addClass("showModal");
+            $("#toggleEventDetailsModal").addClass("event-showModal");
             $('.container').addClass('blur');
             let context = this;
             let displayEvent = this.set("displayEvent", item);
@@ -73,7 +73,7 @@ export default Ember.Controller.extend({
         cancelEventDetailsModal(item) {
 
             if (!($(item.target).hasClass("modal-content") || $(item.target).hasClass("modal-body") || $(item.target).hasClass("modal-footer"))) {
-                $("#toggleEventDetailsModal").removeClass("showModal");
+                $("#toggleEventDetailsModal").removeClass("event-showModal");
                 $('.container').removeClass('blur');
                 $('body').css('overflow', 'scroll');
             }
