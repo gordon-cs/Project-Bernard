@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="assets/profile.css">
 <main class="container main-container profile-container profile">
     {{!--Profile picture and information--}}
     <section class="row profile-block">
@@ -56,7 +55,7 @@
     <div id="editProfilePictureModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <div id="modal-form-box" class="whitebox row">
+            <div id="profile-modal-from-box" class="whitebox row">
                 <form {{action "updatePicture" on="submit"}}>
                     {{#if errorMessage}}
                         <p id="error-message">{{errorMessage}}</p>
