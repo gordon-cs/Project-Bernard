@@ -128,7 +128,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Gets user info from server
         let getuserInfo = function() {
-            return getAsync("/profiles/" + userName + "/", context);
+            return getAsync("/profiles/", context);
         };
 
         // Changes class from the number value set in the table to the corresponding string

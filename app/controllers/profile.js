@@ -135,7 +135,7 @@ export default Ember.Controller.extend({
                 let url = {
                     [type]: data
                 }
-                return putAsync("/profiles/" + username + "/" + type, url, context).catch((reason) => {
+                return putAsync("/profiles/" + type, url, context).catch((reason) => {
                     showError(reason);
                 });
             };
@@ -255,8 +255,7 @@ export default Ember.Controller.extend({
                         imageData.append("canvasImage", blob, "canvasImage.jpeg");
                         console.log(imageData);
 
-                        return postFileAsync("/profiles/" + context.get("model.userInfo.EmailUserName") +
-                          "/image", imageData, context).catch((reason) => {
+                        return postFileAsync("/profiles/" + "/image", imageData, context).catch((reason) => {
                             error = true;
                             showError(reason);
                         });
@@ -289,7 +288,7 @@ export default Ember.Controller.extend({
 
             // Gets the user info so that the new profile image can be displayed.
             let getUserInfo = function() {
-                return  getAsync("/profiles/" + context.get("session.data.authenticated.token_data.user_name").toLowerCase() + "/", context);
+                return  getAsync("/profiles/", context);
             }
 
             // hides the modal and changes the picture on page to reflect the new change
