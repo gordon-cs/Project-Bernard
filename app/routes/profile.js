@@ -209,24 +209,34 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // sets social media links to seperate array that defines the type of the link along with the link
         let loadLinks = function() {
-            links = [
-                {
-                    "type": "Facebook",
-                    "link": userInfo.Facebook
-                },
-                {
-                    "type": "Twitter",
-                    "link": userInfo.Twitter
-                },
-                {
-                    "type": "LinkedIn",
-                    "link": userInfo.LinkedIn
-                },
-                {
-                    "type": "Instagram",
-                    "link": userInfo.Instagram
+            var Link = Ember.Object.extend({
+                linkPrefixes: ["https://www.facebook.com/", "https://twitter.com/","https://www.linkedin.com/in/","https://www.instagram.com/"],
+                init: function() {
+                    this._super();
                 }
-            ]
+            });
+            links = [
+                Link.create({
+                    "type": "Facebook",
+                    "link": userInfo.Facebook,
+                    "prefixNum": 0
+                }),
+                Link.create({
+                    "type": "Twitter",
+                    "link": userInfo.Twitter,
+                    "prefixNum": 1
+                }),
+                Link.create({
+                    "type": "LinkedIn",
+                    "link": userInfo.LinkedIn,
+                    "prefixNum": 2
+                }),
+                Link.create({
+                    "type": "Instagram",
+                    "link": userInfo.Instagram,
+                    "prefixNum": 3
+                })
+             ]
         }   
  
 

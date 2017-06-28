@@ -103,20 +103,20 @@
                 <div class="col-sm-6 links-title">{{link.type}}: </div>
                 {{#if link.link}}
                     <div class="col-sm-3 edit-links-button-containers">
-                        <button class="btn btn-primary edit-links-button" onclick={{action "changeSocialMediaLink"}}>Edit</button>
+                        <button class="btn btn-primary edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Edit</button>
                     </div>
                     <div class="col-sm-3 edit-links-button-containers">
-                        <button class="btn button-danger edit-links-button">Remove</button>
+                        <button class="btn button-danger edit-links-button" onclick={{action "updateLinks" "removed" link}}>Remove</button>
                     </div>
                 {{else}}
                     <div class="col-sm-3 edit-links-button-containers">
-                        <button class="btn btn-success edit-links-button" onclick={{action "changeSocialMediaLink"}}>Add</button>
+                        <button class="btn btn-success edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Add</button>
                     </div>
                 {{/if}}
             </div>
             {{! form for entering data }}
             <div class="row edit-links-form-container hide">
-                <form class="edit-links-form" {{action "updateLinks" link on="submit"}}>
+                <form class="edit-links-form" {{action "updateLinks" "updated" link on="submit"}}>
                         <div class="col-sm-9 edit-links-button-containers">
                                 {{input value=model.link class="edit-links-input"}}
                         </div>

@@ -78,28 +78,37 @@ export default Ember.Controller.extend({
             if(lastForm){
                 lastForm.addClass("hide");
             }
+            this.set("linksErrorMessage", "");
+            this.set("linksSuccessMessage", "");
         },
         // Displays the form to change a specific social media link
         // Also hides the last open form
-        changeSocialMediaLink(item){
+        changeSocialMediaLink(linkItem, item){    
+            let LinkToUse;        
             let lastForm = this.get("lastForm");
+            let form = $(item.target).parent().parent().next();
             if(lastForm){
                 lastForm.addClass("hide");
             }
-            this.set("model.link", "");
-            let form = $(item.target).parent().parent().next();
+            if(linkItem.link) {
+                LinkToUse = linkItem.linkPrefixes[linkItem.prefixNum];
+                LinkToUse = LinkToUse + decodeURIComponent(linkItem.link);
+            }
+            this.set("model.link", LinkToUse);
             this.set("lastForm", form);
             form.removeClass("hide");
         },
         // Logic to update a social media link
-        updateLinks(item) {
+        updateLinks(action, item) {
             let context = this;
             let username = context.get("session.data.authenticated.token_data.user_name");
             let link = context.get("model.link");
             let type = item.type.toLowerCase();
-            let linkPrefixes = ["https://www.facebook.com/", "https://twitter.com/","https://www.linkedin.com/in/","https://www.instagram.com/"];
+            let linkPrefixes =  item.linkPrefixes;
+            let prefixNum = item.prefixNum;
             let linkToSend;
 
+            //Get link ready to send to API
             let prepareLink = function() {
                 
                 switch(type) {
@@ -117,11 +126,12 @@ export default Ember.Controller.extend({
                         break;
                 };
 
+                linkToSend = encodeURIComponent(linkToSend);
 
             };
 
+            // Send link to API
             let uploadLink = function(data) {
-                console.log(data);
                 let url = {
                     [type]: data
                 }
@@ -130,32 +140,16 @@ export default Ember.Controller.extend({
                 });
             };
 
-            // Make sure link passed 
+            // Make sure link passed starts with one of the specified link prefixes
             let errorChecks = function(){
                 let passed = false;
-                if(type === "facebook"){
-                    if((link.indexOf(linkPrefixes[0]) === 0)){
-                        passed = true
-                    }
-                }
-                if(type === "twitter"){
-                    if((link.indexOf(linkPrefixes[1]) === 0)){
-                        passed = true
-                    }
-                }
-                if(type === "linkedin"){
-                    if((link.indexOf(linkPrefixes[2]) === 0)){
-                        passed = true
-                    }
-                }
-                if(type === "instagram"){
-                    if((link.indexOf(linkPrefixes[3]) === 0)){
-                        passed = true
-                    }
+                if(link.indexOf(linkPrefixes[prefixNum]) ===0 ){
+                    passed = true;
                 }
                 return passed;
             };
 
+            // If error checks fail, display message to user to ask for another link
             let askAgain = function(){
                 let reason = {
                     responseText: "Please use your " + type + " profile link"
@@ -163,29 +157,44 @@ export default Ember.Controller.extend({
                 showError(reason);
             };
 
+            // Display error to user
             let showError = function(result) {
                 context.set("linksErrorMessage", new Error(result.responseText));
             };
 
+            // If link updates correctly show success message to user
             let showSuccess = function() {
-                context.set("linksSuccessMessage", "You have updated your " + item.type + " profile link!");
+                context.set("linksSuccessMessage", "You have " + action + " your " + item.type + " profile link!");
             };
 
+            // Change UI when link is changed
             let transition = function() {
+                if(action ==="updated"){
+                    let linkToDisplay = decodeURIComponent(linkToSend);
+                    item.set("link", linkToDisplay);
+                }else {
+                    item.set("link", null);
+                }
                 context.set("model.userInfo."+item.type, linkToSend);
-                console.log(context);
                 let form = context.get("lastForm");
-                form.addClass("hide");
+                if(form){
+                    form.addClass("hide");
+                }
                 showSuccess();
             };
 
-            if(errorChecks){
-                console.log("GOOD LINK");
-                prepareLink();
-                uploadLink(linkToSend)
-                .then(transition);
+            // Run everything
+            if(action === "updated"){
+                if(errorChecks()){
+                    prepareLink();
+                    uploadLink(linkToSend)
+                    .then(transition);
+                } else {
+                    askAgain();
+                }
             } else {
-                askAgain();
+                uploadLink(null)
+                .then(transition);
             }
         },
         // Logic to update profile picture
