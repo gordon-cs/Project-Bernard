@@ -117,10 +117,6 @@
     .event-progress {
         width: 70% !important;
     }
-    .modal-content {
-        width: 35%;
-        height: 40%;
-    }
     .modal {
         display: none;
         /* Hidden by default */
@@ -148,15 +144,28 @@
         /* 15% from the top and centered */
         padding: 20px;
         border: 1px solid #888;
-        width: 40%;
+        width: 35%;
         /* Could be more or less, depending on screen size */
     }
     /* The Close Button */
-    .close {
+    .cancel-modal {
         color: #aaa;
-        float: right;
+        float: right !important;
         font-size: 28px;
         font-weight: bold;
+        margin-top: auto;
+        margin-bottom: 0%;
+        margin-right: 0%;
+    }
+    .modal-row {
+        margin: 15%;
+    }
+    .cancel-modal:hover {
+        background-color: #E2794C !important;
+        color: white !important;
+    }
+    .modal-header {
+        color: #00aeef;
     }
     .blur {
         -webkit-filter: blur(5px) grayscale(70%);
