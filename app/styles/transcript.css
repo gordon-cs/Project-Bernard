@@ -108,6 +108,30 @@
     }
 }
 
+@media only screen and (max-width: 425px) {
+    .col-xs-hide {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .col-sm-hide {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .col-md-hide {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .col-lg-hide {
+        display: none;
+    }
+}
+
 @media print {
     .transcript #download-div, .transcript .header {
         display: none;
