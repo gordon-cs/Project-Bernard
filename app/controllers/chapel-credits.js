@@ -64,7 +64,6 @@ export default Ember.Controller.extend({
 
             $("#toggleEventDetailsModal").addClass("showModal");
             $('.container').addClass('blur');
-            $('body').css('overflow', 'hidden');
             let context = this;
             let displayEvent = this.set("displayEvent", item);
             let chEventID = this.get("displayEvent.CHEventID", item);
