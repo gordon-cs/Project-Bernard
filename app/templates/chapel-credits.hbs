@@ -21,7 +21,7 @@
   </h4>
   <div class="entry-rows">
     {{#each model.chapelEvents as |event|}}
-    <div class="row event-row" style= "margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event.CHEventID }}>
+    <div class="row event-row" style= "margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
       <h4 class="col-md-6 col-sm-5 event-id"  onclick= {{action "toggleRequestSent"}} >{{event.CHEventID}}</h4>
       <h4 class="display-col col-md-2 col-sm-3 col-xs-hide">A.J. Chapel</h4>
       <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.CHTime}}</h4>
@@ -30,8 +30,6 @@
     {{/each}}
   </div>
 
-
-
 </div>
 
 <!-- Event Details Modal -->
@@ -39,8 +37,10 @@
 
   <!-- Modal Content -->
   <div class="modal-content">
-    <h3 class="navybox"> </h3>
-    <div class="modal-body"> Description <br /> and other stuff <br /> or whatever <br /> </div>
+      <h3 class="navybox"> {{ displayEvent.CHEventID }} </h3>
+    <div class="modal-body">
+      <h4> A.J Chapel <br> {{ displayEvent.CHTime }} <br> {{ displayEvent.CHDate}} </h4>
+    </div>
     <div class="modal-footer">
       <button class="btn button-cyan form-button form-cancel-button">Cancel</button>
     </div>
