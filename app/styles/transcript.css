@@ -11,64 +11,52 @@
     color: white;
     text-transform: uppercase;
 }
-.transcript .reset-padding {
-    padding: 0 !important;
-}
-.transcript .table-responsive {
+
+/* --- */
+.transcript .transcript-table {
     font-size: 1.6em;
 }
 .transcript .session-description {
     background-color: #ddd;
+    padding: 0.5em;
 }
-.transcript .end {
-    height: 2.5em;
-}
-/*#transcipt-view {
-  display: none;
-}
-.position, .position-title {
+.transcript .header-row {
+    padding: 0.3em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid #cccccb;
+    font-weight: bold;
+    text-transform: uppercase;
     display: flex;
     flex-direction: row;
-    border-bottom: #cdcdcd 1px solid;
 }
-.position span, .position-title span {
-    font-size: 1.5em;
-    padding-left: 1em;
-    padding-right: 1em;
+.transcript .entry-row {
+    padding: 0.3em;
     padding-top: 0.2em;
-    padding-bottom: 0.2em;
+    border-bottom: 1px solid #cccccb;
+    display: flex;
+    flex-direction: row;
 }
-.session {
-    width: 30%;
+.transcript .header-row div, .transcript .entry-row div{
+    padding: 0.5em;
 }
-
-.participation {
-    width: 20%;
+.transcript .header-row div strong, .transcript .entry-row div strong{
+    display: none;
 }
-
-#leaderships .activity {
+.transcript .activity-title, .transcript .activity-entry {
     width: 50%;
 }
-
-#memberships .activity {
-    width: 70%;
+.transcript .participation-title, .transcript .participation-entry {
+    width: 25%;
+}
+.transcript .entry-row:last-child {
+    border-bottom: none;
+}
+.transcript .glyphicon.glyphicon-menu-down {
+    display: inline;
+    margin-left: 1em;
+    float: right;
 }
 
-.position:nth-child(even) {
-    background-color: #ddd;
-}*/
-
-/*.position:nth-child(odd) {
-    background-color: white;
-}*/
-
-.transcript .position-title span{
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-}
-.transcript .position-title {
-    background-color: #cdcdcd;
-}
 .transcript h4 {
     font-style: normal;
     margin: 0.2em !important;
@@ -108,17 +96,90 @@
     }
 }
 
-@media print {
-    .transcript #download-div, .transcript .header {
+.sem-title {
+    display: none;
+}
+.transcript .glyphicon.glyphicon-menu-down {
+    display: none;
+}
+
+@media only screen and (max-width: 1200px) {
+
+}
+
+@media only screen and (max-width: 992px) {
+
+}
+
+
+@media only screen and (max-width: 768px) {
+    .sem-title {
+        display: block;
+    }
+    .total-semester-title {
         display: none;
     }
-    .transcript body {
+    .transcript .activity-title, .transcript .activity-entry {
+        width: 60%;
+    }
+    .transcript .participation-title, .transcript .participation-entry {
+        width: 25%;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .transcript .activity-title, .transcript .activity-entry {
+        width: 100%;
+    }
+    .transcript .participation-title, .transcript .participation-entry, .transcript .sem-title, .transcript .semester-entry {
+        width: 100%;
+    }
+    .transcript .participation-title, .transcript .participation-entry, .transcript .sem-title, .transcript .semester-entry {
+        display: none;
+    }
+    .transcript .glyphicon.glyphicon-menu-down {
+        display: block;
+    }
+    .transcript .header-row, .transcript .entry-row {
+        flex-direction: column;
+    }
+    .transcript .header-row div strong, .transcript .entry-row div strong{
+        display: inline;
+    }
+}
+
+@media only screen and (min-width: 577px) {
+    .transcript .entry-row div{
+        display: block !important;
+    }
+}
+
+
+
+
+@media print {
+    .transcript .entry-row div{
+        display: block !important;
+    }
+    .transcript #download-div, header button, .transcript .sem-title {
+        display: none;
+    }
+    html, body {
         width: 1000px;
     }
-    .transcript .table>tbody>tr>td, .transcript .session-description>tr>th {
-        border: none !important;
+    .transcript h3 {
+        margin-top: 0 !important;
+        margin-bottom: 30px !important;
     }
-    /*.table-responsive {
-        font-size: 10pt !important;
-    }*/
+    .transcript .header-row, .transcript .entry-row {
+        padding-top: 0em;
+        padding-bottom: 0em;
+        border-bottom: none;
+    }
+    .transcript .header-row div, .transcript .entry-row div {
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+    }
+    .transcript .session-table {
+        margin-bottom: 30px;
+    }
 }
