@@ -3,7 +3,10 @@
     <h4 class="event-p">
       You currently have <b>{{model.numEvents}}</b> Christian Life and Worship Credits
     </h4>
-    <button type="button" class="btn-upComing btn">UPCOMING CL&W</button>
+    <div class="search-bar">
+			<label for="search events">Search Events</label>
+				{{input value=model.searchValue key-up=(action "filterEvents") class="form-control" }}
+		</div>
 
     <div class="progress event-progress" style="height: 32px; margin-bottom: 0px; margin-top: 5px;">
       <div class= "progress-bar" role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%; height: 50px">
@@ -13,14 +16,14 @@
   </div>
   <h4 class="event-cyanbox cyanbox">
     <div id = "category-bar" class="row">
-      <div class="event-labels col-xs-6 col-sm-5 col-md-6">Events Attended </div>
-      <div class="event-labels col-xs-2 col-sm-3 col-md-2">Location</div>
-      <div class="event-labels col-xs-2 col-sm-2 col-md-2">Time</div>
-      <div class="event-labels col-xs-2 col-sm-2 col-md-2"> Date</div>
+      <div class="event-labels col-xs-6 col-sm-5 col-md-6" onclick= {{action "sortByName"}}>Events Attended </div>
+      <div class="event-labels col-xs-2 col-sm-3 col-md-2" onclick= {{action "sortByLocation"}}>Location</div>
+      <div class="event-labels col-xs-2 col-sm-2 col-md-2" onclick= {{action "SortByDate"}}>Time</div>
+      <div class="event-labels col-xs-2 col-sm-2 col-md-2" onclick= {{action "SortByDate"}}> Date</div>
     </div>
   </h4>
   <div class="entry-rows">
-    {{#each model.chapelEvents as |event|}}
+    {{#each model.eventShown as |event|}}
     <div class="row event-row" style= "margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
       <h4 class="col-md-6 col-sm-5 event-id"  onclick= {{action "toggleRequestSent"}} >{{event.CHEventID}}</h4>
       <h4 class="display-col col-md-2 col-sm-3 col-xs-hide">A.J. Chapel</h4>

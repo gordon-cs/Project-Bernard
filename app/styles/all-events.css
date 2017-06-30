@@ -59,6 +59,10 @@
     color: white;
 }
 
+.events .event-labels:hover {
+    color: #E2794C !important;
+}
+
 .events .entry-rows {
     padding: 8px;
     font-size: 1.6em;

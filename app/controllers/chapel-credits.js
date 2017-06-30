@@ -11,16 +11,49 @@ export default Ember.Controller.extend({
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
     actions: {
 
+        sortByName: function() {
+            console.log("sorting");
+            let events = this.get("model.eventShown");
+            let sorted = [];
+            events = events.sort(function(a, b) { return (a.CHEventID - b.CHEventID) });
+            for (let i = 0; i < events.length; i++) {
+                sorted.push(events[i]);
+            }
+            this.set("model.eventShown", sorted);
+        },
+        sortByLocation(item) {
+            let events = this.get("model.eventShown");
+            events.sort(function(a, b) { return a.CHEventID - b.CHEventID });
+            this.set("events", this.get("model.eventShown"));
+        },
+        SortByDate(item) {
+            let events = this.get("model.eventShown");
+            let eventIndexA;
+            let eventIndexB;
+            let sorted = [];
+            let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            events.sort(function(a, b) {
+                for (let i = 0; i < monthArry.length; i++) {
+                    if (a.CHDate === monthArry[i]) {
+                        eventIndexA = i;
+                    }
+                    if (a.CHDate === monthArry[i]) {
+                        eventIndexB = i;
+                    }
+
+                    if (eventIndexA < eventIndexB)
+                        return -1;
+                    if (eventIndexA > eventIndexB)
+                        return 1;
+                    return 0
+                }
+            });
+            for (let i = 0; i < events.length; i++) {
+                sorted.push(events[i]);
+            }
+            this.set("model.eventShown", sorted);
+        },
         toggleRequestSent(item) {
-
-
-            /*let lastForm = this.get("lastForm");
-             if(lastForm){
-                 lastForm.addClass("hide");
-             }
-             let form = $(item.target).parent().parent().next();
-             this.set("lastForm", form);
-             form.removeClass("hide");*/
 
             let lastForm = this.get("lastForm");
 
@@ -68,6 +101,30 @@ export default Ember.Controller.extend({
             let displayEvent = this.set("displayEvent", item);
             let chEventID = this.get("displayEvent.CHEventID", item);
 
+        },
+
+        filterEvents: function() {
+            // Filter the list of activities shown when user types in the search bar
+            let searchValue = this.get("model.searchValue");
+            if (searchValue) {
+                let newList = [];
+                let oldList = this.get("model.chapelEvents");
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].CHEventID.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                        newList.push(oldList[i]);
+                    } else if (oldList[i].CHDate.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                        newList.push(oldList[i]);
+                    } else if (oldList[i].CHDate.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                        newList.push(oldList[i]);
+                    } else if (oldList[i].CHTime.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                this.set("model.eventShown", newList);
+            } else {
+                this.set("model.eventShown", this.get("model.chapelEvents"));
+            }
         },
 
         cancelEventDetailsModal(item) {
