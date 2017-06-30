@@ -51,6 +51,17 @@ export default Ember.Controller.extend({
                 }
             }
         },
+        toggleClubPrivacy(activity) {
+            let newPrivacy = !activity.privacy;
+            let context = this;
+            console.log(newPrivacy);
+            let setPrivacy = function(value) {
+                return putAsync("/memberships/" + activity.MembershipID + "/privacy/" + value, value, context).catch((reason) => {
+                    console.log(reason);
+                });
+            }
+            setPrivacy(newPrivacy);
+        },
         // Shows the modal that holds the information to update profile picture
         showEditProfilePictureModal(){
              $("#editProfilePictureModal").addClass("showModal");

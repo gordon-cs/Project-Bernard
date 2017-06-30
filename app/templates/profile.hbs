@@ -202,13 +202,13 @@
                             <div class="col-sm-10">
                                 <div class="row bootstrap-tester">
                                     <div class="col-sm-7 bootstrap-tester">
-                                        <div class="activity-entry-title">{{activity.ActivityDescription}} {{unless activity.privacy "(Hidden on your page)"}}</div>
+                                        <div class="activity-entry-title">{{activity.ActivityDescription}} {{if activity.privacy "(Hidden on your page)"}}</div>
                                     </div>
                                     <div class="col-sm-2">
                                         <button class="view-club-button">{{#link-to "specific-activity" activity.SessionCode activity.ActivityCode}}View Club{{/link-to}}</button>
                                     </div>
                                     <div class="col-sm-3">
-                                        <button class="view-club-button" {{action "toggleClubPrivacy" activity}}>{{if activity.privacy "Hide this activity" "Show this activity"}}</button>
+                                        <button class="view-club-button" {{action "toggleClubPrivacy" activity}}>{{if activity.privacy "Show this activity" "Hide this activity"}}</button>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -223,9 +223,8 @@
                                             <div class="col-sm-12">
                                                 <ul>
                                                     {{#each activity.groupAdminsEmail as |groupAdmin|}}
-                                                        <li>{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</li>
+                                                        <li><a href="mailto:{{groupAdmin.Email}}">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a></li>
                                                     {{/each}}
-                                                    {{!Add email on click functionality}}
                                                 </ul>
                                             </div>
                                         </div>
