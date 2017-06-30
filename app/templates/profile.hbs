@@ -141,7 +141,14 @@
     <section class="row profile-block">
         <div class="col-sm-12">
             <div class="row">
-                <div class="col-sm-12 block-header">Personal Information</div>
+                <div class="col-sm-5 block-header">Personal Information</div>
+                <div class="col-sm-3">
+                    <button class="btn btn-primary phone-privacy-button" {{action "toggleMobilePhonePrivacy"}}>{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</button>
+                </div>
+                <div class="col-sm-4 success-message">
+                    {{if phonePrivacySuccessMessage phonePrivacySuccessMessage}}
+                </div>
+                
             </div>
             <div class="row">
                 <div class="col-sm-4 personal-info-list">
@@ -153,7 +160,7 @@
                         <li>Home Phone: {{model.userInfo.HomePhone}}</li>   {{!-- TODO: add functionality to allow call on click --}}
                         <li>Email: {{model.userInfo.EmailUserName}}@gordon.edu</li>            {{!-- TODO: add functionality to allow email on click --}}
                         {{#if model.userInfo.IsFaculty}}
-                            <li>Job Title: {{model.userInfo.JobTitle}}</li> 
+                            <li>Office Phone: {{model.userInfo.OnCampusPhone}}</li> 
                             <li>Department: {{model.userInfo.OnCampusDepartment}}</li> 
                         {{/if}}
                     </ul>
@@ -211,10 +218,10 @@
                                         <div class="activity-entry-title">{{activity.ActivityDescription}} {{if activity.privacy "(Hidden on your page)"}}</div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button class="view-club-button">{{#link-to "specific-activity" activity.SessionCode activity.ActivityCode}}View Club{{/link-to}}</button>
+                                        <button class="btn view-club-button">{{#link-to "specific-activity" activity.SessionCode activity.ActivityCode}}View Club{{/link-to}}</button>
                                     </div>
                                     <div class="col-sm-3">
-                                        <button class="view-club-button" {{action "toggleClubPrivacy" activity}}>{{if activity.privacy "Show this activity" "Hide this activity"}}</button>
+                                        <button class="btn btn-primary view-club-button" {{action "toggleClubPrivacy" activity}}>{{if activity.privacy "Show this activity" "Hide this activity"}}</button>
                                     </div>
                                 </div>
                                 <div class="row">

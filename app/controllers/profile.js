@@ -63,9 +63,9 @@ export default Ember.Controller.extend({
             setPrivacy(newPrivacy);
         },
         setPicturePrivacy() {
-            let currentPrivacy = this.get("model.userInfo.show_img");
-            let newPrivacy = !currentPrivacy;
             let context = this;
+            let currentPrivacy = context.get("model.userInfo.show_img");
+            let newPrivacy = !currentPrivacy;
             let successMessage;
             let setPrivacy = function(value) {
                 return putAsync("/profiles/image_privacy/" + value, value, context).catch((reason) => {
@@ -80,6 +80,31 @@ export default Ember.Controller.extend({
                     successMessage = "Your profile picture is no longer visible on your public profile page";
                 }
                 context.set("profilePictureSuccessMessage", successMessage);
+            };
+            
+            setPrivacy(newPrivacy)
+            .then(transition);
+        },
+        toggleMobilePhonePrivacy() {
+            let context = this;
+            let currentPrivacy = context.get("model.userInfo.IsMobilePhonePrivate");
+            let newPrivacy = ! currentPrivacy;
+            let successMessage;
+            console.log(newPrivacy);
+            let setPrivacy = function(value) {
+                return putAsync("/profiles/mobile_privacy/" + value, value, context).catch((reason) => {
+                    console.log(reason);
+                });
+            };
+            let transition = function() {
+                context.set("model.userInfo.IsMobilePhonePrivate", newPrivacy);
+                if(!newPrivacy) {
+                    successMessage = "Your mobile phone number is now visible on your public profile page";
+                } else {
+                    successMessage = "Your mobile phone number is no longer visible on your public profile page";
+                }
+                context.set("phonePrivacySuccessMessage", successMessage);
+                console.log(context.get("model.userInfo.IsMobilePhonePrivate"));
             };
             setPrivacy(newPrivacy)
             .then(transition);
