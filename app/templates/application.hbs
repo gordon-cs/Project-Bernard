@@ -85,6 +85,7 @@
                     {{/link-to}}
                   </span>
                 </li>
+                {{#unless isReadOnly}}
                 <li>
                   <span {{action "closeMenu"}}>
                     {{#link-to "all-activities" class="button uppercase"}}
@@ -92,6 +93,7 @@
                     {{/link-to}}
                   </span>
                 </li>
+                {{/unless}}
                 <li>
                   <span {{action "closeMenu"}}>
                     {{#link-to "transcript" class="button uppercase"}}
@@ -106,6 +108,7 @@
                     {{/link-to}}
                   </span>
                 </li>
+                {{#unless isReadOnly}}
                 <li>
                   <span {{action "closeMenu"}}>
                     {{#link-to "my-involvements" class="button uppercase"}}
@@ -113,6 +116,7 @@
                     {{/link-to}}
                   </span>
                 </li>
+                {{/unless}}
                 <li class="user-info-mobile" >
                   <span {{action "closeMenu"}}>
                     {{#link-to "help"}} Help{{/link-to}}
