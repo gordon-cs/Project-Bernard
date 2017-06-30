@@ -90,12 +90,14 @@ export default Ember.Controller.extend({
              $('body').css('overflow','hidden');
         },
         // Hides the modal that holds the information to update profile picture
-        cancelEditProfilePicture(){
-            this.set("file", null);
-            this.set("defaultImage", false);
-            this.set("errorMessage", null);
-             $("#editProfilePictureModal").removeClass("showModal");
-            $('body').css('overflow','scroll');
+        cancelEditProfilePicture(item){
+            if(item.target == $(".cancel-profile-picture-button")[0] || item.target == $("#editProfilePictureModal").not(".modal-content")[0]){
+                this.set("file", null);
+                this.set("defaultImage", false);
+                this.set("errorMessage", null);
+                $("#editProfilePictureModal").removeClass("showModal");
+                $('body').css('overflow','scroll');
+            }
             //TODO Get cropper to disappear after canceling upload
         },
         // Shows the modal that allows users to update social media links
@@ -104,15 +106,17 @@ export default Ember.Controller.extend({
             $('body').css('overflow','hidden');
         },
         // hides the modal that allows 
-        hideEditLinksModal(){
-            $("#editLinksModal").removeClass("showModal");
-            $('body').css('overflow','scroll');
-            let lastForm = this.get("lastForm");
-            if(lastForm){
-                lastForm.addClass("hide");
+        hideEditLinksModal(item){
+            if(item.target == $(".hide-links-modal-button")[0] || item.target == $("#editLinksModal").not(".modal-content")[0]){
+                $("#editLinksModal").removeClass("showModal");
+                $('body').css('overflow','scroll');
+                let lastForm = this.get("lastForm");
+                if(lastForm){
+                    lastForm.addClass("hide");
+                }
+                this.set("linksErrorMessage", "");
+                this.set("linksSuccessMessage", "");
             }
-            this.set("linksErrorMessage", "");
-            this.set("linksSuccessMessage", "");
         },
         // Displays the form to change a specific social media link
         // Also hides the last open form

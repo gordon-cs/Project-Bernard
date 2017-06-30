@@ -52,7 +52,7 @@
 
 
     <!-- Edit profile picture modal -->
-    <div id="editProfilePictureModal" class="modal">
+    <div id="editProfilePictureModal" class="modal" onclick={{action "cancelEditProfilePicture"}}>
         <!-- Modal content -->
         <div class="modal-content">
             <div id="profile-modal-from-box" class="whitebox row">
@@ -76,7 +76,7 @@
                     </div>
                     <p class="form-note">Files acceptable: png, jpg, jpeg, bmp, gif</p>
                     <button class="btn button-navy form-button" {{action 'updatePicture'}}>Upload Picture</button>
-                    <button class="btn button-cyan form-button form-cancel-button" {{action "cancelEditProfilePicture"}}>Cancel</button>
+                    <button class="btn button-cyan form-button form-cancel-button cancel-profile-picture-button">Cancel</button>
                 </form>
                 <div>
                     <button class="btn button-cyan form-button form-cancel-button" {{action "setPicturePrivacy"}}>{{if model.userInfo.show_img "Hide you profile picture" "Show your profile picture"}}</button>
@@ -90,50 +90,50 @@
 
 
     <!-- Edit social media links modal -->
-    <div id="editLinksModal" class="modal">
+    <div id="editLinksModal" class="modal" onclick={{action "hideEditLinksModal"}}>
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="row">
-            <div class="col-sm-12 modal-title">Edit your links</div>
-        </div>
-        {{#if linksErrorMessage}}
-            <p id="error-message">{{linksErrorMessage}}</p>
-        {{/if}}
-        {{#if linksSuccessMessage}}
-            <div class="success-message">{{linksSuccessMessage}}</div>
-        {{/if}}
-        {{#each model.links as |link|}}
-            <div class="row edit-links-row">
-                <div class="col-sm-6 links-title">{{link.type}}: </div>
-                {{#if link.link}}
-                    <div class="col-sm-3 edit-links-button-containers">
-                        <button class="btn btn-primary edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Edit</button>
-                    </div>
-                    <div class="col-sm-3 edit-links-button-containers">
-                        <button class="btn button-danger edit-links-button" onclick={{action "updateLinks" "removed" link}}>Remove</button>
-                    </div>
-                {{else}}
-                    <div class="col-sm-3 edit-links-button-containers">
-                        <button class="btn btn-success edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Add</button>
-                    </div>
-                {{/if}}
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-sm-12 modal-title">Edit your links</div>
             </div>
-            {{! form for entering data }}
-            <div class="row edit-links-form-container hide">
-                <form class="edit-links-form" {{action "updateLinks" "updated" link on="submit"}}>
-                        <div class="col-sm-9 edit-links-button-containers">
-                                {{input value=model.link class="edit-links-input"}}
+            {{#if linksErrorMessage}}
+                <p id="error-message">{{linksErrorMessage}}</p>
+            {{/if}}
+            {{#if linksSuccessMessage}}
+                <div class="success-message">{{linksSuccessMessage}}</div>
+            {{/if}}
+            {{#each model.links as |link|}}
+                <div class="row edit-links-row">
+                    <div class="col-sm-6 links-title">{{link.type}}: </div>
+                    {{#if link.link}}
+                        <div class="col-sm-3 edit-links-button-containers">
+                            <button class="btn btn-primary edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Edit</button>
                         </div>
                         <div class="col-sm-3 edit-links-button-containers">
-                            <input class="btn btn-primary edit-links-button" type="submit">
+                            <button class="btn button-danger edit-links-button" onclick={{action "updateLinks" "removed" link}}>Remove</button>
                         </div>
-                </form>
-            </div>
-        {{/each}}
-        <button class="btn btn-primary"{{action "hideEditLinksModal"}}>Done</button>
-        
-    </div>
+                    {{else}}
+                        <div class="col-sm-3 edit-links-button-containers">
+                            <button class="btn btn-success edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Add</button>
+                        </div>
+                    {{/if}}
+                </div>
+                {{! form for entering data }}
+                <div class="row edit-links-form-container hide">
+                    <form class="edit-links-form" {{action "updateLinks" "updated" link on="submit"}}>
+                            <div class="col-sm-9 edit-links-button-containers">
+                                    {{input value=model.link class="edit-links-input"}}
+                            </div>
+                            <div class="col-sm-3 edit-links-button-containers">
+                                <input class="btn btn-primary edit-links-button" type="submit">
+                            </div>
+                    </form>
+                </div>
+            {{/each}}
+            <button class="btn btn-primary hide-links-modal-button">Done</button>
+            
+        </div>
 
     </div>
 
