@@ -78,6 +78,12 @@
                     <button class="btn button-navy form-button" {{action 'updatePicture'}}>Upload Picture</button>
                     <button class="btn button-cyan form-button form-cancel-button" {{action "cancelEditProfilePicture"}}>Cancel</button>
                 </form>
+                <div>
+                    <button class="btn button-cyan form-button form-cancel-button" {{action "setPicturePrivacy"}}>{{if model.userInfo.show_img "Hide you profile picture" "Show your profile picture"}}</button>
+                </div>
+                {{#if profilePictureSuccessMessage}}
+                    <div class="success-message">{{profilePictureSuccessMessage}}</div>
+                {{/if}}
             </div>
         </div>
     </div>
@@ -95,7 +101,7 @@
             <p id="error-message">{{linksErrorMessage}}</p>
         {{/if}}
         {{#if linksSuccessMessage}}
-            <div class="links-success-message">{{linksSuccessMessage}}</div>
+            <div class="success-message">{{linksSuccessMessage}}</div>
         {{/if}}
         {{#each model.links as |link|}}
             <div class="row edit-links-row">

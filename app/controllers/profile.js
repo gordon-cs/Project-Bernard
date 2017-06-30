@@ -62,6 +62,28 @@ export default Ember.Controller.extend({
             }
             setPrivacy(newPrivacy);
         },
+        setPicturePrivacy() {
+            let currentPrivacy = this.get("model.userInfo.show_img");
+            let newPrivacy = !currentPrivacy;
+            let context = this;
+            let successMessage;
+            let setPrivacy = function(value) {
+                return putAsync("/profiles/image_privacy/" + value, value, context).catch((reason) => {
+                    console.log(reason);
+                });
+            };
+            let transition = function() {
+                context.set("model.userInfo.show_img", newPrivacy);
+                if(newPrivacy) {
+                    successMessage = "Your profile picture is now visible on your public profile page";
+                } else {
+                    successMessage = "Your profile picture is no longer visible on your public profile page";
+                }
+                context.set("profilePictureSuccessMessage", successMessage);
+            };
+            setPrivacy(newPrivacy)
+            .then(transition);
+        },
         // Shows the modal that holds the information to update profile picture
         showEditProfilePictureModal(){
              $("#editProfilePictureModal").addClass("showModal");
