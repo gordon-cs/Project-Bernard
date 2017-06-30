@@ -21,6 +21,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let userName = this.get("session.data.authenticated.token_data.user_name").toLowerCase(); 
         let requestsSent = [];
         let memberships = [];
+        let activities = [];
+        let activityAdmins = [];
         let admins = [];
         let links = [];
         let userInfo;
@@ -185,8 +187,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         // Gets all the activities a user is a member of
-        let getUserActivities = function() {
+        let getUserMemberships = function() {
             return getAsync("/memberships/student/" + IDNumber, context);
+        }
+
+        let setUserMemberships = function(data) {
+            memberships = data;
+            return data;
         }
 
         // Gets more information about the activites that a user is a member of
@@ -194,18 +201,38 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // TODO not working
         let getUserActivitiesInfo = function(data) {
             for(var i = 0; i < data.length; i++) {
-                let Info = getAsync("/activities/" + data[i].ActivityCode.trim(), context);
-                console.log(Info);
-                data[i].activityInfo = Info;
+                activities.push(getAsync("/activities/" + data[i].ActivityCode.trim(), context));
             }
-            return data;
+            return activities;
+
         }
-        
+
+        let prepareInfo = function(data) {
+            return Promise.all(data);
+        }
+
         // Sets memberships to be the information about all of a users activities
-        let setUserActivities = function(data) {
-            console.log(data);
-            memberships = data;
+        let addActivitiesInfo = function(data) {
+            for(var i = 0; i < data.length; i++) {
+                memberships[i].clubInfo = data[i];
+            }
+            console.log(memberships);
+            return memberships;
         }
+
+        let getActivityAdmins = function(data) {
+            for(var i = 0; i < data.length; i++) {
+                activityAdmins.push(getAsync("/emails/activity/" + data[i].ActivityCode.trim() + "/group-admin/session/" + data[i].SessionCode.trim(), context));
+            }
+            return activityAdmins;
+        };
+
+        let addActivityAdmins = function(data) {
+            for(var i = 0; i < data.length; i++) {
+                memberships[i].groupAdminsEmail = data[i];
+            }
+        }
+
 
         // sets social media links to seperate array that defines the type of the link along with the link
         let loadLinks = function() {
@@ -282,9 +309,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(setOnOffCampus)
         .then(setUserType)
         .then(setuserInfo)
-        .then(getUserActivities)
-        // .then(getUserActivitiesInfo)
-        .then(setUserActivities)
+        .then(getUserMemberships)
+        .then(setUserMemberships)
+        .then(getUserActivitiesInfo)
+        .then(prepareInfo)
+        .then(addActivitiesInfo)
+        .then(getActivityAdmins)
+        .then(prepareInfo)
+        .then(addActivityAdmins)
         .then(loadLinks)
         .then(loadModel);
         // return testLoadModel;

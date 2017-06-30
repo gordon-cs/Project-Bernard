@@ -248,7 +248,8 @@ Activities
 ****************************/
 
 .profile .activity-image {
-    width: 75%;
+    display: block;
+    width: 90%;
     margin: 0 auto;
     height: auto;
 }
@@ -257,10 +258,11 @@ Activities
     padding: 10px 0;
     margin: 10px 10px;
     border: 1px solid lightgray;
+    font-size: 1.5em;
 }
 
 .profile .activity-entry-title {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 /*******************
@@ -335,5 +337,5 @@ Request Tables
 Development Helper
 ***********************/
 .profile .bootstrap-tester {
-    border: 1px solid purple;
+    /*border: 1px solid purple;*/
 }
