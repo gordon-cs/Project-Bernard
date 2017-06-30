@@ -74,7 +74,24 @@ export default Ember.Controller.extend({
       checkIfGroupAdmin();
 
     },
+    // Check if the user has readonly permission
+    checkReadOnly() {
+      let context = this;
 
+      context.set("isReadOnly", false);
+
+      let college_role = this.get('session.data.authenticated.token_data.college_role');
+
+      console.log(college_role);
+
+      // Check if the user is a regular admin
+      if (college_role === "readonly") {
+        context.set("isReadOnly", true);
+        console.log("User has read only permission");
+        return;
+      }
+
+    },
 
     // Get requests a user may have to approve or deny
     getRequests() {
