@@ -9,6 +9,6 @@
     margin-top: 20px;
 }
 
-.image-cropper #cropper-div {
+.image-cropper#cropper-div {
     display: none;
 }

@@ -1,14 +1,30 @@
 /* All vendor prefixes were generated automatically via Autoprefixer */
 
+
 /* -----------------------------
     Section Headers
 ------------------------------- */
+
+.profile {
+    width: 768px !important;
+    margin: auto !important;
+    margin-top: 20px !important;
+    background-color: white;
+    font-size: 1.6em;
+}
+
+.profile h1 {
+    font-size: 1.2em !important;
+}
 
 .profile .section-title {
     text-align: center;
     margin-top: 50px;
     margin-bottom: 20px;
     color: #31342b;
+}
+.profile strong {
+    font-size: 0.9em;
 }
 .profile .section-title > h2 {
     text-align: center;
@@ -52,5 +68,11 @@
     }
     .profile .empty-list > h3 {
         font-size: 18px !important;
+    }
+}
+
+@media only screen and (max-width: 815px) {
+    .profile {
+        width: 100% !important;
     }
 }

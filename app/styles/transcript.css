@@ -1,6 +1,8 @@
-.transcript.main-container {
+.transcript {
+    width: 768px !important;
+    margin: auto !important;
+    margin-top: 20px !important;
     background-color: white;
-    margin-top: 15px;
 }
 .transcript #download-button {
     width: 100%;
@@ -96,7 +98,7 @@
     }
 }
 
-.sem-title {
+.transcript .sem-title {
     display: none;
 }
 .transcript .glyphicon.glyphicon-menu-down {
@@ -107,13 +109,16 @@
 
 }
 
-@media only screen and (max-width: 992px) {
-
+@media only screen and (max-width: 815px) {
+    .transcript {
+        width: 100% !important;
+    }
 }
 
 
 @media only screen and (max-width: 768px) {
-    .sem-title {
+
+    .transcript .sem-title {
         display: block;
     }
     .total-semester-title {
@@ -157,6 +162,9 @@
 
 
 @media print {
+    .transcript {
+        float: left;
+    }
     .transcript .entry-row div{
         display: block !important;
     }
@@ -169,6 +177,8 @@
     .transcript h3 {
         margin-top: 0 !important;
         margin-bottom: 30px !important;
+        text-align: left;
+        margin-left: -15px !important;
     }
     .transcript .header-row, .transcript .entry-row {
         padding-top: 0em;
