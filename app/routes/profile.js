@@ -231,8 +231,21 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             for(var i = 0; i < data.length; i++) {
                 memberships[i].groupAdminsEmail = data[i];
             }
+            return memberships;
         }
 
+        let loadMemberships = function(data) {
+            var membership = Ember.Object.extend({
+                init: function() {
+                    this._super();
+                }
+            });
+            for(var i = 0; i < data.length; i++){
+                memberships[i] = membership.create({
+                    "membership": data[i]
+                });
+            }
+        }   
 
         // sets social media links to seperate array that defines the type of the link along with the link
         let loadLinks = function() {
@@ -317,6 +330,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(getActivityAdmins)
         .then(prepareInfo)
         .then(addActivityAdmins)
+        .then(loadMemberships)
         .then(loadLinks)
         .then(loadModel);
         // return testLoadModel;

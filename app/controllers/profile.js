@@ -51,64 +51,7 @@ export default Ember.Controller.extend({
                 }
             }
         },
-        toggleClubPrivacy(activity) {
-            let newPrivacy = !activity.privacy;
-            let context = this;
-            console.log(newPrivacy);
-            let setPrivacy = function(value) {
-                return putAsync("/memberships/" + activity.MembershipID + "/privacy/" + value, value, context).catch((reason) => {
-                    console.log(reason);
-                });
-            }
-            setPrivacy(newPrivacy);
-        },
-        setPicturePrivacy() {
-            let context = this;
-            let currentPrivacy = context.get("model.userInfo.show_img");
-            let newPrivacy = !currentPrivacy;
-            let successMessage;
-            let setPrivacy = function(value) {
-                return putAsync("/profiles/image_privacy/" + value, value, context).catch((reason) => {
-                    console.log(reason);
-                });
-            };
-            let transition = function() {
-                context.set("model.userInfo.show_img", newPrivacy);
-                if(newPrivacy) {
-                    successMessage = "Your profile picture is now visible on your public profile page";
-                } else {
-                    successMessage = "Your profile picture is no longer visible on your public profile page";
-                }
-                context.set("profilePictureSuccessMessage", successMessage);
-            };
-            
-            setPrivacy(newPrivacy)
-            .then(transition);
-        },
-        toggleMobilePhonePrivacy() {
-            let context = this;
-            let currentPrivacy = context.get("model.userInfo.IsMobilePhonePrivate");
-            let newPrivacy = ! currentPrivacy;
-            let successMessage;
-            console.log(newPrivacy);
-            let setPrivacy = function(value) {
-                return putAsync("/profiles/mobile_privacy/" + value, value, context).catch((reason) => {
-                    console.log(reason);
-                });
-            };
-            let transition = function() {
-                context.set("model.userInfo.IsMobilePhonePrivate", newPrivacy);
-                if(!newPrivacy) {
-                    successMessage = "Your mobile phone number is now visible on your public profile page";
-                } else {
-                    successMessage = "Your mobile phone number is no longer visible on your public profile page";
-                }
-                context.set("phonePrivacySuccessMessage", successMessage);
-                console.log(context.get("model.userInfo.IsMobilePhonePrivate"));
-            };
-            setPrivacy(newPrivacy)
-            .then(transition);
-        },
+        
         // Shows the modal that holds the information to update profile picture
         showEditProfilePictureModal(){
              $("#editProfilePictureModal").addClass("showModal");
@@ -164,7 +107,76 @@ export default Ember.Controller.extend({
             this.set("lastForm", form);
             form.removeClass("hide");
         },
+
+        //Change the privacy value for a club membership
+        toggleClubPrivacy(activity) {
+            let newPrivacy = !activity.membership.Privacy;
+            let context = this;
+            let setPrivacy = function(value) {
+                return putAsync("/memberships/" + activity.membership.MembershipID + "/privacy/" + value, value, context).catch((reason) => {
+                    console.log(reason);
+                });
+            }
+            let transition = function() {
+                activity.set("membership.Privacy", newPrivacy);
+            }
+            setPrivacy(newPrivacy)
+            .then(transition);
+        },
+
+        //Change the privacy value for profile picture
+        setPicturePrivacy() {
+            let context = this;
+            let currentPrivacy = context.get("model.userInfo.show_img");
+            let newPrivacy = !currentPrivacy;
+            let successMessage;
+            let setPrivacy = function(value) {
+                return putAsync("/profiles/image_privacy/" + value, value, context).catch((reason) => {
+                    console.log(reason);
+                });
+            };
+            let transition = function() {
+                context.set("model.userInfo.show_img", newPrivacy);
+                if(newPrivacy) {
+                    successMessage = "Your profile picture is now visible on your public profile page";
+                } else {
+                    successMessage = "Your profile picture is no longer visible on your public profile page";
+                }
+                context.set("profilePictureSuccessMessage", successMessage);
+            };
+            
+            setPrivacy(newPrivacy)
+            .then(transition);
+        },
+        toggleMobilePhonePrivacy() {
+            let context = this;
+            let currentPrivacy = context.get("model.userInfo.IsMobilePhonePrivate");
+            let newPrivacy = ! currentPrivacy;
+            let successMessage;
+            console.log(newPrivacy);
+            let setPrivacy = function(value) {
+                return putAsync("/profiles/mobile_privacy/" + value, value, context).catch((reason) => {
+                    console.log(reason);
+                });
+            };
+            let transition = function() {
+                context.set("model.userInfo.IsMobilePhonePrivate", newPrivacy);
+                if(!newPrivacy) {
+                    successMessage = "Your mobile phone number is now visible on your public profile page";
+                } else {
+                    successMessage = "Your mobile phone number is no longer visible on your public profile page";
+                }
+                context.set("phonePrivacySuccessMessage", successMessage);
+                console.log(context.get("model.userInfo.IsMobilePhonePrivate"));
+            };
+            setPrivacy(newPrivacy)
+            .then(transition);
+        },
+
+        /***********************************
         // Logic to update a social media link
+        ***********************************/
+
         updateLinks(action, item) {
             let context = this;
             let username = context.get("session.data.authenticated.token_data.user_name");
@@ -263,7 +275,11 @@ export default Ember.Controller.extend({
                 .then(transition);
             }
         },
+        
+        /***********************************
         // Logic to update profile picture
+        ***********************************/
+        
         updatePicture() {
 
             let context = this;
