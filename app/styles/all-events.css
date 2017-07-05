@@ -13,6 +13,15 @@
     background: #DDD;
 }
 
+.event-progress {
+    padding: 0px !important;
+    float: right !important;
+}
+
+.toggleclick {
+    font-style: strong;
+}
+
 .events .highlight-box {
     font-size: 20px;
     margin-top: 10px;
@@ -26,9 +35,15 @@
     margin-left: 25px
 }
 
+.events .event-search {
+    display: block;
+    margin-left: 15px;
+}
+
 .events .event-row:hover {
     background-color: #E2794C !important;
     color: white;
+    cursor: pointer;
 }
 
 .events .event-header {
@@ -39,8 +54,9 @@
 
 .events .event-p {
     margin-top: 0px !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 20px !important;
     padding-top: 0px !important;
+    float: left;
 }
 
 .events .event-id {
@@ -61,6 +77,7 @@
 
 .events .event-labels:hover {
     color: #E2794C !important;
+    cursor: pointer;
 }
 
 .events .entry-rows {
@@ -116,9 +133,6 @@
     }
     .events .btn-upComing {
         float: right;
-    }
-    .events .event-progress {
-        width: 70% !important;
     }
     .event-modal {
         display: none;

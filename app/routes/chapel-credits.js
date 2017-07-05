@@ -56,6 +56,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
                 //get the date information
                 let eventDate = new Date(chapelEvents[i].CHDate);
+                chapelEvents[i].ROWID = chapelEvents[i].CHDate;
                 let eventMonth = eventDate.getMonth();
                 let eventDay = eventDate.getDate();
                 let eventHour = new Date(chapelEvents[i].CHDate).getHours();

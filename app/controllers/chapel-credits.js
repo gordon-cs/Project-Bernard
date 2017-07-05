@@ -11,45 +11,53 @@ export default Ember.Controller.extend({
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
     actions: {
 
-        sortByName: function() {
+        sortByName(item) {
             console.log("sorting");
             let events = this.get("model.eventShown");
             let sorted = [];
-            events = events.sort(function(a, b) { return (a.CHEventID - b.CHEventID) });
-            for (let i = 0; i < events.length; i++) {
-                sorted.push(events[i]);
+            if ($(item.target).hasClass("toggleclick")) {
+                for (let i = 0; i < events.length; i++) {
+                    console.log("hi");
+                    sorted.push(events[events.length - 1 - i]);
+                }
+                $(item.target).removeClass("toggleclick");
+            } else {
+                events = events.sort(function(a, b) { return (a.CHEventID - b.CHEventID); });
+                $(item.target).addClass("toggleclick");
+                for (let i = 0; i < events.length; i++) {
+                    sorted.push(events[i]);
+                }
             }
             this.set("model.eventShown", sorted);
         },
         sortByLocation(item) {
             let events = this.get("model.eventShown");
-            events.sort(function(a, b) { return a.CHEventID - b.CHEventID });
+            events.sort(function(a, b) { return a.CHEventID - b.CHEventID; });
             this.set("events", this.get("model.eventShown"));
         },
         SortByDate(item) {
             let events = this.get("model.eventShown");
-            let eventIndexA;
-            let eventIndexB;
             let sorted = [];
-            let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            events.sort(function(a, b) {
-                for (let i = 0; i < monthArry.length; i++) {
-                    if (a.CHDate === monthArry[i]) {
-                        eventIndexA = i;
-                    }
-                    if (a.CHDate === monthArry[i]) {
-                        eventIndexB = i;
-                    }
-
-                    if (eventIndexA < eventIndexB)
-                        return -1;
-                    if (eventIndexA > eventIndexB)
-                        return 1;
-                    return 0
+            if ($(item.target).hasClass("toggleclick")) {
+                for (let i = 0; i < events.length; i++) {
+                    console.log("hi");
+                    sorted.push(events[events.length - 1 - i]);
+                    $(item.target).removeClass("toggleclick");
                 }
-            });
-            for (let i = 0; i < events.length; i++) {
-                sorted.push(events[i]);
+            } else {
+                events.sort(function(a, b) {
+                    if (a.ROWID < b.ROWID) {
+                        return -1;
+                    }
+                    if (a.ROWID > b.ROWID) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                for (let i = 0; i < events.length; i++) {
+                    sorted.push(events[i]);
+                }
+                $(item.target).addClass("toggleclick");
             }
             this.set("model.eventShown", sorted);
         },
