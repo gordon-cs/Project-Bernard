@@ -12,6 +12,8 @@
 		margin-left: 15px;
 		margin-right: 15px;
 }
+
+
 #logo-box img {
     max-width: 20%;
 }
@@ -37,9 +39,9 @@ header {
 	background: #cccccb;
 }
 .app-title-container {
-    text-align: center;
-	background: #cccccb;
-	position: relative;
+    text-align: left;
+		background: #cccccb;
+		position: relative;
 }
 .app-title {
 	display: none;
@@ -80,13 +82,14 @@ header {
 	font-style: normal;
 	letter-spacing: 1px;
 	padding: 0;
-  text-align: center;
+  text-align: left;
 	text-transform: uppercase;
 }
 #primary-menu li {
 	list-style: none;
 	display: block;
 	padding: 15px 0px;
+	text-align: center;
 	border-bottom: 1px solid #3d3d3a;
 }
 #primary-menu a {
@@ -122,22 +125,29 @@ ul.dropdown-menu {
 	letter-spacing: 1px;
 	margin-top: .65em;
 }
+
 .user-info {
     text-align: right;
     color: #31342b;
 		display: none;
 		position: absolute !important;
 		right: 0;
-		margin-top: 19px;
+		padding-bottom: 10px;
 }
-.user-info h6 {
+.user-info h4 {
 	color: #31342b;
 	letter-spacing: 1px;
 	font-size: 8pt;
 	font-weight: bold;
 	display: inline;
 	text-transform: uppercase;
+	margin-top: 19px;
+	margin-bottom: 19px;
 }
+.user-info:hover {
+	color: #DE571F;
+}
+
 .user-info-buttons {
 	display: inline;
 	margin-left: 15px;
@@ -154,7 +164,7 @@ ul.dropdown-menu {
 	cursor: pointer;
 }
 .user-info-mobile {
-		color: white;
+		color: BLACK;
 }
 .request-button {
     border: 0px !important;
@@ -207,6 +217,7 @@ ul.dropdown-menu {
 		border-radius: 25px;
 }
 
+=======
 /* Change autocomplete background to any color ;) */
 input:-webkit-autofill, input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 30px white inset;
@@ -225,6 +236,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 	.hero-container {
 		overflow: auto;
 	}
+
 }
 
 /* For providing image via background image and not royalslider */
@@ -265,6 +277,8 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     .user-info {
         display: inline;
     }
+
+
     .user-info > h6 {
         margin-top: 0;
 				display: inline-block;
@@ -272,6 +286,10 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 		.user-info-mobile, .logout-mobile {
 				display: none !important;
 		}
+		.dropdown:hover .dropdown-menu {
+		    display: block;
+		    margin-top: 0; // remove the gap so it doesn't close
+		 }
     #primary-menu {
         font-size: 1em;
         margin-top: 12px;
@@ -311,7 +329,17 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 		}
 }
 @media only screen and (min-width: 992px) {
-    #logo-box {
+    .app-title-container {
+        text-align: center;
+				padding: 22px;
+		}
+		.mobile-row{
+			display:none;
+		}
+    .app-title {
+        display: inline;
+    }
+		#logo-box {
       max-width: 200px;
       padding: 20px 30px;
 			display: block;
@@ -338,7 +366,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 			margin-left: 200px;
 		}*/
 		.user-info {
-			margin-top: 17px;
+			margin-top: 5px;
 		}
 }
 @media only screen and (min-width: 1200px) {
@@ -348,4 +376,6 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 		#logo-box-horizontal {
 			padding-bottom: 34px;
 		}
+
+
 }

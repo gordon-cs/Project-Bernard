@@ -18,6 +18,8 @@ Router.map(function() {
   this.route('about');
   this.route('help');
   this.route('activities-status');
+  this.route('all-events');
+  this.route('chapel-credits');
   this.route('my-involvements');
   this.route("email", {path: "/email/:EmailAdress"});
 });
