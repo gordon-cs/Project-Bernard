@@ -1,37 +1,67 @@
+.profile .row-centered {
+    text-align: center;
+}
+.profile .col-centered {
+    display: inline-block;
+    float: none;
+    margin-right: -4px;
+}
+
 /*******************
 Student Profile
 *******************/
-
-.profile .profile-block {
-    padding: 25px 0;
-    margin: 0;
-    border-bottom: 2px solid lightgray;
-}
-
-.profile .block-header {
-    font-size: 4em;
-    text-decoration: underline;
-}
-
 .profile {
     padding: 0 !important;
     padding-bottom: 45px;
 }
+
+.profile .profile-block {
+    padding: 25px 0;
+    margin: 0;
+    border-bottom: 2px solid rgb(235, 234, 234);
+}
+
+.profile .profile-action-block {
+    margin: 0;
+    border-bottom: 2px solid rgb(235, 234, 234);
+}
+
+.profile .block-header {
+    font-size: 2.5em;
+    text-decoration: underline;
+}
+
 
 /*********************
 Main profile block
 *********************/
 
 .profile .user-name {
-    font-size: 6em;
+    font-size: 2.5em;
+    text-align: center;
 }
 
 .profile .user-links {
-    font-size: 2em;
+    font-size: 1.5em;
+    text-align: center;
+    /*margin: 0 auto;*/
+}
+
+.profile .social-media-button-containers {
+    padding: 0px;   
+}
+
+.profile .social-media-buttons {
+    border: 1px solid rgb(215, 215, 215);
+    margin: 2px;
+    -moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+    border-radius: 6px;
 }
 
 .profile .user-position {
-    font-size: 4em;
+    font-size: 2em;
+    text-align: center;
     padding-bottom: .5em;
 }
 
@@ -39,12 +69,40 @@ Main profile block
     margin: auto 0;
 }
 
+.profile .profile-action-button-container {
+    border-left: 1px solid rgb(235, 234, 234);
+    border-right: 1px solid rgb(235, 234, 234);
+    padding: 2px;
+}
+
+.profile .profile-action-button-container:hover {
+    background: rgb(235, 234, 234);
+}
+
+.profile .action-icon {
+    width: 40%;
+    float: left;
+}
+.action-icon-image {
+    width: 100%;
+}
+
+.profile .action-link {
+    float: left;
+    width: 60%;
+    font-size: 1.25em;
+}
+
+.phone-privacy-button {
+    display: none;
+}
+
 /***********************
 Personal info block
 ***********************/
 
 .profile .personal-info-list {
-     font-size: 2em;
+     font-size: 1.5em;
 }
 
 .profile .personal-info-list > ul {
@@ -195,7 +253,6 @@ Edit social media modal
 .profile .edit-links-button {
     display: block;
     margin: 0 auto;
-    /*padding: 6px 0;*/
     width: 90%;
 }
 .profile .modal-title {

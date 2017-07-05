@@ -31,24 +31,192 @@
                 </div>
             </div>
             {{! Display users social media links if provided }}
-            <div class="row user-links">
-                {{#if model.userInfo.Facebook}}
-                    <a href="https://www.facebook.com/{{model.userInfo.Facebook}}" class="col-sm-2">Facebook</a>
-                {{/if}}
-                {{#if model.userInfo.Twitter}}
-                <a href="https://twitter.com/{{model.userInfo.Twitter}}" class="col-sm-2">Twitter</a>
-                {{/if}}
-                {{#if model.userInfo.LinkedIn}}
-                <a href="https://www.linkedin.com/in/{{mode.userInfo.LinkedIn}}" class="col-sm-2">LinkedIn</a>
-                {{/if}}
-                {{#if model.userInfo.Instagram}}
-                <a href="https://www.instagram.com/{{model.userInfo.Instagram}}" class="col-sm-2">Instagram</a>
-                {{/if}}
-                <a href="#/profile" class="col-sm-4" {{action "showEditLinksModal"}}>Edit your social media links</a>
+            <div class="row row-centered user-links">
+                    {{#if model.userInfo.Facebook}}
+                        <div class="col-xs-3 social-media-button-containers col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://www.facebook.com/{{model.userInfo.Facebook}}">Facebook</a>
+                            </div>
+                        </div>
+                    {{/if}}
+                    {{#if model.userInfo.Twitter}}
+                        <div class="col-xs-3 social-media-button-containers col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://twitter.com/{{model.userInfo.Twitter}}" >Twitter</a>
+                            </div>
+                        </div>
+                    {{/if}}
+                    {{#if model.userInfo.LinkedIn}}
+                        <div class="col-xs-3 social-media-button-containers col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://www.linkedin.com/in/{{mode.userInfo.LinkedIn}}">LinkedIn</a>
+                            </div>
+                        </div>
+                    {{/if}}
+                    {{#if model.userInfo.Instagram}}
+                        <div class="col-xs-3 social-media-button-containers col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://www.instagram.com/{{model.userInfo.Instagram}}">Instagram</a>
+                            </div>
+                        </div>
+                    {{/if}}
             </div>
-            
         </div>
     </section>
+    <section class="row profile-action-block">
+        <div class="col-xs-4 profile-action-button-container">
+            <div class="profile-action-button"{{action "showEditLinksModal"}}>
+                <div class="action-icon">
+                    <img src="http://cdn.onlinewebfonts.com/svg/img_52.svg" class="action-icon-image">
+                </div>
+                <div class="action-link" href="#/profile">Edit your social media links</div>
+            </div>
+        </div>
+        <div class="col-xs-4 profile-action-button-container">
+            <div class="profile-action-button"{{action "showEditProfilePictureModal"}}>
+                <div class="action-icon">
+                    <img src="http://simpleicon.com/wp-content/uploads/camera.svg" class="action-icon-image">
+                </div>
+                <div class="action-link" href="#/profile">Update your profile picture</div>
+            </div>
+        </div>
+        <div class="col-xs-4 profile-action-button-container">
+            <div class="profile-action-button"{{action "toggleMobilePhonePrivacy"}}>
+                <div class="action-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Mobile_phone_font_awesome.svg/512px-Mobile_phone_font_awesome.svg.png" class="action-icon-image">
+                </div>
+                <div class="action-link" href="#/profile">{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</div>
+            </div>
+        </div>
+    </section>
+
+
+    {{!--Personal Information--}}
+    <section class="row profile-block">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-5 block-header">Personal Information</div>
+                <div class="col-sm-3 phone-privacy-button">
+                    <button class="btn btn-primary" {{action "toggleMobilePhonePrivacy"}}>{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</button>
+                </div>
+                <div class="col-sm-4 success-message">
+                    {{if phonePrivacySuccessMessage phonePrivacySuccessMessage}}
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-sm-4 personal-info-list">
+                    <ul>
+                        {{#if model.userInfo.IsStudentOrAlumni}}
+                            <li>Major: {{model.userInfo.Major}}</li>
+                            <li>Cell Phone: {{model.userInfo.MobilePhone}}</li> {{!-- TODO: add functionality to allow call on click --}}
+                        {{/if}}
+                        <li>Home Phone: {{model.userInfo.HomePhone}}</li>   {{!-- TODO: add functionality to allow call on click --}}
+                        <li>Email: {{model.userInfo.EmailUserName}}@gordon.edu</li>            {{!-- TODO: add functionality to allow email on click --}}
+                        {{#if model.userInfo.IsFaculty}}
+                            <li>Office Phone: {{model.userInfo.OnCampusPhone}}</li> 
+                            <li>Department: {{model.userInfo.OnCampusDepartment}}</li> 
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 personal-info-list">
+                    <div class="address-title">Home Address</div>
+                    <ul>
+                        <li>Street: {{model.userInfo.HomeStreet1}}</li>
+                        <li>City: {{model.userInfo.HomeCity}}</li>
+                        <li>State: {{model.userInfo.HomeState}}</li>
+                    </ul>
+                </div>
+                {{#if model.userInfo.OnOffCampus}}
+                    <div class="col-xs-6 personal-info-list">
+                        <div class="address-title">Campus Address</div>
+                        <ul>
+                            <li>Dorm: {{model.userInfo.OnCampusBuilding}}</li>
+                            <li>Room: {{model.userInfo.OnCampusRoom}}</li>
+                        </ul>
+                    </div>
+                {{/if}}
+                {{#if model.userInfo.IsFaculty}}
+                    <div class="col-sm-4 personal-info-list">
+                        <div class="address-title">On Campus Info</div>
+                        <ul>
+                            <li>Office: {{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</li> {{!-- GET description of building from TmsEPrd.dbo.building_master (showperson.cfm line: 596) --}}
+                            <li>Office Phone: {{model.userInfo.OnCampusPhone}}</li>
+                            {{!TODO: add office hours}}
+                        </ul>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+
+    {{!--Activities--}}
+    
+    <section class="row profile-block">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="block-header">Activities</div>
+                </div>
+            </div>
+            {{#each model.memberships as |activity|}}
+                <div class="row activity-entry bootstrap-tester">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-2 bootstrap-tester">
+                                <img src="{{activity.membership.ActivityImagePath}}" class="activity-image" alt="{{activity.membership.ActivityDescription}} profile picture">
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="row bootstrap-tester">
+                                    <div class="col-sm-7 bootstrap-tester">
+                                        <div class="activity-entry-title">{{activity.membership.ActivityDescription}} {{if activity.membership.privacy "(Hidden on your page)"}}</div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn view-club-button">{{#link-to "specific-activity" activity.membership.SessionCode activity.membership.ActivityCode}}View Club{{/link-to}}</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button class="btn btn-primary view-club-button" {{action "toggleClubPrivacy" activity}}>{{if activity.membership.Privacy "Show this activity" "Hide this activity"}}</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-12">{{activity.membership.SessionDescription}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">Group Contacts:</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <ul>
+                                                    {{#each activity.membership.groupAdminsEmail as |groupAdmin|}}
+                                                        <li><a href="mailto:{{groupAdmin.Email}}">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a></li>
+                                                    {{/each}}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-12">Description:</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">{{activity.membership.clubInfo.ActivityBlurb}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5"></div>
+                        <div class="col-sm-5"></div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+
 
 
     <!-- Edit profile picture modal -->
@@ -136,134 +304,6 @@
         </div>
 
     </div>
-
-    {{!--Personal Information--}}
-    <section class="row profile-block">
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-5 block-header">Personal Information</div>
-                <div class="col-sm-3">
-                    <button class="btn btn-primary phone-privacy-button" {{action "toggleMobilePhonePrivacy"}}>{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</button>
-                </div>
-                <div class="col-sm-4 success-message">
-                    {{if phonePrivacySuccessMessage phonePrivacySuccessMessage}}
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="col-sm-4 personal-info-list">
-                    <ul>
-                        {{#if model.userInfo.IsStudentOrAlumni}}
-                            <li>Major: {{model.userInfo.Major}}</li>
-                            <li>Cell Phone: {{model.userInfo.MobilePhone}}</li> {{!-- TODO: add functionality to allow call on click --}}
-                        {{/if}}
-                        <li>Home Phone: {{model.userInfo.HomePhone}}</li>   {{!-- TODO: add functionality to allow call on click --}}
-                        <li>Email: {{model.userInfo.EmailUserName}}@gordon.edu</li>            {{!-- TODO: add functionality to allow email on click --}}
-                        {{#if model.userInfo.IsFaculty}}
-                            <li>Office Phone: {{model.userInfo.OnCampusPhone}}</li> 
-                            <li>Department: {{model.userInfo.OnCampusDepartment}}</li> 
-                        {{/if}}
-                    </ul>
-                </div>
-                {{#if model.userInfo.OnOffCampus}}
-                    <div class="col-sm-4 personal-info-list">
-                        <div class="address-title">Campus Address</div>
-                        <ul>
-                            <li>Dorm: {{model.userInfo.OnCampusBuilding}}</li>
-                            <li>Room: {{model.userInfo.OnCampusRoom}}</li>
-                        </ul>
-                    </div>
-                {{/if}}
-                {{#if model.userInfo.IsFaculty}}
-                    <div class="col-sm-4 personal-info-list">
-                        <div class="address-title">On Campus Info</div>
-                        <ul>
-                            <li>Office: {{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</li> {{!-- GET description of building from TmsEPrd.dbo.building_master (showperson.cfm line: 596) --}}
-                            <li>Office Phone: {{model.userInfo.OnCampusPhone}}</li>
-                            {{!TODO: add office hours}}
-                        </ul>
-                    </div>
-                {{/if}}
-                <div class="col-sm-4 personal-info-list">
-                    <div class="address-title">Home Address</div>
-                    <ul>
-                        <li>Street: {{model.userInfo.HomeStreet1}}</li>
-                        <li>City: {{model.userInfo.HomeCity}}</li>
-                        <li>State: {{model.userInfo.HomeState}}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{!--Activities--}}
-    
-    <section class="row profile-block">
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="block-header">Activities</div>
-                </div>
-            </div>
-            {{#each model.memberships as |activity|}}
-                <div class="row activity-entry bootstrap-tester">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-2 bootstrap-tester">
-                                <img src="{{activity.membership.ActivityImagePath}}" class="activity-image" alt="{{activity.membership.ActivityDescription}} profile picture">
-                            </div>
-                            <div class="col-sm-10">
-                                <div class="row bootstrap-tester">
-                                    <div class="col-sm-7 bootstrap-tester">
-                                        <div class="activity-entry-title">{{activity.membership.ActivityDescription}} {{if activity.membership.privacy "(Hidden on your page)"}}</div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <button class="btn view-club-button">{{#link-to "specific-activity" activity.membership.SessionCode activity.membership.ActivityCode}}View Club{{/link-to}}</button>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button class="btn btn-primary view-club-button" {{action "toggleClubPrivacy" activity}}>{{if activity.membership.Privacy "Show this activity" "Hide this activity"}}</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <div class="col-sm-12">{{activity.membership.SessionDescription}}</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">Group Contacts:</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <ul>
-                                                    {{#each activity.membership.groupAdminsEmail as |groupAdmin|}}
-                                                        <li><a href="mailto:{{groupAdmin.Email}}">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a></li>
-                                                    {{/each}}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <div class="col-sm-12">Description:</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">{{activity.membership.clubInfo.ActivityBlurb}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-5"></div>
-                        <div class="col-sm-5"></div>
-                    </div>
-                </div>
-            {{/each}}
-        </div>
-    </section>
-
-
-
-
 
 
 
