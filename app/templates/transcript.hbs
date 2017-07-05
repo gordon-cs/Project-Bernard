@@ -1,10 +1,35 @@
-<div class="container">
-    <div class="row reset-padding">
+<div class="container main-container transcript">
+    <div class="row" id="download-div">
         <button id="download-button" class="btn button-cyan" onclick={{action "getPDF"}}>
             Download Transcript
         </button>
     </div>
-    <div class="row reset-padding">
-        <iframe id="transcipt-view" src={{model.url}}></iframe>
+    <div id="print">
+        <h3><strong>{{model.title}}</strong></h3>
+
+        <div class="transcript-table">
+
+            <!-- <table class="table"> -->
+                <!-- <thead></thead> -->
+                {{#each model.membershipsDictionary as |session|}}
+                <div class="session-table">
+                    <div class="session-description row"><h4><strong>{{session.SessionDescription}}</strong></h4></div>
+                    <div class="row header-row">
+                        <div class="activity-title">Activity</div>
+                        <div class="participation-title">Participation</div>
+                        <div class="total-semester-title">Total Semesters</div>
+                        <div class="sem-title"># Sem.</div>
+                    </div>
+                    {{#each session.Activities as |membership|}}
+                    <div class="row entry-row">
+                        <div class="activity-entry">{{membership.ActivityDescription}}<span class="glyphicon glyphicon-menu-down" onclick={{action "toggleActivityTable"}}></span></div>
+                        <div class="participation-entry "><strong>Participation: </strong>{{membership.ParticipationDescription}}</div>
+                        <div class="semester-entry"><strong>Total Semesters: </strong>{{membership.SemesterAcount}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+                {{/each}}
+            <!-- </table> -->
+        </div>
     </div>
 </div>

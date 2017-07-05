@@ -7,6 +7,14 @@ import getAsync from "gordon360/utils/get-async";
  *  Builds the data model that is used in the corresponding template (hbs) and controller (js) files.
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+    /* If the user has read-only permission, the user will be
+     * redirected to home page */
+    beforeModel() {
+        let college_role = this.get("session.data.authenticated.token_data.college_role");
+        if (college_role == "readonly") {
+            this.transitionTo("index");
+        }
+    },
     model(param) {
         // Variables we will need later
         let context = this;
@@ -41,6 +49,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Wrapper function to load the model object.
         let loadModel = function (result) {
+            console.log(result);
             return {
                 "activity": result,
                 "sessionCode": param.SessionCode,

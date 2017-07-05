@@ -8,10 +8,13 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
  *  Builds the data model that is used in the corresponding template (hbs) and controller (js) files.
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-    activate() {
-        this.controllerFor("application").getRequests();
-        this.controllerFor("application").checkAdmin();
-        this.controllerFor("application").checkReadOnly();
+    /* If the user has read-only permission, the user will be
+     * redirected to home page */
+    beforeModel() {
+        let college_role = this.get("session.data.authenticated.token_data.college_role");
+        if (college_role == "readonly") {
+            this.transitionTo("index");
+        }
     },
     model() {
         let id_number = this.get("session.data.authenticated.token_data.id");
@@ -24,9 +27,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Membership-related variables
         let currentMemberships = [];
         let pastMemberships = [];
-
-        // Dashboard slider content
-        let slides = [];
 
         // Switches
         let currentMembershipsFilled;
@@ -74,14 +74,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             sortSupervisions(currentSession,allSupervisions,currentSupervisions,pastSupervisions);
         };
 
-        let loadSlides = function () {
-          return getAsync("/cms/slider", context);
-        }
-
-        let initializeSlides = function (result) {
-          slides = result;
-        }
-
         let loadSwitches = function() {
             // Check if the user has any current or past activity memberships or supervisions
             currentMembershipsFilled = (currentMemberships.length !== 0);
@@ -107,8 +99,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "currentSupervisions": currentSupervisions,
                 "pastSupervisionsFilled": pastSupervisionsFilled,
                 "pastSupervisions": pastSupervisions,
-                "nothingToShow": nothingToShow,
-                "slides" : slides
+                "nothingToShow": nothingToShow
             };
         };
         /* End Promises */
@@ -121,8 +112,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(initializeMemberships)
         .then(arrangeMemberships)
         .then(arrangeSupervisions)
-        .then(loadSlides)
-        .then(initializeSlides)
         .then(loadSwitches)
         .then(loadModel);
 

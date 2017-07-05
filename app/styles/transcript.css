@@ -1,4 +1,10 @@
-#download-button {
+.transcript {
+    width: 768px !important;
+    margin: auto !important;
+    margin-top: 20px !important;
+    background-color: white;
+}
+.transcript #download-button {
     width: 100%;
     height: 50px;
     font-size: 1.6em !important;
@@ -7,27 +13,183 @@
     color: white;
     text-transform: uppercase;
 }
-#transcipt-view {
+
+/* --- */
+.transcript .transcript-table {
+    font-size: 1.6em;
+}
+.transcript .session-description {
+    background-color: #ddd;
+    padding: 0.5em;
+}
+.transcript .header-row {
+    padding: 0.3em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid #cccccb;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: row;
+}
+.transcript .entry-row {
+    padding: 0.3em;
+    padding-top: 0.2em;
+    border-bottom: 1px solid #cccccb;
+    display: flex;
+    flex-direction: row;
+}
+.transcript .header-row div, .transcript .entry-row div{
+    padding: 0.5em;
+}
+.transcript .header-row div strong, .transcript .entry-row div strong{
     display: none;
 }
-.reset-padding {
-    padding: 0 !important;
+.transcript .activity-title, .transcript .activity-entry {
+    width: 50%;
 }
+.transcript .participation-title, .transcript .participation-entry {
+    width: 25%;
+}
+.transcript .entry-row:last-child {
+    border-bottom: none;
+}
+.transcript .glyphicon.glyphicon-menu-down {
+    display: inline;
+    margin-left: 1em;
+    float: right;
+}
+
+.transcript h4 {
+    font-style: normal;
+    margin: 0.2em !important;
+}
+.transcript h3 {
+    text-align: center;
+    padding-top: 0.5em;
+    margin-bottom: 1em !important;
+}
+/*
+.main-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-bottom: 5em !important;
+}*/
 
 /* -----------------------------
     Responsive Changes
 ------------------------------- */
 
 @media only screen and (min-width: 768px) {
-    .transcript-button {
+    .transcript .transcript-button {
         width: auto;
     }
-    #transcipt-view {
+    .transcript #transcipt-view {
         display: inline-block;
         height: 1000px;
         margin-top: 20px;
         width: 100%;
         margin-left: auto;
         margin-right: auto;
+    }
+    .transcript.main-container {
+        padding-left: 5em !important;
+        padding-right: 5em !important;
+        padding-bottom: 5em !important;
+    }
+}
+
+.transcript .sem-title {
+    display: none;
+}
+.transcript .glyphicon.glyphicon-menu-down {
+    display: none;
+}
+
+@media only screen and (max-width: 1200px) {
+
+}
+
+@media only screen and (max-width: 815px) {
+    .transcript {
+        width: 100% !important;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    .transcript .sem-title {
+        display: block;
+    }
+    .total-semester-title {
+        display: none;
+    }
+    .transcript .activity-title, .transcript .activity-entry {
+        width: 60%;
+    }
+    .transcript .participation-title, .transcript .participation-entry {
+        width: 25%;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .transcript .activity-title, .transcript .activity-entry {
+        width: 100%;
+    }
+    .transcript .participation-title, .transcript .participation-entry, .transcript .sem-title, .transcript .semester-entry {
+        width: 100%;
+    }
+    .transcript .participation-title, .transcript .participation-entry, .transcript .sem-title, .transcript .semester-entry {
+        display: none;
+    }
+    .transcript .glyphicon.glyphicon-menu-down {
+        display: block;
+    }
+    .transcript .header-row, .transcript .entry-row {
+        flex-direction: column;
+    }
+    .transcript .header-row div strong, .transcript .entry-row div strong{
+        display: inline;
+    }
+}
+
+@media only screen and (min-width: 577px) {
+    .transcript .entry-row div{
+        display: block !important;
+    }
+}
+
+
+
+
+@media print {
+    .transcript {
+        float: left;
+    }
+    .transcript .entry-row div{
+        display: block !important;
+    }
+    .transcript #download-div, header button, .transcript .sem-title {
+        display: none;
+    }
+    html, body {
+        width: 1000px;
+    }
+    .transcript h3 {
+        margin-top: 0 !important;
+        margin-bottom: 30px !important;
+        text-align: left;
+        margin-left: -15px !important;
+    }
+    .transcript .header-row, .transcript .entry-row {
+        padding-top: 0em;
+        padding-bottom: 0em;
+        border-bottom: none;
+    }
+    .transcript .header-row div, .transcript .entry-row div {
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+    }
+    .transcript .session-table {
+        margin-bottom: 30px;
     }
 }

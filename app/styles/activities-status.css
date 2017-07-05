@@ -1,3 +1,25 @@
-.glyphicon.glyphicon-arrow-right {
+.activities-status td, .activities-status th {
+    font-size: 1.5em;
+}
+
+.activities-status table {
+    margin-top: 1.2em;
+}
+
+.activities-status .glyphicon.glyphicon-arrow-right {
   color: #fff;
+}
+.activities-status.main-container {
+    background-color: #fff;
+    padding: 3em;
+}
+
+.activities-status h2 {
+    font-size: 2em !important;
+}
+
+@media only screen and (min-width: 768px) {
+    .activities-status.main-container {
+        margin-top: 50px;
+    }
 }

@@ -7,15 +7,22 @@ module.exports = function(defaults) {
         'ember-power-select': {
             theme: 'bootstrap'
         },
+        'mediumEditorOptions': {
+            theme: 'bootstrap'
+        },
         tests: false
     });
 
-    app.import('vendor/jsPDF-1.2.60/jspdf.js');
+    // app.import('vendor/jsPDF-1.2.60/jspdf.js');
     app.import('vendor/jsPDF-1.2.60/plugins/addimage.js');
+    app.import('vendor/jsPDF-1.2.60/plugins/from_html.js');
+    app.import('vendor/jsPDF-1.2.60/plugins/split_text_to_size.js');
+    app.import('vendor/jsPDF-1.2.60/plugins/standard_fonts_metrics.js');
     app.import('vendor/file-saver/FileSaver.js');
     app.import('vendor/royalslider/jquery.event.frame.js');
     app.import('vendor/royalslider/jquery.royalslider.custom.min.js');
     app.import('vendor/royalslider/jquery.unveil.min.js');
+    app.import('vendor/customize-tab.js');
 
     // Use `app.import` to add additional libraries to the generated
     // output files.
