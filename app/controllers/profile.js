@@ -112,7 +112,8 @@ export default Ember.Controller.extend({
         // Shows the modal that holds the information to update profile picture
         showEditProfilePictureModal(){
              $("#editProfilePictureModal").addClass("showModal");
-             $('body').css('overflow','hidden');
+             $('body').css('position','fixed');
+             $('body').css('overflow-y','scroll');
         },
         // Hides the modal that holds the information to update profile picture
         cancelEditProfilePicture(item){
@@ -121,20 +122,23 @@ export default Ember.Controller.extend({
                 this.set("defaultImage", false);
                 this.set("errorMessage", null);
                 $("#editProfilePictureModal").removeClass("showModal");
-                $('body').css('overflow','scroll');
+                $('body').css('position','static');
+                $('body').css('overflow-y','auto');
             }
             //TODO Get cropper to disappear after canceling upload
         },
         // Shows the modal that allows users to update social media links
         showEditLinksModal(){
             $("#editLinksModal").addClass("showModal");
-            $('body').css('overflow','hidden');
+            $('body').css('position','fixed');
+            $('body').css('overflow-y','scroll');
         },
         // hides the modal that allows 
         hideEditLinksModal(item){
             if(item.target == $(".hide-links-modal-button")[0] || item.target == $("#editLinksModal").not(".modal-content")[0]){
                 $("#editLinksModal").removeClass("showModal");
-                $('body').css('overflow','scroll');
+                $('body').css('position','static');
+                $('body').css('overflow-y','auto');
                 let lastForm = this.get("lastForm");
                 if(lastForm){
                     lastForm.addClass("hide");

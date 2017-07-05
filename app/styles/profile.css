@@ -2,29 +2,46 @@
 Student Profile
 *******************/
 
-.profile .right-align-text{
-    float: right;
+.profile .profile-block {
+    padding: 25px 0;
+    margin: 0;
+    border-bottom: 2px solid lightgray;
 }
+
+.profile .block-header {
+    font-size: 4em;
+    text-decoration: underline;
+}
+
+.profile {
+    padding: 0 !important;
+    padding-bottom: 45px;
+}
+
+/*********************
+Main profile block
+*********************/
 
 .profile .user-name {
     font-size: 6em;
-    /*padding-bottom: .2em;*/
 }
 
 .profile .user-links {
     font-size: 2em;
 }
 
-.profile .student-class {
+.profile .user-position {
     font-size: 4em;
     padding-bottom: .5em;
 }
 
-.profile .profile-block {
-    padding: 25px 0;
-    margin: 0;
-    border-bottom: 2px solid lightgray;
+.profile .profile-block-info {
+    margin: auto 0;
 }
+
+/***********************
+Personal info block
+***********************/
 
 .profile .personal-info-list {
      font-size: 2em;
@@ -37,20 +54,6 @@ Student Profile
 
 .profile .address-title {
     text-decoration: underline;
-}
-
-.profile .block-header {
-    font-size: 4em;
-    text-decoration: underline;
-}
-
-.profile .profile-block-info {
-    margin: auto 0;
-}
-
-.profile .profile-container {
-    padding: 0 !important;
-    padding-bottom: 45px;
 }
 
 
@@ -109,17 +112,17 @@ Edit profile picture modal
 }
 
 .profile .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 3; /* Sit on top */
-    padding-top: 30px; /* Location of the box */
+    display: none; 
+    position: fixed; 
+    z-index: 3; 
+    padding-top: 20px; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
 }
 
 /* Modal Content */
@@ -129,22 +132,12 @@ Edit profile picture modal
     padding: 20px;
     border: 1px solid #888;
     width: 400px;
+    max-height: 90%;
+    overflow-y: auto;
     /*max-width:*/
 }
-
-/* The Close Button */
-.profile .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.profile .close:hover,
-.profile .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+.profile .modal-content::-webkit-scrollbar { 
+    display: none; 
 }
 
 

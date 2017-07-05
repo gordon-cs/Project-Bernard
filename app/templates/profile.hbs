@@ -1,4 +1,4 @@
-<main class="container main-container profile-container profile">
+<main class="container main-container profile">
     {{!--Profile picture and information--}}
     <section class="row profile-block">
         {{! Profile picture and overlay }}
@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="student-class">
+                    <div class="user-position">
                         {{#if model.userInfo.IsFaculty}}
                             {{model.userInfo.JobTitle}}
                         {{else if model.userInfo.IsStudent}}
