@@ -62,7 +62,7 @@ Main profile block
 
 
 .profile .social-media-buttons {
-    border: 1px solid rgb(215, 215, 215);
+    border: 1px solid rgb(205, 205, 205);
     margin: 2px;
     -moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
@@ -336,6 +336,9 @@ Activities
 .profile .activity-entry-title {
     font-size: 1.2em;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .profile .activity-entry ul {
@@ -347,6 +350,21 @@ Activities
     background: #00aeef;
     padding: 5px 10px 5px 10px;
     width: 120;
+}
+
+.profile .activity-session {
+    font-size: 1.15em;
+    padding-top: 3px;
+}
+
+.profile .activity-privacy-button-mobile {
+    text-align: center;
+    color: #00aeef;
+    font-size: 1.1em;
+}
+
+.profile .activity-row2-mobile {
+    padding-top: 2px;
 }
 
 

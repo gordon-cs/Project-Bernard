@@ -172,10 +172,12 @@
                                         <div class="activity-entry-title">{{activity.membership.ActivityDescription}} {{if activity.membership.privacy "(Hidden on your page)"}}</div>
                                 <div class="row">
                                     <div class="col-sm-6 col-no-padding">
-                                        <div class="row">
+                                        <div class="row activity-row2-mobile">
                                             <div class="activity-session col-xs-5 col-sm-12 col-no-padding">{{activity.membership.session}}</div>
-                                             <div class="activity-privacy-button-mobile col-xs-3">
-                                                <div class="btn club-privacy-button" {{action "toggleClubPrivacy" activity}}>{{if activity.membership.Privacy "Show this activity" "Hide this activity"}}</div>
+                                             <div class="col-xs-7 col-no-padding col-only-sm"{{action "toggleClubPrivacy" activity}}>
+                                                <div class="social-media-buttons">
+                                                    <div class="activity-privacy-button-mobile">{{if activity.membership.Privacy "Show this activity" "Hide this activity"}}</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row col-xs-hide">

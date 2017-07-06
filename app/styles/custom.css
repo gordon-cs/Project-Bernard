@@ -450,3 +450,9 @@ button:active,
         display: none;
     }
 }
+
+@media only screen and (min-width: 992){
+    .col-only-sm {
+        display: none;
+    }
+}
