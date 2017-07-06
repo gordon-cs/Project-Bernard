@@ -151,9 +151,22 @@ Personal info block
     -webkit-padding-start: 0;
 }
 
-.profile .address-title {
-    text-decoration: underline;
-    font-size: 1.3em;
+.profile .personal-information-entry {
+    font-size: 1.6em;
+    padding: 5px 15px;
+    border-bottom: 1px solid rgb(221,221,221);
+}
+
+.profile .personal-information-entry:last-of-type {
+    border: none;
+    padding-bottom: 0;
+}
+
+.profile .personal-information-entry-value {
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 

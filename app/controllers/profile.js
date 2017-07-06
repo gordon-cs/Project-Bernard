@@ -328,13 +328,13 @@ export default Ember.Controller.extend({
                         let dataUrl = $("#image-to-crop").cropper('getCroppedCanvas', {
                             width: 320,
                             height: 320
-                        }).toDataURL('image/jpeg');
+                        }).toDataURL('image/jpg');
                         let blob = dataURItoBlob(dataUrl);
-                        let blobName = "canvasImage.jpeg";
+                        let blobName = "canvasImage.jpg";
                         console.log(blob);
                         let imageData = new FormData();
 
-                        imageData.append("canvasImage", blob, "canvasImage.jpeg");
+                        imageData.append("canvasImage", blob, "canvasImage.jpg");
                         console.log(imageData);
 
                         return postFileAsync("/profiles/" + "/image", imageData, context).catch((reason) => {
