@@ -5,6 +5,18 @@
     margin-top: 30px !important;
 }
 
+.events .filterBtn {
+    float: right;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.events .filterBtn-row:hover {
+    background-color: #E2794C !important;
+    color: white;
+    cursor: pointer;
+}
+
 .events .entry-rows div:nth-child(even) {
     background: #ffffff;
 }
@@ -46,6 +58,11 @@
     cursor: pointer;
 }
 
+.events .event-checks {
+    font-size: 15px;
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+}
+
 .events .event-header {
     font-size: 25px;
     margin-top: 0px;
@@ -56,7 +73,13 @@
     margin-top: 0px !important;
     margin-bottom: 20px !important;
     padding-top: 0px !important;
-    float: left;
+}
+
+.events .event-title {
+    font-style: strong;
+    font-size: 20px;
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+    text-align: center;
 }
 
 .events .event-id {
