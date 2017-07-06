@@ -1,6 +1,6 @@
 <main class="container main-container profile">
     {{!--Profile picture and information--}}
-    <section class="profile-block">
+    <section class="row profile-block">
         {{! Profile picture and overlay }}
         <div class="col-sm-3">
             <div class="profile-picture-container" {{action "showEditProfilePictureModal"}}>
@@ -25,7 +25,7 @@
                         {{else if model.userInfo.IsStudent}}
                             {{model.userInfo.Class}}
                         {{else if model.userInfo.isAlumni}}
-                            {{model.userInfo.}}
+                            {{model.userInfo.}} 
                         {{/if}}
                     </div>
                 </div>
@@ -92,8 +92,7 @@
 
 
     {{!--Personal Information--}}
-    <section class="profile-block">
-        <div class="row">
+    <section class="row profile-block">
             <div class="col-sm-5 block-header">Personal Information</div>
             <div class="col-sm-3 phone-privacy-button">
                 <button class="btn btn-primary" {{action "toggleMobilePhonePrivacy"}}>{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</button>
@@ -101,9 +100,7 @@
             <div class="col-sm-4 success-message">
                 {{if phonePrivacySuccessMessage phonePrivacySuccessMessage}}
             </div>
-            
-        </div>
-        <div class="row">
+            <div class="row">
             <div class="col-sm-4">
                 <ul class="personal-info-list">
                     {{#if model.userInfo.IsStudentOrAlumni}}
@@ -121,47 +118,47 @@
         </div>
     </section>
 
-    <section class="profile-block">
-        <div class="row">
+    <section class="row profile-block">
+            <div class="col-xs-12 block-header">
+                Home Address
+            </div>
             <div class="col-xs-12">
-                <div class="block-header">Home Address</div>
                 <ul class="personal-info-list">
                     <li>Street: {{model.userInfo.HomeStreet1}}</li>
                     <li>City: {{model.userInfo.HomeCity}}</li>
                     <li>State: {{model.userInfo.HomeState}}</li>
                 </ul>
             </div>
-        </div>
     </section>
 
-    <section class="profile-block">
-        <div class="row">
-            <div class="col-xs-12">
+    <section class="row profile-block">
                 {{#if model.userInfo.OnOffCampus}}
-                    <div class="block-header">Campus Address</div>
-                    <ul class="personal-info-list">
-                        <li>Dorm: {{model.userInfo.OnCampusBuilding}}</li>
-                        <li>Room: {{model.userInfo.OnCampusRoom}}</li>
-                    </ul>
+                    <div class="col-xs-12 block-header">Campus Address</div>
+                    <div class="col-xs-12">
+                        <ul class="personal-info-list">
+                            <li>Dorm: {{model.userInfo.OnCampusBuilding}}</li>
+                            <li>Room: {{model.userInfo.OnCampusRoom}}</li>
+                        </ul>
+                    </div>
                 {{/if}}
                 {{#if model.userInfo.IsFaculty}}
-                        <div class="address-title">On Campus Info</div>
-                        <ul class="personal-info-list">
-                            <li>Office: {{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</li> {{!-- GET description of building from TmsEPrd.dbo.building_master (showperson.cfm line: 596) --}}
-                            <li>Office Phone: {{model.userInfo.OnCampusPhone}}</li>
-                            {{!TODO: add office hours}}
-                        </ul>
+                        <div class="col-xs-12 block-header">On Campus Info</div>
+                        <div class="col-xs-12">
+                            <ul class="personal-info-list">
+                                <li>Office: {{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</li> {{!-- TODO get description of building from TmsEPrd.dbo.building_master (showperson.cfm line: 596) --}}
+                                <li>Office Phone: {{model.userInfo.OnCampusPhone}}</li>
+                                {{!TODO: add office hours}}
+                            </ul>
+                        </div>
                 {{/if}}
-            </div>
-        </div>
     </section>
 
     {{!--Activities--}}
     
     <section class="profile-block">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="block-header">Activities</div>
+        <div class="row round-top-coners">
+            <div class="block-header col-sm-12">
+                Activities
             </div>
         </div>
         {{#each model.memberships as |activity|}}
@@ -309,10 +306,9 @@
 
 
     {{!--Requests tables--}}
-    <section class="tables-section">
+    <section class="tables-section round-top-coners">
         {{#if requestsRecieved}}
-            <article>
-                <div class="row">
+                <div class="row background-transparent">
                     <div class="col-sm-12">
                         <h2 {{action "toggleRecievedTable"}} class="toggleTableBtn">
                             <strong><span id="recieved-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Recieved</strong>
@@ -339,11 +335,9 @@
                         </div>
                     {{/each}}
                 </div>
-            </article>
         {{/if}}
         {{!--Membership requests Sent table--}}
-        <article>
-            <div class="row">
+            <div class="row background-transparent">
                 <div class="col-sm-12">
                     <h2 {{action "toggleSentTable"}} class="toggleTableBtn">
                         <strong><span id="sent-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Sent</strong>
@@ -375,11 +369,9 @@
                 <p class="empty-table-reminder">There are no pending requests</p>
                 {{/if}}
             </div>
-        </article>
     {{!--Admin table--}}
         {{#if model.superGodMode}}
-            <article>
-                <div class="row">
+                <div class="row background-transparent">
                     <div class="col-sm-12">
                         <h2 {{action "toggleAdminTable"}} class="toggleTableBtn">
                             <strong><span id="admin-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Admins</strong>
@@ -405,7 +397,6 @@
                         <button class="logout-btn btn button-navy">Add admin</button>
                     {{/link-to}}
                 </div>
-            </article>
         {{/if}}
     </section>
 </main>

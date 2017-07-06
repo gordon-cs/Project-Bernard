@@ -1,3 +1,7 @@
+.profile .background-transparent {
+    background: transparent;
+}
+
 .profile .row-centered {
     text-align: center;
 }
@@ -31,16 +35,31 @@ Student Profile
 }
 
 .profile .profile-block {
-    padding: 10px 0;
+    padding-bottom: 10px;
     margin: 0 auto;
     margin-bottom: 10px;
     width: 100%;
     border-radius: 10px;
+    -moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+.profile .profile-block:first-of-type {
+    padding-top: 10px;
 }
 
 .profile .block-header {
-    font-size: 2.5em;
-    text-decoration: underline;
+    padding-top: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid rgb(235, 234, 234);
+    font-size: 2em;
+    background-color: rgb(250,250,250);
+}
+
+.profile .round-top-coners {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 
@@ -361,6 +380,7 @@ Activities
     text-align: center;
     color: #00aeef;
     font-size: 1.1em;
+    background: transparent;
 }
 
 .profile .activity-row2-mobile {
@@ -380,7 +400,6 @@ Request Tables
     text-transform: uppercase;
     font-size: 1.6em;
     font-weight: bold;
-    border-bottom: 2px solid rgb(221,221,221);
     padding: 8px 0;
     margin: 0;
 }
@@ -404,6 +423,7 @@ Request Tables
 .profile .toggleTableBtn {
     cursor: pointer;
 }
+
 
 
 /****************************
