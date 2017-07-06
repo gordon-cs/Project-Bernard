@@ -127,7 +127,7 @@ Personal info block
      font-size: 1.5em;
 }
 
-.profile .personal-info-list > ul {
+.profile .personal-info-list {
     list-style-type: none;
     -webkit-padding-start: 0;
 }
