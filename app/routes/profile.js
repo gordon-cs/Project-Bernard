@@ -216,7 +216,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             for(var i = 0; i < data.length; i++) {
                 memberships[i].clubInfo = data[i];
             }
-            console.log(memberships);
             return memberships;
         }
 
@@ -241,6 +240,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             });
             for(var i = 0; i < data.length; i++){
+                if(data[i].SessionDescription.indexOf("Academic") > 0){
+                    data[i].session = data[i].SessionDescription.slice(0, data[i].SessionDescription.indexOf(" Academic"));
+                }
                 memberships[i] = membership.create({
                     "membership": data[i]
                 });
@@ -283,6 +285,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let loadModel = function() {
             console.log(userInfo);
             console.log(links);
+            console.log(memberships);
             return {
                 "requestsSent": requestsSent,
                 "godMode": godMode,

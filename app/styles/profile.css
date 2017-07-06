@@ -7,23 +7,35 @@
     margin-right: -4px;
 }
 
+.profile .col-no-padding {
+    padding: 0;
+}
+
+.profile .row {
+    margin: 0 auto;
+    width: 100%;
+}
+
 /*******************
 Student Profile
 *******************/
 .profile {
     padding: 0 !important;
     padding-bottom: 45px;
+    background: rgb(235, 234, 234);
+}
+
+.profile div,
+.profile section {
+    background-color: white;
 }
 
 .profile .profile-block {
-    padding: 25px 0;
-    margin: 0;
-    border-bottom: 2px solid rgb(235, 234, 234);
-}
-
-.profile .profile-action-block {
-    margin: 0;
-    border-bottom: 2px solid rgb(235, 234, 234);
+    padding: 10px 0;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .profile .block-header {
@@ -44,12 +56,10 @@ Main profile block
 .profile .user-links {
     font-size: 1.5em;
     text-align: center;
-    /*margin: 0 auto;*/
+    /*width: 100%;
+    margin: 0 auto;*/
 }
 
-.profile .social-media-button-containers {
-    padding: 0px;   
-}
 
 .profile .social-media-buttons {
     border: 1px solid rgb(215, 215, 215);
@@ -69,28 +79,40 @@ Main profile block
     margin: auto 0;
 }
 
-.profile .profile-action-button-container {
-    border-left: 1px solid rgb(235, 234, 234);
-    border-right: 1px solid rgb(235, 234, 234);
-    padding: 2px;
+
+/**********************************
+Profile Action buttons (for mobile)
+**********************************/
+.profile .profile-action-block{
+    padding-top: 5px;
 }
 
-.profile .profile-action-button-container:hover {
+.profile .profile-action-button-container {
+    border-left: 1px solid rgb(235, 234, 234);
+    padding: 4px;
+}
+
+.profile .profile-action-button-container:first-of-type {
+    border: none;
+}
+
+.profile .profile-action-button-container:active {
     background: rgb(235, 234, 234);
 }
 
 .profile .action-icon {
-    width: 40%;
-    float: left;
+    width: 50%;
+    margin: 0 auto;
 }
 .action-icon-image {
     width: 100%;
 }
 
 .profile .action-link {
-    float: left;
-    width: 60%;
-    font-size: 1.25em;
+    width: 95%;
+    margin: 0 auto;
+    font-size: 1.4em;
+    text-align: center;
 }
 
 .phone-privacy-button {
@@ -112,6 +134,7 @@ Personal info block
 
 .profile .address-title {
     text-decoration: underline;
+    font-size: 1.3em;
 }
 
 
@@ -153,6 +176,7 @@ Profile Picture
 
 .profile .text {
   color: white;
+  background-color: rgba(0, 0, 0, 0);
   font-size: 20px;
   position: absolute;
   top: 50%;
@@ -306,18 +330,25 @@ Activities
 
 .profile .activity-entry {
     padding: 10px 0;
-    margin: 10px 10px;
-    border: 1px solid lightgray;
     font-size: 1.5em;
 }
 
 .profile .activity-entry-title {
-    font-size: 1.5em;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .profile .activity-entry ul {
     list-style-type: none;
 }
+
+.profile .club-privacy-button {
+    color: #ffffff;
+    background: #00aeef;
+    padding: 5px 10px 5px 10px;
+    width: 120;
+}
+
 
 /*******************
 Request Tables

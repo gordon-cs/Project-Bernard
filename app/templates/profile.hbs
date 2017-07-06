@@ -33,59 +33,59 @@
             {{! Display users social media links if provided }}
             <div class="row row-centered user-links">
                     {{#if model.userInfo.Facebook}}
-                        <div class="col-xs-3 social-media-button-containers col-centered">
+                        <div class="col-xs-3 col-no-padding col-centered">
                             <div class="social-media-buttons">
                                 <a href="https://www.facebook.com/{{model.userInfo.Facebook}}">Facebook</a>
                             </div>
                         </div>
                     {{/if}}
-                    {{#if model.userInfo.Twitter}}
-                        <div class="col-xs-3 social-media-button-containers col-centered">
-                            <div class="social-media-buttons">
-                                <a href="https://twitter.com/{{model.userInfo.Twitter}}" >Twitter</a>
-                            </div>
-                        </div>
-                    {{/if}}
-                    {{#if model.userInfo.LinkedIn}}
-                        <div class="col-xs-3 social-media-button-containers col-centered">
-                            <div class="social-media-buttons">
-                                <a href="https://www.linkedin.com/in/{{mode.userInfo.LinkedIn}}">LinkedIn</a>
-                            </div>
-                        </div>
-                    {{/if}}
                     {{#if model.userInfo.Instagram}}
-                        <div class="col-xs-3 social-media-button-containers col-centered">
+                        <div class="col-xs-3 col-no-padding col-centered">
                             <div class="social-media-buttons">
                                 <a href="https://www.instagram.com/{{model.userInfo.Instagram}}">Instagram</a>
                             </div>
                         </div>
                     {{/if}}
+                    {{#if model.userInfo.LinkedIn}}
+                        <div class="col-xs-3 col-no-padding col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://www.linkedin.com/in/{{mode.userInfo.LinkedIn}}">LinkedIn</a>
+                            </div>
+                        </div>
+                    {{/if}}
+                    {{#if model.userInfo.Twitter}}
+                        <div class="col-xs-3 col-no-padding col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://twitter.com/{{model.userInfo.Twitter}}" >Twitter</a>
+                            </div>
+                        </div>
+                    {{/if}}
             </div>
-        </div>
-    </section>
-    <section class="row profile-action-block">
-        <div class="col-xs-4 profile-action-button-container">
-            <div class="profile-action-button"{{action "showEditLinksModal"}}>
-                <div class="action-icon">
-                    <img src="http://cdn.onlinewebfonts.com/svg/img_52.svg" class="action-icon-image">
+            <div class="row profile-action-block"> 
+                <div class="col-xs-4 profile-action-button-container">
+                    <div class="profile-action-button"{{action "showEditLinksModal"}}>
+                        <div class="action-icon">
+                            <img src="http://cdn.onlinewebfonts.com/svg/img_52.svg" class="action-icon-image">
+                        </div>
+                        <div class="action-link">Edit your social media links</div>
+                    </div>
                 </div>
-                <div class="action-link" href="#/profile">Edit your social media links</div>
-            </div>
-        </div>
-        <div class="col-xs-4 profile-action-button-container">
-            <div class="profile-action-button"{{action "showEditProfilePictureModal"}}>
-                <div class="action-icon">
-                    <img src="http://simpleicon.com/wp-content/uploads/camera.svg" class="action-icon-image">
+                <div class="col-xs-4 profile-action-button-container">
+                    <div class="profile-action-button"{{action "showEditProfilePictureModal"}}>
+                        <div class="action-icon">
+                            <img src="http://simpleicon.com/wp-content/uploads/camera.svg" class="action-icon-image">
+                        </div>
+                        <div class="action-link">Update your profile picture</div>
+                    </div>
                 </div>
-                <div class="action-link" href="#/profile">Update your profile picture</div>
-            </div>
-        </div>
-        <div class="col-xs-4 profile-action-button-container">
-            <div class="profile-action-button"{{action "toggleMobilePhonePrivacy"}}>
-                <div class="action-icon">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Mobile_phone_font_awesome.svg/512px-Mobile_phone_font_awesome.svg.png" class="action-icon-image">
+                <div class="col-xs-4 profile-action-button-container">
+                    <div class="profile-action-button"{{action "toggleMobilePhonePrivacy"}}>
+                        <div class="action-icon">
+                            <img src="http://www.clker.com/cliparts/0/f/c/2/1195445181899094722molumen_phone_icon.svg.hi.png" class="action-icon-image">
+                        </div>
+                        <div class="action-link">{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</div>
+                    </div>
                 </div>
-                <div class="action-link" href="#/profile">{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</div>
             </div>
         </div>
     </section>
@@ -163,32 +163,25 @@
             </div>
             {{#each model.memberships as |activity|}}
                 <div class="row activity-entry bootstrap-tester">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 col-no-padding">
                         <div class="row">
-                            <div class="col-sm-2 bootstrap-tester">
+                            <div class="col-xs-2 col-no-padding bootstrap-tester">
                                 <img src="{{activity.membership.ActivityImagePath}}" class="activity-image" alt="{{activity.membership.ActivityDescription}} profile picture">
                             </div>
-                            <div class="col-sm-10">
-                                <div class="row bootstrap-tester">
-                                    <div class="col-sm-7 bootstrap-tester">
+                            <div class="col-xs-10">
                                         <div class="activity-entry-title">{{activity.membership.ActivityDescription}} {{if activity.membership.privacy "(Hidden on your page)"}}</div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <button class="btn view-club-button">{{#link-to "specific-activity" activity.membership.SessionCode activity.membership.ActivityCode}}View Club{{/link-to}}</button>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button class="btn btn-primary view-club-button" {{action "toggleClubPrivacy" activity}}>{{if activity.membership.Privacy "Show this activity" "Hide this activity"}}</button>
-                                    </div>
-                                </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 col-no-padding">
                                         <div class="row">
-                                            <div class="col-sm-12">{{activity.membership.SessionDescription}}</div>
+                                            <div class="activity-session col-xs-5 col-sm-12 col-no-padding">{{activity.membership.session}}</div>
+                                             <div class="activity-privacy-button-mobile col-xs-3">
+                                                <div class="btn club-privacy-button" {{action "toggleClubPrivacy" activity}}>{{if activity.membership.Privacy "Show this activity" "Hide this activity"}}</div>
+                                            </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row col-xs-hide">
                                             <div class="col-sm-12">Group Contacts:</div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row col-xs-hide">
                                             <div class="col-sm-12">
                                                 <ul>
                                                     {{#each activity.membership.groupAdminsEmail as |groupAdmin|}}
@@ -199,18 +192,22 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="row">
+                                        <div class="row col-xs-hide">
                                             <div class="col-sm-12">Description:</div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row col-xs-hide">
                                             <div class="col-sm-12">{{activity.membership.clubInfo.ActivityBlurb}}</div>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-hide">
+                                            <button class="btn view-club-button">{{#link-to "specific-activity" activity.membership.SessionCode activity.membership.ActivityCode}}View Club{{/link-to}}</button>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-hide">
+                                            <button class="btn club-privacy-button" {{action "toggleClubPrivacy" activity}}>{{if activity.membership.Privacy "Show this activity" "Hide this activity"}}</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-5"></div>
-                        <div class="col-sm-5"></div>
                     </div>
                 </div>
             {{/each}}
