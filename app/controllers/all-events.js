@@ -166,6 +166,43 @@ export default Ember.Controller.extend({
             $('.container').addClass('blur');
             let context = this;
             let displayEvent = this.set("displayEvent", item);
+            if (displayEvent.Locations != null) {
+                let startClock;
+                for (let i = 0; i < displayEvent.Locations.length; i++) {
+                    let startDate = new Date(displayEvent.Locations[i][0]);
+                    if (Object.prototype.toString.call(startDate) === '[object Date]') {
+                        let startYear = startDate.getFullYear();
+                        let startMonth = startDate.getMonth();
+                        let startDay = startDate.getDate();
+                        let startHour = startDate.getHours();
+                        let startMin = startDate.getMinutes();
+                        startYear = startYear.toString().substr(-2);
+                        if (startMin < 10) {
+                            startMin = "0" + startMin;
+                        }
+
+                        if (startHour === 12) {
+                            startClock = startHour + ":" + startMin + "pm";
+                        } else if (startHour > 12) {
+                            startHour = startHour - 12;
+                            startClock = startHour + ":" + startMin + "pm";
+                        } else {
+                            startClock = startHour + ":" + startMin + "am";
+                        }
+
+                        if (startHour === 0) {
+                            startClock = "All Day";
+                        }
+
+                        if (displayEvent.Locations[i][1] === null || displayEvent.Locations[i][1] === "") {
+                            displayEvent.Locations[i][2] = (startMonth + 1) + "/" + startDay + "/" + startYear + ",      " + startClock;
+                        } else {
+                            displayEvent.Locations[i][2] = (startMonth + 1) + "/" + startDay + "/" + startYear + ", " + startClock + ": " + displayEvent.Locations[i][1];
+                        }
+                    }
+                }
+            }
+
 
         },
 

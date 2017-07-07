@@ -8,29 +8,32 @@
     </div>
   </div>
   <div class=" row whitebox">
-    <div class="input-group event-search col-xs-6 col-sm-4 col-md-4">
+    <div class="input-group event-search col-xs-10 col-sm-4 col-md-4">
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
     </div>
-    <div class="form-check col-xs-2 col-sm-2 col-md-2">
+    <div class="form-check col-xs-3 col-sm-2 col-md-2">
       <label class="form-check-label event-checks">
         <input type="checkbox" class="form-check-input">
        chapel
       </label>
     </div>  
-        <div class="form-check col-xs-2 col-sm-2 col-md-2">
+        <div class="form-check col-xs-3 col-sm-2 col-md-2">
       <label class="form-check-label event-checks">
         <input type="checkbox" class="form-check-input">
         Athletic
       </label>
     </div>  
-        <div class="form-check col-xs-2 col-sm-2 col-md-2">
+        <div class="form-check col-xs-3 col-sm-2 col-md-2">
       <label class="form-check-label event-checks">
         <input type="checkbox" class="form-check-input">
         CEC/GCSA
       </label>
     </div>  
-    <button type="submit" class="btn btn-primary">Submit</button>
+    
 </div>
+  <div class=" row ">
+<button type="submit" class="btn btn-primary event-sort event-checks col-xs-6 col-xs-offset-3" onclick={{action "SortByDate"}}>Sort By Date</button>
+  </div>
   <div class="event-cyanbox cyanbox">
     <div id="category-bar" class="row">
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event</h4>
@@ -59,7 +62,10 @@
   <div class="modal-content event-modal-content">
     <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
     <div class="modal-body">
-      <h4> A.J Chapel <br> {{ displayEvent.Organization }} <br> {{ displayEvent.Description}} </h4>
+      <h4> A.J Chapel <br> {{ displayEvent.Organization }} <br> {{ displayEvent.Description}} </h4> <br>
+    {{#each displayEvent.Locations as |Location|}}
+    <h4>{{Location.[2]}} </h4>
+    {{/each}}
     </div>
     <div class="modal-footer">
       <button class="btn button-lightgray cancel-modal form-button form-cancel-button">Cancel</button>

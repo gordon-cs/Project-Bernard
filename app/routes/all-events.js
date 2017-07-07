@@ -18,12 +18,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let loadModel = function(result) {
             console.log(result);
             let eventList = result;
-            let displayTime;
             let startClock;
             let endClock;
+            let modalClock;
 
             for (let i = 0; i < eventList.length; ++i) {
 
+                if (eventList[i].Description !== "No description available") {
+                    eventList[i].Description = eventList[i].Description.substring(3, eventList[i].Description.length - 4);
+                }
                 //get the date information
                 eventList[i].timeObject = eventList[i].Start_Time;
                 let startDate = new Date(eventList[i].Start_Time);
@@ -39,6 +42,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 //insert the formated date back into the JSON array
                 eventList[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
                 //console.log(eventMonth);
+
 
                 //create a 12 hour clock
                 if (startMin < 10) {
@@ -67,7 +71,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     endClock = endHour + ":" + endMin + "am";
                 }
 
-                eventList[i].End_Time = startClock + " - " + endClock;
+
+                if (eventList[i].Location === null && eventList[i].Locations !== null) {
+                    eventList[i].Location = "Multiple locations or dates";
+                    eventList[i].End_Time = "---";
+                    eventList[i].Start_Time = "---";
+                } else if (startHour === 0) {
+                    eventList[i].End_Time = "All Day";
+                } else {
+                    eventList[i].End_Time = startClock + " - " + endClock;
+                }
+                if (eventList[i].Location === null && eventList[i].Locations === null) {
+                    eventList[i].Location = "No location available";
+
+                }
 
             }
 

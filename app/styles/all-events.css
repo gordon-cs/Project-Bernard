@@ -11,6 +11,10 @@
     margin-top: 0px;
 }
 
+.event-sort {
+    align-items: center !important;
+}
+
 .events .filterBtn-row:hover {
     background-color: #E2794C !important;
     color: white;
@@ -148,6 +152,9 @@
         background-color: white;
         color: black;
     }
+    .event-checks {
+        margin: 5px;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -185,7 +192,12 @@
         padding: 20px;
         border: 1px solid #888;
         width: 35%;
+        max-height: 50%;
+        overflow-y: auto;
         /* Could be more or less, depending on screen size */
+    }
+    .event-modal-content::-webkit-full-screen {
+        display: none !important;
     }
     /* The Close Button */
     .cancel-modal {
@@ -215,5 +227,8 @@
     }
     .event-showModal {
         display: block !important;
+    }
+    .events .event-sort {
+        display: none !important;
     }
 }
