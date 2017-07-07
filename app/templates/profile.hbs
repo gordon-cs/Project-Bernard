@@ -39,24 +39,24 @@
                             </div>
                         </div>
                     {{/if}}
-                    {{#if model.userInfo.Instagram}}
+                    {{#if model.userInfo.Twitter}}
                         <div class="col-xs-3 col-no-padding col-centered">
                             <div class="social-media-buttons">
-                                <a href="https://www.instagram.com/{{model.userInfo.Instagram}}">Instagram</a>
+                                <a href="https://twitter.com/{{model.userInfo.Twitter}}" >Twitter</a>
                             </div>
                         </div>
                     {{/if}}
                     {{#if model.userInfo.LinkedIn}}
                         <div class="col-xs-3 col-no-padding col-centered">
                             <div class="social-media-buttons">
-                                <a href="https://www.linkedin.com/in/{{mode.userInfo.LinkedIn}}">LinkedIn</a>
+                                <a href="https://www.linkedin.com/in/{{model.userInfo.LinkedIn}}">LinkedIn</a>
                             </div>
                         </div>
                     {{/if}}
-                    {{#if model.userInfo.Twitter}}
+                    {{#if model.userInfo.Instagram}}
                         <div class="col-xs-3 col-no-padding col-centered">
                             <div class="social-media-buttons">
-                                <a href="https://twitter.com/{{model.userInfo.Twitter}}" >Twitter</a>
+                                <a href="https://www.instagram.com/{{model.userInfo.Instagram}}">Instagram</a>
                             </div>
                         </div>
                     {{/if}}
@@ -109,7 +109,7 @@
                     </div>
                     <div class="row personal-information-entry">
                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
-                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.MobilePhone}}</div>
+                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}</div>
                     </div>
                 {{/if}}
                 {{#if model.userInfo.IsFaculty}}
@@ -124,7 +124,7 @@
                 {{/if}}
                     <div class="row personal-information-entry">
                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Home Phone</div>
-                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.HomePhone}}</div>
+                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.formattedHomePhone model.userInfo.formattedHomePhone model.userInfo.HomePhone}}</div>
                     </div>
                     <div class="row personal-information-entry">
                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Email</div>
@@ -301,27 +301,27 @@
             {{/if}}
             {{#each model.links as |link|}}
                 <div class="row edit-links-row">
-                    <div class="col-sm-6 links-title">{{link.type}}: </div>
+                    <div class="col-xs-5 links-title">{{link.type}}</div>
                     {{#if link.link}}
-                        <div class="col-sm-3 edit-links-button-containers">
+                        <div class="col-xs-3 edit-links-button-containers">
                             <button class="btn btn-primary edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Edit</button>
                         </div>
-                        <div class="col-sm-3 edit-links-button-containers">
+                        <div class="col-xs-4 edit-links-button-containers">
                             <button class="btn button-danger edit-links-button" onclick={{action "updateLinks" "removed" link}}>Remove</button>
                         </div>
                     {{else}}
-                        <div class="col-sm-3 edit-links-button-containers">
+                        <div class="col-xs-7 edit-links-button-containers">
                             <button class="btn btn-success edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Add</button>
                         </div>
                     {{/if}}
                 </div>
                 {{! form for entering data }}
-                <div class="row edit-links-form-container hide">
+                <div class="row edit-links-form-container col-no-padding hide">
                     <form class="edit-links-form" {{action "updateLinks" "updated" link on="submit"}}>
-                            <div class="col-sm-9 edit-links-button-containers">
+                            <div class="col-xs-8 edit-links-button-containers">
                                     {{input value=model.link class="edit-links-input"}}
                             </div>
-                            <div class="col-sm-3 edit-links-button-containers">
+                            <div class="col-xs-4 edit-links-button-containers">
                                 <input class="btn btn-primary edit-links-button" type="submit">
                             </div>
                     </form>

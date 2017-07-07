@@ -195,9 +195,17 @@ export default Ember.Controller.extend({
                         break;
                 case "twitter":
                         linkToSend = link.substring(20);
+                        if(linkToSend.indexOf("?") > 0){
+                            linkToSend = linkToSend.slice(0, linkToSend.indexOf("?"));
+                        }
+                        console.log(linkToSend);
                         break;
                 case "linkedin":
                         linkToSend = link.substring(28);
+                        if(linkToSend.slice(-1) === "/"){
+                            linkToSend = linkToSend.slice(0, -1);
+                        }
+                        console.log(linkToSend);
                         break;
                 case "instagram":
                         linkToSend = link.substring(26);
@@ -337,7 +345,7 @@ export default Ember.Controller.extend({
                         imageData.append("canvasImage", blob, "canvasImage.jpg");
                         console.log(imageData);
 
-                        return postFileAsync("/profiles/" + "/image", imageData, context).catch((reason) => {
+                        return postFileAsync("/profiles/" + "image", imageData, context).catch((reason) => {
                             error = true;
                             showError(reason);
                         });

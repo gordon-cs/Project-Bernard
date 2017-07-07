@@ -197,8 +197,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         // Gets more information about the activites that a user is a member of
-        // TODO need more info 
-        // TODO not working
         let getUserActivitiesInfo = function(data) {
             for(var i = 0; i < data.length; i++) {
                 activities.push(getAsync("/activities/" + data[i].ActivityCode.trim(), context));
@@ -207,6 +205,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         }
 
+        //Allows mulitple promises to be executed
         let prepareInfo = function(data) {
             return Promise.all(data);
         }
@@ -219,6 +218,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return memberships;
         }
 
+        //Gets the contact information for every club a student is a part of
         let getActivityAdmins = function(data) {
             for(var i = 0; i < data.length; i++) {
                 activityAdmins.push(getAsync("/emails/activity/" + data[i].ActivityCode.trim() + "/group-admin/session/" + data[i].SessionCode.trim(), context));
@@ -233,6 +233,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return memberships;
         }
 
+        //Turn Memberships into ember objects so that they have listeners
         let loadMemberships = function(data) {
             var membership = Ember.Object.extend({
                 init: function() {
@@ -240,6 +241,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
             });
             for(var i = 0; i < data.length; i++){
+                //Create session variable that is the session without "Academic Year" if that is part of the session description
                 if(data[i].SessionDescription.indexOf("Academic") > 0){
                     data[i].session = data[i].SessionDescription.slice(0, data[i].SessionDescription.indexOf(" Academic"));
                 }
@@ -249,7 +251,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         }   
 
-        // sets social media links to seperate array that defines the type of the link along with the link
+        // sets social media links to seperate array of ember objects that defines the type of the link along with the link
         let loadLinks = function() {
             var Link = Ember.Object.extend({
                 linkPrefixes: ["https://www.facebook.com/", "https://twitter.com/","https://www.linkedin.com/in/","https://www.instagram.com/"],
@@ -278,8 +280,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     "link": userInfo.Instagram,
                     "prefixNum": 3
                 })
-             ]
+             ];
+            //  userInfo.LinkedIn = decodeURIComponent(userInfo.LinkedIn);
         }   
+
+        let formatPhoneNumbers = function() {
+            var mobilePhone = userInfo.MobilePhone;
+            var homePhone = userInfo.HomePhone;
+            if(mobilePhone.length === 10){
+                userInfo.formattedMobilePhone = "(" + mobilePhone.slice(0, 3) + ") " + mobilePhone.slice(3, 6) + "-" + mobilePhone.slice(6);
+            }
+            if(homePhone.length ===10) {
+                userInfo.formattedHomePhone = "(" + homePhone.slice(0,3) + ") " + homePhone.slice(3, 6) + "-" + homePhone.slice(6);
+            }
+        }
  
 
         let loadModel = function() {
@@ -335,6 +349,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(addActivityAdmins)
         .then(loadMemberships)
         .then(loadLinks)
+        .then(formatPhoneNumbers)
         .then(loadModel);
         // return testLoadModel;
     }
