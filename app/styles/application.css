@@ -185,6 +185,7 @@ ul.dropdown-menu {
 .user-info-wrapper {
 	display: inline;
 	float: right;
+	margin-right: 1em;
 }
 .user-info-wrapper h6 {
 	cursor: pointer;
