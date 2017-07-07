@@ -60,7 +60,7 @@ export default Ember.Controller.extend({
         },
         // Hides the modal that holds the information to update profile picture
         cancelEditProfilePicture(item){
-            if(item.target == $(".cancel-profile-picture-button")[0] || item.target == $("#editProfilePictureModal").not(".modal-content")[0]){
+            if(item.target == $(".profile-picture-cancel-button")[0] || item.target == $("#editProfilePictureModal").not(".modal-content")[0]){
                 this.set("file", null);
                 this.set("defaultImage", false);
                 this.set("errorMessage", null);
@@ -115,6 +115,7 @@ export default Ember.Controller.extend({
             let setPrivacy = function(value) {
                 return putAsync("/memberships/" + activity.membership.MembershipID + "/privacy/" + value, value, context).catch((reason) => {
                     console.log(reason);
+                    //TODO handle error
                 });
             }
             let transition = function() {
@@ -133,6 +134,7 @@ export default Ember.Controller.extend({
             let setPrivacy = function(value) {
                 return putAsync("/profiles/image_privacy/" + value, value, context).catch((reason) => {
                     console.log(reason);
+                    //TODO handle error
                 });
             };
             let transition = function() {
@@ -153,10 +155,10 @@ export default Ember.Controller.extend({
             let currentPrivacy = context.get("model.userInfo.IsMobilePhonePrivate");
             let newPrivacy = ! currentPrivacy;
             let successMessage;
-            console.log(newPrivacy);
             let setPrivacy = function(value) {
                 return putAsync("/profiles/mobile_privacy/" + value, value, context).catch((reason) => {
                     console.log(reason);
+                    //TODO handle error
                 });
             };
             let transition = function() {
@@ -167,7 +169,6 @@ export default Ember.Controller.extend({
                     successMessage = "Your mobile phone number is no longer visible on your public profile page";
                 }
                 context.set("phonePrivacySuccessMessage", successMessage);
-                console.log(context.get("model.userInfo.IsMobilePhonePrivate"));
             };
             setPrivacy(newPrivacy)
             .then(transition);
@@ -198,14 +199,12 @@ export default Ember.Controller.extend({
                         if(linkToSend.indexOf("?") > 0){
                             linkToSend = linkToSend.slice(0, linkToSend.indexOf("?"));
                         }
-                        console.log(linkToSend);
                         break;
                 case "linkedin":
                         linkToSend = link.substring(28);
                         if(linkToSend.slice(-1) === "/"){
                             linkToSend = linkToSend.slice(0, -1);
                         }
-                        console.log(linkToSend);
                         break;
                 case "instagram":
                         linkToSend = link.substring(26);
@@ -329,7 +328,6 @@ export default Ember.Controller.extend({
             let uploadImage = function() {
                 let image = Ember.$("#file")[0].files[0];
 
-                    console.log("uploading image");
 
                     // let imageValidation = validateImage(image);
 
@@ -340,11 +338,9 @@ export default Ember.Controller.extend({
                         }).toDataURL('image/jpg');
                         let blob = dataURItoBlob(dataUrl);
                         let blobName = "canvasImage.jpg";
-                        console.log(blob);
                         let imageData = new FormData();
 
                         imageData.append("canvasImage", blob, "canvasImage.jpg");
-                        console.log(imageData);
 
                         return postFileAsync("/profiles/" + "image", imageData, context).catch((reason) => {
                             error = true;
