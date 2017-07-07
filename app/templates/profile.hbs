@@ -192,7 +192,7 @@
             </div>
         </div>
         {{#each model.memberships as |activity|}}
-            <div class="row activity-entry bootstrap-tester">
+            <div class="row activity-entry bootstrap-tester" onclick={{action "linkToSpecificActivity" activity }}>
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-xs-2 col-no-padding bootstrap-tester">
@@ -204,7 +204,7 @@
                                 <div class="col-sm-6 col-no-padding">
                                     <div class="row activity-row2-mobile">
                                         <div class="activity-session col-xs-5 col-sm-12 col-no-padding">{{activity.membership.session}}</div>
-                                            <div class="col-xs-7 col-no-padding col-only-sm"{{action "toggleClubPrivacy" activity}}>
+                                            <div class="col-xs-7 col-no-padding col-only-sm activity-privacy-button-mobile-containter"{{action "toggleClubPrivacy" activity}}>
                                             <div class="social-media-buttons">
                                                 <div class="activity-privacy-button-mobile">{{if activity.membership.Privacy "Show this activity" "Hide this activity"}}</div>
                                             </div>
@@ -244,7 +244,6 @@
             </div>
         {{/each}}
     </section>
-
 
 
     <!-- Edit profile picture modal -->

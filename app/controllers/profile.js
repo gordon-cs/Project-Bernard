@@ -51,15 +51,26 @@ export default Ember.Controller.extend({
                 }
             }
         },
+
+        linkToSpecificActivity(activity, element){
+            let target = element.target;
+            if(!($(target).parents().hasClass("activity-privacy-button-mobile-containter"))){
+                let link = '/#/specific-activity/' + activity.membership.SessionCode + "/" + activity.membership.ActivityCode;
+                this.transitionToRoute(link);
+                console.log(link);
+            }
+            
+        },
         
         // Shows the modal that holds the information to update profile picture
         showEditProfilePictureModal(){
              $("#editProfilePictureModal").addClass("showModal");
              $('body').css('position','fixed');
              $('body').css('overflow-y','scroll');
+             this.set("profilePictureSuccessMessage", null);
         },
         // Hides the modal that holds the information to update profile picture
-        cancelEditProfilePicture(item){
+        cancelEditProfilePicture(item){ 
             if(item.target == $(".profile-picture-cancel-button")[0] || item.target == $("#editProfilePictureModal").not(".modal-content")[0]){
                 this.set("file", null);
                 this.set("defaultImage", false);
