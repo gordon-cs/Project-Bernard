@@ -251,34 +251,42 @@
     <div id="editProfilePictureModal" class="modal" onclick={{action "cancelEditProfilePicture"}}>
         <!-- Modal content -->
         <div class="modal-content">
-            <div id="profile-modal-from-box" class="whitebox row">
-                <form {{action "updatePicture" on="submit"}}>
-                    {{#if errorMessage}}
-                        <p id="error-message">{{errorMessage}}</p>
-                    {{/if}}
-                    <label for="image">Upload new profile picture</label>
-                    <div class="input-group">
-                        <label class="input-group-btn">
-                            <span class="btn button-navy">
-                                Browse{{input id="file" type="file" value=file multiple="false"}}
-                            </span>
-                        </label>
-                        {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
-                    </div>
-                    <div class="image-cropper-wrapper">
-                        <div class="image-cropper-container">
-                            {{image-cropper image=file}}
+            <div id="profile-modal-form-box" class="row">
+                <div class="col-sm-12 col-no-padding">
+                    <form>
+                        {{#if errorMessage}}
+                            <p id="error-message">{{errorMessage}}</p>
+                        {{/if}}
+                        <label for="image">Upload new profile picture</label>
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="browse-button btn button-navy">
+                                    Browse{{input id="file" type="file" value=file multiple="false"}}
+                                </span>
+                            </label>
+                            {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
                         </div>
-                    </div>
-                    <p class="form-note">Files acceptable: png, jpg, jpeg, bmp, gif</p>
-                    <button class="btn button-navy form-button" {{action 'updatePicture'}}>Upload Picture</button>
-                    <button class="btn button-cyan form-button form-cancel-button cancel-profile-picture-button">Cancel</button>
-                </form>
-                <div>
-                    <button class="btn button-cyan form-button form-cancel-button" {{action "setPicturePrivacy"}}>{{if model.userInfo.show_img "Hide you profile picture" "Show your profile picture"}}</button>
+                        <div class="image-cropper-wrapper">
+                            <div class="image-cropper-container">
+                                {{image-cropper image=file}}
+                            </div>
+                        </div>
+                        <p class="form-note">Files acceptable: png, jpg, jpeg, bmp, gif</p>
+                        <div class="row">
+                            <div class="col-xs-7 col-no-padding">
+                                <button class="btn button-navy form-button" {{action 'updatePicture'}}>Submit</button>
+                            </div>
+                            <div class="col-xs-5 col-no-padding">
+                                <button class="btn button-cyan form-button profile-picture-cancel-button">Cancel</button>
+                            </div>
+                            <div class="col-xs-12 col-no-padding">
+                                <button class="btn button-cyan form-button profile-picture-privacy-button" {{action "setPicturePrivacy"}}>{{if model.userInfo.show_img "Hide you profile picture" "Show your profile picture"}}</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 {{#if profilePictureSuccessMessage}}
-                    <div class="success-message">{{profilePictureSuccessMessage}}</div>
+                    <div class="success-message profile-success-message">{{profilePictureSuccessMessage}}</div>
                 {{/if}}
             </div>
         </div>
@@ -311,7 +319,7 @@
                         </div>
                     {{else}}
                         <div class="col-xs-7 edit-links-button-containers">
-                            <button class="btn btn-success edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Add</button>
+                            <button class="btn btn-primary add-links-button" onclick={{action "changeSocialMediaLink" link}}>Add</button>
                         </div>
                     {{/if}}
                 </div>

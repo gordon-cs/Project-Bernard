@@ -229,7 +229,7 @@ Edit profile picture modal
     display: none; 
     position: fixed; 
     z-index: 3; 
-    padding-top: 20px; 
+    padding-top: 60px; 
     left: 0;
     top: 0;
     width: 100%;
@@ -248,7 +248,6 @@ Edit profile picture modal
     width: 400px;
     max-height: 90%;
     overflow-y: auto;
-    /*max-width:*/
 }
 .profile .modal-content::-webkit-scrollbar { 
     display: none; 
@@ -257,10 +256,10 @@ Edit profile picture modal
 
 /**Form Styles**/
 
-#profile-modal-from-box > form > input,
-#profile-modal-from-box > form > .ember-power-select-trigger,
-#profile-modal-from-box > form > .input-group,
-#profile-modal-from-box > form > textarea {
+/*#profile-modal-form-box form input,*/
+#profile-modal-form-box form .ember-power-select-trigger,
+#profile-modal-form-box form .input-group,
+#profile-modal-form-box form textarea {
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
@@ -269,33 +268,55 @@ Edit profile picture modal
     font-weight: bold;
     letter-spacing: 1px;
 }
-#profile-modal-from-box > form > button {
-    text-transform: uppercase;
-		font-weight: bold !important;
-    font-size: 1.5em;
-    padding: 8px 15px;
-}
-#profile-modal-from-box span {
+
+#profile-modal-form-box span {
     font-weight: bold !important;
 }
-#profile-modal-from-box label {
+#profile-modal-form-box label {
     text-transform: uppercase;
-    font-size: 1.3em;
+    font-size: 1em;
 }
-#profile-modal-from-box {
+#profile-modal-form-box {
   letter-spacing: 1px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
-#profile-modal-from-box > form > .input-group > label > span > input {
+#profile-modal-form-box form .input-group label span input {
     display: none;
 }
 
-.profile .image-cropper-container {
-    width: 80%;
-    height: auto;
+.profile .image-cropper-wrapper {
     margin: 0 auto;
+    width: 100%;
+    height: auto;
+}
+
+.profile .img-preview {
+    display: none;
+}
+
+.profile #profile-modal-form-box button,
+.profile #profile-modal-form-box .browse-button {
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    font-size: 1.45em;
+    padding: 8px 15px;
+    margin: 0 auto;
+}
+
+.profile .profile-picture-privacy-button {
+    font-size: 1.3em !important;
+    height: 34px;
+}
+
+.profile #profile-modal-form-box button {
+    margin: 5px;
+}
+
+.profile-success-message {
+    padding-bottom: 5px;
 }
 
 /****************************
@@ -311,12 +332,19 @@ Edit social media modal
     margin: 0 auto;
     width: 90%;
 }
+
+.profile .add-links-button {
+    display: block;
+    width: 100%;
+} 
+
 .profile .modal-title {
     font-size: 3em;
 }
 
 .profile .links-title {
     font-size: 1.8em;
+    padding-top: 5px;
 }
 
 .profile .hide {
@@ -327,7 +355,12 @@ Edit social media modal
     display: block;
     width: 100%;
     height: 32px;
-    font-size: 1.5em;
+    margin: 0 auto;
+    font-size: 1.8em;
+    padding: 2px 4px;
+    border: 1px solid rgb(205, 205, 205); 
+    border-radius: 4px;
+
 }
 
 .profile .edit-links-form {
@@ -337,7 +370,6 @@ Edit social media modal
 .profile .edit-links-row {
     margin: 3px 0;
     padding: 5px 0;
-    border: 1px solid rgb(235, 234, 234);
 }
 
 .profile .edit-links-form-container {

@@ -266,6 +266,7 @@ export default Ember.Controller.extend({
                 if(form){
                     form.addClass("hide");
                 }
+                context.set("linksErrorMessage", null);
                 showSuccess();
             };
 
