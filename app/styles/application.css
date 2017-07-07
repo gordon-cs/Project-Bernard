@@ -49,7 +49,7 @@ header {
 	font-size: 1.5em !important;
 	letter-spacing: 1px;
 	font-weight: 400 !important;
-	padding-right: 3em !important;
+	text-align: center;
 }
 .app-title ul {
 	list-style-type: none;
@@ -78,7 +78,7 @@ header {
 	font-style: normal;
 	letter-spacing: 1px;
 	padding: 0;
-  text-align: center;
+    text-align: center;
 	text-transform: uppercase;
 }
 #primary-menu .dropdown-menu {
@@ -124,9 +124,10 @@ header {
 }
 #primary-menu.nav .open .dropdown-menu li {
 	padding: 0;
-	border-top: 1px dashed #3d3d3a;
+	border-top: 1px solid #3d3d3a;
 	border-bottom: none;
 	font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+	background-color: #5a5d55;
 }
 #primary-menu.nav .open .dropdown-menu li:first-child {
 	margin-top: 5px;
@@ -155,10 +156,12 @@ ul.dropdown-menu {
 .user-info {
     text-align: right;
     color: #31342b;
-		display: none;
-		position: absolute !important;
-		right: 0;
-		margin-top: 19px;
+	display: none;
+	position: absolute !important;
+	right: 0;
+	margin-top: 19px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 .user-info h6 {
 	color: #31342b;
@@ -167,6 +170,9 @@ ul.dropdown-menu {
 	font-weight: bold;
 	display: inline;
 	text-transform: uppercase;
+}
+.user-info h6:hover {
+	text-decoration: underline;
 }
 .user-info-buttons {
 	display: inline;
@@ -324,7 +330,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
         margin-left: 13px;
 		margin-right: 13px;
         font-size: 150%;
-				border: 0;
+		border: 0;
     }
 	#primary-menu span a {
 		cursor: pointer;
@@ -332,15 +338,18 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 	#primary-menu .dropdown-menu {
 		font-size: 10px;
 		width: auto;
+		margin-top: 8px;
+		margin-left: -10px;
+		border: none;
 	}
 	#primary-menu .dropdown-menu li {
 		margin: 0px;
 	}
 	#primary-menu .dropdown-menu li a {
 		text-align: left;
-		padding-left: 1em;
-		padding-right: 1em;
-		font-size: 0.9em;
+		padding-left: 10px;
+		padding-right: 10px;
+		font-size: 0.8em;
 	}
 	#primary-menu .dropdown-menu li a:hover {
 		background-color: #ebebea !important;
@@ -351,8 +360,8 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 	.primary-menu-container {
 		display: block;
 		background: #ebeaea;
-		padding-top: 2.5em;
-		padding-bottom: 2.5em;
+		padding-top: 1.8em;
+		padding-bottom: 1.8em;
 		border-bottom: 2px solid #cccccb;
 	}
 	#primary-menu.nav.navbar-nav {
@@ -385,24 +394,24 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     #logo-box img {
       max-width: 100%;
     }
-		#logo-box-horizontal {
-				display: block;
-				position: absolute;
-				top: 0;
-				padding-top: 45px;
-				padding-bottom: 30px;
-				padding-left: 30px;
-				padding-right: 30px;
-		}
-		.logo-mobile-center {
-			display: none !important;
-		}
-		/*#primary-menu {
-			margin-left: 200px;
-		}*/
-		.user-info {
-			margin-top: 17px;
-		}
+	#logo-box-horizontal {
+			display: block;
+			position: absolute;
+			top: 0;
+			padding-top: 45px;
+			padding-bottom: 30px;
+			padding-left: 30px;
+			padding-right: 30px;
+	}
+	.logo-mobile-center {
+		display: none !important;
+	}
+	/*#primary-menu {
+		margin-left: 200px;
+	}*/
+	.user-info {
+		margin-top: 17px;
+	}
 }
 @media only screen and (min-width: 1200px) {
 		#primary-menu {
