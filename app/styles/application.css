@@ -12,8 +12,6 @@
 		margin-left: 15px;
 		margin-right: 15px;
 }
-
-
 #logo-box img {
     max-width: 20%;
 }
@@ -39,20 +37,18 @@ header {
 	background: #cccccb;
 }
 .app-title-container {
-    text-align: left;
-		background: #cccccb;
-		position: relative;
+    text-align: center;
+	background: #cccccb;
+	position: relative;
 }
 .app-title {
 	display: none;
 	color: #31342b;
 	text-transform: uppercase;
 	vertical-align: middle;
-	font-size: 8pt !important;
+	font-size: 1.5em !important;
 	letter-spacing: 1px;
 	font-weight: 400 !important;
-	margin-top: 16px !important;
-	margin-bottom: 15px !important;
 	padding-right: 3em !important;
 }
 .app-title ul {
@@ -82,20 +78,27 @@ header {
 	font-style: normal;
 	letter-spacing: 1px;
 	padding: 0;
-  text-align: left;
+  text-align: center;
 	text-transform: uppercase;
+}
+#primary-menu .dropdown-menu {
+	text-align: center;
+}
+#primary-menu .dropdown-menu a {
+	padding: none !important;
 }
 #primary-menu li {
 	list-style: none;
 	display: block;
 	padding: 15px 0px;
-	text-align: center;
 	border-bottom: 1px solid #3d3d3a;
 }
 #primary-menu a {
 	color: #00aeef;
-  padding: inherit;
-  text-decoration: none;
+	text-decoration: none;
+}
+#primary-menu.navbar-nav>li>a {
+	padding: none !important;
 }
 #primary-menu a:hover {
 	color: #DE571F;
@@ -113,6 +116,30 @@ header {
 	-webkit-transition: color 0s;
 	-moz-transition: color 0s;
 }
+#primary-menu.nav a, #primary-menu.nav a:focus, #primary-menu.nav a:hover {
+	background-color: transparent !important;
+}
+#primary-menu.nav a:hover {
+	cursor: pointer;
+}
+#primary-menu.nav .open .dropdown-menu li {
+	padding: 0;
+	border-top: 1px dashed #3d3d3a;
+	border-bottom: none;
+	font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+}
+#primary-menu.nav .open .dropdown-menu li:first-child {
+	margin-top: 5px;
+}
+#primary-menu.nav .open .dropdown-menu li:last-child {
+	margin-bottom: -15px;
+}
+#primary-menu .caret {
+	color: #00aeef;
+}
+#primary-menu .caret:hover {
+	color: #de571f;
+}
 .showMenu {
 	display: block !important;
 	padding: 0;
@@ -125,29 +152,22 @@ ul.dropdown-menu {
 	letter-spacing: 1px;
 	margin-top: .65em;
 }
-
 .user-info {
     text-align: right;
     color: #31342b;
 		display: none;
 		position: absolute !important;
 		right: 0;
-		padding-bottom: 10px;
+		margin-top: 19px;
 }
-.user-info h4 {
+.user-info h6 {
 	color: #31342b;
 	letter-spacing: 1px;
 	font-size: 8pt;
 	font-weight: bold;
 	display: inline;
 	text-transform: uppercase;
-	margin-top: 19px;
-	margin-bottom: 19px;
 }
-.user-info:hover {
-	color: #DE571F;
-}
-
 .user-info-buttons {
 	display: inline;
 	margin-left: 15px;
@@ -164,7 +184,7 @@ ul.dropdown-menu {
 	cursor: pointer;
 }
 .user-info-mobile {
-		color: BLACK;
+		color: white;
 }
 .request-button {
     border: 0px !important;
@@ -217,7 +237,6 @@ ul.dropdown-menu {
 		border-radius: 25px;
 }
 
-=======
 /* Change autocomplete background to any color ;) */
 input:-webkit-autofill, input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 30px white inset;
@@ -236,7 +255,6 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 	.hero-container {
 		overflow: auto;
 	}
-
 }
 
 /* For providing image via background image and not royalslider */
@@ -261,6 +279,12 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     #primary-menu li {
         padding: 10px 0px;
     }
+
+}
+@media only screen and (max-width: 767px) {
+	#primary-menu.nav .open .dropdown-menu li {
+		font-size: 0.9em;
+	}
 }
 @media only screen and (min-width: 768px) {
 	.app-title {
@@ -277,24 +301,20 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     .user-info {
         display: inline;
     }
-
-
     .user-info > h6 {
         margin-top: 0;
 				display: inline-block;
     }
-		.user-info-mobile, .logout-mobile {
-				display: none !important;
-		}
-		.dropdown:hover .dropdown-menu {
-		    display: block;
-		    margin-top: 0; // remove the gap so it doesn't close
-		 }
+	.user-info-mobile, .logout-mobile {
+			display: none !important;
+	}
+	.navbar-nav>li {
+		float: none !important;
+	}
     #primary-menu {
         font-size: 1em;
         margin-top: 12px;
-				/*margin-right: 22%;*/
-		width: 700px;
+		width: 768px;
 		margin-left: auto;
 		margin-right: auto;
         float: none;
@@ -302,44 +322,59 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     #primary-menu li {
         display: inline;
         margin-left: 13px;
-				margin-right: 13px;
+		margin-right: 13px;
         font-size: 150%;
 				border: 0;
     }
+	#primary-menu span a {
+		cursor: pointer;
+	}
+	#primary-menu .dropdown-menu {
+		font-size: 10px;
+		width: auto;
+	}
+	#primary-menu .dropdown-menu li {
+		margin: 0px;
+	}
+	#primary-menu .dropdown-menu li a {
+		text-align: left;
+		padding-left: 1em;
+		padding-right: 1em;
+		font-size: 0.9em;
+	}
+	#primary-menu .dropdown-menu li a:hover {
+		background-color: #ebebea !important;
+	}
     #primary-menu li:first-child {
         margin-left: 0;
     }
-		.primary-menu-container {
-			display: block;
-			background: #ebeaea;
-			padding-top: 1.5em;
-			padding-bottom: 1.5em;
-			border-bottom: 2px solid #cccccb;
-		}
-		#main-page-container {
-			margin-bottom: 50px;
-		}
-		#icon-menu {
-			display: none;
-		}
-		.logout-btn {
-			margin-right: 20px;
-			float: right;
-			width: auto;
-		}
+	.primary-menu-container {
+		display: block;
+		background: #ebeaea;
+		padding-top: 2.5em;
+		padding-bottom: 2.5em;
+		border-bottom: 2px solid #cccccb;
+	}
+	#primary-menu.nav.navbar-nav {
+		margin-top: 0px;
+	}
+	#main-page-container {
+		margin-bottom: 50px;
+	}
+	#icon-menu {
+		display: none;
+	}
+	.logout-btn {
+		margin-right: 20px;
+		float: right;
+		width: auto;
+	}
 }
 @media only screen and (min-width: 992px) {
-    .app-title-container {
-        text-align: center;
-				padding: 22px;
-		}
-		.mobile-row{
-			display:none;
-		}
-    .app-title {
-        display: inline;
-    }
-		#logo-box {
+	#primary-menu {
+		width: 992px;
+	}
+    #logo-box {
       max-width: 200px;
       padding: 20px 30px;
 			display: block;
@@ -366,7 +401,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 			margin-left: 200px;
 		}*/
 		.user-info {
-			margin-top: 5px;
+			margin-top: 17px;
 		}
 }
 @media only screen and (min-width: 1200px) {
@@ -376,6 +411,4 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 		#logo-box-horizontal {
 			padding-bottom: 34px;
 		}
-
-
 }
