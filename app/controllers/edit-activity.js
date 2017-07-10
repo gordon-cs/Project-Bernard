@@ -21,6 +21,7 @@ export default Ember.Controller.extend({
             // Get all the values that can be entered in
             // If not entered in, use the value already being used
             let description = this.get("model.description");
+            let joinInfo = this.get("model.joinInfo");
             let pageUrl = this.get("model.pageUrl");
 
             let error = false;
@@ -115,7 +116,8 @@ export default Ember.Controller.extend({
                 let data = {
                     "ACT_CDE": context.get("model.activity.ActivityCode"),
                     "ACT_URL": pageUrl,
-                    "ACT_BLURB": description
+                    "ACT_BLURB": description,
+                    "ACT_JOIN_INFO": joinInfo
                 };
                 return putAsync("/activities/" + context.get("model.activity.ActivityCode"), data, context).catch((reason) => {
                     error = true;

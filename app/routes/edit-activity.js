@@ -54,7 +54,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "activity": result,
                 "sessionCode": param.SessionCode,
                 "pageUrl": result.ActivityURL,
-                "description": result.ActivityBlurb
+                "description": result.ActivityBlurb,
+                "joinInfo": result.ActivityJoinInfo
             };
         }
 

@@ -94,7 +94,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "sessionCode": param.SessionCode,
                 "roles": roles,
                 "leading": leading,
-                "memberships": memberships
+                "memberships": memberships,
+                "hasJoinInfo": activity.ActivityJoinInfo.trim() == "" || activity.ActivityJoinInfo == null
             };
         };
 
