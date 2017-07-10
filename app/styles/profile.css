@@ -32,6 +32,8 @@ Student Profile
     background: rgb(235, 234, 234);
 }
 
+
+/*This only works becuase the background of the dropdown is set to transparent*/
 .profile div,
 .profile section {
     background-color: white;
@@ -460,14 +462,9 @@ Activities
     padding-top: 2px;
 }
 
-.profile .activityPrivacyDropdown {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 100px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+/*This prevents the page from disappearing when the dropdown is clicked*/
+.profile .dropdown-backdrop {
+    background: transparent;
 }
 
 .profile .dropdown-item {
