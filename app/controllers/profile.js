@@ -29,17 +29,29 @@ export default Ember.Controller.extend({
         },
         // Shows and hides the table that shows membership requests recieved
         toggleRecievedTable() {
-            $("#membership-requests-recieved-table").slideToggle();
+            $("#membership-requests-recieved-table").toggle(1, function() {
+                $("#membership-requests-recieved-table").children(".entry-rows").last()[0].scrollIntoView(false);
+            });
             $("#recieved-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         },
         // Shows and hides the table that shows membership requests sent
         toggleSentTable() {
-            $("#membership-requests-sent-table").slideToggle();
+            $("#membership-requests-sent-table").toggle(1, function() {
+                $("#membership-requests-sent-table").children(".entry-rows").last()[0].scrollIntoView(false);
+            });
+            // Another method that will animate the scrolling but I think that it might take too long
+            // $("#membership-requests-sent-table").toggle(1, function(){
+            //     $("html, body").animate({
+            //         scrollTop: $("#membership-requests-sent-table").children(".entry-rows").last().offset().top
+            //     }, 1000);
+            // });
             $("#sent-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         },
         // Shows and hides the table that shows the system admins
         toggleAdminTable() {
-            $("#admin-table").slideToggle();
+            $("#admin-table").toggle(1, function(){
+                $("#admin-table").children(".entry-rows").last()[0].scrollIntoView(false);
+            });
             $("#admin-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         },
         // On mobile displays dropdown with more info about the selected membership request
@@ -157,8 +169,13 @@ export default Ember.Controller.extend({
                     successMessage = "Your profile picture is no longer visible on your public profile page";
                 }
                 context.set("profilePictureSuccessMessage", successMessage);
+                setTimeout(closeSuccessMessage, 10000);
             };
             
+            let closeSuccessMessage = function() {
+                context.set("phonePrivacySuccessMessage", null);
+            }
+
             setPrivacy(newPrivacy)
             .then(transition);
         },
@@ -181,7 +198,13 @@ export default Ember.Controller.extend({
                     successMessage = "Your mobile phone number is no longer visible on your public profile page";
                 }
                 context.set("phonePrivacySuccessMessage", successMessage);
+                setTimeout(closeSuccessMessage, 10000);
             };
+
+            let closeSuccessMessage = function() {
+                context.set("phonePrivacySuccessMessage", null);
+            }
+
             setPrivacy(newPrivacy)
             .then(transition);
         },

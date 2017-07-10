@@ -310,7 +310,7 @@ Edit profile picture modal
 }
 
 .profile .profile-picture-privacy-button {
-    font-size: 1.3em !important;
+    /*font-size: 1.3em !important;*/
     height: 34px;
 }
 
@@ -441,6 +441,7 @@ Activities
     color: #00aeef;
     float: right;
     padding-right: 5px;
+    padding-top: 1px;
 }
 .profile .activity-privacy-button-mobile {
     text-align: left;
