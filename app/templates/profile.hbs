@@ -282,8 +282,11 @@
                             <div class="col-xs-5 col-no-padding">
                                 <button class="btn button-cyan form-button profile-picture-cancel-button">Cancel</button>
                             </div>
-                            <div class="col-xs-12 col-no-padding">
-                                <button class="btn button-cyan form-button profile-picture-privacy-button" {{action "setPicturePrivacy"}}>{{if model.userInfo.show_img "Hide you profile picture" "Show your profile picture"}}</button>
+                            <div class="col-xs-6 col-no-padding">
+                                <button class="btn button-cyan form-button profile-picture-privacy-button" {{action "setPicturePrivacy"}}>{{if model.userInfo.show_img "Hide picture" "Show picture"}}</button>
+                            </div>
+                            <div class="col-xs-6 col-no-padding">
+                                <button class="btn button-cyan form-button profile-picture-reset-button" {{action "resetProfilePicture"}}>Reset Picture</button>
                             </div>
                         </div>
                     </form>

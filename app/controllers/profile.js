@@ -149,6 +149,41 @@ export default Ember.Controller.extend({
             .then(transition);
         },
 
+        resetProfilePicture() {
+            let context = this
+            let reset = function() {
+                return postAsync("/profiles/image/reset", null, context).catch((reason) => {
+                    showError(reason);
+                    //TODO handle error
+                });
+            };
+
+            let transition = function() {
+                context.set("errorMessage", null);
+                return getUserInfo()
+                .then(transitionModal);
+            };
+
+            // Gets the user info so that the new profile image can be displayed.
+            let getUserInfo = function() {
+                return  getAsync("/profiles/", context);
+            }
+
+            let showError = function(result) {
+                context.set("errorMessage", new Error(result.responseText));
+            };
+
+            let transitionModal = function(user){
+                $("#editProfilePictureModal").removeClass("showModal");
+                $('body').css('overflow','scroll');
+                $("#profilePicture").attr("src", user.ImagePath);
+            }
+
+            reset()
+            .then(transition);
+            
+        },
+
         //Change the privacy value for profile picture
         setPicturePrivacy() {
             let context = this;
@@ -194,7 +229,7 @@ export default Ember.Controller.extend({
                 }
                 context.set("phonePrivacySuccessMessage", successMessage);
             };
-            
+
             setPrivacy(newPrivacy)
             .then(transition);
         },
