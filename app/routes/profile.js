@@ -186,6 +186,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             userInfo = data;
         }
 
+        let getUserProfilePicture = function() {
+            // TODO When new photo schema is working, Check userInfo for which photo to use and then make the
+            // call to profiles/image to get the new image.
+        }
+
         // Gets all the activities a user is a member of
         let getUserMemberships = function() {
             return getAsync("/memberships/student/" + IDNumber, context);
@@ -226,6 +231,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return activityAdmins;
         };
 
+        // Adds the admins contact information to each of the users memberships
         let addActivityAdmins = function(data) {
             for(var i = 0; i < data.length; i++) {
                 memberships[i].groupAdminsEmail = data[i];
@@ -284,6 +290,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             //  userInfo.LinkedIn = decodeURIComponent(userInfo.LinkedIn);
         }   
 
+        // Convert US phone numbers to a readable format
         let formatPhoneNumbers = function() {
             var mobilePhone = userInfo.MobilePhone;
             var homePhone = userInfo.HomePhone;
