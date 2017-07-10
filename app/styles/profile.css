@@ -20,6 +20,9 @@
     width: 100%;
 }
 
+.profile .show {
+    display: block;
+}
 /*******************
 Student Profile
 *******************/
@@ -394,9 +397,16 @@ Activities
 }
 
 .profile .activity-entry {
-    padding: 10px 0;
+    padding: 15px 0;
     font-size: 1.5em;
+    border-bottom: 1px solid rgb(221,221,221);
 }
+
+.profile .activity-entry:last-of-type {
+    border: none;
+    padding-bottom: 0;
+}
+
 
 .profile .activity-entry-title {
     font-size: 1.2em;
@@ -422,17 +432,41 @@ Activities
     padding-top: 3px;
 }
 
-.profile .activity-privacy-button-mobile {
-    text-align: center;
+.profile .activity-privacy-button-mobile-container {
+    width: 100px;
+    float: right;
+}
+
+.profile .activity-privacy-button-mobile span {
     color: #00aeef;
+    float: right;
+    padding-right: 5px;
+}
+.profile .activity-privacy-button-mobile {
+    text-align: left;
+    color: #00aeef ;
     font-size: 1.1em;
     background: transparent;
+    padding-left: 5px;
 }
 
 .profile .activity-row2-mobile {
     padding-top: 2px;
 }
 
+.profile .activityPrivacyDropdown {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.profile .dropdown-item {
+    padding-left: 5px;
+}
 
 /*******************
 Request Tables

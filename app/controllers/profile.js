@@ -54,7 +54,7 @@ export default Ember.Controller.extend({
 
         linkToSpecificActivity(activity, element){
             let target = element.target;
-            if(!($(target).parents().hasClass("activity-privacy-button-mobile-containter"))){
+            if(!($(target).parents().hasClass("activity-privacy-button-mobile-container"))){
                 let link = '/#/specific-activity/' + activity.membership.SessionCode + "/" + activity.membership.ActivityCode;
                 this.transitionToRoute(link);
                 console.log(link);
@@ -120,9 +120,10 @@ export default Ember.Controller.extend({
         },
 
         //Change the privacy value for a club membership
-        toggleClubPrivacy(activity) {
-            let newPrivacy = !activity.membership.Privacy;
+        setClubPrivacy(activity, newPrivacy) {
             let context = this;
+            console.log(activity.membership.MembershipID);
+            console.log(newPrivacy);
             let setPrivacy = function(value) {
                 return putAsync("/memberships/" + activity.membership.MembershipID + "/privacy/" + value, value, context).catch((reason) => {
                     console.log(reason);
