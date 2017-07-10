@@ -125,6 +125,7 @@ Profile Action buttons (for mobile)
 .profile .action-icon {
     width: 50%;
     margin: 0 auto;
+    text-align: center;
 }
 .action-icon-image {
     width: 100%;
@@ -139,6 +140,10 @@ Profile Action buttons (for mobile)
 
 .phone-privacy-button {
     display: none;
+}
+
+.profile .action-icon .glyphicon {
+    font-size: 3.5em;
 }
 
 /***********************
