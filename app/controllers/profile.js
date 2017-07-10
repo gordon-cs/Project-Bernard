@@ -109,8 +109,8 @@ export default Ember.Controller.extend({
                 if(lastForm){
                     lastForm.addClass("hide");
                 }
-                this.set("linksErrorMessage", "");
-                this.set("linksSuccessMessage", "");
+                this.set("linksErrorMessage", null);
+                this.set("linksSuccessMessage", null);
             }
         },
         // Displays the form to change a specific social media link
@@ -169,12 +169,7 @@ export default Ember.Controller.extend({
                     successMessage = "Your profile picture is no longer visible on your public profile page";
                 }
                 context.set("profilePictureSuccessMessage", successMessage);
-                setTimeout(closeSuccessMessage, 10000);
             };
-            
-            let closeSuccessMessage = function() {
-                context.set("phonePrivacySuccessMessage", null);
-            }
 
             setPrivacy(newPrivacy)
             .then(transition);
@@ -198,13 +193,8 @@ export default Ember.Controller.extend({
                     successMessage = "Your mobile phone number is no longer visible on your public profile page";
                 }
                 context.set("phonePrivacySuccessMessage", successMessage);
-                setTimeout(closeSuccessMessage, 10000);
             };
-
-            let closeSuccessMessage = function() {
-                context.set("phonePrivacySuccessMessage", null);
-            }
-
+            
             setPrivacy(newPrivacy)
             .then(transition);
         },
@@ -302,7 +292,12 @@ export default Ember.Controller.extend({
                 }
                 context.set("linksErrorMessage", null);
                 showSuccess();
+                setTimeout(closeSuccessMessage, 10000);
             };
+
+            let closeSuccessMessage = function() {
+                context.set("phonePrivacySuccessMessage", null);
+            }
 
             // Run everything
             if(action === "updated"){
