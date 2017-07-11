@@ -160,7 +160,107 @@ export default Ember.Controller.extend({
             }
         },
 
+
+        toggleCheckBox: function() {
+
+            if (this.get("pastEvents")) {
+                this.set("model.eventShown", this.get("model.allEvents"));
+            } else {
+                this.set("model.eventShown", this.get("model.pastEvents"));
+            }
+
+            let newList = [];
+            let oldList = this.get("model.eventShown");
+
+
+            if (this.get("isChapel")) {
+                console.log(oldList);
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Category_Id === "85") {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                this.set("model.eventShown", newList);
+            }
+            if (this.get("isAthletics")) {
+                console.log(oldList);
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                this.set("model.eventShown", newList);
+            }
+            if (this.get("isAdmissions")) {
+                console.log(oldList);
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Organization === "Admissions") {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                this.set("model.eventShown", newList);
+            }
+        },
+
+        showPastEvents(item) {
+            for (let i = 0; i < this.get("model.eventShown").length; i++) {
+                this.set("model.eventShown", this.get("model.allEvents"));
+                controller.toggleCheckBox();
+
+            }
+        },
+
         toggleEventDetailsModal(item) {
+
+            if ($(window).width() > 750) {
+                $("#toggleEventDetailsModal").addClass("event-showModal");
+                $('.container').addClass('blur');
+                let context = this;
+                let displayEvent = this.set("displayEvent", item);
+                if (displayEvent.Locations != null) {
+                    let startClock;
+                    for (let i = 0; i < displayEvent.Locations.length; i++) {
+                        let startDate = new Date(displayEvent.Locations[i][0]);
+                        if (Object.prototype.toString.call(startDate) === '[object Date]') {
+                            let startYear = startDate.getFullYear();
+                            let startMonth = startDate.getMonth();
+                            let startDay = startDate.getDate();
+                            let startHour = startDate.getHours();
+                            let startMin = startDate.getMinutes();
+                            startYear = startYear.toString().substr(-2);
+                            if (startMin < 10) {
+                                startMin = "0" + startMin;
+                            }
+
+                            if (startHour === 12) {
+                                startClock = startHour + ":" + startMin + "pm";
+                            } else if (startHour > 12) {
+                                startHour = startHour - 12;
+                                startClock = startHour + ":" + startMin + "pm";
+                            } else {
+                                startClock = startHour + ":" + startMin + "am";
+                            }
+
+                            if (startHour === 0) {
+                                startClock = "All Day";
+                            }
+
+                            if (displayEvent.Locations[i][1] === null || displayEvent.Locations[i][1] === "") {
+                                displayEvent.Locations[i][2] = (startMonth + 1) + "/" + startDay + "/" + startYear + ",      " + startClock;
+                            } else {
+                                displayEvent.Locations[i][2] = (startMonth + 1) + "/" + startDay + "/" + startYear + ", " + startClock + ": " + displayEvent.Locations[i][1];
+                            }
+                        }
+                    }
+                }
+
+            }
+        },
+
+        MobileEventDetailsModal(item) {
 
             $("#toggleEventDetailsModal").addClass("event-showModal");
             $('.container').addClass('blur');

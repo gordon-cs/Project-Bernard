@@ -8,47 +8,65 @@
     </div>
   </div>
   <div class=" row whitebox">
-    <div class="input-group event-search col-xs-10 col-sm-4 col-md-4">
+
+    <div class="input-group event-search col-xs-10 col-sm-4 col-md-3">
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
     </div>
-    <div class="form-check col-xs-3 col-sm-2 col-md-2">
-      <label class="form-check-label event-checks">
-        <input type="checkbox" class="form-check-input">
+
+    <div class="dropdown show col-xs-5 col-sm-2 col-md-offset-4 col-md-2">
+      <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter Results
+  </button>
+
+      <div class="dropdown-menu">
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isChapel }}
        chapel
       </label>
-    </div>  
-        <div class="form-check col-xs-3 col-sm-2 col-md-2">
-      <label class="form-check-label event-checks">
-        <input type="checkbox" class="form-check-input">
-        Athletic
+        </div>
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isAdmissions }}
+       Admissions
       </label>
-    </div>  
-        <div class="form-check col-xs-3 col-sm-2 col-md-2">
-      <label class="form-check-label event-checks">
-        <input type="checkbox" class="form-check-input">
-        CEC/GCSA
+        </div>
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+         {{input type="checkbox" checked=isAthletics }}
+        Athletics
       </label>
-    </div>  
-    
-</div>
-  <div class=" row ">
-<button type="submit" class="btn btn-primary event-sort event-checks col-xs-6 col-xs-offset-3" onclick={{action "SortByDate"}}>Sort By Date</button>
+        </div>
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=pastEvents }}
+       Show Past Events
+      </label>
+        </div>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary col-sm-2 col-md-2 col-xs-5" onclick={{action
+      "toggleCheckBox"}}>refresh</button>
   </div>
+
   <div class="event-cyanbox cyanbox">
     <div id="category-bar" class="row">
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event</h4>
-      <h4 class="event-labels col-sm-5 col-md-5" onclick={{action "sortByLocation"}}>Location</h4>
+      <h4 class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}>Location</h4>
       <h4 class="event-labels col-sm-2 col-md-2" onclick={{action "SortByDate"}}>Date</h4>
-      <h4 class="event-labels col-sm-1 col-md-1" onclick={{action "SortByDate"}}>Time</h4>
+      <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "SortByDate"}}>Time</h4>
     </div>
   </div>
   <div class="entry-rows">
     {{#each model.eventShown as |event|}}
     <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
       <h4 class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Name}}</h4>
-      <h4 class="display-col col-md-5 col-sm-5 col-xs-hide">{{event.Location}}</h4>
+      <h4 class="display-col col-md-4 col-sm-4 col-xs-hide">{{event.Location}}</h4>
       <h4 class="display-col col-sm-2 col-md-2 col-xs-hide">{{event.Start_Time}}</h4>
-      <h4 class="display-col col-sm-2 col-md-2 col-xs-hide">{{event.End_Time}}</h4>
+      <h4 class="display-col col-sm-3 col-md-3 col-xs-hide">{{event.End_Time}}<button class="btn btn-primary events-hide" onclick={{ action "MobileEventDetailsModal" event }}>more...</button></h4>
+
     </div>
     {{/each}}
   </div>
@@ -62,10 +80,10 @@
   <div class="modal-content event-modal-content">
     <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
     <div class="modal-body">
-      <h4> A.J Chapel <br> {{ displayEvent.Organization }} <br> {{ displayEvent.Description}} </h4> <br>
-    {{#each displayEvent.Locations as |Location|}}
-    <h4>{{Location.[2]}} </h4>
-    {{/each}}
+      <h4> A.J Chapel <br> {{ displayEvent.Organization }} <br> {{ displayEvent.Description}} </h4> <br> {{#each displayEvent.Locations
+      as |Location|}}
+      <h4>{{Location.[2]}} </h4>
+      {{/each}}
     </div>
     <div class="modal-footer">
       <button class="btn button-lightgray cancel-modal form-button form-cancel-button">Cancel</button>

@@ -1,8 +1,80 @@
 /* The Modal (background) */
 
+.event-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.event-modal-content::-webkit-full-screen {
+    display: none !important;
+}
+
+.events-filter {
+    align-content: right !important;
+}
+
+.event-checks {
+    margin: 3px;
+}
+
+.event-checks:hover {
+    background-color: #d83c30 !important;
+    color: white !important;
+}
+
+
+/* The Close Button */
+
+.cancel-modal {
+    color: #aaa;
+    float: right !important;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom: 0%;
+    margin-right: 0%;
+}
+
+.cancel-modal:hover {
+    background-color: #b2bb1c !important;
+    color: white !important;
+}
+
+.event-modal-header {
+    color: #00aeef;
+}
+
+.blur {
+    -webkit-filter: blur(5px) grayscale(70%);
+}
+
 .events.event-box {
     background-color: #FFFFFF !important;
     margin-top: 30px !important;
+}
+
+.events .events-hide {
+    margin-left: 10px;
+}
+
+.event-showModal {
+    display: block !important;
 }
 
 .events .filterBtn {
@@ -11,12 +83,8 @@
     margin-top: 0px;
 }
 
-.event-sort {
-    align-items: center !important;
-}
-
 .events .filterBtn-row:hover {
-    background-color: #E2794C !important;
+    background-color: #b2bb1c !important;
     color: white;
     cursor: pointer;
 }
@@ -31,7 +99,6 @@
 
 .event-progress {
     padding: 0px !important;
-    float: right !important;
 }
 
 .toggleclick {
@@ -57,7 +124,7 @@
 }
 
 .events .event-row:hover {
-    background-color: #E2794C !important;
+    background-color: #b2bb1c !important;
     color: white;
     cursor: pointer;
 }
@@ -103,7 +170,7 @@
 }
 
 .events .event-labels:hover {
-    color: #E2794C !important;
+    color: #b2bb1c !important;
     cursor: pointer;
 }
 
@@ -119,7 +186,7 @@
         font-size: 15px;
     }
     .events .onclickOrange {
-        background-color: #E2794C !important;
+        background-color: #b2bb1c !important;
         color: white !important;
     }
     .events .event-id {
@@ -155,35 +222,20 @@
     .event-checks {
         margin: 5px;
     }
+    .event-modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-height: 50%;
+        overflow-y: auto;
+        /* Could be more or less, depending on screen size */
+    }
 }
 
 @media screen and (min-width: 768px) {
-    .events .display-col {
-        display: block !important;
-    }
-    .events .btn-upComing {
-        float: right;
-    }
-    .event-modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 1;
-        /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%;
-        /* Full width */
-        height: 100%;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4);
-        /* Black w/ opacity */
-    }
     /* Modal Content/Box */
     .event-modal-content {
         background-color: #fefefe;
@@ -196,28 +248,11 @@
         overflow-y: auto;
         /* Could be more or less, depending on screen size */
     }
-    .event-modal-content::-webkit-full-screen {
-        display: none !important;
+    .events .display-col {
+        display: block;
     }
-    /* The Close Button */
-    .cancel-modal {
-        color: #aaa;
-        float: right !important;
-        font-size: 28px;
-        font-weight: bold;
-        margin-top: auto;
-        margin-bottom: 0%;
-        margin-right: 0%;
-    }
-    .cancel-modal:hover {
-        background-color: #E2794C !important;
-        color: white !important;
-    }
-    .event-modal-header {
-        color: #00aeef;
-    }
-    .blur {
-        -webkit-filter: blur(5px) grayscale(70%);
+    .events .btn-upComing {
+        float: right;
     }
     .close:hover,
     .close:focus {
@@ -225,10 +260,8 @@
         text-decoration: none;
         cursor: pointer;
     }
-    .event-showModal {
-        display: block !important;
-    }
-    .events .event-sort {
+    .events .events-hide {
         display: none !important;
+        float: right !important;
     }
 }

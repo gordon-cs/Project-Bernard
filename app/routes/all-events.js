@@ -21,6 +21,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             let startClock;
             let endClock;
             let modalClock;
+            let pastEvents = [];
+            let date = new Date();
+
+
 
             for (let i = 0; i < eventList.length; ++i) {
 
@@ -30,6 +34,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 //get the date information
                 eventList[i].timeObject = eventList[i].Start_Time;
                 let startDate = new Date(eventList[i].Start_Time);
+                if (startDate > date) {
+                    pastEvents.push(eventList[i]);
+                }
                 let startYear = startDate.getFullYear();
                 let startMonth = startDate.getMonth();
                 let startDay = startDate.getDate();
@@ -88,10 +95,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
             }
 
+
             return {
                 //return all the deseired information
                 "allEvents": eventList,
-                "eventShown": eventList,
+                "eventShown": pastEvents,
+                "pastEvents": pastEvents,
                 "searchValue": searchValue
             };
         };
