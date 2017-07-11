@@ -97,9 +97,11 @@
             <div class="col-sm-3 phone-privacy-button">
                 <button class="btn btn-primary" {{action "toggleMobilePhonePrivacy"}}>{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</button>
             </div>
-            <div class="col-sm-4 success-message">
-                {{if phonePrivacySuccessMessage phonePrivacySuccessMessage}}
-            </div>
+            {{#if phonePrivacySuccessMessage}}
+                <div class="col-sm-4 success-message">
+                    {{phonePrivacySuccessMessage}}
+                </div>
+            {{/if}}
             <div class="row">
             <div class="col-sm-4 col-no-padding">
                 {{#if model.userInfo.IsStudentOrAlumni}}
@@ -128,7 +130,7 @@
                     </div>
                     <div class="row personal-information-entry">
                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Email</div>
-                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.EmailUserName}}@gordon.edu</div>
+                        <div class="col-xs-8 col-no-padding personal-information-entry-value no-overflow">{{model.userInfo.EmailUserName}}@gordon.edu</div>
                     </div>
             </div>
         </div>
@@ -140,16 +142,24 @@
             </div>
             <div class="col-xs-12 col-no-padding">
                 <div class="row personal-information-entry">
-                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Street</div>
-                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.HomeStreet1}}</div>
+                    <div class="col-xs-12 col-no-padding personal-information-entry-key">{{if (eq model.userInfo.HomeStreet1 "") model.userInfo.HomeStreet2 model.userInfo.HomeStreet1}}</div>
                 </div>
-                <div class="row personal-information-entry">
-                    <div class="col-xs-4 col-no-padding personal-information-entry-key">City</div>
-                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.HomeCity}}</div>
-                </div>
-                <div class="row personal-information-entry">
-                    <div class="col-xs-4 col-no-padding personal-information-entry-key">State</div>
-                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.HomeState}}</div>
+                {{#if (not-eq model.userInfo.HomeStreet1 "")}}
+                    {{#if (not-eq model.userInfo.HomeStreet2 "")}}
+                        <div class="row personal-information-entry">
+                            <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.HomeStreet2}}</div>
+                        </div>
+                    {{/if}}
+                {{/if}}
+                <div class="row personal-information-entry no-border">
+                    <div class="col-xs-12 col-no-padding personal-information-entry-key">
+                        {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}}
+                        {{model.userInfo.HomeState}}
+                         {{model.userInfo.HomePostalCode}} 
+                        {{#if (not-eq model.userInfo.HomeCountry "US")}}
+                            {{if model.userInfo.HomeCountry model.userInfo.HomeCountry}}
+                        {{/if}}
+                        </div>
                 </div>
             </div>
     </section>
@@ -159,12 +169,7 @@
                     <div class="col-xs-12 block-header">Campus Address</div>
                     <div class="col-xs-12 col-no-padding">
                         <div class="row personal-information-entry">
-                            <div class="col-xs-4 col-no-padding personal-information-entry-key">Dorm</div>
-                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusBuilding}}</div>
-                        </div>
-                        <div class="row personal-information-entry">
-                            <div class="col-xs-4 col-no-padding personal-information-entry-key">Room</div>
-                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusRoom}}</div>
+                            <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.OnCampusRoom}} {{model.userInfo.OnCampusBuilding}}</div>
                         </div>
                     </div>
                 {{/if}}
