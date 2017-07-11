@@ -259,9 +259,12 @@ Edit profile picture modal
     max-height: 90%;
     overflow-y: auto;
 }
-.profile .modal-content::-webkit-scrollbar { 
+/*.profile .modal-content::-webkit-scrollbar { 
     display: none; 
-}
+    TODO style scrollbar
+}*/
+
+
 
 
 /**Form Styles**/

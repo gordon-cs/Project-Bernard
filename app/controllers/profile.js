@@ -160,24 +160,38 @@ export default Ember.Controller.extend({
 
             let transition = function() {
                 context.set("errorMessage", null);
-                return getUserInfo()
+                return getUserPhoto()
                 .then(transitionModal);
             };
 
             // Gets the user info so that the new profile image can be displayed.
-            let getUserInfo = function() {
-                return  getAsync("/profiles/", context);
+            let getUserPhoto = function() {
+                return  getAsync("/profiles/image", context);
             }
 
             let showError = function(result) {
                 context.set("errorMessage", new Error(result.responseText));
             };
 
-            let transitionModal = function(user){
+            let transitionModal = function(content){
                 $("#editProfilePictureModal").removeClass("showModal");
                 $('body').css('overflow','scroll');
-                $("#profilePicture").attr("src", user.ImagePath);
+                var blob = base64ToBlob(content , {type: 'image/jpeg'});
+                URL = window.URL || window.webkitURL;
+                var blobUrl = URL.createObjectURL(blob);
+                $("#profilePicture").attr("src", blobUrl);
             }
+
+            let base64ToBlob = function(base64) {
+                var binary = atob(base64);
+                var len = binary.length;
+                var buffer = new ArrayBuffer(len);
+                var view = new Uint8Array(buffer);
+                for (var i = 0; i < len; i++) {
+                    view[i] = binary.charCodeAt(i);
+                }
+                return new Blob([view], {type: 'image/jpeg'});
+            };
 
             reset()
             .then(transition);
@@ -434,21 +448,35 @@ export default Ember.Controller.extend({
             let transition = function() {
                 context.set("file", "");
                 context.set("errorMessage", null);
-                return getUserInfo()
+                return getUserPhoto()
                 .then(transitionModal);
             };
 
             // Gets the user info so that the new profile image can be displayed.
-            let getUserInfo = function() {
-                return  getAsync("/profiles/", context);
+            let getUserPhoto = function() {
+                return  getAsync("/profiles/image", context);
             }
 
             // hides the modal and changes the picture on page to reflect the new change
-            let transitionModal = function(user){
+            let transitionModal = function(content){
                 $("#editProfilePictureModal").removeClass("showModal");
                 $('body').css('overflow','scroll');
-                $("#profilePicture").attr("src", user.ImagePath);
+                var blob = base64ToBlob(content , {type: 'image/jpeg'});
+                URL = window.URL || window.webkitURL;
+                var blobUrl = URL.createObjectURL(blob);
+                $("#profilePicture").attr("src", blobUrl);
             }
+
+            let base64ToBlob = function(base64) {
+                var binary = atob(base64);
+                var len = binary.length;
+                var buffer = new ArrayBuffer(len);
+                var view = new Uint8Array(buffer);
+                for (var i = 0; i < len; i++) {
+                    view[i] = binary.charCodeAt(i);
+                }
+                return new Blob([view], {type: 'image/jpeg'});
+            };
             
             // Show error
             let askAgain = function(){

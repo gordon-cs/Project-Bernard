@@ -186,10 +186,51 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             userInfo = data;
         }
 
+        // Gets the users profile picture, It is a base64 string
         let getUserProfilePicture = function() {
-            // TODO When new photo schema is working, Check userInfo for which photo to use and then make the
-            // call to profiles/image to get the new image.
+            return getAsync("/profiles/image/", context);
         }
+
+        // Converts the base64 to a blobl and stores it in a URL to be used by the handlebars file.
+        let setUserProfilePicture = function(content ) {
+            var blob = base64ToBlob(content , {type: 'image/jpeg'});
+            URL = window.URL || window.webkitURL;
+            var blobUrl = URL.createObjectURL(blob);
+            console.log(blobUrl);
+            userInfo.imageURL = blobUrl;
+        }
+
+        let base64ToBlob = function(base64) {
+            var binary = atob(base64);
+            var len = binary.length;
+            var buffer = new ArrayBuffer(len);
+            var view = new Uint8Array(buffer);
+            for (var i = 0; i < len; i++) {
+                view[i] = binary.charCodeAt(i);
+            }
+            return new Blob([view], {type: 'image/jpeg'});
+        };
+
+       let dataURItoBlob =  function (dataURI) {
+                // convert base64/URLEncoded data component to raw binary data held in a string
+                var byteString;
+                console.log(dataURI);
+                if (dataURI.split(',')[0].indexOf('base64') >= 0)
+                    byteString = atob(dataURI.split(',')[1]);
+                else
+                    byteString = unescape(dataURI.split(',')[1]);
+
+                // separate out the mime component
+                var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+                // write the bytes of the string to a typed array
+                var ia = new Uint8Array(byteString.length);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+
+                return new Blob([ia], {type:mimeString});
+            }
 
         // Gets all the activities a user is a member of
         let getUserMemberships = function() {
@@ -346,6 +387,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(setOnOffCampus)
         .then(setUserType)
         .then(setuserInfo)
+        .then(getUserProfilePicture)
+        .then(setUserProfilePicture)
         .then(getUserMemberships)
         .then(setUserMemberships)
         .then(getUserActivitiesInfo)
