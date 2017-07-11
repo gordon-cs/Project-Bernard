@@ -315,12 +315,16 @@ Edit profile picture modal
 
 .profile #profile-modal-form-box button,
 .profile #profile-modal-form-box .browse-button {
-    width: 100%;
+    width: 95%;
     text-transform: uppercase;
     font-weight: bold !important;
     font-size: 1.45em;
-    padding: 8px 15px;
+    padding: 8px 0;
     margin: 0 auto;
+}
+.profile #profile-modal-form-box .browse-button{
+    padding: 8px 15px;
+    width: 100%;
 }
 
 .profile .profile-picture-privacy-button {

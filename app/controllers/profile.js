@@ -14,6 +14,9 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
+    // imageChange: Ember.observer('image', function() {
+
+    // }),
     actions: {
         removeAdmin(id) {
             deleteAsync("/admins/" + id, this)
@@ -84,12 +87,12 @@ export default Ember.Controller.extend({
         // Hides the modal that holds the information to update profile picture
         cancelEditProfilePicture(item){ 
             if(item.target == $(".profile-picture-cancel-button")[0] || item.target == $("#editProfilePictureModal").not(".modal-content")[0]){
-                this.set("file", null);
-                this.set("defaultImage", false);
                 this.set("errorMessage", null);
+                this.set("file", null);
                 $("#editProfilePictureModal").removeClass("showModal");
                 $('body').css('position','static');
                 $('body').css('overflow-y','auto');
+                $('#cropper-div').hide();
             }
             //TODO Get cropper to disappear after canceling upload
         },
@@ -159,7 +162,9 @@ export default Ember.Controller.extend({
             };
 
             let transition = function() {
+                context.set("file", null);
                 context.set("errorMessage", null);
+                $('#cropper-div').hide();
                 return getUserPhoto()
                 .then(transitionModal);
             };
@@ -202,7 +207,8 @@ export default Ember.Controller.extend({
         setPicturePrivacy() {
             let context = this;
             let currentPrivacy = context.get("model.userInfo.show_img");
-            let newPrivacy = !currentPrivacy;
+            let newPrivacy = currentPrivacy ? 0 : 1;
+            console.log(newPrivacy);
             let successMessage;
             let setPrivacy = function(value) {
                 return putAsync("/profiles/image_privacy/" + value, value, context).catch((reason) => {
@@ -446,8 +452,8 @@ export default Ember.Controller.extend({
 
             // Leave inputs blank and transition back to activity after post
             let transition = function() {
-                context.set("file", "");
                 context.set("errorMessage", null);
+
                 return getUserPhoto()
                 .then(transitionModal);
             };
@@ -465,6 +471,7 @@ export default Ember.Controller.extend({
                 URL = window.URL || window.webkitURL;
                 var blobUrl = URL.createObjectURL(blob);
                 $("#profilePicture").attr("src", blobUrl);
+                $('#cropper-div').hide();
             }
 
             let base64ToBlob = function(base64) {
