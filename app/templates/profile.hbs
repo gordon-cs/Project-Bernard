@@ -232,7 +232,7 @@
                                                 {{#each activity.membership.groupAdminsEmail as |groupAdmin index|}}
                                                     {{#if (lt index 2)}}
                                                         <div class="activity-contact-button-containers">
-                                                            <div class="social-media-buttons activity-contact-buttons">
+                                                            <div class="social-media-buttons activity-contact-buttons"{{action "linkToGroupAdminProfile" groupAdmin}}>
                                                                 <a class="activity-contacts">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a>
                                                             </div>
                                                         </div>

@@ -523,6 +523,11 @@ Activities
 
 .profile .dropdown-item {
     padding-left: 5px;
+    padding-right: 5px;
+}
+
+.profile .activityPrivacyDropdown {
+    min-width: 120px;
 }
 
 /*******************
@@ -530,7 +535,7 @@ Request Tables
 *******************/
 
 .profile .tables-section{
-    font-size: 150%;
+    font-size: 1.3em;
 }
 
 .profile .header-rows {
@@ -592,6 +597,12 @@ Request Tables
 
     .profile .activity-privacy-button-mobile span {
         padding-right: 10px;
+    }
+
+    .profile .activityPrivacyDropdown {
+        min-width: 140px;
+        font-size: 1.1em;
+        margin-left: 5px;
     }
 
 

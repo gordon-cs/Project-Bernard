@@ -29,14 +29,14 @@ export default Ember.Controller.extend({
         },
         // Shows and hides the table that shows membership requests recieved
         toggleRecievedTable() {
-            $("#membership-requests-recieved-table").toggle(1, function() {
+            $("#membership-requests-recieved-table").toggle(0, function() {
                 $("#membership-requests-recieved-table").children(".entry-rows").last()[0].scrollIntoView(false);
             });
             $("#recieved-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         },
         // Shows and hides the table that shows membership requests sent
         toggleSentTable() {
-            $("#membership-requests-sent-table").toggle(1, function() {
+            $("#membership-requests-sent-table").toggle(0, function() {
                 $("#membership-requests-sent-table").children(".entry-rows").last()[0].scrollIntoView(false);
             });
             // Another method that will animate the scrolling but I think that it might take too long
@@ -49,7 +49,7 @@ export default Ember.Controller.extend({
         },
         // Shows and hides the table that shows the system admins
         toggleAdminTable() {
-            $("#admin-table").toggle(1, function(){
+            $("#admin-table").toggle(0, function(){
                 $("#admin-table").children(".entry-rows").last()[0].scrollIntoView(false);
             });
             $("#admin-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
@@ -57,8 +57,9 @@ export default Ember.Controller.extend({
         // On mobile displays dropdown with more info about the selected membership request
         toggleRequestSent(item){
             let elements = $(item.target).nextAll();
-            for(var i=0; i < 3; i++){
+            for(var i=0; i < elements.length; i++){
                 if($(window).innerWidth() < 768){
+                console.log(elements[i]);
                     $(elements[i]).slideToggle();
                 }
             }
@@ -67,12 +68,24 @@ export default Ember.Controller.extend({
         linkToSpecificActivity(activity, element){
             let target = element.target;
             if($(window).width() < 992){
-                if(!($(target).parents().hasClass("activity-privacy-button-mobile-container"))){
+                if(!($(target).parents().hasClass("activity-privacy-button-mobile-container") || ($(target).parents().hasClass("activity-contact-button-containers")))){
                     let link = '/#/specific-activity/' + activity.membership.SessionCode + "/" + activity.membership.ActivityCode;
                     this.transitionToRoute(link);
                     console.log(link);
                 }
             }
+        },
+
+        linkToGroupAdminProfile(groupAdmin) {
+            let profile;
+            if(groupAdmin.Email.indexOf("@" > 0 )) {
+                profile = groupAdmin.Email.slice(0, groupAdmin.Email.indexOf("@"));
+            } else {
+                console.log("Bad email");
+            }
+            let link = '/#/profile/' + profile;
+            this.transitionToRoute(link);
+            console.log(link);
         },
         
         // Shows the modal that holds the information to update profile picture

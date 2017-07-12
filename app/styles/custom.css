@@ -442,17 +442,17 @@ button:active,
 
 @media only screen and (max-width: 991px) {
     .col-sm-hide {
-        display: none !important;
+        display: none;
     }
 }
 @media only screen and (max-width: 767px) {
         .col-xs-hide {
-        display: none !important;
+        display: none;
     }
 }
 
 @media only screen and (min-width: 992){
     .col-only-sm {
-        display: none !important;
+        display: none;
     }
 }
