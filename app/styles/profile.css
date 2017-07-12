@@ -579,6 +579,8 @@ Request Tables
  Media Queries 
 ****************************/
 
+/*Bootstrap Small*/
+
 @media only screen and (min-width: 768px){
     .profile {
         font-size: 1.5em;
@@ -616,7 +618,42 @@ Request Tables
 
 }
 
+/*Bootstrap Medium*/
 
+@media only screen and (min-width: 992px) {
+    .profile .activity-image {
+        width: 75%;
+    }
+}
+
+/*Bootstrap large*/
+
+@media only screen and (min-width: 1200px) {
+    .profile {
+        font-size: 1.2em;
+    }
+
+    .profile .user-name {
+        text-align: left;
+        font-size: 3em;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    .profile .user-position {
+        text-align: left;
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .profile .user-links {
+        text-align: left;
+        font-size: 1.5em;
+    }
+    .profile .profile-block-info {
+        padding-left: 20px;
+    }
+}
 
 
 
