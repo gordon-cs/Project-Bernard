@@ -2,16 +2,16 @@
     {{!--Profile picture and information--}}
     <section class="row profile-block">
         {{! Profile picture and overlay }}
-        <div class="col-sm-3">
-            <div class="profile-picture-container" {{action "showEditProfilePictureModal"}}>
+        <div class="col-sm-4">
+            <div class="profile-picture-container" >
             <img src="{{model.userInfo.imageURL}}" alt="Avatar" class="image" id="profilePicture">
-            <div class="overlay">
+            <div class="overlay col-sm-hide"{{action "showEditProfilePictureModal"}}>
                 <div class="text">Click here to change profile picture</div>
             </div>
             </div>
         </div>
         {{! User main info }}
-        <div class="col-sm-9 profile-block-info">
+        <div class="col-sm-8 profile-block-info">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}} {{if  model.userInfo.NickName "("}}{{model.userInfo.NickName}}{{if model.userInfo.NickName ")"}}</div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             {{! Display users social media links if provided }}
-            <div class="row row-centered user-links">
+            <div class="row user-links">
                     {{#if model.userInfo.Facebook}}
                         <div class="col-xs-3 col-no-padding col-centered">
                             <div class="social-media-buttons">
@@ -93,17 +93,17 @@
 
     {{!--Personal Information--}}
     <section class="row profile-block">
-            <div class="col-sm-5 block-header">Personal Information</div>
+            <div class="col-md-5 block-header">Personal Information</div>
             <div class="col-sm-3 phone-privacy-button">
                 <button class="btn btn-primary" {{action "toggleMobilePhonePrivacy"}}>{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</button>
             </div>
             {{#if phonePrivacySuccessMessage}}
-                <div class="col-sm-4 success-message">
+                <div class="col-sm-12 success-message">
                     {{phonePrivacySuccessMessage}}
                 </div>
             {{/if}}
             <div class="row">
-            <div class="col-sm-4 col-no-padding">
+            <div class="col-sm-12 col-no-padding">
                 {{#if model.userInfo.IsStudentOrAlumni}}
                     <div class="row personal-information-entry">
                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Majors</div>
@@ -137,7 +137,7 @@
     </section>
 
     <section class="row profile-block">
-            <div class="col-xs-12 block-header">
+            <div class="col-md-5 block-header">
                 Home Address
             </div>
             <div class="col-xs-12 col-no-padding">
@@ -166,7 +166,7 @@
 
     <section class="row profile-block">
                 {{#if model.userInfo.OnOffCampus}}
-                    <div class="col-xs-12 block-header">Campus Address</div>
+                    <div class="col-md-5 block-header">Campus Address</div>
                     <div class="col-xs-12 col-no-padding">
                         <div class="row personal-information-entry">
                             <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.OnCampusRoom}} {{model.userInfo.OnCampusBuilding}}</div>
@@ -174,7 +174,7 @@
                     </div>
                 {{/if}}
                 {{#if model.userInfo.IsFaculty}}
-                    <div class="col-xs-12 block-header">On Campus Info</div>
+                    <div class="col-md-5 block-header">On Campus Info</div>
                     <div class="col-xs-12 col-no-padding">
                         <div class="row personal-information-entry">
                             <div class="col-xs-4 col-no-padding personal-information-entry-key">Office</div>
@@ -200,51 +200,50 @@
             <div class="row activity-entry bootstrap-tester" onclick={{action "linkToSpecificActivity" activity }}>
                 <div class="col-sm-12">
                     <div class="row">
-                        <div class="col-xs-2 col-no-padding bootstrap-tester">
+                        <div class="col-xs-2 col-sm-3 col-no-padding bootstrap-tester">
                             <img src="{{activity.membership.ActivityImagePath}}" class="activity-image" alt="{{activity.membership.ActivityDescription}} profile picture">
                         </div>
-                        <div class="col-xs-10">
+                        <div class="col-xs-10 col-sm-9">
                                     <div class="activity-entry-title">{{activity.membership.ActivityDescription}} {{if activity.membership.privacy "(Hidden on your page)"}}</div>
                             <div class="row">
-                                <div class="col-sm-6 col-no-padding">
-                                    <div class="row activity-row2-mobile">
-                                        <div class="activity-session col-xs-5 col-sm-12 col-no-padding">{{activity.membership.session}}</div>
+                                <div class="col-md-6 col-no-padding">
+                                    <div class="row activity-row2">
+                                        <div class="activity-session col-xs-5 col-no-padding">{{activity.membership.session}}</div>
                                         {{!--Dropdown that display the options for privacy settings on mobile--}}
-                                        <div class="col-xs-7 col-no-padding col-only-sm activity-privacy-button-mobile-container dropdown">
-                                            <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <div class="activity-privacy-button-mobile">{{if activity.membership.Privacy "Private" "Public"}} <span id="recieved-table-header" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
-                                            </div>
-                                            <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
-                                                <div class="dropdown-item"{{action "setClubPrivacy" activity true}}>Make Private</div>
-                                                <div class="dropdown-item"{{action "setClubPrivacy" activity false}}>Make Public</div>
+                                        <div class="col-xs-7 col-no-padding col-only-sm">
+                                            <div class="activity-privacy-button-mobile-container dropdown">
+                                                <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <div class="activity-privacy-button-mobile">{{if activity.membership.Privacy "Private" "Public"}} <span id="recieved-table-header" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                                </div>
+                                                <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
+                                                    <div class="dropdown-item"{{action "setClubPrivacy" activity true}}>Make Private</div>
+                                                    <div class="dropdown-item"{{action "setClubPrivacy" activity false}}>Make Public</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row col-xs-hide">
-                                        <div class="col-sm-12">Group Contacts:</div>
+                                        <div class="col-sm-5 col-no-padding activity-header">Group Contacts:</div>
+                                        <div class="col-sm-7 col-no-padding activity-header">Description:</div>
                                     </div>
                                     <div class="row col-xs-hide">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-5 col-no-padding">
                                             {{!--The group admins email addresses will be displayed and be clickable--}}
                                             <ul>
                                                 {{#each activity.membership.groupAdminsEmail as |groupAdmin|}}
-                                                    <li><a href="mailto:{{groupAdmin.Email}}">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a></li>
+                                                    <li><a class="activity-contacts" href="mailto:{{groupAdmin.Email}}">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a></li>
                                                 {{/each}}
                                             </ul>
                                         </div>
+                                        <div class="col-sm-7 col-no-padding activity-description">{{activity.membership.clubInfo.ActivityBlurb}}</div>
+                                        <div class="col-sm-7 col-no-padding activity-description-more-info">(<span>More info</span>)</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="row col-xs-hide">
-                                        <div class="col-sm-12">Description:</div>
-                                    </div>
-                                    <div class="row col-xs-hide">
-                                        <div class="col-sm-12">{{activity.membership.clubInfo.ActivityBlurb}}</div>
-                                    </div>
-                                    <div class="col-sm-2 col-xs-hide">
+                                    <div class="col-sm-2 col-sm-hide">
                                         <button class="btn view-club-button">{{#link-to "specific-activity" activity.membership.SessionCode activity.membership.ActivityCode}}View Club{{/link-to}}</button>
                                     </div>
-                                    <div class="col-sm-3 col-xs-hide">
+                                    <div class="col-sm-3 col-sm-hide">
                                         <button class="btn club-privacy-button" {{action "toggleClubPrivacy" activity}}>{{if activity.membership.Privacy "Show this activity" "Hide this activity"}}</button>
                                     </div>
                                 </div>

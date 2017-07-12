@@ -14,9 +14,6 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
-    // imageChange: Ember.observer('image', function() {
-
-    // }),
     actions: {
         removeAdmin(id) {
             deleteAsync("/admins/" + id, this)
@@ -69,12 +66,13 @@ export default Ember.Controller.extend({
 
         linkToSpecificActivity(activity, element){
             let target = element.target;
-            if(!($(target).parents().hasClass("activity-privacy-button-mobile-container"))){
-                let link = '/#/specific-activity/' + activity.membership.SessionCode + "/" + activity.membership.ActivityCode;
-                this.transitionToRoute(link);
-                console.log(link);
+            if($(window).width() < 992){
+                if(!($(target).parents().hasClass("activity-privacy-button-mobile-container"))){
+                    let link = '/#/specific-activity/' + activity.membership.SessionCode + "/" + activity.membership.ActivityCode;
+                    this.transitionToRoute(link);
+                    console.log(link);
+                }
             }
-            
         },
         
         // Shows the modal that holds the information to update profile picture

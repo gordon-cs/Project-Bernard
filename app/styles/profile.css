@@ -2,13 +2,11 @@
     background: transparent;
 }
 
-.profile .row-centered {
-    text-align: center;
-}
 .profile .col-centered {
     display: inline-block;
     float: none;
     margin-right: -4px;
+    margin-left: -4px;
 }
 
 .profile .col-no-padding {
@@ -79,19 +77,22 @@ Main profile block
 }
 
 .profile .user-links {
-    font-size: 1.5em;
+    font-size: 1.3em;
     text-align: center;
-    /*width: 100%;
-    margin: 0 auto;*/
 }
 
 
 .profile .social-media-buttons {
     border: 1px solid rgb(205, 205, 205);
-    margin: 2px;
+    margin: 2px 4px;
+    text-align: center;
     -moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
     border-radius: 6px;
+}
+
+.profile .social-media-buttons a {
+    color: #00aeef;
 }
 
 .profile .user-position {
@@ -191,6 +192,7 @@ Profile Picture
   position: relative;
   width: 75%;
   margin: 0 auto;
+  max-width: 275px;
 }
 
 .profile .image {
@@ -469,8 +471,35 @@ Activities
     padding-left: 5px;
 }
 
-.profile .activity-row2-mobile {
+.profile .activity-row2 {
     padding-top: 2px;
+}
+
+.profile .activity-contacts {
+    color: #00aeef;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile .activity-description {
+    height: 2.1em;
+    line-height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*white-space: nowrap;*/
+}
+
+.profile .activity-description-more-info {
+    text-align: right;
+}
+
+.profile .activity-description-more-info span {
+    color: #00aeef;
+}
+
+.profile .activity-header {
+    font-size: 1.1em;
 }
 
 /*This prevents the page from disappearing when the dropdown is clicked*/
@@ -523,6 +552,44 @@ Request Tables
 /****************************
  Media Queries 
 ****************************/
+
+@media only screen and (min-width: 768px){
+    .profile {
+        font-size: 1.5em;
+    }
+
+    .profile .profile-picture-container {
+        width: 100%;
+        margin-top: 7px;
+        margin-left: 7px;
+    }
+
+    .profile .action-icon .glyphicon {
+        font-size: 2.5em;
+    }
+
+    .profile .activity-privacy-button-mobile-container {
+        width: 150px;
+    }
+
+    .profile .activity-privacy-button-mobile {
+        padding-left: 10px;
+    }
+
+    .profile .activity-privacy-button-mobile span {
+        padding-right: 10px;
+    }
+
+
+
+}
+
+
+
+
+
+
+/*Tables*/
 
 @media only screen and (max-width: 1199px) { 
     .profile .entry-rows {
