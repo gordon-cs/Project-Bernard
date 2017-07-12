@@ -6,6 +6,21 @@ import deleteAsync from "gordon360/utils/delete-async";
  *  Sends requests to the model to retrieve and/or modify data.
  */
 export default Ember.Controller.extend({
+
+    queryParams: ['category'],
+    category: null,
+
+    hey: function() {
+        console.log("hey");
+        this.send('filteredArticles');
+    },
+
+    filteredArticles: Ember.computed('category', 'model', function() {
+        var category = this.get('category');
+        console.log("hey");
+
+    }),
+
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
@@ -160,6 +175,19 @@ export default Ember.Controller.extend({
             }
         },
 
+        filterChapel(eventsList, isChecked) {
+            let newList = [];
+            if (isChecked) {
+                console.log(eventsList);
+                for (let i = 0; i < eventsList.length; i++) {
+                    if (eventsList[i].Category_Id === "85") {
+                        newList.push(eventsList[i]);
+                    }
+
+                }
+                this.set("model.eventShown", newList);
+            }
+        },
 
         toggleCheckBox: function() {
 
@@ -172,17 +200,8 @@ export default Ember.Controller.extend({
             let newList = [];
             let oldList = this.get("model.eventShown");
 
+            this.send('filterChapel', oldList, "isChapel");
 
-            if (this.get("isChapel")) {
-                console.log(oldList);
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Category_Id === "85") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                this.set("model.eventShown", newList);
-            }
             if (this.get("isAthletics")) {
                 console.log(oldList);
                 for (let i = 0; i < oldList.length; i++) {
@@ -202,14 +221,6 @@ export default Ember.Controller.extend({
 
                 }
                 this.set("model.eventShown", newList);
-            }
-        },
-
-        showPastEvents(item) {
-            for (let i = 0; i < this.get("model.eventShown").length; i++) {
-                this.set("model.eventShown", this.get("model.allEvents"));
-                controller.toggleCheckBox();
-
             }
         },
 

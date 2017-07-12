@@ -20,7 +20,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             let eventList = result;
             let startClock;
             let endClock;
-            let modalClock;
             let pastEvents = [];
             let date = new Date();
 
@@ -28,15 +27,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
             for (let i = 0; i < eventList.length; ++i) {
 
+
                 if (eventList[i].Description !== "No description available") {
                     eventList[i].Description = eventList[i].Description.substring(3, eventList[i].Description.length - 4);
                 }
                 //get the date information
-                eventList[i].timeObject = eventList[i].Start_Time;
+                eventList[i].startTimeObject = eventList[i].Start_Time;
+                eventList[i].timeObject = eventList[i].End_Time;
+
                 let startDate = new Date(eventList[i].Start_Time);
-                if (startDate > date) {
-                    pastEvents.push(eventList[i]);
-                }
                 let startYear = startDate.getFullYear();
                 let startMonth = startDate.getMonth();
                 let startDay = startDate.getDate();
@@ -81,9 +80,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
                 if (eventList[i].Location === null && eventList[i].Locations !== null) {
                     eventList[i].Location = "Multiple locations or dates";
-                    eventList[i].End_Time = "---";
-                    eventList[i].Start_Time = "---";
-                } else if (startHour === 0) {
+                }
+                if (startHour === 0) {
                     eventList[i].End_Time = "All Day";
                 } else {
                     eventList[i].End_Time = startClock + " - " + endClock;
@@ -93,8 +91,32 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
                 }
 
+                if (startDate > date) {
+                    pastEvents.push(eventList[i]);
+                }
+
             }
 
+            eventList.sort(function(a, b) {
+
+                if (a.timeObject < b.timeObject) {
+                    return -1;
+                }
+                if (a.timeObject > b.timeObject) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            pastEvents.sort(function(a, b) {
+                if (a.timeObject < b.timeObject) {
+                    return -1;
+                }
+                if (a.timeObject > b.timeObject) {
+                    return 1;
+                }
+                return 0;
+            });
 
             return {
                 //return all the deseired information

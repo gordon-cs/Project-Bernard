@@ -83,6 +83,11 @@
     margin-top: 0px;
 }
 
+.event-cyanbox {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 .events .filterBtn-row:hover {
     background-color: #b2bb1c !important;
     color: white;
@@ -121,6 +126,7 @@
 .events .event-search {
     display: block;
     margin-left: 15px;
+    margin-right: 15px !important;
 }
 
 .events .event-row:hover {
@@ -253,6 +259,9 @@
     }
     .events .btn-upComing {
         float: right;
+    }
+    .display-col {
+        display: block !important;
     }
     .close:hover,
     .close:focus {

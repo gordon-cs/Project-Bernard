@@ -37,7 +37,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         //retreive the chapel information from the database
         let loadChapel = function() {
-            return getAsync("/events/chapel/Student/" + id_name + "/" + "SU17", context);
+            return getAsync("/events/chapel/Student/" + id_name + "/" + termCode, context);
         };
 
         //Formate the information you want to display

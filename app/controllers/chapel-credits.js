@@ -103,12 +103,13 @@ export default Ember.Controller.extend({
 
         toggleEventDetailsModal(item) {
 
-            $("#toggleEventDetailsModal").addClass("event-showModal");
-            $('.container').addClass('blur');
-            let context = this;
-            let displayEvent = this.set("displayEvent", item);
-            let chEventID = this.get("displayEvent.CHEventID", item);
-
+            if ($(window).width() > 750) {
+                $("#toggleEventDetailsModal").addClass("event-showModal");
+                $('.container').addClass('blur');
+                let context = this;
+                let displayEvent = this.set("displayEvent", item);
+                let chEventID = this.get("displayEvent.CHEventID", item);
+            }
         },
 
         filterEvents: function() {

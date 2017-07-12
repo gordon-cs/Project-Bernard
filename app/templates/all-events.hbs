@@ -21,7 +21,7 @@
       <div class="dropdown-menu">
         <div class=" dropdown-item event-checks form-check">
           <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isChapel }}
+        {{input type="checkbox" checked=isChapel onchange="toggleCheckBox();" }}
        chapel
       </label>
         </div>
@@ -39,7 +39,7 @@
         </div>
         <div class=" dropdown-item event-checks form-check">
           <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=pastEvents }}
+        {{input type="checkbox" checked=pastEvents  }}
        Show Past Events
       </label>
         </div>
@@ -47,8 +47,7 @@
     </div>
 
 
-    <button type="submit" class="btn btn-primary col-sm-2 col-md-2 col-xs-5" onclick={{action
-      "toggleCheckBox"}}>refresh</button>
+    <button type="submit" class="btn btn-primary col-sm-2 col-md-2 col-xs-5" onclick={{action "toggleCheckBox"}}>refresh</button>
   </div>
 
   <div class="event-cyanbox cyanbox">
@@ -80,8 +79,9 @@
   <div class="modal-content event-modal-content">
     <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
     <div class="modal-body">
-      <h4> A.J Chapel <br> {{ displayEvent.Organization }} <br> {{ displayEvent.Description}} </h4> <br> {{#each displayEvent.Locations
-      as |Location|}}
+      <h4>Department: {{ displayEvent.Organization }}</h4>
+      <h4>Event Discription: {{ displayEvent.Description}}</h4>
+     {{#each displayEvent.Locations as |Location|}}
       <h4>{{Location.[2]}} </h4>
       {{/each}}
     </div>
