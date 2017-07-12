@@ -229,11 +229,15 @@
                                     <div class="row col-xs-hide">
                                         <div class="col-sm-5 col-no-padding">
                                             {{!--The group admins email addresses will be displayed and be clickable--}}
-                                            <ul>
-                                                {{#each activity.membership.groupAdminsEmail as |groupAdmin|}}
-                                                    <li><a class="activity-contacts" href="mailto:{{groupAdmin.Email}}">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a></li>
+                                                {{#each activity.membership.groupAdminsEmail as |groupAdmin index|}}
+                                                    {{#if (lt index 2)}}
+                                                        <div class="activity-contact-button-containers">
+                                                            <div class="social-media-buttons activity-contact-buttons">
+                                                                <a class="activity-contacts">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a>
+                                                            </div>
+                                                        </div>
+                                                    {{/if}}
                                                 {{/each}}
-                                            </ul>
                                         </div>
                                         <div class="col-sm-7 col-no-padding activity-description">{{activity.membership.clubInfo.ActivityBlurb}}</div>
                                         <div class="col-sm-7 col-no-padding activity-description-more-info">(<span>More info</span>)</div>
