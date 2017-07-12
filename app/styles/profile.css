@@ -510,6 +510,7 @@ Activities
 
 .profile .activity-description-more-info {
     text-align: right;
+    float: right;
 }
 
 .profile .activity-description-more-info span {

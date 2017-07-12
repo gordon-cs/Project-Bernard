@@ -295,9 +295,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 if(data[i].SessionDescription.indexOf("Academic") > 0){
                     data[i].session = data[i].SessionDescription.slice(0, data[i].SessionDescription.indexOf(" Academic"));
                 }
-                memberships[i] = membership.create({
-                    "membership": data[i]
-                });
+                memberships[i] = membership.create(data[i]);
             }
         }   
 

@@ -69,7 +69,7 @@ export default Ember.Controller.extend({
             let target = element.target;
             if($(window).width() < 992){
                 if(!($(target).parents().hasClass("activity-privacy-button-mobile-container") || ($(target).parents().hasClass("activity-contact-button-containers")))){
-                    let link = '/#/specific-activity/' + activity.membership.SessionCode + "/" + activity.membership.ActivityCode;
+                    let link = '/#/specific-activity/' + activity.SessionCode + "/" + activity.ActivityCode;
                     this.transitionToRoute(link);
                     console.log(link);
                 }
@@ -148,16 +148,14 @@ export default Ember.Controller.extend({
         //Change the privacy value for a club membership
         setClubPrivacy(activity, newPrivacy) {
             let context = this;
-            console.log(activity.membership.MembershipID);
-            console.log(newPrivacy);
             let setPrivacy = function(value) {
-                return putAsync("/memberships/" + activity.membership.MembershipID + "/privacy/" + value, value, context).catch((reason) => {
+                return putAsync("/memberships/" + activity.MembershipID + "/privacy/" + value, value, context).catch((reason) => {
                     console.log(reason);
                     //TODO handle error
                 });
             }
             let transition = function() {
-                activity.set("membership.Privacy", newPrivacy);
+                activity.set("Privacy", newPrivacy);
             }
             setPrivacy(newPrivacy)
             .then(transition);
