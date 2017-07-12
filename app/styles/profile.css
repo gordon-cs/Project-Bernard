@@ -471,6 +471,10 @@ Activities
     padding-left: 5px;
 }
 
+.profile .social-media-buttons.disabled {
+    opacity: 0.5;
+}
+
 .profile .activity-row2 {
     padding-top: 2px;
 }

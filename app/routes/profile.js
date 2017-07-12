@@ -259,6 +259,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Sets memberships to be the information about all of a users activities
         let addActivitiesInfo = function(data) {
             for(var i = 0; i < data.length; i++) {
+                if (data[i].Privacy) {
+                    memberships[i].Privacy = true;
+                }
                 memberships[i].clubInfo = data[i];
             }
             return memberships;
