@@ -30,14 +30,14 @@ export default Ember.Controller.extend({
         // Shows and hides the table that shows membership requests recieved
         toggleRecievedTable() {
             $("#membership-requests-recieved-table").toggle(0, function() {
-                $("#membership-requests-recieved-table").children(".entry-rows").last()[0].scrollIntoView(false);
+                $("#membership-requests-recieved-table").children(".entry-rows").last()[0].scrollIntoView(true);
             });
             $("#recieved-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         },
         // Shows and hides the table that shows membership requests sent
         toggleSentTable() {
             $("#membership-requests-sent-table").toggle(0, function() {
-                $("#membership-requests-sent-table").children(".entry-rows").last()[0].scrollIntoView(false);
+                $("#membership-requests-sent-table").children(".entry-rows").last()[0].scrollIntoView(true);
             });
             // Another method that will animate the scrolling but I think that it might take too long
             // $("#membership-requests-sent-table").toggle(1, function(){
@@ -50,7 +50,7 @@ export default Ember.Controller.extend({
         // Shows and hides the table that shows the system admins
         toggleAdminTable() {
             $("#admin-table").toggle(0, function(){
-                $("#admin-table").children(".entry-rows").last()[0].scrollIntoView(false);
+                $("#admin-table").children(".entry-rows").last()[0].scrollIntoView(true);
             });
             $("#admin-table-header").toggleClass("glyphicon-menu-right glyphicon-menu-down");
         },

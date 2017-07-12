@@ -471,9 +471,11 @@ Activities
     padding-left: 5px;
 }
 
-.profile .social-media-buttons.disabled {
-    opacity: 0.5;
+.profile .social-media-buttons.disabled .activity-privacy-button-mobile {
+    /*color: #0096cc;*/
+    opacity: .4;
 }
+
 
 .profile .activity-row2 {
     padding-top: 2px;

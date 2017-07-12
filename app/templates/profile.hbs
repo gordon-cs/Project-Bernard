@@ -213,7 +213,7 @@
                                         <div class="col-xs-7 col-no-padding col-only-sm">
                                             <div class="activity-privacy-button-mobile-container dropdown">
                                                 <div class="social-media-buttons dropdown-toggle {{if activity.clubInfo.Privacy "disabled"}}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <div class="activity-privacy-button-mobile">{{if activity.Privacy "Private" "Public"}} <span id="recieved-table-header" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                                    <div class="activity-privacy-button-mobile">{{if activity.Privacy "Private" "Public"}} <span class="{{unless activity.clubInfo.Privacy "glyphicon glyphicon-menu-down"}}" aria-hidden="true"></span></div>
                                                 </div>
                                                 <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
                                                     <div class="dropdown-item"{{action "setClubPrivacy" activity true}}>Make Private</div>
