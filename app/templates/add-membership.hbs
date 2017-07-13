@@ -17,7 +17,7 @@
             {{input value=studentEmail class="form-control"}}
         {{/if}}
         {{#unless model.hasJoinInfo}}
-            <h2><strong>Declare your membership</strong></h2>
+            <h2><strong>Already a member?<br /> Declare your membership here:</strong></h2>
         {{/unless}}
         <label for="participation">Participation</label>
         {{#power-select
@@ -33,7 +33,7 @@
         <label for="Comment (optional)">Title/Comment (optional)</label>
         {{input value=comments class="form-control"}}
         {{#unless model.hasJoinInfo}}
-            <h2><strong>Special Information for Joining</strong></h2>
+            <h2><strong>Not a member yet?<br /> Special Information for Joining:</strong></h2>
             <p>{{model.activity.ActivityJoinInfo}}</p>
         {{/unless}}
         {{#if model.leading}}
