@@ -24,6 +24,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let sessions;
         let selectedSession;
         let activities;
+        let activitiesShown;
         let types = [];
         let selectedType;
         let reversedSessions = [];
@@ -77,16 +78,30 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             types = types.sort();
         };
 
+        let initializeActivitiesShown = function() {
+            selectedType = transition.queryParams.selectedType;
+            console.log(selectedType);
+            if (selectedType && selectedType.toLowerCase() != "All".toLowerCase()) {
+                let newList = [];
+                for (let i = 0; i < activities.length; i++) {
+                    if (activities[i].ActivityTypeDescription.toLowerCase() == selectedType.toLowerCase()) {
+                        newList.push(activities[i]);
+                    }
+                }
+                activitiesShown = newList;
+            }
+        }
+
         let loadModel = function () {
             // Return the resolved value
             return {
                 "activities": activities,
-                "activitiesShown": activities,
+                "activitiesShown": activitiesShown,
                 "activitiesFilled" : (activities.length > 0),
                 "sessions": reversedSessions,
                 "selectedSession": selectedSession,
                 "activityTypes": types,
-                "selectedType": "All",
+                "selectedType": selectedType,
                 "searchValue" : ""
             };
         };
@@ -98,6 +113,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(initializeSelectedSession)
         .then(loadActivities)
         .then(initializeActivities)
+        .then(initializeActivitiesShown)
         .then(loadTypes)
         .then(initializeTypes)
         .then(loadModel)
