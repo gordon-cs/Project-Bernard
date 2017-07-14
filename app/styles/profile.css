@@ -333,11 +333,6 @@ Edit profile picture modal
     width: 100%;
 }
 
-.profile .profile-picture-privacy-button {
-    /*font-size: 1.3em !important;*/
-    height: 34px;
-}
-
 .profile #profile-modal-form-box button {
     margin: 5px;
 }
@@ -421,7 +416,7 @@ Activities
 }
 
 .profile .activity-entry {
-    padding: 15px 0;
+    padding: 10px 0;
     font-size: 1.5em;
     border-bottom: 1px solid rgb(221,221,221);
 }
@@ -517,6 +512,7 @@ Activities
 .profile .activity-description-more-info {
     text-align: right;
     float: right;
+    cursor: pointer;
 }
 
 .profile .activity-description-more-info span {
@@ -664,15 +660,33 @@ Request Tables
 
     .profile .profile-block-container-left {
         padding-right: 10px;
+        float: left;
     }
 
     .profile .profile-block-container-right {
         padding-left: 10px;
+        float: right;
     }
 
     .profile .profile-picture-container {
         margin: 0;
     }
+
+    .profile .activity-entry {
+        font-size: 1.3em;
+    }
+
+    .profile .activity-image {
+        width: 100%;
+    }
+
+    .profile .activity-image-container {
+        width: 75%;
+        margin: 0 auto;
+        padding-top: 2px;
+    }
+
+
 }
 
 

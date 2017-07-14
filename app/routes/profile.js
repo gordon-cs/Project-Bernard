@@ -135,29 +135,34 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Changes class from the number value set in the table to the corresponding string
         let setClass = function(data) {
-            switch(data.Class) {
-                case "1":
-                    data.Class = "Freshman";
-                    break;
-                case "2":
-                    data.Class = "Sophmore";
-                    break;
-                case "3":
-                    data.Class = "Junior";
-                    break;
-                case "4":
-                    data.Class = "Senior";
-                    break;
-                case "5":
-                    data.Class = "Graduate Student";
-                    break;
-                case "6":
-                    data.Class = "Undergraduate Conferred";
-                    break;
-                case "7":
-                    data.Class = "Graduate Conferred";
-                    break;
+            if(data.IsStudent){
+                switch(data.Class) {
+                    case "1":
+                        data.Class = "Freshman";
+                        break;
+                    case "2":
+                        data.Class = "Sophmore";
+                        break;
+                    case "3":
+                        data.Class = "Junior";
+                        break;
+                    case "4":
+                        data.Class = "Senior";
+                        break;
+                    case "5":
+                        data.Class = "Graduate Student";
+                        break;
+                    case "6":
+                        data.Class = "Undergraduate Conferred";
+                        break;
+                    case "7":
+                        data.Class = "Graduate Conferred";
+                        break;
+                    default:
+                        data.Class = "Student";
+                }
             }
+            
             return data;
         }
 
@@ -369,9 +374,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(verifyAdmin)
         .then(getAdmins)
         .then(getuserInfo)
-        .then(setClass)
-        .then(setOnOffCampus)
         .then(setUserType)
+        .then(setOnOffCampus)
+        .then(setClass)
         .then(setuserInfo)
         .then(getUserProfilePicture)
         .then(setUserProfilePicture)
@@ -387,6 +392,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(loadLinks)
         .then(formatPhoneNumbers)
         .then(loadModel);
-        // return testLoadModel;
     }
 });

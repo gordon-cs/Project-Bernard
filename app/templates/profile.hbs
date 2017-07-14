@@ -25,7 +25,7 @@
                         {{else if model.userInfo.IsStudent}}
                             {{model.userInfo.Class}}
                         {{else if model.userInfo.isAlumni}}
-                            {{model.userInfo.}} 
+                            Alumni
                         {{/if}}
                     </div>
                 </div>
@@ -33,33 +33,38 @@
             {{! Display users social media links if provided }}
             <div class="row user-links">
                     {{#if model.userInfo.Facebook}}
-                        <div class="col-xs-3 col-no-padding col-centered">
+                        <div class="col-xs-3 col-lg-2 col-no-padding col-centered">
                             <div class="social-media-buttons">
                                 <a href="https://www.facebook.com/{{model.userInfo.Facebook}}">Facebook</a>
                             </div>
                         </div>
                     {{/if}}
                     {{#if model.userInfo.Twitter}}
-                        <div class="col-xs-3 col-no-padding col-centered">
+                        <div class="col-xs-3 col-lg-2 col-no-padding col-centered">
                             <div class="social-media-buttons">
                                 <a href="https://twitter.com/{{model.userInfo.Twitter}}" >Twitter</a>
                             </div>
                         </div>
                     {{/if}}
                     {{#if model.userInfo.LinkedIn}}
-                        <div class="col-xs-3 col-no-padding col-centered">
+                        <div class="col-xs-3 col-lg-2 col-no-padding col-centered">
                             <div class="social-media-buttons">
                                 <a href="https://www.linkedin.com/in/{{model.userInfo.LinkedIn}}">LinkedIn</a>
                             </div>
                         </div>
                     {{/if}}
                     {{#if model.userInfo.Instagram}}
-                        <div class="col-xs-3 col-no-padding col-centered">
+                        <div class="col-xs-3 col-lg-2 col-no-padding col-centered">
                             <div class="social-media-buttons">
                                 <a href="https://www.instagram.com/{{model.userInfo.Instagram}}">Instagram</a>
                             </div>
                         </div>
                     {{/if}}
+                    <div class="md-hide col-lg-4 col-no-padding col-centered">
+                        <div class="social-media-buttons">
+                            <a>Edit your Social Media links</a>
+                        </div>
+                    </div>
             </div>
             <div class="row profile-action-block md-show"> 
                 <div class="col-xs-4 profile-action-button-container">
@@ -91,175 +96,174 @@
     </section>
 
     <div class="row background-transparent">
-        <div class="col-lg-6 profile-block-container-left background-transparent col-no-padding">
+        <div class="col-lg-5 profile-block-container-left background-transparent col-no-padding">
+            <div class="col-lg-12 background-transparent col-no-padding">
 
-            {{!--Personal Information--}}
-            <section class="row profile-block">
-                    <div class="col-md-12 block-header">Personal Information</div>
-                    {{#if phonePrivacySuccessMessage}}
-                        <div class="col-sm-12 success-message">
-                            {{phonePrivacySuccessMessage}}
-                        </div>
-                    {{/if}}
-                    <div class="col-sm-12 col-no-padding">
-                        {{#if model.userInfo.IsStudentOrAlumni}}
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Majors</div>
-                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.Major}}</div>
-                            </div>
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
-                                <div class="col-xs-8 col-no-padding personal-information-entry-value"><em>{{if model.userInfo.IsMobilePhonePrivate "(Private) " "(Public) "}}</em>{{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}</div>
-                            </div>
-                        {{/if}}
-                        {{#if model.userInfo.IsFaculty}}
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Department</div>
-                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusDepartment}}</div>
-                            </div>
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
-                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusPhone}}</div>
-                            </div>
-                        {{/if}}
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Home Phone</div>
-                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.formattedHomePhone model.userInfo.formattedHomePhone model.userInfo.HomePhone}}</div>
-                            </div>
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Email</div>
-                                <div class="col-xs-8 col-no-padding personal-information-entry-value no-overflow">{{model.userInfo.EmailUserName}}@gordon.edu</div>
-                            </div>
-                    </div>
-            </section>
-        </div>
-
-        <div class="col-lg-6 profile-block-container-right col-no-padding background-transparent">
-            <section class="row profile-block">
-                    <div class="col-md-12 block-header">
-                        Home Address
-                    </div>
-                    <div class="col-xs-12 col-no-padding">
-                        <div class="row personal-information-entry">
-                            <div class="col-xs-12 col-no-padding personal-information-entry-key">{{if (eq model.userInfo.HomeStreet1 "") model.userInfo.HomeStreet2 model.userInfo.HomeStreet1}}</div>
-                        </div>
-                        {{#if (not-eq model.userInfo.HomeStreet1 "")}}
-                            {{#if (not-eq model.userInfo.HomeStreet2 "")}}
-                                <div class="row personal-information-entry">
-                                    <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.HomeStreet2}}</div>
-                                </div>
-                            {{/if}}
-                        {{/if}}
-                        <div class="row personal-information-entry no-border">
-                            <div class="col-xs-12 col-no-padding personal-information-entry-key">
-                                {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}}
-                                {{model.userInfo.HomeState}}
-                                {{model.userInfo.HomePostalCode}} 
-                                {{#if (not-eq model.userInfo.HomeCountry "US")}}
-                                    {{if model.userInfo.HomeCountry model.userInfo.HomeCountry}}
-                                {{/if}}
-                                </div>
-                        </div>
-                    </div>
-            </section>
-        </div>
-        <div class="col-lg-6 profile-block-container-right col-no-padding background-transparent">
-            {{#if model.userInfo.OnOffCampus}}    
+                {{!--Personal Information--}}
                 <section class="row profile-block">
-                                <div class="col-md-12 block-header">Campus Address</div>
-                                <div class="col-xs-12 col-no-padding">
-                                    <div class="row personal-information-entry">
-                                        <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.OnCampusRoom}} {{model.userInfo.OnCampusBuilding}}</div>
-                                    </div>
+                        <div class="col-md-12 block-header">Personal Information</div>
+                        {{#if phonePrivacySuccessMessage}}
+                            <div class="col-sm-12 success-message">
+                                {{phonePrivacySuccessMessage}}
+                            </div>
+                        {{/if}}
+                        <div class="col-sm-12 col-no-padding">
+                            {{#if model.userInfo.IsStudentOrAlumni}}
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Majors</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.Major}}</div>
                                 </div>
-                            {{#if model.userInfo.IsFaculty}}
-                                <div class="col-md-12 block-header">On Campus Info</div>
-                                <div class="col-xs-12 col-no-padding">
-                                    <div class="row personal-information-entry">
-                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Office</div>
-                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</div>
-                                    </div>
-                                    <div class="row personal-information-entry">
-                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
-                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusPhone}}</div>
-                                    </div>
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value"><em>{{if model.userInfo.IsMobilePhonePrivate "(Private) " "(Public) "}}</em>{{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}</div>
                                 </div>
                             {{/if}}
+                            {{#if model.userInfo.IsFaculty}}
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Department</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusDepartment}}</div>
+                                </div>
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusPhone}}</div>
+                                </div>
+                            {{/if}}
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Home Phone</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.formattedHomePhone model.userInfo.formattedHomePhone model.userInfo.HomePhone}}</div>
+                                </div>
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Email</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value no-overflow">{{model.userInfo.Email}}</div>
+                                </div>
+                        </div>
                 </section>
-            {{/if}}
-        </div>
-    </div>
+            </div>
 
-    {{!--Activities--}}
-    
-    <section class="profile-block">
-        <div class="row round-top-coners">
-            <div class="block-header col-sm-12">
-                Activities
+
+            <div class="col-lg-12 background-transparent col-no-padding">
+                <section class="row profile-block">
+                        <div class="col-md-12 block-header">
+                            Home Address
+                        </div>
+                        <div class="col-xs-12 col-no-padding">
+                            <div class="row personal-information-entry">
+                                <div class="col-xs-12 col-no-padding personal-information-entry-key">{{if (eq model.userInfo.HomeStreet1 "") model.userInfo.HomeStreet2 model.userInfo.HomeStreet1}}</div>
+                            </div>
+                            {{#if (not-eq model.userInfo.HomeStreet1 "")}}
+                                {{#if (not-eq model.userInfo.HomeStreet2 "")}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.HomeStreet2}}</div>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            <div class="row personal-information-entry no-border">
+                                <div class="col-xs-12 col-no-padding personal-information-entry-key">
+                                    {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}}
+                                    {{model.userInfo.HomeState}}
+                                    {{model.userInfo.HomePostalCode}} 
+                                    {{#if (not-eq model.userInfo.HomeCountry "US")}}
+                                        {{if model.userInfo.HomeCountry model.userInfo.HomeCountry}}
+                                    {{/if}}
+                                    </div>
+                            </div>
+                        </div>
+                </section>
+            </div>
+            <div class="col-lg-12 background-transparent col-no-padding">
+                {{#if model.userInfo.OnOffCampus}}    
+                    <section class="row profile-block">
+                                    <div class="col-md-12 block-header">Campus Address</div>
+                                    <div class="col-xs-12 col-no-padding">
+                                        <div class="row personal-information-entry">
+                                            <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.OnCampusRoom}} {{model.userInfo.OnCampusBuilding}}</div>
+                                        </div>
+                                    </div>
+                                {{#if model.userInfo.IsFaculty}}
+                                    <div class="col-md-12 block-header">On Campus Info</div>
+                                    <div class="col-xs-12 col-no-padding">
+                                        <div class="row personal-information-entry">
+                                            <div class="col-xs-4 col-no-padding personal-information-entry-key">Office</div>
+                                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</div>
+                                        </div>
+                                        <div class="row personal-information-entry">
+                                            <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
+                                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusPhone}}</div>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                    </section>
+                {{/if}}
             </div>
         </div>
-        {{#each model.memberships as |activity|}}
-            <div class="row activity-entry bootstrap-tester" onclick={{action "linkToSpecificActivity" activity }}>
-                <div class="col-sm-12">
-                    <div class="row">
-                        <div class="col-xs-2 col-sm-3 col-no-padding bootstrap-tester">
-                            <img src="{{activity.ActivityImagePath}}" class="activity-image" alt="{{activity.ActivityDescription}} profile picture">
-                        </div>
-                        <div class="col-xs-10 col-sm-9">
-                                    <div class="activity-entry-title">{{activity.ActivityDescription}} {{if activity.privacy "(Hidden on your page)"}}</div>
+
+    {{!--Activities--}}
+        <div class="col-lg-7 profile-block-container-right background-transparent col-no-padding">
+    
+            <section class="profile-block">
+                <div class="row round-top-coners">
+                    <div class="block-header col-sm-12">
+                        Activities
+                    </div>
+                </div>
+                {{#each model.memberships as |activity|}}
+                    <div class="row activity-entry bootstrap-tester" onclick={{action "linkToSpecificActivity" activity }}>
+                        <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-lg-6 col-no-padding">
-                                    <div class="row activity-row2">
-                                        <div class="activity-session col-xs-5 col-no-padding">{{activity.session}}</div>
-                                        {{!--Dropdown that display the options for privacy settings on mobile--}}
-                                        <div class="col-xs-7 col-no-padding sm-show">
-                                            <div class="activity-privacy-button-mobile-container dropdown">
-                                                <div class="social-media-buttons dropdown-toggle {{if activity.clubInfo.Privacy "disabled"}}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <div class="activity-privacy-button-mobile">{{if activity.Privacy "Private" "Public"}} <span class="{{unless activity.clubInfo.Privacy "glyphicon glyphicon-menu-down"}}" aria-hidden="true"></span></div>
+                                <div class="col-xs-2 col-sm-3 col-no-padding linkToSpecificActivity-desktop bootstrap-tester">
+                                    <div class="activity-image-container">
+                                        <img src="{{activity.ActivityImagePath}}" class="activity-image" alt="{{activity.ActivityDescription}} profile picture" >
+                                    </div>
+                                </div>
+                                <div class="col-xs-10 col-sm-9">
+                                            <div class="activity-entry-title">{{activity.ActivityDescription}} {{if activity.privacy "(Hidden on your page)"}}</div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-no-padding">
+                                            <div class="row activity-row2">
+                                                <div class="activity-session col-xs-5 col-no-padding">{{activity.session}}</div>
+                                                {{!--Dropdown that display the options for privacy settings on mobile--}}
+                                                <div class="col-xs-7 col-no-padding">
+                                                    <div class="activity-privacy-button-mobile-container dropdown">
+                                                        <div class="social-media-buttons dropdown-toggle {{if activity.clubInfo.Privacy "disabled"}}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <div class="activity-privacy-button-mobile">{{if activity.Privacy "Private" "Public"}} <span class="{{unless activity.clubInfo.Privacy "glyphicon glyphicon-menu-down"}}" aria-hidden="true"></span></div>
+                                                        </div>
+                                                        <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
+                                                            <div class="dropdown-item"{{action "setClubPrivacy" activity true}}>Make Private</div>
+                                                            <div class="dropdown-item"{{action "setClubPrivacy" activity false}}>Make Public</div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
-                                                    <div class="dropdown-item"{{action "setClubPrivacy" activity true}}>Make Private</div>
-                                                    <div class="dropdown-item"{{action "setClubPrivacy" activity false}}>Make Public</div>
+                                            </div>
+                                            <div class="row xs-hide">
+                                                <div class="col-sm-5 col-no-padding activity-header">Group Contacts:</div>
+                                                <div class="col-sm-7 col-no-padding activity-header">Description:</div>
+                                            </div>
+                                            <div class="row xs-hide">
+                                                <div class="col-sm-5 col-no-padding">
+                                                    {{!--The group admins email addresses will be displayed and be clickable--}}
+                                                        {{#each activity.groupAdminsEmail as |groupAdmin index|}}
+                                                            {{#if (lt index 2)}}
+                                                                <div class="activity-contact-button-containers">
+                                                                    <div class="social-media-buttons activity-contact-buttons"{{action "linkToGroupAdminProfile" groupAdmin}}>
+                                                                        <a class="activity-contacts">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a>
+                                                                    </div>
+                                                                </div>
+                                                            {{/if}}
+                                                        {{/each}}
                                                 </div>
+                                                <div class="col-sm-7 col-no-padding activity-description">{{activity.clubInfo.ActivityBlurb}}</div>
+                                                <div class="col-sm-7 col-no-padding activity-description-more-info linkToSpecificActivity-desktop">(<span>More info</span>)</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row xs-hide">
-                                        <div class="col-sm-5 col-no-padding activity-header">Group Contacts:</div>
-                                        <div class="col-sm-7 col-no-padding activity-header">Description:</div>
-                                    </div>
-                                    <div class="row xs-hide">
-                                        <div class="col-sm-5 col-no-padding">
-                                            {{!--The group admins email addresses will be displayed and be clickable--}}
-                                                {{#each activity.groupAdminsEmail as |groupAdmin index|}}
-                                                    {{#if (lt index 2)}}
-                                                        <div class="activity-contact-button-containers">
-                                                            <div class="social-media-buttons activity-contact-buttons"{{action "linkToGroupAdminProfile" groupAdmin}}>
-                                                                <a class="activity-contacts">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a>
-                                                            </div>
-                                                        </div>
-                                                    {{/if}}
-                                                {{/each}}
-                                        </div>
-                                        <div class="col-sm-7 col-no-padding activity-description">{{activity.clubInfo.ActivityBlurb}}</div>
-                                        <div class="col-sm-7 col-no-padding activity-description-more-info">(<span>More info</span>)</div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 md-hide">
-                                    <div class="col-sm-2">
-                                        <button class="btn view-club-button">{{#link-to "specific-activity" activity.SessionCode activity.ActivityCode}}View Club{{/link-to}}</button>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button class="btn club-privacy-button" {{action "toggleClubPrivacy" activity}}>{{if activity.Privacy "Show this activity" "Hide this activity"}}</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        {{/each}}
-    </section>
+                {{/each}}
+            </section>
+        </div>
+    </div>
 
 
     <!-- Edit profile picture modal -->

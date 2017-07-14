@@ -74,6 +74,13 @@ export default Ember.Controller.extend({
                     console.log(link);
                 }
             }
+            if($(window).width() >= 992) {
+                if(($(target).parents().hasClass("linkToSpecificActivity-desktop"))){
+                    let link = '/#/specific-activity/' + activity.SessionCode + "/" + activity.ActivityCode;
+                    this.transitionToRoute(link);
+                    console.log(link);
+                }
+            }
         },
 
         linkToGroupAdminProfile(groupAdmin) {

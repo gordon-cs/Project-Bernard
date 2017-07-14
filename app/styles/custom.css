@@ -442,7 +442,7 @@ button:active,
 
 @media only screen and (max-width: 1199px) {
     .md-hide {
-        display: none;
+        display: none !important;
     }
 }
 
