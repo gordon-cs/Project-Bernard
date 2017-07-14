@@ -48,8 +48,15 @@ Student Profile
 	-webkit-border-radius: 10px;
 }
 
-.profile .profile-block:first-of-type {
-    padding-top: 10px;
+.profile .first-profile-block {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .profile .block-header {
@@ -142,9 +149,6 @@ Profile Action buttons (for mobile)
     text-align: center;
 }
 
-.phone-privacy-button {
-    display: none;
-}
 
 .profile .action-icon .glyphicon {
     font-size: 3.5em;
@@ -588,8 +592,8 @@ Request Tables
 
     .profile .profile-picture-container {
         width: 100%;
-        margin-top: 7px;
-        margin-left: 7px;
+        margin-top: 5px; 
+        margin-left: 10px;
     }
 
     .profile .action-icon .glyphicon {
@@ -652,6 +656,22 @@ Request Tables
     }
     .profile .profile-block-info {
         padding-left: 20px;
+    }
+
+    .profile .first-profile-block {
+        padding-bottom: 20px;
+    }
+
+    .profile .profile-block-container-left {
+        padding-right: 10px;
+    }
+
+    .profile .profile-block-container-right {
+        padding-left: 10px;
+    }
+
+    .profile .profile-picture-container {
+        margin: 0;
     }
 }
 

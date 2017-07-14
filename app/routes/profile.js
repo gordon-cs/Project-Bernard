@@ -361,22 +361,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
 
-        // Test setup
-        let testLoadModel = function(){
-            return {
-                "requestsSent": [
-                    {
-                        "ActivityDescription": "This is a test activity",
-                        "RequestApproved": "Pending",
-                        "DiffDays": "12 days ago",
 
-                    }
-                ],
-                "godMode": false,
-                "superGodMode": false,
-                "admins":[]
-            }
-        }
         return getLeaderPositions()
         .then(getadvisorPositions)
         .then(getSentRequests)
