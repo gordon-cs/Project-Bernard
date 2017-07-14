@@ -133,7 +133,7 @@
                             {{#each model.rosterMemberships as |mem|}}
                                 <tr>
                                     <td> {{mem.FirstName}} </td>
-                                    <td> {{mem.LastName}} </td>
+                                    <td> {{mem.LastName}} {{#if mem.AccountPrivate}}{{#if model.leading}}*{{/if}}{{/if}} </td>
                                     <td> {{mem.ParticipationDescription}} </td>
                                     {{#if model.leading}}
 
@@ -158,6 +158,7 @@
                             {{/each}}
                         </tbody>
                     </table>
+                    {{#if model.leading}}<p>* FERPA protected student</p>{{/if}}
                 </div>
             {{else}}
                 {{#unless model.notAMember}}
