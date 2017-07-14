@@ -21,14 +21,33 @@
       <div class="dropdown-menu">
         <div class=" dropdown-item event-checks form-check">
           <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isChapel onchange="toggleCheckBox();" }}
-       chapel
+        {{input type="checkbox" checked=isCLAW onchange="toggleCheckBox();" }}
+       CL&W Credit
       </label>
         </div>
         <div class=" dropdown-item event-checks form-check">
           <label class="form-check-label event-checks">
         {{input type="checkbox" checked=isAdmissions }}
        Admissions
+      </label>
+        </div>
+
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isChapel }}
+      Chapel Office
+      </label>
+        </div>
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isCEC }}
+       CEC Events
+      </label>
+        </div>
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isArt }}
+       The Arts
       </label>
         </div>
         <div class=" dropdown-item event-checks form-check">
@@ -40,17 +59,25 @@
         <div class=" dropdown-item event-checks form-check">
           <label class="form-check-label event-checks">
         {{input type="checkbox" checked=pastEvents  }}
-       Show Past Events
+        Past Events
       </label>
         </div>
+
+               <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isCalendar }}
+       Claendar Events
+      </label>
+        </div>
+
       </div>
     </div>
 
 
-    <button type="submit" class="btn btn-primary col-sm-2 col-md-2 col-xs-5" onclick={{action "toggleCheckBox"}}>refresh</button>
+    <button type="submit" class="btn refresh-button col-sm-2 col-md-2 col-xs-5" onclick={{action "toggleCheckBox"}}>refresh</button>
   </div>
 
-  <div class="event-cyanbox cyanbox">
+  <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event</h4>
       <h4 class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}>Location</h4>
@@ -61,11 +88,11 @@
   <div class="entry-rows">
     {{#each model.eventShown as |event|}}
     <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
-      <h4 class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Name}}</h4>
-      <h4 class="display-col col-md-4 col-sm-4 col-xs-hide">{{event.Location}}</h4>
+      <h4 class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</h4>
+      <h4 class="display-col col-md-4 col-sm-4 col-xs-hide ">{{event.Location}}</h4>
       <h4 class="display-col col-sm-2 col-md-2 col-xs-hide">{{event.Start_Time}}</h4>
-      <h4 class="display-col col-sm-3 col-md-3 col-xs-hide">{{event.End_Time}}<button class="btn btn-primary events-hide" onclick={{ action "MobileEventDetailsModal" event }}>more...</button></h4>
-
+      <h4 class="display-col col-sm-3 col-md-3 col-xs-hide">{{event.End_Time}}</h4>
+      <h4 class="display-col col-sm-3 col-md-3 col-xs-hide events-info" onclick={{ action "MobileEventDetailsModal" event }}>More...</h4>
     </div>
     {{/each}}
   </div>
@@ -81,8 +108,8 @@
     <div class="modal-body">
       <h4>Department: {{ displayEvent.Organization }}</h4>
       <h4>Event Discription: {{ displayEvent.Description}}</h4>
-     {{#each displayEvent.Locations as |Location|}}
-      <h4>{{Location.[2]}} </h4>
+      {{#each displayEvent.Occurrences as |Location|}}
+      <h4>{{Location.[3]}} </h4>
       {{/each}}
     </div>
     <div class="modal-footer">

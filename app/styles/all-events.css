@@ -33,10 +33,11 @@
     margin: 3px;
 }
 
-.event-checks:hover {
+
+/*.event-checks:hover {
     background-color: #d83c30 !important;
     color: white !important;
-}
+}*/
 
 
 /* The Close Button */
@@ -81,6 +82,11 @@
     float: right;
     margin: 10px;
     margin-top: 0px;
+}
+
+.events .events-info {
+    text-align: right !important;
+    color: #b53228 !important;
 }
 
 .event-cyanbox {
@@ -148,13 +154,13 @@
 
 .events .event-p {
     margin-top: 0px !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 0px!important;
     padding-top: 0px !important;
 }
 
 .events .event-title {
-    font-style: strong;
-    font-size: 20px;
+    font-style: strong !important;
+    font-size: 5em;
     font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
     text-align: center;
 }
@@ -180,6 +186,11 @@
     cursor: pointer;
 }
 
+.refresh-button {
+    background-color: #00bdec;
+    color: white;
+}
+
 .events .entry-rows {
     padding: 8px;
     font-size: 1.6em;
@@ -191,9 +202,19 @@
     .events .event-row {
         font-size: 15px;
     }
+    .refresh-button {
+        background-color: #014983;
+        color: white;
+    }
     .events .onclickOrange {
         background-color: #b2bb1c !important;
         color: white !important;
+    }
+    .events .events-hide {
+        float: right !important;
+    }
+    .events .event-title {
+        font-size: 3em;
     }
     .events .event-id {
         font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
@@ -221,7 +242,7 @@
         font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
         padding-bottom: 5px;
         padding-top: 5px;
-        text-align: center;
+        text-align: left;
         background-color: white;
         color: black;
     }
@@ -262,6 +283,9 @@
     }
     .display-col {
         display: block !important;
+    }
+    .events .events-info {
+        display: none !important;
     }
     .close:hover,
     .close:focus {

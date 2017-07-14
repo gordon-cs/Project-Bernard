@@ -3,35 +3,111 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 import getAsync from "gordon360/utils/get-async";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-    model: function(params, transition) {
+
+
+
+    model: function() {
 
         let context = this;
         let searchValue;
-        let eventShown;
+        let eventList;
+        let pastEvents = [];
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+
+
+
+        let formatDiscription = function(Discription) {
+
+            if (Discription === "" || Discription.substring(0, 4) === "<res") {
+                return "No description available";
+            } else {
+                return Discription.replace(/&(#[0-9]+|[a-zA-Z]+);/g, " ").replace(/<\/?[^>]+(>|$)/g, " ");
+            }
+
+
+        }
+
+        function setClock(startTime, endTime, startClock, endClock) {
+
+            let startHour = new Date(startTime).getHours();
+            let startMin = new Date(startTime).getMinutes();
+            let endHour = new Date(endTime).getHours();
+            let endMin = new Date(endTime).getMinutes();
+
+
+            if (startMin < 10) {
+                startMin = "0" + startMin;
+            }
+
+            if (startHour === 12) {
+                startClock = startHour + ":" + startMin + "pm";
+            } else if (startHour > 12) {
+                startHour = startHour - 12;
+                startClock = startHour + ":" + startMin + "pm";
+            } else {
+                startClock = startHour + ":" + startMin + "am";
+            }
+
+            if (endMin < 10) {
+                endMin = "0" + endMin;
+            }
+
+            if (endHour > 12) {
+                endHour = endHour - 12;
+                endClock = endHour + ":" + endMin + "pm";
+            } else {
+                endClock = endHour + ":" + endMin + "am";
+            }
+
+            if (startHour === 0) {
+                return "All Day";
+            } else {
+                return startClock + " - " + endClock;
+            }
+
+
+        }
+
+        function sortByTime(a, b) {
+            if (a.timeObject < b.timeObject) {
+                return -1;
+            }
+            if (a.timeObject > b.timeObject) {
+                return 1;
+            }
+            return 0;
+        }
+
+        function formatMultipleOccurances(Occurrences, location) {
+
+            if (Occurrences.length > 1) {
+                return "Multiple locations or dates";
+            } else if (location === "") {
+                return "No location available";
+            } else {
+                return location;
+            }
+        }
+
+
         let loadEvents = function() {
-            return getAsync('/events/25Live/10$11$12$13$14$15$16$17$18$19$20/t', context);
+            return getAsync('/events/25Live/All', context);
         };
 
+        let formatEvents = function(result) {
 
-        let loadModel = function(result) {
-            console.log(result);
-            let eventList = result;
+            eventList = result;
             let startClock;
             let endClock;
-            let pastEvents = [];
+
             let date = new Date();
-
-
 
             for (let i = 0; i < eventList.length; ++i) {
 
-
-                if (eventList[i].Description !== "No description available") {
-                    eventList[i].Description = eventList[i].Description.substring(3, eventList[i].Description.length - 4);
-                }
-                //get the date information
+                eventList[i].Start_Time = eventList[i].Occurrences[0][0];
+                eventList[i].End_Time = eventList[i].Occurrences[0][1];
+                eventList[i].Location = eventList[i].Occurrences[0][2];
                 eventList[i].startTimeObject = eventList[i].Start_Time;
                 eventList[i].timeObject = eventList[i].End_Time;
 
@@ -39,57 +115,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 let startYear = startDate.getFullYear();
                 let startMonth = startDate.getMonth();
                 let startDay = startDate.getDate();
-                let startHour = new Date(eventList[i].Start_Time).getHours();
-                let startMin = new Date(eventList[i].Start_Time).getMinutes();
 
-                let endHour = new Date(eventList[i].End_Time).getHours();
-                let endMin = new Date(eventList[i].End_Time).getMinutes();
 
-                //insert the formated date back into the JSON array
+                eventList[i].Description = formatDiscription(eventList[i].Description);
+                eventList[i].End_Time = setClock(eventList[i].Start_Time, eventList[i].End_Time, startClock, endClock);
+                eventList[i].Location = formatMultipleOccurances(eventList[i].Occurrences, eventList[i].Location);
+
+
+                if (eventList[i].Event_Title === "") {
+                    eventList[i].Event_Title = eventList[i].Event_Name;
+                }
                 eventList[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
-                //console.log(eventMonth);
 
-
-                //create a 12 hour clock
-                if (startMin < 10) {
-                    startMin = "0" + startMin;
-                }
-
-                if (startHour === 12) {
-                    startClock = startHour + ":" + startMin + "pm";
-                } else if (startHour > 12) {
-                    startHour = startHour - 12;
-                    startClock = startHour + ":" + startMin + "pm";
-                } else {
-                    startClock = startHour + ":" + startMin + "am";
-                }
-
-
-
-                if (endMin < 10) {
-                    endMin = "0" + endMin;
-                }
-
-                if (endHour > 12) {
-                    endHour = endHour - 12;
-                    endClock = endHour + ":" + endMin + "pm";
-                } else {
-                    endClock = endHour + ":" + endMin + "am";
-                }
-
-
-                if (eventList[i].Location === null && eventList[i].Locations !== null) {
-                    eventList[i].Location = "Multiple locations or dates";
-                }
-                if (startHour === 0) {
-                    eventList[i].End_Time = "All Day";
-                } else {
-                    eventList[i].End_Time = startClock + " - " + endClock;
-                }
-                if (eventList[i].Location === null && eventList[i].Locations === null) {
-                    eventList[i].Location = "No location available";
-
-                }
 
                 if (startDate > date) {
                     pastEvents.push(eventList[i]);
@@ -97,37 +134,34 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
             }
 
-            eventList.sort(function(a, b) {
+            eventList.sort(sortByTime);
+            pastEvents.sort(sortByTime);
 
-                if (a.timeObject < b.timeObject) {
-                    return -1;
-                }
-                if (a.timeObject > b.timeObject) {
-                    return 1;
-                }
-                return 0;
-            });
 
-            pastEvents.sort(function(a, b) {
-                if (a.timeObject < b.timeObject) {
-                    return -1;
-                }
-                if (a.timeObject > b.timeObject) {
-                    return 1;
-                }
-                return 0;
-            });
 
+            return {
+                eventList,
+                pastEvents,
+
+            };
+
+
+        };
+
+
+        let loadModel = function() {
             return {
                 //return all the deseired information
                 "allEvents": eventList,
-                "eventShown": pastEvents,
+                "eventShown": eventList,
                 "pastEvents": pastEvents,
                 "searchValue": searchValue
             };
+
         };
         return loadEvents()
-            .then(loadModel)
+            .then(formatEvents)
+            .then(loadModel);
     }
 
 });
