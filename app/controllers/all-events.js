@@ -6,6 +6,10 @@ import deleteAsync from "gordon360/utils/delete-async";
  *  Sends requests to the model to retrieve and/or modify data.
  */
 export default Ember.Controller.extend({
+
+    buttonText: 'CL&W',
+    buttonText2: 'Past Events',
+
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
@@ -18,11 +22,20 @@ export default Ember.Controller.extend({
         sortByName(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
-            if ($(item.target).hasClass("toggleclick")) {
+            if ($(item.target).hasClass("nameCheck")) {
+                events.sort(function(a, b) {
+                    if (a.Event_Name < b.Event_Name) {
+                        return 1;
+                    }
+                    if (a.Event_Name > b.Event_Name) {
+                        return -1;
+                    }
+                    return 0;
+                });
                 for (let i = 0; i < events.length; i++) {
-                    sorted.push(events[events.length - 1 - i]);
-                    $(item.target).removeClass("toggleclick");
+                    sorted.push(events[i]);
                 }
+                $(item.target).removeClass("nameCheck");
             } else {
                 events.sort(function(a, b) {
                     if (a.Event_Name < b.Event_Name) {
@@ -36,7 +49,7 @@ export default Ember.Controller.extend({
                 for (let i = 0; i < events.length; i++) {
                     sorted.push(events[i]);
                 }
-                $(item.target).addClass("toggleclick");
+                $(item.target).addClass("nameCheck");
             }
             this.set("model.eventShown", sorted);
         },
@@ -44,12 +57,20 @@ export default Ember.Controller.extend({
         sortByLocation(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
-            if ($(item.target).hasClass("toggleclick")) {
+            if ($(item.target).hasClass("locationCheck")) {
+                events.sort(function(a, b) {
+                    if (a.Location < b.Location) {
+                        return 1;
+                    }
+                    if (a.Location > b.Location) {
+                        return -1;
+                    }
+                    return 0;
+                });
                 for (let i = 0; i < events.length; i++) {
-                    console.log("hi");
-                    sorted.push(events[events.length - 1 - i]);
-                    $(item.target).removeClass("toggleclick");
+                    sorted.push(events[i]);
                 }
+                $(item.target).removeClass("locationCheck");
             } else {
                 events.sort(function(a, b) {
                     if (a.Location < b.Location) {
@@ -63,7 +84,7 @@ export default Ember.Controller.extend({
                 for (let i = 0; i < events.length; i++) {
                     sorted.push(events[i]);
                 }
-                $(item.target).addClass("toggleclick");
+                $(item.target).addClass("locationCheck");
             }
             this.set("model.eventShown", sorted);
         },
@@ -71,12 +92,20 @@ export default Ember.Controller.extend({
         SortByDate(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
-            if ($(item.target).hasClass("toggleclick")) {
+            if ($(item.target).hasClass("dateCheck")) {
+                events.sort(function(a, b) {
+                    if (a.timeObject < b.timeObject) {
+                        return 1;
+                    }
+                    if (a.timeObject > b.timeObject) {
+                        return -1;
+                    }
+                    return 0;
+                });
                 for (let i = 0; i < events.length; i++) {
-                    console.log("hi");
-                    sorted.push(events[events.length - 1 - i]);
-                    $(item.target).removeClass("toggleclick");
+                    sorted.push(events[i]);
                 }
+                $(item.target).removeClass("dateCheck");
             } else {
                 events.sort(function(a, b) {
                     if (a.timeObject < b.timeObject) {
@@ -90,9 +119,38 @@ export default Ember.Controller.extend({
                 for (let i = 0; i < events.length; i++) {
                     sorted.push(events[i]);
                 }
-                $(item.target).addClass("toggleclick");
+                $(item.target).addClass("dateCheck");
             }
             this.set("model.eventShown", sorted);
+        },
+
+        checkForChaple() {
+            let newList = [];
+            let oldList = this.get("model.eventShown");
+            if (this.get('buttonText') === 'CL&W') {
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Category_Id === '85') {
+                        newList.push(oldList[i]);
+                    }
+                }
+                this.set("model.eventShown", newList);
+                this.set('buttonText', 'All Events');
+            } else {
+                this.set("model.eventShown", this.get("model.pastEvents"));
+                this.set('buttonText', 'CL&W');
+            }
+
+        },
+
+        showPastEvents() {
+
+            if (this.get('buttonText2') === 'Past Events') {
+                this.set("model.eventShown", this.get("model.allEvents"));
+                this.set('buttonText2', 'Upoming Events');
+            } else {
+                this.set("model.eventShown", this.get("model.pastEvents"));
+                this.set('buttonText2', 'Past Events');
+            }
         },
 
         toggleRequestSent(item) {
@@ -103,7 +161,6 @@ export default Ember.Controller.extend({
 
             if (lastForm && $(item.target).hasClass("onclickOrange")) {
                 let elements = $(lastForm).nextAll();
-                $(lastForm).removeClass("onclickOrange");
                 for (var i = 0; i < 4; i++) {
                     if ($(window).innerWidth() < 768) {
                         $(elements[i]).slideUp();

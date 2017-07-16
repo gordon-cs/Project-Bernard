@@ -9,22 +9,17 @@
   </div>
   <div class=" row whitebox">
 
-    <div class="input-group event-search col-xs-10 col-sm-4 col-md-3">
+    <div class="input-group event-search col-xs-11 col-sm-4 ">
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
     </div>
 
-    <div class="dropdown show col-xs-5 col-sm-2 col-md-offset-4 col-md-2">
-      <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="dropdown show hidden-xs col-sm-2">
+      <button type="button" class="btn filter-button btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Filter Results
   </button>
 
       <div class="dropdown-menu">
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isCLAW onchange="toggleCheckBox();" }}
-       CL&W Credit
-      </label>
-        </div>
+
         <div class=" dropdown-item event-checks form-check">
           <label class="form-check-label event-checks">
         {{input type="checkbox" checked=isAdmissions }}
@@ -56,27 +51,78 @@
         Athletics
       </label>
         </div>
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=pastEvents  }}
-        Past Events
-      </label>
-        </div>
 
-               <div class=" dropdown-item event-checks form-check">
+
+        <div class=" dropdown-item event-checks form-check">
           <label class="form-check-label event-checks">
         {{input type="checkbox" checked=isCalendar }}
        Claendar Events
       </label>
         </div>
 
+        <div class=" dropdown-item event-checks form-check"><button type="button" class="btn btn-danger" onclick={{action "toggleCheckBox"}}>Submit</button></div>
+
       </div>
     </div>
-
-
-    <button type="submit" class="btn refresh-button col-sm-2 col-md-2 col-xs-5" onclick={{action "toggleCheckBox"}}>refresh</button>
+    <div class=" hidden-xs col-sm-1  col-md-offset-2  col-md-1"><button class="btn refresh-button" onclick={{action "checkForChaple"}}>{{buttonText}}</button></div>
+    <div class=" hidden-xs col-sm-2 col-md-1"><button class="btn refresh-button" onclick={{action "showPastEvents"}}>{{buttonText2}}</button></div>
   </div>
+  <div class="moble-eventbox navybox">
+    <div id="category-bar" class="row">
+      <div class="dropdown show col-xs-3 visible-xs">
+        <button type="button" class="btn filter-button refresh-button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false"><h4>
+    Filters</h4>
+  </button>
 
+        <div class="dropdown-menu">
+            <div class=" dropdown-item event-checks form-check">
+              <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isAdmissions }}
+       Admissions
+      </label>
+            </div>
+
+            <div class=" dropdown-item event-checks form-check">
+              <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isChapel }}
+      Chapel Office
+      </label>
+            </div>
+            <div class=" dropdown-item event-checks form-check">
+              <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isCEC }}
+       CEC Events
+      </label>
+            </div>
+            <div class=" dropdown-item event-checks form-check">
+              <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isArt }}
+       The Arts
+      </label>
+            </div>
+            <div class=" dropdown-item event-checks form-check">
+              <label class="form-check-label event-checks">
+         {{input type="checkbox" checked=isAthletics }}
+        Athletics
+      </label>
+            </div>
+
+
+            <div class=" dropdown-item event-checks form-check">
+              <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isCalendar }}
+       Claendar Events
+      </label>
+              <div class=" dropdown-item event-checks form-check"><button type="button" class="btn btn-danger" onclick={{action "toggleCheckBox"}}>Submit</button></div>
+            </div>
+        </div>
+      </div>
+
+      <div class="visible-xs col-xs-3"><button class="btn refresh-button " onclick={{action "checkForChaple"}}><h4>{{buttonText}}</h4></button></div>
+      <div class=" visible-xs col-xs-5"><button class="btn refresh-button" onclick={{action "showPastEvents"}}><h4>{{buttonText2}}</h4></button></div>
+    </div>
+  </div>
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event</h4>

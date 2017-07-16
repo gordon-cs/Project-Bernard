@@ -1,21 +1,39 @@
 <div class="container events event-box">
+    <div class=" row whitebox">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <h4 class="event-p heading-text event-title">
+        Christian Life and Worship Events
+      </h4>
+    </div>
+  </div>
   <div class="whitebox">
     <h4 class="event-p">
       You currently have <b>{{model.numEvents}}</b> Christian Life and Worship Credits
     </h4>
     <div class= "row">
-<div class="input-group event-search col-xs-5 col-sm-4 col-md-3">
+<div class="input-group event-search col-xs-11 col-sm-4 col-md-3">
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
     </div>
 
-      <div class="progress event-progress col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1  col-md-offset-2 col-md-4" style="height: 32px;">
-        <div class= "progress-bar " role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;"></div>
+      <div class="progress event-progress hidden-xs col-sm-offset-1 col-sm-3 col-md-4" style="height: 32px;">
+        <div class= "progress-bar " role="progressbar event-progress" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;"></div>
       </div>
 
-      <button type="button" class="btn btn-primary col-sm-1 col-md-1 col-xs-4 col-xs-offset-4 col-sm-offset-1 col-md-offset-1" >All CL&W</button> 
+      <button type="button" class="btn btn-primary  col-sm-2 col-md-2 hidden-xs col-sm-offset-1 "onclick={{action "displayALLEvents"}} >{{buttonText}}</button> 
     </div>
-  </div>
-  <div class="event-cyanbox cyanbox">
+    
+      <div class="moble-eventbox navybox">
+    <div id="category-bar" class="row">
+      <div class="progress event-progress visible-xs col-xs-5" style="height: 32px;">
+        <div class= "progress-bar progress-bar-danger " role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;"></div>
+      </div>
+
+      <button type="button" class="btn  visible-xs col-xs-offset-1 col-xs-5 refresh-button"onclick={{action "displayALLEvents"}} >{{buttonText}}</button> 
+    </div>
+    </div>
+      </div>
+
+  <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event</h4>
       <h4 class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}>Location</h4>
@@ -26,10 +44,10 @@
   <div class="entry-rows">
     {{#each model.eventShown as |event|}}
     <div class="row event-row" style= "margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
-      <h4 class="col-md-3 col-sm-3 event-id"  onclick= {{action "toggleRequestSent"}} >{{event.CHEventID}}</h4>
-      <h4 class="display-col col-md-4 col-sm-4 col-xs-hide">A.J. Chapel</h4>
-      <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.CHDate}}</h4>
-      <h4 class="display-col col-md-3 col-sm-3 col-xs-hide">{{event.CHTime}}</h4>
+      <h4 class="col-md-3 col-sm-3 event-id"  onclick= {{action "toggleRequestSent"}} >{{event.Event_Name}}</h4>
+      <h4 class="display-col col-md-4 col-sm-4 col-xs-hide">{{event.Location}}</h4>
+      <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.Start_Time}}</h4>
+      <h4 class="display-col col-md-3 col-sm-3 col-xs-hide">{{event.End_Time}}</h4>
     </div>
     {{/each}}
   </div>
@@ -41,9 +59,13 @@
 
   <!-- Modal Content -->
   <div class="modal-content event-modal-content">
-      <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.CHEventID }} </h3>
-    <div class="modal-body">
-      <h4> A.J Chapel <br> {{ displayEvent.CHTime }} <br> {{ displayEvent.CHDate}} </h4>
+      <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
+   <div class="modal-body">
+      <h4>Department: {{ displayEvent.Organization }}</h4>
+      <h4>Event Discription: {{ displayEvent.Description}}</h4>
+      {{#each displayEvent.Occurrences as |Location|}}
+      <h4>{{Location.[3]}} </h4>
+      {{/each}}
     </div>
     <div class="modal-footer">
       <button class="btn button-lightgray cancel-modal form-button form-cancel-button">Cancel</button>

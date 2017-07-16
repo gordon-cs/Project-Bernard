@@ -96,7 +96,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let formatEvents = function(result) {
-
+            console.log(result)
             eventList = result;
             let startClock;
             let endClock;

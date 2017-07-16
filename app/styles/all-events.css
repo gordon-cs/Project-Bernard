@@ -33,15 +33,6 @@
     margin: 3px;
 }
 
-
-/*.event-checks:hover {
-    background-color: #d83c30 !important;
-    color: white !important;
-}*/
-
-
-/* The Close Button */
-
 .cancel-modal {
     color: #aaa;
     float: right !important;
@@ -89,11 +80,6 @@
     color: #b53228 !important;
 }
 
-.event-cyanbox {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
 .events .filterBtn-row:hover {
     background-color: #b2bb1c !important;
     color: white;
@@ -108,12 +94,9 @@
     background: #DDD;
 }
 
-.event-progress {
+.events .event-progress {
     padding: 0px !important;
-}
-
-.toggleclick {
-    font-style: strong;
+    margin-bottom: 5px!important;
 }
 
 .events .highlight-box {
@@ -181,14 +164,21 @@
     color: white;
 }
 
+.events .moble-eventbox {
+    margin-top: 10px;
+    padding-top: 3px;
+    padding-bottom: 0px;
+}
+
 .events .event-labels:hover {
     color: #b2bb1c !important;
     cursor: pointer;
 }
 
-.refresh-button {
+.events .refresh-button {
     background-color: #00bdec;
     color: white;
+    float: left;
 }
 
 .events .entry-rows {
@@ -202,9 +192,12 @@
     .events .event-row {
         font-size: 15px;
     }
-    .refresh-button {
+    .events .refresh-button {
         background-color: #014983;
         color: white;
+    }
+    .refresh-button:hover {
+        color: #b2bb1c !important;
     }
     .events .onclickOrange {
         background-color: #b2bb1c !important;
@@ -281,7 +274,7 @@
     .events .btn-upComing {
         float: right;
     }
-    .display-col {
+    .events .display-col {
         display: block !important;
     }
     .events .events-info {
@@ -292,6 +285,9 @@
         color: black;
         text-decoration: none;
         cursor: pointer;
+    }
+    .events .moble-eventbox {
+        display: none;
     }
     .events .events-hide {
         display: none !important;
