@@ -9,7 +9,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         this.controllerFor("application").getRequests();
     },
     /*  Below is the model and calls to the api that retrieve data to fill the model */
-    model() {
+    model(param) {
         let college_role = this.get('session.data.authenticated.token_data.college_role');
 
         // Set the god switch -- is this user an admin.
@@ -17,8 +17,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let superGodMode = false;
 
         let context = this;
+        let routeUsername = param.Username;
         let IDNumber = this.get("session.data.authenticated.token_data.id");
-        let userName = this.get("session.data.authenticated.token_data.user_name").toLowerCase(); 
+        let loggedInUsername = this.get("session.data.authenticated.token_data.user_name").toLowerCase(); 
+        let loggedInUser = false;
         let requestsSent = [];
         let memberships = [];
         let activities = [];
@@ -37,6 +39,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
             }
         };
+
+        
 
         let getAdmins = function() {
             if (superGodMode) {
@@ -129,7 +133,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         // Gets user info from server
-        let getuserInfo = function() {
+        let getLoggedInUserInfo = function() {
             return getAsync("/profiles/", context);
         };
 
@@ -201,7 +205,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         // Gets the users profile picture, It is a base64 string
-        let getUserProfilePicture = function() {
+        let getLoggedInUserProfilePicture = function() {
             return getAsync("/profiles/image/", context);
         }
 
@@ -246,8 +250,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 return new Blob([ia], {type:mimeString});
             }
 
+        let isLoggedInUser = function() {
+            if(routeUsername === loggedInUsername){
+                loggedInUser = true;
+            }
+            console.log(loggedInUser);
+        };
+
         // Gets all the activities a user is a member of
-        let getUserMemberships = function() {
+        let getLoggedInUserMemberships = function() {
             return getAsync("/memberships/student/" + IDNumber, context);
         }
 
@@ -257,7 +268,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         // Gets more information about the activites that a user is a member of
-        let getUserActivitiesInfo = function(data) {
+        let getActivitiesInfo = function(data) {
             for(var i = 0; i < data.length; i++) {
                 activities.push(getAsync("/activities/" + data[i].ActivityCode.trim(), context));
             }
@@ -375,32 +386,34 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
 
+        if(isLoggedInUser){
+            return getSentRequests()
+            .then(addSentRequests)
+            .then(verifyAdmin)
+            .then(getAdmins)
+            .then(getLoggedInUserInfo)
+            .then(setUserType)
+            .then(setOnOffCampus)
+            .then(setClass)
+            .then(setMajorObject)
+            .then(setuserInfo)
+            .then(getLoggedInUserProfilePicture)
+            .then(setUserProfilePicture)
+            .then(getLoggedInUserMemberships)
+            .then(setUserMemberships)
+            .then(getActivitiesInfo)
+            .then(prepareInfo)
+            .then(addActivitiesInfo)
+            .then(getActivityAdmins)
+            .then(prepareInfo)
+            .then(addActivityAdmins)
+            .then(loadMemberships)
+            .then(loadLinks)
+            .then(formatPhoneNumbers)
+            .then(loadModel);
+        } else {
 
-        return getLeaderPositions()
-        .then(getadvisorPositions)
-        .then(getSentRequests)
-        .then(addSentRequests)
-        .then(verifyAdmin)
-        .then(getAdmins)
-        .then(getuserInfo)
-        .then(setUserType)
-        .then(setOnOffCampus)
-        .then(setClass)
-        .then(setMajorObject)
-        .then(setuserInfo)
-        .then(getUserProfilePicture)
-        .then(setUserProfilePicture)
-        .then(getUserMemberships)
-        .then(setUserMemberships)
-        .then(getUserActivitiesInfo)
-        .then(prepareInfo)
-        .then(addActivitiesInfo)
-        .then(getActivityAdmins)
-        .then(prepareInfo)
-        .then(addActivityAdmins)
-        .then(loadMemberships)
-        .then(loadLinks)
-        .then(formatPhoneNumbers)
-        .then(loadModel);
+        }
+
     }
 });
