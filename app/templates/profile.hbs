@@ -111,11 +111,30 @@
                             {{#if model.userInfo.IsStudentOrAlumni}}
                                 <div class="row personal-information-entry">
                                     <div class="col-xs-4 col-no-padding personal-information-entry-key">Majors</div>
-                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.Major}}</div>
+                                    {{#each model.userInfo.Majors as |major|}}
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{major}}</div>
+                                    {{/each}}
                                 </div>
                                 <div class="row personal-information-entry">
                                     <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
-                                    <div class="col-xs-8 col-no-padding personal-information-entry-value"><em>{{if model.userInfo.IsMobilePhonePrivate "(Private) " "(Public) "}}</em>{{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
+                                        <div class="row col-no-padding">
+                                            <div class="md-hide col-lg-7 col-no-padding">
+                                                <div class="mobile-phone-privacy-button-mobile-container  dropdown">
+                                                    <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <div class="mobile-phone-privacy-button-mobile">{{if activity.IsMobilePhonePrivate "Private" "Public"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                                    </div>
+                                                    <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
+                                                        <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" activity true}}>Make Private</div>
+                                                        <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" activity false}}>Make Public</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 col-no-padding">
+                                                {{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             {{/if}}
                             {{#if model.userInfo.IsFaculty}}
@@ -369,10 +388,10 @@
     <section class="tables-section round-top-coners">
         {{#if requestsRecieved}}
                 <div class="row background-transparent">
-                    <div class="col-sm-12">
-                        <h2 {{action "toggleRecievedTable"}} class="toggleTableBtn">
-                            <strong><span id="recieved-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Recieved</strong>
-                        </h2>
+                    <div class="col-sm-12 background-transparent">
+                        <div {{action "toggleRecievedTable"}} class="toggleTableBtn block-header">
+                            <span id="recieved-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Recieved
+                        </div>
                     </div>
                 </div>
                 <div id="membership-requests-recieved-table" class="hidden-table">
@@ -398,10 +417,10 @@
         {{/if}}
         {{!--Membership requests Sent table--}}
             <div class="row background-transparent">
-                <div class="col-sm-12">
-                    <h2 {{action "toggleSentTable"}} class="toggleTableBtn">
-                        <strong><span id="sent-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Sent</strong>
-                    </h2>
+                <div class="col-sm-12 background-transparent">
+                    <div {{action "toggleSentTable"}} class="toggleTableBtn block-header">
+                        <span id="sent-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Sent
+                    </div>
                 </div>
             </div>
             <div id="membership-requests-sent-table" class="hidden-table">
@@ -432,10 +451,10 @@
     {{!--Admin table--}}
         {{#if model.superGodMode}}
                 <div class="row background-transparent">
-                    <div class="col-sm-12">
-                        <h2 {{action "toggleAdminTable"}} class="toggleTableBtn">
-                            <strong><span id="admin-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Admins</strong>
-                        </h2>
+                    <div class="col-sm-12 ">
+                        <div {{action "toggleAdminTable"}} class="toggleTableBtn block-header">
+                            <span id="admin-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Admins
+                        </div>
                     </div>
                 </div>
                 <div id="admin-table"  class="hidden-table">

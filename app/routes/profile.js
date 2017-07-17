@@ -166,6 +166,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data;
         }
 
+        let setMajorObject = function(data) {
+            data.Majors = [];
+            data.Majors.push(data.Major)
+            if(data.Major2){
+                data.Majors.push(data.Major2);
+            }
+            return data;
+        }
+
         // Set whether student is on or off campus 
         // TODO will need to be changed if live data is in different format
         let setOnOffCampus = function(data){
@@ -377,6 +386,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(setUserType)
         .then(setOnOffCampus)
         .then(setClass)
+        .then(setMajorObject)
         .then(setuserInfo)
         .then(getUserProfilePicture)
         .then(setUserProfilePicture)

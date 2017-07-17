@@ -112,6 +112,11 @@ Main profile block
     margin: auto 0;
 }
 
+.profile .cell-phone-value {
+    /* float: right; */
+    text-align: right;
+}
+
 
 /**********************************
 Profile Action buttons (for mobile)
@@ -180,12 +185,33 @@ Personal info block
 
 .profile .personal-information-entry-value {
     text-align: right;
+    float: right;
 }
 
 .profile .personal-information-entry-value.no-overflow {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.profile .mobile-phone-privacy-button-mobile span {
+    color: #00aeef;
+    float: right;
+    padding-right: 5px;
+    padding-top: 1px;
+}
+.profile .mobile-phone-privacy-button-mobile {
+    text-align: left;
+    color: #00aeef ;
+    font-size: 0.8em;
+    background: transparent;
+    padding-left: 5px;
+}
+
+.profile .mobile-phone-privacy-button-mobile-container {
+    width: 100px;
+    margin-left: auto;
+    margin-right: 0;
 }
 
 
@@ -540,10 +566,6 @@ Activities
 /*******************
 Request Tables
 *******************/
-
-.profile .tables-section{
-    font-size: 1.3em;
-}
 
 .profile .header-rows {
     text-transform: uppercase;
