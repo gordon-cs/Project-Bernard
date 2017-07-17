@@ -27,9 +27,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let admins = [];
         let links = [];
         let userInfo;
+        let loggedInUser = false;
         
         let isLoggedInUser = function() {
-            let loggedInUser = false;
             if(routeUsername === loggedInUsername){
                 loggedInUser = true;
             } 
@@ -401,7 +401,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "admins": admins,
                 "userInfo": userInfo,
                 "memberships": memberships,
-                "links" : links
+                "links" : links,
+                "loggedInUser": loggedInUser
             };
         };
 

@@ -5,9 +5,11 @@
         <div class="col-sm-4 col-md-3 col-lg-2">
             <div class="profile-picture-container" >
             <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture">
-            <div class="overlay sm-hide"{{action "showEditProfilePictureModal"}}>
-                <div class="text">Click here to change profile picture</div>
-            </div>
+            {{#if model.loggedInUser}}
+                <div class="overlay sm-hide"{{action "showEditProfilePictureModal"}}>
+                    <div class="text">Click here to change profile picture</div>
+                </div>
+            {{/if}}
             </div>
         </div>
         {{! User main info }}
@@ -60,38 +62,42 @@
                             </div>
                         </div>
                     {{/if}}
-                    <div class="md-hide col-lg-4 col-no-padding col-centered">
-                        <div class="social-media-buttons"{{action "showEditLinksModal"}}>
-                            <a>Edit your Social Media links</a>
+                    {{#if model.loggedInUser}}
+                        <div class="md-hide col-lg-4 col-no-padding col-centered">
+                            <div class="social-media-buttons"{{action "showEditLinksModal"}}>
+                                <a>Edit your Social Media links</a>
+                            </div>
                         </div>
-                    </div>
+                    {{/if}}
             </div>
-            <div class="row profile-action-block md-show"> 
-                <div class="col-xs-4 profile-action-button-container">
-                    <div class="profile-action-button"{{action "showEditLinksModal"}}>
-                        <div class="action-icon">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            {{#if model.loggedInUser}}
+                <div class="row profile-action-block md-show"> 
+                    <div class="col-xs-4 profile-action-button-container">
+                        <div class="profile-action-button"{{action "showEditLinksModal"}}>
+                            <div class="action-icon">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </div>
+                            <div class="action-link">Edit your social media links</div>
                         </div>
-                        <div class="action-link">Edit your social media links</div>
+                    </div>
+                    <div class="col-xs-4 profile-action-button-container">
+                        <div class="profile-action-button"{{action "showEditProfilePictureModal"}}>
+                            <div class="action-icon">
+                                <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+                            </div>
+                            <div class="action-link">Update your profile picture</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 profile-action-button-container">
+                        <div class="profile-action-button"{{action "toggleMobilePhonePrivacy"}}>
+                            <div class="action-icon">
+                                <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                            </div>
+                            <div class="action-link">{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-4 profile-action-button-container">
-                    <div class="profile-action-button"{{action "showEditProfilePictureModal"}}>
-                        <div class="action-icon">
-                             <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
-                        </div>
-                        <div class="action-link">Update your profile picture</div>
-                    </div>
-                </div>
-                <div class="col-xs-4 profile-action-button-container">
-                    <div class="profile-action-button"{{action "toggleMobilePhonePrivacy"}}>
-                        <div class="action-icon">
-                            <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-                        </div>
-                        <div class="action-link">{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</div>
-                    </div>
-                </div>
-            </div>
+            {{/if}}
         </div>
     </section>
 
