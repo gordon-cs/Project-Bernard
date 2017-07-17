@@ -215,11 +215,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             userInfo = data;
         }
 
-        // Gets the users profile picture, It is a base64 string
+        // Gets the logged in user's profile picture, It is a base64 string
         let getLoggedInUserProfilePicture = function() {
             return getAsync("/profiles/image/", context);
         }
-        
+
+        // Gets the public profile picture of the person being looked up
         let getPublicUserProfilePicture = function() {
             return getAsync("/profiles/image/" + routeUsername + "/", context);
         }
@@ -274,7 +275,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Gets all the activities a user is a member of
         let getLoggedInUserMemberships = function() {
-            return getAsync("/memberships/student/" + IDNumber, context);
+            return getAsync("/memberships/student/username/" + loggedInUsername + "/", context);
+        }
+
+        let getPublicUserMemberships = function() {
+            return getAsync("/memberships/student/username/" + routeUsername + "/", context);
         }
 
         let setUserMemberships = function(data) {
@@ -376,10 +381,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let formatPhoneNumbers = function() {
             var mobilePhone = userInfo.MobilePhone;
             var homePhone = userInfo.HomePhone;
-            if(mobilePhone.length === 10){
+            if(mobilePhone && mobilePhone.length === 10){
                 userInfo.formattedMobilePhone = "(" + mobilePhone.slice(0, 3) + ") " + mobilePhone.slice(3, 6) + "-" + mobilePhone.slice(6);
             }
-            if(homePhone.length ===10) {
+            if(homePhone && homePhone.length ===10) {
                 userInfo.formattedHomePhone = "(" + homePhone.slice(0,3) + ") " + homePhone.slice(3, 6) + "-" + homePhone.slice(6);
             }
         }
@@ -435,11 +440,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(setClass)
             .then(setMajorObject)
             .then(setuserInfo)
-            .then(getLoggedInUserProfilePicture)
-            .then(loadLinks)
-            // .then(formatPhoneNumbers)
             .then(getPublicUserProfilePicture)
             .then(setUserProfilePicture)
+            .then(getPublicUserMemberships)
+            .then(setUserMemberships)
+            .then(getActivitiesInfo)
+            .then(prepareInfo)
+            .then(addActivitiesInfo)
+            .then(getActivityAdmins)
+            .then(prepareInfo)
+            .then(addActivityAdmins)
+            .then(loadMemberships)
+            .then(loadLinks)
+            .then(formatPhoneNumbers)
             .then(loadModel);
         }
 
