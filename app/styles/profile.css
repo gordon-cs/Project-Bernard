@@ -104,6 +104,7 @@ Main profile block
     -moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .profile .social-media-buttons a {

@@ -482,7 +482,8 @@ export default Ember.Controller.extend({
             // hides the modal and changes the picture on page to reflect the new change
             let transitionModal = function(content){
                 $("#editProfilePictureModal").removeClass("showModal");
-                $('body').css('overflow','scroll');
+                $('body').css('position','static');
+                $('body').css('overflow-y','auto');
                 var blob = base64ToBlob(content , {type: 'image/jpeg'});
                 URL = window.URL || window.webkitURL;
                 var blobUrl = URL.createObjectURL(blob);
