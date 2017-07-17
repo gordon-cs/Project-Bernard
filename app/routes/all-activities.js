@@ -90,6 +90,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
                 activitiesShown = newList;
             }
+            else {
+                activitiesShown = activities;
+            }
         }
 
         let loadModel = function () {
@@ -101,7 +104,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "sessions": reversedSessions,
                 "selectedSession": selectedSession,
                 "activityTypes": types,
-                "selectedType": selectedType,
+                "selectedType": selectedType ? selectedType : "All",
                 "searchValue" : ""
             };
         };
