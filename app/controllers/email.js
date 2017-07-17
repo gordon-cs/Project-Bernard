@@ -7,6 +7,8 @@ import ENV from "gordon360/config/environment"
  *  Sends requests to the model to retrieve and/or modify data.
  */
 export default Ember.Controller.extend({
+    // query params. emailType - "personal"/"group".
+    queryParams: ['emailType','emailAddress','activityCode','sessionCode'],
     session: Ember.inject.service('session'),
     mediumEditorOptions: {
         "toolbar": {
@@ -47,20 +49,38 @@ export default Ember.Controller.extend({
             }
 
             let sendEmail = function() {
-                let toAddress = context.get("model");
                 let fromAddress = username + "@gordon.edu";
-                let data = {
-                    "ToAddress": toAddress,
-                    "FromAddress": fromAddress,
-                    "Subject": emailSubject,
-                    "Content": emailContent,
-                    "Password": password
+                if (context.get("emailType") == "personal" || context.get("emailType") == null) {
+                    let toAddress = context.get("emailAddress");
+                    let data = {
+                        "ToAddress": toAddress,
+                        "FromAddress": fromAddress,
+                        "Subject": emailSubject,
+                        "Content": emailContent,
+                        "Password": password
+                    }
+                    putAsync("/emails", data, context)
+                    .then(function(){
+                        $("#email-div").hide();
+                        $("#success-msg").show();
+                    })
                 }
-                putAsync("/emails", data, context)
-                .then(function(){
-                    $("#email-div").hide();
-                    $("#success-msg").show();
-                })
+                else if (context.get("emailType") == "group") {
+                    let activityCode = context.get("activityCode");
+                    let sessionCode = context.get("sessionCode");
+                    let data = {
+                        "FromAddress": fromAddress,
+                        "Subject": emailSubject,
+                        "Content": emailContent,
+                        "Password": password
+                    }
+                    putAsync("/emails/activity/" + activityCode + "/session/" + sessionCode , data, context)
+                    .then(function(){
+                        $("#email-div").hide();
+                        $("#success-msg").show();
+                    })
+                }
+
             }
 
             let setErrorMsg = function() {

@@ -7,7 +7,19 @@ import getAsync from "gordon360/utils/get-async";
  *  Builds the data model that is used in the corresponding template (hbs) and controller (js) files.
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-    model(param) {
-        return param.EmailAdress;
+    model(params, transition) {
+        let context = this;
+        let emailType = transition.queryParams.emailType;
+        if (emailType == "personal" || emailType == null) {
+            return transition.queryParams.emailAddress;
+        }
+        else {
+            let activityPromise = getAsync("/activities/" + transition.queryParams.activityCode.trim(), context);
+            let ActivityDescription = activityPromise.then(function(v) {
+                return v.ActivityDescription;
+            })
+            return ActivityDescription;
+        }
+
     }
 });

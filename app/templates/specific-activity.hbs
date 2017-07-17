@@ -30,7 +30,7 @@
                           {{#each model.contactEmails as |contact|}}
                           <p class="activity-info-item-data">
                               {{contact.FirstName}} {{contact.LastName}}
-                              {{#link-to 'email' contact.Email}}
+                              {{#link-to 'email' (query-params emailType='personal' emailAddress=contact.Email)}}
                                 <span class="glyphicon glyphicon-envelope cyan"></span>
                               {{/link-to}}
                           </p>
@@ -65,7 +65,7 @@
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
-            {{#link-to 'email' model.emails}}
+            {{#link-to 'email' (query-params emailType='group' activityCode=model.activity.ActivityCode sessionCode=model.session.SessionCode)}}
                 <button class="btn button-navy">Send Email to Group</button>
             {{/link-to}}
         {{else if model.leading}}
@@ -76,9 +76,9 @@
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
-            <a href="mailto:{{model.emails}}">
+            {{#link-to 'email' (query-params emailType='group' activityCode=model.activity.ActivityCode sessionCode=model.session.SessionCode)}}
                 <button class="btn button-navy">Send Email to Group</button>
-            </a>
+            {{/link-to}}
         {{else if model.notAMember}}
             {{#if followLoad}}
                 <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Wait</button>
