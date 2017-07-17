@@ -20,7 +20,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let routeUsername = param.Username;
         let IDNumber = this.get("session.data.authenticated.token_data.id");
         let loggedInUsername = this.get("session.data.authenticated.token_data.user_name").toLowerCase(); 
-        let loggedInUser = false;
         let requestsSent = [];
         let memberships = [];
         let activities = [];
@@ -28,6 +27,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let admins = [];
         let links = [];
         let userInfo;
+        
+        let isLoggedInUser = function() {
+            let loggedInUser = false;
+            if(routeUsername === loggedInUsername){
+                loggedInUser = true;
+            } 
+            return loggedInUser;
+        };
 
         let verifyAdmin = function() {
             if (godMode) {
@@ -39,8 +46,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
             }
         };
-
-        
 
         let getAdmins = function() {
             if (superGodMode) {
@@ -58,12 +63,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         };
 
-        // Get the account from email
+        // Get the account from email (Not used)
         let getAccount = function(email) {
             return getAsync("/accounts/email/" + email + "/", context);
         };
 
-        // Get leader positions of user
+        // Get leader positions of user (not used)
         let getLeaderPositions = function() {
             let positions = [];
             return getAsync("/memberships/student/" + IDNumber, context)
@@ -79,7 +84,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             });
         };
 
-        // Get advisor positions of user
+        // Get advisor positions of user (not used)
         let getadvisorPositions = function(positions) {
             return getAsync("/memberships/student/" + IDNumber, context)
             .then(function(result) {
@@ -137,6 +142,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/profiles/", context);
         };
 
+        let getPublicUserInfo = function() {
+            return getAsync("/profiles/" + routeUsername + "/", context);
+        };
+
         // Changes class from the number value set in the table to the corresponding string
         let setClass = function(data) {
             if(data.IsStudent){
@@ -172,7 +181,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let setMajorObject = function(data) {
             data.Majors = [];
-            data.Majors.push(data.Major)
+            if(data.Major){
+                data.Majors.push(data.Major)
+            }
             if(data.Major2){
                 data.Majors.push(data.Major2);
             }
@@ -208,14 +219,25 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let getLoggedInUserProfilePicture = function() {
             return getAsync("/profiles/image/", context);
         }
+        
+        let getPublicUserProfilePicture = function() {
+            return getAsync("/profiles/image/" + routeUsername + "/", context);
+        }
 
         // Converts the base64 to a blobl and stores it in a URL to be used by the handlebars file.
         let setUserProfilePicture = function(content ) {
-            var blob = base64ToBlob(content , {type: 'image/jpeg'});
-            URL = window.URL || window.webkitURL;
-            var blobUrl = URL.createObjectURL(blob);
-            console.log(blobUrl);
-            userInfo.imageURL = blobUrl;
+            if(content.def){
+                var blob = base64ToBlob(content.def , {type: 'image/jpeg'});
+                URL = window.URL || window.webkitURL;
+                var blobUrl = URL.createObjectURL(blob);
+                userInfo.defaultImageURL = blobUrl;
+            }
+            if(content.pref) {
+                var blob = base64ToBlob(content.pref , {type: 'image/jpeg'});
+                URL = window.URL || window.webkitURL;
+                var blobUrl = URL.createObjectURL(blob);
+                userInfo.defaultImageURL = blobUrl;
+            }
         }
 
         let base64ToBlob = function(base64) {
@@ -249,13 +271,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
                 return new Blob([ia], {type:mimeString});
             }
-
-        let isLoggedInUser = function() {
-            if(routeUsername === loggedInUsername){
-                loggedInUser = true;
-            }
-            console.log(loggedInUser);
-        };
 
         // Gets all the activities a user is a member of
         let getLoggedInUserMemberships = function() {
@@ -386,7 +401,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
 
-        if(isLoggedInUser){
+        if(isLoggedInUser()){
+            console.log("Private Page");
             return getSentRequests()
             .then(addSentRequests)
             .then(verifyAdmin)
@@ -412,7 +428,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(formatPhoneNumbers)
             .then(loadModel);
         } else {
-
+            console.log("Public Page");
+            return getPublicUserInfo()
+            .then(setUserType)
+            .then(setOnOffCampus)
+            .then(setClass)
+            .then(setMajorObject)
+            .then(setuserInfo)
+            .then(getLoggedInUserProfilePicture)
+            .then(loadLinks)
+            // .then(formatPhoneNumbers)
+            .then(getPublicUserProfilePicture)
+            .then(setUserProfilePicture)
+            .then(loadModel);
         }
 
     }

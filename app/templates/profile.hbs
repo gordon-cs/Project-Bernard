@@ -4,7 +4,7 @@
         {{! Profile picture and overlay }}
         <div class="col-sm-4 col-md-3 col-lg-2">
             <div class="profile-picture-container" >
-            <img src="{{model.userInfo.imageURL}}" alt="Avatar" class="image" id="profilePicture">
+            <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture">
             <div class="overlay sm-hide"{{action "showEditProfilePictureModal"}}>
                 <div class="text">Click here to change profile picture</div>
             </div>
