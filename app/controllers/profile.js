@@ -37,7 +37,9 @@ export default Ember.Controller.extend({
         // Shows and hides the table that shows membership requests sent
         toggleSentTable() {
             $("#membership-requests-sent-table").toggle(0, function() {
-                $("#membership-requests-sent-table").children(".entry-rows").last()[0].scrollIntoView(true);
+                if($("#membership-requests-sent-table").children(".entry-rows").last()[0]){
+                    $("#membership-requests-sent-table").children(".entry-rows").last()[0].scrollIntoView(true);
+                }
             });
             // Another method that will animate the scrolling but I think that it might take too long
             // $("#membership-requests-sent-table").toggle(1, function(){
