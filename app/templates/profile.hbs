@@ -214,6 +214,102 @@
                     </section>
                 {{/if}}
             </div>
+            <div class="tables-section col-lg-12 background-transparent col-no-padding">
+                <section class="row profile-block no-padding background-transparent">
+                    {{!--Requests tables--}}
+                        {{#if requestsRecieved}}
+                                <div class="row table-header">
+                                    <div class="col-sm-12 col-no-padding background-transparent">
+                                        <div {{action "toggleRecievedTable"}} class="toggleTableBtn  background-transparent">
+                                            <span id="recieved-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Recieved
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="membership-requests-recieved-table" class="hidden-table">
+                                    <div class="row header-rows">
+                                        <div class = "col-md-4 col-sm-5">Name</div>
+                                        <div class = "col-md-4 col-sm-5 sm-hide">Activity</div>
+                                        <div class = "col-md-2 sm-hide">Time</div>
+                                        <div class = "col-sm-2 sm-hide">Options</div>
+                                    </div>
+                                    {{#each requestsRecieved as |req|}}
+                                        <div class="row entry-rows">
+                                            <div class="col-md-4 col-sm-5" onclick={{action "toggleRequestSent"}}> {{req.FirstName}} {{req.LastName}}</div>
+                                            <div class ="col-md-4 col-sm-5 sm-hide"> {{req.ActivityDescription}} </div>
+                                            <div class ="col-md-2 sm-hide"> {{req.DiffDays}} </div>
+                                            <div class ="col-sm-2 sm-hide">
+                                                {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
+                                                    <button class="btn button-navy  activity-buttons">See Activity</button>
+                                                {{/link-to}}
+                                            </div>
+                                        </div>
+                                    {{/each}}
+                                </div>
+                        {{/if}}
+                        {{!--Membership requests Sent table--}}
+                            <div class="row table-header">
+                                <div class="col-sm-12 col-no-padding background-transparent">
+                                    <div {{action "toggleSentTable"}} class="toggleTableBtn  background-transparent">
+                                        <span id="sent-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Sent
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="membership-requests-sent-table" class="hidden-table">
+                                {{#if model.requestsSent}}
+                                    <div class="row header-rows">
+                                        <div class = "col-md-5 col-sm-8">Activity</div>
+                                        <div class = "col-md-2 sm-hide">Decision</div>
+                                        <div class = "col-md-2 sm-hide">Time</div>
+                                        <div class = "col-md-3 col-sm-4 sm-hide">Options</div>
+                                    </div>
+                                    {{#each model.requestsSent as |req|}}
+                                        <div class="row entry-rows">
+                                            <div class="col-md-5 col-sm-8" onclick={{action "toggleRequestSent"}}> {{req.ActivityDescription}} </div>
+                                            <div class = "col-md-2 sm-hide"> {{req.RequestApproved}} </div>
+                                            <div class = "col-md-2 sm-hide"> {{req.DiffDays}} </div>
+                                            <div class = "col-md-3 col-sm-4 sm-hide">
+                                                {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
+                                                    <button class="btn button-navy  activity-buttons">See Activity</button>
+                                                {{/link-to}}
+                                                <button {{action "deleteRequest" req.RequestID}} class="btn button-red activity-buttons">Clear</button>
+                                            </div>
+                                        </div>
+                                    {{/each}}
+                                {{else}}
+                                <p class="empty-table-reminder">There are no pending requests</p>
+                                {{/if}}
+                            </div>
+                    {{!--Admin table--}}
+                        {{#if model.superGodMode}}
+                                <div class="row table-header">
+                                    <div class="col-sm-12 col-no-padding background-transparent">
+                                        <div {{action "toggleAdminTable"}} class="toggleTableBtn  background-transparent">
+                                            <span id="admin-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Admins
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="admin-table"  class="hidden-table">
+                                    <div class="row header-rows">
+                                        <div class = "col-sm-5 col-xs-6">Name</div>
+                                        <div class = "col-sm-3 sm-hide">Super Admin</div>
+                                        <div class = "col-sm-4 col-xs-6">Options</div>
+                                    </div>
+                                    {{#each model.admins as |admin|}}
+                                        <div class="row entry-rows">
+                                            <div class="col-sm-5 col-xs-6"> {{admin.Name}}</div>
+                                            <div class = "col-sm-3 sm-hide"> {{if admin.superAdmin 'Yes' 'No'}} </div>
+                                            <div class = "col-sm-4 col-xs-6">
+                                                <button {{action "removeAdmin" admin.ID}} class="btn button-red table-button">Remove</button>
+                                            </div>
+                                        </div>
+                                    {{/each}}
+                                    {{#link-to "add-admin"}}
+                                        <button class="logout-btn btn button-navy">Add admin</button>
+                                    {{/link-to}}
+                                </div>
+                        {{/if}}
+                    </section>
+            </div>
         </div>
 
     {{!--Activities--}}
@@ -384,98 +480,5 @@
 
 
 
-    {{!--Requests tables--}}
-    <section class="tables-section round-top-coners">
-        {{#if requestsRecieved}}
-                <div class="row background-transparent">
-                    <div class="col-sm-12 background-transparent">
-                        <div {{action "toggleRecievedTable"}} class="toggleTableBtn block-header">
-                            <span id="recieved-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Recieved
-                        </div>
-                    </div>
-                </div>
-                <div id="membership-requests-recieved-table" class="hidden-table">
-                    <div class="row header-rows">
-                        <div class = "col-md-4 col-sm-5">Name</div>
-                        <div class = "col-md-4 col-sm-5 sm-hide">Activity</div>
-                        <div class = "col-md-2 sm-hide">Time</div>
-                        <div class = "col-sm-2 sm-hide">Options</div>
-                    </div>
-                    {{#each requestsRecieved as |req|}}
-                        <div class="row entry-rows">
-                            <div class="col-md-4 col-sm-5" onclick={{action "toggleRequestSent"}}> {{req.FirstName}} {{req.LastName}}</div>
-                            <div class ="col-md-4 col-sm-5 sm-hide"> {{req.ActivityDescription}} </div>
-                            <div class ="col-md-2 sm-hide"> {{req.DiffDays}} </div>
-                            <div class ="col-sm-2 sm-hide">
-                                {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                    <button class="btn button-navy  activity-buttons">See Activity</button>
-                                {{/link-to}}
-                            </div>
-                        </div>
-                    {{/each}}
-                </div>
-        {{/if}}
-        {{!--Membership requests Sent table--}}
-            <div class="row background-transparent">
-                <div class="col-sm-12 background-transparent">
-                    <div {{action "toggleSentTable"}} class="toggleTableBtn block-header">
-                        <span id="sent-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Sent
-                    </div>
-                </div>
-            </div>
-            <div id="membership-requests-sent-table" class="hidden-table">
-                {{#if model.requestsSent}}
-                    <div class="row header-rows">
-                        <div class = "col-md-5 col-sm-8">Activity</div>
-                        <div class = "col-md-2 sm-hide">Decision</div>
-                        <div class = "col-md-2 sm-hide">Time</div>
-                        <div class = "col-md-3 col-sm-4 sm-hide">Options</div>
-                    </div>
-                    {{#each model.requestsSent as |req|}}
-                        <div class="row entry-rows">
-                            <div class="col-md-5 col-sm-8" onclick={{action "toggleRequestSent"}}> {{req.ActivityDescription}} </div>
-                            <div class = "col-md-2 sm-hide"> {{req.RequestApproved}} </div>
-                            <div class = "col-md-2 sm-hide"> {{req.DiffDays}} </div>
-                            <div class = "col-md-3 col-sm-4 sm-hide">
-                                {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                    <button class="btn button-navy  activity-buttons">See Activity</button>
-                                {{/link-to}}
-                                <button {{action "deleteRequest" req.RequestID}} class="btn button-red activity-buttons">Clear</button>
-                            </div>
-                        </div>
-                    {{/each}}
-                {{else}}
-                <p class="empty-table-reminder">There are no pending requests</p>
-                {{/if}}
-            </div>
-    {{!--Admin table--}}
-        {{#if model.superGodMode}}
-                <div class="row background-transparent">
-                    <div class="col-sm-12 ">
-                        <div {{action "toggleAdminTable"}} class="toggleTableBtn block-header">
-                            <span id="admin-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Admins
-                        </div>
-                    </div>
-                </div>
-                <div id="admin-table"  class="hidden-table">
-                    <div class="row header-rows">
-                        <div class = "col-sm-5 col-xs-6">Name</div>
-                        <div class = "col-sm-3 sm-hide">Super Admin</div>
-                        <div class = "col-sm-4 col-xs-6">Options</div>
-                    </div>
-                    {{#each model.admins as |admin|}}
-                        <div class="row entry-rows">
-                            <div class="col-sm-5 col-xs-6"> {{admin.Name}}</div>
-                            <div class = "col-sm-3 sm-hide"> {{if admin.superAdmin 'Yes' 'No'}} </div>
-                            <div class = "col-sm-4 col-xs-6">
-                                <button {{action "removeAdmin" admin.ID}} class="btn button-red table-button">Remove</button>
-                            </div>
-                        </div>
-                    {{/each}}
-                    {{#link-to "add-admin"}}
-                        <button class="logout-btn btn button-navy">Add admin</button>
-                    {{/link-to}}
-                </div>
-        {{/if}}
-    </section>
+
 </main>
