@@ -227,17 +227,17 @@
                                 </div>
                                 <div id="membership-requests-recieved-table" class="hidden-table">
                                     <div class="row header-rows">
-                                        <div class = "col-md-4 col-sm-5">Name</div>
-                                        <div class = "col-md-4 col-sm-5 sm-hide">Activity</div>
-                                        <div class = "col-md-2 sm-hide">Time</div>
-                                        <div class = "col-sm-2 sm-hide">Options</div>
+                                        <div class = "col-sm-3 col-xs-12">Name</div>
+                                        <div class = "col-sm-3 col-xs-5 xs-hide">Activity</div>
+                                        <div class = "col-sm-2 xs-hide">Time</div>
+                                        <div class = "col-xs-4 xs-hide">Options</div>
                                     </div>
                                     {{#each requestsRecieved as |req|}}
                                         <div class="row entry-rows">
-                                            <div class="col-md-4 col-sm-5" onclick={{action "toggleRequestSent"}}> {{req.FirstName}} {{req.LastName}}</div>
-                                            <div class ="col-md-4 col-sm-5 sm-hide"> {{req.ActivityDescription}} </div>
-                                            <div class ="col-md-2 sm-hide"> {{req.DiffDays}} </div>
-                                            <div class ="col-sm-2 sm-hide">
+                                            <div class="col-sm-3 col-xs-12" onclick={{action "toggleRequestSent"}}> {{req.FirstName}} {{req.LastName}}</div>
+                                            <div class ="col-sm-3 col-xs-12 xs-hide"> {{req.ActivityDescription}} </div>
+                                            <div class ="col-sm-2 col-xs-12 xs-hide"> {{req.DiffDays}} </div>
+                                            <div class ="col-sm-4 col-xs-12 xs-hide">
                                                 {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
                                                     <button class="btn button-navy  activity-buttons">See Activity</button>
                                                 {{/link-to}}
@@ -257,19 +257,19 @@
                             <div id="membership-requests-sent-table" class="hidden-table">
                                 {{#if model.requestsSent}}
                                     <div class="row header-rows">
-                                        <div class = "col-md-5 col-sm-8">Activity</div>
-                                        <div class = "col-md-2 sm-hide">Decision</div>
-                                        <div class = "col-md-2 sm-hide">Time</div>
-                                        <div class = "col-md-3 col-sm-4 sm-hide">Options</div>
+                                        <div class = "col-sm-3 col-xs-12">Activity</div>
+                                        <div class = "col-sm-3 xs-hide">Decision</div>
+                                        <div class = "col-sm-2 xs-hide">Time</div>
+                                        <div class = "col-sm-4 col-xs-4 xs-hide">Options</div>
                                     </div>
                                     {{#each model.requestsSent as |req|}}
                                         <div class="row entry-rows">
-                                            <div class="col-md-5 col-sm-8" onclick={{action "toggleRequestSent"}}> {{req.ActivityDescription}} </div>
-                                            <div class = "col-md-2 sm-hide"> {{req.RequestApproved}} </div>
-                                            <div class = "col-md-2 sm-hide"> {{req.DiffDays}} </div>
-                                            <div class = "col-md-3 col-sm-4 sm-hide">
+                                            <div class="col-sm-3 col-xs-12" onclick={{action "toggleRequestSent"}}> {{req.ActivityDescription}} </div>
+                                            <div class = "col-sm-3 col-xs-12 xs-hide"> {{req.RequestApproved}} </div>
+                                            <div class = "col-sm-2 col-xs-12 xs-hide"> {{req.DiffDays}} </div>
+                                            <div class = "col-sm-4 col-xs-12 xs-hide">
                                                 {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                                    <button class="btn button-navy  activity-buttons">See Activity</button>
+                                                    <button class="btn button-navy  activity-buttons md-show">See Activity</button>
                                                 {{/link-to}}
                                                 <button {{action "deleteRequest" req.RequestID}} class="btn button-red activity-buttons">Clear</button>
                                             </div>
@@ -291,13 +291,13 @@
                                 <div id="admin-table"  class="hidden-table">
                                     <div class="row header-rows">
                                         <div class = "col-sm-5 col-xs-6">Name</div>
-                                        <div class = "col-sm-3 sm-hide">Super Admin</div>
+                                        <div class = "col-sm-3 xs-hide">Super Admin</div>
                                         <div class = "col-sm-4 col-xs-6">Options</div>
                                     </div>
                                     {{#each model.admins as |admin|}}
                                         <div class="row entry-rows">
                                             <div class="col-sm-5 col-xs-6"> {{admin.Name}}</div>
-                                            <div class = "col-sm-3 sm-hide"> {{if admin.superAdmin 'Yes' 'No'}} </div>
+                                            <div class = "col-sm-3 xs-hide"> {{if admin.superAdmin 'Yes' 'No'}} </div>
                                             <div class = "col-sm-4 col-xs-6">
                                                 <button {{action "removeAdmin" admin.ID}} class="btn button-red table-button">Remove</button>
                                             </div>
