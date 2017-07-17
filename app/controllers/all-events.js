@@ -134,7 +134,7 @@ export default Ember.Controller.extend({
                     }
                 }
                 this.set("model.eventShown", newList);
-                this.set('buttonText', 'All Events');
+                this.set('buttonText', 'All');
             } else {
                 this.set("model.eventShown", this.get("model.pastEvents"));
                 this.set('buttonText', 'CL&W');
@@ -146,7 +146,7 @@ export default Ember.Controller.extend({
 
             if (this.get('buttonText2') === 'Past Events') {
                 this.set("model.eventShown", this.get("model.allEvents"));
-                this.set('buttonText2', 'Upoming Events');
+                this.set('buttonText2', 'Upoming');
             } else {
                 this.set("model.eventShown", this.get("model.pastEvents"));
                 this.set('buttonText2', 'Past Events');
@@ -166,6 +166,7 @@ export default Ember.Controller.extend({
                         $(elements[i]).slideUp();
                     }
                 }
+                $(lastForm).removeClass("onclickOrange");
                 let form = $(item.target);
                 this.set("lastForm", form);
             } else {

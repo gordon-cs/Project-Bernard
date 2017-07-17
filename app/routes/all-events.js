@@ -14,9 +14,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let pastEvents = [];
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-
-
-
         let formatDiscription = function(Discription) {
 
             if (Discription === "" || Discription.substring(0, 4) === "<res") {
@@ -24,7 +21,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             } else {
                 return Discription.replace(/&(#[0-9]+|[a-zA-Z]+);/g, " ").replace(/<\/?[^>]+(>|$)/g, " ");
             }
-
 
         }
 
@@ -153,7 +149,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return {
                 //return all the deseired information
                 "allEvents": eventList,
-                "eventShown": eventList,
+                "eventShown": pastEvents,
                 "pastEvents": pastEvents,
                 "searchValue": searchValue
             };

@@ -143,6 +143,7 @@ export default Ember.Controller.extend({
                     }
                 }
                 let form = $(item.target);
+                $(lastForm).removeClass("onclickOrange");
                 this.set("lastForm", form);
             } else {
                 if (lastForm) {
