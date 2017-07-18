@@ -300,7 +300,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Gets all the activities a user is a member of
         let getLoggedInUserMemberships = function() {
-            return getAsync("/memberships/student/username/" + loggedInUsername + "/", context);
+            return getAsync("/memberships/student/" + IDNumber + "/", context);
         }
 
         let getPublicUserMemberships = function() {
