@@ -197,9 +197,11 @@ export default Ember.Controller.extend({
             };
 
             let transitionModal = function(content){
+                $('#cropper-div').hide();
                 $("#editProfilePictureModal").removeClass("showModal");
-                $('body').css('overflow','scroll');
-                var blob = base64ToBlob(content , {type: 'image/jpeg'});
+                $('body').css('position','static');
+                $('body').css('overflow-y','auto');
+                var blob = base64ToBlob(content.def , {type: 'image/jpeg'});
                 URL = window.URL || window.webkitURL;
                 var blobUrl = URL.createObjectURL(blob);
                 $("#profilePicture").attr("src", blobUrl);
