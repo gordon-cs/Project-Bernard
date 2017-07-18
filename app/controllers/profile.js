@@ -488,7 +488,7 @@ export default Ember.Controller.extend({
                 $("#editProfilePictureModal").removeClass("showModal");
                 $('body').css('position','static');
                 $('body').css('overflow-y','auto');
-                var blob = base64ToBlob(content , {type: 'image/jpeg'});
+                var blob = base64ToBlob(content.pref , {type: 'image/jpeg'});
                 URL = window.URL || window.webkitURL;
                 var blobUrl = URL.createObjectURL(blob);
                 $("#profilePicture").attr("src", blobUrl);
