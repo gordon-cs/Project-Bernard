@@ -14,19 +14,26 @@ export default Ember.Controller.extend({
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
     actions: {
 
+        addArrow(string, item) {
+            let elements = item.siblings();
+            for (var i = 0; i < 3; i++) {
+                $(elements[i]).find("span").remove();
+            }
+            if (item.is('span')) {
+                item.replaceWith(string);
+            } else {
+                item.children('span').remove();
+                item.append(string);
+            }
+        },
+
+
         sortByName(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
 
             if ($(item.target).hasClass("Event_Name")) {
-
-                let elements = $(item.target).siblings();
-                for (var i = 0; i < 3; i++) {
-                    $(elements[i]).find("span").remove();
-                }
-                $(item.target).find("span").remove();
-                $(item.target).append('<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>');
-
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Event_Name < b.Event_Name) {
                         return 1;
@@ -41,14 +48,7 @@ export default Ember.Controller.extend({
                 }
                 $(item.target).removeClass("Event_Name");
             } else {
-
-                let elements = $(item.target).siblings();
-                for (var i = 0; i < 3; i++) {
-                    $(elements[i]).find("span").remove();
-                }
-                $(item.target).find("span").remove();
-                $(item.target).append('<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>');
-
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Event_Name < b.Event_Name) {
                         return -1;
@@ -70,12 +70,7 @@ export default Ember.Controller.extend({
             let events = this.get("model.eventShown");
             let sorted = [];
             if ($(item.target).hasClass("locationCheck")) {
-                let elements = $(item.target).siblings();
-                for (var i = 0; i < 3; i++) {
-                    $(elements[i]).find("span").remove();
-                }
-                $(item.target).find("span").remove();
-                $(item.target).append('<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>');
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Location < b.Location) {
                         return 1;
@@ -90,12 +85,7 @@ export default Ember.Controller.extend({
                 }
                 $(item.target).removeClass("locationCheck");
             } else {
-                let elements = $(item.target).siblings();
-                for (var i = 0; i < 3; i++) {
-                    $(elements[i]).find("span").remove();
-                }
-                $(item.target).find("span").remove();
-                $(item.target).append('<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>');
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Location < b.Location) {
                         return -1;
@@ -117,12 +107,7 @@ export default Ember.Controller.extend({
             let events = this.get("model.eventShown");
             let sorted = [];
             if ($(item.target).hasClass("dateCheck")) {
-                let elements = $(item.target).siblings();
-                for (var i = 0; i < 3; i++) {
-                    $(elements[i]).find("span").remove();
-                }
-                $(item.target).find("span").remove();
-                $(item.target).append('<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>');
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.timeObject < b.timeObject) {
                         return 1;
@@ -137,12 +122,7 @@ export default Ember.Controller.extend({
                 }
                 $(item.target).removeClass("dateCheck");
             } else {
-                let elements = $(item.target).siblings();
-                for (var i = 0; i < 3; i++) {
-                    $(elements[i]).find("span").remove();
-                }
-                $(item.target).find("span").remove();
-                $(item.target).append('<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>');
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.timeObject < b.timeObject) {
                         return -1;
@@ -159,7 +139,6 @@ export default Ember.Controller.extend({
             }
             this.set("model.eventShown", sorted);
         },
-
         displayALLEvents() {
 
             if (this.get('selectList') === 'ALL') {
