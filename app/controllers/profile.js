@@ -182,7 +182,6 @@ export default Ember.Controller.extend({
             let transition = function() {
                 context.set("file", null);
                 context.set("errorMessage", null);
-                $('#cropper-div').hide();
                 return getUserPhoto()
                 .then(transitionModal);
             };

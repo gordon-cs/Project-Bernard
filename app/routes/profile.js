@@ -28,6 +28,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let links = [];
         let userInfo;
         let userLoggedIn = false;
+        let loggedInUserInfo;
+        let showBothImages;
         
         let isLoggedInUser = function() {
             if(routeUsername === loggedInUsername){
@@ -235,9 +237,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data
         }
 
-        // Sets userInfo to be the edited data about the person
         let setuserInfo = function(data) {
             userInfo = data;
+            return data
+        }
+
+        // Sets userInfo to be the edited data about the person
+        let setLoggedInUserInfo = function(data) {
+            loggedInUserInfo = data;
         }
 
         // Gets the logged in user's profile picture, It is a base64 string
@@ -279,24 +286,32 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
        let dataURItoBlob =  function (dataURI) {
-                // convert base64/URLEncoded data component to raw binary data held in a string
-                var byteString;
-                if (dataURI.split(',')[0].indexOf('base64') >= 0)
-                    byteString = atob(dataURI.split(',')[1]);
-                else
-                    byteString = unescape(dataURI.split(',')[1]);
+            // convert base64/URLEncoded data component to raw binary data held in a string
+            var byteString;
+            if (dataURI.split(',')[0].indexOf('base64') >= 0)
+                byteString = atob(dataURI.split(',')[1]);
+            else
+                byteString = unescape(dataURI.split(',')[1]);
 
-                // separate out the mime component
-                var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+            // separate out the mime component
+            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
-                // write the bytes of the string to a typed array
-                var ia = new Uint8Array(byteString.length);
-                for (var i = 0; i < byteString.length; i++) {
-                    ia[i] = byteString.charCodeAt(i);
-                }
-
-                return new Blob([ia], {type:mimeString});
+            // write the bytes of the string to a typed array
+            var ia = new Uint8Array(byteString.length);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
             }
+
+            return new Blob([ia], {type:mimeString});
+        }
+
+        let showImages = function() {
+            if((loggedInUserInfo.IsFaculty || superGodMode) && !userLoggedIn && userInfo.preferredImageURL){
+                showBothImages = true;
+            } else {
+                showBothImages = false;
+            }
+        }
 
         // Gets all the activities a user is a member of
         let getLoggedInUserMemberships = function() {
@@ -427,7 +442,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "userInfo": userInfo,
                 "memberships": memberships,
                 "links" : links,
-                "userLoggedIn": userLoggedIn
+                "userLoggedIn": userLoggedIn,
+                "loggedInUserInfo": loggedInUserInfo,
+                "showBothImages": showBothImages
             };
         };
 
@@ -445,6 +462,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(setClass)
             .then(setMajorObject)
             .then(setuserInfo)
+            .then(setLoggedInUserInfo)
             .then(getLoggedInUserProfilePicture)
             .then(setUserProfilePicture)
             .then(getLoggedInUserMemberships)
@@ -468,8 +486,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(setClass)
             .then(setMajorObject)
             .then(setuserInfo)
+            .then(getLoggedInUserInfo)
+            .then(checkIfUserExists)
+            .then(setUserType)
+            .then(setLoggedInUserInfo)
             .then(getPublicUserProfilePicture)
             .then(setUserProfilePicture)
+            .then(showImages)
             .then(getPublicUserMemberships)
             .then(setUserMemberships)
             .then(getActivitiesInfo)

@@ -3,21 +3,16 @@
     {{!--Profile picture and information--}}
     <section class="row first-profile-block">
         {{! Profile picture and overlay }}
-        <div class="col-sm-4 col-md-3 col-lg-2">
-            <div class="profile-picture-container" >
+        <div class="col-sm-4 col-md-3 {{if model.showBothImages "col-lg-3" "col-lg-2"}}">
+            <div class="profile-picture-container" {{action "tester"}}>
                 {{#if model.userInfo.preferredImageURL}}
-                        <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image" id="profilePicture">  
-                        {{!-- <img src="https://image.shutterstock.com/z/stock-photo-preferred-word-in-a-red-round-grunge-style-stamp-to-illustrate-the-best-favorite-or-approved-choice-280349993.jpg" alt="Avatar" class="image" id="profilePicture">  --}}
+                        <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">  
                     
                 {{else}}
                         <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
-                    {{!-- <img src="http://eddieandsylviarobertson.com/wp-content/uploads/2015/09/Default-Icon-icon.png" alt="Avatar" class="image" id="profilePicture"> --}}
                 {{/if}}
-                {{#if (and model.userInfo.preferredImageURL (not model.userLoggedIn))}}
-                    {{#if (or model.userInfo.IsFaculty model.superGodMode)}}
-                            <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
-                        {{!-- <img src="http://eddieandsylviarobertson.com/wp-content/uploads/2015/09/Default-Icon-icon.png" alt="Avatar" class="image" id="profilePicture"> --}}
-                    {{/if}}
+                {{#if model.showBothImages}}
+                    <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image image-half-width" id="profilePicture"> 
                 {{/if}}
                 {{#if model.userLoggedIn}}
                     <div class="overlay sm-hide"{{action "showEditProfilePictureModal"}}>
@@ -27,7 +22,7 @@
             </div>
         </div>
         {{! User main info }}
-        <div class="col-sm-8 col-md-9 col-lg-10 profile-block-info">
+        <div class="col-sm-8 col-md-9 col-lg-10 {{if model.showBothImages "col-lg-9" "col-lg-10"}} profile-block-info">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}} {{if  model.userInfo.NickName "("}}{{model.userInfo.NickName}}{{if model.userInfo.NickName ")"}}</div>
@@ -40,7 +35,7 @@
                             {{model.userInfo.JobTitle}}
                         {{else if model.userInfo.IsStudent}}
                             {{model.userInfo.Class}}
-                        {{else if model.userInfo.isAlumni}}
+                        {{else if model.userInfo.IsAlumni}}
                             Alumni
                         {{/if}}
                     </div>

@@ -1,3 +1,7 @@
+.profile .main-contianer {
+    margin: 50 auto 0 auto;
+}
+
 .profile .background-transparent {
     background: transparent;
 }
@@ -240,6 +244,13 @@ Profile Picture
   height: auto;
   margin: 0 auto;
 }
+
+.profile .image.image-half-width {
+    width: 46%;
+    margin-left: 10px;
+    float: left;
+}
+
 
 .profile .overlay {
     display: none;
@@ -739,6 +750,7 @@ Request Tables
 
     .profile .profile-picture-container {
         margin: 0;
+        width: 100%;
     }
 
     .profile .activity-entry {
