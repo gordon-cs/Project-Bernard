@@ -27,13 +27,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let admins = [];
         let links = [];
         let userInfo;
-        let loggedInUser = false;
+        let userLoggedIn = false;
         
         let isLoggedInUser = function() {
             if(routeUsername === loggedInUsername){
-                loggedInUser = true;
+                userLoggedIn = true;
             } 
-            return loggedInUser;
+            return userLoggedIn;
         };
 
         let verifyAdmin = function() {
@@ -150,17 +150,22 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             if(data === "Not Found"){ 
                 return Promise.reject({name: "Not found", message: "user was not found"});
             }else {
+                
                 data.found = true;
                 return data;
             }
         };
 
         let catchNotFound = function(error) {
+            console.log("error");
+            console.log(error);
             if (error.name === "Not found"){
+                console.log("not found");
                 userInfo = {
                     "found": false
                 };
             } else {
+                
                 throw error;
             }
         }
@@ -422,7 +427,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "userInfo": userInfo,
                 "memberships": memberships,
                 "links" : links,
-                "loggedInUser": loggedInUser
+                "userLoggedIn": userLoggedIn
             };
         };
 
@@ -434,6 +439,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(verifyAdmin)
             .then(getAdmins)
             .then(getLoggedInUserInfo)
+            .then(checkIfUserExists)
             .then(setUserType)
             .then(setOnOffCampus)
             .then(setClass)

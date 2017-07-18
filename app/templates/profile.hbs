@@ -13,13 +13,13 @@
                         <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
                     {{!-- <img src="http://eddieandsylviarobertson.com/wp-content/uploads/2015/09/Default-Icon-icon.png" alt="Avatar" class="image" id="profilePicture"> --}}
                 {{/if}}
-                {{#if (and model.userInfo.preferredImageURL (not model.loggedInUser))}}
+                {{#if (and model.userInfo.preferredImageURL (not model.userLoggedIn))}}
                     {{#if (or model.userInfo.IsFaculty model.superGodMode)}}
                             <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
                         {{!-- <img src="http://eddieandsylviarobertson.com/wp-content/uploads/2015/09/Default-Icon-icon.png" alt="Avatar" class="image" id="profilePicture"> --}}
                     {{/if}}
                 {{/if}}
-                {{#if model.loggedInUser}}
+                {{#if model.userLoggedIn}}
                     <div class="overlay sm-hide"{{action "showEditProfilePictureModal"}}>
                         <div class="text">Click here to change profile picture</div>
                     </div>
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     {{/if}}
-                    {{#if model.loggedInUser}}
+                    {{#if model.userLoggedIn}}
                         <div class="md-hide col-lg-4 col-no-padding col-centered">
                             <div class="social-media-buttons"{{action "showEditLinksModal"}}>
                                 <a>Edit your Social Media links</a>
@@ -84,7 +84,7 @@
                         </div>
                     {{/if}}
             </div>
-            {{#if model.loggedInUser}}
+            {{#if model.userLoggedIn}}
                 <div class="row profile-action-block md-show"> 
                     <div class="col-xs-4 profile-action-button-container">
                         <div class="profile-action-button"{{action "showEditLinksModal"}}>
@@ -128,8 +128,22 @@
                             </div>
                         {{/if}}
                         <div class="col-sm-12 col-no-padding">
+                            {{#if model.userInfo.IsFaculty}}
+                                {{#if model.userInfo.OnCampusDepartment}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Department</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusDepartment}}</div>
+                                    </div>
+                                {{/if}}
+                                {{#if model.userInfo.HomePhone}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Phone</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.formattedHomePhone model.userInfo.formattedHomePhone model.userInfo.HomePhone}}</div>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
                             {{#if model.userInfo.IsStudentOrAlumni}}
-                                {{#if (gt model.userInfo.Majors 0)}}
+                                {{#if (gt model.userInfo.Majors.length 0)}}
                                     <div class="row personal-information-entry">
                                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Majors</div>
                                         {{#each model.userInfo.Majors as |major|}}
@@ -137,13 +151,13 @@
                                         {{/each}}
                                     </div>
                                 {{/if}}
-                                {{#if (and model.userInfo.MobilePhone (or model.loggedInUser (not model.userInfo.IsMobilePhonePrivate)))}}
+                                {{#if (and model.userInfo.MobilePhone (or model.userLoggedIn (not model.userInfo.IsMobilePhonePrivate)))}}
                                     <div class="row personal-information-entry">
                                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
                                         <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
                                             <div class="row col-no-padding">
                                                 <div class="md-hide col-lg-7 col-no-padding">
-                                                    {{#if model.loggedInUser}}
+                                                    {{#if model.userLoggedIn}}
                                                         <div class="mobile-phone-privacy-button-mobile-container  dropdown">
                                                             <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 <div class="mobile-phone-privacy-button-mobile">{{if activity.IsMobilePhonePrivate "Private" "Public"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
@@ -162,26 +176,6 @@
                                         </div>
                                     </div>
                                 {{/if}}
-                            {{/if}}
-                            {{#if model.userInfo.IsFaculty}}
-                                {{#if model.userInfo.OnCampusDepartment}}
-                                    <div class="row personal-information-entry">
-                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Department</div>
-                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusDepartment}}</div>
-                                    </div>
-                                {{/if}}
-                                    {{#if model.userInfo.OnCampusPhone}}
-                                    <div class="row personal-information-entry">
-                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
-                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusPhone}}</div>
-                                    </div>
-                                {{/if}}
-                            {{/if}}
-                            {{#if model.userInfo.HomePhone}}
-                                <div class="row personal-information-entry">
-                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Home Phone</div>
-                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.formattedHomePhone model.userInfo.formattedHomePhone model.userInfo.HomePhone}}</div>
-                                </div>
                             {{/if}}
                             {{#if model.userInfo.Email}}
                                 <div class="row personal-information-entry">
@@ -227,30 +221,36 @@
             <div class="col-lg-12 background-transparent col-no-padding">
                 {{#if model.userInfo.OnOffCampus}}    
                     <section class="row profile-block">
-                                    <div class="col-md-12 block-header">Campus Address</div>
-                                    <div class="col-xs-12 col-no-padding">
-                                        <div class="row personal-information-entry">
-                                            <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.OnCampusRoom}} {{model.userInfo.OnCampusBuilding}}</div>
-                                        </div>
-                                    </div>
-                                {{#if model.userInfo.IsFaculty}}
-                                    <div class="col-md-12 block-header">On Campus Info</div>
-                                    <div class="col-xs-12 col-no-padding">
-                                        <div class="row personal-information-entry">
-                                            <div class="col-xs-4 col-no-padding personal-information-entry-key">Office</div>
-                                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</div>
-                                        </div>
-                                        <div class="row personal-information-entry">
-                                            <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
-                                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusPhone}}</div>
-                                        </div>
-                                    </div>
-                                {{/if}}
+                        <div class="col-md-12 block-header">Campus Address</div>
+                        <div class="col-xs-12 col-no-padding">
+                            <div class="row personal-information-entry">
+                                <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.OnCampusRoom}} {{model.userInfo.OnCampusBuilding}}</div>
+                            </div>
+                        </div>
+                    </section>
+                {{/if}}
+                {{#if model.userInfo.IsFaculty}}
+                    <section class="row profile-block">
+                        <div class="col-md-12 block-header">Office Information</div>
+                        <div class="col-xs-12 col-no-padding">
+                            <div class="row personal-information-entry">
+                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Room</div>
+                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</div>
+                            </div>
+                            <div class="row personal-information-entry">
+                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
+                                <div class="col-xs-8 col-no-padding personal-information-entry-value">(978) 867-{{model.userInfo.OnCampusPhone}}</div>
+                            </div>
+                            <div class="row personal-information-entry">
+                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Hours</div>
+                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.office_hours}}</div>
+                            </div>
+                        </div>
                     </section>
                 {{/if}}
             </div>
 
-            {{#if model.loggedInUser}}
+            {{#if model.userLoggedIn}}
                 <div class="tables-section col-lg-12 background-transparent col-no-padding">
                     <section class="row profile-block no-padding background-transparent">
                         {{!--Requests tables--}}
@@ -377,7 +377,7 @@
                                                 <div class="activity-session col-xs-5 col-no-padding">{{activity.session}}</div>
                                                 {{!--Dropdown that display the options for privacy settings on mobile--}}
                                                 <div class="col-xs-7 col-no-padding">
-                                                    {{#if model.loggedInUser}}
+                                                    {{#if model.userLoggedIn}}
                                                         <div class="activity-privacy-button-mobile-container dropdown">
                                                             <div class="social-media-buttons dropdown-toggle {{if activity.clubInfo.Privacy "disabled"}}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 <div class="activity-privacy-button-mobile">{{if activity.Privacy "Private" "Public"}} <span class="{{unless activity.clubInfo.Privacy "glyphicon glyphicon-menu-down"}}" aria-hidden="true"></span></div>
