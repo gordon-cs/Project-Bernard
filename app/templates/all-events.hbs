@@ -9,11 +9,11 @@
   </div>
   <div class=" row whitebox">
 
-    <div class="input-group event-search col-xs-11 col-sm-4 ">
+    <div class="input-group event-search col-xs-7 col-sm-4 ">
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
     </div>
 
-    <div class="dropdown show hidden-xs col-sm-2">
+    <div class="dropdown show col-xs-3 col-sm-2" style = "margin-right: 10px;">
       <button type="button" class="btn filter-button btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Filter Results
   </button>
@@ -64,71 +64,48 @@
 
       </div>
     </div>
-    <div class=" hidden-xs col-sm-1  col-md-offset-2  col-md-1"><button class="btn refresh-button" onclick={{action "checkForChaple"}}>{{buttonText}}</button></div>
-    <div class=" hidden-xs col-sm-2 col-md-1"><button class="btn refresh-button" onclick={{action "showPastEvents"}}>{{buttonText2}}</button></div>
-  </div>
-  <div class="moble-eventbox navybox">
-    <div id="category-bar" class="row">
-      <div class="dropdown show col-xs-3 visible-xs">
-        <button type="button" class="btn filter-button refresh-button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false"><h4>
-    Filters</h4>
-  </button>
-
-        <div class="dropdown-menu">
-            <div class=" dropdown-item event-checks form-check">
-              <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isAdmissions }}
-       Admissions
-      </label>
-            </div>
-
-            <div class=" dropdown-item event-checks form-check">
-              <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isChapel }}
-      Chapel Office
-      </label>
-            </div>
-            <div class=" dropdown-item event-checks form-check">
-              <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isCEC }}
-       CEC Events
-      </label>
-            </div>
-            <div class=" dropdown-item event-checks form-check">
-              <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isArt }}
-       The Arts
-      </label>
-            </div>
-            <div class=" dropdown-item event-checks form-check">
-              <label class="form-check-label event-checks">
-         {{input type="checkbox" checked=isAthletics }}
-        Athletics
-      </label>
-            </div>
-
-
-            <div class=" dropdown-item event-checks form-check">
-              <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isCalendar }}
-       Claendar Events
-      </label>
-              <div class=" dropdown-item event-checks form-check"><button type="button" class="btn btn-danger" onclick={{action "toggleCheckBox"}}>Submit</button></div>
-            </div>
-        </div>
+   
+    <div class="material-switch no-padding hidden-xs  col-sm-offset-1 col-sm-2">
+        <input id="switch1" type="checkbox" onclick={{action "checkForChaple"}}/>
+        <label for="switch1" class="label-default"></label>
+         <h4>Only&nbsp;CL&W</h4>
       </div>
 
-      <div class="visible-xs col-xs-3"><button class="btn refresh-button " onclick={{action "checkForChaple"}}><h4>{{buttonText}}</h4></button></div>
-      <div class=" visible-xs col-xs-5"><button class="btn refresh-button" onclick={{action "showPastEvents"}}><h4>{{buttonText2}}</h4></button></div>
+      <div class="material-switch no-padding hidden-xs col-sm-1">
+        <input id="switch2" type="checkbox" onclick={{action "showPastEvents"}}/>
+        <label for="switch2" class="label-default"></label>
+         <h4>Include&nbsp;Past&nbsp;Events</h4>
+      </div>
+
+  </div>
+  <div class="moble-eventbox lightgraybox">
+    <div id="category-bar" class="row">
+
+       <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2">
+        <input id="switch3" type="checkbox" onclick={{action "checkForChaple"}}/>
+        <label for="switch3" class="label-default"></label>
+        <h4>Only&nbsp;CL&W</h4>
+      </div>
+
+
+      <div class="material-switch no-padding visible-xs col-xs-offset-4 col-xs-2">
+        <input id="switch4" type="checkbox" onclick={{action "showPastEvents"}}/>
+        <label for="switch4" class="label-default"></label>
+         <h4>Past&nbsp;Events</h4>
+      </div>
+
+       <div class="material-switch no-padding visible-xs col-xs-2">
+         </div>
+
+
     </div>
   </div>
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
-      <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event</h4>
-      <h4 class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}>Location</h4>
-      <h4 class="event-labels col-sm-2 col-md-2" onclick={{action "SortByDate"}}>Date</h4>
-      <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "SortByDate"}}>Time</h4>
+      <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event </h4>
+      <h4 class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}>Location </h4>
+      <h4 class="event-labels  col-sm-2 col-md-2" onclick={{action "SortByDate"}}>Date <span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span></h4>
+      <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "SortByDate"}}>Time </h4>
     </div>
   </div>
   <div class="entry-rows">

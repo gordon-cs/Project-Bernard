@@ -1,5 +1,5 @@
 <div class="container events event-box">
-    <div class=" row whitebox">
+  <div class=" row whitebox">
     <div class="col-xs-12 col-sm-12 col-md-12">
       <h4 class="event-p heading-text event-title">
         Christian Life and Worship Events
@@ -10,41 +10,54 @@
     <h4 class="event-p">
       You currently have <b>{{model.numEvents}}</b> Christian Life and Worship Credits
     </h4>
-    <div class= "row">
-<div class="input-group event-search col-xs-11 col-sm-4 col-md-3">
-      {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
-    </div>
+    <div class="row">
+      <div class="input-group event-search col-xs-11 col-sm-4 col-md-3">
+        {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
+      </div>
 
       <div class="progress event-progress hidden-xs col-sm-offset-1 col-sm-3 col-md-4" style="height: 32px;">
-        <div class= "progress-bar " role="progressbar " aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;"></div>
+        <div class="progress-bar " role="progressbar " aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;"></div>
+        <span><h5>{{model.numEvents}}/{{model.required}}</h5></span>
       </div>
 
-      <button type="button" class="btn btn-primary  col-sm-2 col-md-2 hidden-xs col-sm-offset-1 "onclick={{action "displayALLEvents"}} >{{buttonText}}</button> 
+            <div class="material-switch no-padding hidden-xs col-sm-offset-1 col-sm-1">
+        <input id="switch2" type="checkbox" onclick={{action "displayALLEvents"}}/>
+        <label for="switch2" class="label-default"></label>
+      </div>
+      <div class="hidden-xs no-padding col-sm-1">
+        <h4>Upcoming</h4>
+      </div>
     </div>
-    
-      <div class="moble-eventbox navybox">
-    <div id="category-bar" class="row">
-      <div class="progress event-progress visible-xs col-xs-5" style="height: 32px;">
-        <div class= "progress-bar " role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%; "></div>
+
+    <div class="moble-eventbox lightgraybox">
+      <div id="category-bar" class="row mobile-row">
+        <div class="progress event-progress visible-xs col-xs-8" style="height: 32px;">
+          <div class="progress-bar " role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%; background-color:  #b2bb1c"></div>
+          <span><h5>{{model.numEvents}}/{{model.required}}</h5></span>
+        </div>
+      <div class="material-switch no-padding visible-xs col-xs-1">
+        <input id="switch" type="checkbox" onclick={{action "displayALLEvents"}}/>
+        <label for="switch" class="label-default"></label>
+        <h5>ALL</h5>
       </div>
 
-      <button type="button" class="btn  visible-xs col-xs-offset-1 col-xs-5 refresh-button"onclick={{action "displayALLEvents"}} >{{buttonText}}</button> 
     </div>
+
     </div>
-      </div>
+  </div>
 
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event</h4>
       <h4 class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}>Location</h4>
-      <h4 class="event-labels col-sm-2 col-md-2" onclick={{action "SortByDate"}}>Date</h4>
+      <h4 class="event-labels col-sm-2 col-md-2" onclick={{action "SortByDate"}}>Date <span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span></h4>
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "SortByDate"}}>Time</h4>
     </div>
   </div>
   <div class="entry-rows">
     {{#each model.eventShown as |event|}}
-    <div class="row event-row" style= "margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
-      <h4 class="col-md-3 col-sm-3 event-id"  onclick= {{action "toggleRequestSent"}} >{{event.Event_Name}}</h4>
+    <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
+      <h4 class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</h4>
       <h4 class="display-col col-md-4 col-sm-4 col-xs-hide">{{event.Location}}</h4>
       <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.Start_Time}}</h4>
       <h4 class="display-col col-md-3 col-sm-3 col-xs-hide">{{event.End_Time}}</h4>
@@ -59,8 +72,8 @@
 
   <!-- Modal Content -->
   <div class="modal-content event-modal-content">
-      <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
-   <div class="modal-body">
+    <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
+    <div class="modal-body">
       <h4>Department: {{ displayEvent.Organization }}</h4>
       <h4>Event Discription: {{ displayEvent.Description}}</h4>
       {{#each displayEvent.Occurrences as |Location|}}

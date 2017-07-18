@@ -16,13 +16,26 @@ export default Ember.Controller.extend({
 
     actions: {
 
-
+        addArrow(string, item) {
+            let elements = item.siblings();
+            for (var i = 0; i < 3; i++) {
+                $(elements[i]).find("span").remove();
+            }
+            if (item.is('span')) {
+                item.replaceWith(string);
+            } else {
+                item.children('span').remove();
+                item.append(string);
+            }
+        },
 
 
         sortByName(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
-            if ($(item.target).hasClass("nameCheck")) {
+
+            if ($(item.target).hasClass("Event_Name")) {
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Event_Name < b.Event_Name) {
                         return 1;
@@ -35,8 +48,9 @@ export default Ember.Controller.extend({
                 for (let i = 0; i < events.length; i++) {
                     sorted.push(events[i]);
                 }
-                $(item.target).removeClass("nameCheck");
+                $(item.target).removeClass("Event_Name");
             } else {
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Event_Name < b.Event_Name) {
                         return -1;
@@ -49,7 +63,7 @@ export default Ember.Controller.extend({
                 for (let i = 0; i < events.length; i++) {
                     sorted.push(events[i]);
                 }
-                $(item.target).addClass("nameCheck");
+                $(item.target).addClass("Event_Name");
             }
             this.set("model.eventShown", sorted);
         },
@@ -58,6 +72,7 @@ export default Ember.Controller.extend({
             let events = this.get("model.eventShown");
             let sorted = [];
             if ($(item.target).hasClass("locationCheck")) {
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Location < b.Location) {
                         return 1;
@@ -72,6 +87,7 @@ export default Ember.Controller.extend({
                 }
                 $(item.target).removeClass("locationCheck");
             } else {
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Location < b.Location) {
                         return -1;
@@ -93,6 +109,7 @@ export default Ember.Controller.extend({
             let events = this.get("model.eventShown");
             let sorted = [];
             if ($(item.target).hasClass("dateCheck")) {
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.timeObject < b.timeObject) {
                         return 1;
@@ -107,6 +124,7 @@ export default Ember.Controller.extend({
                 }
                 $(item.target).removeClass("dateCheck");
             } else {
+                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.timeObject < b.timeObject) {
                         return -1;
@@ -138,6 +156,7 @@ export default Ember.Controller.extend({
             } else {
                 this.set("model.eventShown", this.get("model.pastEvents"));
                 this.set('buttonText', 'CL&W');
+                this.send("toggleCheckBox");
             }
 
         },
@@ -147,15 +166,15 @@ export default Ember.Controller.extend({
             if (this.get('buttonText2') === 'Past Events') {
                 this.set("model.eventShown", this.get("model.allEvents"));
                 this.set('buttonText2', 'Upoming');
+                this.send("toggleCheckBox");
             } else {
                 this.set("model.eventShown", this.get("model.pastEvents"));
                 this.set('buttonText2', 'Past Events');
+                this.send("toggleCheckBox");
             }
         },
 
         toggleRequestSent(item) {
-
-
 
             let lastForm = this.get("lastForm");
 
@@ -202,15 +221,13 @@ export default Ember.Controller.extend({
                 let oldList = this.get("model.allEvents");
 
                 for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Event_Name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                    if (oldList[i].Event_Title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                        newList.push(oldList[i]);
+                    } else if (oldList[i].Start_Time.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
                     } else if (oldList[i].End_Time.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
-                    } else if (oldList[i].Location !== null) {
-                        if (oldList[i].Location.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
-                            newList.push(oldList[i]);
-                        }
-                    } else if (oldList[i].Start_Time.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                    } else if (oldList[i].Location.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
                     }
 
@@ -218,6 +235,7 @@ export default Ember.Controller.extend({
                 this.set("model.eventShown", newList);
             } else {
                 this.set("model.eventShown", this.get("model.allEvents"));
+                this.send("toggleCheckBox");
             }
         },
 

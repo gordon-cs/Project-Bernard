@@ -15,6 +15,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let eventsPercent;
         let chapelEvents = [];
         let allEvents = [];
+        let required;
 
 
         //subtract a year if it is the spring semester,
@@ -86,17 +87,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         }
 
-
-        console.log(termCode);
-
-
         //retreive the chapel information from the database
         let loadChapel = function() {
             return getAsync("/events/chapel/" + id_name + "/" + "17FA", context)
                 .then(function(result) {
                     chapelEvents = result;
+                    console.log(chapelEvents);
                     numEvents = chapelEvents.length;
-                    eventsPercent = Math.round((numEvents * 100) / chapelEvents[0].Required);
+                    if (chapelEvents.length > 1) {
+                        eventsPercent = Math.round((numEvents * 100) / chapelEvents[0].Required);
+                        required = chapelEvents[0].Required;
+                    } else {
+                        required = 0;
+                        eventsPercent = 0;
+                    }
                     let startClock;
                     let endClock;
                     chapelEvents.sort(sortDate);
@@ -179,6 +183,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 //return all the deseired information
                 "chapelEvents": chapelEvents,
                 "allEvents": allEvents,
+                "required": required,
                 "eventShown": chapelEvents,
                 "eventsPercent": eventsPercent,
                 "searchValue": searchValue,

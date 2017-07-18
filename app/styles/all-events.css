@@ -1,4 +1,59 @@
+.material-switch>input[type="checkbox"] {
+    display: none;
+}
+
+.material-switch>label {
+    margin-top: 15px;
+    cursor: pointer;
+    height: 0px;
+    position: relative;
+    width: 40px;
+}
+
+.material-switch>label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    margin-top: -8px;
+    position: absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 40px;
+}
+
+.material-switch>label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 24px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 24px;
+}
+
+.material-switch>input[type="checkbox"]:checked+label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+
+.material-switch>input[type="checkbox"]:checked+label::after {
+    background: #00aeef;
+    left: 20px;
+}
+
+
 /* The Modal (background) */
+
+.no-padding {
+    padding: 0px!important;
+    margin-right: 0px!important;
+}
 
 .event-modal {
     display: none;
@@ -95,8 +150,11 @@
 }
 
 .events .event-progress {
-    padding: 0px !important;
+    padding-left: 0px !important;
     margin-bottom: 5px!important;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 5px;
 }
 
 .events .highlight-box {
@@ -163,6 +221,10 @@
 .events .event-labels {
     text-transform: UPPERCASE;
     color: white;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .events .moble-eventbox {
@@ -176,10 +238,20 @@
     cursor: pointer;
 }
 
+.progress span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    color: black;
+}
+
 .events .refresh-button {
     background-color: #00bdec;
     color: white;
     float: left;
+    margin-left: 0px;
 }
 
 .events .entry-rows {
@@ -228,6 +300,9 @@
     }
     .events .btn-upComing {
         margin-bottom: 5px;
+    }
+    .events .moble-eventbox {
+        border-radius: 10px;
     }
     .events .display-col {
         display: none;
@@ -289,6 +364,7 @@
     }
     .events .moble-eventbox {
         display: none;
+        border-radius: 25px;
     }
     .events .events-hide {
         display: none !important;
