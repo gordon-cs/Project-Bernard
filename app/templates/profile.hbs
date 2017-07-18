@@ -4,12 +4,25 @@
         {{! Profile picture and overlay }}
         <div class="col-sm-4 col-md-3 col-lg-2">
             <div class="profile-picture-container" >
-            <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture">
-            {{#if model.loggedInUser}}
-                <div class="overlay sm-hide"{{action "showEditProfilePictureModal"}}>
-                    <div class="text">Click here to change profile picture</div>
-                </div>
-            {{/if}}
+                {{#if model.userInfo.preferredImageURL}}
+                        <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image" id="profilePicture">  
+                        {{!-- <img src="https://image.shutterstock.com/z/stock-photo-preferred-word-in-a-red-round-grunge-style-stamp-to-illustrate-the-best-favorite-or-approved-choice-280349993.jpg" alt="Avatar" class="image" id="profilePicture">  --}}
+                    
+                {{else}}
+                        <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
+                    {{!-- <img src="http://eddieandsylviarobertson.com/wp-content/uploads/2015/09/Default-Icon-icon.png" alt="Avatar" class="image" id="profilePicture"> --}}
+                {{/if}}
+                {{#if (and model.userInfo.preferredImageURL (not model.loggedInUser))}}
+                    {{#if (or model.userInfo.IsFaculty model.superGodMode)}}
+                            <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
+                        {{!-- <img src="http://eddieandsylviarobertson.com/wp-content/uploads/2015/09/Default-Icon-icon.png" alt="Avatar" class="image" id="profilePicture"> --}}
+                    {{/if}}
+                {{/if}}
+                {{#if model.loggedInUser}}
+                    <div class="overlay sm-hide"{{action "showEditProfilePictureModal"}}>
+                        <div class="text">Click here to change profile picture</div>
+                    </div>
+                {{/if}}
             </div>
         </div>
         {{! User main info }}
@@ -121,29 +134,31 @@
                                         <div class="col-xs-8 col-no-padding personal-information-entry-value">{{major}}</div>
                                     {{/each}}
                                 </div>
-                                <div class="row personal-information-entry">
-                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
-                                    <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
-                                        <div class="row col-no-padding">
-                                            <div class="md-hide col-lg-7 col-no-padding">
-                                                {{#if model.loggedInUser}}
-                                                    <div class="mobile-phone-privacy-button-mobile-container  dropdown">
-                                                        <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <div class="mobile-phone-privacy-button-mobile">{{if activity.IsMobilePhonePrivate "Private" "Public"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                {{#if (and model.userInfo.MobilePhone (or model.loggedInUser (not model.userInfo.IsMobilePhonePrivate))}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
+                                            <div class="row col-no-padding">
+                                                <div class="md-hide col-lg-7 col-no-padding">
+                                                    {{#if model.loggedInUser}}
+                                                        <div class="mobile-phone-privacy-button-mobile-container  dropdown">
+                                                            <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <div class="mobile-phone-privacy-button-mobile">{{if activity.IsMobilePhonePrivate "Private" "Public"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                                            </div>
+                                                            <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" activity true}}>Make Private</div>
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" activity false}}>Make Public</div>
+                                                            </div>
                                                         </div>
-                                                        <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
-                                                            <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" activity true}}>Make Private</div>
-                                                            <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" activity false}}>Make Public</div>
-                                                        </div>
-                                                    </div>
-                                                {{/if}}
-                                            </div>
-                                            <div class="col-lg-5 col-no-padding">
-                                                {{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}
+                                                    {{/if}}
+                                                </div>
+                                                <div class="col-lg-5 col-no-padding">
+                                                    {{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                {{/if}}
                             {{/if}}
                             {{#if model.userInfo.IsFaculty}}
                                 <div class="row personal-information-entry">
@@ -174,19 +189,20 @@
                             Home Address
                         </div>
                         <div class="col-xs-12 col-no-padding">
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-12 col-no-padding personal-information-entry-key">{{if (eq model.userInfo.HomeStreet1 "") model.userInfo.HomeStreet2 model.userInfo.HomeStreet1}}</div>
-                            </div>
-                            {{#if (not-eq model.userInfo.HomeStreet1 "")}}
-                                {{#if (not-eq model.userInfo.HomeStreet2 "")}}
-                                    <div class="row personal-information-entry">
-                                        <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.HomeStreet2}}</div>
-                                    </div>
-                                {{/if}}
+                            {{#if (and  model.userInfo.HomeStreet1 (not-eq model.userInfo.HomeStreet1 ""))}}
+                                <div class="row personal-information-entry entry1">
+                                    <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.HomeStreet1}}</div>
+                                </div>
                             {{/if}}
-                            <div class="row personal-information-entry no-border">
+                             {{#if (and  model.userInfo.HomeStreet2 (not-eq model.userInfo.HomeStreet2 ""))}}
+                                <div class="row personal-information-entry entry2">
+                                    <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.HomeStreet2}}</div>
+                                </div>
+                            {{/if}}
+                            <div class="row personal-information-entry entry3 no-border">
                                 <div class="col-xs-12 col-no-padding personal-information-entry-key">
-                                    {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}}
+                                    {{!-- {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}} --}}
+                                    {{model.userInfo.HomeCity}}, 
                                     {{model.userInfo.HomeState}}
                                     {{model.userInfo.HomePostalCode}} 
                                     {{#if (not-eq model.userInfo.HomeCountry "US")}}
@@ -428,7 +444,7 @@
                                 <button class="btn button-cyan form-button profile-picture-cancel-button">Cancel</button>
                             </div>
                             <div class="col-xs-6 col-no-padding">
-                                <button class="btn button-cyan form-button profile-picture-privacy-button" {{action "setPicturePrivacy"}}>{{if model.userInfo.show_img "Hide picture" "Show picture"}}</button>
+                                <button class="btn button-cyan form-button profile-picture-privacy-button" {{action "setPicturePrivacy"}}>{{if model.userInfo.show_pic "Hide picture" "Show picture"}}</button>
                             </div>
                             <div class="col-xs-6 col-no-padding">
                                 <button class="btn button-cyan form-button profile-picture-reset-button" {{action "resetProfilePicture"}}>Reset Picture</button>

@@ -237,7 +237,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 var blob = base64ToBlob(content.pref , {type: 'image/jpeg'});
                 URL = window.URL || window.webkitURL;
                 var blobUrl = URL.createObjectURL(blob);
-                userInfo.defaultImageURL = blobUrl;
+                userInfo.preferredImageURL = blobUrl;
             }
         }
 
