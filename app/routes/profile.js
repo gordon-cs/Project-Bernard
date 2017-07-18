@@ -146,6 +146,26 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/profiles/" + routeUsername + "/", context);
         };
 
+        let checkIfUserExists = function(data) {
+            if(data === "Not Found"){ 
+                return Promise.reject({name: "Not found", message: "user was not found"});
+            }else {
+                data.found = true;
+                return data;
+            }
+        };
+
+        let catchNotFound = function(error) {
+            if (error.name === "Not found"){
+                userInfo = {
+                    "found": false
+                };
+            } else {
+                throw error;
+            }
+        }
+        
+
         // Changes class from the number value set in the table to the corresponding string
         let setClass = function(data) {
             if(data.IsStudent){
@@ -226,7 +246,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         // Converts the base64 to a blobl and stores it in a URL to be used by the handlebars file.
-        let setUserProfilePicture = function(content ) {
+        let setUserProfilePicture = function(content) {
+            console.log(content);
             if(content.def){
                 var blob = base64ToBlob(content.def , {type: 'image/jpeg'});
                 URL = window.URL || window.webkitURL;
@@ -255,7 +276,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
        let dataURItoBlob =  function (dataURI) {
                 // convert base64/URLEncoded data component to raw binary data held in a string
                 var byteString;
-                console.log(dataURI);
                 if (dataURI.split(',')[0].indexOf('base64') >= 0)
                     byteString = atob(dataURI.split(',')[1]);
                 else
@@ -436,6 +456,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         } else {
             console.log("Public Page");
             return getPublicUserInfo()
+            .then(checkIfUserExists)
             .then(setUserType)
             .then(setOnOffCampus)
             .then(setClass)
@@ -454,6 +475,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(loadMemberships)
             .then(loadLinks)
             .then(formatPhoneNumbers)
+            .catch(catchNotFound)
             .then(loadModel);
         }
 

@@ -1,4 +1,5 @@
 <main class="container main-container profile">
+     {{#if model.userInfo.found}} 
     {{!--Profile picture and information--}}
     <section class="row first-profile-block">
         {{! Profile picture and overlay }}
@@ -128,13 +129,15 @@
                         {{/if}}
                         <div class="col-sm-12 col-no-padding">
                             {{#if model.userInfo.IsStudentOrAlumni}}
-                                <div class="row personal-information-entry">
-                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Majors</div>
-                                    {{#each model.userInfo.Majors as |major|}}
-                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{major}}</div>
-                                    {{/each}}
-                                </div>
-                                {{#if (and model.userInfo.MobilePhone (or model.loggedInUser (not model.userInfo.IsMobilePhonePrivate))}}
+                                {{#if (gt model.userInfo.Majors 0)}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Majors</div>
+                                        {{#each model.userInfo.Majors as |major|}}
+                                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{major}}</div>
+                                        {{/each}}
+                                    </div>
+                                {{/if}}
+                                {{#if (and model.userInfo.MobilePhone (or model.loggedInUser (not model.userInfo.IsMobilePhonePrivate)))}}
                                     <div class="row personal-information-entry">
                                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
                                         <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
@@ -161,23 +164,31 @@
                                 {{/if}}
                             {{/if}}
                             {{#if model.userInfo.IsFaculty}}
-                                <div class="row personal-information-entry">
-                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Department</div>
-                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusDepartment}}</div>
-                                </div>
-                                <div class="row personal-information-entry">
-                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
-                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusPhone}}</div>
-                                </div>
+                                {{#if model.userInfo.OnCampusDepartment}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Department</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusDepartment}}</div>
+                                    </div>
+                                {{/if}}
+                                    {{#if model.userInfo.OnCampusPhone}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusPhone}}</div>
+                                    </div>
+                                {{/if}}
                             {{/if}}
+                            {{#if model.userInfo.HomePhone}}
                                 <div class="row personal-information-entry">
                                     <div class="col-xs-4 col-no-padding personal-information-entry-key">Home Phone</div>
                                     <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.formattedHomePhone model.userInfo.formattedHomePhone model.userInfo.HomePhone}}</div>
                                 </div>
+                            {{/if}}
+                            {{#if model.userInfo.Email}}
                                 <div class="row personal-information-entry">
                                     <div class="col-xs-4 col-no-padding personal-information-entry-key">Email</div>
                                     <div class="col-xs-8 col-no-padding personal-information-entry-value no-overflow">{{model.userInfo.Email}}</div>
                                 </div>
+                            {{/if}}
                         </div>
                 </section>
             </div>
@@ -507,8 +518,9 @@
         </div>
 
     </div>
+ {{else}}
+    <div>The user was not found</div>
 
 
-
-
+{{/if}} 
 </main>
