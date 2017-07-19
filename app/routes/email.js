@@ -17,8 +17,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             let activityPromise = getAsync("/activities/" + transition.queryParams.activityCode.trim(), context);
             let ActivityDescription = activityPromise.then(function(v) {
                 return v.ActivityDescription;
-            })
-            return ActivityDescription;
+            });
+            let sessionPromise = getAsync("/sessions/" + transition.queryParams.sessionCode.trim(), context);
+            let SessionDescription = sessionPromise.then(function(v) {
+                return v.SessionDescription;
+            });
+            let model = {};
+            model.ActivityDescription = ActivityDescription;
+            model.SessionDescription = SessionDescription;
+            return Ember.RSVP.hash(model);
         }
 
     }
