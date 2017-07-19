@@ -83,6 +83,7 @@ header {
 }
 #primary-menu .dropdown-menu {
 	text-align: center;
+	text-transform: none;
 }
 #primary-menu .dropdown-menu a {
 	padding: none !important;
@@ -417,6 +418,12 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 @media only screen and (min-width: 1200px) {
 		#primary-menu {
 			font-size: 1.2em;
+		}
+		#primary-menu .dropdown-menu {
+			margin-top: 9px;
+		}
+		#primary-menu .dropdown-menu li a {
+			font-size: 1em !important;
 		}
 		#logo-box-horizontal {
 			padding-bottom: 34px;
