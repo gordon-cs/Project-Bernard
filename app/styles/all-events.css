@@ -47,33 +47,22 @@
     left: 20px;
 }
 
-
-/* The Modal (background) */
-
-.no-padding {
+.events .no-padding {
     padding: 0px!important;
     margin-right: 0px!important;
 }
 
 .event-modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Sit on top */
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
     height: 100%;
-    /* Full height */
     overflow: auto;
-    /* Enable scroll if needed */
     background-color: rgb(0, 0, 0);
-    /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
 }
 
 .event-modal-content::-webkit-full-screen {
@@ -88,7 +77,7 @@
     margin: 3px;
 }
 
-.cancel-modal {
+.events .cancel-modal {
     color: #aaa;
     float: right !important;
     font-size: 28px;
@@ -98,16 +87,16 @@
     margin-right: 0%;
 }
 
-.cancel-modal:hover {
+.events .cancel-modal:hover {
     background-color: #b2bb1c !important;
     color: white !important;
 }
 
-.event-modal-header {
+.events .event-modal-header {
     color: #00aeef;
 }
 
-.blur {
+.events .blur {
     -webkit-filter: blur(5px) grayscale(70%);
 }
 
