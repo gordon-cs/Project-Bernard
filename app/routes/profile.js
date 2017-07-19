@@ -256,8 +256,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let setuserInfo = function(data) {
-            userInfo = data;
-            return data
+            var user = Ember.Object.extend({
+                init: function() {
+                    this._super();
+                }
+            });
+            userInfo = user.create(data);
+            // userInfo = data;
+            return userInfo;
         }
 
         // Sets userInfo to be the edited data about the person

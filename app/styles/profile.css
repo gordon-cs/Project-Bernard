@@ -376,8 +376,12 @@ Edit profile picture modal
     margin: 5px;
 }
 
-.profile-success-message {
+.profile .success-message {
     padding-bottom: 5px;
+}
+.profile .success-message {
+    font-size: 1.5em;
+    color: green;
 }
 
 /* Scrollbar styles */
@@ -458,10 +462,7 @@ Edit social media modal
     margin: 3px 0;
 }
 
-.profile .success-message {
-    font-size: 1.9em;
-    color: green;
-}
+
 
 
 /****************************
@@ -595,6 +596,11 @@ Activities
 
 .profile .activityPrivacyDropdown {
     min-width: 120px;
+}
+
+.profile .mobilePhonePrivacyDropdown {
+    min-width: 120px;
+    font-size: 0.9em;
 }
 
 /*******************

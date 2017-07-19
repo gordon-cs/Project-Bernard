@@ -237,8 +237,8 @@ export default Ember.Controller.extend({
                 });
             };
             let transition = function() {
-                context.set("model.userInfo.show_img", newPrivacy);
-                if(newPrivacy) {
+                context.set("model.userInfo.show_pic", privacyToSet);
+                if(privacyToSet) {
                     successMessage = "Your profile picture is now visible on your public profile page";
                 } else {
                     successMessage = "Your profile picture is no longer visible on your public profile page";
@@ -248,11 +248,15 @@ export default Ember.Controller.extend({
 
             setPrivacy(newPrivacy)
             .then(transition);
-        },
-        toggleMobilePhonePrivacy() {
+        },     
+        toggleMobilePhonePrivacy(setting) {
             let context = this;
             let currentPrivacy = context.get("model.userInfo.IsMobilePhonePrivate");
-            let newPrivacy = ! currentPrivacy;
+            if(setting){
+                currentPrivacy = !setting;
+            }
+            let newPrivacy = currentPrivacy ? 'N' : 'Y';
+            let privacyToSet = currentPrivacy ? 0 : 1;
             let successMessage;
             let setPrivacy = function(value) {
                 return putAsync("/profiles/mobile_privacy/" + value, value, context).catch((reason) => {
@@ -261,7 +265,7 @@ export default Ember.Controller.extend({
                 });
             };
             let transition = function() {
-                context.set("model.userInfo.IsMobilePhonePrivate", newPrivacy);
+                context.set("model.userInfo.IsMobilePhonePrivate", privacyToSet);
                 if(!newPrivacy) {
                     successMessage = "Your mobile phone number is now visible on your public profile page";
                 } else {

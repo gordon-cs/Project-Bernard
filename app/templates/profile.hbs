@@ -158,11 +158,11 @@
                                                     {{#if model.userLoggedIn}}
                                                         <div class="mobile-phone-privacy-button-mobile-container  dropdown">
                                                             <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <div class="mobile-phone-privacy-button-mobile">{{if activity.IsMobilePhonePrivate "Private" "Public"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                                                <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Private" "Public"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
                                                             </div>
-                                                            <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
-                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" activity true}}>Make Private</div>
-                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" activity false}}>Make Public</div>
+                                                            <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" true}}>Make Private</div>
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" false}}>Make Public</div>
                                                             </div>
                                                         </div>
                                                     {{/if}}
