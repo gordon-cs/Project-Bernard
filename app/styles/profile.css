@@ -231,7 +231,7 @@ Personal info block
 /*******************
 Profile Picture
 *******************/
-.profile .profile-picture-container {
+.profile .first-profile-block .image {
   position: relative;
   width: 75%;
   margin: 0 auto;
@@ -244,13 +244,6 @@ Profile Picture
   height: auto;
   margin: 0 auto;
 }
-
-.profile .image.image-half-width {
-    width: 46%;
-    margin-left: 10px;
-    float: left;
-}
-
 
 .profile .overlay {
     display: none;
@@ -267,7 +260,7 @@ Profile Picture
     background-color: rgba(23,80,236,.5);
 }
 
-.profile .profile-picture-container:hover .overlay {
+.profile .first-profile-block .image:hover .overlay {
     opacity: 1;
     cursor: pointer;
 }
@@ -666,8 +659,7 @@ Request Tables
         font-size: 1.5em;
     }
 
-    .profile .profile-picture-container {
-        width: 100%;
+    .profile .first-profile-block .image {
         margin-top: 5px; 
         margin-left: 10px;
     }
@@ -693,8 +685,12 @@ Request Tables
         font-size: 1.1em;
         margin-left: 5px;
     }
-
-
+    
+    .profile .image.image-half-width {
+        width: 46%;
+        margin-left: 10px;
+        float: left;
+    }
 
 }
 
@@ -746,11 +742,6 @@ Request Tables
     .profile .profile-block-container-right {
         padding-left: 10px;
         float: right;
-    }
-
-    .profile .profile-picture-container {
-        margin: 0;
-        width: 100%;
     }
 
     .profile .activity-entry {

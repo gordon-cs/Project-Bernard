@@ -237,6 +237,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data
         }
 
+        let setOfficeHours = function(data) {
+            let officeHours = [];
+            if(data.office_hours){
+                while(data.office_hours.indexOf(",") > 0){
+                    officeHours.push(data.office_hours.slice(0, data.office_hours.indexOf(",")));
+                    data.office_hours = data.office_hours.slice(data.office_hours.indexOf(",")+2);
+                }
+                officeHours.push(data.office_hours.slice(0, data.office_hours.indexOf(",")));
+            }
+            data.office_hours = officeHours;
+            return data;
+        };
+
         let setuserInfo = function(data) {
             userInfo = data;
             return data
@@ -306,7 +319,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         let showImages = function() {
-            if((loggedInUserInfo.IsFaculty || superGodMode) && !userLoggedIn && userInfo.preferredImageURL){
+            if(userInfo.defaultImageURL && userInfo.preferredImageURL){
                 showBothImages = true;
             } else {
                 showBothImages = false;
@@ -461,6 +474,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(setOnOffCampus)
             .then(setClass)
             .then(setMajorObject)
+            .then(setOfficeHours)
             .then(setuserInfo)
             .then(setLoggedInUserInfo)
             .then(getLoggedInUserProfilePicture)
@@ -485,6 +499,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(setOnOffCampus)
             .then(setClass)
             .then(setMajorObject)
+            .then(setOfficeHours)
             .then(setuserInfo)
             .then(getLoggedInUserInfo)
             .then(checkIfUserExists)

@@ -3,13 +3,11 @@
     {{!--Profile picture and information--}}
     <section class="row first-profile-block">
         {{! Profile picture and overlay }}
-        <div class="col-sm-4 col-md-3 {{if model.showBothImages "col-lg-3" "col-lg-2"}}">
-            <div class="profile-picture-container" {{action "tester"}}>
+        <div class="{{if model.showBothImages "col-lg-4 col-sm-5" "col-lg-2 col-sm-4"}}">
                 {{#if model.userInfo.preferredImageURL}}
-                        <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">  
-                    
+                    <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">  
                 {{else}}
-                        <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
+                    <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
                 {{/if}}
                 {{#if model.showBothImages}}
                     <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image image-half-width" id="profilePicture"> 
@@ -19,10 +17,9 @@
                         <div class="text">Click here to change profile picture</div>
                     </div>
                 {{/if}}
-            </div>
         </div>
         {{! User main info }}
-        <div class="col-sm-8 col-md-9 col-lg-10 {{if model.showBothImages "col-lg-9" "col-lg-10"}} profile-block-info">
+        <div class="{{if model.showBothImages "col-lg-8 col-sm-7" "col-sm-8 col-lg-10"}} profile-block-info">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}} {{if  model.userInfo.NickName "("}}{{model.userInfo.NickName}}{{if model.userInfo.NickName ")"}}</div>
@@ -236,10 +233,14 @@
                                 <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
                                 <div class="col-xs-8 col-no-padding personal-information-entry-value">(978) 867-{{model.userInfo.OnCampusPhone}}</div>
                             </div>
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Hours</div>
-                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.office_hours}}</div>
-                            </div>
+                            {{#if model.userInfo.office_hours}}
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Hours</div>
+                                    {{#each model.userInfo.office_hours as |officeHours|}}
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{officeHours}}</div>
+                                    {{/each}}
+                                </div>
+                            {{/if}}
                         </div>
                     </section>
                 {{/if}}
@@ -387,7 +388,7 @@
                                             </div>
                                             <div class="row xs-hide">
                                                 <div class="col-sm-5 col-no-padding activity-header">Group Contacts:</div>
-                                                <div class="col-sm-7 col-no-padding activity-header">Description:</div>
+                                                <div class="col-sm-7 col-no-padding activity-header">{{if activity.clubInfo.ActivityBlurb "Description:"}}</div>
                                             </div>
                                             <div class="row xs-hide">
                                                 <div class="col-sm-5 col-no-padding">
@@ -513,8 +514,8 @@
         </div>
 
     </div>
- {{else}}
-    <div>The user was not found</div>
+  {{else}}
+    <div {{action "tester"}}>The user was not found</div> 
 
 
 {{/if}} 
