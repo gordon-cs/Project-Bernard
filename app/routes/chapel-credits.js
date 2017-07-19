@@ -36,6 +36,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 return -1;
         }
 
+        //formate the event discription and get rid of all html tags
         let formatDiscription = function(Discription) {
 
             if (Discription === "" || Discription.substring(0, 4) === "<res") {
@@ -46,6 +47,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         }
 
+        //take the date object and formate a 12 hour clock with it
         function setClock(startTime, endTime, startClock, endClock) {
 
             let startHour = new Date(startTime).getHours();
@@ -87,7 +89,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         }
 
-        //retreive the chapel information from the database
+        //retreive the chapel information from the database and then formate the events listed
         let loadChapel = function() {
             return getAsync("/events/chapel/" + id_name + "/" + "17FA", context)
                 .then(function(result) {
@@ -138,6 +140,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
         };
 
+        //get all the chapel evcents in the future and then formate the responses 
         let loadAllChapel = function() {
             return getAsync("/events/25Live/CLAW", context)
                 .then(function(result) {
@@ -178,6 +181,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
         };
 
+        //load the model and return all the important information
         let loadModel = function() {
             return {
                 //return all the deseired information

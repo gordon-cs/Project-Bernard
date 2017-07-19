@@ -1,5 +1,6 @@
 <div class="container events event-box">
 
+
   <div class=" row whitebox">
     <div class="col-xs-12 col-sm-12 col-md-12">
       <h4 class="event-p heading-text event-title">
@@ -7,15 +8,18 @@
       </h4>
     </div>
   </div>
-  <div class=" row whitebox">
 
+
+  <div class=" row whitebox">
+    <!-- search bar -->
     <div class="input-group event-search col-xs-7 col-sm-4 ">
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
     </div>
 
+    <!-- Filter button and its dropdown menu -->
     <div class="dropdown show col-xs-3 col-sm-2" style = "margin-right: 10px;">
       <button type="button" class="btn filter-button btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Filter Results
+    Filter
   </button>
 
       <div class="dropdown-menu">
@@ -64,7 +68,7 @@
 
       </div>
     </div>
-   
+   <!-- switches to change the displayed list -->
     <div class="material-switch no-padding hidden-xs  col-sm-offset-1 col-sm-2">
         <input id="switch1" type="checkbox" onclick={{action "checkForChaple"}}/>
         <label for="switch1" class="label-default"></label>
@@ -78,6 +82,7 @@
       </div>
 
   </div>
+  <!-- same switches but formated for mobile -->
   <div class="moble-eventbox lightgraybox">
     <div id="category-bar" class="row">
 
@@ -94,12 +99,10 @@
          <h4>Past&nbsp;Events</h4>
       </div>
 
-       <div class="material-switch no-padding visible-xs col-xs-2">
-         </div>
-
 
     </div>
   </div>
+  <!--heading for the event list + filter buttons -->
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event </h4>
@@ -109,6 +112,7 @@
     </div>
   </div>
   <div class="entry-rows">
+     <!--all the events in the event list -->
     {{#each model.eventShown as |event|}}
     <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
       <h4 class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</h4>

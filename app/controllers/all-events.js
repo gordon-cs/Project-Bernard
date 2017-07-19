@@ -16,6 +16,8 @@ export default Ember.Controller.extend({
 
     actions: {
 
+
+        //add a up arrow or down arror to the sort buttons
         addArrow(string, item) {
             let elements = item.siblings();
             for (var i = 0; i < 3; i++) {
@@ -29,13 +31,15 @@ export default Ember.Controller.extend({
             }
         },
 
-
+        //sort the name of the event when clicked, and add the arror
         sortByName(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
 
             if ($(item.target).hasClass("Event_Name")) {
+                //add the arror
                 this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
+                //sort in acending order
                 events.sort(function(a, b) {
                     if (a.Event_Name < b.Event_Name) {
                         return 1;
@@ -50,6 +54,7 @@ export default Ember.Controller.extend({
                 }
                 $(item.target).removeClass("Event_Name");
             } else {
+                //sort by decending then add a down arrow 
                 this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Event_Name < b.Event_Name) {
@@ -68,6 +73,7 @@ export default Ember.Controller.extend({
             this.set("model.eventShown", sorted);
         },
 
+        //same as the one above but by location
         sortByLocation(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
@@ -104,7 +110,7 @@ export default Ember.Controller.extend({
             }
             this.set("model.eventShown", sorted);
         },
-
+        //same but by date
         SortByDate(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
@@ -142,6 +148,7 @@ export default Ember.Controller.extend({
             this.set("model.eventShown", sorted);
         },
 
+        //if the chapel credit button is clicked only display chapel with the CL&W creddit tag
         checkForChaple() {
             let newList = [];
             let oldList = this.get("model.eventShown");
@@ -161,6 +168,7 @@ export default Ember.Controller.extend({
 
         },
 
+        //switch display to the list including past events
         showPastEvents() {
 
             if (this.get('buttonText2') === 'Past Events') {
@@ -174,6 +182,8 @@ export default Ember.Controller.extend({
             }
         },
 
+        //On mobiel, when the event name is clicked, drop down the informatio
+        //and slideup the previous dropdown
         toggleRequestSent(item) {
 
             let lastForm = this.get("lastForm");
@@ -213,6 +223,7 @@ export default Ember.Controller.extend({
             }
         },
 
+        //search through the the event list with the given user input
         filterEvents: function() {
             // Filter the list of activities shown when user types in the search bar
             let searchValue = this.get("model.searchValue");
@@ -221,12 +232,16 @@ export default Ember.Controller.extend({
                 let oldList = this.get("model.allEvents");
 
                 for (let i = 0; i < oldList.length; i++) {
+                    //search through the event title
                     if (oldList[i].Event_Title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
+                        //search through the date
                     } else if (oldList[i].Start_Time.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
+                        //search through the event times
                     } else if (oldList[i].End_Time.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
+                        //search through the location
                     } else if (oldList[i].Location.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
                     }
@@ -235,18 +250,14 @@ export default Ember.Controller.extend({
                 this.set("model.eventShown", newList);
             } else {
                 this.set("model.eventShown", this.get("model.allEvents"));
+                //apply filters to the new list
                 this.send("toggleCheckBox");
             }
         },
 
 
+        //filter the list of events according to the boxes checked
         toggleCheckBox: function() {
-
-            if (this.get("pastEvents")) {
-                this.set("model.eventShown", this.get("model.allEvents"));
-            } else {
-                this.set("model.eventShown", this.get("model.pastEvents"));
-            }
 
             let newList = [];
             let oldList = this.get("model.eventShown");
@@ -328,8 +339,9 @@ export default Ember.Controller.extend({
             }
         },
 
+        //when the event list is clicked, display toggle for the clicked event
         toggleEventDetailsModal(item) {
-
+            //to make sure this cant be activated by clicking on it in mobile 
             if ($(window).width() > 750) {
                 $("#toggleEventDetailsModal").addClass("event-showModal");
                 $('.container').addClass('blur');
@@ -339,18 +351,20 @@ export default Ember.Controller.extend({
             }
         },
 
+
+        //activated by the button on mobile
         MobileEventDetailsModal(item) {
 
             $("#toggleEventDetailsModal").addClass("event-showModal");
             $('.container').addClass('blur');
             let context = this;
             let displayEvent = this.set("displayEvent", item);
-            console.log("displayEvent.Occurrences.length");
             this.send('modelFormate', displayEvent);
 
 
         },
 
+        //formate the infor being displayed in the modal
         modelFormate(displayEvent) {
             if (displayEvent.Occurrences.length > 1) {
                 let startClock;
@@ -390,6 +404,7 @@ export default Ember.Controller.extend({
             }
         },
 
+        //clode the modal
         cancelEventDetailsModal(item) {
 
             if (!($(item.target).hasClass("modal-content") || $(item.target).hasClass("modal-body") || $(item.target).hasClass("modal-footer"))) {

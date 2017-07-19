@@ -8,12 +8,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     model: function() {
 
+        //initialize all the variables
         let context = this;
         let searchValue;
         let eventList;
         let pastEvents = [];
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+        //formate the discription and get ride of all html tags
         let formatDiscription = function(Discription) {
 
             if (Discription === "" || Discription.substring(0, 4) === "<res") {
@@ -24,6 +26,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         }
 
+        //get the time of the event in clock form
         function setClock(startTime, endTime, startClock, endClock) {
 
             let startHour = new Date(startTime).getHours();
@@ -75,6 +78,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return 0;
         }
 
+        //handel events with multiple occurances 
         function formatMultipleOccurances(Occurrences, location) {
 
             if (Occurrences.length > 1) {
@@ -86,11 +90,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
         }
 
-
+        //get the info from live 25
         let loadEvents = function() {
             return getAsync('/events/25Live/All', context);
         };
 
+        //formate all the information in the vent list ot a more readble formate
         let formatEvents = function(result) {
             console.log(result)
             eventList = result;
@@ -133,8 +138,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             eventList.sort(sortByTime);
             pastEvents.sort(sortByTime);
 
-
-
             return {
                 eventList,
                 pastEvents,
@@ -144,7 +147,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         };
 
-
+        //return all important information
         let loadModel = function() {
             return {
                 //return all the deseired information
@@ -155,6 +158,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             };
 
         };
+        //load everything
         return loadEvents()
             .then(formatEvents)
             .then(loadModel);

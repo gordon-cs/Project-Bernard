@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
     actions: {
 
+        //add the arrow indicators when called
         addArrow(string, item) {
             let elements = item.siblings();
             for (var i = 0; i < 3; i++) {
@@ -27,7 +28,7 @@ export default Ember.Controller.extend({
             }
         },
 
-
+        //sort by name
         sortByName(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
@@ -65,7 +66,7 @@ export default Ember.Controller.extend({
             }
             this.set("model.eventShown", sorted);
         },
-
+        //sort by location
         sortByLocation(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
@@ -102,7 +103,7 @@ export default Ember.Controller.extend({
             }
             this.set("model.eventShown", sorted);
         },
-
+        //sort by Date
         SortByDate(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
@@ -139,6 +140,8 @@ export default Ember.Controller.extend({
             }
             this.set("model.eventShown", sorted);
         },
+
+        //display list of all past events events
         displayALLEvents() {
 
             if (this.get('selectList') === 'ALL') {
@@ -147,9 +150,11 @@ export default Ember.Controller.extend({
             } else {
                 this.set("model.eventShown", this.get("model.chapelEvents"));
                 this.set('selectList', 'ALL');
+                this.send("toggleCheckBox");
             }
         },
 
+        //apply filter to event list 
         toggleRequestSent(item) {
 
             let lastForm = this.get("lastForm");
@@ -191,6 +196,7 @@ export default Ember.Controller.extend({
             }
         },
 
+        //apply filter to event list  display modal
         toggleEventDetailsModal(item) {
 
             if ($(window).width() > 750) {
@@ -202,6 +208,8 @@ export default Ember.Controller.extend({
             }
         },
 
+
+        //search the events with user input
         filterEvents: function() {
             // Filter the list of activities shown when user types in the search bar
             let searchValue = this.get("model.searchValue");
@@ -230,6 +238,7 @@ export default Ember.Controller.extend({
             }
         },
 
+        //close modal
         cancelEventDetailsModal(item) {
 
             if (!($(item.target).hasClass("modal-content") || $(item.target).hasClass("modal-body") || $(item.target).hasClass("modal-footer"))) {
