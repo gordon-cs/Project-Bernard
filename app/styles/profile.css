@@ -240,40 +240,41 @@ Profile Picture
 
 .profile .image {
   display: block;
-  width: 100%;
   height: auto;
   margin: 0 auto;
 }
 
-.profile .overlay {
-    display: none;
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .5s ease;
-    background-color: rgba(23,80,236,.5);
+.profile .first-profile-block .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(1, 73, 131, 0.5);
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
 }
 
-.profile .first-profile-block .image:hover .overlay {
-    opacity: 1;
-    cursor: pointer;
+.profile .profile-image-container:hover .overlay {
+  height: 30%;
+  cursor: pointer;
+}
+.profile .profile-image-container {
+    position:relative;
+    overflow:hidden;
+    z-index:1;
+    padding:0px;
+    width: 100%;
 }
 
 .profile .text {
   color: white;
   background-color: rgba(0, 0, 0, 0);
-  font-size: 20px;
+  font-size: 16px;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+  top: 8%;
+  left: 15%;
 }
 
 /****************************
@@ -698,6 +699,11 @@ Request Tables
         float: left;
     }
 
+    .profile .first-profile-block .image {
+        width: 100%;
+        margin: 0;
+    }  
+
 }
 
 /*Bootstrap Medium*/
@@ -713,6 +719,10 @@ Request Tables
 @media only screen and (min-width: 1200px) {
     .profile {
         font-size: 1.2em;
+    } 
+
+    .profile .profile-image-col {
+        padding-left: 20px;
     }
 
     .profile .user-name {

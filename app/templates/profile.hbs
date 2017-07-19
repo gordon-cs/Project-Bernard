@@ -3,7 +3,8 @@
     {{!--Profile picture and information--}}
     <section class="row first-profile-block">
         {{! Profile picture and overlay }}
-        <div class="{{if model.showBothImages "col-lg-4 col-sm-5" "col-lg-2 col-sm-4"}}">
+        <div class="profile-image-col {{if model.showBothImages "col-lg-4 col-sm-5" "col-lg-2 col-sm-4"}}">
+            <div class="profile-image-container">
                 {{#if model.userInfo.preferredImageURL}}
                     <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">  
                 {{else}}
@@ -14,9 +15,10 @@
                 {{/if}}
                 {{#if model.userLoggedIn}}
                     <div class="overlay sm-hide"{{action "showEditProfilePictureModal"}}>
-                        <div class="text">Click here to change profile picture</div>
+                        <div class="text">Update Profile Picture</div>
                     </div>
                 {{/if}}
+            </div>
         </div>
         {{! User main info }}
         <div class="{{if model.showBothImages "col-lg-8 col-sm-7" "col-sm-8 col-lg-10"}} profile-block-info">
