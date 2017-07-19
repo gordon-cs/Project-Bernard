@@ -272,6 +272,9 @@ export default Ember.Controller.extend({
                     successMessage = "Your mobile phone number is no longer visible on your public profile page";
                 }
                 context.set("phonePrivacySuccessMessage", successMessage);
+                setTimeout(function(){
+                    context.set("phonePrivacySuccessMessage", null);
+                }, 10000);
             };
 
             setPrivacy(newPrivacy)
