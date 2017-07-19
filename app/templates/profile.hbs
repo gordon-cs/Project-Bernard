@@ -143,6 +143,12 @@
                                         {{/each}}
                                     </div>
                                 {{/if}}
+                                {{#if model.userInfo.OnOffCampus}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">On/Off Campus</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnOffCampus}}</div>
+                                    </div>
+                                {{/if}}
                                 {{#if (and model.userInfo.MobilePhone (or model.userLoggedIn (not model.userInfo.IsMobilePhonePrivate)))}}
                                     <div class="row personal-information-entry">
                                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
@@ -211,7 +217,7 @@
                 </section>
             </div>
             <div class="col-lg-12 background-transparent col-no-padding">
-                {{#if model.userInfo.OnOffCampus}}    
+                {{#if model.userInfo.OnCampusBuilding}}    
                     <section class="row profile-block">
                         <div class="col-md-12 block-header">Campus Address</div>
                         <div class="col-xs-12 col-no-padding">

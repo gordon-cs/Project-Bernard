@@ -217,16 +217,21 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data;
         }
 
-        // Set whether student is on or off campus 
-        // TODO will need to be changed if live data is in different format
         let setOnOffCampus = function(data){
-            if(data.OnOffCampus == "on"){
-                data.OnOffCampus = true;
-            }else {
-                data.OnOffCampus = false;
+            switch(data.OnOffCampus){
+                case "O": 
+                    data.OnOffCampus = "Off Campus";
+                    break;
+                case "A": 
+                    data.OnOffCampus = "Away";
+                    break;
+                case "D": "Deferred";
+                    data.OnOffCampus = ""
+                default: 
+                    data.OnOffCampus = "On Campus";
             }
             return data;
-        }
+        };
 
         // Adds data to model to determine the type of user
         let setUserType = function(data) {
