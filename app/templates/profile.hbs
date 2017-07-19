@@ -211,7 +211,7 @@
                                     {{model.userInfo.HomeState}}
                                     {{model.userInfo.HomePostalCode}} 
                                     {{#if (not-eq model.userInfo.HomeCountry "US")}}
-                                        {{if model.userInfo.HomeCountry model.userInfo.HomeCountry}}
+                                        {{if model.userInfo.Country model.userInfo.Country model.userInfo.HomeCountry}}
                                     {{/if}}
                                     </div>
                             </div>
@@ -236,7 +236,7 @@
                             {{#if model.userInfo.OnCampusBuilding}}
                             <div class="row personal-information-entry">
                                 <div class="col-xs-4 col-no-padding personal-information-entry-key">Room</div>
-                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</div>
+                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.BuildingDescription model.userInfo.BuildingDescription model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</div>
                             </div>
                             {{/if}}
                             {{#if model.userInfo.OnCampusPhone}}

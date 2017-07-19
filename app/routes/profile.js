@@ -209,10 +209,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let setMajorObject = function(data) {
             data.Majors = [];
             if(data.Major){
-                data.Majors.push(data.Major)
+                data.Majors.push(data.Major1Description)
             }
             if(data.Major2){
-                data.Majors.push(data.Major2);
+                data.Majors.push(data.Major2Description);
+            }
+            if(data.Major3){
+                data.Majors.push(data.Major3Description);
             }
             return data;
         }
@@ -254,7 +257,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             data.office_hours = officeHours;
             return data;
         };
-
+        
         let setuserInfo = function(data) {
             var user = Ember.Object.extend({
                 init: function() {
