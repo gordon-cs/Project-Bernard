@@ -225,8 +225,9 @@ export default Ember.Controller.extend({
         //Change the privacy value for profile picture
         setPicturePrivacy() {
             let context = this;
-            let currentPrivacy = context.get("model.userInfo.show_img");
-            let newPrivacy = currentPrivacy ? 0 : 1;
+            let currentPrivacy = context.get("model.userInfo.show_pic");
+            let newPrivacy = currentPrivacy ? 'N' : 'Y';
+            let privacyToSet = currentPrivacy ? false : true;
             console.log(newPrivacy);
             let successMessage;
             let setPrivacy = function(value) {

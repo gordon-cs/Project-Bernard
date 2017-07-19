@@ -231,14 +231,18 @@
                     <section class="row profile-block">
                         <div class="col-md-12 block-header">Office Information</div>
                         <div class="col-xs-12 col-no-padding">
+                            {{#if model.userInfo.OnCampusBuilding}}
                             <div class="row personal-information-entry">
                                 <div class="col-xs-4 col-no-padding personal-information-entry-key">Room</div>
                                 <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</div>
                             </div>
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
-                                <div class="col-xs-8 col-no-padding personal-information-entry-value">(978) 867-{{model.userInfo.OnCampusPhone}}</div>
-                            </div>
+                            {{/if}}
+                            {{#if model.userInfo.OnCampusPhone}}
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">(978) 867-{{model.userInfo.OnCampusPhone}}</div>
+                                </div>
+                            {{/if}}
                             {{#if model.userInfo.office_hours}}
                                 <div class="row personal-information-entry">
                                     <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Hours</div>
@@ -419,6 +423,15 @@
                         </div>
                     </div>
                 {{/each}}
+                {{#unless (gt model.memberships.length 0)}}
+                    <div class="row activity-entry bootstrap-tester">
+                        {{#link-to "all-activities"}}
+                            <div class="col-sm-12 personal-information-entry-key">
+                                No activities to show! Click here to see activities around campus.
+                            </div>
+                        {{/link-to}}
+                    </div>
+                {{/unless}}
             </section>
         </div>
     </div>
