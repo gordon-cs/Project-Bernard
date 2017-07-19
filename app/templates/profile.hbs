@@ -4,7 +4,7 @@
     <section class="row first-profile-block">
         {{! Profile picture and overlay }}
         <div class="profile-image-col {{if model.showBothImages "col-lg-4 col-sm-5" "col-lg-2 col-sm-4"}}">
-            <div class="profile-image-container">
+            <div class="profile-image-container" {{action "showEditProfilePictureModal"}}>
                 {{#if model.userInfo.preferredImageURL}}
                     <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">  
                 {{else}}
@@ -14,7 +14,7 @@
                     <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image image-half-width" id="profilePicture"> 
                 {{/if}}
                 {{#if model.userLoggedIn}}
-                    <div class="overlay sm-hide"{{action "showEditProfilePictureModal"}}>
+                    <div class="overlay sm-hide">
                         <div class="text">Update Profile Picture</div>
                     </div>
                 {{/if}}
@@ -396,11 +396,11 @@
                                                     {{#if model.userLoggedIn}}
                                                         <div class="activity-privacy-button-mobile-container dropdown">
                                                             <div class="social-media-buttons dropdown-toggle {{if activity.clubInfo.Privacy "disabled"}}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <div class="activity-privacy-button-mobile">{{if activity.Privacy "Private" "Public"}} <span class="{{unless activity.clubInfo.Privacy "glyphicon glyphicon-menu-down"}}" aria-hidden="true"></span></div>
+                                                                <div class="activity-privacy-button-mobile">{{if activity.Privacy "Hidden" "Visible"}} <span class="{{unless activity.clubInfo.Privacy "glyphicon glyphicon-menu-down"}}" aria-hidden="true"></span></div>
                                                             </div>
                                                             <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
-                                                                <div class="dropdown-item"{{action "setClubPrivacy" activity true}}>Make Private</div>
-                                                                <div class="dropdown-item"{{action "setClubPrivacy" activity false}}>Make Public</div>
+                                                                <div class="dropdown-item"{{action "setClubPrivacy" activity true}}>Make Hidden</div>
+                                                                <div class="dropdown-item"{{action "setClubPrivacy" activity false}}>Make Visible</div>
                                                             </div>
                                                         </div>
                                                     {{/if}}

@@ -199,6 +199,7 @@ Personal info block
 .profile .personal-information-entry-value {
     text-align: right;
     float: right;
+    padding-right: 7px;
 }
 
 .profile .personal-information-entry-value.no-overflow {
@@ -258,7 +259,6 @@ Profile Picture
 
 .profile .profile-image-container:hover .overlay {
   height: 30%;
-  cursor: pointer;
 }
 .profile .profile-image-container {
     position:relative;
@@ -266,6 +266,7 @@ Profile Picture
     z-index:1;
     padding:0px;
     width: 100%;
+    cursor: pointer;
 }
 
 .profile .text {
@@ -303,11 +304,12 @@ Edit profile picture modal
 .profile .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
+    padding: 15px;
     border: 1px solid #888;
     width: 400px;
     max-height: 90%;
     overflow-y: auto;
+    font-size: 10px;
 }
 /*.profile .modal-content::-webkit-scrollbar { 
     display: none; 
@@ -364,7 +366,7 @@ Edit profile picture modal
     width: 95%;
     text-transform: uppercase;
     font-weight: bold !important;
-    font-size: 1.45em;
+    font-size: 1.2em;
     padding: 8px 0;
     margin: 0 auto;
 }
@@ -593,6 +595,7 @@ Activities
 .profile .dropdown-item {
     padding-left: 5px;
     padding-right: 5px;
+    cursor: pointer;
 }
 
 .profile .activityPrivacyDropdown {
@@ -772,6 +775,15 @@ Request Tables
         width: 75%;
         margin: 0 auto;
         padding-top: 2px;
+    }
+
+    .profile #profile-modal-form-box .browse-button{
+        padding: 7px 15px;
+    }   
+
+    .profile #profile-modal-form-box button,
+    .profile #profile-modal-form-box .browse-button {
+        font-size: 1.4em;
     }
 
 
