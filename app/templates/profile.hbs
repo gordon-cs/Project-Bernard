@@ -145,6 +145,14 @@
                                         {{/each}}
                                     </div>
                                 {{/if}}
+                                {{#if (gt model.userInfo.Minors.length 0)}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Minors</div>
+                                        {{#each model.userInfo.Minors as |minor|}}
+                                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{minor}}</div>
+                                        {{/each}}
+                                    </div>
+                                {{/if}}
                                 {{#if model.userInfo.OnOffCampus}}
                                     <div class="row personal-information-entry">
                                         <div class="col-xs-4 col-no-padding personal-information-entry-key">On/Off Campus</div>

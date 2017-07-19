@@ -208,14 +208,28 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let setMajorObject = function(data) {
             data.Majors = [];
-            if(data.Major){
+            if(data.Major1Description){
                 data.Majors.push(data.Major1Description)
             }
-            if(data.Major2){
+            if(data.Major2Description){
                 data.Majors.push(data.Major2Description);
             }
-            if(data.Major3){
+            if(data.Major3Description){
                 data.Majors.push(data.Major3Description);
+            }
+            return data;
+        }
+
+        let setMinorObject = function(data) {
+            data.Minors = [];
+            if(data.Minor1Description){
+                data.Minors.push(data.Minor1Description)
+            }
+            if(data.Minor2Description){
+                data.Minors.push(data.Minor2Description);
+            }
+            if(data.Minor3Description){
+                data.Minors.push(data.Minor3Description);
             }
             return data;
         }
@@ -488,6 +502,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(setOnOffCampus)
             .then(setClass)
             .then(setMajorObject)
+            .then(setMinorObject)
             .then(setOfficeHours)
             .then(setuserInfo)
             .then(setLoggedInUserInfo)
@@ -513,6 +528,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(setOnOffCampus)
             .then(setClass)
             .then(setMajorObject)
+            .then(setMinorObject)
             .then(setOfficeHours)
             .then(setuserInfo)
             .then(getLoggedInUserInfo)
