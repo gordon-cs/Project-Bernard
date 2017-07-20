@@ -7,8 +7,12 @@ import deleteAsync from "gordon360/utils/delete-async";
  */
 export default Ember.Controller.extend({
 
-    buttonText: 'CL&W',
-    buttonText2: 'Past Events',
+    onlyChapel: false,
+    button1: 'All Event Types',
+    button2: 'Future Events',
+    option1: 'Show CL&W Events',
+    option2: 'Include Past Events',
+    showPastEvents: false,
 
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
@@ -150,37 +154,36 @@ export default Ember.Controller.extend({
 
         //if the chapel credit button is clicked only display chapel with the CL&W creddit tag
         checkForChaple() {
-            let newList = [];
-            let oldList = this.get("model.eventShown");
-            if (this.get('buttonText') === 'CL&W') {
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Category_Id === '85') {
-                        newList.push(oldList[i]);
-                    }
-                }
-                this.set("model.eventShown", newList);
-                this.set('buttonText', 'All');
+            if (this.get('onlyChapel') === false) {
+                this.set('onlyChapel', true);
+                this.set('button1', 'CL&W Events');
+                this.set('option1', 'Show All Types');
+                this.send('filterEvents');
             } else {
-                this.set("model.eventShown", this.get("model.pastEvents"));
-                this.set('buttonText', 'CL&W');
-                this.send("toggleCheckBox");
+                this.set('onlyChapel', false);
+                this.set('button1', 'All Event Types');
+                this.set('option1', 'Show CL&W Events');
+                this.send('filterEvents');
             }
 
         },
+
 
         //switch display to the list including past events
         showPastEvents() {
-
-            if (this.get('buttonText2') === 'Past Events') {
-                this.set("model.eventShown", this.get("model.allEvents"));
-                this.set('buttonText2', 'Upoming');
-                this.send("toggleCheckBox");
+            if (this.get('showPastEvents') === false) {
+                this.set('showPastEvents', true);
+                this.set('button2', 'All event Dates');
+                this.set('option2', 'Show Upcoming Events');
+                this.send('filterEvents');
             } else {
-                this.set("model.eventShown", this.get("model.pastEvents"));
-                this.set('buttonText2', 'Past Events');
-                this.send("toggleCheckBox");
+                this.set('showPastEvents', false);
+                this.set('button2', 'Future Events');
+                this.set('option2', 'Include Past Events');
+                this.send('filterEvents');
             }
         },
+
 
         //On mobiel, when the event name is clicked, drop down the informatio
         //and slideup the previous dropdown
@@ -225,12 +228,107 @@ export default Ember.Controller.extend({
 
         //search through the the event list with the given user input
         filterEvents: function() {
+
+            let oldList = [];
+            let newList = [];
+
+            if (this.get('showPastEvents')) {
+                oldList = this.get("model.allEvents");
+            } else {
+                oldList = this.get("model.pastEvents");
+            }
+
+            if (this.get('onlyChapel')) {
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Category_Id === '85') {
+                        newList.push(oldList[i]);
+                    }
+                }
+                oldList = newList;
+                newList = [];
+            }
+
+            if (this.get("isChapel")) {
+
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Organization === "Chapel Office") {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                oldList = newList;
+            }
+
+            if (this.get("isCEC")) {
+
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Organization === "Campus Events Council (CEC)") {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                oldList = newList;
+
+            }
+            if (this.get("isArt")) {
+
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Organization === "Music Department" || oldList[i].Organization === "Theatre" || oldList[i].Organization === "Art Department") {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                oldList = newList;
+
+            }
+            if (this.get("isCalendar")) {
+
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Event_Type_Name === "Calendar Announcement") {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                oldList = newList;
+
+            }
+            if (this.get("isAthletics")) {
+
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                oldList = newList;
+
+
+            }
+            if (this.get("isAdmissions")) {
+
+                for (let i = 0; i < oldList.length; i++) {
+                    if (oldList[i].Organization === "Admissions") {
+                        newList.push(oldList[i]);
+                    }
+
+                }
+                oldList = newList;
+            }
+            if (this.get("isCLAW")) {
+
+                for (let i = 0; i < newList.length; i++) {
+                    if (newList[i].Category_Id !== "85") {
+                        newList.popObject(i);
+                    }
+
+                }
+                oldList = newList;
+
+            }
+
             // Filter the list of activities shown when user types in the search bar
             let searchValue = this.get("model.searchValue");
             if (searchValue) {
-                let newList = [];
-                let oldList = this.get("model.allEvents");
-
                 for (let i = 0; i < oldList.length; i++) {
                     //search through the event title
                     if (oldList[i].Event_Title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
@@ -248,19 +346,19 @@ export default Ember.Controller.extend({
 
                 }
                 this.set("model.eventShown", newList);
+                //this.send("toggleCheckBox");
             } else {
-                this.set("model.eventShown", this.get("model.allEvents"));
-                //apply filters to the new list
-                this.send("toggleCheckBox");
+                this.set("model.eventShown", oldList);
+                //this.send("toggleCheckBox");
             }
         },
 
 
         //filter the list of events according to the boxes checked
-        toggleCheckBox: function() {
+        toggleCheckBox() {
 
             let newList = [];
-            let oldList = this.get("model.eventShown");
+            let oldList = this.get("model.allEvents");
 
             if (this.get("isChapel")) {
 
@@ -337,6 +435,7 @@ export default Ember.Controller.extend({
                 }
                 this.set("model.eventShown", newList);
             }
+
         },
 
         //when the event list is clicked, display toggle for the clicked event

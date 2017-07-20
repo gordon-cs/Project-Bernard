@@ -17,7 +17,7 @@
     </div>
 
     <!-- Filter button and its dropdown menu -->
-    <div class="dropdown show col-xs-3 col-sm-2" style = "margin-right: 10px;">
+    <div class="dropdown show col-xs-3 col-sm-1" style="margin-right: 10px;">
       <button type="button" class="btn filter-button btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Filter
       </button>
@@ -46,7 +46,7 @@
         <div class=" dropdown-item event-checks form-check">
           <label class="form-check-label event-checks">
         {{input type="checkbox" checked=isArt }}
-       The Arts
+       Arts
       </label>
         </div>
         <div class=" dropdown-item event-checks form-check">
@@ -60,33 +60,54 @@
         <div class=" dropdown-item event-checks form-check">
           <label class="form-check-label event-checks">
         {{input type="checkbox" checked=isCalendar }}
-       Claendar Events
+       Calendar Events
       </label>
         </div>
 
-        <div class=" dropdown-item event-checks form-check"><button type="button" class="btn btn-danger" onclick={{action "toggleCheckBox"}}>Submit</button></div>
+        <div class=" dropdown-item event-checks form-check"><button type="button" class="btn btn-danger" onclick={{action "filterEvents"}}>Submit</button></div>
 
       </div>
     </div>
-   <!-- switches to change the displayed list -->
-    <div class="material-switch no-padding hidden-xs  col-sm-offset-1 col-sm-2">
-        <input id="switch1" type="checkbox" onclick={{action "checkForChaple"}}/>
-        <label for="switch1" class="label-default"></label>
-        <h4>Only&nbsp;CL&W</h4>
+    <!-- switches to change the displayed list -->
+    <div class="mobile-phone-privacy-button-mobile-container col-sm-3 col-md-2 dropdown">
+      <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <div class="mobile-phone-privacy-button-mobile"><a>{{button1}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+      </div>
+      <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-item" {{action "checkForChaple"}}>{{option1}}</div>
+      </div>
     </div>
 
-      <div class="material-switch no-padding hidden-xs col-sm-1">
-        <input id="switch2" type="checkbox" onclick={{action "showPastEvents"}}/>
-        <label for="switch2" class="label-default"></label>
-         <h4>Include&nbsp;Past&nbsp;Events</h4>
+    <div class="mobile-phone-privacy-button-mobile-container no-padding hidden-xs col-sm-3 col-md-2 dropdown">
+      <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <div class="mobile-phone-privacy-button-mobile"><a>{{button2}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
       </div>
+      <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-item" {{action "showPastEvents"}}>{{option2}}</div>
+      </div>
+    </div>
+
+    {{!--
+    <div class="material-switch no-padding hidden-xs col-sm-1">
+      <input id="switch2" type="checkbox" onclick={{action "checkForChaple"}}/>
+      <label for="switch2" class="label-default"></label>
+      <h4>ALL&nbspCL&W</h4>
+    </div> --}}
+
+    {{!-- <div class="material-switch no-padding hidden-xs col-sm-1">
+      <input id="switch2" type="checkbox" onclick={{action "showPastEvents"}}/>
+      <label for="switch2" class="label-default"></label>
+      <h4>Include&nbsp;Past&nbsp;Events</h4>
+    </div> --}}
 
   </div>
   <!-- same switches but formated for mobile -->
   <div class="moble-eventbox lightgraybox">
     <div id="category-bar" class="row">
 
-       <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2">
+      <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2">
         <input id="switch3" type="checkbox" onclick={{action "checkForChaple"}}/>
         <label for="switch3" class="label-default"></label>
         <h4>Only&nbsp;CL&W</h4>
@@ -96,7 +117,7 @@
       <div class="material-switch no-padding visible-xs col-xs-offset-4 col-xs-2">
         <input id="switch4" type="checkbox" onclick={{action "showPastEvents"}}/>
         <label for="switch4" class="label-default"></label>
-         <h4>Past&nbsp;Events</h4>
+        <h4>Past&nbsp;Events</h4>
       </div>
 
 
@@ -107,12 +128,12 @@
     <div id="category-bar" class="row">
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event </h4>
       <h4 class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}>Location </h4>
-      <h4 class="event-labels  col-sm-2 col-md-2" onclick={{action "SortByDate"}}>Date <span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span></h4>
+      <h4 class="event-labels  col-sm-2 col-md-2" onclick={{action "SortByDate"}}>Date <span class="glyphicon glyphicon glyphicon-triangle-bottom" style="color: white;" aria-hidden="true"></span></h4>
       <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "SortByDate"}}>Time </h4>
     </div>
   </div>
   <div class="entry-rows">
-     <!--all the events in the event list -->
+    <!--all the events in the event list -->
     {{#each model.eventShown as |event|}}
     <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
       <h4 class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</h4>
