@@ -437,7 +437,7 @@
                     <div class="row activity-entry bootstrap-tester">
                         {{#link-to "all-activities"}}
                             <div class="col-sm-12 personal-information-entry-key">
-                                No activities to show! Click here to see activities around campus.
+                                <a>No activities to show! Click here to see activities around campus.</a>
                             </div>
                         {{/link-to}}
                     </div>
@@ -544,7 +544,14 @@
 
     </div>
   {{else}}
-    <div {{action "tester"}}>The user was not found</div> 
+  <section class="row first-profile-block">
+    <div class="col-lg-12 user-name" {{action "tester"}}>The user was not found</div> 
+    {{#link-to "index"}}
+        <div class="col-lg-12 user-position"><a>Go back to search</a></div>
+    {{/link-to}}
+    {{!-- TODO link to search page --}}
+    
+  </section>
 
 
 {{/if}} 
