@@ -271,7 +271,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let formatCountry = function(data){
             if(data.Country){
-
+                    data.Country =  data.Country.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                    if(data.Country.includes(",")){
+                        data.Country = data.Country.slice(data.Country.indexOf(",") + 2,) + " " + data.Country.slice(0, data.Country.indexOf(","));
+                    }
             }
             return data;
         };
@@ -508,6 +511,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(setMajorObject)
             .then(setMinorObject)
             .then(setOfficeHours)
+            .then(formatCountry)
             .then(setuserInfo)
             .then(setLoggedInUserInfo)
             .then(getLoggedInUserProfilePicture)
@@ -534,6 +538,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(setMajorObject)
             .then(setMinorObject)
             .then(setOfficeHours)
+            .then(formatCountry)
             .then(setuserInfo)
             .then(getLoggedInUserInfo)
             .then(checkIfUserExists)
