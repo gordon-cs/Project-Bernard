@@ -159,15 +159,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let catchNotFound = function(error) {
-            console.log("error");
-            console.log(error);
-            if (error.name === "Not found"){
+            if(error.status === 404){
                 console.log("not found");
                 userInfo = {
                     "found": false
                 };
             } else {
-                
                 throw error;
             }
         }
@@ -269,6 +266,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 officeHours.push(data.office_hours.slice(0, data.office_hours.indexOf(",")));
             }
             data.office_hours = officeHours;
+            return data;
+        };
+
+        let formatCountry = function(data){
+            if(data.Country){
+
+            }
             return data;
         };
         
