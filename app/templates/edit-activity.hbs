@@ -15,7 +15,9 @@
             </label>
             {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
         </div>
+        {{image-cropper image=file}}
         <p class="form-note {{if defaultImage 'hidden'}}">Prefered image size: 320 x 320 px</p>
+        <p class="form-note {{if defaultImage 'hidden'}}">Files acceptable: png, jpg, jpeg, bmp, gif</p>
         <label for="description">Description</label>
         {{textarea value=model.description class="form-control" rows="4"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>

@@ -1,114 +1,558 @@
-<div class="container main-container">
-    <div class="row">
-        <div class="section-title">
-            <h1>{{session.data.authenticated.token_data.name}}</h1>
-        </div>
-    </div>
-    {{#if requestsRecieved}}
-        <div class="row table-row">
-            <div class="col-sm-12">
-                <h2>
-                    <strong>Membership Requests Received</strong>
-                </h2>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Activity</th>
-                                <th>Time</th>
-                                <th>Options</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each requestsRecieved as |req|}}
-                                <tr>
-                                    <td> {{req.FirstName}} {{req.LastName}} </td>
-                                    <td> {{req.ActivityDescription}} </td>
-                                    <td> {{req.DiffDays}} </td>
-                                    <td>
-                                        {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                            <button class="btn button-navy table-button">See Activity</button>
-                                        {{/link-to}}
-                                    </td>
-                                </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-                </div>
+<main class="container main-container profile">
+     {{#if model.userInfo.found}} 
+    {{!--Profile picture and information--}}
+    <section class="row first-profile-block">
+        {{! Profile picture and overlay }}
+        <div class="profile-image-col {{if model.showBothImages "col-lg-4 col-sm-5" "col-lg-2 col-sm-4"}}">
+            <div class="profile-image-container" {{action "showEditProfilePictureModal"}}>
+                {{#if model.userInfo.preferredImageURL}}
+                    <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">  
+                {{else}}
+                    <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
+                {{/if}}
+                {{#if model.showBothImages}}
+                    <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image image-half-width" id="profilePicture"> 
+                {{/if}}
+                {{#if model.userLoggedIn}}
+                    <div class="overlay sm-hide">
+                        <div class="text">Update Profile Picture</div>
+                    </div>
+                {{/if}}
             </div>
         </div>
-    {{/if}}
-    <div class="row table-row">
-        <div class="col-sm-12">
-            <h2>
-                <strong>Membership Requests Sent</strong>
-            </h2>
-            {{#if model.requestsSent}}
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Activity</th>
-                                <th>Decision</th>
-                                <th>Time</th>
-                                <th>Options</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each model.requestsSent as |req|}}
-                                <tr>
-                                    <td> {{req.ActivityDescription}} </td>
-                                    <td> {{req.RequestApproved}} </td>
-                                    <td> {{req.DiffDays}} </td>
-                                    <td>
-                                        {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                            <button class="btn button-navy table-button">See Activity</button>
-                                        {{/link-to}}
-                                        <button {{action "deleteRequest" req.RequestID}} class="btn button-red table-button">Clear</button>
-                                    </td>
-                                </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
+        {{! User main info }}
+        <div class="{{if model.showBothImages "col-lg-8 col-sm-7" "col-sm-8 col-lg-10"}} profile-block-info">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="user-name">{{model.userInfo.FirstName}} {{model.userInfo.LastName}} {{if  model.userInfo.NickName "("}}{{model.userInfo.NickName}}{{if model.userInfo.NickName ")"}}</div>
                 </div>
-            {{else}}
-                <p class="empty-table-reminder">There are no pending requests</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="user-position">
+                        {{#if model.userInfo.IsFaculty}}
+                            {{model.userInfo.JobTitle}}
+                        {{else if model.userInfo.IsStudent}}
+                            {{model.userInfo.Class}}
+                        {{else if model.userInfo.IsAlumni}}
+                            Alumni
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            {{! Display users social media links if provided }}
+            <div class="row user-links">
+                    {{#if model.userInfo.Facebook}}
+                        <div class="col-xs-3 col-lg-2 col-no-padding col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://www.facebook.com/{{model.userInfo.Facebook}}">Facebook</a>
+                            </div>
+                        </div>
+                    {{/if}}
+                    {{#if model.userInfo.Twitter}}
+                        <div class="col-xs-3 col-lg-2 col-no-padding col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://twitter.com/{{model.userInfo.Twitter}}" >Twitter</a>
+                            </div>
+                        </div>
+                    {{/if}}
+                    {{#if model.userInfo.LinkedIn}}
+                        <div class="col-xs-3 col-lg-2 col-no-padding col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://www.linkedin.com/in/{{model.userInfo.LinkedIn}}">LinkedIn</a>
+                            </div>
+                        </div>
+                    {{/if}}
+                    {{#if model.userInfo.Instagram}}
+                        <div class="col-xs-3 col-lg-2 col-no-padding col-centered">
+                            <div class="social-media-buttons">
+                                <a href="https://www.instagram.com/{{model.userInfo.Instagram}}">Instagram</a>
+                            </div>
+                        </div>
+                    {{/if}}
+                    {{#if model.userLoggedIn}}
+                        <div class="md-hide col-lg-4 col-no-padding col-centered">
+                            <div class="social-media-buttons"{{action "showEditLinksModal"}}>
+                                <a>Edit your Social Media links</a>
+                            </div>
+                        </div>
+                    {{/if}}
+            </div>
+            {{#if model.userLoggedIn}}
+                <div class="row profile-action-block md-show"> 
+                    <div class="col-xs-4 profile-action-button-container">
+                        <div class="profile-action-button"{{action "showEditLinksModal"}}>
+                            <div class="action-icon">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </div>
+                            <div class="action-link">Edit your social media links</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 profile-action-button-container">
+                        <div class="profile-action-button"{{action "showEditProfilePictureModal"}}>
+                            <div class="action-icon">
+                                <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+                            </div>
+                            <div class="action-link">Update your profile picture</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 profile-action-button-container">
+                        <div class="profile-action-button"{{action "toggleMobilePhonePrivacy"}}>
+                            <div class="action-icon">
+                                <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                            </div>
+                            <div class="action-link">{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</div>
+                        </div>
+                    </div>
+                </div>
             {{/if}}
         </div>
+    </section>
+
+    <div class="row background-transparent">
+        <div class="col-lg-5 profile-block-container-left background-transparent col-no-padding">
+            <div class="col-lg-12 background-transparent col-no-padding">
+
+                {{!--Personal Information--}}
+                <section class="row profile-block">
+                        <div class="col-md-12 block-header">Personal Information</div>
+                        {{#if phonePrivacySuccessMessage}}
+                            <div class="col-sm-12 success-message">
+                                {{phonePrivacySuccessMessage}}
+                            </div>
+                        {{/if}}
+                        <div class="col-sm-12 col-no-padding">
+                            {{#if model.userInfo.IsFaculty}}
+                                {{#if model.userInfo.OnCampusDepartment}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Department</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnCampusDepartment}}</div>
+                                    </div>
+                                {{/if}}
+                                {{#if model.userInfo.HomePhone}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Phone</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.formattedHomePhone model.userInfo.formattedHomePhone model.userInfo.HomePhone}}</div>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if model.userInfo.IsStudentOrAlumni}}
+                                {{#if (gt model.userInfo.Majors.length 0)}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Majors</div>
+                                        {{#each model.userInfo.Majors as |major|}}
+                                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{major}}</div>
+                                        {{/each}}
+                                    </div>
+                                {{/if}}
+                                {{#if (gt model.userInfo.Minors.length 0)}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Minors</div>
+                                        {{#each model.userInfo.Minors as |minor|}}
+                                            <div class="col-xs-8 col-no-padding personal-information-entry-value">{{minor}}</div>
+                                        {{/each}}
+                                    </div>
+                                {{/if}}
+                                {{#if model.userInfo.OnOffCampus}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">On/Off Campus</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.OnOffCampus}}</div>
+                                    </div>
+                                {{/if}}
+                                {{#if (and model.userInfo.MobilePhone (or model.userLoggedIn (not model.userInfo.IsMobilePhonePrivate)))}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
+                                            <div class="row col-no-padding">
+                                                <div class="md-hide col-lg-7 col-no-padding">
+                                                    {{#if model.userLoggedIn}}
+                                                        <div class="mobile-phone-privacy-button-mobile-container  dropdown">
+                                                            <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Private" "Public"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                                            </div>
+                                                            <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" true}}>Make Private</div>
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" false}}>Make Public</div>
+                                                            </div>
+                                                        </div>
+                                                    {{/if}}
+                                                </div>
+                                                <div class="col-lg-5 col-no-padding">
+                                                    {{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{#if model.userInfo.Email}}
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Email</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value no-overflow">{{model.userInfo.Email}}</div>
+                                </div>
+                            {{/if}}
+                        </div>
+                </section>
+            </div>
+
+
+            <div class="col-lg-12 background-transparent col-no-padding">
+                <section class="row profile-block">
+                        <div class="col-md-12 block-header">
+                            Home Address
+                        </div>
+                        <div class="col-xs-12 col-no-padding">
+                            {{#if (and  model.userInfo.HomeStreet1 (not-eq model.userInfo.HomeStreet1 ""))}}
+                                <div class="row personal-information-entry entry1">
+                                    <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.HomeStreet1}}</div>
+                                </div>
+                            {{/if}}
+                             {{#if (and  model.userInfo.HomeStreet2 (not-eq model.userInfo.HomeStreet2 ""))}}
+                                <div class="row personal-information-entry entry2">
+                                    <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.HomeStreet2}}</div>
+                                </div>
+                            {{/if}}
+                            <div class="row personal-information-entry entry3 no-border">
+                                <div class="col-xs-12 col-no-padding personal-information-entry-key">
+                                    {{!-- {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}} --}}
+                                    {{model.userInfo.HomeCity}}, 
+                                    {{model.userInfo.HomeState}}
+                                    {{model.userInfo.HomePostalCode}} 
+                                    {{#if (not-eq model.userInfo.HomeCountry "US")}}
+                                        {{if model.userInfo.Country model.userInfo.Country model.userInfo.HomeCountry}}
+                                    {{/if}}
+                                    </div>
+                            </div>
+                        </div>
+                </section>
+            </div>
+            <div class="col-lg-12 background-transparent col-no-padding">
+                {{#if model.userInfo.OnCampusBuilding}}    
+                    <section class="row profile-block">
+                        <div class="col-md-12 block-header">Campus Address</div>
+                        <div class="col-xs-12 col-no-padding">
+                            <div class="row personal-information-entry">
+                                <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.OnCampusRoom}} {{model.userInfo.OnCampusBuilding}}</div>
+                            </div>
+                        </div>
+                    </section>
+                {{/if}}
+                {{#if model.userInfo.IsFaculty}}
+                    <section class="row profile-block">
+                        <div class="col-md-12 block-header">Office Information</div>
+                        <div class="col-xs-12 col-no-padding">
+                            {{#if model.userInfo.OnCampusBuilding}}
+                            <div class="row personal-information-entry">
+                                <div class="col-xs-4 col-no-padding personal-information-entry-key">Room</div>
+                                <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.BuildingDescription model.userInfo.BuildingDescription model.userInfo.OnCampusBuilding}} {{model.userInfo.OnCampusRoom}}</div>
+                            </div>
+                            {{/if}}
+                            {{#if model.userInfo.OnCampusPhone}}
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">(978) 867-{{model.userInfo.OnCampusPhone}}</div>
+                                </div>
+                            {{/if}}
+                            {{#if model.userInfo.office_hours}}
+                                <div class="row personal-information-entry">
+                                    <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Hours</div>
+                                    {{#each model.userInfo.office_hours as |officeHours|}}
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">{{officeHours}}</div>
+                                    {{/each}}
+                                </div>
+                            {{/if}}
+                        </div>
+                    </section>
+                {{/if}}
+            </div>
+
+            {{#if model.userLoggedIn}}
+                <div class="tables-section col-lg-12 background-transparent col-no-padding">
+                    <section class="row profile-block no-padding background-transparent">
+                        {{!--Requests tables--}}
+                            {{#if requestsRecieved}}
+                                    <div class="row table-header">
+                                        <div class="col-sm-12 col-no-padding background-transparent">
+                                            <div {{action "toggleRecievedTable"}} class="toggleTableBtn  background-transparent">
+                                                <span id="recieved-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Recieved
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="membership-requests-recieved-table" class="hidden-table">
+                                        <div class="row header-rows">
+                                            <div class = "col-sm-3 col-xs-12">Name</div>
+                                            <div class = "col-sm-3 col-xs-5 xs-hide">Activity</div>
+                                            <div class = "col-sm-2 xs-hide">Time</div>
+                                            <div class = "col-xs-4 xs-hide">Options</div>
+                                        </div>
+                                        {{#each requestsRecieved as |req|}}
+                                            <div class="row entry-rows">
+                                                <div class="col-sm-3 col-xs-12" onclick={{action "toggleRequestSent"}}> {{req.FirstName}} {{req.LastName}}</div>
+                                                <div class ="col-sm-3 col-xs-12 xs-hide"> {{req.ActivityDescription}} </div>
+                                                <div class ="col-sm-2 col-xs-12 xs-hide"> {{req.DiffDays}} </div>
+                                                <div class ="col-sm-4 col-xs-12 xs-hide">
+                                                    {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
+                                                        <button class="btn button-navy  activity-buttons">See Activity</button>
+                                                    {{/link-to}}
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                            {{/if}}
+                            {{!--Membership requests Sent table--}}
+                                <div class="row table-header">
+                                    <div class="col-sm-12 col-no-padding background-transparent">
+                                        <div {{action "toggleSentTable"}} class="toggleTableBtn  background-transparent">
+                                            <span id="sent-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Membership Requests Sent
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="membership-requests-sent-table" class="hidden-table">
+                                    {{#if model.requestsSent}}
+                                        <div class="row header-rows">
+                                            <div class = "col-sm-3 col-xs-12">Activity</div>
+                                            <div class = "col-sm-3 xs-hide">Decision</div>
+                                            <div class = "col-sm-2 xs-hide">Time</div>
+                                            <div class = "col-sm-4 col-xs-4 xs-hide">Options</div>
+                                        </div>
+                                        {{#each model.requestsSent as |req|}}
+                                            <div class="row entry-rows">
+                                                <div class="col-sm-3 col-xs-12" onclick={{action "toggleRequestSent"}}> {{req.ActivityDescription}} </div>
+                                                <div class = "col-sm-3 col-xs-12 xs-hide"> {{req.RequestApproved}} </div>
+                                                <div class = "col-sm-2 col-xs-12 xs-hide"> {{req.DiffDays}} </div>
+                                                <div class = "col-sm-4 col-xs-12 xs-hide">
+                                                    {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
+                                                        <button class="btn button-navy  activity-buttons md-show">See Activity</button>
+                                                    {{/link-to}}
+                                                    <button {{action "deleteRequest" req.RequestID}} class="btn button-red activity-buttons">Clear</button>
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                    {{else}}
+                                    <p class="empty-table-reminder">There are no pending requests</p>
+                                    {{/if}}
+                                </div>
+                        {{!--Admin table--}}
+                            {{#if model.superGodMode}}
+                                    <div class="row table-header">
+                                        <div class="col-sm-12 col-no-padding background-transparent">
+                                            <div {{action "toggleAdminTable"}} class="toggleTableBtn  background-transparent">
+                                                <span id="admin-table-header" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Admins
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="admin-table"  class="hidden-table">
+                                        <div class="row header-rows">
+                                            <div class = "col-sm-5 col-xs-6">Name</div>
+                                            <div class = "col-sm-3 xs-hide">Super Admin</div>
+                                            <div class = "col-sm-4 col-xs-6">Options</div>
+                                        </div>
+                                        {{#each model.admins as |admin|}}
+                                            <div class="row entry-rows">
+                                                <div class="col-sm-5 col-xs-6"> {{admin.Name}}</div>
+                                                <div class = "col-sm-3 xs-hide"> {{if admin.superAdmin 'Yes' 'No'}} </div>
+                                                <div class = "col-sm-4 col-xs-6">
+                                                    <button {{action "removeAdmin" admin.ID}} class="btn button-red table-button">Remove</button>
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                        {{#link-to "add-admin"}}
+                                            <button class="logout-btn btn button-navy">Add admin</button>
+                                        {{/link-to}}
+                                    </div>
+                            {{/if}}
+                        </section>
+                </div>
+            {{/if}}
+
+        </div>
+
+    {{!--Activities--}}
+        <div class="col-lg-7 profile-block-container-right background-transparent col-no-padding">
+    
+            <section class="profile-block">
+                <div class="row round-top-coners">
+                    <div class="block-header col-sm-12">
+                        Activities
+                    </div>
+                </div>
+                {{#each model.memberships as |activity|}}
+                    <div class="row activity-entry bootstrap-tester" onclick={{action "linkToSpecificActivity" activity }}>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-xs-2 col-sm-3 col-no-padding linkToSpecificActivity-desktop bootstrap-tester">
+                                    <div class="activity-image-container">
+                                        <img src="{{activity.ActivityImagePath}}" class="activity-image" alt="{{activity.ActivityDescription}} profile picture" >
+                                    </div>
+                                </div>
+                                <div class="col-xs-10 col-sm-9">
+                                            <div class="activity-entry-title">{{activity.ActivityDescription}} {{if activity.privacy "(Hidden on your page)"}}</div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-no-padding">
+                                            <div class="row activity-row2">
+                                                <div class="activity-session col-xs-5 col-no-padding">{{activity.session}}</div>
+                                                {{!--Dropdown that display the options for privacy settings on mobile--}}
+                                                <div class="col-xs-7 col-no-padding">
+                                                    {{#if model.userLoggedIn}}
+                                                        <div class="activity-privacy-button-mobile-container dropdown">
+                                                            <div class="social-media-buttons dropdown-toggle {{if activity.clubInfo.Privacy "disabled"}}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <div class="activity-privacy-button-mobile">{{if activity.Privacy "Hidden" "Visible"}} <span class="{{unless activity.clubInfo.Privacy "glyphicon glyphicon-menu-down"}}" aria-hidden="true"></span></div>
+                                                            </div>
+                                                            <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
+                                                                <div class="dropdown-item"{{action "setClubPrivacy" activity true}}>Make Hidden</div>
+                                                                <div class="dropdown-item"{{action "setClubPrivacy" activity false}}>Make Visible</div>
+                                                            </div>
+                                                        </div>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
+                                            <div class="row xs-hide">
+                                                <div class="col-sm-5 col-no-padding activity-header">Group Contacts:</div>
+                                                <div class="col-sm-7 col-no-padding activity-header">{{if activity.clubInfo.ActivityBlurb "Description:"}}</div>
+                                            </div>
+                                            <div class="row xs-hide">
+                                                <div class="col-sm-5 col-no-padding">
+                                                    {{!--The group admins email addresses will be displayed and be clickable--}}
+                                                        {{#each activity.groupAdminsEmail as |groupAdmin index|}}
+                                                            {{#if (lt index 2)}}
+                                                                <div class="activity-contact-button-containers">
+                                                                    <div class="social-media-buttons activity-contact-buttons"{{action "linkToGroupAdminProfile" groupAdmin}}>
+                                                                        <a class="activity-contacts">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a>
+                                                                    </div>
+                                                                </div>
+                                                            {{/if}}
+                                                        {{/each}}
+                                                </div>
+                                                <div class="col-sm-7 col-no-padding activity-description">{{activity.clubInfo.ActivityBlurb}}</div>
+                                                <div class="col-sm-7 col-no-padding activity-description-more-info linkToSpecificActivity-desktop">(<span>More info</span>)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+                {{#unless (gt model.memberships.length 0)}}
+                    <div class="row activity-entry bootstrap-tester">
+                        {{#link-to "all-activities"}}
+                            <div class="col-sm-12 personal-information-entry-key">
+                                <a>No activities to show! Click here to see activities around campus.</a>
+                            </div>
+                        {{/link-to}}
+                    </div>
+                {{/unless}}
+            </section>
+        </div>
     </div>
-    {{#if model.superGodMode}}
-        <div class="row table-row">
-            <div class="col-sm-12">
-              <h2>
-                  <strong>Admins</strong>
-              </h2>
-              <div class="table-responsive">
-                  <table class="table">
-                      <thead>
-                          <tr>
-                              <th>Name</th>
-                              <th>Super Admin</th>
-                              <th>Options</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          {{#each model.admins as |admin|}}
-                              <tr>
-                                  <td> {{admin.Name}} </td>
-                                  <td> {{if admin.superAdmin 'Yes' 'No'}} </td>
-                                  <td>
-                                      <button {{action "removeAdmin" admin.ID}} class="btn button-red table-button">Remove</button>
-                                  </td>
-                              </tr>
-                          {{/each}}
-                      </tbody>
-                  </table>
-              </div>
-              {{#link-to "add-admin"}}
-                  <button class="logout-btn btn button-navy">Add admin</button>
-              {{/link-to}}
-          </div>
-      </div>
-    {{/if}}
-</div>
+
+
+    <!-- Edit profile picture modal -->
+    <div id="editProfilePictureModal" class="modal" onclick={{action "cancelEditProfilePicture"}}>
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div id="profile-modal-form-box" class="row">
+                <div class="col-sm-12 col-no-padding">
+                    <form>
+                        {{#if errorMessage}}
+                            <p id="error-message">{{errorMessage}}</p>
+                        {{/if}}
+                        <label for="image">Upload new profile picture</label>
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="browse-button btn button-navy">
+                                    Browse{{input id="file" type="file" value=file multiple="false"}}
+                                </span>
+                            </label>
+                            {{input value=file placeholder="No File Chosen" type="text" class="form-control" readonly="true"}}
+                        </div>
+                        <div class="image-cropper-wrapper">
+                            <div class="image-cropper-container">
+                                {{image-cropper image=file}}
+                            </div>
+                        </div>
+                        <p class="form-note">Files acceptable: png, jpg, jpeg, bmp, gif</p>
+                        <div class="row">
+                            <div class="col-xs-7 col-no-padding">
+                                <button class="btn button-navy form-button" {{action 'updatePicture'}}>Submit</button>
+                            </div>
+                            <div class="col-xs-5 col-no-padding">
+                                <button class="btn button-cyan form-button profile-picture-cancel-button">Cancel</button>
+                            </div>
+                            <div class="col-xs-6 col-no-padding">
+                                <button class="btn button-cyan form-button profile-picture-privacy-button" {{action "setPicturePrivacy"}}>{{if model.userInfo.show_pic "Hide picture" "Show picture"}}</button>
+                            </div>
+                            <div class="col-xs-6 col-no-padding">
+                                <button class="btn button-cyan form-button profile-picture-reset-button" {{action "resetProfilePicture"}}>Reset Picture</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {{#if profilePictureSuccessMessage}}
+                    <div class="success-message profile-success-message">{{profilePictureSuccessMessage}}</div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Edit social media links modal -->
+    <div id="editLinksModal" class="modal" onclick={{action "hideEditLinksModal"}}>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-sm-12 modal-title">Edit your links</div>
+            </div>
+            {{#if linksErrorMessage}}
+                <p id="error-message">{{linksErrorMessage}}</p>
+            {{/if}}
+            {{#if linksSuccessMessage}}
+                <div class="success-message">{{linksSuccessMessage}}</div>
+            {{/if}}
+            {{#each model.links as |link|}}
+                <div class="row edit-links-row">
+                    <div class="col-xs-5 links-title">{{link.type}}</div>
+                    {{#if link.link}}
+                        <div class="col-xs-3 edit-links-button-containers">
+                            <button class="btn btn-primary edit-links-button" onclick={{action "changeSocialMediaLink" link}}>Edit</button>
+                        </div>
+                        <div class="col-xs-4 edit-links-button-containers">
+                            <button class="btn button-danger edit-links-button" onclick={{action "updateLinks" "removed" link}}>Remove</button>
+                        </div>
+                    {{else}}
+                        <div class="col-xs-7 edit-links-button-containers">
+                            <button class="btn btn-primary add-links-button" onclick={{action "changeSocialMediaLink" link}}>Add</button>
+                        </div>
+                    {{/if}}
+                </div>
+                {{! form for entering data }}
+                <div class="row edit-links-form-container col-no-padding hide">
+                    <form class="edit-links-form" {{action "updateLinks" "updated" link on="submit"}}>
+                            <div class="col-xs-8 edit-links-button-containers">
+                                    {{input value=model.link class="edit-links-input"}}
+                            </div>
+                            <div class="col-xs-4 edit-links-button-containers">
+                                <input class="btn btn-primary edit-links-button" type="submit">
+                            </div>
+                    </form>
+                </div>
+            {{/each}}
+            <button class="btn btn-primary hide-links-modal-button">Done</button>
+            
+        </div>
+
+    </div>
+  {{else}}
+  <section class="row first-profile-block">
+    <div class="col-lg-12 user-name" {{action "tester"}}>The user was not found</div> 
+    {{#link-to "index"}}
+        <div class="col-lg-12 user-position"><a>Go back to search</a></div>
+    {{/link-to}}
+    {{!-- TODO link to search page --}}
+    
+  </section>
+
+
+{{/if}} 
+</main>

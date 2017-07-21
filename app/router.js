@@ -13,13 +13,15 @@ Router.map(function() {
   this.route("specific-activity", { path: "/specific-activity/:SessionCode/:ActivityCode" });
   this.route("add-membership", { path: "/add-membership/:SessionCode/:ActivityCode" });
   this.route("edit-activity", { path: "/edit-activity/:SessionCode/:ActivityCode" });
-  this.route("profile");
+  this.route("profile", { path: "/profile/:Username"});
   this.route('add-admin');
   this.route('about');
   this.route('help');
   this.route('activities-status');
   this.route('all-events');
   this.route('chapel-credits');
+  this.route('my-involvements');
+  this.route("email", {path: "/email/:EmailAdress"});
 });
 
 export default Router;

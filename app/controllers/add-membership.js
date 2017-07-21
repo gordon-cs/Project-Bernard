@@ -69,6 +69,20 @@ export default Ember.Controller.extend({
                 return getAsync("/accounts/email/" + email + "/", context).catch(showError);
             };
 
+            // Get current date with only year, month and date
+            function javascript_current_date() {
+                var current_date = new Date(),
+                    curYear = current_date.getFullYear(),
+                    curMonth = current_date.getMonth(),
+                    curDay = current_date.getDate(),
+                    curHour = current_date.getHours() < 10 ? "0" + current_date.getHours() : current_date.getHours(),
+                    curMinute = current_date.getMinutes() < 10 ? "0" + current_date.getMinutes() : current_date.getMinutes();
+
+                var jsCurrDate = new Date(curYear, curMonth, curDay, curHour, curMinute);
+
+                return jsCurrDate;
+            }
+
             // Send data for membership
             let postMembership = function(result) {
                 let data = {
@@ -76,7 +90,6 @@ export default Ember.Controller.extend({
                     "SESS_CDE": sessionCode,
                     "ID_NUM": result.GordonID,
                     "PART_CDE": role.ParticipationCode,
-                    "BEGIN_DTE": new Date().toLocaleString(),
                     "COMMENT_TXT": comments,
                     "GRP_ADMIN": false
                 };

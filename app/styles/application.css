@@ -27,12 +27,6 @@
     margin-left: 15px;
 }
 
-.logo-mobile-center {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    float: none !important;
-}
-
 
 /* -----------------------------
     Title and Navigation
@@ -49,21 +43,44 @@ header {
 }
 
 .app-title-container {
-    text-align: left;
-    background: #cccccb;
-    position: relative;
+
+    text-align: center;
+	background: #cccccb;
+	position: relative;
 }
 
 .app-title {
-    display: none;
-    color: #31342b;
-    text-transform: uppercase;
-    vertical-align: middle;
-    font-size: 1.4em !important;
-    letter-spacing: 1px;
-    font-weight: 400 !important;
-    margin-top: 15px !important;
-    margin-bottom: 15px !important;
+	display: none;
+	color: #31342b;
+	text-transform: uppercase;
+	vertical-align: middle;
+	font-size: 8pt !important;
+	letter-spacing: 1px;
+	font-weight: 400 !important;
+	margin-top: 16px !important;
+	margin-bottom: 15px !important;
+	padding-right: 3em !important;
+}
+.app-title ul {
+	list-style-type: none;
+	display: flex;
+	float: right;
+}
+.app-title ul li {
+	margin-right: 2em;
+}
+.app-title a {
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	padding: 2em;
+	margin: -2em;
+	color: #31342b;
+	text-decoration: none;
+}
+.app-title a:hover {
+	color: #00aeef;
+	text-decoration: none;
 }
 
 #primary-menu {
@@ -85,8 +102,9 @@ header {
 }
 
 #primary-menu a {
-    color: #00aeef;
-    padding: inherit;
+	color: #00aeef;
+  padding: inherit;
+  text-decoration: none;
 }
 
 #primary-menu a:hover {
@@ -126,29 +144,35 @@ ul.dropdown-menu {
 .user-info {
     text-align: right;
     color: #31342b;
-    display: none;
-    position: absolute !important;
-    right: 0;
-    padding-bottom: 10px;
-}
 
-.user-info h4 {
-    color: #31342b;
-    letter-spacing: 1px;
-    font-size: 1.2em;
-    display: inline;
-    text-transform: uppercase;
-    margin-top: 19px;
-    margin-bottom: 19px;
+		display: none;
+		position: absolute !important;
+		right: 0;
+		margin-top: 19px;
 }
-
-.user-info:hover {
-    color: #DE571F;
+.user-info h6 {
+	color: #31342b;
+	letter-spacing: 1px;
+	font-size: 8pt;
+	font-weight: bold;
+	display: inline;
+	text-transform: uppercase;
 }
 
 .user-info-buttons {
-    display: inline;
-    margin-left: 15px;
+	display: inline;
+	margin-left: 15px;
+}
+.user-info-unauth {
+	padding-right: 0em !important;
+	float: right !important;
+}
+.user-info-wrapper {
+	display: inline;
+	float: right;
+}
+.user-info-wrapper h6 {
+	cursor: pointer;
 }
 
 .user-info-mobile {
@@ -214,6 +238,10 @@ ul.dropdown-menu {
     border-radius: 25px;
 }
 
+/* Change autocomplete background to any color ;) */
+input:-webkit-autofill, input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
 
 /* -----------------------------
    HERO IMAGE
@@ -258,6 +286,17 @@ ul.dropdown-menu {
 }
 
 @media only screen and (min-width: 768px) {
+	.app-title {
+		display: inline;
+	}
+	.app-title-container {
+        text-align: center;
+	}
+	.logo-mobile-center {
+			margin-left: auto !important;
+			margin-right: auto !important;
+			float: none !important;
+	}
     .user-info {
         display: inline;
     }
@@ -276,9 +315,10 @@ ul.dropdown-menu {
     #primary-menu {
         font-size: 1em;
         margin-top: 12px;
-        margin-right: 22%;
+		width: 700px;
+		margin-left: auto;
+		margin-right: auto;
         float: none;
-        text-align: right;
     }
     #primary-menu li {
         display: inline;
@@ -311,24 +351,15 @@ ul.dropdown-menu {
 }
 
 @media only screen and (min-width: 992px) {
-    .app-title-container {
-        text-align: center;
-        padding: 22px;
-    }
-    .mobile-row {
-        display: none;
-    }
-    .app-title {
-        display: inline;
-    }
+
     #logo-box {
-        max-width: 200px;
-        padding: 20px 30px;
-        display: block;
-        position: absolute;
-        top: 0;
-        padding: 2% 3%;
-    }
+      max-width: 200px;
+      padding: 20px 30px;
+			display: block;
+      position: absolute;
+      top: 0;
+      padding: 2% 3%;
+  	}
     #logo-box img {
         max-width: 100%;
     }
@@ -350,6 +381,25 @@ ul.dropdown-menu {
     .user-info {
         margin-top: 5px;
     }
+
+		#logo-box-horizontal {
+				display: block;
+				position: absolute;
+				top: 0;
+				padding-top: 45px;
+				padding-bottom: 30px;
+				padding-left: 30px;
+				padding-right: 30px;
+		}
+		.logo-mobile-center {
+			display: none !important;
+		}
+		/*#primary-menu {
+			margin-left: 200px;
+		}*/
+		.user-info {
+			margin-top: 17px;
+		}
 }
 
 @media only screen and (min-width: 1200px) {

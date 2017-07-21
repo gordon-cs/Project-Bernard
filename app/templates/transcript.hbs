@@ -1,10 +1,93 @@
-<div class="container">
-    <div class="row reset-padding">
+<div class="container main-container transcript">
+    <div class="row" id="download-div">
         <button id="download-button" class="btn button-cyan" onclick={{action "getPDF"}}>
             Download Transcript
         </button>
     </div>
-    <div class="row reset-padding">
-        <iframe id="transcipt-view" src={{model.url}}></iframe>
+    <div id="print">
+        <h3><strong>{{model.title}}</strong></h3>
+
+        <div class="table-responsive">
+
+            <table class="table">
+                <thead></thead>
+                {{#each model.membershipsDictionary as |session|}}
+                <thead class="session-description"><tr><th colspan="3"><h4><strong>{{session.SessionDescription}}</strong></h4></th></tr></thead>
+                <thead>
+                    <tr>
+                        <!-- <th>Session</th> -->
+                        <th>Activity</th>
+                        <th>Participation</th>
+                        <th>Total Semesters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each session.Activities as |membership|}}
+                    <tr>
+                        <!-- <td>{{membership.SessionDescription}}</td> -->
+                        <td>{{membership.ActivityDescription}}</td>
+                        <td>{{membership.ParticipationDescription}}</td>
+                        <td>{{membership.SemesterAcount}}</td>
+                    </tr>
+                    {{/each}}
+                    <tr class="end">
+                        <td colspan="3">
+                        </td>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>
+        </div>
     </div>
+
+    <!-- {{#if model.hasLeaderships}}
+    <div class="table-responsive">
+        <h4><strong>Leadership positions</strong></h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Session</th>
+                    <th>Activity</th>
+                    <th>Participation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each model.leaderships as |leadership|}}
+                <tr>
+                    <td>{{leadership.SessionDescription}}</td>
+                    <td>{{leadership.ActivityDescription}}</td>
+                    <td>{{leadership.ParticipationDescription}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{/if}}
+    {{#if model.hasMemberships}}
+    <div class="table-responsive">
+        <h4><strong>Memberships</strong></h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Session</th>
+                    <th>Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each model.memberships as |membership|}}
+                <tr>
+                    <td>{{membership.SessionDescription}}</td>
+                    <td>{{membership.ActivityDescription}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{/if}} -->
+    <!-- {{#if model.noActivity}}
+    <h4>There is no activity to report!</h4>
+    {{/if}} -->
+    <!-- <div class="row reset-padding">
+        <iframe class="col-xs-12" id="transcipt-view" src={{model.url}}></iframe>
+    </div> -->
 </div>

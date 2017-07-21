@@ -14,12 +14,26 @@ export default Ember.Controller.extend({
     requestsRecieved: [],
     showMenu: false,
     actions: {
+        toggleLogin() {
+            if($("#login-outer-box").is(':visible')) {
+                $("#login-outer-box").hide();
+            }
+            else {
+                $("#login-outer-box").show();
+            }
+            $(".login-toggle").blur();
+        },
         toggleMenu() {
             this.set("showMenu", !this.get("showMenu"));
+        },
+        closeMenu() {
+            this.set("showMenu", false);
         },
         logout() {
             this.get("session").invalidate();
             this.set("requestsRecieved", []);
+            console.log(this.get("requestsSent"));
+            console.log(this.get("requestsCalled"));
             this.set("requestsSent", []);
         },
         stalkPeeps(item) {

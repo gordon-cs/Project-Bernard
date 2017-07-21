@@ -1,0 +1,13 @@
+h4, h3 {
+    margin-bottom: 0.5em;
+    margin-top: 2em;
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+    text-align: left;
+}
+table {
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+    text-align: left;
+}
+td, th {
+    padding-right: 2em;
+}

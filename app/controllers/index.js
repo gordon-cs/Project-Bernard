@@ -11,5 +11,9 @@ export default Ember.Controller.extend({
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
     actions: {
 
+      toggleDropdown(){
+        $("#involvements-navbar").toggle();
+      }
     }
+
 });

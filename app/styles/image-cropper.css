@@ -1,0 +1,14 @@
+.image-cropper .cropper-canvas {
+    display: inline !important;
+}
+
+.image-cropper .img-preview {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.image-cropper #cropper-div {
+    display: none;
+}

@@ -1,18 +1,36 @@
 <div class="col-sm-12 header">
-  <nav class="container vertical-center graybox app-title-container">
-    <div class="user-info col-sm-3">
-      {{#if session.isAuthenticated}}
-      <div class="user-info-buttons dropdown">
-        <h4 class="dropdown-toggle" id=id="dropdownMenu1" aria-haspopup="true" aria-expanded="true">
-          {{session.data.authenticated.token_data.name}}
-        </h4>
-        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown1menu1">
-          <li>
-            {{#link-to "help"}} Help{{/link-to}}
-          </li>
-          <li>
-            {{#link-to "profile"}}Profile {{#if requestsRecieved}}
-            <span class="notification">
+
+    <header class="container">
+        <div class="app-title-container row">
+            {{#link-to "index"}}
+                <img src="images/gordon-logo-mobile.png" id="logo-mobile"/>
+            {{/link-to}}
+            {{#if session.isAuthenticated}}
+                <div class="mobile-menu-icon">
+                    <button {{action 'toggleMenu'}}>
+                      <img src="images/list.svg" id="icon-menu">
+                    </button>
+                </div>
+            {{else}}
+                <div class="mobile-menu-icon">
+                    <button class="btn btn-lg login-toggle" {{action 'toggleLogin'}}>
+                        Log In
+                    </button>
+                </div>
+            {{/if}}
+            <div class="user-info col-sm-9 {{if session.isAuthenticated '' 'user-info-unauth'}}">
+                {{#if session.isAuthenticated}}
+                <div class="user-info-wrapper">
+                    <div class="user-info-buttons dropdown">
+                        <h6 class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                        {{session.data.authenticated.token_data.name}}
+                        <span class="glyphicon glyphicon-chevron-down"></span></h6>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown1menu1">
+                          <li>{{#link-to "help"}} Help{{/link-to}} </li>
+                          <li>{{#link-to "profile"}}Profile
+                            {{#if requestsRecieved}}
+                                <span class="notification">
                                     {{requestsRecieved.length}}
                                 </span> {{/if}} {{/link-to}}
           </li>
@@ -31,110 +49,116 @@
       {{#if requestsRecieved}}
       <span class="notification">
                             {{requestsRecieved.length}}
-                        </span> {{/if}} {{/if}}
-    </div>
-    {{#if session.isAuthenticated}} {{#link-to "index"}}
-    <div id="logo-box-horizontal">
-      <img src="images/gordon-logo-horizontal.svg" alt="Gordon College logo" width="150" height="38" />
-    </div>
-    {{/link-to}} {{else}} {{#link-to "index"}}
-    <div id="logo-box">
-      <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College logo">
-    </div>
-    {{/link-to}} {{/if}}
-  </nav>
+                        </span>
+                    {{/if}}
+                </div>
+                {{/if}}
+                <div class="app-title">
+                    <ul>
+                        <li><a>Student Clubs &amp; Organizations</a></li>
+                        <li><a href="https://my.gordon.edu/">My Gordon</a></li>
+                    </ul>
+                </div>
 
-
-  {{#if session.isAuthenticated}}
-  <nav class=" {{if showMenu 'graybox showMenu' 'lightgraybox'}} navbar navbar-toggleable-md navbar-light bg-faded">
-    <div class="row mobile-row">
-      {{#link-to "index"}}
-      <img src="images/gordon-logo-mobile.png" id="logo-mobile" class="{{if session.isAuthenticated '' 'logo-mobile-center'}}"
-      /> {{/link-to}} {{#if session.isAuthenticated}}
-      <div class="mobile-menu-icon">
-        <button data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <img src="images/list.svg" id="icon-menu">
-                  </button>
-      </div>
-      {{/if}}
-    </div>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="primary-menu" id="primary-menu">
-        <li class="user-info-mobile">
-          {{session.data.authenticated.token_data.name}}
-        </li>
-        <li>
-          
-            <div class="input-group event-search">
-               {{input value=model.searchValue key-up=(action "stalkPeeps") class="form-control" placeholder="Search for..."}}
             </div>
-            </li>
-            <li>
-           
-          </li>
-          <li>
 
-          <button type="button">
+            {{#if session.isAuthenticated}}
+                <!-- {{#link-to "index"}}
+                    <div id="logo-box-horizontal">
+                        <img src="images/gordon-logo-horizontal.svg" alt="Gordon College logo"  width="150" height="38" />
+                    </div>
+                {{/link-to}} -->
+            {{else}}
+                {{#link-to "index"}}
+                    <div id="logo-box">
+                        <img src="images/gordon-logo-vertical-white.svg" alt="Gordon College logo">
+                    </div>
+                {{/link-to}}
+            {{/if}}
+        </div>
+    </header>
+    {{#if session.isAuthenticated}}
+        <div class="row {{if showMenu 'graybox showMenu' 'lightgraybox'}} primary-menu-container">
+            <ul id="primary-menu">
+                <li class="user-info-mobile">
+                    {{session.data.authenticated.token_data.name}}
+                </li>
+                <li>
+                  <span {{action "closeMenu"}}>
                     {{#link-to "index" class="button uppercase"}}
                         My Home
                     {{/link-to}}
-                  </button>
-        </li>
-        <li>
-          <button type="button">
+                  </span>
+                </li>
+                <li>
+                  <span {{action "closeMenu"}}>
                     {{#link-to "all-activities" class="button uppercase"}}
                         Activities
                     {{/link-to}}
-                  </button>
-        </li>
-
-        <li class="nav-item dropdown">
-          <button class="nav-link" type="button">
-                    {{#link-to "all-events" class="uppercase"}} Events {{/link-to}}
-                  </button>
-          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <div class="dropdown-item">
-              {{#link-to "chapel-credits" class="primary-menu" }}
-              <center>Chapel </center>
-              {{/link-to}}
-            </div>
-            <div class="dropdown-item">
-              {{#link-to "all-events" class="uppercase" }}
-              <center>All Events </center>
-              {{/link-to}}
-            </div>
-          </ul>
-        </li>
-
-        <li>
-          <button type="button">
-                  {{#link-to "about" class="button uppercase"}}
-                        About
-                  {{/link-to}}
-                </button>
-        </li>
-
-        <li class="user-info-mobile">
-          {{#link-to "help"}} Help{{/link-to}}
-        </li>
-        <li class="user-info-mobile">
-          {{#link-to "profile" class="button uppercase" }} Profile {{/link-to}} {{#if requestsRecieved}}
-          <span class="notification">
+                  </span>
+                </li>
+                <li>
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "transcript" class="button uppercase"}}
+                        Transcript
+                    {{/link-to}}
+                  </span>
+                </li>
+                <li>
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "about" class="button uppercase"}}
+                          About
+                    {{/link-to}}
+                  </span>
+                </li>
+                <li>
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "my-involvements" class="button uppercase"}}
+                          My Involvements
+                    {{/link-to}}
+                  </span>
+                </li>
+                <li class="user-info-mobile" >
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "help"}} Help{{/link-to}}
+                  </span>
+                </li>
+                <li class="user-info-mobile">
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "profile" class="button uppercase"}}
+                        Profile
+                    {{/link-to}}
+                    {{#if requestsRecieved}}
+                        <span class="notification">
                             {{requestsRecieved.length}}
-                        </span> {{/if}}
-        </li>
-        {{#if isSomeAdmin}}
-        <li class="user-info-mobile">
-          {{#link-to "activities-status"}} Activities' Status{{/link-to}}
-        </li>
-        {{/if}}
-        <li class="logout-mobile">
-          <a {{action "logout"}} class="button uppercase">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  {{/if}}
+                        </span>
+                    {{/if}}
+                  </span>
+                </li>
+                {{#if isSomeAdmin}}
+                <li class="user-info-mobile">
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "activities-status"}}
+                    Activities' Status
+                    {{/link-to}}
+                  </span>
+                </li>
+                {{/if}}
+                <li class="user-info-mobile">
+                    <span>
+                        <a href="https://my.gordon.edu/">My Gordon</a>
+                    </span>
+                </li>
+                <li class="logout-mobile">
+                  <span {{action "closeMenu"}}>
+                    <a {{action "logout"}} href="#" class="button uppercase">Logout</a>
+                  </span>
+                </li>
+            </ul>
+        </div>
+    {{else}}
+        {{login-block}}
+    {{/if}}
 </div>
 
 <div id="main-page-container" class="col-sm-12">

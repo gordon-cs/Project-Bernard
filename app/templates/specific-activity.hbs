@@ -1,4 +1,4 @@
-<div class="container main-container">
+<div class="container main-container specific-activity">
     <div class="row">
         <div class="activity-name">
             <h1>{{model.activity.ActivityDescription}}</h1>
@@ -30,9 +30,9 @@
                           {{#each model.contactEmails as |contact|}}
                           <p class="activity-info-item-data">
                               {{contact.FirstName}} {{contact.LastName}}
-                              <a href="mailto:{{contact.Email}}">
+                              {{#link-to 'email' contact.Email}}
                                 <span class="glyphicon glyphicon-envelope cyan"></span>
-                              </a>
+                              {{/link-to}}
                           </p>
                           {{/each}}
                         </div>
@@ -65,9 +65,9 @@
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
-            <a href="mailto:{{model.emails}}">
+            {{#link-to 'email' model.emails}}
                 <button class="btn button-navy">Send Email to Group</button>
-            </a>
+            {{/link-to}}
         {{else if model.leading}}
             {{#link-to 'add-membership' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy" disabled={{model.activityClosed}}>Add Member</button>
@@ -81,11 +81,11 @@
             </a>
         {{else if model.notAMember}}
             {{#if followLoad}}
-                <button type="button" class="btn button-navy">Wait</button>
+                <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Wait</button>
             {{else if model.following}}
-                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Unfollow</button>
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}} disabled={{model.activityClosed}}>Unsubscribe</button>
             {{else}}
-                <button type="button" class="btn button-navy" {{action "toggleFollow"}}>Follow</button>
+                <button type="button" class="btn button-navy" {{action "toggleFollow"}} disabled={{model.activityClosed}}>Subscribe</button>
             {{/if}}
             {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
                 <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Join</button>
@@ -145,7 +145,9 @@
                                             <button {{action "removePerson" mem}} class="btn button-red table-button">Remove</button>
                                         </td>
                                         <td class="group-admin-checkbox">
-                                        <input type="checkbox" name="groupAdmin" checked={{mem.GroupAdmin}} {{action "toggleAdmin" mem on="change"}}>
+                                            {{#if (not-eq mem.ParticipationDescription "Guest")}}
+                                            <input type="checkbox" name="groupAdmin" checked={{mem.GroupAdmin}} {{action "toggleAdmin" mem on="change"}}>
+                                            {{/if}}
                                         </td>
                                     {{else if mem.isLoggedInUser}}
                                         <td><button {{action "removePerson" mem}} class="btn button-red table-button">Leave</button></td>

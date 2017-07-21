@@ -4,34 +4,34 @@
     Section Headers
 ------------------------------- */
 
-.section-title {
+.profile .section-title {
     text-align: center;
     margin-top: 50px;
     margin-bottom: 20px;
     color: #31342b;
 }
-.section-title > h2 {
+.profile .section-title > h2 {
     text-align: center;
 }
-.group-title {
+.profile .group-title {
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
     font-size: 1.3em;
 }
 
-.empty-list {
+.profile .empty-list {
     text-align: center;
 }
-.empty-list > h3 {
+.profile .empty-list > h3 {
     font-size: 14px !important;
 }
-.empty-list-link {
+.profile .empty-list-link {
     color:  #00aeef;
 	text-decoration: none;
     padding: inherit;
 }
-.empty-list-link:hover {
+.profile .empty-list-link:hover {
     color: var(--orange);
 }
 
@@ -39,18 +39,18 @@
     Responsive Changes
 ------------------------------- */
 @media only screen and (min-width: 768px) {
-    .section-title {
+    .profile .section-title {
         font-size: 1.2em !important;
         width: 61%;
         margin-left: auto;
         margin-right: auto;
     }
-    .group-title {
+    .profile .group-title {
         width: 40%;
         margin-left: auto;
         margin-right: auto;
     }
-    .empty-list > h3 {
+    .profile .empty-list > h3 {
         font-size: 18px !important;
     }
 }
