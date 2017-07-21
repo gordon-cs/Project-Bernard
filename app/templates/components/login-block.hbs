@@ -1,0 +1,12 @@
+<div id="login-block">
+    <form {{action "authenticate" on="submit"}}>
+        <div id="login-info">
+            {{input id="identification-block" class="form-control" value=identification autofocus="autofocus" placeholder="Username"}}
+            {{input id="password-block" class="form-control" type="password" value=password placeholder="Password"}}
+            <button type="submit" class="btn form-button button-navy login-button">Login</button>
+        </div>
+        {{#if errorMessage}}
+            <p id="error-message">{{errorMessage}}</p>
+        {{/if}}
+    </form>
+</div>

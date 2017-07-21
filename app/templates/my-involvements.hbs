@@ -1,0 +1,81 @@
+<div class="row my-involvements">
+    <h1>My Involvements</h1>
+    <div id="my-involvements-content">
+        {{#if model.nothingToShow}}
+        <div id="no-activity">
+            Looks like you don't have any activities yet! Check out
+            {{#link-to 'all-activities'}}
+                what's available!
+            {{/link-to}}
+        </div>
+        {{else}}
+            {{#if model.currentSupervisionsFilled}}
+                <h2>Activities Currently Advising</h2>
+                <div class="whitebox">
+                    <h3 data-toggle="collapse" data-target="#current-supervise"> {{truncate-text model.currentSession.SessionDescription 0 -14}}<span class="glyphicon glyphicon-menu-down"></span></h3>
+                    <ul id="current-supervise" class="in">
+                        {{#each model.currentSupervisions as |advisor|}}
+                            <li class="activities">
+                                {{#link-to "specific-activity" advisor.SessionCode advisor.ActivityCode}}
+                                    {{advisor.ActivityDescription}}{{/link-to}}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/if}}
+
+            {{#if model.currentMembershipsFilled}}
+                <h2>Current Experience</h2>
+                <div class="whitebox">
+                    <h3 data-toggle="collapse" data-target="#current-membership">
+                    {{truncate-text model.currentSession.SessionDescription 0 -14 }}<span class="glyphicon glyphicon-menu-down"></span></h3>
+                    <ul id="current-membership" class="in">
+                        {{#each model.currentMemberships as |mem|}}
+                            <li class="activities">
+                                {{#link-to "specific-activity" mem.SessionCode mem.ActivityCode}}
+                                    {{mem.ActivityDescription}}{{/link-to}}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/if}}
+
+            {{#if model.pastSupervisionsFilled}}
+                <h2>Activities Previously Advised</h2>
+                <div class="whitebox">
+                    <h3 data-toggle="collapse" data-target="#past-supervise">All Past Sessions<span class="glyphicon glyphicon-menu-down"></span></h3>
+                    <ul id="past-supervise" class="collapse">
+                        {{#each model.pastSupervisions as |advisor|}}
+                            <li class="past-session activities">
+                                {{#link-to "specific-activity" advisor.SessionCode advisor.ActivityCode class="row"}}
+                                    <span class="col-xs-6 co">{{advisor.ActivityDescription}}</span>
+                                    <span class="col-xs-6 involvements-session-description">{{advisor.SessionDescription}}</span>
+                                {{/link-to}}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/if}}
+
+            {{#if model.pastMembershipsFilled}}
+                <h2>Past Experience</h2>
+                <div class="whitebox">
+                    {{#each model.pastMemberships as |memSession|}}
+                    <div>
+                        <h3 data-toggle="collapse" data-target= {{concat "#past-membership-" memSession.sessionCode}}> {{truncate-text memSession.session 0 -14}}<span class="glyphicon glyphicon-menu-down"></span></h3>
+                        <ul id= {{concat "past-membership-" memSession.sessionCode}} class="collapse">
+                            <!--- Note that for accessibility, we still need to find a way to set aria-lablledby attr -->
+                            {{#each memSession.activities as |mem|}}
+                                <li class="activities">
+                                    {{#link-to "specific-activity" mem.SessionCode mem.ActivityCode}}
+                                        {{mem.ActivityDescription}}{{/link-to}}
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            {{/if}}
+        {{/if}}
+    </div>
+</div>

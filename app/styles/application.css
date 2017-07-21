@@ -23,11 +23,6 @@
 		margin: 11px;
 		margin-left: 15px;
 }
-.logo-mobile-center {
-		margin-left: auto !important;
-		margin-right: auto !important;
-		float: none !important;
-}
 
 /* -----------------------------
     Title and Navigation
@@ -43,19 +38,41 @@ header {
 }
 .app-title-container {
     text-align: center;
-		background: #cccccb;
-		position: relative;
+	background: #cccccb;
+	position: relative;
 }
 .app-title {
 	display: none;
 	color: #31342b;
 	text-transform: uppercase;
 	vertical-align: middle;
-	font-size: 1.4em !important;
+	font-size: 8pt !important;
 	letter-spacing: 1px;
 	font-weight: 400 !important;
-	margin-top: 15px !important;
+	margin-top: 16px !important;
 	margin-bottom: 15px !important;
+	padding-right: 3em !important;
+}
+.app-title ul {
+	list-style-type: none;
+	display: flex;
+	float: right;
+}
+.app-title ul li {
+	margin-right: 2em;
+}
+.app-title a {
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	padding: 2em;
+	margin: -2em;
+	color: #31342b;
+	text-decoration: none;
+}
+.app-title a:hover {
+	color: #00aeef;
+	text-decoration: none;
 }
 #primary-menu {
 	font-size: 1.5em;
@@ -75,6 +92,7 @@ header {
 #primary-menu a {
 	color: #00aeef;
   padding: inherit;
+  text-decoration: none;
 }
 #primary-menu a:hover {
 	color: #DE571F;
@@ -115,20 +133,26 @@ ul.dropdown-menu {
 .user-info h6 {
 	color: #31342b;
 	letter-spacing: 1px;
-	font-size: 1.2em;
+	font-size: 8pt;
+	font-weight: bold;
 	display: inline;
 	text-transform: uppercase;
 }
 .user-info-buttons {
-		display: inline;
-		margin-left: 15px;
-		
+
+	display: inline;
+	margin-left: 15px;
 }
-#dropdownMenu1 {
+.user-info-unauth {
+	padding-right: 0em !important;
+	float: right !important;
+}
+.user-info-wrapper {
+	display: inline;
+	float: right;
+}
+.user-info-wrapper h6 {
 	cursor: pointer;
-}
-#dropdownMenu1:hover {
-	text-shadow: 2px 1px 1px #aaaaaa;
 }
 .user-info-mobile {
 		color: white;
@@ -183,6 +207,12 @@ ul.dropdown-menu {
 		padding: 2px 4px 2px 5px;
 		border-radius: 25px;
 }
+
+/* Change autocomplete background to any color ;) */
+input:-webkit-autofill, input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
 /* -----------------------------
    HERO IMAGE
  ------------------------------- */
@@ -222,6 +252,17 @@ ul.dropdown-menu {
     }
 }
 @media only screen and (min-width: 768px) {
+	.app-title {
+		display: inline;
+	}
+	.app-title-container {
+        text-align: center;
+	}
+	.logo-mobile-center {
+			margin-left: auto !important;
+			margin-right: auto !important;
+			float: none !important;
+	}
     .user-info {
         display: inline;
     }
@@ -235,9 +276,11 @@ ul.dropdown-menu {
     #primary-menu {
         font-size: 1em;
         margin-top: 12px;
-				margin-right: 22%;
+				/*margin-right: 22%;*/
+		width: 700px;
+		margin-left: auto;
+		margin-right: auto;
         float: none;
-        text-align: right;
     }
     #primary-menu li {
         display: inline;
@@ -269,13 +312,7 @@ ul.dropdown-menu {
 		}
 }
 @media only screen and (min-width: 992px) {
-    .app-title-container {
-        text-align: center;
-		}
-    .app-title {
-        display: inline;
-    }
-		#logo-box {
+    #logo-box {
       max-width: 200px;
       padding: 20px 30px;
 			display: block;
@@ -295,12 +332,12 @@ ul.dropdown-menu {
 				padding-left: 30px;
 				padding-right: 30px;
 		}
-		#logo-mobile {
-			display: none;
+		.logo-mobile-center {
+			display: none !important;
 		}
-		#primary-menu {
+		/*#primary-menu {
 			margin-left: 200px;
-		}
+		}*/
 		.user-info {
 			margin-top: 17px;
 		}

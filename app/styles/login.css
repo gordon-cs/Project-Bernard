@@ -1,0 +1,28 @@
+.login #login-outer-box {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /*margin-top: -140px;
+    margin-left: -200px;*/
+    z-index: 100;
+}
+
+.login#login-page-main {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+
+
+
+.login #login-outer-outer-box {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .login #login-outer-outer-box {
+      display: block;
+  }
+}

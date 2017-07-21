@@ -68,7 +68,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Get the account from email (Not used)
         let getAccount = function(email) {
             return getAsync("/accounts/email/" + email + "/", context);
-        };
+        }; 
 
         // Get leader positions of user (not used)
         let getLeaderPositions = function() {
