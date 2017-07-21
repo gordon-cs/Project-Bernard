@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Gordon 360 · Student Clubs &amp; Organizations</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         {{content-for "head"}}
 
@@ -19,19 +19,33 @@
         <link rel="stylesheet" href="assets/form.css">
 
         <link rel="stylesheet" href="assets/application.css">
-        <link rel="stylesheet" href="assets/all-activities.css">
-        <link rel="stylesheet" href="assets/my-activities.css">
-        <link rel="stylesheet" href="assets/specific-activity.css">
         <link rel="stylesheet" href="assets/activities-status.css">
-        <link rel="stylesheet" href="assets/transcript.css">
-        <link rel="stylesheet" href="assets/index.css">
+        <link rel="stylesheet" href="assets/all-activities.css">
+        <link rel="stylesheet" href="assets/email.css">
+        <link rel="stylesheet" href="assets/homepage-banner.css">
         <link rel="stylesheet" href="assets/image-cropper.css">
+        <link rel="stylesheet" href="assets/index.css">
+        <link rel="stylesheet" href="assets/help.css">
+        <link rel="stylesheet" href="assets/profile.css">
+        <link rel="stylesheet" href="assets/specific-activity.css">
+        <link rel="stylesheet" href="assets/add-membership.css">
+
+        <link rel="stylesheet" href="assets/transcript.css">
+        <link rel="stylesheet" href="assets/about.css">
+
+
         <link rel="stylesheet" href="assets/royalslider.css">
         <link rel="stylesheet" href="assets/rs-minimal-white.css">
 
+        <link rel="stylesheet" href="assets/login-block.css">
+        <link rel="stylesheet" href="assets/dashboard-slider.css">
+
+        <link rel="stylesheet" href="assets/login.css">
+        <link rel="stylesheet" href="assets/my-involvements.css">
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/application.css">
 
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -54,6 +68,19 @@
       <!--- End royal slider stuff --->
 
         {{content-for "head-footer"}}
+
+        <script>
+          import ENV from "gordon360/config/environment";
+
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', ENV.trackingCode, 'auto');
+          ga('send', 'pageview');
+
+        </script>
     </head>
     <body>
         {{content-for "body"}}

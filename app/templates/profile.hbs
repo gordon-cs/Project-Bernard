@@ -1,7 +1,8 @@
-<div class="container main-container">
+<div class="container main-container profile">
     <div class="row">
         <div class="section-title">
             <h1>{{session.data.authenticated.token_data.name}}</h1>
+            <h2>{{model.account_type}}</h2>
         </div>
     </div>
     {{#if requestsRecieved}}

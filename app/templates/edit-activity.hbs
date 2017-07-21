@@ -20,6 +20,8 @@
         <p class="form-note {{if defaultImage 'hidden'}}">Files acceptable: png, jpg, jpeg, bmp, gif</p>
         <label for="description">Description</label>
         {{textarea value=model.description class="form-control" rows="4"}}
+        <label for="joinInfo">Special Information for Joining</label>
+        {{textarea value=model.joinInfo class="form-control" rows="4"}}
         <button class="btn button-navy form-button" {{action 'update'}}>Submit Changes</button>
         <button class="btn button-cyan form-button form-cancel-button" {{action "cancel"}}>Cancel</button>
     </form>

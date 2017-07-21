@@ -4,24 +4,22 @@
     Title and Picture
 ------------------------------- */
 
-.main-container {
+.specific-activity.main-container {
     background-color: white;
     margin-top: 15px;
-    margin-left: 15px;
-    margin-right: 15px;
 }
-.activity-name {
+.specific-activity .activity-name {
     margin-top: 50px;
     margin-bottom: 35px;
     font-size: 120%;
     text-align: center;
     color: #31342b;
 }
-.activity-picture {
+.specific-activity .activity-picture {
     max-width: 50%;
     margin-bottom: 20px;
 }
-a {
+.specific-activity a {
     text-decoration: none !important;
 }
 
@@ -29,31 +27,26 @@ a {
     Description
 ------------------------------- */
 
-.right-section {
-    width: 90%;
-    margin-right: auto;
-    margin-left: auto;
-}
-.activity-info {
+.specific-activity .activity-info {
     display: inline-block;
 }
-.detail-item {
+.specific-activity .detail-item {
     font-size: 200%;
 }
-.detail-header {
+.specific-activity .detail-header {
     display: inline;
     font-weight: bold;
 }
-.detail-info {
+.specific-activity .detail-info {
     display: inline;
 }
-.leaders {
+.specific-activity .leaders {
     margin-left: 20px;
 }
-.activity-info-item-data {
+.specific-activity .activity-info-item-data {
     margin: 0 !important;
 }
-.status-message p {
+.specific-activity .status-message p {
   font-size: 1.5em !important;
   font-style: italic;
 }
@@ -61,12 +54,12 @@ a {
 /* -----------------------------
     Buttons
 ------------------------------- */
-.button-row {
+.specific-activity .button-row {
     text-decoration: inherit;
     margin-bottom: 20px;
 }
-.button-row > button,
-.button-row > a > button {
+.specific-activity .button-row > button,
+.specific-activity .button-row > a > button {
     width: 100%;
     margin-top: 10px;
     display: block;
@@ -74,49 +67,49 @@ a {
     text-transform: uppercase;
     font-weight: bold;
 }
-.sup-btn {
+.specific-activity .sup-btn {
     margin-right: 5px !important;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold !important;
 }
-.remove-image-btn {
+.specific-activity .remove-image-btn {
     text-align: center;
 }
-.remove-image-btn button {
+.specific-activity .remove-image-btn button {
     text-transform: uppercase;
     font-weight: bold !important;
 }
-.glyphicon-envelope {
+.specific-activity .glyphicon-envelope {
   font-size: .9em;
   padding-left: .35em;
   padding-right: .6em;
 }
-.glyphicon-envelope.cyan {
+.specific-activity .glyphicon-envelope.cyan {
     color: #00aeef;
 }
-.glyphicon-envelope.cyan:hover {
+.specific-activity .glyphicon-envelope.cyan:hover {
     color: #DE571F;
 }
 /* -----------------------------
     Tables
 ------------------------------- */
 
-.table-row {
+.specific-activity .table-row {
     font-size: 150%;
     margin-top: 20px;
 }
-.table-button {
+.specific-activity .table-button {
     margin-right: 5px;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold !important;
 }
-.empty-table-reminder {
+.specific-activity .empty-table-reminder {
     margin-left: 20px !important;
     font-size: 100%;
 }
-.group-admin-checkbox {
+.specific-activity .group-admin-checkbox {
   text-align: center;
 }
 
@@ -125,26 +118,31 @@ a {
 ------------------------------- */
 
 @media only screen and (min-width: 768px) {
-    .right-section {
-        width: 100%;
-    }
-    .button-row {
+    .specific-activity .button-row {
         margin-right: 10px !important;
     }
-    .button-row > button,
-    .button-row > a > button {
+    .specific-activity .button-row > button,
+    .specific-activity .button-row > a > button {
         width: auto;
         margin-right: 5px;
         display: inline-block;
     }
-    .activity-picture {
+    .specific-activity .activity-picture {
         min-width: 256px;
         min-height: 256px;
     }
-    .comments-table-data {
+    .specific-activity .comments-table-data {
         max-width: 200px;
     }
-    .main-container {
+    .specific-activity.main-container {
         margin-top: 50px;
+    }
+}
+
+@media only screen and (min-width: 815px) {
+    .specific-activity.main-container {
+        width: 768px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

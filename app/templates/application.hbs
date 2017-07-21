@@ -2,7 +2,7 @@
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
-                <img src="images/gordon-logo-mobile.png" id="logo-mobile" class="{{if session.isAuthenticated '' 'logo-mobile-center'}}"/>
+                <img src="images/gordon-logo-mobile.png" id="logo-mobile"/>
             {{/link-to}}
             {{#if session.isAuthenticated}}
                 <div class="mobile-menu-icon">
@@ -10,11 +10,16 @@
                       <img src="images/list.svg" id="icon-menu">
                     </button>
                 </div>
+            {{else}}
+                <div class="mobile-menu-icon">
+                    <button class="btn btn-lg login-toggle" {{action 'toggleLogin'}}>
+                        Log In
+                    </button>
+                </div>
             {{/if}}
-            <div class="col-sm-3"></div>
-            <h1 class="app-title col-sm-6">Student Clubs &amp; Organizations</h1>
-            <div class="user-info col-sm-6">
+            <div class="user-info col-sm-9 {{if session.isAuthenticated '' 'user-info-unauth'}}">
                 {{#if session.isAuthenticated}}
+                <div class="user-info-wrapper">
                     <div class="user-info-buttons dropdown">
                         <h6 class="dropdown-toggle" id=id="dropdownMenu1" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true">
@@ -29,9 +34,6 @@
                                 </span>
                             {{/if}}
                             {{/link-to}}</li>
-                          {{#if isSomeAdmin}}
-                          <li>{{#link-to "activities-status"}} Activities' Status{{/link-to}} </li>
-                          {{/if}}
                           <li role="separator" class="divider"></li>
                           <li><a href="#" {{action "logout"}}>Logout</a></li>
                         </ul>
@@ -41,14 +43,24 @@
                             {{requestsRecieved.length}}
                         </span>
                     {{/if}}
+                </div>
                 {{/if}}
+                <h1 class="app-title col-sm-8">Gordon 360</h1>
+                <!-- <div class="app-title">
+                    <ul>
+                        <li><a>Student Clubs &amp; Organizations</a></li>
+                        <li><a href="https://my.gordon.edu/">My Gordon</a></li>
+                    </ul>
+                </div> -->
+
             </div>
+
             {{#if session.isAuthenticated}}
-                {{#link-to "index"}}
+                <!-- {{#link-to "index"}}
                     <div id="logo-box-horizontal">
                         <img src="images/gordon-logo-horizontal.svg" alt="Gordon College logo"  width="150" height="38" />
                     </div>
-                {{/link-to}}
+                {{/link-to}} -->
             {{else}}
                 {{#link-to "index"}}
                     <div id="logo-box">
@@ -60,7 +72,7 @@
     </header>
     {{#if session.isAuthenticated}}
         <div class="row {{if showMenu 'graybox showMenu' 'lightgraybox'}} primary-menu-container">
-            <ul id="primary-menu">
+            <ul id="primary-menu" class="nav navbar-nav">
                 <li class="user-info-mobile">
                     {{session.data.authenticated.token_data.name}}
                 </li>
@@ -72,17 +84,28 @@
                   </span>
                 </li>
                 <li>
-                  <span {{action "closeMenu"}}>
-                    {{#link-to "all-activities" class="button uppercase"}}
-                        All Activities
-                    {{/link-to}}
-                  </span>
-                </li>
-                <li>
-                  <span {{action "closeMenu"}}>
-                    {{#link-to "transcript" class="button uppercase"}}
-                        Transcript
-                    {{/link-to}}
+                  <span>
+                      <a data-toggle="dropdown">Activities <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        {{#unless isReadOnly}}
+                        <li>{{#link-to "all-activities" invokeAction=(action 'closeMenu')}}
+                          All Activities
+                        {{/link-to}}</li>
+                        <li>{{#link-to "my-involvements" invokeAction=(action 'closeMenu')}}
+                          My Involvements
+                        {{/link-to}}</li>
+                        {{/unless}}
+                        <li>{{#link-to "transcript" invokeAction=(action 'closeMenu')}}
+                          Transcript
+                        {{/link-to}}</li>
+                        {{#if isSomeAdmin}}
+                        <li>
+                            {{#link-to "activities-status" invokeAction=(action 'closeMenu')}}
+                            Activities' Status
+                            {{/link-to}}
+                        </li>
+                        {{/if}}
+                      </ul>
                   </span>
                 </li>
                 <li>
@@ -91,7 +114,7 @@
                           About
                     {{/link-to}}
                   </span>
-                </li {{action "closeMenu"}}>
+                </li>
                 <li class="user-info-mobile" >
                   <span {{action "closeMenu"}}>
                     {{#link-to "help"}} Help{{/link-to}}
@@ -109,15 +132,7 @@
                     {{/if}}
                   </span>
                 </li>
-                {{#if isSomeAdmin}}
-                <li class="user-info-mobile">
-                  <span {{action "closeMenu"}}>
-                    {{#link-to "activities-status"}}
-                    Activities' Status
-                    {{/link-to}}
-                  </span>
-                </li>
-                {{/if}}
+
                 <li class="logout-mobile">
                   <span {{action "closeMenu"}}>
                     <a {{action "logout"}} href="#" class="button uppercase">Logout</a>
@@ -125,6 +140,8 @@
                 </li>
             </ul>
         </div>
+    {{else}}
+        {{login-block}}
     {{/if}}
 </div>
 

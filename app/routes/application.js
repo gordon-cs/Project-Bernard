@@ -5,5 +5,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
     activate() {
         this.controllerFor("application").getRequests();
         this.controllerFor("application").checkAdmin();
+        this.controllerFor("application").checkReadOnly();
     }
 });

@@ -23,11 +23,6 @@
 		margin: 11px;
 		margin-left: 15px;
 }
-.logo-mobile-center {
-		margin-left: auto !important;
-		margin-right: auto !important;
-		float: none !important;
-}
 
 /* -----------------------------
     Title and Navigation
@@ -43,19 +38,39 @@ header {
 }
 .app-title-container {
     text-align: center;
-		background: #cccccb;
-		position: relative;
+	background: #cccccb;
+	position: relative;
 }
 .app-title {
 	display: none;
 	color: #31342b;
 	text-transform: uppercase;
 	vertical-align: middle;
-	font-size: 1.4em !important;
+	font-size: 1.5em !important;
 	letter-spacing: 1px;
 	font-weight: 400 !important;
-	margin-top: 15px !important;
-	margin-bottom: 15px !important;
+	text-align: center;
+}
+.app-title ul {
+	list-style-type: none;
+	display: flex;
+	float: right;
+}
+.app-title ul li {
+	margin-right: 2em;
+}
+.app-title a {
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	padding: 2em;
+	margin: -2em;
+	color: #31342b;
+	text-decoration: none;
+}
+.app-title a:hover {
+	color: #00aeef;
+	text-decoration: none;
 }
 #primary-menu {
 	font-size: 1.5em;
@@ -63,8 +78,15 @@ header {
 	font-style: normal;
 	letter-spacing: 1px;
 	padding: 0;
-  text-align: center;
+    text-align: center;
 	text-transform: uppercase;
+}
+#primary-menu .dropdown-menu {
+	text-align: center;
+	text-transform: none;
+}
+#primary-menu .dropdown-menu a {
+	padding: none !important;
 }
 #primary-menu li {
 	list-style: none;
@@ -74,7 +96,10 @@ header {
 }
 #primary-menu a {
 	color: #00aeef;
-  padding: inherit;
+	text-decoration: none;
+}
+#primary-menu.navbar-nav>li>a {
+	padding: none !important;
 }
 #primary-menu a:hover {
 	color: #DE571F;
@@ -92,6 +117,31 @@ header {
 	-webkit-transition: color 0s;
 	-moz-transition: color 0s;
 }
+#primary-menu.nav a, #primary-menu.nav a:focus, #primary-menu.nav a:hover {
+	background-color: transparent !important;
+}
+#primary-menu.nav a:hover {
+	cursor: pointer;
+}
+#primary-menu.nav .open .dropdown-menu li {
+	padding: 0;
+	border-top: 1px solid #3d3d3a;
+	border-bottom: none;
+	font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+	background-color: #5a5d55;
+}
+#primary-menu.nav .open .dropdown-menu li:first-child {
+	margin-top: 5px;
+}
+#primary-menu.nav .open .dropdown-menu li:last-child {
+	margin-bottom: -15px;
+}
+#primary-menu .caret {
+	color: #00aeef;
+}
+#primary-menu .caret:hover {
+	color: #de571f;
+}
 .showMenu {
 	display: block !important;
 	padding: 0;
@@ -107,21 +157,39 @@ ul.dropdown-menu {
 .user-info {
     text-align: right;
     color: #31342b;
-		display: none;
-		position: absolute !important;
-		right: 0;
-		margin-top: 19px;
+	display: none;
+	position: absolute !important;
+	right: 0;
+	margin-top: 19px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 .user-info h6 {
 	color: #31342b;
 	letter-spacing: 1px;
-	font-size: 1.2em;
+	font-size: 8pt;
+	font-weight: bold;
 	display: inline;
 	text-transform: uppercase;
 }
+.user-info h6:hover {
+	text-decoration: underline;
+}
 .user-info-buttons {
-		display: inline;
-		margin-left: 15px;
+	display: inline;
+	margin-left: 15px;
+}
+.user-info-unauth {
+	padding-right: 0em !important;
+	float: right !important;
+}
+.user-info-wrapper {
+	display: inline;
+	float: right;
+	margin-right: 1em;
+}
+.user-info-wrapper h6 {
+	cursor: pointer;
 }
 .user-info-mobile {
 		color: white;
@@ -176,6 +244,12 @@ ul.dropdown-menu {
 		padding: 2px 4px 2px 5px;
 		border-radius: 25px;
 }
+
+/* Change autocomplete background to any color ;) */
+input:-webkit-autofill, input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
 /* -----------------------------
    HERO IMAGE
  ------------------------------- */
@@ -213,8 +287,25 @@ ul.dropdown-menu {
     #primary-menu li {
         padding: 10px 0px;
     }
+
+}
+@media only screen and (max-width: 767px) {
+	#primary-menu.nav .open .dropdown-menu li {
+		font-size: 0.9em;
+	}
 }
 @media only screen and (min-width: 768px) {
+	.app-title {
+		display: inline;
+	}
+	.app-title-container {
+        text-align: center;
+	}
+	.logo-mobile-center {
+			margin-left: auto !important;
+			margin-right: auto !important;
+			float: none !important;
+	}
     .user-info {
         display: inline;
     }
@@ -222,53 +313,79 @@ ul.dropdown-menu {
         margin-top: 0;
 				display: inline-block;
     }
-		.user-info-mobile, .logout-mobile {
-				display: none !important;
-		}
+	.user-info-mobile, .logout-mobile {
+			display: none !important;
+	}
+	.navbar-nav>li {
+		float: none !important;
+	}
     #primary-menu {
         font-size: 1em;
         margin-top: 12px;
-				margin-right: 22%;
+		width: 768px;
+		margin-left: auto;
+		margin-right: auto;
         float: none;
-        text-align: right;
     }
     #primary-menu li {
         display: inline;
         margin-left: 13px;
-				margin-right: 13px;
+		margin-right: 13px;
         font-size: 150%;
-				border: 0;
+		border: 0;
     }
+	#primary-menu span a {
+		cursor: pointer;
+	}
+	#primary-menu .dropdown-menu {
+		font-size: 10px;
+		width: auto;
+		margin-top: 8px;
+		margin-left: -10px;
+		border: none;
+	}
+	#primary-menu .dropdown-menu li {
+		margin: 0px;
+	}
+	#primary-menu .dropdown-menu li a {
+		text-align: left;
+		padding-left: 10px;
+		padding-right: 10px;
+		font-size: 0.8em;
+	}
+	#primary-menu .dropdown-menu li a:hover {
+		background-color: #ebebea !important;
+	}
     #primary-menu li:first-child {
         margin-left: 0;
     }
-		.primary-menu-container {
-			display: block;
-			background: #ebeaea;
-			padding-top: 1.5em;
-			padding-bottom: 1.5em;
-			border-bottom: 2px solid #cccccb;
-		}
-		#main-page-container {
-			margin-bottom: 50px;
-		}
-		#icon-menu {
-			display: none;
-		}
-		.logout-btn {
-			margin-right: 20px;
-			float: right;
-			width: auto;
-		}
+	.primary-menu-container {
+		display: block;
+		background: #ebeaea;
+		padding-top: 1.8em;
+		padding-bottom: 1.8em;
+		border-bottom: 2px solid #cccccb;
+	}
+	#primary-menu.nav.navbar-nav {
+		margin-top: 0px;
+	}
+	#main-page-container {
+		margin-bottom: 50px;
+	}
+	#icon-menu {
+		display: none;
+	}
+	.logout-btn {
+		margin-right: 20px;
+		float: right;
+		width: auto;
+	}
 }
 @media only screen and (min-width: 992px) {
-    .app-title-container {
-        text-align: center;
-		}
-    .app-title {
-        display: inline;
-    }
-		#logo-box {
+	#primary-menu {
+		width: 992px;
+	}
+    #logo-box {
       max-width: 200px;
       padding: 20px 30px;
 			display: block;
@@ -279,28 +396,34 @@ ul.dropdown-menu {
     #logo-box img {
       max-width: 100%;
     }
-		#logo-box-horizontal {
-				display: block;
-				position: absolute;
-				top: 0;
-				padding-top: 45px;
-				padding-bottom: 30px;
-				padding-left: 30px;
-				padding-right: 30px;
-		}
-		#logo-mobile {
-			display: none;
-		}
-		#primary-menu {
-			margin-left: 200px;
-		}
-		.user-info {
-			margin-top: 17px;
-		}
+	#logo-box-horizontal {
+			display: block;
+			position: absolute;
+			top: 0;
+			padding-top: 45px;
+			padding-bottom: 30px;
+			padding-left: 30px;
+			padding-right: 30px;
+	}
+	.logo-mobile-center {
+		display: none !important;
+	}
+	/*#primary-menu {
+		margin-left: 200px;
+	}*/
+	.user-info {
+		margin-top: 17px;
+	}
 }
 @media only screen and (min-width: 1200px) {
 		#primary-menu {
 			font-size: 1.2em;
+		}
+		#primary-menu .dropdown-menu {
+			margin-top: 9px;
+		}
+		#primary-menu .dropdown-menu li a {
+			font-size: 1em !important;
 		}
 		#logo-box-horizontal {
 			padding-bottom: 34px;

@@ -1,0 +1,48 @@
+#login-block {
+    display: inline;
+	width: 600px !important;
+	float: right;
+	margin-bottom: 1em;
+}
+#login-block input, #login-block button {
+    margin-right: 1em;
+    margin-left: 1em;
+}
+#login-block #login-info {
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+}
+
+@media only screen and (max-width: 768px) {
+  #login-block {
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  #login-block input, #login-block button {
+      margin-bottom: 1em;
+  }
+  #login-block {
+      width: 100% !important;
+  }
+  #login-block #login-info {
+      margin-top: 1em;
+  }
+}
+
+/* ----------------------------------
+     Login block toggle on the top
+ ------------------------------------ */
+.login-toggle {
+	display: none !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .login-toggle {
+      display: block !important;
+      margin-top: 0.2em;
+      color: #00aeef !important;
+  }
+}

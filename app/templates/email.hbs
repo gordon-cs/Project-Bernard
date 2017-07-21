@@ -1,0 +1,26 @@
+<div class="main-container email">
+    <div class="row" id="email-div">
+        <h1>Send Email to</h1>
+        <p>{{#if model.ActivityDescription}}
+                {{model.ActivityDescription}}, {{model.SessionDescription}}
+            {{else}}
+                {{model}}
+            {{/if}}</p>
+        <form class="email-form">
+            <input type="text" class="form-control" placeholder="Subject" id="email-subject"/>
+            {{ medium-content-editable value="" options=mediumEditorOptions class="form-control" id="email-content"}}
+            <!-- <textarea class="form-control" id="email-content" /> -->
+            <div id="submit-div">
+                <input type="text" class="form-control" placeholder="Username" id="username"/>
+                <input type="password" class="form-control" placeholder="Password" id="password"/>
+                <button type="submit" class="btn pull-right" id="submit-email" {{action "send"}}>Submit</button>
+            </div>
+            {{#if errorMessage}}
+                <p id="error-message">{{errorMessage}}</p>
+            {{/if}}
+        </form>
+    </div>
+    <div class="row" id="success-msg">
+        <h3>Email sent successfully!</h3>
+    </div>
+</div>

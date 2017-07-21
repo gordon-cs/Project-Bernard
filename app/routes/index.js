@@ -11,6 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     activate() {
         this.controllerFor("application").getRequests();
         this.controllerFor("application").checkAdmin();
+        this.controllerFor("application").checkReadOnly();
     },
     model() {
         let id_number = this.get("session.data.authenticated.token_data.id");

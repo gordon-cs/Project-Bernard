@@ -8,6 +8,14 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
  *  Builds the data model that is used in the corresponding template (hbs) and controller (js) files.
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+    /* If the user has read-only permission, the user will be
+     * redirected to home page */
+    beforeModel() {
+        let college_role = this.get("session.data.authenticated.token_data.college_role");
+        if (college_role == "readonly") {
+            this.transitionTo("index");
+        }
+    },
     model: function(params, transition) {
 
         let context = this;
@@ -16,6 +24,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let sessions;
         let selectedSession;
         let activities;
+        let activitiesShown;
         let types = [];
         let selectedType;
         let reversedSessions = [];
@@ -69,16 +78,33 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             types = types.sort();
         };
 
+        let initializeActivitiesShown = function() {
+            selectedType = transition.queryParams.selectedType;
+            console.log(selectedType);
+            if (selectedType && selectedType.toLowerCase() != "All".toLowerCase()) {
+                let newList = [];
+                for (let i = 0; i < activities.length; i++) {
+                    if (activities[i].ActivityTypeDescription.toLowerCase() == selectedType.toLowerCase()) {
+                        newList.push(activities[i]);
+                    }
+                }
+                activitiesShown = newList;
+            }
+            else {
+                activitiesShown = activities;
+            }
+        }
+
         let loadModel = function () {
             // Return the resolved value
             return {
                 "activities": activities,
-                "activitiesShown": activities,
+                "activitiesShown": activitiesShown,
                 "activitiesFilled" : (activities.length > 0),
                 "sessions": reversedSessions,
                 "selectedSession": selectedSession,
                 "activityTypes": types,
-                "selectedType": "All",
+                "selectedType": selectedType ? selectedType : "All",
                 "searchValue" : ""
             };
         };
@@ -90,6 +116,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(initializeSelectedSession)
         .then(loadActivities)
         .then(initializeActivities)
+        .then(initializeActivitiesShown)
         .then(loadTypes)
         .then(initializeTypes)
         .then(loadModel)
