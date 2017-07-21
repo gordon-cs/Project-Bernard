@@ -27,7 +27,7 @@
                         <span class="glyphicon glyphicon-chevron-down"></span></h6>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown1menu1">
                           <li>{{#link-to "help"}} Help{{/link-to}} </li>
-                          <li>{{#link-to "profile"}}Profile
+                          <li>{{#link-to "profile" session.data.authenticated.token_data.user_name}}Profile
                             {{#if requestsRecieved}}
                                 <span class="notification">
                                     {{requestsRecieved.length}}
