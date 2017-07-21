@@ -45,10 +45,28 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 return Discription.replace(/&(#[0-9]+|[a-zA-Z]+);/g, " ").replace(/<\/?[^>]+(>|$)/g, " ");
             }
 
-        }
+        };
 
+
+        function setClock(Min, hour, clock) {
+            if (Min < 10) {
+                Min = "0" + Min;
+            }
+
+            if (hour === 12) {
+                clock = hour + ":" + Min + "pm";
+            } else if (hour > 12) {
+                hour = hour - 12;
+                clock = hour + ":" + Min + "pm";
+            } else {
+                clock = hour + ":" + Min + "am";
+            }
+
+            return clock;
+
+        }
         //take the date object and formate a 12 hour clock with it
-        function setClock(startTime, endTime, startClock, endClock) {
+        function formatClock(startTime, endTime, startClock, endClock) {
 
             let startHour = new Date(startTime).getHours();
             let startMin = new Date(startTime).getMinutes();
@@ -56,29 +74,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             let endMin = new Date(endTime).getMinutes();
 
 
-            if (startMin < 10) {
-                startMin = "0" + startMin;
-            }
-
-            if (startHour === 12) {
-                startClock = startHour + ":" + startMin + "pm";
-            } else if (startHour > 12) {
-                startHour = startHour - 12;
-                startClock = startHour + ":" + startMin + "pm";
-            } else {
-                startClock = startHour + ":" + startMin + "am";
-            }
-
-            if (endMin < 10) {
-                endMin = "0" + endMin;
-            }
-
-            if (endHour > 12) {
-                endHour = endHour - 12;
-                endClock = endHour + ":" + endMin + "pm";
-            } else {
-                endClock = endHour + ":" + endMin + "am";
-            }
+            startClock = setClock(startMin, startHour, startClock);
+            endClock = setClock(endMin, endHour, endClock);
 
             if (startHour === 0) {
                 return "All Day";
@@ -88,6 +85,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 
         }
+
 
         //retreive the chapel information from the database and then formate the events listed
         let loadChapel = function() {
@@ -123,7 +121,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 
                         chapelEvents[i].Description = formatDiscription(chapelEvents[i].Description);
-                        chapelEvents[i].End_Time = setClock(chapelEvents[i].Start_Time, chapelEvents[i].End_Time, startClock, endClock);
+                        chapelEvents[i].End_Time = formatClock(chapelEvents[i].Start_Time, chapelEvents[i].End_Time, startClock, endClock);
 
                         if (chapelEvents[i].Event_Title === "") {
                             chapelEvents[i].Event_Title = chapelEvents[i].Event_Name;

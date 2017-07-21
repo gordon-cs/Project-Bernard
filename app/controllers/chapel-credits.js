@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
             let sorted = [];
 
             if ($(item.target).hasClass("Event_Name")) {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
+                this.send('addArrow', '<span class="glyphicon  glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Event_Name < b.Event_Name) {
                         return 1;
@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
                 }
                 $(item.target).removeClass("Event_Name");
             } else {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
+                this.send('addArrow', '<span class="glyphicon  glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Event_Name < b.Event_Name) {
                         return -1;
@@ -69,7 +69,7 @@ export default Ember.Controller.extend({
             let events = this.get("model.eventShown");
             let sorted = [];
             if ($(item.target).hasClass("locationCheck")) {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
+                this.send('addArrow', '<span class="glyphicon  glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Location < b.Location) {
                         return 1;
@@ -84,7 +84,7 @@ export default Ember.Controller.extend({
                 }
                 $(item.target).removeClass("locationCheck");
             } else {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
+                this.send('addArrow', '<span class="glyphicon  glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.Location < b.Location) {
                         return -1;
@@ -106,7 +106,7 @@ export default Ember.Controller.extend({
             let events = this.get("model.eventShown");
             let sorted = [];
             if ($(item.target).hasClass("dateCheck")) {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
+                this.send('addArrow', '<span class="glyphicon  glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.timeObject < b.timeObject) {
                         return 1;
@@ -121,7 +121,7 @@ export default Ember.Controller.extend({
                 }
                 $(item.target).removeClass("dateCheck");
             } else {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
+                this.send('addArrow', '<span class="glyphicon  glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
                 events.sort(function(a, b) {
                     if (a.timeObject < b.timeObject) {
                         return -1;
@@ -202,7 +202,6 @@ export default Ember.Controller.extend({
                 $('.container').addClass('blur');
                 let context = this;
                 let displayEvent = this.set("displayEvent", item);
-                let chEventID = this.get("displayEvent.CHEventID", item);
             }
         },
 

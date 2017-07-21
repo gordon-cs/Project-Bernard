@@ -8,9 +8,6 @@
     </div>
   </div>
   <div class="whitebox">
-    <h4 class="event-p">
-      You currently have <b>{{model.numEvents}}</b> Christian Life and Worship Credits
-    </h4>
     <div class="row">
       <div class="input-group event-search col-xs-11 col-sm-4 col-md-3">
         {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
@@ -18,7 +15,7 @@
 
       <div class="progress event-progress hidden-xs col-sm-offset-1 col-sm-3 col-md-4" style="height: 32px;">
         <div class="progress-bar " role="progressbar " aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;"></div>
-        <span><h5>{{model.numEvents}}/{{model.required}}</h5></span>
+        <span><h5>{{model.numEvents}}/{{model.required}} Christian Life and Worship Credits</h5></span>
       </div>
 
             <div class="material-switch no-padding hidden-xs col-sm-offset-1 col-sm-1">
@@ -49,26 +46,26 @@
 
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
-      <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event</h4>
-      <h4 class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}>Location</h4>
-      <h4 class="event-labels col-sm-2 col-md-2" onclick={{action "SortByDate"}}>Date <span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span></h4>
-      <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "SortByDate"}}>Time</h4>
+      <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}><h4 >Event</h4></div>
+      <div class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}><h4>Location</h4></div>
+      <div class="event-labels col-sm-2 col-md-2" onclick={{action "sortByLocation"}}><h4>Date<span class="glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span></h4></div>
+       <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortByLocation"}}><h4>Time</h4></div>
     </div>
   </div>
   <div class="entry-rows">
     {{#each model.eventShown as |event|}}
     <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
-      <h4 class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</h4>
-      <h4 class="display-col col-md-4 col-sm-4 col-xs-hide">{{event.Location}}</h4>
-      <h4 class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.Start_Time}}</h4>
-      <h4 class="display-col col-md-3 col-sm-3 col-xs-hide">{{event.End_Time}}</h4>
+      <div class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</div>
+      <div class="display-col col-md-4 col-sm-4 col-xs-hide">{{event.Location}}</div>
+      <div  class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.Start_Time}}</div>
+     <div class="display-col col-md-3 col-sm-3 col-xs-hide">{{event.End_Time}}</div>
     </div>
     {{/each}}
   </div>
 
 </div>
 <!-- Event Details Modal -->
-<div id="toggleEventDetailsModal" class="modal event-modal" onclick={{action "cancelEventDetailsModal"}}>
+<div id="toggleEventDetailsModal" class="modal events event-modal" onclick={{action "cancelEventDetailsModal"}}>
   <!-- Modal Content -->
   <div class="modal-content event-modal-content">
     <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>

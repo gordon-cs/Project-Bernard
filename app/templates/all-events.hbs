@@ -69,7 +69,7 @@
       </div>
     </div>
     <!-- switches to change the displayed list -->
-    <div class="mobile-phone-privacy-button-mobile-container col-sm-3 col-md-2 dropdown">
+    <div class="mobile-phone-privacy-button-mobile-container hidden-xs col-sm-3 col-md-2 dropdown">
       <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <div class="mobile-phone-privacy-button-mobile"><a>{{button1}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
@@ -126,20 +126,20 @@
   <!--heading for the event list + filter buttons -->
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
-      <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}>Event </h4>
-      <h4 class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}>Location </h4>
-      <h4 class="event-labels  col-sm-2 col-md-2" onclick={{action "SortByDate"}}>Date <span class="glyphicon glyphicon glyphicon-triangle-bottom" style="color: white;" aria-hidden="true"></span></h4>
-      <h4 class="event-labels col-sm-3 col-md-3" onclick={{action "SortByDate"}}>Time </h4>
+            <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}><h4 >Event</h4></div>
+      <div class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}><h4>Location</h4></div>
+      <div class="event-labels col-sm-2 col-md-2" onclick={{action "sortByLocation"}}><h4>Date<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span></h4></div>
+       <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortByLocation"}}><h4>Time</h4></div>
     </div>
   </div>
   <div class="entry-rows">
     <!--all the events in the event list -->
     {{#each model.eventShown as |event|}}
     <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
-      <h4 class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</h4>
-      <h4 class="display-col col-md-4 col-sm-4 col-xs-hide ">{{event.Location}}</h4>
-      <h4 class="display-col col-sm-2 col-md-2 col-xs-hide">{{event.Start_Time}}</h4>
-      <h4 class="display-col col-sm-3 col-md-3 col-xs-hide">{{event.End_Time}}</h4>
+      <div class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</div>
+      <div class="display-col col-md-4 col-sm-4 col-xs-hide">{{event.Location}}</div>
+      <div  class="display-col col-md-2 col-sm-2 col-xs-hide">{{event.Start_Time}}</div>
+     <div class="display-col col-md-3 col-sm-3 col-xs-hide">{{event.End_Time}}</div>
       <h4 class="display-col col-sm-3 col-md-3 col-xs-hide events-info" onclick={{ action "MobileEventDetailsModal" event }}>More...</h4>
     </div>
     {{/each}}

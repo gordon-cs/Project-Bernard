@@ -92,6 +92,11 @@
     margin-right: 0px!important;
 }
 
+.events .display-col {
+    font-size: 18px;
+    padding: 10px;
+}
+
 .event-modal {
     display: none;
     position: fixed;
@@ -120,7 +125,7 @@
 .events .cancel-modal {
     color: #aaa;
     float: right !important;
-    font-size: 28px;
+    font-size: 18px;
     font-weight: bold;
     margin-top: auto;
     margin-bottom: 0%;
@@ -170,11 +175,11 @@
     cursor: pointer;
 }
 
-.events .entry-rows div:nth-child(even) {
+.events .entry-rows .event-row:nth-child(even) {
     background: #ffffff;
 }
 
-.events .entry-rows div:nth-child(odd) {
+.events .entry-rows .event-row:nth-child(odd) {
     background: #DDD;
 }
 
@@ -183,7 +188,7 @@
     margin-bottom: 5px!important;
     margin-right: 20px;
     margin-left: 20px;
-    margin-top: 5px;
+    margin-top: 0px;
 }
 
 .events .highlight-box {
@@ -237,12 +242,12 @@
 }
 
 .events .event-id {
-    padding-bottom: 0px;
+    padding: 10px;
     padding-right: 0px;
+    font-size: 18px;
 }
 
 .events .display-col {
-    padding-bottom: 0px;
     padding-right: 0px;
     font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
 }
