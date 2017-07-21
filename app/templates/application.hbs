@@ -1,4 +1,5 @@
 <div class="col-sm-12 header">
+
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
@@ -21,7 +22,7 @@
                 {{#if session.isAuthenticated}}
                 <div class="user-info-wrapper">
                     <div class="user-info-buttons dropdown">
-                        <h6 class="dropdown-toggle" id=id="dropdownMenu1" data-toggle="dropdown"
+                        <h6 class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true">
                         {{session.data.authenticated.token_data.name}}
                         <span class="glyphicon glyphicon-chevron-down"></span></h6>
@@ -40,6 +41,7 @@
                     </div>
                     {{#if requestsRecieved}}
                         <span class="notification">
+
                             {{requestsRecieved.length}}
                         </span>
                     {{/if}}
@@ -146,5 +148,5 @@
 </div>
 
 <div id="main-page-container" class="col-sm-12">
-    {{outlet}}
+  {{outlet}}
 </div>
