@@ -353,10 +353,10 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     .logout-mobile {
         display: none !important;
     }
-    .dropdown:hover .dropdown-menu {
+     .application-dropdown:hover .dropdown-menu {
         display: block;
         margin-top: 0; // remove the gap so it doesn't close
-    }
+    } 
 	.user-info-mobile, .logout-mobile {
 			display: none !important;
 	}
