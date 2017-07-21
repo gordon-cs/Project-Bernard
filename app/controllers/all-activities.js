@@ -8,7 +8,8 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
  */
 export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
-    queryParams:['sessionCode'],
+    queryParams:['sessionCode', 'selectedType'],
+    selectedType: "model.selectedType",
     sessionCode: "model.selectedSession",
     searchValue: "model.searchValue",
     actions: {
@@ -35,6 +36,7 @@ export default Ember.Controller.extend({
 
                 // set the sessionCode query param
                 context.set("sessionCode", session.SessionCode);
+
             }
             // Get all possible types of activities for the selected session
             let getTypes = function() {
@@ -49,10 +51,16 @@ export default Ember.Controller.extend({
                 context.set("model.activityTypes", types);
             }
 
+            // Clear search box
+            let clearSearch = function(){
+                context.set("model.searchValue", "");
+            }
+
             getAsync("/activities/session/" + session.SessionCode.trim(), this)
             .then(setSession)
             .then(getTypes)
-            .then(setTypes);
+            .then(setTypes)
+            .then(clearSearch);
 
 
 
@@ -61,8 +69,12 @@ export default Ember.Controller.extend({
             // If a user selects a Type in the power-select for Type, filter out
             // activities to only display that type
             this.set("model.selectedType", type);
-            // set the activityType query params
+            // Clear search value
             this.set("searchValue", "");
+            // Clear search box
+            this.set("model.searchValue", "");
+            // set the activityType query params
+            this.set("selectedType", type);
 
             if (type && type.toLowerCase() != "All".toLowerCase()) {
                 let newList = [];
@@ -81,18 +93,26 @@ export default Ember.Controller.extend({
         filterActivities: function() {
           // Filter the list of activities shown when user types in the search bar
             let searchValue = this.get("model.searchValue");;
+            let selectedType = this.get("model.selectedType");
             if (searchValue) {
                 let newList = [];
                 let oldList = this.get("model.activities");
                 for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].ActivityDescription.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                    if (oldList[i].ActivityDescription.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1 && (selectedType == "All" || oldList[i].ActivityTypeDescription.toLowerCase() == selectedType.toLowerCase())) {
                         newList.push(oldList[i]);
                     }
                 }
                 this.set("model.activitiesShown", newList);
             }
             else {
-                this.set("model.activitiesShown", this.get("model.activities"));
+                let newList = [];
+                let oldList = this.get("model.activities");
+                for (let i = 0; i < oldList.length; i++) {
+                    if (selectedType == "All" || oldList[i].ActivityTypeDescription.toLowerCase() == selectedType.toLowerCase()) {
+                        newList.push(oldList[i]);
+                    }
+                }
+                this.set("model.activitiesShown", newList);
             }
         }
     }

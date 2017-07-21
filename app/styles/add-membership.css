@@ -1,0 +1,10 @@
+.add-membership h2{
+    font-size: 1.8em !important;
+    margin-bottom: 0.5em !important;
+    margin-top: 2em !important;
+}
+
+.add-membership p {
+    font-size: 1.3em;
+    font-style: italic;
+}

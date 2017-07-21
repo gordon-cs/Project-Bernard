@@ -21,7 +21,16 @@ Router.map(function() {
   this.route('all-events');
   this.route('chapel-credits');
   this.route('my-involvements');
-  this.route("email", {path: "/email/:EmailAdress"});
+  this.route("email", {path: "/email"});
+});
+
+Router.reopen({
+  notifyGoogleAnalytics: function() {
+    return ga('send', 'pageview', {
+        'page': this.get('url'),
+        'title': this.get('url')
+      });
+  }.on('didTransition')
 });
 
 export default Router;

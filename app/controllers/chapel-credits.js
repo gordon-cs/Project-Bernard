@@ -6,9 +6,7 @@ import deleteAsync from "gordon360/utils/delete-async";
  *  Sends requests to the model to retrieve and/or modify data.
  */
 export default Ember.Controller.extend({
-
     selectList: 'ALL',
-
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),

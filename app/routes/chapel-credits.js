@@ -1,12 +1,12 @@
 import Ember from "ember";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import getAsync from "gordon360/utils/get-async";
-
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model: function(params, transition) {
 
         //initialize variables
         let context = this;
+
         let id_name = this.get("session.data.authenticated.token_data.user_name");
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let searchValue;
@@ -196,6 +196,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         //send to the front end
+
         return loadAllChapel()
             .then(loadChapel)
             .then(loadModel)

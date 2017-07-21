@@ -1,7 +1,11 @@
 <div class="main-container email">
     <div class="row" id="email-div">
         <h1>Send Email to</h1>
-        <p>{{model}}</p>
+        <p>{{#if model.ActivityDescription}}
+                {{model.ActivityDescription}}, {{model.SessionDescription}}
+            {{else}}
+                {{model}}
+            {{/if}}</p>
         <form class="email-form">
             <input type="text" class="form-control" placeholder="Subject" id="email-subject"/>
             {{ medium-content-editable value="" options=mediumEditorOptions class="form-control" id="email-content"}}
