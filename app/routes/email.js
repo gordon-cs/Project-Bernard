@@ -10,7 +10,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     model(params, transition) {
         let context = this;
         let emailType = transition.queryParams.emailType;
-        if (emailType == "personal" || emailType == null) {
+        if (emailType == "personal") {
             return transition.queryParams.emailAddress;
         }
         else {
