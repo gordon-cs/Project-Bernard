@@ -137,10 +137,10 @@
     {{#each model.eventShown as |event|}}
     <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
       <h4 class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</h4>
-      <h4 class="display-col col-md-4 col-sm-4 col-xs-hide ">{{event.Location}}</h4>
-      <h4 class="display-col col-sm-2 col-md-2 col-xs-hide">{{event.Start_Time}}</h4>
-      <h4 class="display-col col-sm-3 col-md-3 col-xs-hide">{{event.End_Time}}</h4>
-      <h4 class="display-col col-sm-3 col-md-3 col-xs-hide events-info" onclick={{ action "MobileEventDetailsModal" event }}>More...</h4>
+      <h4 class="display-col col-md-4 col-sm-4 xs-hide ">{{event.Location}}</h4>
+      <h4 class="display-col col-sm-2 col-md-2 xs-hide">{{event.Start_Time}}</h4>
+      <h4 class="display-col col-sm-3 col-md-3 xs-hide">{{event.End_Time}}</h4>
+      <h4 class="display-col col-sm-3 col-md-3 xs-hide events-info" onclick={{ action "MobileEventDetailsModal" event }}>More...</h4>
     </div>
     {{/each}}
   </div>
