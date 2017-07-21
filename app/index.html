@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Gordon 360 · Student Clubs &amp; Organizations</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-        {{content-for "head"}}
 
-        <!-- Font will not work in development and will cause a 403, because the only domains allowed are *.gordon.edu -->
-        <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7763712/7875172/css/fonts.css" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gordon 360 · Student Clubs &amp; Organizations</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> {{content-for "head"}}
 
+    <!-- Font will not work in development and will cause a 403, because the only domains allowed are *.gordon.edu -->
+    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7763712/7875172/css/fonts.css" />
         
 
        
@@ -30,9 +29,9 @@
         <link rel="stylesheet" href="assets/vendor.css">
         <link rel="stylesheet" href="assets/gordon360.css">
 
-        <link rel="stylesheet" href="assets/custom.css">
-        <link rel="stylesheet" href="assets/form.css">
 
+    <link rel="stylesheet" href="assets/custom.css">
+    <link rel="stylesheet" href="assets/form.css">
 
         <link rel="stylesheet" href="assets/application.css">
 
@@ -53,7 +52,21 @@
         <link rel="stylesheet" href="assets/rs-minimal-white.css">
         <link rel="stylesheet" href="assets/profile.css">
 
+    <link rel="stylesheet" href="assets/specific-activity.css">
+    <link rel="stylesheet" href="assets/index.css">
+    <link rel="stylesheet" href="assets/royalslider.css">
+    <link rel="stylesheet" href="assets/rs-minimal-white.css">
+    <link rel="stylesheet" href="assets/all-events.css">
 
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/application.css">
+
+    <!-- chart library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <link rel="stylesheet" href="assets/login-block.css">
         <link rel="stylesheet" href="assets/dashboard-slider.css">
 
@@ -68,24 +81,31 @@
       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
 
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
       <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script> -->
 
-      <!--- Royal slider stuff --->
-      <script src="/royalslider/jquery.event.frame.js"></script>
-      <script src="/royalslider/jquery.royalslider.custom.min.js"></script>
-      <script src="/royalslider/jquery.unveil.min.js"></script>
-      <!--- End royal slider stuff --->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-        {{content-for "head-footer"}}
-    </head>
-    <body>
-        {{content-for "body"}}
+    <!--- Royal slider stuff --->
+    <script src="/royalslider/jquery.event.frame.js"></script>
+    <script src="/royalslider/jquery.royalslider.custom.min.js"></script>
+    <script src="/royalslider/jquery.unveil.min.js"></script>
+    <!--- End royal slider stuff --->
 
-        <script src="assets/vendor.js"></script>
-        <script src="assets/gordon360.js"></script>
+    {{content-for "head-footer"}}
+</head>
 
-        {{content-for "body-footer"}}
-    </body>
+<body>
+    {{content-for "body"}}
+
+    <script src="assets/vendor.js"></script>
+    <script src="assets/gordon360.js"></script>
+
+    {{content-for "body-footer"}}
+</body>
+
 </html>

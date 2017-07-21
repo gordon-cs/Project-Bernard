@@ -1,4 +1,5 @@
 <div class="col-sm-12 header">
+
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
@@ -31,18 +32,22 @@
                             {{#if requestsRecieved}}
                                 <span class="notification">
                                     {{requestsRecieved.length}}
-                                </span>
-                            {{/if}}
-                            {{/link-to}}</li>
-                          {{#if isSomeAdmin}}
-                          <li>{{#link-to "activities-status"}} Activities' Status{{/link-to}} </li>
-                          {{/if}}
-                          <li role="separator" class="divider"></li>
-                          <li><a href="#" {{action "logout"}}>Logout</a></li>
-                        </ul>
-                    </div>
-                    {{#if requestsRecieved}}
-                        <span class="notification">
+                                </span> {{/if}} {{/link-to}}
+          </li>
+          <li>
+            {{#link-to "transcript"}}Transcript{{/link-to}}
+          </li>
+          {{#if isSomeAdmin}}
+          <li>
+            {{#link-to "activities-status"}} Activities' Status{{/link-to}}
+          </li>
+          {{/if}}
+          <li role="separator" class="divider"></li>
+          <li><a href="#" {{action "logout"}}>Logout</a></li>
+        </ul>
+      </div>
+      {{#if requestsRecieved}}
+      <span class="notification">
                             {{requestsRecieved.length}}
                         </span>
                     {{/if}}
@@ -88,7 +93,7 @@
                 <li>
                   <span {{action "closeMenu"}}>
                     {{#link-to "all-activities" class="button uppercase"}}
-                        All Activities
+                        Activities
                     {{/link-to}}
                   </span>
                 </li>
@@ -157,5 +162,5 @@
 </div>
 
 <div id="main-page-container" class="col-sm-12">
-    {{outlet}}
+  {{outlet}}
 </div>

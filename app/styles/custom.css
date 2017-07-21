@@ -272,7 +272,6 @@ button:hover,
 button:focus,
 .btn:hover,
 .btn:focus {
-    color: white !important;
     text-decoration: none;
 }
 button:active,
