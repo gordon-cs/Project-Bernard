@@ -4,7 +4,7 @@
     <section class="row first-profile-block">
         {{! Profile picture and overlay }}
         <div class="profile-image-col {{if model.showBothImages "col-lg-4 col-sm-5" "col-lg-2 col-sm-4"}}">
-            <div class="profile-image-container" {{action "showEditProfilePictureModal"}}>
+            <div class="profile-image-container" {{action "showEditProfilePictureModal" false}}>
                 {{#if model.userInfo.preferredImageURL}}
                     <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">  
                 {{else}}
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4 profile-action-button-container">
-                        <div class="profile-action-button"{{action "showEditProfilePictureModal"}}>
+                        <div class="profile-action-button"{{action "showEditProfilePictureModal" true}}>
                             <div class="action-icon">
                                 <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
                             </div>
@@ -282,17 +282,17 @@
                                         <div class="row header-rows">
                                             <div class = "col-sm-3 col-xs-12">Name</div>
                                             <div class = "col-sm-3 col-xs-5 xs-hide">Activity</div>
-                                            <div class = "col-sm-2 xs-hide">Time</div>
+                                            <div class = "col-sm-2 xs-hide md-show">Time</div>
                                             <div class = "col-xs-4 xs-hide">Options</div>
                                         </div>
                                         {{#each requestsRecieved as |req|}}
                                             <div class="row entry-rows">
                                                 <div class="col-sm-3 col-xs-12" onclick={{action "toggleRequestSent"}}> {{req.FirstName}} {{req.LastName}}</div>
                                                 <div class ="col-sm-3 col-xs-12 xs-hide"> {{req.ActivityDescription}} </div>
-                                                <div class ="col-sm-2 col-xs-12 xs-hide"> {{req.DiffDays}} </div>
-                                                <div class ="col-sm-4 col-xs-12 xs-hide">
+                                                <div class ="col-sm-2 col-lg-3 col-xs-12 xs-hide"> {{req.DiffDays}} </div>
+                                                <div class ="col-sm-4 col-lg-3 col-xs-12 xs-hide">
                                                     {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                                        <button class="btn button-navy  activity-buttons">See Activity</button>
+                                                        <button class="btn button-navy activity-buttons">See Activity</button>
                                                     {{/link-to}}
                                                 </div>
                                             </div>
@@ -312,17 +312,17 @@
                                         <div class="row header-rows">
                                             <div class = "col-sm-3 col-xs-12">Activity</div>
                                             <div class = "col-sm-3 xs-hide">Decision</div>
-                                            <div class = "col-sm-2 xs-hide">Time</div>
+                                            <div class = "col-sm-2 xs-hide md-show">Time</div>
                                             <div class = "col-sm-4 col-xs-4 xs-hide">Options</div>
                                         </div>
                                         {{#each model.requestsSent as |req|}}
                                             <div class="row entry-rows">
                                                 <div class="col-sm-3 col-xs-12" onclick={{action "toggleRequestSent"}}> {{req.ActivityDescription}} </div>
                                                 <div class = "col-sm-3 col-xs-12 xs-hide"> {{req.RequestApproved}} </div>
-                                                <div class = "col-sm-2 col-xs-12 xs-hide"> {{req.DiffDays}} </div>
-                                                <div class = "col-sm-4 col-xs-12 xs-hide">
+                                                <div class = "col-sm-2 col-lg-3 col-xs-12 xs-hide"> {{req.DiffDays}} </div>
+                                                <div class = "col-sm-4 col-lg-3 col-xs-12 xs-hide">
                                                     {{#link-to "specific-activity" req.SessionCode req.ActivityCode}}
-                                                        <button class="btn button-navy  activity-buttons md-show">See Activity</button>
+                                                        <button class="btn button-navy md-show activity-buttons">See Activity</button>
                                                     {{/link-to}}
                                                     <button {{action "deleteRequest" req.RequestID}} class="btn button-red activity-buttons">Clear</button>
                                                 </div>

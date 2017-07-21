@@ -58,13 +58,7 @@ export default Ember.Controller.extend({
         },
         // On mobile displays dropdown with more info about the selected membership request
         toggleRequestSent(item){
-            let elements = $(item.target).nextAll();
-            for(var i=0; i < elements.length; i++){
-                if($(window).innerWidth() < 768){
-                console.log(elements[i]);
-                    $(elements[i]).slideToggle();
-                }
-            }
+            $(item.target).nextAll().slideToggle();
         },
 
         linkToSpecificActivity(activity, element){
@@ -98,11 +92,13 @@ export default Ember.Controller.extend({
         },
         
         // Shows the modal that holds the information to update profile picture
-        showEditProfilePictureModal(){
-             $("#editProfilePictureModal").addClass("showModal");
-             $('body').css('position','fixed');
-             $('body').css('overflow-y','scroll');
-             this.set("profilePictureSuccessMessage", null);
+        showEditProfilePictureModal(isButton){
+            if(this.get("model.userLoggedIn") && (isButton || $(window).width() >= 1200)){
+                $("#editProfilePictureModal").addClass("showModal");
+                $('body').css('position','fixed');
+                $('body').css('overflow-y','scroll');
+                this.set("profilePictureSuccessMessage", null);
+            }
         },
         // Hides the modal that holds the information to update profile picture
         cancelEditProfilePicture(item){ 
