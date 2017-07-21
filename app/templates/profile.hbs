@@ -4,7 +4,7 @@
     <section class="row first-profile-block">
         {{! Profile picture and overlay }}
         <div class="profile-image-col {{if model.showBothImages "col-lg-4 col-sm-5" "col-lg-2 col-sm-4"}}">
-            <div class="profile-image-container" {{action "showEditProfilePictureModal"}}>
+            <div class="profile-image-container" {{action "showEditProfilePictureModal" false}}>
                 {{#if model.userInfo.preferredImageURL}}
                     <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">  
                 {{else}}
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4 profile-action-button-container">
-                        <div class="profile-action-button"{{action "showEditProfilePictureModal"}}>
+                        <div class="profile-action-button"{{action "showEditProfilePictureModal" true}}>
                             <div class="action-icon">
                                 <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
                             </div>

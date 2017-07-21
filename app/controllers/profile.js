@@ -92,11 +92,13 @@ export default Ember.Controller.extend({
         },
         
         // Shows the modal that holds the information to update profile picture
-        showEditProfilePictureModal(){
-             $("#editProfilePictureModal").addClass("showModal");
-             $('body').css('position','fixed');
-             $('body').css('overflow-y','scroll');
-             this.set("profilePictureSuccessMessage", null);
+        showEditProfilePictureModal(isButton){
+            if(this.get("model.userLoggedIn") && (isButton || $(window).width() >= 1200)){
+                $("#editProfilePictureModal").addClass("showModal");
+                $('body').css('position','fixed');
+                $('body').css('overflow-y','scroll');
+                this.set("profilePictureSuccessMessage", null);
+            }
         },
         // Hides the modal that holds the information to update profile picture
         cancelEditProfilePicture(item){ 
