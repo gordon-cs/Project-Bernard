@@ -2,53 +2,45 @@
     Gordon logo
 ------------------------------- */
 
-#logo-box,
-#logo-box-horizontal {
-    background: #014983;
+#logo-box, #logo-box-horizontal {
+	background: #014983;
     text-align: center;
-    padding: 2% 2%;
+	padding: 2% 2%;
     position: relative;
     z-index: 2;
-    display: none;
-    margin-left: 15px;
-    margin-right: 15px;
+		display: none;
+		margin-left: 15px;
+		margin-right: 15px;
 }
-
 #logo-box img {
     max-width: 20%;
 }
-
 #logo-mobile {
-    display: block;
-    float: left;
-    width: 123px;
-    height: 31px;
-    margin: 11px;
-    margin-left: 15px;
+		display: block;
+		float: left;
+		width: 123px;
+		height: 31px;
+		margin: 11px;
+		margin-left: 15px;
 }
-
 
 /* -----------------------------
     Title and Navigation
 ------------------------------- */
 
 header {
-    background: #cccccb;
-    width: 100%;
-    padding: 0 !important;
+	background: #cccccb;
+	width: 100%;
+	padding: 0 !important;
 }
-
 .header {
-    background: #cccccb;
+	background: #cccccb;
 }
-
 .app-title-container {
-
     text-align: center;
 	background: #cccccb;
 	position: relative;
 }
-
 .app-title {
 	display: none;
 	color: #31342b;
@@ -80,7 +72,6 @@ header {
 	color: #00aeef;
 	text-decoration: none;
 }
-
 #primary-menu {
 	font-size: 1.5em;
 	font-weight: 700;
@@ -97,15 +88,12 @@ header {
 #primary-menu .dropdown-menu a {
 	padding: none !important;
 }
-
 #primary-menu li {
-    list-style: none;
-    display: block;
-    padding: 15px 0px;
-    text-align: center;
-    border-bottom: 1px solid #3d3d3a;
+	list-style: none;
+	display: block;
+	padding: 15px 0px;
+	border-bottom: 1px solid #3d3d3a;
 }
-
 #primary-menu a {
 	color: #00aeef;
 	text-decoration: none;
@@ -113,24 +101,21 @@ header {
 #primary-menu.navbar-nav>li>a {
 	padding: none !important;
 }
-
 #primary-menu a:hover {
-    color: #DE571F;
+	color: #DE571F;
 }
-
 #primary-menu button {
-    background: inherit;
-    color: #00aeef;
-    font-weight: inherit;
-    font-size: inherit;
-    text-transform: inherit;
+	background: inherit;
+	color: #00aeef;
+	font-weight: inherit;
+	font-size: inherit;
+	text-transform: inherit;
 }
-
 #primary-menu button:hover {
-    color: #DE571F !important;
-    transition: color 0s;
-    -webkit-transition: color 0s;
-    -moz-transition: color 0s;
+	color: #DE571F !important;
+	transition: color 0s;
+	-webkit-transition: color 0s;
+	-moz-transition: color 0s;
 }
 #primary-menu.nav a, #primary-menu.nav a:focus, #primary-menu.nav a:hover {
 	background-color: transparent !important;
@@ -157,22 +142,18 @@ header {
 #primary-menu .caret:hover {
 	color: #de571f;
 }
-
 .showMenu {
-    display: block !important;
-    padding: 0;
+	display: block !important;
+	padding: 0;
 }
-
 .primary-menu-container {
-    display: none;
+	display: none;
 }
-
 ul.dropdown-menu {
-    border-radius: 0;
-    letter-spacing: 1px;
-    margin-top: .65em;
+	border-radius: 0;
+	letter-spacing: 1px;
+	margin-top: .65em;
 }
-
 .user-info {
     text-align: right;
     color: #31342b;
@@ -182,7 +163,6 @@ ul.dropdown-menu {
 	margin-top: 19px;
 	padding-left: 0px;
 	padding-right: 0px;
-
 }
 .user-info h6 {
 	color: #31342b;
@@ -192,11 +172,9 @@ ul.dropdown-menu {
 	display: inline;
 	text-transform: uppercase;
 }
-
 .user-info h6:hover {
 	text-decoration: underline;
 }
-
 .user-info-buttons {
 	display: inline;
 	margin-left: 15px;
@@ -213,68 +191,58 @@ ul.dropdown-menu {
 .user-info-wrapper h6 {
 	cursor: pointer;
 }
-
 .user-info-mobile {
-    color: BLACK;
+		color: white;
 }
-
 .request-button {
     border: 0px !important;
     font-size: 250%;
     color: white;
     margin-right: 20px;
-    position: absolute !important;
-    top: -13px !important;
+		position: absolute !important;
+		top: -13px !important;
 }
-
 .request-button:hover {
     color: #31342b;
     cursor: pointer;
 }
-
 .profile-btn {
     font-size: 120% !important;
-    text-transform: uppercase;
-    font-weight: bold !important;
-    letter-spacing: .07em;
+		text-transform: uppercase;
+		font-weight: bold !important;
+		letter-spacing: .07em;
 }
-
 .logout-btn {
-    margin-bottom: 20px !important;
-    margin-top: 20px;
-    text-transform: uppercase;
-    font-weight: bold !important;
-    float: right;
-    width: 100%;
+		margin-bottom: 20px !important;
+		margin-top: 20px;
+		text-transform: uppercase;
+		font-weight: bold !important;
+		float: right;
+		width: 100%;
 }
-
 .activities-status .btn {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
-
 .mobile-menu-icon {
-    display: block;
-    float: right;
+		display: block;
+		float: right;
 }
-
 .mobile-menu-icon button {
-    background: inherit;
+		background: inherit;
 }
-
 #icon-menu {
-    width: 50px;
-    height: 50px;
+		width: 50px;
+		height: 50px;
 }
-
 .notification {
-    position: relative;
-    top: -5px;
-    background: red;
-    color: white;
-    font-size: 0.8em;
-    font-weight: bold;
-    padding: 2px 4px 2px 5px;
-    border-radius: 25px;
+		position: relative;
+		top: -5px;
+		background: red;
+		color: white;
+		font-size: 0.8em;
+		font-weight: bold;
+		padding: 2px 4px 2px 5px;
+		border-radius: 25px;
 }
 
 /* Change autocomplete background to any color ;) */
@@ -287,30 +255,27 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
  ------------------------------- */
 
 .hero-container {
-    width: 100%;
-    margin: 0px;
-    border-bottom: 2px solid #cccccb;
+	width: 100%;
+	margin: 0px;
+	border-bottom: 2px solid #cccccb;
 }
-
 @media screen and (max-width:750px) {
-    .hero-container {
-        overflow: auto;
-    }
+	.hero-container {
+		overflow: auto;
+	}
 }
-
 
 /* For providing image via background image and not royalslider */
-
 .hero-container-background-img {
-    width: 100%;
-    min-height: 175px;
-    max-height: 550px;
-    position: relative;
-    margin: 0px;
-    border-bottom: 2px solid #cccccb;
-    background-position: center center;
-    background-size: cover;
-    background-image: url(images/seascape.jpg);
+	width: 100%;
+	min-height: 175px;
+	max-height: 550px;
+	position: relative;
+	margin: 0px;
+	border-bottom: 2px solid #cccccb;
+	background-position: center center;
+	background-size: cover;
+	background-image: url(images/seascape.jpg);
 }
 
 
@@ -329,7 +294,6 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 		font-size: 0.9em;
 	}
 }
-
 @media only screen and (min-width: 768px) {
 	.app-title {
 		display: inline;
@@ -345,18 +309,10 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     .user-info {
         display: inline;
     }
-    .user-info>h6 {
+    .user-info > h6 {
         margin-top: 0;
-        display: inline-block;
+				display: inline-block;
     }
-    .user-info-mobile,
-    .logout-mobile {
-        display: none !important;
-    }
-     .application-dropdown:hover .dropdown-menu {
-        display: block;
-        margin-top: 0; // remove the gap so it doesn't close
-    } 
 	.user-info-mobile, .logout-mobile {
 			display: none !important;
 	}
@@ -367,7 +323,6 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
         font-size: 1em;
         margin-top: 12px;
 		width: 768px;
-
 		margin-left: auto;
 		margin-right: auto;
         float: none;
@@ -375,11 +330,9 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     #primary-menu li {
         display: inline;
         margin-left: 13px;
-
-      margin-right: 13px;
+		margin-right: 13px;
         font-size: 150%;
 		border: 0;
-
     }
 	#primary-menu span a {
 		cursor: pointer;
@@ -427,14 +380,11 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 		float: right;
 		width: auto;
 	}
-
 }
-
 @media only screen and (min-width: 992px) {
 	#primary-menu {
 		width: 992px;
 	}
-
     #logo-box {
       max-width: 200px;
       padding: 20px 30px;
@@ -444,25 +394,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
       padding: 2% 3%;
   	}
     #logo-box img {
-        max-width: 100%;
-    }
-    #logo-box-horizontal {
-        display: block;
-        position: absolute;
-        top: 0;
-        padding-top: 45px;
-        padding-bottom: 30px;
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-    #logo-mobile {
-        display: none;
-    }
-    #primary-menu {
-        margin-left: 200px;
-    }
-    .user-info {
-        margin-top: 5px;
+      max-width: 100%;
     }
 	#logo-box-horizontal {
 			display: block;
@@ -482,9 +414,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 	.user-info {
 		margin-top: 17px;
 	}
-
 }
-
 @media only screen and (min-width: 1200px) {
 		#primary-menu {
 			font-size: 1.2em;
@@ -499,4 +429,3 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 			padding-bottom: 34px;
 		}
 }
-
