@@ -533,6 +533,7 @@ Activities
 
 .profile .social-media-buttons.disabled .activity-privacy-button-mobile {
     opacity: .4;
+    cursor: default;
 }
 
 
