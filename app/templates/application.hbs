@@ -108,6 +108,21 @@
                       </ul>
                   </span>
                 </li>
+                <!-- Dropdown Menu to access Events pages -->
+                <li>
+                  <span>
+                      <a data-toggle="dropdown">Events <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li>{{#link-to "all-events" invokeAction=(action 'closeMenu')}}
+                          All Events
+                        {{/link-to}}</li>
+                        <li>{{#link-to "chapel-credits" invokeAction=(action 'closeMenu')}}
+                          Chapel Credits
+                        {{/link-to}}</li>
+                      </ul>
+                  </span>
+                </li>
+
                 <li>
                   <span {{action "closeMenu"}}>
                     {{#link-to "about" class="button uppercase"}}
