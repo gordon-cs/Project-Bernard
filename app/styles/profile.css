@@ -693,7 +693,7 @@ Request Tables
         margin-left: 5px;
     }
     
-    .profile .image.image-half-width {
+    .profile .first-profile-block .image.image-half-width {
         width: 46%;
         margin-left: 10px;
         float: left;
