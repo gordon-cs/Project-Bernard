@@ -377,9 +377,12 @@
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
-        max-height: 50%;
-        overflow-y: auto;
+        height: 60%;
         /* Could be more or less, depending on screen size */
+    }
+    .event-modal-body {
+        max-height: 55%;
+        overflow-y: auto;
     }
 }
 
@@ -391,10 +394,13 @@
         /* 15% from the top and centered */
         padding: 20px;
         border: 1px solid #888;
-        width: 35%;
-        max-height: 50%;
-        overflow-y: auto;
+        width: 50%;
+        height: 35%;
         /* Could be more or less, depending on screen size */
+    }
+    .event-modal-body {
+        max-height: 60%;
+        overflow-y: auto;
     }
     .events .event-row:hover * {
         color: white !important;

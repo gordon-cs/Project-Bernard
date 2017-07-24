@@ -9,6 +9,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let id_name = this.get("session.data.authenticated.token_data.user_name");
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         let searchValue;
         let eventShown;
         let numEvents;
@@ -129,6 +130,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         if (chapelEvents[i].Event_Title === "") {
                             chapelEvents[i].Event_Title = chapelEvents[i].Event_Name;
                         }
+
+
+                        chapelEvents[i].Month = fullMonth[startMonth];
                         chapelEvents[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
                     }
                     return {
@@ -172,6 +176,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         if (allEvents[i].Event_Title === "") {
                             allEvents[i].Event_Title = allEvents[i].Event_Name;
                         }
+                        allEvents[i].Month = fullMonth[startMonth];
                         allEvents[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
                     }
                     return {

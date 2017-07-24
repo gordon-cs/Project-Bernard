@@ -221,6 +221,8 @@ export default Ember.Controller.extend({
                         newList.push(oldList[i]);
                     } else if (oldList[i].Location.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
+                    } else if (oldList[i].Month.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                        newList.push(oldList[i]);
                     }
 
                 }
