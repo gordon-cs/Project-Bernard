@@ -415,11 +415,13 @@
                                                     {{!--The group admins email addresses will be displayed and be clickable--}}
                                                         {{#each activity.groupAdminsEmail as |groupAdmin index|}}
                                                             {{#if (lt index 2)}}
+                                                            {{#link-to "profile" groupAdmin.username}}
                                                                 <div class="activity-contact-button-containers">
-                                                                    <div class="social-media-buttons activity-contact-buttons"{{action "linkToGroupAdminProfile" groupAdmin}}>
+                                                                    <div class="social-media-buttons activity-contact-buttons">
                                                                         <a class="activity-contacts">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a>
                                                                     </div>
                                                                 </div>
+                                                            {{/link-to}}
                                                             {{/if}}
                                                         {{/each}}
                                                 </div>

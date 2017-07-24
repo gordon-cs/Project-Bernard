@@ -411,6 +411,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Adds the admins contact information to each of the users memberships
         let addActivityAdmins = function(data) {
             for(var i = 0; i < data.length; i++) {
+                for(var j = 0; j < data[i].length; j++){
+                    data[i][j].username = data[i][j].Email.slice(0, data[i][j].Email.indexOf('@')).toLowerCase();
+                }
                 memberships[i].groupAdminsEmail = data[i];
             }
             return memberships;
