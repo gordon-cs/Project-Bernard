@@ -16,6 +16,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let chapelEvents = [];
         let allEvents = [];
         let required;
+        let requiredEventsString;
 
 
         //subtract a year if it is the spring semester,
@@ -97,9 +98,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     if (chapelEvents.length > 1) {
                         eventsPercent = Math.round((numEvents * 100) / chapelEvents[0].Required);
                         required = chapelEvents[0].Required;
+                        requiredEventsString = numEvents + "/" + required + " CL&W Credits";
                     } else {
                         required = 0;
                         eventsPercent = 0;
+                        requiredEventsString = "No Attendence Recorded";
                     }
                     let startClock;
                     let endClock;
@@ -138,7 +141,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
         };
 
-        //get all the chapel evcents in the future and then formate the responses 
+        //get all the chapel evcents in the future and then formate the responses
         let loadAllChapel = function() {
             return getAsync("/events/25Live/CLAW", context)
                 .then(function(result) {
@@ -189,7 +192,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "eventShown": chapelEvents,
                 "eventsPercent": eventsPercent,
                 "searchValue": searchValue,
-                "numEvents": numEvents
+                "numEvents": numEvents,
+                "requiredEventsString" : requiredEventsString
             };
         };
 
