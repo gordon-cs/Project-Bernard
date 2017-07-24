@@ -168,11 +168,11 @@
                                                     {{#if model.userLoggedIn}}
                                                         <div class="mobile-phone-privacy-button-mobile-container  dropdown">
                                                             <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Hidden" "visible"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                                                <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Hidden" "Visible"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
                                                             </div>
                                                             <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
                                                                 <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" true}}>Make Hidden</div>
-                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" false}}>Make visible</div>
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" false}}>Make Visible</div>
                                                             </div>
                                                         </div>
                                                     {{/if}}
@@ -188,7 +188,15 @@
                             {{#if model.userInfo.Email}}
                                 <div class="row personal-information-entry">
                                     <div class="col-xs-4 col-no-padding personal-information-entry-key">Email</div>
-                                    <div class="col-xs-8 col-no-padding personal-information-entry-value no-overflow">{{model.userInfo.Email}}</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value pointer no-overflow">
+                                        {{#if model.userLoggedIn}}
+                                            {{model.userInfo.Email}}
+                                        {{else}}
+                                            {{#link-to 'email' (query-params emailType='personal' emailAddress=model.userInfo.Email)}}
+                                                {{model.userInfo.Email}}
+                                            {{/link-to}}
+                                        {{/if}}
+                                    </div>
                                 </div>
                             {{/if}}
                         </div>
