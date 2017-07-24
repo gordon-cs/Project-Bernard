@@ -148,7 +148,6 @@ export default Ember.Controller.extend({
             } else {
                 this.set("model.eventShown", this.get("model.chapelEvents"));
                 this.set('selectList', 'ALL');
-                this.send("toggleCheckBox");
             }
         },
 

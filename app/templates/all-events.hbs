@@ -12,12 +12,12 @@
 
   <div class=" row whitebox">
     <!-- search bar -->
-    <div class="input-group event-search col-xs-7 col-sm-4 ">
+    <div class="input-group event-search col-xs-10 col-sm-4 ">
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
     </div>
 
     <!-- Filter button and its dropdown menu -->
-    <div class="dropdown show col-xs-3 col-sm-1" style="margin-right: 10px;">
+    <div class="dropdown show hidden-xs col-sm-1" style="margin-right: 10px;">
       <button type="button" class="btn filter-button btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Filter
       </button>
@@ -69,7 +69,7 @@
       </div>
     </div>
     <!-- switches to change the displayed list -->
-    <div class="mobile-phone-privacy-button-mobile-container hidden-xs col-sm-3 col-md-2 dropdown">
+    <div class="mobile-phone-privacy-button-mobile-container hidden-xs col-sm-3 col-md-3 dropdown">
       <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <div class="mobile-phone-privacy-button-mobile"><a>{{button1}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
@@ -79,12 +79,12 @@
       </div>
     </div>
 
-    <div class="mobile-phone-privacy-button-mobile-container no-padding hidden-xs col-sm-3 col-md-2 dropdown">
+    <div class="mobile-phone-privacy-button-mobile-container no-padding hidden-xs col-sm-3 col-md-3 dropdown">
       <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <div class="mobile-phone-privacy-button-mobile"><a>{{button2}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
       </div>
-      <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
+      <div class="dropdown-menu mobilePhonePrivacyDropdown right-button-dropdown" aria-labelledby="dropdownMenuButton">
         <div class="dropdown-item" {{action "showPastEvents"}}>{{option2}}</div>
       </div>
     </div>
@@ -113,13 +113,58 @@
         <h4>Only&nbsp;CL&W</h4>
       </div>
 
+      <div class="dropdown show col-xs-offset-3 col-xs-4 visible-xs" style="margin-right: 10px;">
+      <button type="button" class="btn filter-button btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filter Results
+      </button>
 
-      <div class="material-switch no-padding visible-xs col-xs-offset-4 col-xs-2">
-        <input id="switch4" type="checkbox" onclick={{action "showPastEvents"}}/>
-        <label for="switch4" class="label-default"></label>
-        <h4>Past&nbsp;Events</h4>
+      <div class="dropdown-menu">
+
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isAdmissions }}
+       Admissions
+      </label>
+        </div>
+
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isChapel }}
+      Chapel Office
+      </label>
+        </div>
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isCEC }}
+       CEC Events
+      </label>
+        </div>
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isArt }}
+       Arts
+      </label>
+        </div>
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+         {{input type="checkbox" checked=isAthletics }}
+        Athletics
+      </label>
+        </div>
+
+
+        <div class=" dropdown-item event-checks form-check">
+          <label class="form-check-label event-checks">
+        {{input type="checkbox" checked=isCalendar }}
+       Calendar Events
+      </label>
+        </div>
+
+        <div class=" dropdown-item event-checks form-check"><button type="button" class="btn btn-danger" onclick={{action "filterEvents"}}>Submit</button></div>
+
       </div>
 
+  </div>
 
     </div>
   </div>
@@ -148,7 +193,7 @@
 
 
 
-<div id="toggleEventDetailsModal" class="modal event-modal" onclick={{action "cancelEventDetailsModal"}}>
+<div id="toggleEventDetailsModal" class="modal events event-modal" onclick={{action "cancelEventDetailsModal"}}>
 
   <!-- Modal Content -->
   <div class="modal-content event-modal-content">

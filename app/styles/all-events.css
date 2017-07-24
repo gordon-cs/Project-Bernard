@@ -13,7 +13,9 @@
 .events .social-media-buttons {
     border: 1px solid rgb(205, 205, 205);
     margin: 2px 4px;
-    text-align: center;
+    width: 150px!important;
+    text-align: left;
+    padding-left: 3px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
@@ -21,9 +23,16 @@
     color: #00aeef;
 }
 
+.events .mobile-phone-privacy-button-mobile span {
+    color: #00aeef;
+    float: right;
+    padding-right: 5px;
+    padding-top: 4px;
+}
+
 .events .social-media-buttons a {
     font-size: 15px;
-    text-align: left;
+    text-align: left !important;
     color: #00aeef;
 }
 
@@ -37,13 +46,23 @@
 }
 
 .events .mobilePhonePrivacyDropdown {
-    min-width: 140px;
+    min-width: 160px;
     cursor: pointer;
     font-size: 15px;
     text-align: center;
     margin-left: 20px;
     font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
     color: #00aeef!important;
+}
+
+.events .right-button-dropdown {
+    margin-left: 5px;
+}
+
+.events .mobilePhonePrivacyDropdown {
+    min-width: 150px;
+    font-size: 12px;
+    padding-left: 0px;
 }
 
 .events .mobilePhonePrivacyDropdown:hover {
@@ -110,10 +129,6 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.event-modal-content::-webkit-full-screen {
-    display: none !important;
-}
-
 .events-filter {
     align-content: right !important;
 }
@@ -141,8 +156,8 @@
     color: #00aeef;
 }
 
-.events .blur {
-    -webkit-filter: blur(5px) grayscale(70%);
+.blur {
+    -webkit-filter: blur(2px);
 }
 
 .events.event-box {
@@ -206,14 +221,14 @@
 
 .events .event-search {
     display: block;
+    z-index: 1;
     margin-top: 10px;
     margin-left: 15px;
-    margin-right: 15px !important;
+    margin-right: 15px;
 }
 
 .events .event-row:hover {
-    background-color: #b2bb1c !important;
-    color: white;
+    background-color: #b2bb1c!important;
     cursor: pointer;
 }
 
@@ -313,6 +328,9 @@
     .events .events-hide {
         float: right !important;
     }
+    .filter-button {
+        margin-top: 13px;
+    }
     .events .event-title {
         font-size: 3em;
     }
@@ -352,7 +370,7 @@
     .event-checks {
         margin: 5px;
     }
-    .event-modal-content {
+    .events .event-modal-content {
         background-color: #fefefe;
         margin: 15% auto;
         /* 15% from the top and centered */
@@ -377,6 +395,10 @@
         max-height: 50%;
         overflow-y: auto;
         /* Could be more or less, depending on screen size */
+    }
+    .events .event-row:hover * {
+        color: white !important;
+        cursor: pointer;
     }
     .events .display-col {
         display: block;
