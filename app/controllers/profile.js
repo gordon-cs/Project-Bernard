@@ -78,18 +78,6 @@ export default Ember.Controller.extend({
                 }
             }
         },
-
-        linkToGroupAdminProfile(groupAdmin) {
-            let profile;
-            if(groupAdmin.Email.indexOf("@" > 0 )) {
-                profile = groupAdmin.Email.slice(0, groupAdmin.Email.indexOf("@"));
-            } else {
-                console.log("Bad email");
-            }
-            let link = '/#/profile/' + profile;
-            this.transitionToRoute(link);
-            console.log(link);
-        },
         
         // Shows the modal that holds the information to update profile picture
         showEditProfilePictureModal(isButton){
