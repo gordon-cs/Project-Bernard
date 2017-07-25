@@ -136,22 +136,11 @@ export default Ember.Controller.extend({
             }
         },
 
-        showFilters(){
-            $(".filter-container").slideToggle();
-        },
-
         //search through the the event list with the given user input
         filterEvents: function() {
 
             let oldList = [];
             let newList = [];
-            console.log(this.get("isChapel"));
-            console.log(this.get("isCEC"));
-            console.log(this.get("isArt"));
-            console.log(this.get("isCalendar"));
-            console.log(this.get("isAthletics"));
-            console.log(this.get("isAdmissions"));
-            console.log(this.get("isCLAW"));
 
             if (this.get('showPastEvents')) {
                 oldList = this.get("model.allEvents");
