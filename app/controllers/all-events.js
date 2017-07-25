@@ -20,136 +20,46 @@ export default Ember.Controller.extend({
 
     actions: {
 
-
-        //add a up arrow or down arror to the sort buttons
-        addArrow(string, item) {
-            let elements = item.siblings();
-            for (var i = 0; i < 3; i++) {
-                $(elements[i]).find("span").remove();
-            }
-            if (item.is('span')) {
-                item.replaceWith(string);
-            } else {
-                item.children('span').remove();
-                item.append(string);
-            }
-        },
-
-        //sort the name of the event when clicked, and add the arror
-        sortByName(item) {
+        sortItems(type) {
             let events = this.get("model.eventShown");
             let sorted = [];
+            let previousSort = this.get("model.sort");
+            console.log("types");
+            console.log(previousSort);
+            console.log(type);
 
-            if ($(item.target).hasClass("Event_Name")) {
-                //add the arror
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
-                //sort in acending order
+            if(type != previousSort.type || previousSort.direction === "up"){
+                // sort down
+                console.log("sort down");
                 events.sort(function(a, b) {
-                    if (a.Event_Name < b.Event_Name) {
-                        return 1;
-                    }
-                    if (a.Event_Name > b.Event_Name) {
+                    if (a[type] < b[type]) {
                         return -1;
+                    }
+                    if (a[type] > b[type]) {
+                        return 1;
                     }
                     return 0;
                 });
-                for (let i = 0; i < events.length; i++) {
-                    sorted.push(events[i]);
-                }
-                $(item.target).removeClass("Event_Name");
+                this.set("model.sort.direction", "down");
             } else {
-                //sort by decending then add a down arrow 
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
+                // sort up
+                console.log("sort up");
                 events.sort(function(a, b) {
-                    if (a.Event_Name < b.Event_Name) {
-                        return -1;
-                    }
-                    if (a.Event_Name > b.Event_Name) {
+                    if (a[type] < b[type]) {
                         return 1;
+                    }
+                    if (a[type] > b[type]) {
+                        return -1;
                     }
                     return 0;
                 });
-                for (let i = 0; i < events.length; i++) {
-                    sorted.push(events[i]);
-                }
-                $(item.target).addClass("Event_Name");
+                this.set("model.sort.direction", "up");
+            }
+            for (let i = 0; i < events.length; i++) {
+                sorted.push(events[i]);
             }
             this.set("model.eventShown", sorted);
-        },
-
-        //same as the one above but by location
-        sortByLocation(item) {
-            let events = this.get("model.eventShown");
-            let sorted = [];
-            if ($(item.target).hasClass("locationCheck")) {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
-                events.sort(function(a, b) {
-                    if (a.Location < b.Location) {
-                        return 1;
-                    }
-                    if (a.Location > b.Location) {
-                        return -1;
-                    }
-                    return 0;
-                });
-                for (let i = 0; i < events.length; i++) {
-                    sorted.push(events[i]);
-                }
-                $(item.target).removeClass("locationCheck");
-            } else {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
-                events.sort(function(a, b) {
-                    if (a.Location < b.Location) {
-                        return -1;
-                    }
-                    if (a.Location > b.Location) {
-                        return 1;
-                    }
-                    return 0;
-                });
-                for (let i = 0; i < events.length; i++) {
-                    sorted.push(events[i]);
-                }
-                $(item.target).addClass("locationCheck");
-            }
-            this.set("model.eventShown", sorted);
-        },
-        //same but by date
-        SortByDate(item) {
-            let events = this.get("model.eventShown");
-            let sorted = [];
-            if ($(item.target).hasClass("dateCheck")) {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
-                events.sort(function(a, b) {
-                    if (a.timeObject < b.timeObject) {
-                        return 1;
-                    }
-                    if (a.timeObject > b.timeObject) {
-                        return -1;
-                    }
-                    return 0;
-                });
-                for (let i = 0; i < events.length; i++) {
-                    sorted.push(events[i]);
-                }
-                $(item.target).removeClass("dateCheck");
-            } else {
-                this.send('addArrow', '<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span>', $(item.target));
-                events.sort(function(a, b) {
-                    if (a.timeObject < b.timeObject) {
-                        return -1;
-                    }
-                    if (a.timeObject > b.timeObject) {
-                        return 1;
-                    }
-                    return 0;
-                });
-                for (let i = 0; i < events.length; i++) {
-                    sorted.push(events[i]);
-                }
-                $(item.target).addClass("dateCheck");
-            }
-            this.set("model.eventShown", sorted);
+            this.set("model.sort.type", type);
         },
 
         //if the chapel credit button is clicked only display chapel with the CL&W creddit tag
@@ -341,6 +251,8 @@ export default Ember.Controller.extend({
                         newList.push(oldList[i]);
                         //search through the location
                     } else if (oldList[i].Location.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                        newList.push(oldList[i]);
+                    } else if (oldList[i].Month.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
                     }
 
