@@ -8,15 +8,6 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
  *  Builds the data model that is used in the corresponding template (hbs) and controller (js) files.
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-    /* If the user has read-only permission, the user will be
-     * redirected to home page */
-    beforeModel() {
-        let college_role = this.get("session.data.authenticated.token_data.college_role");
-        if (college_role == "readonly") {
-            this.transitionTo("index");
-        }
-    },
-
     /*  Below is the model and calls to the api that retrieve data to fill the model */
     model(param) {
         let context = this;
@@ -51,6 +42,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         theModel.godMode = college_role === "god";
         // If use is an admin, they have all the functionality that leaders and advisors have.
         theModel.leading = theModel.godMode === true;
+        // Set readonly switch - does this user have readonly permission
+        theModel.isReadOnly = college_role === "readonly";
 
         // Advisors and Activity leaders filtered by session code.
         // Manager = advisor or leader

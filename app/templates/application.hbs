@@ -21,13 +21,13 @@
                 {{#if session.isAuthenticated}}
                 <div class="user-info-wrapper">
                     <div class="user-info-buttons dropdown">
-                        <h6 class="dropdown-toggle" id=id="dropdownMenu1" data-toggle="dropdown"
+                        <h6 class="dropdown-toggle" id="user-info-dropdown-h6" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true">
                         {{session.data.authenticated.token_data.name}}
                         <span class="glyphicon glyphicon-chevron-down"></span></h6>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown1menu1">
                           <li>{{#link-to "help"}} Help{{/link-to}} </li>
-                          <li>{{#link-to "profile"}}Profile
+                          <li>{{#link-to "profile" session.data.authenticated.token_data.user_name}}Profile
                             {{#if requestsRecieved}}
                                 <span class="notification">
                                     {{requestsRecieved.length}}
@@ -108,6 +108,38 @@
                       </ul>
                   </span>
                 </li>
+                <!-- Dropdown Menu to access Events pages -->
+                <li>
+                  <span>
+                      <a data-toggle="dropdown">Events <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li>{{#link-to "all-events" invokeAction=(action 'closeMenu')}}
+                          All Events
+                        {{/link-to}}</li>
+                        <li>{{#link-to "chapel-credits" invokeAction=(action 'closeMenu')}}
+                          Chapel Credits
+                        {{/link-to}}</li>
+                      </ul>
+                  </span>
+                </li>
+                <li>
+                   <form class="navbar-form navbar-right searhbar">
+                        <div class="form-group" >
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for..."}}
+                        </div>
+                   </form>
+                   <ul class="dropdown-menu dropdown-people">
+                       {{#each model.people as |person index|}}
+                       {{#if (lt index 10)}}
+                       <li>
+                            {{#link-to "profile"  person.UserName }}
+                            {{person.UserName}}
+                            {{/link-to}}
+                       </li>
+                       {{/if}}
+                        {{/each}}
+                    </ul>
+                </li>
                 <li>
                   <span {{action "closeMenu"}}>
                     {{#link-to "about" class="button uppercase"}}
@@ -122,7 +154,7 @@
                 </li>
                 <li class="user-info-mobile">
                   <span {{action "closeMenu"}}>
-                    {{#link-to "profile" class="button uppercase"}}
+                    {{#link-to "profile" session.data.authenticated.token_data.user_name class="button uppercase"}}
                         Profile
                     {{/link-to}}
                     {{#if requestsRecieved}}

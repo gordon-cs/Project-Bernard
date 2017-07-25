@@ -1,5 +1,42 @@
-<div class="row dashboard">
-	<div class="main-content">
-		{{homepage-banner slides=model.slides}}
-	</div>
+<div class="container-fluid">
+  <div class="row hey">
+    <!-- <div class="col-sm-6 col-lg-4"> -->
+
+
+          <!-- <div class="progress id=one visible-xs"> -->
+          <div class="progress id=one">
+              <div class="progress-bar" role="progressbar" style="width: {{model.eventsPercent}}%;" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
+                <span><h5>{{model.requiredEventsString}}</h5></span>
+              </div>
+          </div>
+        <!-- <div class="center-row">
+          <div class="hidden-xs col-xs-6" id="cont" data-pct="{{model.eventsPercent}}% completed">
+          <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+            <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+          </svg>
+          </div>
+
+           <div class="hidden-xs" id="cont" data-pct="{{model.numEvents}}/{{model.required}} done">
+          <svg id="svg" width="300" height="300" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+            <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+          </svg>
+          </div>
+        </div> -->
+  </div>
+
+
+    <div class ="row">
+
+    <!-- <div class="col-sm-6  col-lg-offset-1 col-lg-7"> -->
+			<div class="row dashboard">
+				<div class="main-content ">
+					{{homepage-banner slides=model.slides}}
+				</div>
+			</div>
+    <!-- </div> -->
+
+  </div>
+
 </div>

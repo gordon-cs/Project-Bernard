@@ -152,8 +152,8 @@ td {
     font-weight: normal;
     margin-top: 5px;
 }
-.activity-list > a:hover {
-    text-decoration: none;
+a:hover {
+    text-decoration-line: none;
 }
 @media only screen and (min-width: 768px) {
     .activity-list-item {
@@ -270,7 +270,6 @@ button:hover,
 button:focus,
 .btn:hover,
 .btn:focus {
-    color: white !important;
     text-decoration: none;
 }
 button:active,
@@ -436,4 +435,33 @@ button:active,
   .container.about-container {
     width: 790px;
   }
+}
+
+@media only screen and (max-width: 1199px) {
+    .md-hide {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .sm-hide {
+        display: none;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .xs-hide {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 992px){
+    .sm-show {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    .md-show {
+        display: none;
+    }
 }

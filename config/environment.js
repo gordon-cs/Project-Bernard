@@ -29,7 +29,7 @@ module.exports = function(environment) {
 
     if (environment === 'development') {
         ENV.locationType = 'hash';
-        ENV.trackingCode: 'UA-101865570-2';
+        ENV.trackingCode = 'UA-101865570-2';
         // ENV.APP.LOG_RESOLVER = true;
         // ENV.APP.LOG_ACTIVE_GENERATION = true;
         // ENV.APP.LOG_TRANSITIONS = true;
@@ -54,7 +54,7 @@ module.exports = function(environment) {
         ENV.APP.apiUrl = 'https://360Api.gordon.edu/api';
         ENV.APP.baseUrl = 'https://360Api.gordon.edu';
         ENV['ember-simple-auth-token'].serverTokenEndpoint = 'https://360Api.gordon.edu/token';
-        ENV.trackingCode: 'UA-101865570-1';
+        ENV.trackingCode = 'UA-101865570-1';
     }
 
     return ENV;
