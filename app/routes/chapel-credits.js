@@ -9,6 +9,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let id_name = this.get("session.data.authenticated.token_data.user_name");
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         let searchValue;
         let eventShown;
         let numEvents;
@@ -16,6 +17,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let chapelEvents = [];
         let allEvents = [];
         let required;
+        let requiredEventsString;
 
 
         //subtract a year if it is the spring semester,
@@ -28,9 +30,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let termCode = subdate + term;
 
         function sortDate(first, second) {
-            if (first.CHDate === second.CHDate)
+            if (first.timeObject === second.timeObject)
                 return 0;
-            if (first.CHDate < second.CHDate)
+            if (first.timeObject < second.timeObject)
                 return 1;
             else
                 return -1;
@@ -97,9 +99,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     if (chapelEvents.length > 1) {
                         eventsPercent = Math.round((numEvents * 100) / chapelEvents[0].Required);
                         required = chapelEvents[0].Required;
+                        requiredEventsString = numEvents + "/" + required + " CL&W Credits";
                     } else {
                         required = 0;
                         eventsPercent = 0;
+                        requiredEventsString = "No Attendence Recorded";
                     }
                     let startClock;
                     let endClock;
@@ -126,6 +130,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         if (chapelEvents[i].Event_Title === "") {
                             chapelEvents[i].Event_Title = chapelEvents[i].Event_Name;
                         }
+
+
+                        chapelEvents[i].Month = fullMonth[startMonth];
                         chapelEvents[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
                     }
                     return {
@@ -164,11 +171,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 
                         allEvents[i].Description = formatDiscription(allEvents[i].Description);
-                        allEvents[i].End_Time = setClock(allEvents[i].Start_Time, allEvents[i].End_Time, startClock, endClock);
+                        allEvents[i].End_Time = formatClock(allEvents[i].Start_Time, allEvents[i].End_Time, startClock, endClock);
 
                         if (allEvents[i].Event_Title === "") {
                             allEvents[i].Event_Title = allEvents[i].Event_Name;
                         }
+                        allEvents[i].Month = fullMonth[startMonth];
                         allEvents[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
                     }
                     return {
@@ -189,7 +197,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "eventShown": chapelEvents,
                 "eventsPercent": eventsPercent,
                 "searchValue": searchValue,
-                "numEvents": numEvents
+                "numEvents": numEvents,
+                "requiredEventsString": requiredEventsString
             };
         };
 

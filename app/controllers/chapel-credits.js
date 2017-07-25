@@ -148,7 +148,6 @@ export default Ember.Controller.extend({
             } else {
                 this.set("model.eventShown", this.get("model.chapelEvents"));
                 this.set('selectList', 'ALL');
-                this.send("toggleCheckBox");
             }
         },
 
@@ -221,6 +220,8 @@ export default Ember.Controller.extend({
                     } else if (oldList[i].End_Time.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
                     } else if (oldList[i].Location.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+                        newList.push(oldList[i]);
+                    } else if (oldList[i].Month.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
                     }
 
