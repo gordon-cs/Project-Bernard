@@ -29,7 +29,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
         let loadCurrentSession = function () {
             let selectedSessionCode = transition.queryParams.sessionCode;
-            if (selectedSessionCode != null)
+            if (selectedSessionCode != null && selectedSessionCode != 'current')
             {
               return getAsync("/sessions/"+selectedSessionCode, context);
             }
