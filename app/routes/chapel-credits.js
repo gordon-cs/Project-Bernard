@@ -149,7 +149,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
         };
 
-        //get all the chapel evcents in the future and then formate the responses 
+        //get all the chapel evcents in the future and then formate the responses
         let loadAllChapel = function() {
             return getAsync("/events/25Live/CLAW", context)
                 .then(function(result) {
