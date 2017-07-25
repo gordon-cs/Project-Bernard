@@ -22,6 +22,7 @@ Router.map(function() {
   this.route('chapel-credits');
   this.route('my-involvements');
   this.route("email", {path: "/email"});
+  this.route('error', {path: "/error"});
 });
 
 Router.reopen({
