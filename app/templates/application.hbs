@@ -122,7 +122,24 @@
                       </ul>
                   </span>
                 </li>
-
+                <li>
+                   <form class="navbar-form navbar-right searhbar">
+                        <div class="form-group" >
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for..."}}
+                        </div>
+                   </form>
+                   <ul class="dropdown-menu dropdown-people">
+                       {{#each model.people as |person index|}}
+                       {{#if (lt index 10)}}
+                       <li>
+                            {{#link-to "profile"  person.UserName }}
+                            {{person.UserName}}
+                            {{/link-to}}
+                       </li>
+                       {{/if}}
+                        {{/each}}
+                    </ul>
+                </li>
                 <li>
                   <span {{action "closeMenu"}}>
                     {{#link-to "about" class="button uppercase"}}
