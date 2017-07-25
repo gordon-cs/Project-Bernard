@@ -13,6 +13,7 @@ export default Ember.Controller.extend({
     requestsCalled: false,
     requestsRecieved: [],
     showMenu: false,
+    showMenuSearch: false,
     actions: {
         toggleLogin() {
             if($("#login-outer-box").is(':visible')) {
@@ -26,8 +27,14 @@ export default Ember.Controller.extend({
         toggleMenu() {
             this.set("showMenu", !this.get("showMenu"));
         },
+        toggleMenuSearch() {
+            this.set("showMenuSearch", !this.get("showMenuSearch"));
+        },
         closeMenu() {
             this.set("showMenu", false);
+        },
+        closeMenuSearch() {
+            this.set("showSearchMenu", false);
         },
         logout() {
             this.get("session").invalidate();

@@ -146,7 +146,15 @@ header {
 	display: block !important;
 	padding: 0;
 }
+.showMenuSearch {
+	display: block !important;
+	padding: 0;
+}
 .primary-menu-container {
+	display: none;
+}
+
+.search-menu-container{
 	display: none;
 }
 ul.dropdown-menu {
@@ -223,14 +231,21 @@ ul.dropdown-menu {
 .activities-status .btn {
 	margin-bottom: 10px;
 }
+
+
 .mobile-menu-icon {
 		display: block;
 		float: right;
 }
+
 .mobile-menu-icon button {
 		background: inherit;
 }
 #icon-menu {
+		width: 50px;
+		height: 50px;
+}
+#icon-search {
 		width: 50px;
 		height: 50px;
 }
@@ -375,6 +390,9 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 	#icon-menu {
 		display: none;
 	}
+	#icon-search {
+		display: none;
+	}
 	.logout-btn {
 		margin-right: 20px;
 		float: right;
@@ -382,6 +400,10 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 	}
 }
 @media only screen and (min-width: 992px) {
+
+	.search-menu-container{
+		display: none;
+	}
 	#primary-menu {
 		width: 992px;
 	}

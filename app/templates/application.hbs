@@ -10,6 +10,11 @@
                       <img src="images/list.svg" id="icon-menu">
                     </button>
                 </div>
+                <div class="mobile-menu-icon">
+                    <button {{action 'toggleMenuSearch'}}>
+                        <img src="images/search.svg" id="icon-search">
+                    </button>
+                </div>
             {{else}}
                 <div class="mobile-menu-icon">
                     <button class="btn btn-lg login-toggle" {{action 'toggleLogin'}}>
@@ -158,6 +163,23 @@
     {{else}}
         {{login-block}}
     {{/if}}
+    <!-- people search bar -->
+    {{#if session.isAuthenticated}}
+        <div class="row {{if showMenuSearch 'graybox showMenuSearch' 'lightgraybox'}} search-menu-container">
+            <ul id="primary-menu" class="nav navbar-nav">
+                <li class="user-info-mobile">
+                    360 People Search
+                </li>
+                <li>
+                  <span {{action "closeMenuSearch"}}>
+                    <!-- search bar -->
+
+                  </span>
+                </li>
+            </ul>
+        </div>
+    {{/if}}
+
 </div>
 
 <div id="main-page-container" class="col-sm-12">
