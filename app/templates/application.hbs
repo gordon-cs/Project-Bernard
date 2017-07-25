@@ -183,7 +183,7 @@
                              {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for People..."}}
                         </div>
                    </form>
-                   <ul class="dropdown-menu dropdown-people ">
+                   <ul class="dropdown-menu " style = "display: block; top: 75px; padding:0;"{{action "closeMenu"}}>
                        {{#each model.people as |person index|}}
                        {{#if (lt index 10)}}
                        <li>
