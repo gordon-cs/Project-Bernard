@@ -26,10 +26,53 @@ export default Ember.Controller.extend({
             }
         },
 
+        sortItems(type) {
+            let events = this.get("model.eventShown");
+            let sorted = [];
+            let previousSort = this.get("model.sort");
+            console.log("types");
+            console.log(previousSort);
+            console.log(type);
+
+            if(type != previousSort.type || previousSort.direction === "up"){
+                // sort down
+                console.log("sort down");
+                events.sort(function(a, b) {
+                    if (a[type] < b[type]) {
+                        return -1;
+                    }
+                    if (a[type] > b[type]) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                this.set("model.sort.direction", "down");
+            } else {
+                // sort up
+                console.log("sort up");
+                events.sort(function(a, b) {
+                    if (a[type] < b[type]) {
+                        return 1;
+                    }
+                    if (a[type] > b[type]) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                this.set("model.sort.direction", "up");
+            }
+            for (let i = 0; i < events.length; i++) {
+                sorted.push(events[i]);
+            }
+            this.set("model.eventShown", sorted);
+            this.set("model.sort.type", type);
+        },
+
         //sort by name
         sortByName(item) {
             let events = this.get("model.eventShown");
             let sorted = [];
+            console.log("sortByNAme");
 
             if ($(item.target).hasClass("Event_Name")) {
                 this.send('addArrow', '<span class="glyphicon  glyphicon-triangle-top" style = "color: white;" aria-hidden="true"></span>', $(item.target));
