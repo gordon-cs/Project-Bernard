@@ -10,6 +10,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let id_name = this.get("session.data.authenticated.token_data.user_name");
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        let sort = {
+            "type": "timeObject",
+            "direction": "down"
+        }
         let searchValue;
         let eventShown;
         let numEvents;
@@ -145,7 +149,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
         };
 
-        //get all the chapel evcents in the future and then formate the responses 
+        //get all the chapel evcents in the future and then formate the responses
         let loadAllChapel = function() {
             return getAsync("/events/25Live/CLAW", context)
                 .then(function(result) {
@@ -198,7 +202,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "eventsPercent": eventsPercent,
                 "searchValue": searchValue,
                 "numEvents": numEvents,
-                "requiredEventsString": requiredEventsString
+                "requiredEventsString": requiredEventsString,
+                "sort": sort
             };
         };
 

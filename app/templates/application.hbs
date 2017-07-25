@@ -122,13 +122,21 @@
                       </ul>
                   </span>
                 </li>
+
                 <li>
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "about" class="button uppercase"}}
+                          About
+                    {{/link-to}}
+                  </span>
+                </li>
+                <li class = "hidden-xs">
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
-                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for..."}}
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for People..."}}
                         </div>
                    </form>
-                   <ul class="dropdown-menu dropdown-people">
+                   <ul class="dropdown-menu dropdown-people ">
                        {{#each model.people as |person index|}}
                        {{#if (lt index 10)}}
                        <li>
@@ -140,13 +148,6 @@
                         {{/each}}
                     </ul>
                 </li>
-                <li>
-                  <span {{action "closeMenu"}}>
-                    {{#link-to "about" class="button uppercase"}}
-                          About
-                    {{/link-to}}
-                  </span>
-                </li>
                 <li class="user-info-mobile" >
                   <span {{action "closeMenu"}}>
                     {{#link-to "help"}} Help{{/link-to}}
@@ -154,7 +155,7 @@
                 </li>
                 <li class="user-info-mobile">
                   <span {{action "closeMenu"}}>
-                    {{#link-to "profile" class="button uppercase"}}
+                    {{#link-to "profile" session.data.authenticated.token_data.user_name class="button uppercase"}}
                         Profile
                     {{/link-to}}
                     {{#if requestsRecieved}}
@@ -176,7 +177,24 @@
         {{login-block}}
     {{/if}}
 </div>
-
+<div class = "visible-xs">
+    <form class="navbar-form navbar-right searhbar">
+                        <div class="form-group" >
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for People..."}}
+                        </div>
+                   </form>
+                   <ul class="dropdown-menu dropdown-people ">
+                       {{#each model.people as |person index|}}
+                       {{#if (lt index 10)}}
+                       <li>
+                            {{#link-to "profile"  person.UserName }}
+                            {{person.UserName}}
+                            {{/link-to}}
+                       </li>
+                       {{/if}}
+                        {{/each}}
+                    </ul>
+</div>
 <div id="main-page-container" class="col-sm-12">
     {{outlet}}
 </div>
