@@ -1,4 +1,6 @@
+
 <div class="col-sm-12 header">
+
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
@@ -122,13 +124,21 @@
                       </ul>
                   </span>
                 </li>
+
                 <li>
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "about" class="button uppercase"}}
+                          About
+                    {{/link-to}}
+                  </span>
+                </li>
+                <li class = "hidden-xs">
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
-                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for..."}}
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for People..."}}
                         </div>
                    </form>
-                   <ul class="dropdown-menu dropdown-people">
+                   <ul class="dropdown-menu dropdown-people ">
                        {{#each model.people as |person index|}}
                        {{#if (lt index 10)}}
                        <li>
@@ -139,13 +149,6 @@
                        {{/if}}
                         {{/each}}
                     </ul>
-                </li>
-                <li>
-                  <span {{action "closeMenu"}}>
-                    {{#link-to "about" class="button uppercase"}}
-                          About
-                    {{/link-to}}
-                  </span>
                 </li>
                 <li class="user-info-mobile" >
                   <span {{action "closeMenu"}}>
@@ -176,7 +179,25 @@
         {{login-block}}
     {{/if}}
 </div>
-
+<div class = "visible-xs">
+    <form class="navbar-form navbar-right searhbar">
+                        <div class="form-group" >
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for People..."}}
+                        </div>
+                   </form>
+                   <ul class="dropdown-menu dropdown-people ">
+                       {{#each model.people as |person index|}}
+                       {{#if (lt index 10)}}
+                       <li>
+                            {{#link-to "profile"  person.UserName }}
+                            {{person.UserName}}
+                            {{/link-to}}
+                       </li>
+                       {{/if}}
+                        {{/each}}
+                    </ul>
+</div>
 <div id="main-page-container" class="col-sm-12">
     {{outlet}}
+
 </div>

@@ -15,9 +15,10 @@ export default Ember.Controller.extend({
     showMenu: false,
     actions: {
         toggleLogin() {
-            if ($("#login-outer-box").is(':visible')) {
+            if($("#login-outer-box").is(':visible')) {
                 $("#login-outer-box").hide();
-            } else {
+            }
+            else {
                 $("#login-outer-box").show();
             }
             $(".login-toggle").blur();
@@ -36,7 +37,6 @@ export default Ember.Controller.extend({
             this.set("requestsSent", []);
         },
         stalkPeeps(item) {
-            // Filter the list of activities shown when user types in the search bar
             let context = this;
             let searchValue = this.get("model.searchValue");
             console.log("Before loop");
@@ -94,20 +94,20 @@ export default Ember.Controller.extend({
     },
     // Check if the user has readonly permission
     checkReadOnly() {
-        let context = this;
+      let context = this;
 
-        context.set("isReadOnly", false);
+      context.set("isReadOnly", false);
 
-        let college_role = this.get('session.data.authenticated.token_data.college_role');
+      let college_role = this.get('session.data.authenticated.token_data.college_role');
 
-        console.log(college_role);
+      console.log(college_role);
 
-        // Check if the user is a regular admin
-        if (college_role === "readonly") {
-            context.set("isReadOnly", true);
-            console.log("User has read only permission");
-            return;
-        }
+      // Check if the user is a regular admin
+      if (college_role === "readonly") {
+        context.set("isReadOnly", true);
+        console.log("User has read only permission");
+        return;
+      }
 
     },
 

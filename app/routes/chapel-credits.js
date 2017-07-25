@@ -212,7 +212,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         return loadAllChapel()
             .then(loadChapel)
             .then(loadModel)
-    }
+    },
 
 
 
