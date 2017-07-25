@@ -16,10 +16,9 @@ export default Ember.Controller.extend({
     showMenuSearch: false,
     actions: {
         toggleLogin() {
-            if($("#login-outer-box").is(':visible')) {
+            if ($("#login-outer-box").is(':visible')) {
                 $("#login-outer-box").hide();
-            }
-            else {
+            } else {
                 $("#login-outer-box").show();
             }
             $(".login-toggle").blur();
@@ -45,16 +44,20 @@ export default Ember.Controller.extend({
         },
         stalkPeeps(item) {
             // Filter the list of activities shown when user types in the search bar
+            let context = this;
             let searchValue = this.get("model.searchValue");
-            let peeps;
-            if (searchValue) {
-                peeps = getAsync('/accounts/search/' + searchValue, this);
-                this.set('model.people', peeps);
+            console.log("Before loop");
+            if (searchValue.length >= 2) {
+                return getAsync('/accounts/search/' + searchValue.toLowerCase(), this).then(function(result) {
+                    for (let i = 0; i < result.length; i++) {
+                        result[i].UserName = result[i].UserName.toLowerCase();
+                    }
+                    context.set('model.people', result);
+                    console.log(context.get('model.people'));
+                });
             } else {
-                this.set('model.people', "");
+                context.set('model.people', []);
             }
-
-            console.log(peeps);
 
         },
 
@@ -98,20 +101,20 @@ export default Ember.Controller.extend({
     },
     // Check if the user has readonly permission
     checkReadOnly() {
-      let context = this;
+        let context = this;
 
-      context.set("isReadOnly", false);
+        context.set("isReadOnly", false);
 
-      let college_role = this.get('session.data.authenticated.token_data.college_role');
+        let college_role = this.get('session.data.authenticated.token_data.college_role');
 
-      console.log(college_role);
+        console.log(college_role);
 
-      // Check if the user is a regular admin
-      if (college_role === "readonly") {
-        context.set("isReadOnly", true);
-        console.log("User has read only permission");
-        return;
-      }
+        // Check if the user is a regular admin
+        if (college_role === "readonly") {
+            context.set("isReadOnly", true);
+            console.log("User has read only permission");
+            return;
+        }
 
     },
 
