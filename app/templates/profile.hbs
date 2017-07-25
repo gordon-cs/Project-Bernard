@@ -132,7 +132,9 @@
                                 {{#if model.userInfo.HomePhone}}
                                     <div class="row personal-information-entry">
                                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Phone</div>
-                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{if model.userInfo.formattedHomePhone model.userInfo.formattedHomePhone model.userInfo.HomePhone}}</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">
+                                            <a href="tel:{{model.userInfo.HomePhone}}">{{if model.userInfo.formattedHomePhone model.userInfo.formattedHomePhone model.userInfo.HomePhone}}</a>
+                                        </div>
                                     </div>
                                 {{/if}}
                             {{/if}}
@@ -164,21 +166,21 @@
                                         <div class="col-xs-4 col-no-padding personal-information-entry-key">Cell Phone</div>
                                         <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
                                             <div class="row col-no-padding">
-                                                <div class="md-hide col-lg-7 col-no-padding">
+                                                <div class="md-hide col-lg-6 col-no-padding">
                                                     {{#if model.userLoggedIn}}
                                                         <div class="mobile-phone-privacy-button-mobile-container  dropdown">
                                                             <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Private" "Public"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                                                <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Hidden" "Visible"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
                                                             </div>
                                                             <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
-                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" true}}>Make Private</div>
-                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" false}}>Make Public</div>
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" true}}>Make Hidden</div>
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" false}}>Make Visible</div>
                                                             </div>
                                                         </div>
                                                     {{/if}}
                                                 </div>
-                                                <div class="col-lg-5 col-no-padding">
-                                                    {{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}
+                                                <div class="col-lg-6 col-no-padding">
+                                                    <a href="tel:{{model.userInfo.MobilePhone}}">{{if model.userInfo.formattedMobilePhone model.userInfo.formattedMobilePhone model.userInfo.MobilePhone}}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,7 +190,15 @@
                             {{#if model.userInfo.Email}}
                                 <div class="row personal-information-entry">
                                     <div class="col-xs-4 col-no-padding personal-information-entry-key">Email</div>
-                                    <div class="col-xs-8 col-no-padding personal-information-entry-value no-overflow">{{model.userInfo.Email}}</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value pointer no-overflow">
+                                        {{#if model.userLoggedIn}}
+                                            {{model.userInfo.Email}}
+                                        {{else}}
+                                            {{#link-to 'email' (query-params emailType='personal' emailAddress=model.userInfo.Email)}}
+                                                {{model.userInfo.Email}}
+                                            {{/link-to}}
+                                        {{/if}}
+                                    </div>
                                 </div>
                             {{/if}}
                         </div>
@@ -227,16 +237,6 @@
                 </section>
             </div>
             <div class="col-lg-12 background-transparent col-no-padding">
-                {{#if model.userInfo.OnCampusBuilding}}    
-                    <section class="row profile-block">
-                        <div class="col-md-12 block-header">Campus Address</div>
-                        <div class="col-xs-12 col-no-padding">
-                            <div class="row personal-information-entry">
-                                <div class="col-xs-12 col-no-padding personal-information-entry-key">{{model.userInfo.OnCampusRoom}} {{model.userInfo.OnCampusBuilding}}</div>
-                            </div>
-                        </div>
-                    </section>
-                {{/if}}
                 {{#if model.userInfo.IsFaculty}}
                     <section class="row profile-block">
                         <div class="col-md-12 block-header">Office Information</div>
@@ -250,7 +250,9 @@
                             {{#if model.userInfo.OnCampusPhone}}
                                 <div class="row personal-information-entry">
                                     <div class="col-xs-4 col-no-padding personal-information-entry-key">Office Phone</div>
-                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">(978) 867-{{model.userInfo.OnCampusPhone}}</div>
+                                    <div class="col-xs-8 col-no-padding personal-information-entry-value">
+                                        <a href="tel:978867{{model.userInfo.OnCampusPhone}}">(978) 867-{{model.userInfo.OnCampusPhone}}</a>
+                                    </div>
                                 </div>
                             {{/if}}
                             {{#if model.userInfo.office_hours}}
@@ -394,10 +396,16 @@
                                                 {{!--Dropdown that display the options for privacy settings on mobile--}}
                                                 <div class="col-xs-7 col-no-padding">
                                                     {{#if model.userLoggedIn}}
-                                                        <div class="activity-privacy-button-mobile-container dropdown">
-                                                            <div class="social-media-buttons dropdown-toggle {{if activity.clubInfo.Privacy "disabled"}}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <div class="activity-privacy-button-mobile">{{if activity.Privacy "Hidden" "Visible"}} <span class="{{unless activity.clubInfo.Privacy "glyphicon glyphicon-menu-down"}}" aria-hidden="true"></span></div>
-                                                            </div>
+                                                        <div class="activity-privacy-button-mobile-container dropdown {{if (or activity.clubInfo.Privacy activity.isAdmin) "disabled"}}">
+                                                            {{#if (or activity.clubInfo.Privacy activity.isAdmin)}}
+                                                                <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <div class="activity-privacy-button-mobile">{{if activity.isAdmin "Group Contact" "Private Club"}}</div>
+                                                                </div>  
+                                                            {{else}}
+                                                                <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <div class="activity-privacy-button-mobile">{{if activity.Privacy "Hidden" "Visible"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+                                                                </div>
+                                                            {{/if}}
                                                             <div class="dropdown-menu activityPrivacyDropdown" aria-labelledby="dropdownMenuButton">
                                                                 <div class="dropdown-item"{{action "setClubPrivacy" activity true}}>Make Hidden</div>
                                                                 <div class="dropdown-item"{{action "setClubPrivacy" activity false}}>Make Visible</div>
@@ -415,11 +423,13 @@
                                                     {{!--The group admins email addresses will be displayed and be clickable--}}
                                                         {{#each activity.groupAdminsEmail as |groupAdmin index|}}
                                                             {{#if (lt index 2)}}
+                                                            {{#link-to "profile" groupAdmin.username}}
                                                                 <div class="activity-contact-button-containers">
-                                                                    <div class="social-media-buttons activity-contact-buttons"{{action "linkToGroupAdminProfile" groupAdmin}}>
+                                                                    <div class="social-media-buttons activity-contact-buttons">
                                                                         <a class="activity-contacts">{{groupAdmin.FirstName}} {{groupAdmin.LastName}}</a>
                                                                     </div>
                                                                 </div>
+                                                            {{/link-to}}
                                                             {{/if}}
                                                         {{/each}}
                                                 </div>

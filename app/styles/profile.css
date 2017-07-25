@@ -531,11 +531,14 @@ Activities
     padding-left: 5px;
 }
 
-.profile .social-media-buttons.disabled .activity-privacy-button-mobile {
+.profile .activity-privacy-button-mobile-container.disabled {
     opacity: .4;
     cursor: default;
 }
 
+.profile .activity-privacy-button-mobile-container.disabled .social-media-buttons {
+    cursor: default;
+}
 
 .profile .activity-row2 {
     padding-top: 2px;
@@ -693,7 +696,7 @@ Request Tables
         margin-left: 5px;
     }
     
-    .profile .image.image-half-width {
+    .profile .first-profile-block .image.image-half-width {
         width: 46%;
         margin-left: 10px;
         float: left;
