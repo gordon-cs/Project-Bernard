@@ -20,7 +20,7 @@ module.exports = function(environment) {
 
         },
         'ember-simple-auth-token': {
-            serverTokenEndpoint: '360ApiTrain.gordon.edu/token',
+            serverTokenEndpoint: 'https://360ApiTrain.gordon.edu/token',
             authorizationPrefix: 'Bearer ',
             authorizationHeaderName: 'Authorization'
         }
