@@ -9,6 +9,10 @@ import ENV from "gordon360/config/environment"
 export default Ember.Controller.extend({
     // query params. emailType - "personal"/"group".
     queryParams: ['emailType','emailAddress','activityCode','sessionCode'],
+    emailType: null,
+    emailAddress: null,
+    activityCode: null,
+    sessionCode: null,
     session: Ember.inject.service('session'),
     mediumEditorOptions: {
         "toolbar": {

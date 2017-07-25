@@ -89,14 +89,12 @@
                   <span>
                       <a data-toggle="dropdown">Activities <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        {{#unless isReadOnly}}
-                        <li>{{#link-to "all-activities" invokeAction=(action 'closeMenu')}}
+                        <li>{{#link-to "all-activities" (query-params selectedType='All' sessionCode='current') invokeAction=(action 'closeMenu')}}
                           All Activities
                         {{/link-to}}</li>
                         <li>{{#link-to "my-involvements" invokeAction=(action 'closeMenu')}}
                           My Involvements
                         {{/link-to}}</li>
-                        {{/unless}}
                         <li>{{#link-to "transcript" invokeAction=(action 'closeMenu')}}
                           Transcript
                         {{/link-to}}</li>
