@@ -15,12 +15,12 @@ module.exports = function(environment) {
         APP: {
             // Here you can pass flags/options to your application instance
             // when it is created
-            apiUrl: 'http://localhost:4869/api',
-            baseUrl: 'http://localhost:4869'
+            apiUrl: 'http://360ApiTrain.gordon.edu/api',
+            baseUrl: 'https://360ApiTrain.gordon.edu'
 
         },
         'ember-simple-auth-token': {
-            serverTokenEndpoint: 'http://localhost:4869/token',
+            serverTokenEndpoint: 'https://360ApiTrain.gordon.edu/token',
             authorizationPrefix: 'Bearer ',
             authorizationHeaderName: 'Authorization'
         }
