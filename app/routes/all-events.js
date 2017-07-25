@@ -15,6 +15,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let pastEvents = [];
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        let sort = {
+            "type": "timeObject",
+            "direction": "down"
+        }
 
         //formate the discription and get ride of all html tags
         let formatDiscription = function(Discription) {
@@ -152,7 +156,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "allEvents": eventList,
                 "eventShown": pastEvents,
                 "pastEvents": pastEvents,
-                "searchValue": searchValue
+                "searchValue": searchValue,
+                "sort": sort
             };
 
         };

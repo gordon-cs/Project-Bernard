@@ -171,10 +171,10 @@
   <!--heading for the event list + filter buttons -->
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
-            <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortByName"}}><h4 >Event</h4></div>
-      <div class="event-labels col-sm-4 col-md-4" onclick={{action "sortByLocation"}}><h4>Location</h4></div>
-      <div class="event-labels col-sm-2 col-md-2" onclick={{action "sortByLocation"}}><h4>Date<span class="glyphicon glyphicon glyphicon-triangle-bottom" style = "color: white;" aria-hidden="true"></span></h4></div>
-       <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortByLocation"}}><h4>Time</h4></div>
+            <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortItems" "Event_Name"}}><h4 >Event <span class="glyphicon {{if (and (eq model.sort.type "Event_Name") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Event_Name") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
+      <div class="event-labels col-sm-4 col-md-4" onclick={{action "sortItems" "Location"}}><h4>Location <span class="glyphicon {{if (and (eq model.sort.type "Location") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Location") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
+      <div class="event-labels col-sm-2 col-md-2" onclick={{action "sortItems" "timeObject"}}><h4>Date <span class="glyphicon {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
+       <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortItems" "timeObject"}}><h4>Time</h4></div>
     </div>
   </div>
   <div class="entry-rows">
