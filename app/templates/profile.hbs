@@ -396,9 +396,9 @@
                                                 {{!--Dropdown that display the options for privacy settings on mobile--}}
                                                 <div class="col-xs-7 col-no-padding">
                                                     {{#if model.userLoggedIn}}
-                                                        <div class="activity-privacy-button-mobile-container dropdown">
+                                                        <div class="activity-privacy-button-mobile-container dropdown {{if (or activity.clubInfo.Privacy activity.isAdmin) "disabled"}}">
                                                             {{#if (or activity.clubInfo.Privacy activity.isAdmin)}}
-                                                                <div class="social-media-buttons dropdown-toggle disabled" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                     <div class="activity-privacy-button-mobile">{{if activity.isAdmin "Group Contact" "Private Club"}}</div>
                                                                 </div>  
                                                             {{else}}
