@@ -59,6 +59,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let allSupervisions = [];
         let allMemberships = [];
 
+
+        //progress bar
+
+        
+
+
+
+
+
+
+
         /* Promises */
         let loadCurrentSession = function() {
             return getAsync("/sessions/current", context)

@@ -6,9 +6,10 @@
           <!-- <div class="progress id=one visible-xs"> -->
           <div class="progress id=one">
               <div class="progress-bar" role="progressbar" style="width: {{model.eventsPercent}}%;" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
-                <span><h5>{{model.requiredEventsString}}</h5></span>
+                {{#link-to "chapel-credits"}}<span><h5>{{model.requiredEventsString}}</h5></span> {{/link-to}}
               </div>
           </div>
+          
         <!-- <div class="center-row">
           <div class="hidden-xs col-xs-6" id="cont" data-pct="{{model.eventsPercent}}% completed">
           <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -24,6 +25,8 @@
           </svg>
           </div>
         </div> -->
+
+
   </div>
 
 
