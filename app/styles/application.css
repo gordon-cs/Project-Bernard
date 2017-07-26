@@ -151,13 +151,13 @@ header {
 
 @media screen and (min-width:992px) {
     .dropdown-people {
-        margin-left: 180px!important;
+        margin-left: 150px!important;
     }
 }
 
 @media screen and (min-width:992px) {
     .dropdown-people {
-        margin-left: 180px!important;
+        margin-left: 150px!important;
     }
 }
 
@@ -245,6 +245,9 @@ header {
     padding-left: 15%;
 }
 
+.mobile-form-group {
+    padding-left: 10px;
+}
 .searchbar-mobile-list-item {
     margin-left: 10px;
     margin-right: auto;
