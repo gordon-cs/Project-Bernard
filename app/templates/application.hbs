@@ -134,35 +134,30 @@
                     {{/link-to}}
                   </span>
                 </li>
-                <li class = "hidden-xs">
-                    <span>
+
+                 <li class = "hidden-xs">
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
-                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for..."}}
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for..."}}
+                            
                         </div>
+                                           <!-- where we show the results for the search -->     
                    </form>
-                   <!-- where we show the results for the search -->
-                   <ul class="dropdown-menu dropdown-people " >
-                       {{#each model.people as |person index|}}
-                            {{#if (lt index 10)}}
-                                <li>
-                                    <!-- link to a users profile page --> 
-                                        {{#link-to "profile"  person.UserName }}
-                                        {{person.FirstName}}  {{person.LastName}} ({{person.UserName}})
-                                        {{/link-to}}
-                                </li>
-                            {{/if}}
-                        {{/each}}
-                    </ul>
-                    </span>
+                    <ul class="dropdown-menu dropdown-people " >
+                            {{#each model.people as |person index|}}
+                                    {{#if (lt index 10)}}
+                                        <li>
+                                            <!-- link to a users profile page --> 
+                                                {{#link-to "profile"  person.UserName }}
+                                                {{person.FirstName}}  {{person.LastName}} ({{person.UserName}})
+                                                {{/link-to}}
+                                        </li>
+                                    {{/if}}
+                                {{/each}}
+                            </ul>
+                 
                 </li>
-                <li>
-                  <span {{action "closeMenu"}}>
-                    {{#link-to "about" class="button uppercase"}}
-                          About
-                    {{/link-to}}
-                  </span>
-                </li>
+
                 <li class="user-info-mobile" >
                   <span {{action "closeMenu"}}>
                     {{#link-to "help"}} Help{{/link-to}}
@@ -191,10 +186,9 @@
     {{else}}
         {{login-block}}
     {{/if}}
+
+    <!-- people search bar for mobile phones -->
 </div>
-
-
-    <!-- people search bar -->
     {{#if session.isAuthenticated}}
         <div class="row {{if showMenuSearch 'graybox showMenuSearch' 'lightgraybox'}} search-menu-container">
             <ul id="primary-menu" class="nav navbar-nav">
@@ -202,18 +196,20 @@
                      360 People Search
                  </li>
                 <li>
-                  <span {{action "closeMenu"}}>
+                 <!-- close the menu by calling this function -->
+                  <span {{action "closeMenuSearch"}}>
                     <form >
-                        <div class="form-group" >
+                        <div class="form-group searchbar-mobile-form" >
                              {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control searhbar-mobile" placeholder="Search for People..."}}
                         </div>
                    </form>
-                   <ul >
+                   <ul class="searchbar-mobile-list">
+                       <!-- limit search result size to 10 -->
                        {{#each model.people as |person index|}}
                        {{#if (lt index 10)}}
-                       <li>
-                            {{#link-to "profile"  person.UserName invokeAction=(action 'closeMenu')}}
-                            {{person.UserName}}
+                       <li class="searchbar-mobile-list-item">
+                            {{#link-to "profile"  person.UserName invokeAction=(action 'toggleMenuSearch')}}
+                            {{person.FirstName}} {{person.LastName}} ({{person.UserName}})
                             {{/link-to}}
                        </li>
                        {{/if}}
@@ -228,4 +224,6 @@
 <div id="main-page-container" class="col-sm-12">
 
     {{outlet}}
+
+
 </div>

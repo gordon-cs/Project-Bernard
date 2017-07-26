@@ -48,6 +48,7 @@ export default Ember.Controller.extend({
             console.log(this.get("requestsCalled"));
             this.set("requestsSent", []);
         },
+        // people search process 
         stalkPeeps(item) {
             let context = this;
             let searchValue = this.get("model.searchValue");
@@ -55,7 +56,7 @@ export default Ember.Controller.extend({
             // Check if the user typed a space, and search if they did
             if (searchValue.length >= 2 && searchValue.includes(" ")) {
                 let split = searchValue.split(" ")
-                return getAsync('/accounts/search/' + split[0] + '/' + split[1], this).then(function(result) {
+                return getAsync('/accounts/search/' + split[0].toLowerCase() + '/' + split[1], this).then(function(result) {
                     for (let i = 0; i < result.length; i++) {
                         result[i].UserName = result[i].UserName.toLowerCase();
                     }
@@ -64,7 +65,7 @@ export default Ember.Controller.extend({
                 });
             }
             if (searchValue.length >= 2) {
-                return getAsync('/accounts/search/' + searchValue + '/', this).then(function(result) {
+                return getAsync('/accounts/search/' + searchValue.toLowerCase() + '/', this).then(function(result) {
                     for (let i = 0; i < result.length; i++) {
                         result[i].UserName = result[i].UserName.toLowerCase();
                     }
