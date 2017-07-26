@@ -39,7 +39,7 @@ export default Ember.Controller.extend({
             $("#membership-requests-sent-table").toggle(0, function() {
                 if($("#membership-requests-sent-table").children(".entry-rows").last()[0]){ 
                     $("#membership-requests-sent-table").children(".entry-rows").last()[0].scrollIntoView(true); 
-                }             
+                }
             });
             // Another method that will animate the scrolling but I think that it might take too long
             // $("#membership-requests-sent-table").toggle(1, function(){
@@ -223,9 +223,9 @@ export default Ember.Controller.extend({
             let transition = function() {
                 context.set("model.userInfo.show_pic", privacyToSet);
                 if(privacyToSet) {
-                    successMessage = "Your profile picture is now visible on your public profile page";
+                    successMessage = "Your profile picture is now visible on your public profile page.  Changes may take a few minutes to take effect.";
                 } else {
-                    successMessage = "Your profile picture is no longer visible on your public profile page";
+                    successMessage = "Your profile picture is no longer visible on your public profile page.  Changes may take a few minutes to take effect.";
                 }
                 context.set("profilePictureSuccessMessage", successMessage);
             };
@@ -233,12 +233,9 @@ export default Ember.Controller.extend({
             setPrivacy(newPrivacy)
             .then(transition);
         },     
-        toggleMobilePhonePrivacy(setting) {
+        toggleMobilePhonePrivacy() {
             let context = this;
             let currentPrivacy = context.get("model.userInfo.IsMobilePhonePrivate");
-            if(setting){
-                currentPrivacy = !setting;
-            }
             let newPrivacy = currentPrivacy ? 'N' : 'Y';
             let privacyToSet = currentPrivacy ? 0 : 1;
             let successMessage;
@@ -250,10 +247,10 @@ export default Ember.Controller.extend({
             };
             let transition = function() {
                 context.set("model.userInfo.IsMobilePhonePrivate", privacyToSet);
-                if(!newPrivacy) {
-                    successMessage = "Your mobile phone number is now visible on your public profile page";
+                if(!privacyToSet) {
+                    successMessage = "Your mobile phone number is now visible on your public profile page. Changes may take a few minutes to take effect.";
                 } else {
-                    successMessage = "Your mobile phone number is no longer visible on your public profile page";
+                    successMessage = "Your mobile phone number is no longer visible on your public profile page. Changes may take a few minutes to take effect.";
                 }
                 context.set("phonePrivacySuccessMessage", successMessage);
                 setTimeout(function(){
