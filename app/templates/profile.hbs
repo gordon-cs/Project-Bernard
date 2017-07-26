@@ -541,7 +541,7 @@
                 <div class="row edit-links-form-container col-no-padding hide">
                     <form class="edit-links-form" {{action "updateLinks" "updated" link on="submit"}}>
                             <div class="col-xs-8 edit-links-button-containers">
-                                    {{input value=model.link class="edit-links-input"}}
+                                    {{input value=model.link placeholder="Enter your profile URL" class="edit-links-input"}}
                             </div>
                             <div class="col-xs-4 edit-links-button-containers">
                                 <input class="btn btn-primary edit-links-button" type="submit">
@@ -557,9 +557,7 @@
   {{else}}
   <section class="row first-profile-block">
     <div class="col-lg-12 user-name" {{action "tester"}}>The user was not found</div>
-    {{#link-to "index"}}
-        <div class="col-lg-12 user-position"><a>Go back to search</a></div>
-    {{/link-to}}
+        <div class="col-lg-12 user-position">Try searching again</div>
     {{!-- TODO link to search page --}}
 
   </section>
