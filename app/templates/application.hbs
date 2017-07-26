@@ -1,6 +1,4 @@
-
 <div class="col-sm-12 header">
-
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
@@ -94,12 +92,14 @@
                   <span>
                       <a data-toggle="dropdown">Activities <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li>{{#link-to "all-activities" (query-params selectedType='All' sessionCode='current') invokeAction=(action 'closeMenu')}}
+                        {{#unless isReadOnly}}
+                        <li>{{#link-to "all-activities" invokeAction=(action 'closeMenu')}}
                           All Activities
                         {{/link-to}}</li>
                         <li>{{#link-to "my-involvements" invokeAction=(action 'closeMenu')}}
                           My Involvements
                         {{/link-to}}</li>
+                        {{/unless}}
                         <li>{{#link-to "transcript" invokeAction=(action 'closeMenu')}}
                           Transcript
                         {{/link-to}}</li>
@@ -127,7 +127,6 @@
                       </ul>
                   </span>
                 </li>
-
                 <li>
                   <span {{action "closeMenu"}}>
                     {{#link-to "about" class="button uppercase"}}
@@ -139,7 +138,7 @@
                     <span>
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
-                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for People..."}}
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for..."}}
                         </div>
                    </form>
                    <!-- where we show the results for the search -->
@@ -156,6 +155,13 @@
                         {{/each}}
                     </ul>
                     </span>
+                </li>
+                <li>
+                  <span {{action "closeMenu"}}>
+                    {{#link-to "about" class="button uppercase"}}
+                          About
+                    {{/link-to}}
+                  </span>
                 </li>
                 <li class="user-info-mobile" >
                   <span {{action "closeMenu"}}>
@@ -186,6 +192,7 @@
         {{login-block}}
     {{/if}}
 </div>
+
 
     <!-- people search bar -->
     {{#if session.isAuthenticated}}
@@ -221,5 +228,4 @@
 <div id="main-page-container" class="col-sm-12">
 
     {{outlet}}
-
 </div>
