@@ -173,8 +173,7 @@
                                                                 <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Hidden" "Visible"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
                                                             </div>
                                                             <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
-                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" true}}>Make Hidden</div>
-                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" false}}>Make Visible</div>
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" }}>{{if model.userInfo.IsMobilePhonePrivate "Make Visible" "Make Hidden"}}</div>
                                                             </div>
                                                         </div>
                                                     {{/if}}
