@@ -188,9 +188,9 @@
     {{/if}}
 
     <!-- people search bar for mobile phones -->
-
+</div>
     {{#if session.isAuthenticated}}
-        <div class="row {{if showMenuSearch 'graybox showMenuSearch'}} search-menu-container">
+        <div class="row {{if showMenuSearch 'graybox showMenuSearch' 'lightgraybox'}} search-menu-container">
             <ul id="primary-menu" class="nav navbar-nav">
                 <li class="user-info-mobile">
                      360 People Search
@@ -207,7 +207,7 @@
                        <!-- limit search result size to 10 -->
                        {{#each model.people as |person index|}}
                        {{#if (lt index 10)}}
-                       <li>
+                       <li class="searchbar-mobile-list-item">
                             {{#link-to "profile"  person.UserName invokeAction=(action 'toggleMenuSearch')}}
                             {{person.FirstName}} {{person.LastName}} ({{person.UserName}})
                             {{/link-to}}
@@ -224,6 +224,6 @@
 <div id="main-page-container" class="col-sm-12">
 
     {{outlet}}
-</div>
+
 
 </div>
