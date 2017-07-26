@@ -80,7 +80,7 @@
             </div>
             {{#if model.userLoggedIn}}
                 <div class="row profile-action-block md-show">
-                    <div class="col-xs-4 profile-action-button-container">
+                    <div class="{{if model.userInfo.IsFaculty "col-xs-6" "col-xs-4"}} profile-action-button-container">
                         <div class="profile-action-button" onclick={{action "showEditLinksModal"}}>
                             <div class="action-icon">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -88,7 +88,7 @@
                             <div class="action-link">Edit your social media links</div>
                         </div>
                     </div>
-                    <div class="col-xs-4 profile-action-button-container">
+                    <div class="{{if model.userInfo.IsFaculty "col-xs-6" "col-xs-4"}} profile-action-button-container">
                         <div class="profile-action-button" onclick={{action "showEditProfilePictureModal" true}}>
                             <div class="action-icon">
                                 <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
@@ -96,6 +96,7 @@
                             <div class="action-link">Update your profile picture</div>
                         </div>
                     </div>
+                    {{#unless model.userInfo.IsFaculty}}
                     <div class="col-xs-4 profile-action-button-container">
                         <div class="profile-action-button" onclick={{action "toggleMobilePhonePrivacy"}}>
                             <div class="action-icon">
@@ -104,6 +105,7 @@
                             <div class="action-link">{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</div>
                         </div>
                     </div>
+                    {{/unless}}
                 </div>
             {{/if}}
         </div>
@@ -167,14 +169,13 @@
                                         <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
                                             <div class="row col-no-padding">
                                                 <div class="md-hide col-lg-6 col-no-padding">
-                                                    {{#if model.userLoggedIn}}
+                                                    {{#if (and model.userLoggedIn (not model.userInfo.IsFaculty))}}
                                                         <div class="mobile-phone-privacy-button-mobile-container  dropdown">
                                                             <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Hidden" "Visible"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
                                                             </div>
                                                             <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
-                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" true}}>Make Hidden</div>
-                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" false}}>Make Visible</div>
+                                                                <div class="dropdown-item"{{action "toggleMobilePhonePrivacy" }}>{{if model.userInfo.IsMobilePhonePrivate "Make Visible" "Make Hidden"}}</div>
                                                             </div>
                                                         </div>
                                                     {{/if}}
@@ -540,7 +541,7 @@
                 <div class="row edit-links-form-container col-no-padding hide">
                     <form class="edit-links-form" {{action "updateLinks" "updated" link on="submit"}}>
                             <div class="col-xs-8 edit-links-button-containers">
-                                    {{input value=model.link class="edit-links-input"}}
+                                    {{input value=model.link placeholder="Enter your profile URL" class="edit-links-input"}}
                             </div>
                             <div class="col-xs-4 edit-links-button-containers">
                                 <input class="btn btn-primary edit-links-button" type="submit">
@@ -556,9 +557,7 @@
   {{else}}
   <section class="row first-profile-block">
     <div class="col-lg-12 user-name" {{action "tester"}}>The user was not found</div>
-    {{#link-to "index"}}
-        <div class="col-lg-12 user-position"><a>Go back to search</a></div>
-    {{/link-to}}
+        <div class="col-lg-12 user-position">Try searching again</div>
     {{!-- TODO link to search page --}}
 
   </section>

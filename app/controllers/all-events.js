@@ -149,7 +149,8 @@ export default Ember.Controller.extend({
                 oldList = this.get("model.pastEvents");
             }
 
-            if (this.get("isChapel") || this.get("isArt") || this.get("isCEC") || this.get("isCalendar") || this.get("isAdmissions") || this.get("isAthletics" || this.get("isCLAW"))) {
+            if (this.get("isChapel") || this.get("isArt") || this.get("isCEC") || this.get("isCalendar") || this.get("isAdmissions") ||
+                this.get("isAthletics") || this.get("isCLAW") || this.get("isAcademics") || this.get("isFairORExpo") || this.get("isStudentLife")) {
 
                 for (let i = 0; i < oldList.length; i++) {
 
@@ -165,28 +166,28 @@ export default Ember.Controller.extend({
                         newList.push(oldList[i]);
                     } else if (this.get("isAthletics") && oldList[i].Organization === "Athletics") {
                         newList.push(oldList[i]);
-                    } else if (this.get("isStudentLife") && oldList[i].Organization === "Athletics") {
+                    } else if (this.get("isStudentLife") && oldList[i].Organization === "Office of Student Life") {
                         newList.push(oldList[i]);
-                    } else if (this.get("isFairORExpo") && oldList[i].Organization === "Athletics") {
+                    } else if (this.get("isFairORExpo") && (oldList[i].Event_Type_Name === "Festival" || oldList[i].Event_Type_Name === "Exhibition" || oldList[i].Event_Type_Name === "Fair/Expo")) {
                         newList.push(oldList[i]);
-                    } else if (this.get("isAcademics") && oldList[i].Organization === "Athletics") {
+                    } else if (this.get("isAcademics") && (oldList[i].Event_Type_Name === "Research Project" || oldList[i].Event_Type_Name === "Lecture/Speaker/Forum")) {
                         newList.push(oldList[i]);
-                    } else if (this.get("isAthletics") && oldList[i].Organization === "Athletics") {
-                        newList.push(oldList[i]);
-                    }
-
-                    if (this.get('onlyChapel')) {
-                        for (let k = 0; k < newList.length; k++) {
-                            if (newList[k].Category_Id !== "85") {
-                                newList.pop(newList[k]);
-                            }
-                        }
                     }
 
                 }
 
                 oldList = newList;
                 newList = [];
+            }
+
+            if (this.get('onlyChapel')) {
+
+                for (let k = 0; k < oldList.length; k++) {
+                    if (oldList[k].Category_Id === "85") {
+                        newList.push(oldList[k]);
+                    }
+                }
+                oldList = newList;
 
             }
             // Filter the list of activities shown when user types in the search bar
@@ -218,6 +219,10 @@ export default Ember.Controller.extend({
             }
         },
 
+
+        showFilters() {
+            $('.filter-container').slideToggle();
+        },
 
         //filter the list of events according to the boxes checked
         toggleCheckBox() {

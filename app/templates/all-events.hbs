@@ -24,7 +24,8 @@
     </div>
 
     <!-- switches to change the displayed list -->
-    <div class="mobile-phone-privacy-button-mobile-container hidden-xs col-sm-3 col-md-3 dropdown">
+    <div class = " hidden-xs col-sm-6 col-md-6">
+    <div class="dropdown button-padding">
       <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <div class="mobile-phone-privacy-button-mobile"><a>{{button1}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
@@ -33,8 +34,8 @@
         <div class="dropdown-item" {{action "checkForChaple"}}>{{option1}}</div>
       </div>
     </div>
-
-    <div class="mobile-phone-privacy-button-mobile-container no-padding hidden-xs col-sm-3 col-md-3 dropdown">
+  
+    <div class=" no-padding button-padding dropdown">
       <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <div class="mobile-phone-privacy-button-mobile"><a>{{button2}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
@@ -43,7 +44,7 @@
         <div class="dropdown-item" {{action "showPastEvents"}}>{{option2}}</div>
       </div>
     </div>
-
+</div>
     {{!--
     <div class="material-switch no-padding hidden-xs col-sm-1">
       <input id="switch2" type="checkbox" onclick={{action "checkForChaple"}}/>
@@ -71,14 +72,13 @@
         Filter Results
       </button>
       </div>
-
     </div>
   </div>
 
   <div class="filter-container">
     <form {{action "filterEvents" on="change"}}>
       <div class="row">
-        <div class="col-lg-4 form-check">
+        <div class="col-sm-4  col form-check">
           <div class="checkbox-container">
             {{input type="checkbox" id="admissions" checked=isAdmissions }}
             <label for="adminssions" class="form-check-label event-checks">
@@ -86,7 +86,31 @@
             </label>
           </div>
         </div>
-        <div class="col-lg-4 form-check">
+        <div class="col-sm-4  form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isStudentLife }}
+            <label  class="form-check-label event-checks">
+              Student Life
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isFairORExpo }}
+            <label  class="form-check-label event-checks">
+              Fair or Expo
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isAcademics }}
+            <label  class="form-check-label event-checks">
+              Academics
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isChapel }}
             <label class="form-check-label event-checks">
@@ -94,7 +118,7 @@
             </label>
           </div>
         </div>
-        <div class="col-lg-4 form-check">
+        <div class="col-sm-4  form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isCEC }}
             <label class="form-check-label event-checks">
@@ -102,7 +126,7 @@
             </label>
           </div>
         </div>
-        <div class="col-lg-4 form-check">
+        <div class="col-sm-4  form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isArt }}
             <label class="form-check-label event-checks">
@@ -110,7 +134,7 @@
             </label>
           </div>
         </div>
-        <div class="col-lg-4 form-check">
+        <div class="col-sm-4  form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isAthletics }}
             <label class="form-check-label event-checks">
@@ -118,7 +142,7 @@
             </label>
           </div>
         </div>
-        <div class="col-lg-4 form-check">
+        <div class="col-sm-4 col-xs-12 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isCalendar }}
             <label class="form-check-label event-checks">
