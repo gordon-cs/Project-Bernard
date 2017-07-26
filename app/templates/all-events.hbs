@@ -173,23 +173,6 @@
   </div>
 
 </div>
-      <div class="event-labels col-sm-2 col-md-2" onclick={{action "sortItems" "timeObject"}}><h4>Date <span class="glyphicon {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
-       <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortItems" "timeObject"}}><h4>Time</h4></div>
-    </div>
-  </div>
-  <div class="entry-rows">
-    <!--all the events in the event list -->
-    {{#each model.eventShown as |event|}}
-    <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
-      <div class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</div>
-      <div class="display-col col-md-4 col-sm-4 xs-hide">{{event.Location}}</div>
-      <div  class="display-col col-md-2 col-sm-2 xs-hide">{{event.Start_Time}}</div>
-     <div class="display-col col-md-3 col-sm-3 xs-hide">{{event.End_Time}}</div>
-      <h4 class="display-col col-sm-3 col-md-3 xs-hide events-info" onclick={{ action "MobileEventDetailsModal" event }}>More...</h4>
-    </div>
-    {{/each}}
-  </div>
-</div>
 
 
 
