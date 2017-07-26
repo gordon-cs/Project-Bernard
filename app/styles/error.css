@@ -1,0 +1,8 @@
+.error{
+  padding-top: 20px ;
+}
+
+.error .error-message {
+  padding-top: 20px;
+  font-size: 60px ;
+}

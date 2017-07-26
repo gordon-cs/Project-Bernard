@@ -18,56 +18,11 @@
 
     <!-- Filter button and its dropdown menu -->
     <div class="dropdown show hidden-xs col-sm-1" style="margin-right: 10px;">
-      <button type="button" class="btn filter-button btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn filter-button btn-danger"  {{action "showFilters"}}>
         Filter
       </button>
-
-      <div class="dropdown-menu">
-
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isAdmissions }}
-       Admissions
-      </label>
-        </div>
-
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isChapel }}
-      Chapel Office
-      </label>
-        </div>
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isCEC }}
-       CEC Events
-      </label>
-        </div>
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isArt }}
-       Arts
-      </label>
-        </div>
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-         {{input type="checkbox" checked=isAthletics }}
-        Athletics
-      </label>
-        </div>
-
-
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isCalendar }}
-       Calendar Events
-      </label>
-        </div>
-
-        <div class=" dropdown-item event-checks form-check"><button type="button" class="btn btn-danger" onclick={{action "filterEvents"}}>Submit</button></div>
-
-      </div>
     </div>
+
     <!-- switches to change the displayed list -->
     <div class="mobile-phone-privacy-button-mobile-container hidden-xs col-sm-3 col-md-3 dropdown">
       <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -101,7 +56,6 @@
       <label for="switch2" class="label-default"></label>
       <h4>Include&nbsp;Past&nbsp;Events</h4>
     </div> --}}
-
   </div>
   <!-- same switches but formated for mobile -->
   <div class="moble-eventbox lightgraybox">
@@ -112,62 +66,70 @@
         <label for="switch3" class="label-default"></label>
         <h4>Only&nbsp;CL&W</h4>
       </div>
-
       <div class="dropdown show col-xs-offset-3 col-xs-4 visible-xs" style="margin-right: 10px;">
-      <button type="button" class="btn filter-button btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn filter-button btn-danger" {{action "showFilters"}}>
         Filter Results
       </button>
-
-      <div class="dropdown-menu">
-
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isAdmissions }}
-       Admissions
-      </label>
-        </div>
-
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isChapel }}
-      Chapel Office
-      </label>
-        </div>
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isCEC }}
-       CEC Events
-      </label>
-        </div>
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isArt }}
-       Arts
-      </label>
-        </div>
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-         {{input type="checkbox" checked=isAthletics }}
-        Athletics
-      </label>
-        </div>
-
-
-        <div class=" dropdown-item event-checks form-check">
-          <label class="form-check-label event-checks">
-        {{input type="checkbox" checked=isCalendar }}
-       Calendar Events
-      </label>
-        </div>
-
-        <div class=" dropdown-item event-checks form-check"><button type="button" class="btn btn-danger" onclick={{action "filterEvents"}}>Submit</button></div>
-
       </div>
-
-  </div>
 
     </div>
   </div>
+
+  <div class="filter-container">
+    <form {{action "filterEvents" on="change"}}>
+      <div class="row">
+        <div class="col-lg-4 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" id="admissions" checked=isAdmissions }}
+            <label for="adminssions" class="form-check-label event-checks">
+              Admissions
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-4 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isChapel }}
+            <label class="form-check-label event-checks">
+              Chapel Office
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-4 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isCEC }}
+            <label class="form-check-label event-checks">
+              CEC Events
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-4 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isArt }}
+            <label class="form-check-label event-checks">
+              Arts
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-4 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isAthletics }}
+            <label class="form-check-label event-checks">
+              Athletics
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-4 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isCalendar }}
+            <label class="form-check-label event-checks">
+              Calendar Events
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
   <!--heading for the event list + filter buttons -->
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
@@ -189,6 +151,27 @@
     </div>
     {{/each}}
   </div>
+</div>
+
+
+
+<div id="toggleEventDetailsModal" class="modal events event-modal" onclick={{action "cancelEventDetailsModal"}}>
+
+  <!-- Modal Content -->
+  <div class="modal-content event-modal-content">
+    <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
+    <div class="modal-body event-modal-body">
+      <h4>Department: {{ displayEvent.Organization }}</h4>
+      <h4>Event Discription: {{ displayEvent.Description}}</h4>
+      {{#each displayEvent.Occurrences as |Location|}}
+      <h4>{{Location.[3]}} </h4>
+      {{/each}}
+    </div>
+    <div class="modal-footer">
+      <button class="btn button-lightgray cancel-modal form-button form-cancel-button">Cancel</button>
+    </div>
+  </div>
+
 </div>
 
 

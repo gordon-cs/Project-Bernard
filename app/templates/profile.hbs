@@ -1,17 +1,17 @@
 <main class="container main-container profile">
-     {{#if model.userInfo.found}} 
+     {{#if model.userInfo.found}}
     {{!--Profile picture and information--}}
     <section class="row first-profile-block">
         {{! Profile picture and overlay }}
         <div class="profile-image-col {{if model.showBothImages "col-lg-4 col-sm-5" "col-lg-2 col-sm-4"}}">
             <div class="profile-image-container" {{action "showEditProfilePictureModal" false}}>
                 {{#if model.userInfo.preferredImageURL}}
-                    <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">  
+                    <img src="{{model.userInfo.preferredImageURL}}" alt="Avatar" class="image {{if model.showBothImages "image-half-width"}}" id="profilePicture">
                 {{else}}
-                    <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture"> 
+                    <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image" id="profilePicture">
                 {{/if}}
                 {{#if model.showBothImages}}
-                    <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image image-half-width" id="profilePicture"> 
+                    <img src="{{model.userInfo.defaultImageURL}}" alt="Avatar" class="image image-half-width" id="profilePicture">
                 {{/if}}
                 {{#if model.userLoggedIn}}
                     <div class="overlay sm-hide">
@@ -79,9 +79,9 @@
                     {{/if}}
             </div>
             {{#if model.userLoggedIn}}
-                <div class="row profile-action-block md-show"> 
+                <div class="row profile-action-block md-show">
                     <div class="col-xs-4 profile-action-button-container">
-                        <div class="profile-action-button"{{action "showEditLinksModal"}}>
+                        <div class="profile-action-button" onclick={{action "showEditLinksModal"}}>
                             <div class="action-icon">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </div>
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4 profile-action-button-container">
-                        <div class="profile-action-button"{{action "showEditProfilePictureModal" true}}>
+                        <div class="profile-action-button" onclick={{action "showEditProfilePictureModal" true}}>
                             <div class="action-icon">
                                 <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
                             </div>
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4 profile-action-button-container">
-                        <div class="profile-action-button"{{action "toggleMobilePhonePrivacy"}}>
+                        <div class="profile-action-button" onclick={{action "toggleMobilePhonePrivacy"}}>
                             <div class="action-icon">
                                 <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
                             </div>
@@ -225,9 +225,9 @@
                             <div class="row personal-information-entry entry3 no-border">
                                 <div class="col-xs-12 col-no-padding personal-information-entry-key">
                                     {{!-- {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}} --}}
-                                    {{model.userInfo.HomeCity}}, 
+                                    {{model.userInfo.HomeCity}},
                                     {{model.userInfo.HomeState}}
-                                    {{model.userInfo.HomePostalCode}} 
+                                    {{model.userInfo.HomePostalCode}}
                                     {{#if (not-eq model.userInfo.HomeCountry "US")}}
                                         {{if model.userInfo.Country model.userInfo.Country model.userInfo.HomeCountry}}
                                     {{/if}}
@@ -371,7 +371,7 @@
 
     {{!--Activities--}}
         <div class="col-lg-7 profile-block-container-right background-transparent col-no-padding">
-    
+
             <section class="profile-block">
                 <div class="row round-top-coners">
                     <div class="block-header col-sm-12">
@@ -400,7 +400,7 @@
                                                             {{#if (or activity.clubInfo.Privacy activity.isAdmin)}}
                                                                 <div class="social-media-buttons">
                                                                     <div class="activity-privacy-button-mobile">{{if activity.isAdmin "Group Contact" "Private Club"}}</div>
-                                                                </div>  
+                                                                </div>
                                                             {{else}}
                                                                 <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                     <div class="activity-privacy-button-mobile">{{if activity.Privacy "Hidden" "Visible"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
@@ -549,20 +549,20 @@
                 </div>
             {{/each}}
             <button class="btn btn-primary hide-links-modal-button">Done</button>
-            
+
         </div>
 
     </div>
   {{else}}
   <section class="row first-profile-block">
-    <div class="col-lg-12 user-name" {{action "tester"}}>The user was not found</div> 
+    <div class="col-lg-12 user-name" {{action "tester"}}>The user was not found</div>
     {{#link-to "index"}}
         <div class="col-lg-12 user-position"><a>Go back to search</a></div>
     {{/link-to}}
     {{!-- TODO link to search page --}}
-    
+
   </section>
 
 
-{{/if}} 
+{{/if}}
 </main>
