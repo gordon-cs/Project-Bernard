@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
             console.log(previousSort);
             console.log(type);
 
-            if(type != previousSort.type || previousSort.direction === "up"){
+            if (type != previousSort.type || previousSort.direction === "up") {
                 // sort down
                 console.log("sort down");
                 events.sort(function(a, b) {
@@ -142,100 +142,53 @@ export default Ember.Controller.extend({
             let oldList = [];
             let newList = [];
 
+
             if (this.get('showPastEvents')) {
                 oldList = this.get("model.allEvents");
             } else {
                 oldList = this.get("model.pastEvents");
             }
 
-            if (this.get('onlyChapel')) {
+            if (this.get("isChapel") || this.get("isArt") || this.get("isCEC") || this.get("isCalendar") || this.get("isAdmissions") || this.get("isAthletics" || this.get("isCLAW"))) {
+
                 for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Category_Id === '85') {
+
+                    if (this.get("isChapel") && oldList[i].Organization === "Chapel Office") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isArt") && (oldList[i].Organization === "Music Department" || oldList[i].Organization === "Theatre" || oldList[i].Organization === "Art Department")) {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isCEC") && oldList[i].Organization === "Campus Events Council (CEC)") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isCalendar") && oldList[i].Event_Type_Name === "Calendar Announcement") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isAdmissions") && oldList[i].Organization === "Admissions") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isAthletics") && oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isStudentLife") && oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isFairORExpo") && oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isAcademics") && oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isAthletics") && oldList[i].Organization === "Athletics") {
                         newList.push(oldList[i]);
                     }
+
+                    if (this.get('onlyChapel')) {
+                        for (let k = 0; k < newList.length; k++) {
+                            if (newList[k].Category_Id !== "85") {
+                                newList.pop(newList[k]);
+                            }
+                        }
+                    }
+
                 }
+
                 oldList = newList;
                 newList = [];
-            }
-
-            if (this.get("isChapel")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Chapel Office") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                oldList = newList;
-            }
-
-            if (this.get("isCEC")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Campus Events Council (CEC)") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                oldList = newList;
 
             }
-            if (this.get("isArt")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Music Department" || oldList[i].Organization === "Theatre" || oldList[i].Organization === "Art Department") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                oldList = newList;
-
-            }
-            if (this.get("isCalendar")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Event_Type_Name === "Calendar Announcement") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                oldList = newList;
-
-            }
-            if (this.get("isAthletics")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Athletics") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                oldList = newList;
-
-
-            }
-            if (this.get("isAdmissions")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Admissions") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                oldList = newList;
-            }
-            if (this.get("isCLAW")) {
-
-                for (let i = 0; i < newList.length; i++) {
-                    if (newList[i].Category_Id !== "85") {
-                        newList.popObject(i);
-                    }
-
-                }
-                oldList = newList;
-
-            }
-
             // Filter the list of activities shown when user types in the search bar
             let searchValue = this.get("model.searchValue");
             if (searchValue) {

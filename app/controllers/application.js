@@ -12,13 +12,17 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     requestsCalled: false,
     requestsRecieved: [],
+    showMenuSearch: false,
     showMenu: false,
     actions: {
+
+        emptylist(item) {
+            this.set(this.get('model.people'), []);
+        },
         toggleLogin() {
-            if($("#login-outer-box").is(':visible')) {
+            if ($("#login-outer-box").is(':visible')) {
                 $("#login-outer-box").hide();
-            }
-            else {
+            } else {
                 $("#login-outer-box").show();
             }
             $(".login-toggle").blur();
@@ -26,9 +30,17 @@ export default Ember.Controller.extend({
         toggleMenu() {
             this.set("showMenu", !this.get("showMenu"));
         },
+        toggleMenuSearch() {
+            this.set("showMenuSearch", !this.get("showMenuSearch"));
+        },
         closeMenu() {
             this.set("showMenu", false);
         },
+
+        closeMenuSearch() {
+            this.set("showSearchMenu", false);
+        },
+
         logout() {
             this.get("session").invalidate();
             this.set("requestsRecieved", []);
@@ -39,9 +51,20 @@ export default Ember.Controller.extend({
         stalkPeeps(item) {
             let context = this;
             let searchValue = this.get("model.searchValue");
-            console.log("Before loop");
+
+            // Check if the user typed a space, and search if they did
+            if (searchValue.length >= 2 && searchValue.includes(" ")) {
+                let split = searchValue.split(" ")
+                return getAsync('/accounts/search/' + split[0] + '/' + split[1], this).then(function(result) {
+                    for (let i = 0; i < result.length; i++) {
+                        result[i].UserName = result[i].UserName.toLowerCase();
+                    }
+                    context.set('model.people', result);
+                    console.log(context.get('model.people'));
+                });
+            }
             if (searchValue.length >= 2) {
-                return getAsync('/accounts/search/' + searchValue.toLowerCase(), this).then(function(result) {
+                return getAsync('/accounts/search/' + searchValue + '/', this).then(function(result) {
                     for (let i = 0; i < result.length; i++) {
                         result[i].UserName = result[i].UserName.toLowerCase();
                     }
@@ -94,20 +117,20 @@ export default Ember.Controller.extend({
     },
     // Check if the user has readonly permission
     checkReadOnly() {
-      let context = this;
+        let context = this;
 
-      context.set("isReadOnly", false);
+        context.set("isReadOnly", false);
 
-      let college_role = this.get('session.data.authenticated.token_data.college_role');
+        let college_role = this.get('session.data.authenticated.token_data.college_role');
 
-      console.log(college_role);
+        console.log(college_role);
 
-      // Check if the user is a regular admin
-      if (college_role === "readonly") {
-        context.set("isReadOnly", true);
-        console.log("User has read only permission");
-        return;
-      }
+        // Check if the user is a regular admin
+        if (college_role === "readonly") {
+            context.set("isReadOnly", true);
+            console.log("User has read only permission");
+            return;
+        }
 
     },
 
