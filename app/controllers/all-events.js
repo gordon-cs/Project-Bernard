@@ -97,7 +97,7 @@ export default Ember.Controller.extend({
 
         //On mobiel, when the event name is clicked, drop down the informatio
         //and slideup the previous dropdown
-        toggleRequestSent(item) {
+        openDropDown(item) {
 
             let lastForm = this.get("lastForm");
 
@@ -109,6 +109,7 @@ export default Ember.Controller.extend({
                     }
                 }
                 $(lastForm).removeClass("onclickOrange");
+                $(lastForm).parent().css("border-bottom", "3px");
                 let form = $(item.target);
                 this.set("lastForm", form);
             } else {

@@ -6,6 +6,8 @@ import deleteAsync from "gordon360/utils/delete-async";
  *  Sends requests to the model to retrieve and/or modify data.
  */
 export default Ember.Controller.extend({
+    button1: 'Attended Events',
+    option1: 'Show Upcoming Events',
     selectList: 'ALL',
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
@@ -20,7 +22,7 @@ export default Ember.Controller.extend({
             console.log(previousSort);
             console.log(type);
 
-            if(type != previousSort.type || previousSort.direction === "up"){
+            if (type != previousSort.type || previousSort.direction === "up") {
                 // sort down
                 console.log("sort down");
                 events.sort(function(a, b) {
@@ -54,16 +56,18 @@ export default Ember.Controller.extend({
             this.set("model.sort.type", type);
         },
 
- 
+
         //display list of all past events events
         displayALLEvents() {
 
-            if (this.get('selectList') === 'ALL') {
+            if (this.get('button1') === 'Attended Events') {
                 this.set("model.eventShown", this.get("model.allEvents"));
-                this.set('selectList', 'Your');
+                this.set('button1', 'Upcoming Events');
+                this.set('option1', 'Show Attended Events');
             } else {
                 this.set("model.eventShown", this.get("model.chapelEvents"));
-                this.set('selectList', 'ALL');
+                this.set('button1', 'Attended Events');
+                this.set('option1', 'Show Upcoming Events');
             }
         },
 

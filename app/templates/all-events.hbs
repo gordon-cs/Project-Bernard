@@ -16,15 +16,8 @@
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
     </div>
 
-    <!-- Filter button and its dropdown menu -->
-    <div class="dropdown show hidden-xs col-sm-1" style="margin-right: 10px;">
-      <button type="button" class="btn filter-button btn-danger"  {{action "showFilters"}}>
-        Filter
-      </button>
-    </div>
-
     <!-- switches to change the displayed list -->
-    <div class = " hidden-xs col-sm-6 col-md-6">
+    <div class = " hidden-xs col-offset-md-1 col-sm-6 col-md-6">
     <div class="dropdown button-padding">
       <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
@@ -45,6 +38,13 @@
       </div>
     </div>
 </div>
+
+    <!-- Filter button and its dropdown menu -->
+    <div class="dropdown show hidden-xs col-sm-1" style="margin-right: 10px;">
+      <button type="button" class="btn filter-button btn-danger"  {{action "showFilters"}}>
+        Filter
+      </button>
+    </div>
     {{!--
     <div class="material-switch no-padding hidden-xs col-sm-1">
       <input id="switch2" type="checkbox" onclick={{action "checkForChaple"}}/>
@@ -78,7 +78,7 @@
   <div class="filter-container">
     <form {{action "filterEvents" on="change"}}>
       <div class="row">
-        <div class="col-sm-4  col form-check">
+        <div class="col-sm-4  col-xs-6 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" id="admissions" checked=isAdmissions }}
             <label for="adminssions" class="form-check-label event-checks">
@@ -86,7 +86,7 @@
             </label>
           </div>
         </div>
-        <div class="col-sm-4  form-check">
+        <div class="col-sm-4  col-xs-6 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isStudentLife }}
             <label  class="form-check-label event-checks">
@@ -94,7 +94,7 @@
             </label>
           </div>
         </div>
-        <div class="col-sm-4  form-check">
+        <div class="col-sm-4  col-xs-6 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isFairORExpo }}
             <label  class="form-check-label event-checks">
@@ -102,7 +102,7 @@
             </label>
           </div>
         </div>
-        <div class="col-sm-4  form-check">
+        <div class="col-sm-4  col-xs-6 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isAcademics }}
             <label  class="form-check-label event-checks">
@@ -110,7 +110,7 @@
             </label>
           </div>
         </div>
-        <div class="col-sm-4  form-check">
+        <div class="col-sm-4  col-xs-6 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isChapel }}
             <label class="form-check-label event-checks">
@@ -118,7 +118,7 @@
             </label>
           </div>
         </div>
-        <div class="col-sm-4  form-check">
+        <div class="col-sm-4  col-xs-6 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isCEC }}
             <label class="form-check-label event-checks">
@@ -126,7 +126,7 @@
             </label>
           </div>
         </div>
-        <div class="col-sm-4  form-check">
+        <div class="col-sm-4  col-xs-6 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isArt }}
             <label class="form-check-label event-checks">
@@ -134,7 +134,7 @@
             </label>
           </div>
         </div>
-        <div class="col-sm-4  form-check">
+        <div class="col-sm-4  col-xs-6 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isAthletics }}
             <label class="form-check-label event-checks">
@@ -142,7 +142,7 @@
             </label>
           </div>
         </div>
-        <div class="col-sm-4 col-xs-12 form-check">
+        <div class="col-sm-4  col-xs-12 form-check">
           <div class="checkbox-container">
             {{input type="checkbox" checked=isCalendar }}
             <label class="form-check-label event-checks">
@@ -167,11 +167,11 @@
     <!--all the events in the event list -->
     {{#each model.eventShown as |event|}}
     <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
-      <div class="col-md-3 col-sm-3 event-id" onclick={{action "toggleRequestSent"}}>{{event.Event_Title}}</div>
+      <div class="col-md-3 col-sm-3 event-id" onclick={{action "openDropDown"}}>{{event.Event_Title}}</div>
       <div class="display-col col-md-4 col-sm-4 xs-hide">{{event.Location}}</div>
       <div  class="display-col col-md-2 col-sm-2 xs-hide">{{event.Start_Time}}</div>
      <div class="display-col col-md-3 col-sm-3 xs-hide">{{event.End_Time}}</div>
-      <h4 class="display-col col-sm-3 col-md-3 xs-hide events-info" onclick={{ action "MobileEventDetailsModal" event }}>More...</h4>
+      <h4 class="display-col col-sm-3 col-md-3 xs-hide events-info" onclick={{ action "MobileEventDetailsModal" event }}>More Info...</h4>
     </div>
     {{/each}}
   </div>
