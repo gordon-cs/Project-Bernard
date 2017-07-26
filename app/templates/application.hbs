@@ -1,4 +1,6 @@
+
 <div class="col-sm-12 header">
+
     <header class="container">
         <div class="app-title-container row">
             {{#link-to "index"}}
@@ -26,7 +28,7 @@
                 {{#if session.isAuthenticated}}
                 <div class="user-info-wrapper">
                     <div class="user-info-buttons dropdown">
-                        <h6 class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
+                        <h6 class="dropdown-toggle" id="user-info-dropdown-h6" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true">
                         {{session.data.authenticated.token_data.name}}
                         <span class="glyphicon glyphicon-chevron-down"></span></h6>
@@ -92,14 +94,12 @@
                   <span>
                       <a data-toggle="dropdown">Activities <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        {{#unless isReadOnly}}
-                        <li>{{#link-to "all-activities" invokeAction=(action 'closeMenu')}}
+                        <li>{{#link-to "all-activities" (query-params selectedType='All' sessionCode='current') invokeAction=(action 'closeMenu')}}
                           All Activities
                         {{/link-to}}</li>
                         <li>{{#link-to "my-involvements" invokeAction=(action 'closeMenu')}}
                           My Involvements
                         {{/link-to}}</li>
-                        {{/unless}}
                         <li>{{#link-to "transcript" invokeAction=(action 'closeMenu')}}
                           Transcript
                         {{/link-to}}</li>
@@ -136,22 +136,26 @@
                   </span>
                 </li>
                 <li class = "hidden-xs">
+                    <span>
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
                              {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for People..."}}
                         </div>
                    </form>
-                   <ul class="dropdown-menu dropdown-people ">
+                   <!-- where we show the results for the search -->
+                   <ul class="dropdown-menu dropdown-people " >
                        {{#each model.people as |person index|}}
-                       {{#if (lt index 10)}}
-                       <li>
-                            {{#link-to "profile"  person.UserName }}
-                            {{person.UserName}}
-                            {{/link-to}}
-                       </li>
-                       {{/if}}
+                            {{#if (lt index 10)}}
+                                <li>
+                                    <!-- link to a users profile page --> 
+                                        {{#link-to "profile"  person.UserName }}
+                                        {{person.FirstName}}  {{person.LastName}} ({{person.UserName}})
+                                        {{/link-to}}
+                                </li>
+                            {{/if}}
                         {{/each}}
                     </ul>
+                    </span>
                 </li>
                 <li class="user-info-mobile" >
                   <span {{action "closeMenu"}}>
@@ -182,6 +186,7 @@
         {{login-block}}
     {{/if}}
 </div>
+
     <!-- people search bar -->
     {{#if session.isAuthenticated}}
         <div class="row {{if showMenuSearch 'graybox showMenuSearch' 'lightgraybox'}} search-menu-container">
@@ -214,5 +219,7 @@
 
     {{/if}}
 <div id="main-page-container" class="col-sm-12">
+
     {{outlet}}
+
 </div>

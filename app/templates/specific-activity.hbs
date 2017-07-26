@@ -30,7 +30,7 @@
                           {{#each model.contactEmails as |contact|}}
                           <p class="activity-info-item-data">
                               {{contact.FirstName}} {{contact.LastName}}
-                              {{#link-to 'email' (query-params emailType='personal' emailAddress=contact.Email)}}
+                              {{#link-to 'email' (query-params emailType='personal' emailAddress=contact.Email activityCode=null sessionCode=null)}}
                                 <span class="glyphicon glyphicon-envelope cyan"></span>
                               {{/link-to}}
                           </p>
@@ -65,7 +65,7 @@
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
-            {{#link-to 'email' (query-params emailType='group' activityCode=model.activity.ActivityCode sessionCode=model.session.SessionCode)}}
+            {{#link-to 'email' (query-params emailType='group' activityCode=model.activity.ActivityCode sessionCode=model.session.SessionCode emailAddress=null)}}
                 <button class="btn button-navy">Send Email to Group</button>
             {{/link-to}}
         {{else if model.leading}}
@@ -76,7 +76,7 @@
             {{#link-to 'edit-activity' model.session.SessionCode model.activity.ActivityCode}}
                 <button class="btn button-navy">Edit Activity</button>
             {{/link-to}}
-            {{#link-to 'email' (query-params emailType='group' activityCode=model.activity.ActivityCode sessionCode=model.session.SessionCode)}}
+            {{#link-to 'email' (query-params emailType='group' activityCode=model.activity.ActivityCode sessionCode=model.session.SessionCode emailAddress=null)}}
                 <button class="btn button-navy">Send Email to Group</button>
             {{/link-to}}
         {{else if model.notAMember}}
@@ -87,9 +87,11 @@
             {{else}}
                 <button type="button" class="btn button-navy" {{action "toggleFollow"}} disabled={{model.activityClosed}}>Subscribe</button>
             {{/if}}
+            {{#unless model.isReadOnly}}
             {{#link-to "add-membership" model.session.SessionCode model.activity.ActivityCode}}
                 <button type="button" class="btn button-navy" disabled={{model.activityClosed}}>Join</button>
             {{/link-to}}
+            {{/unless}}
         {{/if}}
     </div>
     <div class="status-message">
