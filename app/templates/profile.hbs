@@ -35,7 +35,7 @@
                         {{else if model.userInfo.IsStudent}}
                             {{model.userInfo.Class}}
                         {{else if model.userInfo.IsAlumni}}
-                            Alumni
+                            Class of {{model.userInfo.ClassYear}}
                         {{/if}}
                     </div>
                 </div>
@@ -124,6 +124,12 @@
                             </div>
                         {{/if}}
                         <div class="col-sm-12 col-no-padding">
+                            {{#if (and model.userInfo.IsFaculty model.userInfo.IsAlumni)}}
+                                    <div class="row personal-information-entry">
+                                        <div class="col-xs-4 col-no-padding personal-information-entry-key">Class Year</div>
+                                        <div class="col-xs-8 col-no-padding personal-information-entry-value">{{model.userInfo.ClassYear}}</div>
+                                    </div>
+                            {{/if}}
                             {{#if model.userInfo.IsFaculty}}
                                 {{#if model.userInfo.OnCampusDepartment}}
                                     <div class="row personal-information-entry">
@@ -225,8 +231,8 @@
                             {{/if}}
                             <div class="row personal-information-entry entry3 no-border">
                                 <div class="col-xs-12 col-no-padding personal-information-entry-key">
-                                    {{!-- {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}} --}}
-                                    {{model.userInfo.HomeCity}},
+                                     {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}} 
+                                    {{!-- {{model.userInfo.HomeCity}}, --}}
                                     {{model.userInfo.HomeState}}
                                     {{model.userInfo.HomePostalCode}}
                                     {{#if (not-eq model.userInfo.HomeCountry "US")}}
