@@ -165,6 +165,14 @@ export default Ember.Controller.extend({
                         newList.push(oldList[i]);
                     } else if (this.get("isAthletics") && oldList[i].Organization === "Athletics") {
                         newList.push(oldList[i]);
+                    } else if (this.get("isStudentLife") && oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isFairORExpo") && oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isAcademics") && oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
+                    } else if (this.get("isAthletics") && oldList[i].Organization === "Athletics") {
+                        newList.push(oldList[i]);
                     }
 
                     if (this.get('onlyChapel')) {
