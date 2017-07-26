@@ -134,12 +134,8 @@
                     {{/link-to}}
                   </span>
                 </li>
-<<<<<<< HEAD
 
                  <li class = "hidden-xs">
-=======
-                <li class = "hidden-xs">
->>>>>>> summer
                     <span>
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
@@ -191,23 +187,15 @@
         {{login-block}}
     {{/if}}
 
-<<<<<<< HEAD
     <!-- people search bar for mobile phones -->
 
     {{#if session.isAuthenticated}}
         <div class="row {{if showMenuSearch 'graybox showMenuSearch'}} search-menu-container">
-=======
-
-    <!-- people search bar -->
-    {{#if session.isAuthenticated}}
-        <div class="row {{if showMenuSearch 'graybox showMenuSearch' 'lightgraybox'}} search-menu-container">
->>>>>>> summer
             <ul id="primary-menu" class="nav navbar-nav">
                 <li class="user-info-mobile">
                      360 People Search
                  </li>
                 <li>
-<<<<<<< HEAD
                  <!-- close the menu by calling this function -->
                   <span {{action "closeMenuSearch"}}>
                     <form >
@@ -222,20 +210,6 @@
                        <li>
                             {{#link-to "profile"  person.UserName invokeAction=(action 'toggleMenuSearch')}}
                             {{person.FirstName}} {{person.LastName}} ({{person.UserName}})
-=======
-                  <span {{action "closeMenu"}}>
-                    <form >
-                        <div class="form-group" >
-                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control searhbar-mobile" placeholder="Search for People..."}}
-                        </div>
-                   </form>
-                   <ul >
-                       {{#each model.people as |person index|}}
-                       {{#if (lt index 10)}}
-                       <li>
-                            {{#link-to "profile"  person.UserName invokeAction=(action 'closeMenu')}}
-                            {{person.UserName}}
->>>>>>> summer
                             {{/link-to}}
                        </li>
                        {{/if}}
