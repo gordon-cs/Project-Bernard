@@ -12,6 +12,11 @@
                       <img src="images/list.svg" id="icon-menu">
                     </button>
                 </div>
+                <div class="mobile-menu-icon">
+                    <button {{action 'toggleMenuSearch'}}>
+                       <img src="images/search.svg" id="icon-search">
+                    </button>
+                </div>
             {{else}}
                 <div class="mobile-menu-icon">
                     <button class="btn btn-lg login-toggle" {{action 'toggleLogin'}}>
@@ -181,27 +186,40 @@
         {{login-block}}
     {{/if}}
 </div>
- {{#if session.isAuthenticated}}
-        <div class = "visible-xs">
-            <form class="navbar-form navbar-right searhbar">
-                                <div class="form-group" >
-                                    {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control" placeholder="Search for People..."}}
-                                </div>
-                        </form>
-                        <ul class="dropdown-menu " style ="display: block; top: 75px; padding:0;">
-                            {{#each model.people as |person index|}}
-                                {{#if (lt index 10)}}
-                                    <li>
-                                            {{#link-to "profile"  person.UserName }}
-                                            {{person.FirstName}} {{person.LastName}} ({{person.UserName}})
-                                            {{/link-to}}
-                                    </li>
-                                {{/if}}
-                            {{/each}}
-                        </ul>
-            </div>
+
+    <!-- people search bar -->
+    {{#if session.isAuthenticated}}
+        <div class="row {{if showMenuSearch 'graybox showMenuSearch' 'lightgraybox'}} search-menu-container">
+            <ul id="primary-menu" class="nav navbar-nav">
+                <li class="user-info-mobile">
+                     360 People Search
+                 </li>
+                <li>
+                  <span {{action "closeMenu"}}>
+                    <form >
+                        <div class="form-group" >
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control searhbar-mobile" placeholder="Search for People..."}}
+                        </div>
+                   </form>
+                   <ul >
+                       {{#each model.people as |person index|}}
+                       {{#if (lt index 10)}}
+                       <li>
+                            {{#link-to "profile"  person.UserName invokeAction=(action 'closeMenu')}}
+                            {{person.UserName}}
+                            {{/link-to}}
+                       </li>
+                       {{/if}}
+                      {{/each}}
+                    </ul>
+                  </span>
+                </li>
+            </ul>
+        </div>
+
     {{/if}}
-    <div id="main-page-container" class="col-sm-12">
+<div id="main-page-container" class="col-sm-12">
+
     {{outlet}}
 
 </div>
