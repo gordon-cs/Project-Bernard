@@ -60,13 +60,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let allMemberships = [];
 
 
-        //progress bar
-
-        
-
-
-
-
+        //days countdown
+        let daysLeft = [];
+        let daysPercent;
+        let offset2;
 
 
 
@@ -136,14 +133,24 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             });
         };
 
+
+        //days countdown promise
+        let loadDaysLeft = function() {
+          return getAsync("/sessions/daysLeft", context)
+            .then(function(result) {
+              daysLeft = result[0];
+              let totalDays = result[1];
+
+
+              daysPercent = Math.round(((totalDays - daysLeft) * 100) / totalDays);
+              return daysLeft, daysPercent;
+            });
+        };
+
+
         let toggleProgress = function() {
-        //$('#percent').on('change', function(){
-
-          let val =eventsPercent;//parseInt($(this).val());
+          let val = eventsPercent;
           let pct;
-          console.log(eventsPercent);
-
-          console.log(val);
 
           let $circle = $('#svg #bar');
 
@@ -151,23 +158,41 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             val = 100;
           }
           else{
-            // let r = $circle.attr('r');
             let r = 90;
             let c = Math.PI*(r*2);
 
             if (val < 0) { val = 0;}
             if (val > 100) { val = 100;}
-            console.log(c);
-            console.log(val);
+
             pct = ((100-val)/100)*c;
           }
-            //$circle.css({ strokeDashoffset: pct});
             offset = pct;
-            console.log(pct);
-
-          //  $('#cont').attr('data-pct',val);
-          // })
         };
+
+        let toggleDays = function() {
+          let val = daysPercent;
+          let pct;
+
+          let $circle = $('#svg #bar');
+
+          if (isNaN(val)) {
+            val = 100;
+          }
+          else{
+            let r = 90;
+            let c = Math.PI*(r*2);
+
+            if (val < 0) { val = 0;}
+            if (val > 100) { val = 100;}
+
+            pct = ((100-val)/100)*c;
+          }
+            offset2 = pct;
+        };
+
+
+
+
 
         let loadSwitches = function() {
             // Check if the user has any current or past activity memberships or supervisions
@@ -200,6 +225,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "numEvents" : numEvents,
                 "required" : required,
                 "requiredEventsString" : requiredEventsString,
+                "daysLeft" : daysLeft,
+                "daysPercent" : daysPercent,
+                "offset2" : offset2,
                 "offset" : offset
 
             };
@@ -218,7 +246,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(initializeSlides)
         .then(chapelProgress)
         .then(loadSwitches)
+        .then(loadDaysLeft)
         .then(toggleProgress)
+        .then(toggleDays)
         .then(loadModel);
 
     }

@@ -1,3 +1,6 @@
+.body {
+  background: grey ;
+}
 .hey {
   padding-top: 15px;
   /*padding-left: 50px;*/
@@ -6,11 +9,16 @@
 .progress {
   height: 40px !important;
 }
+
+.progress .visible-xs{
+  mix-blend-mode: difference;
+
+
 .one {
-  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-/*.center-row {
+.center-row {
   margin: 0 auto;
 }
 
@@ -19,9 +27,11 @@
   transition: stroke-dashoffset 1s linear;
   stroke: #666;
   stroke-width: 1em;
+
 }
 #svg #bar {
-  stroke: #337ab7;
+  stroke: #00aeef;
+  stroke-width: 20;
 
 }
 #cont {
@@ -29,9 +39,11 @@
   height: 200px;
   width: 200px;
   margin: 2em auto;
-  box-shadow: 0 0 1em black;
+
   border-radius: 100%;
   position: relative;
+  background-color: #cccccb;
+    margin-bottom: 100px;
 
 }
 #cont:after {
@@ -48,10 +60,8 @@
   border-radius: 100%;
   line-height: 160px;
   font-size: 2em;
-  text-shadow: 0 0 0.5em black;
-  text-align: center;
-}
 
-input {
-  color: #000;
-}*/
+  text-align: center;
+  background: rgb(235,234,234);
+
+}
