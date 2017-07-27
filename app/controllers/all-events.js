@@ -28,9 +28,6 @@ export default Ember.Controller.extend({
             console.log("types");
             console.log(previousSort);
             console.log(type);
-            if (!type) {
-                type = this.get('model.sort.type');
-            }
             if (type != previousSort.type || previousSort.direction === "up") {
                 // sort down
                 console.log("sort down");
