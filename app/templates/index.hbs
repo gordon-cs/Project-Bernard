@@ -1,41 +1,42 @@
 <div class="container-fluid">
-  <div class="row hey">
-    <!-- <div class="col-sm-6 col-lg-4"> -->
+  <div class=" row hey">
 
-
-          <!-- <div class="progress id=one visible-xs"> -->
-          <div class="progress id=one">
-              <div class="progress-bar" role="progressbar" style="width: {{model.eventsPercent}}%;" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
-                <span><h5>{{model.requiredEventsString}}</h5></span>
+          <div class="progress visible-xs">
+              <div class="progress-bar id=one" role="progressbar" style="width: {{model.eventsPercent}}%;" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
+                {{#link-to "chapel-credits"}}<span><h5>{{model.requiredEventsString}}</h5></span> {{/link-to}}
               </div>
           </div>
-        <!-- <div class="center-row">
-          <div class="hidden-xs col-xs-6" id="cont" data-pct="{{model.eventsPercent}}% completed">
-          <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-            <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-          </svg>
+
+          <div class="progress visible-xs">
+              <div class="progress-bar id=one" role="progressbar" style="width: {{model.daysPercent}}%;" aria-valuenow="{{model.totalDays}}" aria-valuemin="0" aria-valuemax="100">
+                <span><h5>{{model.daysLeft}} Days Left</h5></span>
+              </div>
           </div>
 
-           <div class="hidden-xs" id="cont" data-pct="{{model.numEvents}}/{{model.required}} done">
+
+
+      <div class="col-sm-4 col-md-3  container">
+
+        {{#link-to "chapel-credits"}}<div class="hidden-xs" id="cont" data-pct="{{model.numEvents}} CL&W Credits">
           <svg id="svg" width="300" height="300" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
             <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
           </svg>
-          </div>
-        </div> -->
-  </div>
+        </div>{{/link-to}}
+
+        <a href = "http://www.gordon.edu/calendars/fouryear"><div class="hidden-xs" id="cont" data-pct="{{model.daysLeft}} Days Left">
+        <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset2}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+          <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset2}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+        </svg>
+      </div></a>
+
+      </div>
 
 
-    <div class ="row">
-
-    <!-- <div class="col-sm-6  col-lg-offset-1 col-lg-7"> -->
-			<div class="row dashboard">
-				<div class="main-content ">
+				<div class="col-sm-8 col-md-9 main-content">
 					{{homepage-banner slides=model.slides}}
 				</div>
-			</div>
-    <!-- </div> -->
 
   </div>
 
