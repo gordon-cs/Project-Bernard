@@ -149,7 +149,7 @@
                                     {{#if (lt index 15)}}
                                         <li>
                                             <!-- link to a users profile page --> 
-                                                {{#link-to "profile"  person.UserName}}
+                                                {{#link-to "profile"  person.UserName invokeAction=(action 'searchClear')}}
                                                 <!-- information to be displayed -->
                                                 {{person.FirstName}}  {{person.LastName}} ({{person.UserName}})
                                                 {{/link-to}}

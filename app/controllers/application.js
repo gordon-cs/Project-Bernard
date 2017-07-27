@@ -41,6 +41,11 @@ export default Ember.Controller.extend({
             this.set("showSearchMenu", false);
         },
 
+         searchClear() {
+             $("#smFormGroupInput").val('');
+              this.set('model.people', null);
+        },
+
         logout() {
             this.get("session").invalidate();
             this.set("requestsRecieved", []);
@@ -48,6 +53,7 @@ export default Ember.Controller.extend({
             console.log(this.get("requestsCalled"));
             this.set("requestsSent", []);
         },
+        
         // people search process 
         stalkPeeps(item) {
             let context = this;
@@ -79,6 +85,8 @@ export default Ember.Controller.extend({
         },
 
     },
+
+
     
     // Check if the user is an admin of any kind - either a group admin,
     // regular admin, or super admin
