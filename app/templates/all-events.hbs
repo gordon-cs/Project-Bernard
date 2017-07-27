@@ -42,7 +42,7 @@
     <!-- Filter button and its dropdown menu -->
     <div class="dropdown show hidden-xs col-sm-1" style="margin-right: 10px;">
       <button type="button" class="btn filter-button btn-danger"  {{action "showFilters"}}>
-        Filter
+        {{filterButton}}
       </button>
     </div>
     {{!--
@@ -61,12 +61,13 @@
   <!-- same switches but formated for mobile -->
   <div class="moble-eventbox lightgraybox">
     <div id="category-bar" class="row">
-
+    <form {{action "chapelSwitch" on="change"}}> 
       <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2">
-        <input id="switch3" type="checkbox" onclick={{action "checkForChaple"}}/>
+        {{input id="switch3" type="checkbox" checked=onlyChapel}}   
         <label for="switch3" class="label-default"></label>
         <h4>Only&nbsp;CL&W</h4>
       </div>
+      </form>
       <div class="dropdown show col-xs-offset-3 col-xs-4 visible-xs" style="margin-right: 10px;">
       <button type="button" class="btn filter-button btn-danger" {{action "showFilters"}}>
         Filter Results
@@ -157,7 +158,7 @@
   <!--heading for the event list + filter buttons -->
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">
-            <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortItems" "Event_Name"}}><h4 >Event <span class="glyphicon {{if (and (eq model.sort.type "Event_Name") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Event_Name") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
+            <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortItems" "Event_Type"}}><h4 >Event <span class="glyphicon {{if (and (eq model.sort.type "Event_Type") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Event_Type") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
       <div class="event-labels col-sm-4 col-md-4" onclick={{action "sortItems" "Location"}}><h4>Location <span class="glyphicon {{if (and (eq model.sort.type "Location") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Location") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
       <div class="event-labels col-sm-2 col-md-2" onclick={{action "sortItems" "timeObject"}}><h4>Date <span class="glyphicon {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
        <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortItems" "timeObject"}}><h4>Time</h4></div>
