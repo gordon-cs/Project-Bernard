@@ -49,11 +49,9 @@ export default Ember.Controller.extend({
         logout() {
             this.get("session").invalidate();
             this.set("requestsRecieved", []);
-            console.log(this.get("requestsSent"));
-            console.log(this.get("requestsCalled"));
             this.set("requestsSent", []);
         },
-        
+
         // people search process 
         stalkPeeps(item) {
             let context = this;
@@ -67,7 +65,6 @@ export default Ember.Controller.extend({
                         result[i].UserName = result[i].UserName.toLowerCase();
                     }
                     context.set('model.people', result);
-                    console.log(context.get('model.people'));
                 });
             }
             if (searchValue.length >= 2) {
@@ -76,7 +73,6 @@ export default Ember.Controller.extend({
                         result[i].UserName = result[i].UserName.toLowerCase();
                     }
                     context.set('model.people', result);
-                    console.log(context.get('model.people'));
                 });
             } else {
                 context.set('model.people', []);
@@ -102,7 +98,6 @@ export default Ember.Controller.extend({
         // Check if the user is a regular admin
         if (college_role === "god") {
             context.set("isSomeAdmin", true);
-            console.log("User is site admin");
             return;
         }
 
@@ -113,7 +108,6 @@ export default Ember.Controller.extend({
                 .then(function(result) {
                     for (var i = 0; i < result.length; i++) {
                         if (result[i].GroupAdmin) {
-                            console.log("User is a leader for: " + result[i].ActivityCode);
                             //responsibilities.push(result[i].ActivityCode);
                             context.set("isSomeAdmin", true);
                         }
@@ -132,8 +126,6 @@ export default Ember.Controller.extend({
         context.set("isReadOnly", false);
 
         let college_role = this.get('session.data.authenticated.token_data.college_role');
-
-        console.log(college_role);
 
         // Check if the user is a regular admin
         if (college_role === "readonly") {
