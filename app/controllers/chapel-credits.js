@@ -57,17 +57,25 @@ export default Ember.Controller.extend({
         },
 
 
+        switchList() {
+            if (this.get('bool1')) {
+                this.set('bool1', false);
+                this.send('displayALLEvents');
+            } else {
+                this.set('bool1', true);
+                this.send('displayALLEvents');
+            }
+        },
         //display list of all past events events
         displayALLEvents() {
-
-            if (this.get('button1') === 'Attended Events') {
-                this.set("model.eventShown", this.get("model.allEvents"));
+            if (this.get('bool1')) {
                 this.set('button1', 'Upcoming Events');
                 this.set('option1', 'Show Attended Events');
+                this.send('filterEvents');
             } else {
-                this.set("model.eventShown", this.get("model.chapelEvents"));
                 this.set('button1', 'Attended Events');
                 this.set('option1', 'Show Upcoming Events');
+                this.send('filterEvents');
             }
         },
 
@@ -77,41 +85,23 @@ export default Ember.Controller.extend({
             let lastForm = this.get("lastForm");
 
             if (lastForm && $(item.target).hasClass("onclickOrange")) {
-                let elements = $(lastForm).nextAll();
-                for (var i = 0; i < 3; i++) {
-                    if ($(window).innerWidth() < 768) {
-                        $(elements[i]).slideUp();
-                        console.log("twice");
-                    }
-                }
+                $(item.target).siblings().slideUp();
                 let form = $(item.target);
                 $(lastForm).removeClass("onclickOrange");
                 this.set("lastForm", form);
             } else {
                 if (lastForm) {
                     $(lastForm).removeClass("onclickOrange");
-
-                    let elements = $(lastForm).nextAll();
-                    for (var i = 0; i < 3; i++) {
-
-                        if ($(window).innerWidth() < 768) {
-                            $(elements[i]).slideUp();
-                            console.log("once");
-                        }
-                    }
+                    $(lastForm).siblings().slideUp();
                 }
                 let form = $(item.target);
                 $(form).addClass("onclickOrange");
-                let elements = $(form).nextAll();
-                for (var i = 0; i < 3; i++) {
-                    if ($(window).innerWidth() < 768) {
-                        $(elements[i]).slideDown();
-                        console.log("twice");
-                    }
-                }
+                $(form).siblings().slideDown();
                 this.set("lastForm", form);
             }
+
         },
+
 
         //apply filter to event list  display modal
         toggleEventDetailsModal(item) {
@@ -127,11 +117,20 @@ export default Ember.Controller.extend({
 
         //search the events with user input
         filterEvents: function() {
+
+            let oldList = [];
+
+            if (this.get('bool1')) {
+                oldList = this.get("model.allEvents");
+            } else {
+                oldList = this.get("model.chapelEvents");
+            }
+
+
             // Filter the list of activities shown when user types in the search bar
             let searchValue = this.get("model.searchValue");
             if (searchValue) {
                 let newList = [];
-                let oldList = this.get("model.eventShown");
                 for (let i = 0; i < oldList.length; i++) {
                     if (oldList[i].Event_Title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
@@ -144,15 +143,10 @@ export default Ember.Controller.extend({
                     } else if (oldList[i].Month.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
                         newList.push(oldList[i]);
                     }
-
                 }
                 this.set("model.eventShown", newList);
             } else {
-                if (this.get('selectList') === "Your") {
-                    this.set("model.eventShown", this.get("model.allEvents"));
-                } else if (this.get('selectList') === "ALL") {
-                    this.set("model.eventShown", this.get("model.chapelEvents"));
-                }
+                this.set("model.eventShown", oldList);
             }
         },
 

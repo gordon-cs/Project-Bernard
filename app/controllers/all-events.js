@@ -13,6 +13,7 @@ export default Ember.Controller.extend({
     option1: 'Show CL&W Events',
     option2: 'Include Past Events',
     showPastEvents: false,
+    filterButton: 'Show Filters',
 
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
@@ -27,7 +28,9 @@ export default Ember.Controller.extend({
             console.log("types");
             console.log(previousSort);
             console.log(type);
-
+            if (!type) {
+                type = this.get('model.sort.type');
+            }
             if (type != previousSort.type || previousSort.direction === "up") {
                 // sort down
                 console.log("sort down");
@@ -62,6 +65,18 @@ export default Ember.Controller.extend({
             this.set("model.sort.type", type);
         },
 
+
+        chapelSwitch() {
+            if (this.get('onlyChapel')) {
+                this.set('button1', 'CL&W Events');
+                this.set('option1', 'Show All Types');
+                this.send('filterEvents');
+            } else {
+                this.set('button1', 'All Event Types');
+                this.set('option1', 'Show CL&W Events');
+                this.send('filterEvents');
+            }
+        },
         //if the chapel credit button is clicked only display chapel with the CL&W creddit tag
         checkForChaple() {
             if (this.get('onlyChapel') === false) {
@@ -102,37 +117,18 @@ export default Ember.Controller.extend({
             let lastForm = this.get("lastForm");
 
             if (lastForm && $(item.target).hasClass("onclickOrange")) {
-                let elements = $(lastForm).nextAll();
-                for (var i = 0; i < 4; i++) {
-                    if ($(window).innerWidth() < 768) {
-                        $(elements[i]).slideUp();
-                    }
-                }
-                $(lastForm).removeClass("onclickOrange");
-                $(lastForm).parent().css("border-bottom", "3px");
+                $(item.target).siblings().slideUp();
                 let form = $(item.target);
+                $(lastForm).removeClass("onclickOrange");
                 this.set("lastForm", form);
             } else {
                 if (lastForm) {
                     $(lastForm).removeClass("onclickOrange");
-
-                    let elements = $(lastForm).nextAll();
-                    for (var i = 0; i < 4; i++) {
-
-                        if ($(window).innerWidth() < 768) {
-                            $(elements[i]).slideUp();
-
-                        }
-                    }
+                    $(lastForm).siblings().slideUp();
                 }
                 let form = $(item.target);
                 $(form).addClass("onclickOrange");
-                let elements = $(form).nextAll();
-                for (var i = 0; i < 4; i++) {
-                    if ($(window).innerWidth() < 768) {
-                        $(elements[i]).slideDown();
-                    }
-                }
+                $(form).siblings().slideDown();
                 this.set("lastForm", form);
             }
         },
@@ -218,96 +214,22 @@ export default Ember.Controller.extend({
                 this.set("model.eventShown", oldList);
                 //this.send("toggleCheckBox");
             }
+
+            this.send('sortItems');
         },
 
 
         showFilters() {
+            if (this.get('filterButton') === 'Show Filters') {
+                this.set('filterButton', 'Hide Filters');
+
+            } else {
+                this.set('filterButton', 'Show Filters');
+            }
             $('.filter-container').slideToggle();
         },
 
         //filter the list of events according to the boxes checked
-        toggleCheckBox() {
-
-            let newList = [];
-            let oldList = this.get("model.allEvents");
-
-            if (this.get("isChapel")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Chapel Office") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                this.set("model.eventShown", newList);
-            }
-
-            if (this.get("isCEC")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Campus Events Council (CEC)") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                this.set("model.eventShown", newList);
-
-            }
-            if (this.get("isArt")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Music Department" || oldList[i].Organization === "Theatre" || oldList[i].Organization === "Art Department") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                this.set("model.eventShown", newList);
-
-            }
-            if (this.get("isCalendar")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Event_Type_Name === "Calendar Announcement") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                this.set("model.eventShown", newList);
-
-            }
-            if (this.get("isAthletics")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Athletics") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                this.set("model.eventShown", newList);
-
-            }
-            if (this.get("isAdmissions")) {
-
-                for (let i = 0; i < oldList.length; i++) {
-                    if (oldList[i].Organization === "Admissions") {
-                        newList.push(oldList[i]);
-                    }
-
-                }
-                this.set("model.eventShown", newList);
-            }
-            if (this.get("isCLAW")) {
-
-                for (let i = 0; i < newList.length; i++) {
-                    if (newList[i].Category_Id !== "85") {
-                        newList.popObject(i);
-                    }
-
-                }
-                this.set("model.eventShown", newList);
-            }
-
-        },
 
         //when the event list is clicked, display toggle for the clicked event
         toggleEventDetailsModal(item) {
