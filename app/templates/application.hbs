@@ -134,21 +134,23 @@
                     {{/link-to}}
                   </span>
                 </li>
-
+                <!-- we make it a hidden-xs class so it does not show up on mobile -->
                  <li class = "hidden-xs">
+                    <!-- we create a form to fill - this will be our searchbar --> 
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
-                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for..."}}
-                            
-                        </div>
-                                           <!-- where we show the results for the search -->     
+                            <!-- this is where we fill in information, and run the function "stalkpeeps" to perform the search -->
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for..."}}                            
+                        </div>             
                    </form>
-                    <ul class="dropdown-menu dropdown-people " >
+                    <!-- where we show the results for the search - parsed out in a "for each" loop and placed inside a list item --> 
+                    <ul class="dropdown-menu dropdown-people role=menu" >
                             {{#each model.people as |person index|}}
-                                    {{#if (lt index 10)}}
+                                    {{#if (lt index 15)}}
                                         <li>
                                             <!-- link to a users profile page --> 
-                                                {{#link-to "profile"  person.UserName }}
+                                                {{#link-to "profile"  person.UserName invokeAction=(action 'searchClear')}}
+                                                <!-- information to be displayed -->
                                                 {{person.FirstName}}  {{person.LastName}} ({{person.UserName}})
                                                 {{/link-to}}
                                         </li>

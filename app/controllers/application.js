@@ -41,19 +41,23 @@ export default Ember.Controller.extend({
             this.set("showSearchMenu", false);
         },
 
+         searchClear() {
+             $("#smFormGroupInput").val('');
+              this.set('model.people', null);
+        },
+
         logout() {
             this.get("session").invalidate();
             this.set("requestsRecieved", []);
-            console.log(this.get("requestsSent"));
-            console.log(this.get("requestsCalled"));
             this.set("requestsSent", []);
         },
+
         // people search process 
         stalkPeeps(item) {
             let context = this;
             let searchValue = this.get("model.searchValue");
-
-            // Check if the user typed a space, and search if they did
+            
+            // Check if the user typed a space, and search if they did using both parts of the string
             if (searchValue.length >= 2 && searchValue.includes(" ")) {
                 let split = searchValue.split(" ")
                 return getAsync('/accounts/search/' + split[0].toLowerCase() + '/' + split[1], this).then(function(result) {
@@ -61,7 +65,6 @@ export default Ember.Controller.extend({
                         result[i].UserName = result[i].UserName.toLowerCase();
                     }
                     context.set('model.people', result);
-                    console.log(context.get('model.people'));
                 });
             }
             if (searchValue.length >= 2) {
@@ -70,7 +73,6 @@ export default Ember.Controller.extend({
                         result[i].UserName = result[i].UserName.toLowerCase();
                     }
                     context.set('model.people', result);
-                    console.log(context.get('model.people'));
                 });
             } else {
                 context.set('model.people', []);
@@ -79,6 +81,9 @@ export default Ember.Controller.extend({
         },
 
     },
+
+
+    
     // Check if the user is an admin of any kind - either a group admin,
     // regular admin, or super admin
     checkAdmin() {
@@ -93,7 +98,6 @@ export default Ember.Controller.extend({
         // Check if the user is a regular admin
         if (college_role === "god") {
             context.set("isSomeAdmin", true);
-            console.log("User is site admin");
             return;
         }
 
@@ -104,7 +108,6 @@ export default Ember.Controller.extend({
                 .then(function(result) {
                     for (var i = 0; i < result.length; i++) {
                         if (result[i].GroupAdmin) {
-                            console.log("User is a leader for: " + result[i].ActivityCode);
                             //responsibilities.push(result[i].ActivityCode);
                             context.set("isSomeAdmin", true);
                         }
@@ -123,8 +126,6 @@ export default Ember.Controller.extend({
         context.set("isReadOnly", false);
 
         let college_role = this.get('session.data.authenticated.token_data.college_role');
-
-        console.log(college_role);
 
         // Check if the user is a regular admin
         if (college_role === "readonly") {
