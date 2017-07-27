@@ -140,7 +140,7 @@
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
                             <!-- this is where we fill in information, and run the function "stalkpeeps" to perform the search -->
-                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for..."}}                            
+                             {{input value=model.searchValue key-up=(action "stalkPeeps") autocomplete="off" class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for People..."}}                            
                         </div>             
                    </form>
                     <!-- where we show the results for the search - parsed out in a "for each" loop and placed inside a list item --> 
@@ -202,7 +202,7 @@
                   <span {{action "closeMenuSearch"}}>
                     <form >
                         <div class="form-group searchbar-mobile-form" >
-                             {{input value=model.searchValue key-up=(action "stalkPeeps")  class="form-control searhbar-mobile" placeholder="Search for People..."}}
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  autocomplete="off" class="form-control searhbar-mobile" placeholder="Search for People..."}}
                         </div>
                    </form>
                    <ul class="searchbar-mobile-list">
