@@ -52,8 +52,8 @@ export default Ember.Controller.extend({
         stalkPeeps(item) {
             let context = this;
             let searchValue = this.get("model.searchValue");
-
-            // Check if the user typed a space, and search if they did
+            
+            // Check if the user typed a space, and search if they did using both parts of the string
             if (searchValue.length >= 2 && searchValue.includes(" ")) {
                 let split = searchValue.split(" ")
                 return getAsync('/accounts/search/' + split[0].toLowerCase() + '/' + split[1], this).then(function(result) {
@@ -79,6 +79,7 @@ export default Ember.Controller.extend({
         },
 
     },
+    
     // Check if the user is an admin of any kind - either a group admin,
     // regular admin, or super admin
     checkAdmin() {
