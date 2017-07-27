@@ -35,7 +35,11 @@
                         {{else if model.userInfo.IsStudent}}
                             {{model.userInfo.Class}}
                         {{else if model.userInfo.IsAlumni}}
-                            Class of {{model.userInfo.ClassYear}}
+                            {{#if model.userInfo.ClassYear}}
+                                Class of {{model.userInfo.ClassYear}}
+                            {{else}}
+                                Alumni
+                            {{/if}}
                         {{/if}}
                     </div>
                 </div>
