@@ -60,24 +60,6 @@ export default Ember.Controller.extend({
         toggleRequestSent(item){
             $(item.target).nextAll().slideToggle();
         },
-
-        linkToSpecificActivity(activity, element){
-            let target = element.target;
-            if($(window).width() < 992){
-                if(!($(target).parents().hasClass("activity-privacy-button-mobile-container") || ($(target).parents().hasClass("activity-contact-button-containers")))){
-                    let link = '/#/specific-activity/' + activity.SessionCode + "/" + activity.ActivityCode;
-                    this.transitionToRoute(link);
-                    console.log(link);
-                }
-            }
-            if($(window).width() >= 992) {
-                if(($(target).parents().hasClass("linkToSpecificActivity-desktop"))){
-                    let link = '/#/specific-activity/' + activity.SessionCode + "/" + activity.ActivityCode;
-                    this.transitionToRoute(link);
-                    console.log(link);
-                }
-            }
-        },
         
         // Shows the modal that holds the information to update profile picture
         showEditProfilePictureModal(isButton){
