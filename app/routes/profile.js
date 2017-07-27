@@ -247,6 +247,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return data;
         };
 
+        let setNickName = function(data) {
+            if(data.FirstName === data.NickName){
+                data.NickName = "";
+            }
+            return data;
+        };
+
         // Adds data to model to determine the type of user
         let setUserType = function(data) {
             data.IsFaculty = (data.PersonType.includes("fac"));
@@ -518,6 +525,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(checkIfUserExists)
             .then(setUserType)
             .then(setOnOffCampus)
+            .then(setNickName)
             .then(setClass)
             .then(setMajorObject)
             .then(setMinorObject)
@@ -545,6 +553,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(checkIfUserExists)
             .then(setUserType)
             .then(setOnOffCampus)
+            .then(setNickName)
             .then(setClass)
             .then(setMajorObject)
             .then(setMinorObject)
