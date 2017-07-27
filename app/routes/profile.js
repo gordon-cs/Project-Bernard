@@ -263,7 +263,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     officeHours.push(data.office_hours.slice(0, data.office_hours.indexOf(",")));
                     data.office_hours = data.office_hours.slice(data.office_hours.indexOf(",")+2);
                 }
-                officeHours.push(data.office_hours.slice(0, data.office_hours.indexOf(",")));
+                if(data.office_hours.indexOf(",") > 0){
+                    officeHours.push(data.office_hours.slice(0, data.office_hours.indexOf(",")));
+                } else {
+                    officeHours.push(data.office_hours.slice(0, data.office_hours.length));
+                }
+                    
             }
             data.office_hours = officeHours;
             return data;
