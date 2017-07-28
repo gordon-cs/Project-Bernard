@@ -136,19 +136,19 @@
                 </li>
                 <!-- we make it a hidden-xs class so it does not show up on mobile -->
                  <li class = "hidden-xs">
-                    <!-- we create a form to fill - this will be our searchbar --> 
+                    <!-- we create a form to fill - this will be our searchbar -->
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
                             <!-- this is where we fill in information, and run the function "stalkpeeps" to perform the search -->
-                             {{input value=model.searchValue key-up=(action "stalkPeeps") autocomplete="off" class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for People..."}}                            
-                        </div>             
+                             {{input value=model.searchValue key-up=(action "stalkPeeps") autocomplete="off" class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for People..."}}
+                        </div>
                    </form>
-                    <!-- where we show the results for the search - parsed out in a "for each" loop and placed inside a list item --> 
+                    <!-- where we show the results for the search - parsed out in a "for each" loop and placed inside a list item -->
                     <ul class="dropdown-menu dropdown-people role=menu" >
                             {{#each model.people as |person index|}}
                                     {{#if (lt index 15)}}
                                         <li>
-                                            <!-- link to a users profile page --> 
+                                            <!-- link to a users profile page -->
                                                 {{#link-to "profile"  person.UserName invokeAction=(action 'searchClear')}}
                                                 <!-- information to be displayed -->
                                                 {{person.FirstName}}  {{person.LastName}} ({{person.UserName}})
@@ -157,7 +157,7 @@
                                     {{/if}}
                                 {{/each}}
                             </ul>
-                 
+
                 </li>
 
                 <li class="user-info-mobile" >
@@ -223,7 +223,7 @@
         </div>
 
     {{/if}}
-<div id="main-page-container">
+<div id="main-page-container" class="col-sm-12 no-side-padding">
 
     {{outlet}}
 
