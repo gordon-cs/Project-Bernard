@@ -131,7 +131,6 @@ export default Ember.Controller.extend({
         // Check if the user is a regular admin
         if (college_role === "readonly") {
             context.set("isReadOnly", true);
-            console.log("User has read only permission");
             return;
         }
 

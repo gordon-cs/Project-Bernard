@@ -26,12 +26,8 @@ export default Ember.Controller.extend({
             let events = this.get("model.eventShown");
             let sorted = [];
             let previousSort = this.get("model.sort");
-            console.log("types");
-            console.log(previousSort);
-            console.log(type);
             if (type != previousSort.type || previousSort.direction === "up") {
                 // sort down
-                console.log("sort down");
                 events.sort(function(a, b) {
                     if (a[type] < b[type]) {
                         return -1;
@@ -44,7 +40,6 @@ export default Ember.Controller.extend({
                 this.set("model.sort.direction", "down");
             } else {
                 // sort up
-                console.log("sort up");
                 events.sort(function(a, b) {
                     if (a[type] < b[type]) {
                         return 1;
@@ -67,13 +62,13 @@ export default Ember.Controller.extend({
         chapelSwitch() {
             if (this.get('onlyChapel')) {
                 this.set('eventsHeader', 'Christian Life & Worship Events');
-                this.set('button1', 'CL&W Events');
+                this.set('button1', 'Only CL&W Events');
                 this.set('option1', 'Show All Types');
                 this.send('filterEvents');
             } else {
                 this.set('eventsHeader', 'All Events');
                 this.set('button1', 'All Event Types');
-                this.set('option1', 'Show CL&W Events');
+                this.set('option1', 'Show Only CL&W Events');
                 this.send('filterEvents');
             }
         },
@@ -82,14 +77,14 @@ export default Ember.Controller.extend({
             if (this.get('onlyChapel') === false) {
                 this.set('onlyChapel', true);
                 this.set('eventsHeader', 'Christian Life & Worship Events');
-                this.set('button1', 'CL&W Events');
+                this.set('button1', 'Only CL&W Events');
                 this.set('option1', 'Show All Types');
                 this.send('filterEvents');
             } else {
                 this.set('eventsHeader', ' All Events');
                 this.set('onlyChapel', false);
                 this.set('button1', 'All Event Types');
-                this.set('option1', 'Show CL&W Events');
+                this.set('option1', 'Show Only CL&W Events');
                 this.send('filterEvents');
             }
 
