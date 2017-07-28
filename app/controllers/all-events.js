@@ -146,7 +146,6 @@ export default Ember.Controller.extend({
                 let type = previousSort.type;
                 if (previousSort.direction === "down") {
                     // sort down
-                    console.log("sort down");
                     events.sort(function(a, b) {
                         if (a[type] < b[type]) {
                             return -1;
@@ -158,7 +157,6 @@ export default Ember.Controller.extend({
                     });
                 } else {
                     // sort up
-                    console.log("sort up");
                     events.sort(function(a, b) {
                         if (a[type] < b[type]) {
                             return 1;
@@ -173,7 +171,6 @@ export default Ember.Controller.extend({
                     sorted.push(events[i]);
                 }
                 events = sorted;
-                console.log(events);
                 return events;
             };
             if (this.get('showPastEvents')) {
