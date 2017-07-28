@@ -56,45 +56,6 @@ export default Ember.Controller.extend({
             this.set("model.sort.type", type);
         },
 
-        filterSort(events) {
-            let sorted = [];
-            let previousSort = this.get("model.sort");
-            console.log("types");
-            console.log(previousSort);
-            console.log(type);
-            if (previousSort.direction === "up") {
-                // sort down
-                console.log("sort down");
-                events.sort(function(a, b) {
-                    if (a[type] < b[type]) {
-                        return -1;
-                    }
-                    if (a[type] > b[type]) {
-                        return 1;
-                    }
-                    return 0;
-                });
-            } else {
-                // sort up
-                console.log("sort up");
-                events.sort(function(a, b) {
-                    if (a[type] < b[type]) {
-                        return 1;
-                    }
-                    if (a[type] > b[type]) {
-                        return -1;
-                    }
-                    return 0;
-                });
-            }
-            for (let i = 0; i < events.length; i++) {
-                sorted.push(events[i]);
-            }
-            events = sorted;
-            return events;
-        },
-
-
 
         switchList() {
             if (this.get('bool1')) {
@@ -158,6 +119,45 @@ export default Ember.Controller.extend({
         filterEvents: function() {
 
             let oldList = [];
+            let previousSort = this.get("model.sort.type");
+            let context = this;
+
+            let filterSort = function(events) {
+                let sorted = [];
+                let previousSort = context.get("model.sort");
+                let type = previousSort.type;
+                if (previousSort.direction === "down") {
+                    // sort down
+                    console.log("sort down");
+                    events.sort(function(a, b) {
+                        if (a[type] < b[type]) {
+                            return -1;
+                        }
+                        if (a[type] > b[type]) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+                } else {
+                    // sort up
+                    console.log("sort up");
+                    events.sort(function(a, b) {
+                        if (a[type] < b[type]) {
+                            return 1;
+                        }
+                        if (a[type] > b[type]) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
+                for (let i = 0; i < events.length; i++) {
+                    sorted.push(events[i]);
+                }
+                events = sorted;
+                console.log(events);
+                return events;
+            };
 
             if (this.get('bool1')) {
                 oldList = this.get("model.allEvents");
@@ -183,10 +183,10 @@ export default Ember.Controller.extend({
                         newList.push(oldList[i]);
                     }
                 }
-                let sortedList = this.send('filterSort', newList);
+                let sortedList = filterSort(newList);
                 this.set("model.eventShown", sortedList);
             } else {
-                let sortedList = this.send('filterSort', oldList);
+                let sortedList = filterSort(oldList);
                 this.set("model.eventShown", sortedList);
             }
         },
