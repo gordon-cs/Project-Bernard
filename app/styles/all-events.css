@@ -321,12 +321,11 @@
 }
 
 .events .entry-rows {
-
     font-size: 1.6em;
 }
 
 @media screen and (max-width: 370px) {
-    .form-check {
+    .events .form-check {
         width: 100%;
     }
 }
@@ -337,8 +336,10 @@
     .events .event-row {
         font-size: 15px;
     }
-
-    
+    .events .form-check {
+        padding-right: 0;
+        font-size: 14px;
+    }
     .events .entry-rows {
         padding-left: 18px;
         padding-right: auto;
