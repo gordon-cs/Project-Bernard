@@ -63,6 +63,44 @@ export default Ember.Controller.extend({
             this.set("model.sort.type", type);
         },
 
+        filterSort(events) {
+            let sorted = [];
+            let previousSort = this.get("model.sort");
+            console.log("types");
+            console.log(previousSort);
+            console.log(type);
+            if (previousSort.direction === "up") {
+                // sort down
+                console.log("sort down");
+                events.sort(function(a, b) {
+                    if (a[type] < b[type]) {
+                        return -1;
+                    }
+                    if (a[type] > b[type]) {
+                        return 1;
+                    }
+                    return 0;
+                });
+            } else {
+                // sort up
+                console.log("sort up");
+                events.sort(function(a, b) {
+                    if (a[type] < b[type]) {
+                        return 1;
+                    }
+                    if (a[type] > b[type]) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            }
+            for (let i = 0; i < events.length; i++) {
+                sorted.push(events[i]);
+            }
+            events = sorted;
+            return events;
+        },
+
 
         chapelSwitch() {
             if (this.get('onlyChapel')) {
@@ -140,7 +178,7 @@ export default Ember.Controller.extend({
 
             let oldList = [];
             let newList = [];
-
+            let previousSort = this.get("model.sort.type");
 
             if (this.get('showPastEvents')) {
                 oldList = this.get("model.allEvents");
@@ -210,14 +248,24 @@ export default Ember.Controller.extend({
                     }
 
                 }
-                this.set("model.eventShown", newList);
-                //this.send("toggleCheckBox");
+                let sortedList = this.send('filterSort', newList);
+                this.set("model.eventShown", sortedList);
             } else {
-                this.set("model.eventShown", oldList);
-                //this.send("toggleCheckBox");
+                let sortedList = this.send('filterSort', oldList);
+                this.set("model.eventShown", sortedList);
             }
 
-            this.send('sortItems');
+
+            newList.sort(function(a, b) {
+                if (a[previousSort] < b[previousSort]) {
+                    return -1;
+                }
+                if (a[previousSort] > b[previousSort]) {
+                    return 1;
+                }
+                return 0;
+            });
+
         },
 
 
