@@ -80,7 +80,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return 0;
         }
 
-        //handel events with multiple occurances 
+        //handel events with multiple occurances
         function formatMultipleOccurances(Occurrences, location) {
 
             if (Occurrences.length > 1) {

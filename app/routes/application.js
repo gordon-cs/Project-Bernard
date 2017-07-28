@@ -3,13 +3,6 @@ import ApplicationRouteMixin from "ember-simple-auth/mixins/application-route-mi
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
 
-    actions: {
-        error(error, transition) {
-          console.log(error);
-            return this.transitionTo('error')
-      }
-    },
-
     model: function() {
 
         let context = this;
