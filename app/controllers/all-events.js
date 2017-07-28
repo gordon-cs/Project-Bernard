@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
 
     onlyChapel: false,
     button1: 'All Event Types',
-    button2: 'Only Future Events',
+    button2: 'Upcoming Events',
     option1: 'Show Only CL&W Events',
     option2: 'Include Past Events',
     showPastEvents: false,
@@ -96,11 +96,11 @@ export default Ember.Controller.extend({
             if (this.get('showPastEvents') === false) {
                 this.set('showPastEvents', true);
                 this.set('button2', 'All Event Dates');
-                this.set('option2', 'Only Upcoming Events');
+                this.set('option2', 'Upcoming Events');
                 this.send('filterEvents');
             } else {
                 this.set('showPastEvents', false);
-                this.set('button2', 'Only Future Events');
+                this.set('button2', 'Upcoming Events');
                 this.set('option2', 'Include Past Events');
                 this.send('filterEvents');
             }
