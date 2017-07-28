@@ -124,7 +124,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     } else {
                         required = 0;
                         eventsPercent = 0;
-                        requiredEventsString = "No Attendence Recorded";
+                        requiredEventsString = "No CL&W Attendence Recorded";
                     }
                     return {
                       "chapelEvents": chapelEvents,

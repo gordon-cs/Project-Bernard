@@ -11,10 +11,9 @@
     height: 40px !important;
 }
 
-.progress .visible-xs {
-    mix-blend-mode: difference;
+.progress-text {
+    font-weight: bold;
 }
-
 .one {
     padding-bottom: 10px;
 }
