@@ -9,6 +9,11 @@
 
 .progress {
     height: 40px !important;
+    margin: 0 15px 10px 15px;
+}
+
+.main-content{
+    padding: 0;
 }
 
 .progress-text {
