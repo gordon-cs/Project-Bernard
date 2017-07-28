@@ -59,6 +59,11 @@ header {
     text-align: center;
 }
 
+.no-side-padding{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .app-title ul {
     list-style-type: none;
     display: flex;
@@ -428,7 +433,7 @@ input:-webkit-autofill:focus {
     .search-menu-container {
         overflow: hidden;
     }
-    
+
 }
 
 @media only screen and (min-width: 768px) {
