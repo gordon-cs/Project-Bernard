@@ -321,12 +321,11 @@
 }
 
 .events .entry-rows {
-
     font-size: 1.6em;
 }
 
 @media screen and (max-width: 370px) {
-    .form-check {
+    .events .form-check {
         width: 100%;
     }
 }
@@ -337,8 +336,10 @@
     .events .event-row {
         font-size: 15px;
     }
-
-    
+    .events .form-check {
+        padding-right: 0;
+        font-size: 14px;
+    }
     .events .entry-rows {
         padding-left: 18px;
         padding-right: auto;
@@ -424,6 +425,7 @@
         font-size: 16px;
     }
     .event-modal-body {
+        min-height: 200px;
         max-height: 200px;
         overflow-y: auto;
         font-size: 16px !important;
@@ -443,7 +445,7 @@
         /* Could be more or less, depending on screen size */
     }
     .event-modal-body {
-        min-height: 200px;
+        min-height: 240px;
         max-height: 240px;
         overflow-y: auto;
     }
