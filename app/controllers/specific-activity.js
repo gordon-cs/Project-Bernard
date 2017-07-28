@@ -11,6 +11,16 @@ export default Ember.Controller.extend({
     session: Ember.inject.service("session"),
     followLoad: false,
     actions: {
+        // On mobile view, toggle hidden items
+        toggleRoasterTable(item){
+            console.log(item.target);
+            let elements = $(item.target).parent().nextAll();
+            for(var i=0; i < 3; i++){
+                if($(window).innerWidth() < 576){
+                    $(elements[i]).slideToggle();
+                }
+            }
+        },
         // Method that gets called when the follow button is clicked
         toggleFollow() {
             let context = this;

@@ -113,9 +113,118 @@
   text-align: center;
 }
 
+/* ----------------------------- */
+.specific-activity .header-row {
+    padding: 0.3em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid #cccccb;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: row;
+}
+.specific-activity .entry-row {
+    padding: 0.3em;
+    padding-top: 0.2em;
+    border-bottom: 1px solid #cccccb;
+    display: flex;
+    flex-direction: row;
+}
+.specific-activity .header-row div, .specific-activity .entry-row div{
+    padding: 0.5em;
+}
+.specific-activity .header-row div strong, .specific-activity .entry-row div strong{
+    display: none;
+}
+.specific-activity .leader.firstname-title, .specific-activity .leader.lastname-title, .specific-activity .leader.participation-title, .specific-activity .leader.groupadmin-title, .specific-activity .leader.firstname-entry, .specific-activity .leader.lastname-entry, .specific-activity .leader.participation-entry, .specific-activity .leader.groupadmin-entry{
+    line-height: 32px;
+    vertical-align: middle;
+    width: 15%;
+}
+.specific-activity .member.firstname-title, .specific-activity .member.lastname-title, .specific-activity .member.participation-title, .specific-activity .member.firstname-entry, .specific-activity .member.lastname-entry, .specific-activity .member.participation-entry, .specific-activity .member.leave-entry {
+    line-height: 32px;
+    vertical-align: middle;
+    width: 25%;
+}
+.specific-activity .leader.options-title, .specific-activity .leader.options-entry {
+    width: 23%;
+    line-height: 32px;
+    vertical-align: middle;
+}
+.specific-activity .leader.comment-title, .specific-activity .leader.comment-entry {
+    width: 17%;
+    line-height: 32px;
+    vertical-align: middle;
+}
+.specific-activity .leader.groupadmin-entry {
+    text-align: center;
+    line-height: 32px;
+    vertical-align: middle;
+}
+.specific-activity .toggle-roaster {
+    display: none;
+    line-height: 32px;
+    vertical-align: middle;
+}
+
+
 /* -----------------------------
     Responsive Changes
 ------------------------------- */
+
+@media only screen and (max-width: 768px) {
+    .specific-activity .header-row div strong, .specific-activity .entry-row div strong{
+        display: inline;
+    }
+    .specific-activity .comment-title, .specific-activity .options-title, .specific-activity .comment-entry, .specific-activity .options-entry {
+        display: none;
+        width: 50% !important;
+    }
+    .specific-activity .comment-entry {
+        line-height: 32px;
+        vertical-align: middle;
+    }
+    .specific-activity .options-entry {
+        text-align: right;
+    }
+    .specific-activity .groupadmin-title, .specific-activity .groupadmin-entry {
+        display: none;
+        width: 100% !important;
+        text-align: left !important;
+    }
+    .specific-activity .header-row, .specific-activity .entry-row {
+        flex-wrap: wrap;
+    }
+    .specific-activity .leader.firstname-title, .specific-activity .leader.lastname-title, .specific-activity .leader.participation-title,.specific-activity .leader.firstname-entry, .specific-activity .leader.lastname-entry, .specific-activity .leader.participation-entry {
+        width: 30%;
+    }
+    .specific-activity .leader.toggle-roaster {
+        display: block;
+    }
+}
+@media only screen and (min-width: 767px) {
+    .specific-activity .entry-row div{
+        display: block !important;
+    }
+    .specific-activity .leader.toggle-roaster {
+        display: none !important;
+    }
+    .specific-activity .roaster-table {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .specific-activity .member.firstname-title, .specific-activity .member.lastname-title, .specific-activity .member.firstname-entry, .specific-activity .member.lastname-entry {
+        width: 30% !important;
+    }
+    .specific-activity .member.participation-title, .specific-activity .member.participation-entry {
+        width: 40% !important;
+    }
+    .specific-activity .member.leave-entry, .specific-activity .member.leave-entry button {
+        width: 100% !important;
+    }
+}
 
 @media only screen and (min-width: 768px) {
     .specific-activity .button-row {

@@ -4,13 +4,21 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
     var app = new EmberApp(defaults, {
-        'ember-power-select': {
-            theme: 'bootstrap'
-        },
-        'mediumEditorOptions': {
-            theme: 'bootstrap'
-        },
-        tests: false
+      'ember-power-select': {
+          theme: 'bootstrap'
+      },
+
+      'mediumEditorOptions': {
+          theme: 'bootstrap'
+      },
+
+      tests: false,
+
+      'ember-bootstrap': {
+        'bootstrapVersion': 3,
+        'importBootstrapFont': true,
+        'importBootstrapCSS': true
+      }
     });
 
     // app.import('vendor/jsPDF-1.2.60/jspdf.js');

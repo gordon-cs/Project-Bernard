@@ -117,51 +117,48 @@
                 {{/if}}
             </h2>
             {{#if model.rosterFilled}}
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Participation</th>
-                                {{#if model.leading}}
-                                    <th>Title/Comment</th>
-                                    <th>Options</th>
-                                    <th class="group-admin-checkbox">Group Admin</th>
-                                {{/if}}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each model.rosterMemberships as |mem|}}
-                                <tr>
-                                    <td> {{mem.FirstName}} </td>
-                                    <td> {{mem.LastName}} {{#if mem.AccountPrivate}}{{#if model.leading}}*{{/if}}{{/if}} </td>
-                                    <td> {{mem.ParticipationDescription}} </td>
-                                    {{#if model.leading}}
+                <div class="roaster-table">
+                    <div class="row header-row">
+                        <div class="firstname-title {{if model.leading 'leader' 'member'}}">First Name</div>
+                        <div class="lastname-title {{if model.leading 'leader' 'member'}}">Last Name</div>
+                        <div class="participation-title {{if model.leading 'leader' 'member'}}">Participation</div>
+                        {{#if model.leading}}
+                        <div class="comment-title leader">Title/Comment</div>
+                        <div class="options-title leader">Options</div>
+                        <div class="groupadmin-title leader">Group Admin</div>
+                        {{/if}}
+                    </div>
+                    {{#each model.rosterMemberships as |mem|}}
+                    <div class="row entry-row">
+                        <div class="firstname-entry {{if model.leading 'leader' 'member'}}">{{mem.FirstName}}<!--<span class="glyphicon glyphicon-menu-down" onclick={{action "toggleActivityTable"}}></span>--></div>
+                        <div class="lastname-entry {{if model.leading 'leader' 'member'}}">{{mem.LastName}}{{#if mem.AccountPrivate}}{{#if model.leading}}*{{/if}}{{/if}}</div>
+                        <div class="participation-entry {{if model.leading 'leader' 'member'}} ">{{mem.ParticipationDescription}}</div>
+                        {{#if model.leading}}
+                        <div class="toggle-roaster {{if model.leading 'leader' 'member'}}"><span class="glyphicon glyphicon-menu-down {{if model.leading 'leader' 'member'}}" onclick={{action "toggleRoasterTable"}}></span></div>
+                        <div class="comment-entry leader "><strong>Title/Comment: </strong>{{mem.Description}}</div>
+                        <div class="options-entry leader">
+                            {{#link-to 'edit-membership' mem.MembershipID}}
+                            <button class="btn button-navy table-button">Edit</button>
+                            {{/link-to}}
+                            <button {{action "removePerson" mem}} class="btn button-red table-button">Remove</button>
+                        </div>
+                        <div class="groupadmin-entry leader">
+                            {{#if (not-eq mem.ParticipationDescription "Guest")}}
+                            <strong>Group Admin:</strong>
 
-                                        <td class="comments-table-data">{{mem.Description}}</td>
-                                        <td>
-                                            {{#link-to 'edit-membership' mem.MembershipID}}
-                                            <button class="btn button-navy table-button">Edit</button>
-                                            {{/link-to}}
-                                            <button {{action "removePerson" mem}} class="btn button-red table-button">Remove</button>
-                                        </td>
-                                        <td class="group-admin-checkbox">
-                                            {{#if (not-eq mem.ParticipationDescription "Guest")}}
-                                            <input type="checkbox" name="groupAdmin" checked={{mem.GroupAdmin}} {{action "toggleAdmin" mem on="change"}}>
-                                            {{/if}}
-                                        </td>
-                                    {{else if mem.isLoggedInUser}}
-                                        <td><button {{action "removePerson" mem}} class="btn button-red table-button">Leave</button></td>
-                                    {{else}}
-                                        <td></td>
-                                    {{/if}}
-                                </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-                    {{#if model.leading}}<p>* FERPA protected student</p>{{/if}}
+                            <input id="groupadmin-toggle" type="checkbox" name="groupAdmin" data-toggle="toggle" checked={{mem.GroupAdmin}} {{action "toggleAdmin" mem on="change"}}>
+                            {{/if}}
+                        </div>
+                        {{else if mem.isLoggedInUser}}
+                            <div class="leave-entry member"><button {{action "removePerson" mem}} class="btn button-red table-button">Leave</button></div>
+                        {{else}}
+                            <div class="leave-entry member"></div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                    <!-- </table> -->
                 </div>
+                {{#if model.leading}}<p>* FERPA protected student</p>{{/if}}
             {{else}}
                 {{#unless model.notAMember}}
                     <p class="empty-table-reminder">There are no members here</p>

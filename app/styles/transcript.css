@@ -104,6 +104,12 @@
 .transcript .glyphicon.glyphicon-menu-down {
     display: none;
 }
+.transcript #transcript-statement {
+    margin-top: 20px !important;
+    margin-left: -3px;
+    margin-left: -3px;
+    font-size: 1.2em;
+}
 
 @media only screen and (max-width: 1200px) {
 
