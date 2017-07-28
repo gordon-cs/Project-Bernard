@@ -9,11 +9,9 @@
 
           <div class="progress visible-xs">
               <div class="progress-bar id=one" role="progressbar" style="width: {{model.daysPercent}}%;" aria-valuenow="{{model.totalDays}}" aria-valuemin="0" aria-valuemax="100">
-                <a href = "http://www.gordon.edu/calendars/fouryear"><span><h5>{{model.daysLeft}} Days Left</h5></span></a>
+                <span><h5>{{model.daysLeft}} Days Left</h5></span>
               </div>
           </div>
-
-
 
       <div class="col-sm-4 col-md-3  container">
 
@@ -24,12 +22,12 @@
           </svg>
         </div>{{/link-to}}
 
-        <a href = "http://www.gordon.edu/calendars/fouryear"><div class="hidden-xs" id="cont" data-pct="{{model.daysLeft}} Days Left">
+        <div class="hidden-xs" id="cont" data-pct="{{model.daysLeft}} Days Left">
         <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
           <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset2}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
           <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset2}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
         </svg>
-      </div></a>
+      </div>
 
       </div>
 
