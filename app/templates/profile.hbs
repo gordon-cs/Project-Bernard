@@ -235,9 +235,7 @@
                             {{/if}}
                             <div class="row personal-information-entry entry3 no-border">
                                 <div class="col-xs-12 col-no-padding personal-information-entry-key">
-                                     {{#if model.userInfo.HomeCity}}{{model.userInfo.HomeCity}}, {{/if}} 
-                                    {{!-- {{model.userInfo.HomeCity}}, --}}
-                                    {{model.userInfo.HomeState}}
+                                    {{model.userInfo.HomeCity}}{{#if model.userInfo.HomeState}}, {{model.userInfo.HomeState}}{{/if}} 
                                     {{model.userInfo.HomePostalCode}}
                                     {{#if (not-eq model.userInfo.HomeCountry "US")}}
                                         {{if model.userInfo.Country model.userInfo.Country model.userInfo.HomeCountry}}
