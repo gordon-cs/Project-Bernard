@@ -107,7 +107,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     } else {
                         required = 0;
                         eventsPercent = 0;
-                        requiredEventsString = "No Attendence Recorded";
+                        requiredEventsString = "No Attendance Recorded";
                     }
                     let startClock;
                     let endClock;
