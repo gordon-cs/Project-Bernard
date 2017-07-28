@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
     option2: 'Include Past Events',
     showPastEvents: false,
     filterButton: 'Show Filters',
+    eventsHeader: 'All Events',
 
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
@@ -65,10 +66,12 @@ export default Ember.Controller.extend({
 
         chapelSwitch() {
             if (this.get('onlyChapel')) {
+                this.set('eventsHeader', 'Christian Life & Worship Events');
                 this.set('button1', 'CL&W Events');
                 this.set('option1', 'Show All Types');
                 this.send('filterEvents');
             } else {
+                this.set('eventsHeader', 'All Events');
                 this.set('button1', 'All Event Types');
                 this.set('option1', 'Show CL&W Events');
                 this.send('filterEvents');
@@ -78,10 +81,12 @@ export default Ember.Controller.extend({
         checkForChaple() {
             if (this.get('onlyChapel') === false) {
                 this.set('onlyChapel', true);
+                this.set('eventsHeader', 'Christian Life & Worship Events');
                 this.set('button1', 'CL&W Events');
                 this.set('option1', 'Show All Types');
                 this.send('filterEvents');
             } else {
+                this.set('eventsHeader', ' All Events');
                 this.set('onlyChapel', false);
                 this.set('button1', 'All Event Types');
                 this.set('option1', 'Show CL&W Events');
