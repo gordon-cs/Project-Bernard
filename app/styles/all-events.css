@@ -155,7 +155,7 @@
 }
 
 .events .cancel-modal {
-    color: #aaa;
+    color: black;
     float: right !important;
     font-size: 18px;
     font-weight: bold;
@@ -376,6 +376,12 @@
     .events .event-cyanbox {
         display: none !important;
     }
+    .events .header-container {
+        font-size: 16px;
+        padding-top: 5px;
+        margin-left: 10px;
+        font-weight: bold;
+    }
     .events .btn-upComing {
         margin-bottom: 5px;
     }
@@ -409,11 +415,12 @@
     .event-modal-header {
         max-height: 70px;
         margin-top: 0px;
+        font-size: 16px;
     }
     .event-modal-body {
         max-height: 200px;
         overflow-y: auto;
-        font-size: 12px;
+        font-size: 16px !important;
     }
 }
 

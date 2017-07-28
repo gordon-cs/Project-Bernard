@@ -29,25 +29,24 @@
     </div>
     </div>
 
-    <div class="moble-eventbox lightgraybox">
+    <div class="moble-eventbox ">
       <div id="category-bar" class="row mobile-row">
         <div class="progress event-progress visible-xs col-xs-8" style="height: 32px;">
           <div class="progress-bar " role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%; background-color:  #b2bb1c"></div>
           <span><h5>{{model.requiredEventsString}}</h5></span>
         </div>
-
     <form {{action "displayALLEvents" on="change"}}> 
       <div class="material-switch no-padding visible-xs col-xs-1">
-        {{!-- material-switch ^ <input id="switch" type="checkbox" onclick={{action "displayALLEvents"}}/> --}}
         {{input id="switch" type="checkbox" checked=bool1}}
         <label for="switch" class="label-default"></label>
         <h5>All</h5>
       </div>
       </form>
-
-
+    </div>
     </div>
 
+     <div class="header-container lightgraybox moble-eventbox visible-xs">
+      Attended Credits
     </div>
   </div>
 
@@ -72,7 +71,7 @@
 
 </div>
 <!-- Event Details Modal -->
-<div id="toggleEventDetailsModal" class="modal event-modal" onclick={{action "cancelEventDetailsModal"}}>
+<div id="toggleEventDetailsModal" class="modal events event-modal" onclick={{action "cancelEventDetailsModal"}}>
   <!-- Modal Content -->
   <div class="modal-content event-modal-content">
     <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
