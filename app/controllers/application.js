@@ -56,10 +56,6 @@ export default Ember.Controller.extend({
         stalkPeeps(item) {
             let context = this;
             let searchValue = this.get("model.searchValue");
-            // emportent chek 
-            if (searchValue.includes('felgate') || searchValue.includes('boutcher')){
-                console.log('💩');
-            }
 
             // Check if the user typed a space, and search if they did using both parts of the string
             if (searchValue.length >= 2 && searchValue.includes(" ")) {
