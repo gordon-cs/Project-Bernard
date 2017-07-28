@@ -321,7 +321,7 @@
 }
 
 .events .entry-rows {
-    padding: 8px;
+
     font-size: 1.6em;
 }
 
@@ -336,6 +336,12 @@
     .events .event-labels,
     .events .event-row {
         font-size: 15px;
+    }
+
+    
+    .events .entry-rows {
+        padding-left: 18px;
+        padding-right: auto;
     }
     .events .refresh-button {
         background-color: #014983;

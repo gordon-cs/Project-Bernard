@@ -56,7 +56,7 @@ export default Ember.Controller.extend({
         stalkPeeps(item) {
             let context = this;
             let searchValue = this.get("model.searchValue");
-            
+
             // Check if the user typed a space, and search if they did using both parts of the string
             if (searchValue.length >= 2 && searchValue.includes(" ")) {
                 let split = searchValue.split(" ")
@@ -67,6 +67,7 @@ export default Ember.Controller.extend({
                     context.set('model.people', result);
                 });
             }
+
             if (searchValue.length >= 2) {
                 return getAsync('/accounts/search/' + searchValue.toLowerCase() + '/', this).then(function(result) {
                     for (let i = 0; i < result.length; i++) {
@@ -130,7 +131,6 @@ export default Ember.Controller.extend({
         // Check if the user is a regular admin
         if (college_role === "readonly") {
             context.set("isReadOnly", true);
-            console.log("User has read only permission");
             return;
         }
 
