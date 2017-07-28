@@ -425,6 +425,7 @@
         font-size: 16px;
     }
     .event-modal-body {
+        min-height: 200px;
         max-height: 200px;
         overflow-y: auto;
         font-size: 16px !important;
@@ -444,7 +445,7 @@
         /* Could be more or less, depending on screen size */
     }
     .event-modal-body {
-        min-height: 200px;
+        min-height: 240px;
         max-height: 240px;
         overflow-y: auto;
     }
