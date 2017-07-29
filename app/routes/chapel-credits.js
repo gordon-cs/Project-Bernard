@@ -31,7 +31,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let date = new Date().getFullYear() - (month >= 0 && month <= 6 ? 1 : 0);
         let term = (month >= 0 && month <= 6 ? "SP" : "FA");
         let subdate = date.toString().substr(-2);
-        let termCode = subdate + term;
+        let termCode = subdate.concat(term);
 
         function sortDate(first, second) {
             if (first.timeObject === second.timeObject)
