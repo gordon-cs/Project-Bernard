@@ -12,7 +12,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let context = this;
         let searchValue;
         let eventList;
-        let pastEvents = [];
+        let futureEvents = [];
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         let sort = {
@@ -132,17 +132,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 eventList[i].Month = fullMonth[startMonth];
 
                 if (startDate > date) {
-                    pastEvents.push(eventList[i]);
+                    futureEvents.push(eventList[i]);
                 }
 
             }
 
             eventList.sort(sortByTime);
-            pastEvents.sort(sortByTime);
+            futureEvents.sort(sortByTime);
 
             return {
                 eventList,
-                pastEvents,
+                futureEvents,
 
             };
 
@@ -154,8 +154,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return {
                 //return all the deseired information
                 "allEvents": eventList,
-                "eventShown": pastEvents,
-                "pastEvents": pastEvents,
+                "eventShown": futureEvents,
+                "futureEvents": futureEvents,
                 "searchValue": searchValue,
                 "sort": sort
             };

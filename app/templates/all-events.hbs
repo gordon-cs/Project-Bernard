@@ -34,7 +34,7 @@
         <div class="mobile-phone-privacy-button-mobile"><a>{{button2}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
       </div>
       <div class="dropdown-menu mobilePhonePrivacyDropdown right-button-dropdown" aria-labelledby="dropdownMenuButton">
-        <div class="dropdown-item" {{action "showPastEvents"}}>{{option2}}</div>
+        <div class="dropdown-item" {{action "showfutureEvents"}}>{{option2}}</div>
       </div>
     </div>
 </div>
@@ -53,7 +53,7 @@
     </div> --}}
 
     {{!-- <div class="material-switch no-padding hidden-xs col-sm-1">
-      <input id="switch2" type="checkbox" onclick={{action "showPastEvents"}}/>
+      <input id="switch2" type="checkbox" onclick={{action "showfutureEvents"}}/>
       <label for="switch2" class="label-default"></label>
       <h4>Include&nbsp;Past&nbsp;Events</h4>
     </div> --}}
@@ -165,7 +165,6 @@
       <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortItems" "Event_Title"}}><h4 >Event <span class="glyphicon {{if (and (eq model.sort.type "Event_Title") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Event_Title") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
       <div class="event-labels col-sm-4 col-md-5" onclick={{action "sortItems" "Location"}}><h4>Location <span class="glyphicon {{if (and (eq model.sort.type "Location") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Location") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
       <div class="event-labels col-sm-5 col-md-4" onclick={{action "sortItems" "timeObject"}}><h4>Date & Time <span class="glyphicon {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
-
     </div>
   </div>
   <div class="entry-rows">
@@ -175,17 +174,13 @@
       <div class="col-md-3 col-sm-3 event-id" onclick={{action "openDropDown"}}>{{event.Event_Title}}</div>
       <div class="display-col col-md-5 col-sm-4 xs-hide">{{event.Location}}</div>
       <div  class="display-col col-md-2 col-sm-2 xs-hide">{{event.Start_Time}}</div>
-     <div class="display-col col-md-2 col-sm-3 xs-hide">{{event.End_Time}}</div>
+      <div class="display-col col-md-2 col-sm-3 xs-hide">{{event.End_Time}}</div>
       <h4 class="display-col col-sm-3 col-md-3 xs-hide events-info" onclick={{ action "MobileEventDetailsModal" event }}>More Info...</h4>
     </div>
     {{/each}}
   </div>
 </div>
-
-
-
 <div id="toggleEventDetailsModal" class="modal events event-modal" onclick={{action "cancelEventDetailsModal"}}>
-
   <!-- Modal Content -->
   <div class="modal-content event-modal-content">
     <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
@@ -200,6 +195,5 @@
       <button class="btn button-lightgray cancel-modal form-button form-cancel-button">Close</button>
     </div>
   </div>
-
 </div>
 
