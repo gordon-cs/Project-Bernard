@@ -145,6 +145,7 @@
                         <div class="groupadmin-entry leader">
                             {{#if (not-eq mem.ParticipationDescription "Guest")}}
                             <strong>Group Admin:</strong>
+                            {{bs-switch checked=switchState on-text="Yes" off-text="No"}}
 
                             <input id="groupadmin-toggle" type="checkbox" name="groupAdmin" data-toggle="toggle" checked={{mem.GroupAdmin}} {{action "toggleAdmin" mem on="change"}}>
                             {{/if}}

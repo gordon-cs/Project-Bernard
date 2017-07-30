@@ -7,7 +7,15 @@ module.exports = function(defaults) {
       'ember-power-select': {
           theme: 'bootstrap'
       },
-
+      'ember-bootstrap-switch': {
+        excludeCSS: true
+      },
+      lessOptions: {
+          paths: [
+            "bower_components/bootstrap/less",
+            "bower_components/bootstrap-switch/src/less/bootstrap3"
+          ]
+      },
       'mediumEditorOptions': {
           theme: 'bootstrap'
       },
