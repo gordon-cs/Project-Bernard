@@ -4,6 +4,9 @@ import deleteAsync from "gordon360/utils/delete-async";
 /*  Controller for the notification table.
  *  Handles user interaction with the page.
  *  Sends requests to the model to retrieve and/or modify data.
+ * 
+ * Important: I am using eventsShown as the intermediate lsit of events to change, then I will reset the list
+ * by settting it back to the list of chapel events attended or upcoming events. 
  */
 export default Ember.Controller.extend({
     button1: 'Attended Events',
@@ -14,6 +17,7 @@ export default Ember.Controller.extend({
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
     actions: {
 
+        //sort the list when the sort button is selected
         sortItems(type) {
             let events = this.get("model.eventShown");
             let sorted = [];
@@ -51,7 +55,7 @@ export default Ember.Controller.extend({
             this.set("model.sort.type", type);
         },
 
-
+        //change the button names when this action is called
         switchList() {
             if (this.get('bool1')) {
                 this.set('bool1', false);
@@ -74,23 +78,23 @@ export default Ember.Controller.extend({
             }
         },
 
-        //apply filter to event list 
+        //dropdown information on the mobile display and applys a color change
         toggleRequestSent(item) {
 
             let lastForm = this.get("lastForm");
 
-            if (lastForm && $(item.target).hasClass("onclickOrange")) {
+            if (lastForm && $(item.target).hasClass("onclickGreen")) {
                 $(item.target).siblings().slideUp();
                 let form = $(item.target);
-                $(lastForm).removeClass("onclickOrange");
+                $(lastForm).removeClass("onclickGreen");
                 this.set("lastForm", form);
             } else {
                 if (lastForm) {
-                    $(lastForm).removeClass("onclickOrange");
+                    $(lastForm).removeClass("onclickGreen");
                     $(lastForm).siblings().slideUp();
                 }
                 let form = $(item.target);
-                $(form).addClass("onclickOrange");
+                $(form).addClass("onclickGreen");
                 $(form).siblings().slideDown();
                 this.set("lastForm", form);
             }
@@ -98,7 +102,7 @@ export default Ember.Controller.extend({
         },
 
 
-        //apply filter to event list  display modal
+        //displays the modal when clicked
         toggleEventDetailsModal(item) {
 
             if ($(window).width() > 750) {
@@ -117,6 +121,7 @@ export default Ember.Controller.extend({
             let previousSort = this.get("model.sort.type");
             let context = this;
 
+            //sort function activated after each filter 
             let filterSort = function(events) {
                 let sorted = [];
                 let previousSort = context.get("model.sort");

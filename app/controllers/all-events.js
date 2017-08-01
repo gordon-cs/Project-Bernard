@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
     button2: 'Upcoming Events',
     option1: 'Show Only CL&W Events',
     option2: 'Include Past Events',
-    showPastEvents: false,
+    showfutureEvents: false,
     filterButton: 'Show Filters',
     eventsHeader: 'All Events',
 
@@ -22,6 +22,7 @@ export default Ember.Controller.extend({
 
     actions: {
 
+        //sort the list when the sort button is selected
         sortItems(type) {
             let events = this.get("model.eventShown");
             let sorted = [];
@@ -60,7 +61,8 @@ export default Ember.Controller.extend({
 
 
 
-
+        //upon list change, changes the names of the button and the header
+        //this is activated byt the switch on mobile
         chapelSwitch() {
             if (this.get('onlyChapel')) {
                 this.set('eventsHeader', 'Christian Life & Worship Events');
@@ -75,6 +77,8 @@ export default Ember.Controller.extend({
             }
         },
         //if the chapel credit button is clicked only display chapel with the CL&W creddit tag
+        //if also switches the bool for the checkbox used for mobile, this allows the switch
+        //to change even when it is not being shown. (the bool is change automatically on mobile)
         checkForChaple() {
             if (this.get('onlyChapel') === false) {
                 this.set('onlyChapel', true);
@@ -93,15 +97,15 @@ export default Ember.Controller.extend({
         },
 
 
-        //switch display to the list including past events
-        showPastEvents() {
-            if (this.get('showPastEvents') === false) {
-                this.set('showPastEvents', true);
+        //switch display to the list including past events and change the name of the buttons
+        showfutureEvents() {
+            if (this.get('showfutureEvents') === false) {
+                this.set('showfutureEvents', true);
                 this.set('button2', 'All Event Dates');
                 this.set('option2', 'Upcoming Events');
                 this.send('filterEvents');
             } else {
-                this.set('showPastEvents', false);
+                this.set('showfutureEvents', false);
                 this.set('button2', 'Upcoming Events');
                 this.set('option2', 'Include Past Events');
                 this.send('filterEvents');
@@ -109,24 +113,24 @@ export default Ember.Controller.extend({
         },
 
 
-        //On mobiel, when the event name is clicked, drop down the informatio
+        //On mobiel, when the event name is clicked, drop down the information
         //and slideup the previous dropdown
         openDropDown(item) {
 
             let lastForm = this.get("lastForm");
 
-            if (lastForm && $(item.target).hasClass("onclickOrange")) {
+            if (lastForm && $(item.target).hasClass("onclickGreen")) {
                 $(item.target).siblings().slideUp();
                 let form = $(item.target);
-                $(lastForm).removeClass("onclickOrange");
+                $(lastForm).removeClass("onclickGreen");
                 this.set("lastForm", form);
             } else {
                 if (lastForm) {
-                    $(lastForm).removeClass("onclickOrange");
+                    $(lastForm).removeClass("onclickGreen");
                     $(lastForm).siblings().slideUp();
                 }
                 let form = $(item.target);
-                $(form).addClass("onclickOrange");
+                $(form).addClass("onclickGreen");
                 $(form).siblings().slideDown();
                 this.set("lastForm", form);
             }
@@ -173,10 +177,11 @@ export default Ember.Controller.extend({
                 events = sorted;
                 return events;
             };
-            if (this.get('showPastEvents')) {
+
+            if (this.get('showfutureEvents')) {
                 oldList = this.get("model.allEvents");
             } else {
-                oldList = this.get("model.pastEvents");
+                oldList = this.get("model.futureEvents");
             }
 
             if (this.get("isChapel") || this.get("isArt") || this.get("isCEC") || this.get("isCalendar") || this.get("isAdmissions") ||
@@ -251,7 +256,7 @@ export default Ember.Controller.extend({
 
         },
 
-
+        //when the filter button is pushed, drop down all the filter options
         showFilters() {
             if (this.get('filterButton') === 'Show Filters') {
                 this.set('filterButton', 'Hide Filters');
@@ -262,7 +267,6 @@ export default Ember.Controller.extend({
             $('.filter-container').slideToggle();
         },
 
-        //filter the list of events according to the boxes checked
 
         //when the event list is clicked, display toggle for the clicked event
         toggleEventDetailsModal(item) {
@@ -277,7 +281,7 @@ export default Ember.Controller.extend({
         },
 
 
-        //activated by the button on mobile
+        //activated by the button on mobile but does the same as above
         MobileEventDetailsModal(item) {
 
             $("#toggleEventDetailsModal").addClass("event-showModal");
@@ -285,8 +289,6 @@ export default Ember.Controller.extend({
             let context = this;
             let displayEvent = this.set("displayEvent", item);
             this.send('modelFormate', displayEvent);
-
-
         },
 
         //formate the infor being displayed in the modal

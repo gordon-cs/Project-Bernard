@@ -31,7 +31,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let date = new Date().getFullYear() - (month >= 0 && month <= 6 ? 1 : 0);
         let term = (month >= 0 && month <= 6 ? "SP" : "FA");
         let subdate = date.toString().substr(-2);
-        let termCode = subdate + term;
+        let termCode = subdate.concat(term);
 
         function sortDate(first, second) {
             if (first.timeObject === second.timeObject)
@@ -53,7 +53,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         };
 
-
+        //formate a clock with
         function setClock(Min, hour, clock) {
             if (Min < 10) {
                 Min = "0" + Min;
@@ -71,7 +71,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return clock;
 
         }
-        //take the date object and formate a 12 hour clock with it
+        //take the date object and apply the formating functions
         function formatClock(startTime, endTime, startClock, endClock) {
 
             let startHour = new Date(startTime).getHours();
@@ -95,7 +95,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         //retreive the chapel information from the database and then formate the events listed
         let loadChapel = function() {
-            return getAsync("/events/chapel/" + id_name + "/" + "17FA", context)
+            return getAsync("/events/chapel/" + id_name + "/" + termCode, context)
                 .then(function(result) {
                     chapelEvents = result;
                     console.log(chapelEvents);
