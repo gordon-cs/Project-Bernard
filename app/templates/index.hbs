@@ -1,7 +1,7 @@
 <div class="container-fluid index">
   <div class="row hey">
 
-          <div class="progress visible-xs">
+          <div class="progress visible-xs" id="progress-bars">
               <div class="progress-bar id=one" role="progressbar" style="width: {{model.eventsPercent}}%; background-color:  #b2bb1c" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
                 {{#link-to "chapel-credits"}}<span><h5 class="progress-text">{{model.requiredEventsString}}</h5></span> {{/link-to}}
               </div>
