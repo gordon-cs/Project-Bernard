@@ -2,11 +2,6 @@
     background: grey;
 }
 
-.hey {
-    padding-top: 15px;
-    /*padding-left: 50px;*/
-}
-
 .progress {
     height: 40px !important;
     margin: 0 15px 10px 15px;
@@ -39,7 +34,7 @@
     stroke-width: 20;
 }
 
-#cont {
+#cont1, #cont2 {
     display: block;
     height: 200px;
     width: 200px;
@@ -50,7 +45,7 @@
     margin-bottom: 100px;
 }
 
-#cont:after {
+#cont1:after, #cont2:after {
     position: absolute;
     display: block;
     height: 160px;
@@ -63,7 +58,14 @@
     margin-left: -80px;
     border-radius: 100%;
     line-height: 160px;
-    font-size: 2em;
     text-align: center;
     background: rgb(235, 234, 234);
+}
+
+#cont1:after {
+    font-size: 2em;
+}
+
+#cont2:after {
+    font-size: 1em;
 }
