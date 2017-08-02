@@ -4,9 +4,9 @@ import deleteAsync from "gordon360/utils/delete-async";
 /*  Controller for the notification table.
  *  Handles user interaction with the page.
  *  Sends requests to the model to retrieve and/or modify data.
- * 
+ *
  * Important: I am using eventsShown as the intermediate lsit of events to change, then I will reset the list
- * by settting it back to the list of chapel events attended or upcoming events. 
+ * by settting it back to the list of chapel events attended or upcoming events.
  */
 export default Ember.Controller.extend({
     button1: 'Attended Events',
@@ -22,6 +22,9 @@ export default Ember.Controller.extend({
             let events = this.get("model.eventShown");
             let sorted = [];
             let previousSort = this.get("model.sort");
+            events.forEach(function(item, index){
+                item["idx"] = index;
+            });
 
             if (type != previousSort.type || previousSort.direction === "up") {
                 // sort down
@@ -32,19 +35,31 @@ export default Ember.Controller.extend({
                     if (a[type] > b[type]) {
                         return 1;
                     }
-                    return 0;
+                    if (a["idx"] < b["idx"]) {
+                        return -1;
+                    }
+                    else {
+                        return 1;
+                    }
                 });
                 this.set("model.sort.direction", "down");
             } else {
                 // sort up
                 events.sort(function(a, b) {
+                    let aIndex = events.indexOf(a);
+                    let bIndex = events.indexOf(b);
                     if (a[type] < b[type]) {
                         return 1;
                     }
                     if (a[type] > b[type]) {
                         return -1;
                     }
-                    return 0;
+                    if (a["idx"] < b["idx"]) {
+                        return -1;
+                    }
+                    else {
+                        return 1;
+                    }
                 });
                 this.set("model.sort.direction", "up");
             }
@@ -121,7 +136,7 @@ export default Ember.Controller.extend({
             let previousSort = this.get("model.sort.type");
             let context = this;
 
-            //sort function activated after each filter 
+            //sort function activated after each filter
             let filterSort = function(events) {
                 let sorted = [];
                 let previousSort = context.get("model.sort");
