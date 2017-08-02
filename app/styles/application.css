@@ -146,6 +146,10 @@ header {
     padding: 0;
 }
 
+.hideDesktopSearch {
+    display: none !important;
+}
+
 .dropdown-people {
     display: block;
     padding: 0;

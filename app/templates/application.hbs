@@ -140,11 +140,11 @@
                    <form class="navbar-form navbar-right searhbar">
                         <div class="form-group" >
                             <!-- this is where we fill in information, and run the function "stalkpeeps" to perform the search -->
-                             {{input value=model.searchValue key-up=(action "stalkPeeps") autocomplete="off" class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for People..."}}
+                             {{input value=model.searchValue key-up=(action "stalkPeeps") focus-out=(action "toggleDesktopSearch") focus-in=(action "toggleDesktopSearch") autocomplete="off" class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for People..."}}
                         </div>
                    </form>
                     <!-- where we show the results for the search - parsed out in a "for each" loop and placed inside a list item -->
-                    <ul class="dropdown-menu dropdown-people role=menu" >
+                    <ul class="dropdown-menu dropdown-people role=menu {{if hideDesktopSearch 'hideDesktopSearch' ''}}" >
                             {{#each model.people as |person index|}}
                                     {{#if (lt index 15)}}
                                         <li>
