@@ -26,10 +26,12 @@
       </div>
     </div>
     <form {{action "displayALLEvents" on="change"}}>
-      <div class="material-switch visible-xs col-xs-2 mobile-toggle" style="padding-top: 10px;">
+      <div class="material-switch visible-xs col-xs-2 mobile-toggle" style="padding-top: 10px;" id="mobile-toggle">
+          <!-- <h5>Past</h5> -->
         {{input id="switch" type="checkbox" checked=bool1}}
         <label for="switch" class="label-default"></label>
         <h5><span>Past</span><span>Future</span></h5>
+        <!-- <h5>Future</h5> -->
       </div>
     </form>
     <div class="moble-eventbox ">

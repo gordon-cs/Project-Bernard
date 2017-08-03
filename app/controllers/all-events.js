@@ -76,7 +76,7 @@ export default Ember.Controller.extend({
                 this.send('filterEvents');
             }
         },
-        //if the chapel credit button is clicked only display chapel with the CL&W creddit tag
+        //if the claw credits button is clicked only display chapel with the CL&W creddit tag
         //if also switches the bool for the checkbox used for mobile, this allows the switch
         //to change even when it is not being shown. (the bool is change automatically on mobile)
         checkForChaple() {
@@ -270,7 +270,7 @@ export default Ember.Controller.extend({
 
         //when the event list is clicked, display toggle for the clicked event
         toggleEventDetailsModal(item) {
-            //to make sure this cant be activated by clicking on it in mobile 
+            //to make sure this cant be activated by clicking on it in mobile
             if ($(window).width() > 750) {
                 $("#toggleEventDetailsModal").addClass("event-showModal");
                 $('.container').addClass('blur');

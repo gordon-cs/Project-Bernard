@@ -62,10 +62,11 @@
   <div class="moble-eventbox">
     <div id="category-bar" class="row">
         <form {{action "chapelSwitch" on="change"}}>
-            <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2 mobile-toggle">
+            <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2 mobile-toggle mobile-toggle-all-events">
                 {{input id="switch3" type="checkbox" checked=onlyChapel}}
                 <label for="switch3" class="label-default"></label>
-                <h5><span>All</span><span>Only&nbsp;CL&W</span></h5>
+                <!-- <div class="mobile-toggle-label"><h5>All</h5><h5>CL&W <br>Only</h5></div> -->
+                <h5><span>All</span><span>CL&W&nbsp;Only</span></h5>
             </div>
         </form>
         <div class="dropdown show col-xs-offset-3 col-xs-4 visible-xs" style="margin-right: 10px; margin-right: 0;">
