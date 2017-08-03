@@ -13,6 +13,7 @@ export default Ember.Controller.extend({
     requestsCalled: false,
     requestsRecieved: [],
     showMenuSearch: false,
+    hideDesktopSearch: true,
     showMenu: false,
     actions: {
 
@@ -52,7 +53,7 @@ export default Ember.Controller.extend({
             this.set("requestsSent", []);
         },
 
-        // people search process 
+        // people search process
         stalkPeeps(item) {
             let context = this;
             let searchValue = this.get("model.searchValue");
@@ -81,10 +82,14 @@ export default Ember.Controller.extend({
 
         },
 
+        toggleDesktopSearch() {
+            this.set("hideDesktopSearch", !this.get("hideDesktopSearch"));
+        }
+
     },
 
 
-    
+
     // Check if the user is an admin of any kind - either a group admin,
     // regular admin, or super admin
     checkAdmin() {

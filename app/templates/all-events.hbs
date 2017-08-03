@@ -27,7 +27,7 @@
         <div class="dropdown-item" {{action "checkForChaple"}}>{{option1}}</div>
       </div>
     </div>
-  
+
     <div class=" no-padding button-padding dropdown">
       <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
@@ -61,18 +61,19 @@
   <!-- same switches but formated for mobile -->
   <div class="moble-eventbox">
     <div id="category-bar" class="row">
-    <form {{action "chapelSwitch" on="change"}}> 
-      <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2">
-        {{input id="switch3" type="checkbox" checked=onlyChapel}}   
-        <label for="switch3" class="label-default"></label>
-        <h5>Show&nbsp;CL&W</h5>
-      </div>
-      </form>
-      <div class="dropdown show col-xs-offset-3 col-xs-4 visible-xs" style="margin-right: 10px; margin-right: 0;">
-      <button type="button" class="btn filter-button btn-primary" {{action "showFilters"}}>
-        {{filterButton}}
-      </button>
-      </div>
+        <form {{action "chapelSwitch" on="change"}}>
+            <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2 mobile-toggle mobile-toggle-all-events">
+                {{input id="switch3" type="checkbox" checked=onlyChapel}}
+                <label for="switch3" class="label-default"></label>
+                <!-- <div class="mobile-toggle-label"><h5>All</h5><h5>CL&W <br>Only</h5></div> -->
+                <h5><span>All</span><span>CL&W&nbsp;Only</span></h5>
+            </div>
+        </form>
+        <div class="dropdown show col-xs-offset-3 col-xs-4 visible-xs" style="margin-right: 10px; margin-right: 0;">
+            <button type="button" class="btn filter-button btn-primary" {{action "showFilters"}}>
+                {{filterButton}}
+            </button>
+        </div>
     </div>
   </div>
 
@@ -150,7 +151,7 @@
               Calendar Events
             </label>
           </div>
-        </div>     
+        </div>
       </div>
     </form>
   </div>
@@ -196,4 +197,3 @@
     </div>
   </div>
 </div>
-

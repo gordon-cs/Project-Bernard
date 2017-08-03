@@ -331,6 +331,23 @@
 }
 
 @media screen and (max-width: 767px) {
+    .events .mobile-toggle h5 span{
+        padding-right: 10px;
+    }
+
+
+    .events .mobile-toggle label{
+        margin-left: 15px;
+    }
+    .events .mobile-toggle-all-events label{
+        margin-left: 5px !important;
+    }
+    /*.events .mobile-toggle-label h5 {
+        display: inline-block;
+    }*/
+    /*.events #mobile-toggle h5, .events #mobile-toggle label {
+        display: inline;
+    }*/
     .events .highlight-box,
     .events .event-labels,
     .events .event-row {

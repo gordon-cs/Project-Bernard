@@ -1,7 +1,7 @@
 <div class="container-fluid index">
   <div class="row hey">
 
-          <div class="progress visible-xs">
+          <div class="progress visible-xs" id="progress-bars">
               <div class="progress-bar id=one" role="progressbar" style="width: {{model.eventsPercent}}%; background-color:  #b2bb1c" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
                 {{#link-to "chapel-credits"}}<span><h5 class="progress-text">{{model.requiredEventsString}}</h5></span> {{/link-to}}
               </div>
@@ -9,23 +9,24 @@
 
           <div class="progress visible-xs">
               <div class="progress-bar id=one" role="progressbar" style="width: {{model.daysPercent}}%; background-color:  #b2bb1c" aria-valuenow="{{model.totalDays}}" aria-valuemin="0" aria-valuemax="100">
-                <span><h5 class="progress-text">{{model.daysLeft}} Days To Go</h5></span>
+                <span><h5 class="progress-text">{{model.daysLeft}} Days Until End of {{model.currentSession.SessionDescription}}</h5></span>
               </div>
           </div>
 
       <div class="col-sm-4 col-md-3  container">
 
-        {{#link-to "chapel-credits"}}<div class="hidden-xs" id="cont" data-pct="{{model.numEvents}} CL&W Credits">
+        {{#link-to "chapel-credits"}}<div class="hidden-xs" id="cont1" data-pct="{{model.numEvents}} CL&W Credits">
           <svg id="svg" width="300" height="300" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
             <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
           </svg>
         </div>{{/link-to}}
 
-        <div class="hidden-xs" id="cont" data-pct="{{model.daysLeft}} Days To Go">
+        <div class="hidden-xs" id="cont2" data-pct="{{model.daysLeft}} Days Until End of {{model.currentSession.SessionDescription}}">
         <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
           <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset2}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
           <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset2}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+          <!-- <text id="count" x="100" y="100" text-anchor="middle" dy="7" font-size="10pt">100%</text> -->
         </svg>
       </div>
 
