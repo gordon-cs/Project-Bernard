@@ -1,30 +1,199 @@
-<div class = "container event-box">
-  <h4 class = "cyanbox">
-    <div id = "category-bar" class="row">
-      <div class="event-labels col-xs-4 col-md-6">Event </div>
-      <div class="event-labels col-xs-4 col-md-2">Location</div>
-      <div class="event-labels col-xs-2 col-md-2">Time</div>
-      <div class="event-labels col-xs-2 col-md-2">Date</div>
+<div class="container events event-box">
+
+
+  <div class=" row whitebox">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <h4 class="event-p heading-text event-title">
+        CAMPUS EVENTS
+      </h4>
     </div>
-  </h4>
-    <div class="row-events">
-      <div class="row event-row">
-        <h4 id = "event-title" class="col-xs-4 col-md-6">Chapel: Tom Haugen </h4>
-        <h4 id= "event-location" class="col-xs-4 col-md-2">A.J. Chapel</h4>
-        <h4 id= "event-time" class="col-xs-2 col-md-2">11:05 AM</h4>
-        <h4 id = "event-date" class="col-xs-2 col-md-2">Feb. 02</h4>
+  </div>
+
+
+  <div class=" row whitebox">
+    <!-- search bar -->
+    <div class="input-group event-search col-xs-10 col-sm-4 ">
+      {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
+    </div>
+
+    <!-- switches to change the displayed list -->
+    <div class = " hidden-xs col-offset-md-1 col-sm-6 col-md-6">
+    <div class="dropdown button-padding">
+      <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <div class="mobile-phone-privacy-button-mobile"><a>{{button1}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
       </div>
-      <div class="row event-row">
-        <h4 class="col-xs-4 col-md-8">Event01 </h4>
-      </div>
-      <div class="row event-row">
-        <h4 class="col-xs-4 col-md-8">Event01 </h4>
-      </div>
-      <div class="row event-row">
-        <h4 class="col-xs-4 col-md-8">Event01 </h4>
-      </div>
-      <div class="row event-row">
-        <h4 class="col-xs-4 col-md-8">Event01 </h4>
+      <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-item" {{action "checkForChaple"}}>{{option1}}</div>
       </div>
     </div>
+
+    <div class=" no-padding button-padding dropdown">
+      <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <div class="mobile-phone-privacy-button-mobile"><a>{{button2}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+      </div>
+      <div class="dropdown-menu mobilePhonePrivacyDropdown right-button-dropdown" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-item" {{action "showfutureEvents"}}>{{option2}}</div>
+      </div>
+    </div>
+</div>
+
+    <!-- Filter button and its dropdown menu -->
+    <div class="dropdown show hidden-xs col-sm-1" style="margin-right: 10px;">
+      <button type="button" class="btn filter-button btn-danger"  {{action "showFilters"}}>
+        {{filterButton}}
+      </button>
+    </div>
+    {{!--
+    <div class="material-switch no-padding hidden-xs col-sm-1">
+      <input id="switch2" type="checkbox" onclick={{action "checkForChaple"}}/>
+      <label for="switch2" class="label-default"></label>
+      <h4>ALL&nbspCL&W</h4>
+    </div> --}}
+
+    {{!-- <div class="material-switch no-padding hidden-xs col-sm-1">
+      <input id="switch2" type="checkbox" onclick={{action "showfutureEvents"}}/>
+      <label for="switch2" class="label-default"></label>
+      <h4>Include&nbsp;Past&nbsp;Events</h4>
+    </div> --}}
+  </div>
+  <!-- same switches but formated for mobile -->
+  <div class="moble-eventbox">
+    <div id="category-bar" class="row">
+        <form {{action "chapelSwitch" on="change"}}>
+            <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2 mobile-toggle mobile-toggle-all-events">
+                {{input id="switch3" type="checkbox" checked=onlyChapel}}
+                <label for="switch3" class="label-default"></label>
+                <!-- <div class="mobile-toggle-label"><h5>All</h5><h5>CL&W <br>Only</h5></div> -->
+                <h5><span>All</span><span>CL&W&nbsp;Only</span></h5>
+            </div>
+        </form>
+        <div class="dropdown show col-xs-offset-3 col-xs-4 visible-xs" style="margin-right: 10px; margin-right: 0;">
+            <button type="button" class="btn filter-button btn-primary" {{action "showFilters"}}>
+                {{filterButton}}
+            </button>
+        </div>
+    </div>
+  </div>
+
+  <div class="filter-container">
+    <form {{action "filterEvents" on="change"}}>
+      <div class="row">
+        <div class="col-sm-4  col-xs-6 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" id="admissions" checked=isAdmissions }}
+            <label for="adminssions" class="form-check-label event-checks">
+              Admissions
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  col-xs-6 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isStudentLife }}
+            <label  class="form-check-label event-checks">
+              Student Life
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  col-xs-6 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isFairORExpo }}
+            <label  class="form-check-label event-checks">
+              Fair or Expo
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  col-xs-6 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isAcademics }}
+            <label  class="form-check-label event-checks">
+              Academics
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  col-xs-6 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isChapel }}
+            <label class="form-check-label event-checks">
+              Chapel Office
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  col-xs-6 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isCEC }}
+            <label class="form-check-label event-checks">
+              CEC Events
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  col-xs-6 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isArt }}
+            <label class="form-check-label event-checks">
+              Arts
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  col-xs-6 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isAthletics }}
+            <label class="form-check-label event-checks">
+              Athletics
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-4  col-xs-12 form-check">
+          <div class="checkbox-container">
+            {{input type="checkbox" checked=isCalendar }}
+            <label class="form-check-label event-checks">
+              Calendar Events
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="header-container lightgraybox moble-eventbox visible-xs">
+    {{eventsHeader}}
+  </div>
+
+  <!--heading for the event list + filter buttons -->
+  <div class="event-cyanbox navybox">
+    <div id="category-bar" class="row">
+      <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortItems" "Event_Title"}}><h4 >Event <span class="glyphicon {{if (and (eq model.sort.type "Event_Title") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Event_Title") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
+      <div class="event-labels col-sm-4 col-md-5" onclick={{action "sortItems" "Location"}}><h4>Location <span class="glyphicon {{if (and (eq model.sort.type "Location") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Location") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
+      <div class="event-labels col-sm-5 col-md-4" onclick={{action "sortItems" "timeObject"}}><h4>Date & Time <span class="glyphicon {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "timeObject") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
+    </div>
+  </div>
+  <div class="entry-rows">
+    <!--all the events in the event list -->
+    {{#each model.eventShown as |event|}}
+    <div class="row event-row" style="margin-left:0px; margin-right:0px" {{ action "toggleEventDetailsModal" event }}>
+      <div class="col-md-3 col-sm-3 event-id" onclick={{action "openDropDown"}}>{{event.Event_Title}}</div>
+      <div class="display-col col-md-5 col-sm-4 xs-hide">{{event.Location}}</div>
+      <div  class="display-col col-md-2 col-sm-2 xs-hide">{{event.Start_Time}}</div>
+      <div class="display-col col-md-2 col-sm-3 xs-hide">{{event.End_Time}}</div>
+      <h4 class="display-col col-sm-3 col-md-3 xs-hide events-info" onclick={{ action "MobileEventDetailsModal" event }}>More Info...</h4>
+    </div>
+    {{/each}}
+  </div>
+</div>
+<div id="toggleEventDetailsModal" class="modal events event-modal" onclick={{action "cancelEventDetailsModal"}}>
+  <!-- Modal Content -->
+  <div class="modal-content event-modal-content">
+    <h3 class="whitebox modal-header event-modal-header"> {{ displayEvent.Event_Name }} </h3>
+    <div class="modal-body event-modal-body">
+      <h4>Department: {{ displayEvent.Organization }}</h4>
+      <h4>Event Discription: {{ displayEvent.Description}}</h4>
+      {{#each displayEvent.Occurrences as |Location|}}
+      <h4>{{Location.[3]}} </h4>
+      {{/each}}
+    </div>
+    <div class="modal-footer">
+      <button class="btn button-lightgray cancel-modal form-button form-cancel-button">Close</button>
+    </div>
+  </div>
 </div>

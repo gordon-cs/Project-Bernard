@@ -10,6 +10,11 @@
                       <img src="images/list.svg" id="icon-menu">
                     </button>
                 </div>
+                <div class="mobile-menu-icon">
+                    <button {{action 'toggleMenuSearch'}}>
+                       <img src="images/search.svg" id="icon-search">
+                    </button>
+                </div>
             {{else}}
                 <div class="mobile-menu-icon">
                     <button class="btn btn-lg login-toggle" {{action 'toggleLogin'}}>
@@ -21,13 +26,13 @@
                 {{#if session.isAuthenticated}}
                 <div class="user-info-wrapper">
                     <div class="user-info-buttons dropdown">
-                        <h6 class="dropdown-toggle" id=id="dropdownMenu1" data-toggle="dropdown"
+                        <h6 class="dropdown-toggle" id="user-info-dropdown-h6" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true">
                         {{session.data.authenticated.token_data.name}}
                         <span class="glyphicon glyphicon-chevron-down"></span></h6>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown1menu1">
                           <li>{{#link-to "help"}} Help{{/link-to}} </li>
-                          <li>{{#link-to "profile"}}Profile
+                          <li>{{#link-to "profile" session.data.authenticated.token_data.user_name}}Profile
                             {{#if requestsRecieved}}
                                 <span class="notification">
                                     {{requestsRecieved.length}}
@@ -87,12 +92,14 @@
                   <span>
                       <a data-toggle="dropdown">Activities <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li>{{#link-to "all-activities" (query-params selectedType='All' sessionCode='current') invokeAction=(action 'closeMenu')}}
+                        {{#unless isReadOnly}}
+                        <li>{{#link-to "all-activities" invokeAction=(action 'closeMenu')}}
                           All Activities
                         {{/link-to}}</li>
                         <li>{{#link-to "my-involvements" invokeAction=(action 'closeMenu')}}
                           My Involvements
                         {{/link-to}}</li>
+                        {{/unless}}
                         <li>{{#link-to "transcript" invokeAction=(action 'closeMenu')}}
                           Transcript
                         {{/link-to}}</li>
@@ -106,6 +113,20 @@
                       </ul>
                   </span>
                 </li>
+                <!-- Dropdown Menu to access Events pages -->
+                <li>
+                  <span>
+                      <a data-toggle="dropdown">Events <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li>{{#link-to "all-events" invokeAction=(action 'closeMenu')}}
+                          All Events
+                        {{/link-to}}</li>
+                        <li>{{#link-to "chapel-credits" invokeAction=(action 'closeMenu')}}
+                          CL&W Credit
+                        {{/link-to}}</li>
+                      </ul>
+                  </span>
+                </li>
                 <li>
                   <span {{action "closeMenu"}}>
                     {{#link-to "about" class="button uppercase"}}
@@ -113,6 +134,32 @@
                     {{/link-to}}
                   </span>
                 </li>
+                <!-- we make it a hidden-xs class so it does not show up on mobile -->
+                 <li class = "hidden-xs">
+                    <!-- we create a form to fill - this will be our searchbar -->
+                   <form class="navbar-form navbar-right searhbar">
+                        <div class="form-group" >
+                            <!-- this is where we fill in information, and run the function "stalkpeeps" to perform the search -->
+                             {{input value=model.searchValue key-up=(action "stalkPeeps") focus-out=(action "toggleDesktopSearch") focus-in=(action "toggleDesktopSearch") autocomplete="off" class="form-control-sm mobile-form-group" id="smFormGroupInput" placeholder="Search for People..."}}
+                        </div>
+                   </form>
+                    <!-- where we show the results for the search - parsed out in a "for each" loop and placed inside a list item -->
+                    <ul class="dropdown-menu dropdown-people role=menu {{if hideDesktopSearch 'hideDesktopSearch' ''}}" >
+                            {{#each model.people as |person index|}}
+                                    {{#if (lt index 15)}}
+                                        <li>
+                                            <!-- link to a users profile page -->
+                                                {{#link-to "profile"  person.UserName invokeAction=(action 'searchClear')}}
+                                                <!-- information to be displayed -->
+                                                {{person.FirstName}}  {{person.LastName}} ({{person.UserName}})
+                                                {{/link-to}}
+                                        </li>
+                                    {{/if}}
+                                {{/each}}
+                            </ul>
+
+                </li>
+
                 <li class="user-info-mobile" >
                   <span {{action "closeMenu"}}>
                     {{#link-to "help"}} Help{{/link-to}}
@@ -120,7 +167,7 @@
                 </li>
                 <li class="user-info-mobile">
                   <span {{action "closeMenu"}}>
-                    {{#link-to "profile" class="button uppercase"}}
+                    {{#link-to "profile" session.data.authenticated.token_data.user_name class="button uppercase"}}
                         Profile
                     {{/link-to}}
                     {{#if requestsRecieved}}
@@ -141,8 +188,44 @@
     {{else}}
         {{login-block}}
     {{/if}}
-</div>
 
-<div id="main-page-container" class="col-sm-12">
+    <!-- people search bar for mobile phones -->
+</div>
+    {{#if session.isAuthenticated}}
+        <div class="row {{if showMenuSearch 'graybox showMenuSearch' 'lightgraybox'}} search-menu-container">
+            <ul id="primary-menu" class="nav navbar-nav">
+                <li class="user-info-mobile">
+                     360 People Search
+                 </li>
+                <li>
+                 <!-- close the menu by calling this function -->
+                  <span {{action "closeMenuSearch"}}>
+                    <form >
+                        <div class="form-group searchbar-mobile-form" >
+                             {{input value=model.searchValue key-up=(action "stalkPeeps")  autocomplete="off" class="form-control searhbar-mobile" placeholder="Search for People..."}}
+                        </div>
+                   </form>
+                   <ul class="searchbar-mobile-list">
+                       <!-- limit search result size to 10 -->
+                       {{#each model.people as |person index|}}
+                       {{#if (lt index 10)}}
+                       <li class="searchbar-mobile-list-item">
+                            {{#link-to "profile"  person.UserName invokeAction=(action 'toggleMenuSearch')}}
+                            {{person.FirstName}} {{person.LastName}} ({{person.UserName}})
+                            {{/link-to}}
+                       </li>
+                       {{/if}}
+                      {{/each}}
+                    </ul>
+                  </span>
+                </li>
+            </ul>
+        </div>
+
+    {{/if}}
+<div id="main-page-container" class="col-sm-12 no-side-padding">
+
     {{outlet}}
+
+
 </div>

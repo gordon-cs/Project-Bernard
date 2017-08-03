@@ -19,8 +19,8 @@
     max-width: 50%;
     margin-bottom: 20px;
 }
-.specific-activity a {
-    text-decoration: none !important;
+.specific-activity button:hover {
+    color: white !important;
 }
 
 /* -----------------------------

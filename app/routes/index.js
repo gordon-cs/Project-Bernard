@@ -15,7 +15,27 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
     model() {
         let id_number = this.get("session.data.authenticated.token_data.id");
+
+        //get user_name for chapel progress bar
+        let id_name = this.get("session.data.authenticated.token_data.user_name")
+
+        let chapelEvents = [];
+
         let context = this;
+        let required;
+        let numEvents;
+
+        //chapel progress bar related variables
+        let eventsPercent;
+        let requiredEventsString;
+
+        let month = new Date().getMonth();
+        let date = new Date().getFullYear() - (month >= 0 && month <= 6 ? 1 : 0);
+        let term = (month >= 0 && month <= 6 ? "SP" : "FA");
+        let subdate = date.toString().substr(-2);
+        let termCode = subdate + term;
+
+        let offset;
 
         // advisor-related variables
         let currentSupervisions = [];
@@ -38,6 +58,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let currentSession;
         let allSupervisions = [];
         let allMemberships = [];
+
+
+        //days countdown
+        let daysLeft = [];
+        let daysPercent;
+        let offset2;
+
+
 
         /* Promises */
         let loadCurrentSession = function() {
@@ -82,6 +110,90 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           slides = result;
         }
 
+        //chapel progress bar promise
+        let chapelProgress = function() {
+          return getAsync("/events/chapel/" + id_name + "/" + "17FA", context)
+            .then(function(result) {
+              chapelEvents = result;
+
+              numEvents = chapelEvents.length;
+                    if (chapelEvents.length > 1) {
+                        eventsPercent = Math.round((numEvents * 100) / chapelEvents[0].Required);
+                        required = chapelEvents[0].Required;
+                        requiredEventsString = numEvents + "/" + required + " CL&W Credits";
+                    } else {
+                        required = 0;
+                        eventsPercent = 0;
+                        requiredEventsString = "No CL&W Attendence Recorded";
+                    }
+                    return {
+                      "chapelEvents": chapelEvents,
+                      "eventsPercent": eventsPercent,
+                    };
+            });
+        };
+
+
+        //days countdown promise
+        let loadDaysLeft = function() {
+          return getAsync("/sessions/daysLeft", context)
+            .then(function(result) {
+              daysLeft = result[0];
+              let totalDays = result[1];
+
+
+              daysPercent = Math.round(((totalDays - daysLeft) * 100) / totalDays);
+              return daysLeft, daysPercent;
+            });
+        };
+
+
+        let toggleProgress = function() {
+          let val = eventsPercent;
+          let pct;
+
+          let $circle = $('#svg #bar');
+
+          if (isNaN(val)) {
+            val = 100;
+          }
+          else{
+            let r = 90;
+            let c = Math.PI*(r*2);
+
+            if (val < 0) { val = 0;}
+            if (val > 100) { val = 100;}
+
+            pct = ((100-val)/100)*c;
+          }
+            offset = pct;
+        };
+
+        let toggleDays = function() {
+          let val = daysPercent;
+          let pct;
+
+          let $circle = $('#svg #bar');
+
+          if (isNaN(val)) {
+            val = 100;
+          }
+          else{
+            let r = 90;
+            let c = Math.PI*(r*2);
+
+            if (val < 0) { val = 0;}
+            if (val > 100) { val = 100;}
+
+            pct = ((100-val)/100)*c;
+          }
+            offset2 = pct;
+        };
+
+
+
+
+
         let loadSwitches = function() {
             // Check if the user has any current or past activity memberships or supervisions
             currentMembershipsFilled = (currentMemberships.length !== 0);
@@ -108,7 +220,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "pastSupervisionsFilled": pastSupervisionsFilled,
                 "pastSupervisions": pastSupervisions,
                 "nothingToShow": nothingToShow,
-                "slides" : slides
+                "slides" : slides,
+                "eventsPercent" : eventsPercent,
+                "numEvents" : numEvents,
+                "required" : required,
+                "requiredEventsString" : requiredEventsString,
+                "daysLeft" : daysLeft,
+                "daysPercent" : daysPercent,
+                "offset2" : offset2,
+                "offset" : offset
+
             };
         };
         /* End Promises */
@@ -123,7 +244,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         .then(arrangeSupervisions)
         .then(loadSlides)
         .then(initializeSlides)
+        .then(chapelProgress)
         .then(loadSwitches)
+        .then(loadDaysLeft)
+        .then(toggleProgress)
+        .then(toggleDays)
         .then(loadModel);
 
     }
