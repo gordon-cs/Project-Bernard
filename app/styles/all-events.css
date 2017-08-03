@@ -331,6 +331,9 @@
 }
 
 @media screen and (max-width: 767px) {
+    .events .mobile-toggle h5 span{
+        padding-right: 10px;
+    }
     .events .highlight-box,
     .events .event-labels,
     .events .event-row {
