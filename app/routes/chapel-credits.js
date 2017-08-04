@@ -11,7 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         let sort = {
-            "type": "timeObject",
+            "type": "startTimeObject",
             "direction": "down"
         }
         let searchValue;
@@ -34,9 +34,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let termCode = subdate.concat(term);
 
         function sortDate(first, second) {
-            if (first.timeObject === second.timeObject)
+            if (first.startTimeObject === second.startTimeObject)
                 return 0;
-            if (first.timeObject < second.timeObject)
+            if (first.startTimeObject < second.startTimeObject)
                 return 1;
             else
                 return -1;
