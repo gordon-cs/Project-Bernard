@@ -37,6 +37,9 @@
     display: inline;
     font-weight: bold;
 }
+.specific-activity a.detail-header {
+    word-wrap: break-all;
+}
 .specific-activity .detail-info {
     display: inline;
 }
@@ -139,9 +142,9 @@
     }
 }
 
-@media only screen and (min-width: 815px) {
+@media only screen and (min-width: 1000px) {
     .specific-activity.main-container {
-        width: 768px;
+        width: 992px;
         margin-left: auto;
         margin-right: auto;
     }
