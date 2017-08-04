@@ -38,7 +38,7 @@
     font-weight: bold;
 }
 .specific-activity a.detail-header {
-    word-wrap: break-all;
+    word-break: break-word;
 }
 .specific-activity .detail-info {
     display: inline;
