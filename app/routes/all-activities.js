@@ -72,7 +72,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let initializeActivitiesShown = function() {
             selectedType = transition.queryParams.selectedType;
-            console.log(selectedType);
+            // console.log(selectedType);
             if (selectedType && selectedType.toLowerCase() != "All".toLowerCase()) {
                 let newList = [];
                 for (let i = 0; i < activities.length; i++) {

@@ -99,7 +99,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         //formate all the information in the vent list ot a more readble formate
         let formatEvents = function(result) {
-            console.log(result)
+            // console.log(result)
             eventList = result;
             let startClock;
             let endClock;

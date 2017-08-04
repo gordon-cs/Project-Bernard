@@ -144,12 +144,12 @@
                         </div>
                    </form>
                     <!-- where we show the results for the search - parsed out in a "for each" loop and placed inside a list item -->
-                    <ul class="dropdown-menu dropdown-people role=menu {{if hideDesktopSearch 'hideDesktopSearch' ''}}" >
+                    <ul class="dropdown-menu dropdown-people role=menu {{if hideDesktopSearch 'hideDesktopSearch' ''}}" preventDefault=false>
                             {{#each model.people as |person index|}}
                                     {{#if (lt index 15)}}
                                         <li>
                                             <!-- link to a users profile page -->
-                                                {{#link-to "profile"  person.UserName invokeAction=(action 'searchClear')}}
+                                                {{#link-to "profile"  person.UserName invokeAction=(action 'searchClear' preventDefault=false)}}
                                                 <!-- information to be displayed -->
                                                 {{person.FirstName}}  {{person.LastName}} ({{person.UserName}})
                                                 {{/link-to}}

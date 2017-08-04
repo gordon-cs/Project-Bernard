@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
             window.print();
         },
         toggleActivityTable(item){
-            console.log(item.target);
+            // console.log(item.target);
             let elements = $(item.target).parent().nextAll();
             for(var i=0; i < 2; i++){
                 if($(window).innerWidth() < 576){
@@ -82,7 +82,7 @@ export default Ember.Controller.extend({
                 membershipsDictionary[i].Activities = sortJsonArray(membershipsDictionary[i].Activities, "ActivityDescription");
             }
 
-            console.log(membershipsDictionary);
+            // console.log(membershipsDictionary);
 
         }
         let generatePDF = function() {

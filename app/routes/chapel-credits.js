@@ -98,7 +98,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/events/chapel/" + id_name + "/" + termCode, context)
                 .then(function(result) {
                     chapelEvents = result;
-                    console.log(chapelEvents);
+                    // console.log(chapelEvents);
                     numEvents = chapelEvents.length;
                     if (chapelEvents.length > 1) {
                         eventsPercent = Math.round((numEvents * 100) / chapelEvents[0].Required);

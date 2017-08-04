@@ -37,8 +37,8 @@ export default Ember.Controller.extend({
         // Shows and hides the table that shows membership requests sent
         toggleSentTable() {
             $("#membership-requests-sent-table").toggle(0, function() {
-                if($("#membership-requests-sent-table").children(".entry-rows").last()[0]){ 
-                    $("#membership-requests-sent-table").children(".entry-rows").last()[0].scrollIntoView(true); 
+                if($("#membership-requests-sent-table").children(".entry-rows").last()[0]){
+                    $("#membership-requests-sent-table").children(".entry-rows").last()[0].scrollIntoView(true);
                 }
             });
             // Another method that will animate the scrolling but I think that it might take too long
@@ -60,7 +60,7 @@ export default Ember.Controller.extend({
         toggleRequestSent(item){
             $(item.target).nextAll().slideToggle();
         },
-        
+
         // Shows the modal that holds the information to update profile picture
         showEditProfilePictureModal(isButton){
             if(this.get("model.userLoggedIn") && (isButton || $(window).width() >= 1200)){
@@ -71,7 +71,7 @@ export default Ember.Controller.extend({
             }
         },
         // Hides the modal that holds the information to update profile picture
-        cancelEditProfilePicture(item){ 
+        cancelEditProfilePicture(item){
             if(item.target == $(".profile-picture-cancel-button")[0] || item.target == $("#editProfilePictureModal").not(".modal-content")[0]){
                 this.set("errorMessage", null);
                 this.set("file", null);
@@ -88,7 +88,7 @@ export default Ember.Controller.extend({
             $('body').css('position','fixed');
             $('body').css('overflow-y','scroll');
         },
-        // hides the modal that allows 
+        // hides the modal that allows
         hideEditLinksModal(item){
             if(item.target == $(".hide-links-modal-button")[0] || item.target == $("#editLinksModal").not(".modal-content")[0]){
                 $("#editLinksModal").removeClass("showModal");
@@ -104,8 +104,8 @@ export default Ember.Controller.extend({
         },
         // Displays the form to change a specific social media link
         // Also hides the last open form
-        changeSocialMediaLink(linkItem, item){    
-            let LinkToUse;        
+        changeSocialMediaLink(linkItem, item){
+            let LinkToUse;
             let lastForm = this.get("lastForm");
             let form = $(item.target).parent().parent().next();
             if(lastForm){
@@ -125,7 +125,7 @@ export default Ember.Controller.extend({
             let context = this;
             let setPrivacy = function(value) {
                 return putAsync("/memberships/" + activity.MembershipID + "/privacy/" + value, value, context).catch((reason) => {
-                    console.log(reason);
+                    // console.log(reason);
                     //TODO handle error
                 });
             }
@@ -185,7 +185,7 @@ export default Ember.Controller.extend({
 
             reset()
             .then(transition);
-            
+
         },
 
         //Change the privacy value for profile picture
@@ -194,11 +194,11 @@ export default Ember.Controller.extend({
             let currentPrivacy = context.get("model.userInfo.show_pic");
             let newPrivacy = currentPrivacy ? 'N' : 'Y';
             let privacyToSet = currentPrivacy ? false : true;
-            console.log(newPrivacy);
+            // console.log(newPrivacy);
             let successMessage;
             let setPrivacy = function(value) {
                 return putAsync("/profiles/image_privacy/" + value, value, context).catch((reason) => {
-                    console.log(reason);
+                    // console.log(reason);
                     //TODO handle error
                 });
             };
@@ -214,7 +214,7 @@ export default Ember.Controller.extend({
 
             setPrivacy(newPrivacy)
             .then(transition);
-        },     
+        },
         toggleMobilePhonePrivacy() {
             let context = this;
             let currentPrivacy = context.get("model.userInfo.IsMobilePhonePrivate");
@@ -223,7 +223,7 @@ export default Ember.Controller.extend({
             let successMessage;
             let setPrivacy = function(value) {
                 return putAsync("/profiles/mobile_privacy/" + value, value, context).catch((reason) => {
-                    console.log(reason);
+                    // console.log(reason);
                     //TODO handle error
                 });
             };
@@ -259,7 +259,7 @@ export default Ember.Controller.extend({
 
             //Get link ready to send to API
             let prepareLink = function() {
-                
+
                 switch(type) {
                 case "facebook":
                         linkToSend = link.substring(25);
@@ -358,11 +358,11 @@ export default Ember.Controller.extend({
                 .then(transition);
             }
         },
-        
+
         /***********************************
         // Logic to update profile picture
         ***********************************/
-        
+
         updatePicture() {
 
             let context = this;
@@ -421,7 +421,7 @@ export default Ember.Controller.extend({
                             error = true;
                             showError(reason);
                         });
-                    
+
             };
 
             //Check to make sure a valid file was selected
@@ -475,7 +475,7 @@ export default Ember.Controller.extend({
                 }
                 return new Blob([view], {type: 'image/jpeg'});
             };
-            
+
             // Show error
             let askAgain = function(){
                 let reason = {
