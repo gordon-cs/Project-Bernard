@@ -236,23 +236,23 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Checks the plurality of guest memberships
             // Checks for both guestCounter and model.followingCount to handle both if
             // the person if a member or not
-            if ((guestCounter === 1 || guestCounter === 0) &&
-                (model.followingCount === 1 || model.followingCount === 0)) {
+            if ((guestCounter === 1) &&
+                (model.followingCount === 1)) {
                 guestSingular = true;
             }
 
             // Checks the plurality of normal memberships
             // Checks for both membershipCounter and model.membershipCount to handle both if
             // the person if a member or not
-            if ((membershipCounter === 1 || membershipCounter === 0) &&
-                (model.membershipCount === 1 || model.membershipCount === 0)) {
+            if ((membershipCounter === 1) &&
+                (model.membershipCount === 1)) {
                 membershipSingular = true;
             }
 
             model.guestSingular = guestSingular;
             model.membershipSingular = membershipSingular;
-            model.guestCounter = guestCounter;
-            model.membershipCounter = membershipCounter;
+            // model.guestCounter = guestCounter;
+            // model.membershipCounter = membershipCounter;
             return Ember.RSVP.hash(model);
         };
 
@@ -270,10 +270,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           let result = activityStatusPromise;
           if (result._result === "CLOSED") {
             model.activityClosed = true;
-            console.log("Activity closed");
           }
           else {
-            console.log("Activity open");
             model.activityClosed = false;
           }
           return Ember.RSVP.hash(model);

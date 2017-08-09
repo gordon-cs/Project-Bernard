@@ -19,7 +19,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let context = this;
         let routeUsername = param.Username.toLowerCase();
         let IDNumber = this.get("session.data.authenticated.token_data.id");
-        let loggedInUsername = this.get("session.data.authenticated.token_data.user_name").toLowerCase(); 
+        let loggedInUsername = this.get("session.data.authenticated.token_data.user_name").toLowerCase();
         let requestsSent = [];
         let memberships = [];
         let activities = [];
@@ -30,11 +30,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let userLoggedIn = false;
         let loggedInUserInfo;
         let showBothImages;
-        
+
         let isLoggedInUser = function() {
             if(routeUsername === loggedInUsername){
                 userLoggedIn = true;
-            } 
+            }
             return userLoggedIn;
         };
 
@@ -68,7 +68,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // Get the account from email (Not used)
         let getAccount = function(email) {
             return getAsync("/accounts/email/" + email + "/", context);
-        }; 
+        };
 
         // Get leader positions of user (not used)
         let getLeaderPositions = function() {
@@ -149,10 +149,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         };
 
         let checkIfUserExists = function(data) {
-            if(data === "Not Found"){ 
+            if(data === "Not Found"){
                 return Promise.reject({name: "Not found", message: "user was not found"});
             }else {
-                
+
                 data.found = true;
                 return data;
             }
@@ -168,7 +168,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 throw error;
             }
         }
-        
+
 
         // Changes class from the number value set in the table to the corresponding string
         let setClass = function(data) {
@@ -199,7 +199,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         data.Class = "Student";
                 }
             }
-            
+
             return data;
         }
 
@@ -233,15 +233,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         let setOnOffCampus = function(data){
             switch(data.OnOffCampus){
-                case "O": 
+                case "O":
                     data.OnOffCampus = "Off Campus";
                     break;
-                case "A": 
+                case "A":
                     data.OnOffCampus = "Away";
                     break;
                 case "D": "Deferred";
                     data.OnOffCampus = ""
-                default: 
+                default:
                     data.OnOffCampus = "On Campus";
             }
             return data;
@@ -282,7 +282,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 } else {
                     officeHours.push(data.office_hours.slice(0, data.office_hours.length));
                 }
-                    
+
             }
             data.office_hours = officeHours;
             return data;
@@ -297,7 +297,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             }
             return data;
         };
-        
+
         let setuserInfo = function(data) {
             var user = Ember.Object.extend({
                 init: function() {
@@ -326,7 +326,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Converts the base64 to a blobl and stores it in a URL to be used by the handlebars file.
         let setUserProfilePicture = function(content) {
-            console.log(content);
+            // console.log(content);
             if(content.def){
                 var blob = base64ToBlob(content.def , {type: 'image/jpeg'});
                 URL = window.URL || window.webkitURL;
@@ -455,7 +455,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 }
                 memberships[i] = membership.create(data[i]);
             }
-        }   
+        }
 
         // sets social media links to seperate array of ember objects that defines the type of the link along with the link
         let loadLinks = function() {
@@ -488,7 +488,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 })
              ];
             //  userInfo.LinkedIn = decodeURIComponent(userInfo.LinkedIn);
-        }   
+        }
 
         // Convert US phone numbers to a readable format
         let formatPhoneNumbers = function() {
@@ -501,12 +501,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 userInfo.formattedHomePhone = "(" + homePhone.slice(0,3) + ") " + homePhone.slice(3, 6) + "-" + homePhone.slice(6);
             }
         }
- 
+
 
         let loadModel = function() {
-            console.log(userInfo);
-            console.log(links);
-            console.log(memberships);
+            // console.log(userInfo);
+            // console.log(links);
+            // console.log(memberships);
             return {
                 "requestsSent": requestsSent,
                 "godMode": godMode,

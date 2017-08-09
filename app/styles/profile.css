@@ -284,17 +284,17 @@ Edit profile picture modal
 }
 
 .profile .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 3; 
-    padding-top: 60px; 
+    display: none;
+    position: fixed;
+    z-index: 3;
+    padding-top: 60px;
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 
 /* Modal Content */
@@ -308,8 +308,8 @@ Edit profile picture modal
     overflow-y: auto;
     font-size: 10px;
 }
-/*.profile .modal-content::-webkit-scrollbar { 
-    display: none; 
+/*.profile .modal-content::-webkit-scrollbar {
+    display: none;
     TODO style scrollbar
 }*/
 
@@ -404,7 +404,7 @@ Edit profile picture modal
 {
     border-radius: 10px;
 	background-color: #555;
-} 
+}
 
 
 /****************************
@@ -424,7 +424,7 @@ Edit social media modal
 .profile .add-links-button {
     display: block;
     width: 100%;
-} 
+}
 
 .profile .modal-title {
     font-size: 3em;
@@ -446,7 +446,7 @@ Edit social media modal
     margin: 0 auto;
     font-size: 1.8em;
     padding: 2px 4px;
-    border: 1px solid rgb(205, 205, 205); 
+    border: 1px solid rgb(205, 205, 205);
     border-radius: 4px;
 
 }
@@ -661,7 +661,7 @@ Request Tables
 
 
 /****************************
- Media Queries 
+ Media Queries
 ****************************/
 
 /*Bootstrap Small*/
@@ -672,7 +672,7 @@ Request Tables
     }
 
     .profile .first-profile-block .image {
-        margin-top: 5px; 
+        margin-top: 5px;
         margin-left: 10px;
     }
 
@@ -697,7 +697,7 @@ Request Tables
         font-size: 1.1em;
         margin-left: 5px;
     }
-    
+
     .profile .first-profile-block .image.image-half-width {
         width: 46%;
         margin-left: 10px;
@@ -707,7 +707,7 @@ Request Tables
     .profile .first-profile-block .image {
         width: 100%;
         margin: 0;
-    }  
+    }
 
 }
 
@@ -722,10 +722,6 @@ Request Tables
 /*Bootstrap large*/
 
 @media only screen and (min-width: 1200px) {
-    .profile {
-        font-size: 1.2em;
-    } 
-
     .profile .profile-image-col {
         padding-left: 20px;
     }
@@ -766,7 +762,7 @@ Request Tables
     }
 
     .profile .activity-entry {
-        font-size: 1.3em;
+        font-size: 10pt;
     }
 
     .profile .activity-image {
@@ -781,12 +777,23 @@ Request Tables
 
     .profile #profile-modal-form-box .browse-button{
         padding: 7px 15px;
-    }   
+    }
 
     .profile #profile-modal-form-box button,
     .profile #profile-modal-form-box .browse-button {
         font-size: 1.4em;
     }
+
+    .profile .personal-information-entry {
+        font-size: 10pt;
+    }
+    .profile .block-header {
+        font-size: 12pt;
+    }
+    .profile .table-header {
+        font-size: 12pt;
+    }
+
 
 
 }
@@ -796,7 +803,7 @@ Request Tables
 
 /*Tables*/
 
-@media only screen and (max-width: 1199px) { 
+@media only screen and (max-width: 1199px) {
     .profile .entry-rows {
         font-size: 1.3em;
     }

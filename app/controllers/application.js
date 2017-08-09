@@ -83,7 +83,9 @@ export default Ember.Controller.extend({
         },
 
         toggleDesktopSearch() {
-            this.set("hideDesktopSearch", !this.get("hideDesktopSearch"));
+            Em.run.later(this, function() {
+                this.set("hideDesktopSearch", !this.get("hideDesktopSearch"))
+            },500);
         }
 
     },

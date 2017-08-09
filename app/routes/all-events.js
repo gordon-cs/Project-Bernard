@@ -16,7 +16,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         let sort = {
-            "type": "timeObject",
+            "type": "startTimeObject",
             "direction": "down"
         }
 
@@ -71,10 +71,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         function sortByTime(a, b) {
-            if (a.timeObject < b.timeObject) {
+            if (a.startTimeObject < b.startTimeObject) {
                 return -1;
             }
-            if (a.timeObject > b.timeObject) {
+            if (a.startTimeObject > b.startTimeObject) {
                 return 1;
             }
             return 0;
@@ -99,7 +99,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         //formate all the information in the vent list ot a more readble formate
         let formatEvents = function(result) {
-            console.log(result)
+            // console.log(result)
             eventList = result;
             let startClock;
             let endClock;
@@ -151,6 +151,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         //return all important information
         let loadModel = function() {
+            console.log(eventList[26]);
+            console.log(eventList[27]);
             return {
                 //return all the deseired information
                 "allEvents": eventList,

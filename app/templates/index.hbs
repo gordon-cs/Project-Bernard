@@ -15,20 +15,72 @@
 
       <div class="col-sm-4 col-md-3  container">
 
-        {{#link-to "chapel-credits"}}<div class="hidden-xs" id="cont1" data-pct="{{model.numEvents}} CL&W Credits">
-          <svg id="svg" width="300" height="300" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-            <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-          </svg>
-        </div>{{/link-to}}
+        {{#link-to "chapel-credits"}}
+        <div class="hidden-xs circle-progress">
+            <svg width="200" height="200">
+                <defs>
+            		<filter id="innershadow" x0="-50%" y0="-50%" width="200%" height="200%">
+            			<feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"></feGaussianBlur>
+            			<feOffset dy="2" dx="3"></feOffset>
+            			<feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
 
-        <div class="hidden-xs" id="cont2" data-pct="{{model.daysLeft}} Days Until End of {{model.currentSession.SessionDescription}}">
-        <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <circle r="90" cx="100" cy="100" style="stroke-dashoffset:{{model.offset2}}px" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-          <circle id="bar" r="90" cx="100" style="stroke-dashoffset:{{model.offset2}}px" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-          <!-- <text id="count" x="100" y="100" text-anchor="middle" dy="7" font-size="10pt">100%</text> -->
-        </svg>
+                       <feFlood flood-color="black" flood-opacity="0.9"></feFlood>
+            		   <feComposite in2="shadowDiff" operator="in"></feComposite>
+            		   <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
+
+
+                      <feGaussianBlur in="firstfilter" stdDeviation="3" result="blur2"></feGaussianBlur>
+            			<feOffset dy="-2" dx="-3"></feOffset>
+            			<feComposite in2="firstfilter" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+
+                       <feFlood flood-color="black" flood-opacity="0.9"></feFlood>
+            			<feComposite in2="shadowDiff" operator="in"></feComposite>
+            			<feComposite in2="firstfilter" operator="over"></feComposite>
+            		</filter>
+
+            	</defs>
+                  <circle r="70" cx="100" cy="100" fill="#ebebea" stroke="#ebebea" stroke-width="20" filter="url(#innershadow)"></circle>
+                  <circle r="90" cx="100" cy="100" fill="transparent" stroke="#cccccb" stroke-width="20"></circle>
+                  <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke="#0aaeef" stroke-width="20" style="stroke-dashoffset:{{model.offset}}px" stroke-dasharray="565.48" transform="rotate(-90, 100, 100)"></circle>
+
+                  <text x="100" y="105" font-size="13" text-anchor="middle">{{model.numEvents}} CL&W Credits</text>
+            </svg>
       </div>
+        {{/link-to}}
+
+        <div class="hidden-xs circle-progress">
+            <svg width="200" height="200">
+                <defs>
+            		<filter id="innershadow" x0="-50%" y0="-50%" width="200%" height="200%">
+            			<feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"></feGaussianBlur>
+            			<feOffset dy="2" dx="3"></feOffset>
+            			<feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+
+                       <feFlood flood-color="black" flood-opacity="0.9"></feFlood>
+            		   <feComposite in2="shadowDiff" operator="in"></feComposite>
+            		   <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
+
+
+                      <feGaussianBlur in="firstfilter" stdDeviation="3" result="blur2"></feGaussianBlur>
+            			<feOffset dy="-2" dx="-3"></feOffset>
+            			<feComposite in2="firstfilter" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+
+                       <feFlood flood-color="black" flood-opacity="0.9"></feFlood>
+            			<feComposite in2="shadowDiff" operator="in"></feComposite>
+            			<feComposite in2="firstfilter" operator="over"></feComposite>
+            		</filter>
+
+            	</defs>
+                  <circle r="70" cx="100" cy="100" fill="#ebebea" stroke="#ebebea" stroke-width="20" filter="url(#innershadow)"></circle>
+                  <circle r="90" cx="100" cy="100" fill="transparent" stroke="#cccccb" stroke-width="20"></circle>
+                  <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke="#0aaeef" stroke-width="20" style="stroke-dashoffset:{{model.offset2}}px" stroke-dasharray="565.48" transform="rotate(-90, 100, 100)"></circle>
+
+                  <text x="100" y="100" font-size="13" text-anchor="middle">{{model.daysLeft}} Days Until End of</text>
+                  <text x="100" y="120" font-size="13" text-anchor="middle"> {{model.currentSession.SessionDescription}}</text>
+            </svg>
+      </div>
+
+
 
       </div>
 
