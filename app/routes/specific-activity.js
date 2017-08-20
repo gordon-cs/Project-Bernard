@@ -8,15 +8,6 @@ import sortJsonArray from "gordon360/utils/sort-json-array";
  *  Builds the data model that is used in the corresponding template (hbs) and controller (js) files.
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-    /* If the user has read-only permission, the user will be
-     * redirected to home page */
-    beforeModel() {
-        let college_role = this.get("session.data.authenticated.token_data.college_role");
-        if (college_role == "readonly") {
-            this.transitionTo("index");
-        }
-    },
-
     /*  Below is the model and calls to the api that retrieve data to fill the model */
     model(param) {
         let context = this;
@@ -51,6 +42,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         theModel.godMode = college_role === "god";
         // If use is an admin, they have all the functionality that leaders and advisors have.
         theModel.leading = theModel.godMode === true;
+        // Set readonly switch - does this user have readonly permission
+        theModel.isReadOnly = college_role === "readonly";
 
         // Advisors and Activity leaders filtered by session code.
         // Manager = advisor or leader
@@ -243,23 +236,23 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             // Checks the plurality of guest memberships
             // Checks for both guestCounter and model.followingCount to handle both if
             // the person if a member or not
-            if ((guestCounter === 1 || guestCounter === 0) &&
-                (model.followingCount === 1 || model.followingCount === 0)) {
+            if ((guestCounter === 1) &&
+                (model.followingCount === 1)) {
                 guestSingular = true;
             }
 
             // Checks the plurality of normal memberships
             // Checks for both membershipCounter and model.membershipCount to handle both if
             // the person if a member or not
-            if ((membershipCounter === 1 || membershipCounter === 0) &&
-                (model.membershipCount === 1 || model.membershipCount === 0)) {
+            if ((membershipCounter === 1) &&
+                (model.membershipCount === 1)) {
                 membershipSingular = true;
             }
 
             model.guestSingular = guestSingular;
             model.membershipSingular = membershipSingular;
-            model.guestCounter = guestCounter;
-            model.membershipCounter = membershipCounter;
+            // model.guestCounter = guestCounter;
+            // model.membershipCounter = membershipCounter;
             return Ember.RSVP.hash(model);
         };
 
@@ -277,10 +270,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           let result = activityStatusPromise;
           if (result._result === "CLOSED") {
             model.activityClosed = true;
-            console.log("Activity closed");
           }
           else {
-            console.log("Activity open");
             model.activityClosed = false;
           }
           return Ember.RSVP.hash(model);

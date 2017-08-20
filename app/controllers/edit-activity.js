@@ -58,7 +58,7 @@ export default Ember.Controller.extend({
                 let image = Ember.$("#file")[0].files[0];
                 if (image != null) {
 
-                    console.log("uploading image");
+                    // console.log("uploading image");
 
                     let imageValidation = validateImage(image);
 
@@ -70,11 +70,11 @@ export default Ember.Controller.extend({
                         }).toDataURL('image/jpeg');
                         let blob = dataURItoBlob(dataUrl);
                         let blobName = "canvasImage.jpeg";
-                        console.log(blob);
+                        // console.log(blob);
                         let imageData = new FormData();
 
                         imageData.append("canvasImage", blob, "canvasImage.jpeg");
-                        console.log(imageData);
+                        // console.log(imageData);
 
                         return postFileAsync("/activities/" + context.get("model.activity.ActivityCode") +
                           "/image", imageData, context).catch((reason) => {
@@ -199,7 +199,7 @@ function validateImage(file) {
     //     result.isValid = false;
     //     result.validationMessage = 'File too large, must be < 100KB.';
     // }
-    console.log(result);
+    // console.log(result);
 
     return result;
 }

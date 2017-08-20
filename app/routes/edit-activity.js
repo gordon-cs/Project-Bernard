@@ -49,7 +49,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         // Wrapper function to load the model object.
         let loadModel = function (result) {
-            console.log(result);
+            // console.log(result);
             return {
                 "activity": result,
                 "sessionCode": param.SessionCode,

@@ -1,0 +1,82 @@
+.body {
+    background: grey;
+}
+
+.progress {
+    height: 40px !important;
+    margin: 0 15px 10px 15px;
+}
+
+.main-content{
+    padding: 0;
+}
+
+.progress-text {
+    font-weight: bold;
+}
+.one {
+    padding-bottom: 10px;
+}
+
+.center-row {
+    margin: 0 auto;
+}
+
+svg circle {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+    box-shadow: inset 0 0 1em black;
+}
+
+#svg #bar {
+    stroke: #00aeef;
+    stroke-width: 20;
+}
+
+/*#cont1, #cont2 {
+    display: block;
+    height: 200px;
+    width: 200px;
+    margin: 2em auto;
+    border-radius: 100%;
+    position: relative;
+    background-color: #cccccb;
+    margin-bottom: 100px;
+}
+
+#cont1:after, #cont2:after {
+    position: absolute;
+    display: block;
+    height: 160px;
+    width: 160px;
+    left: 50%;
+    top: 50%;
+    box-shadow: inset 0 0 1em black;
+    content: attr(data-pct);
+    margin-top: -80px;
+    margin-left: -80px;
+    border-radius: 100%;
+    line-height: 160px;
+    text-align: center;
+    background: rgb(235, 234, 234);
+}*/
+
+/*#cont1:after {
+    font-size: 2em;
+}
+
+#cont2:after {
+    font-size: 1.05em;
+}*/
+
+.circle-progress svg {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#progress-bars {
+    margin-top: 15px;
+}

@@ -19,8 +19,8 @@
     max-width: 50%;
     margin-bottom: 20px;
 }
-.specific-activity a {
-    text-decoration: none !important;
+.specific-activity button:hover {
+    color: white !important;
 }
 
 /* -----------------------------
@@ -31,11 +31,14 @@
     display: inline-block;
 }
 .specific-activity .detail-item {
-    font-size: 200%;
+    font-size: 180%;
 }
 .specific-activity .detail-header {
     display: inline;
     font-weight: bold;
+}
+.specific-activity a.detail-header {
+    word-break: break-word;
 }
 .specific-activity .detail-info {
     display: inline;
@@ -139,9 +142,9 @@
     }
 }
 
-@media only screen and (min-width: 815px) {
+@media only screen and (min-width: 1000px) {
     .specific-activity.main-container {
-        width: 768px;
+        width: 992px;
         margin-left: auto;
         margin-right: auto;
     }

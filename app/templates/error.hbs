@@ -1,0 +1,15 @@
+<div class="container error">
+      <div class="error-message text-center">ERROR</div>
+
+      <div class="error-description text-center">
+            <h4>Please go back to the {{#link-to 'index'}}home page{{/link-to}}</h4>
+          <h5>Found a bug? Report to
+            <span>
+                CTS
+                {{#link-to 'email' (query-params emailAddress='cts@gordon.edu' emailType='personal' activityCode=null sessionCode=null)}}
+                  <span class="glyphicon glyphicon-envelope cyan"></span>
+                {{/link-to}}
+            </span>
+        </h5>
+      </div>
+  </div>
