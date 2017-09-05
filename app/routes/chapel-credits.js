@@ -100,7 +100,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     chapelEvents = result;
                     // console.log(chapelEvents);
                     numEvents = chapelEvents.length;
-                    if (chapelEvents.length > 1) {
+                    if (chapelEvents.length >= 1) {
                         eventsPercent = Math.round((numEvents * 100) / chapelEvents[0].Required);
                         required = chapelEvents[0].Required;
                         requiredEventsString = numEvents + "/" + required + " CL&W Credits";
