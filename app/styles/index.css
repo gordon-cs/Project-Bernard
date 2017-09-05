@@ -7,13 +7,15 @@
     margin: 0 15px 10px 15px;
 }
 
-.main-content{
+.main-content {
     padding: 0;
 }
 
 .progress-text {
     font-weight: bold;
+    font-size: 11px;
 }
+
 .one {
     padding-bottom: 10px;
 }
@@ -32,6 +34,7 @@ svg circle {
     stroke: #00aeef;
     stroke-width: 20;
 }
+
 
 /*#cont1, #cont2 {
     display: block;
@@ -61,6 +64,7 @@ svg circle {
     background: rgb(235, 234, 234);
 }*/
 
+
 /*#cont1:after {
     font-size: 2em;
 }
@@ -79,4 +83,10 @@ svg circle {
 
 #progress-bars {
     margin-top: 15px;
+}
+
+@media screen and (min-width: 767px) {
+    .progress-container {
+        margin: 20px;
+    }
 }

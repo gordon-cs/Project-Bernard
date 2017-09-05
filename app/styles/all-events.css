@@ -180,6 +180,7 @@
 .events.event-box {
     background-color: #FFFFFF !important;
     margin-top: 30px !important;
+    padding-bottom: 10px;
 }
 
 .events .events-hide {
@@ -208,11 +209,11 @@
 }
 
 .events .entry-rows .event-row:nth-child(even) {
-    background: #ffffff;
+    background: #DDD;
 }
 
 .events .entry-rows .event-row:nth-child(odd) {
-    background: #DDD;
+    background: #ffffff;
 }
 
 .events .event-progress {
@@ -331,15 +332,13 @@
 }
 
 @media screen and (max-width: 767px) {
-    .events .mobile-toggle h5 span{
+    .events .mobile-toggle h5 span {
         padding-right: 10px;
     }
-
-
-    .events .mobile-toggle label{
+    .events .mobile-toggle label {
         margin-left: 15px;
     }
-    .events .mobile-toggle-all-events label{
+    .events .mobile-toggle-all-events label {
         margin-left: 5px !important;
     }
     /*.events .mobile-toggle-label h5 {
