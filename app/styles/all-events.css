@@ -177,12 +177,6 @@
     -webkit-filter: blur(2px);
 }
 
-.events.event-box {
-    background-color: #FFFFFF !important;
-    margin-top: 30px !important;
-    padding-bottom: 10px;
-}
-
 .events .events-hide {
     margin-left: 10px;
 }
@@ -222,6 +216,7 @@
     margin-right: 20px;
     margin-left: 20px;
     margin-top: 0px;
+    align-items:
 }
 
 .events .highlight-box {
@@ -256,9 +251,9 @@
 }
 
 .events .event-header {
-    font-size: 25px;
+    font-size: 20px;
     margin-top: 0px;
-    background-color: white;
+    color: white;
 }
 
 .events .event-p {
@@ -300,6 +295,10 @@
     padding-bottom: 0px;
 }
 
+.event-header {
+    color: white;
+}
+
 .events .event-labels:hover {
     color: #b2bb1c !important;
     cursor: pointer;
@@ -335,8 +334,28 @@
     .events .mobile-toggle h5 span {
         padding-right: 10px;
     }
+    .events.event-box {
+        background-color: #FFFFFF !important;
+        margin-top: 30px !important;
+        padding-bottom: 10px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .events .eventHeader {
+        text-align: center;
+        font-weight: bold;
+        background-color: #014983;
+        border-bottom: 5px solid #0aaeef;
+        color: white !important;
+    }
     .events .mobile-toggle label {
         margin-left: 15px;
+    }
+    .menu-block {
+        border-bottom: 20px solid #EBEAEA;
+    }
+    .events-underline {
+        border-bottom: 3px solid #EBEAEA;
     }
     .events .mobile-toggle-all-events label {
         margin-left: 5px !important;
@@ -357,7 +376,6 @@
         font-size: 14px;
     }
     .events .entry-rows {
-        padding-left: 18px;
         padding-right: auto;
     }
     .events .refresh-button {
@@ -378,7 +396,8 @@
         margin-top: 13px;
     }
     .events .event-title {
-        font-size: 3em;
+        font-size: 20px;
+        color: white;
     }
     .events .event-id {
         font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
@@ -400,16 +419,16 @@
         display: none !important;
     }
     .events .header-container {
-        font-size: 16px;
-        padding-top: 5px;
-        margin-left: 10px;
+        font-size: 20px;
+        margin-top: 0px;
+        color: white;
+        padding: 20px;
         font-weight: bold;
+        background-color: #31342B;
+        border-bottom: 5px solid #0aaeef;
     }
     .events .btn-upComing {
         margin-bottom: 5px;
-    }
-    .events .moble-eventbox {
-        border-radius: 10px;
     }
     .events .display-col {
         display: none;
@@ -459,6 +478,13 @@
         width: 50%;
         height: 400px;
         /* Could be more or less, depending on screen size */
+    }
+    .events.event-box {
+        background-color: #FFFFFF !important;
+        margin-top: 30px !important;
+        padding-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
     .event-modal-body {
         min-height: 240px;

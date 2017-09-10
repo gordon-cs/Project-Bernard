@@ -64,7 +64,7 @@ export default Ember.Controller.extend({
         //upon list change, changes the names of the button and the header
         //this is activated byt the switch on mobile
         chapelSwitch() {
-            if (this.get('onlyChapel')) {
+            if (this.get('model.onlyChapel')) {
                 this.set('eventsHeader', 'Christian Life & Worship Events');
                 this.set('button1', 'Only CL&W Events');
                 this.set('option1', 'Show All Types');
@@ -80,15 +80,15 @@ export default Ember.Controller.extend({
         //if also switches the bool for the checkbox used for mobile, this allows the switch
         //to change even when it is not being shown. (the bool is change automatically on mobile)
         checkForChaple() {
-            if (this.get('onlyChapel') === false) {
-                this.set('onlyChapel', true);
+            if (this.get('model.onlyChapel') === false) {
+                this.set('model.onlyChapel', true);
                 this.set('eventsHeader', 'Christian Life & Worship Events');
                 this.set('button1', 'Only CL&W Events');
                 this.set('option1', 'Show All Types');
                 this.send('filterEvents');
             } else {
                 this.set('eventsHeader', ' All Events');
-                this.set('onlyChapel', false);
+                this.set('model.onlyChapel', false);
                 this.set('button1', 'All Event Types');
                 this.set('option1', 'Show Only CL&W Events');
                 this.send('filterEvents');
@@ -215,7 +215,7 @@ export default Ember.Controller.extend({
                 newList = [];
             }
 
-            if (this.get('onlyChapel')) {
+            if (this.get('model.onlyChapel')) {
 
                 for (let k = 0; k < oldList.length; k++) {
                     if (oldList[k].Category_Id === "85") {

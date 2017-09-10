@@ -1,18 +1,19 @@
 <div class="container events event-box">
-  <div class=" row whitebox">
+  <img src="images\chapel-sunset-hero_2016_08_19_02_01_38.jpg" class = "visible-xs"style="width:100%">
+  <div class=" row whitebox eventHeader">
     <div class="col-xs-12 col-sm-12 col-md-12">
-      <h4 class="event-p heading-text event-title">
+      <h4 class="event-title">
         Christian Life & Worship Events
       </h4>
     </div>
   </div>
-  <div class="whitebox">
-    <div class="row">
+  <div class="whitebox menu-block">
+    <div class="row ">
       <div class="event-search col-xs-11 col-sm-4 col-md-4">
         {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
       </div>
       <div class="progress event-progress hidden-xs col-sm-offset-1 col-sm-3 col-md-4" style="height: 32px;">
-        <div class="progress-bar " role="progressbar " aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.numEvents}}%;"></div>
+        <div class="progress-bar " role="progressbar " aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;"></div>
         <span><h5>{{model.requiredEventsString}}</h5></span>
       </div>
       <div class=" hidden-xs  no-padding button-padding dropdown">
@@ -28,9 +29,9 @@
     <form {{action "displayALLEvents" on="change"}}>
       <div class="material-switch visible-xs col-xs-2 mobile-toggle" style="padding-top: 10px;" id="mobile-toggle">
           <!-- <h5>Past</h5> -->
-        {{input id="switch" type="checkbox" checked=bool1}}
+        {{input id="switch" type="checkbox" checked= model.bool1}}
         <label for="switch" class="label-default"></label>
-        <h5><span>Past</span><span>Future</span></h5>
+        <h5><span>Attended</span><span>Future</span></h5>
         <!-- <h5>Future</h5> -->
       </div>
     </form>
@@ -42,10 +43,13 @@
         </div>
       </div>
     </div>
-    <div class="header-container lightgraybox moble-eventbox visible-xs">
-      {{button1}}
     </div>
-  </div>
+    <div class="header-container moble-eventbox visible-xs">
+      {{button1}}
+     {{#if model.bool1}} <span class="glyphicon glyphicon-calendar" style = "color: white; float: right;" aria-hidden="true"></span>
+     {{else}} <span class="glyphicon glyphicon-ok" style = "color: white; float: right;" aria-hidden="true"></span> {{/if}}
+    </div>
+  
 
   <div class="event-cyanbox navybox">
     <div id="category-bar" class="row">

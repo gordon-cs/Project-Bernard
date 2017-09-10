@@ -72,7 +72,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return getAsync("/sessions/current", context)
         };
 
-        let initializeCurrentSession = function (result) {
+        let initializeCurrentSession = function(result) {
             currentSession = result;
         }
 
@@ -84,108 +84,109 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             for (let membership of result) {
                 if (membership.Participation == "ADV") {
                     allSupervisions.push(membership);
-                }
-                else if (membership.Participation != "GUEST") {
+                } else if (membership.Participation != "GUEST") {
                     allMemberships.push(membership);
                 }
             }
         };
 
-        let arrangeMemberships = function () {
-            sortMemberships(currentSession,allMemberships,currentMemberships,pastMemberships);
+        let arrangeMemberships = function() {
+            sortMemberships(currentSession, allMemberships, currentMemberships, pastMemberships);
             for (let i = 0; i < pastMemberships.length; i++) {
                 sortJsonArray(pastMemberships[i].activities, "ActivityDescription");
             }
         };
 
-        let arrangeSupervisions = function () {
-            sortSupervisions(currentSession,allSupervisions,currentSupervisions,pastSupervisions);
+        let arrangeSupervisions = function() {
+            sortSupervisions(currentSession, allSupervisions, currentSupervisions, pastSupervisions);
         };
 
-        let loadSlides = function () {
-          return getAsync("/cms/slider", context);
+        let loadSlides = function() {
+            return getAsync("/cms/slider", context);
         }
 
-        let initializeSlides = function (result) {
-          slides = result;
+        let initializeSlides = function(result) {
+            slides = result;
         }
 
         //chapel progress bar promise
         let chapelProgress = function() {
-          return getAsync("/events/chapel/" + id_name + "/" + "17FA", context)
-            .then(function(result) {
-              chapelEvents = result;
-              numEvents = chapelEvents.length;
+            return getAsync("/events/chapel/" + id_name + "/" + "17FA", context)
+                .then(function(result) {
+                    chapelEvents = result;
+                    numEvents = chapelEvents.length;
                     if (chapelEvents.length >= 1) {
                         eventsPercent = Math.round((numEvents * 100) / chapelEvents[0].Required);
                         required = chapelEvents[0].Required;
-                        requiredEventsString = numEvents + "/" + required + " CL&W Credits";
+                        if (required === numEvents) {
+                            requiredEventsString = "Requirement Met";
+                        } else {
+                            requiredEventsString = numEvents + "/" + required + " Attended";
+                        }
                     } else {
                         required = 0;
                         eventsPercent = 0;
                         requiredEventsString = "No CL&W Attendence Recorded";
                     }
                     return {
-                      "chapelEvents": chapelEvents,
-                      "eventsPercent": eventsPercent,
+                        "chapelEvents": chapelEvents,
+                        "eventsPercent": eventsPercent,
                     };
-            });
+                });
         };
 
 
         //days countdown promise
         let loadDaysLeft = function() {
-          return getAsync("/sessions/daysLeft", context)
-            .then(function(result) {
-              daysLeft = result[0];
-              let totalDays = result[1];
+            return getAsync("/sessions/daysLeft", context)
+                .then(function(result) {
+                    daysLeft = result[0];
+                    let totalDays = result[1];
 
 
-              daysPercent = Math.round(((totalDays - daysLeft) * 100) / totalDays);
-              return daysLeft, daysPercent;
-            });
+                    daysPercent = Math.round(((totalDays - daysLeft) * 100) / totalDays);
+                    return daysLeft, daysPercent;
+                });
         };
 
 
         let toggleProgress = function() {
-          let val = eventsPercent;
-          let pct;
+            let val = eventsPercent;
+            let pct;
 
-          let $circle = $('#svg #bar');
+            let $circle = $('#svg #bar');
 
-          if (isNaN(val)) {
-            val = 100;
-          }
-          else{
-            let r = 90;
-            let c = Math.PI*(r*2);
+            if (isNaN(val)) {
+                val = 100;
+            } else {
+                let r = 90;
+                let c = Math.PI * (r * 2);
 
-            if (val < 0) { val = 0;}
-            if (val > 100) { val = 100;}
+                if (val < 0) { val = 0; }
+                if (val > 100) { val = 100; }
 
-            pct = ((100-val)/100)*c;
-          }
+                pct = ((100 - val) / 100) * c;
+            }
             offset = pct;
         };
 
         let toggleDays = function() {
-          let val = daysPercent;
-          let pct;
+            let val = daysPercent;
+            let pct;
 
-          let $circle = $('#svg #bar');
+            let $circle = $('#svg #bar');
 
-          if (isNaN(val)) {
-            val = 100;
-          }
-          else{
-            let r = 90;
-            let c = Math.PI*(r*2);
+            if (isNaN(val)) {
+                val = 100;
+            } else {
+                let r = 90;
+                let c = Math.PI * (r * 2);
 
-            if (val < 0) { val = 0;}
-            if (val > 100) { val = 100;}
+                if (val < 0) { val = 0; }
+                if (val > 100) { val = 100; }
 
-            pct = ((100-val)/100)*c;
-          }
+                pct = ((100 - val) / 100) * c;
+            }
             offset2 = pct;
         };
 
@@ -211,7 +212,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return {
                 "currentSession": currentSession,
                 "currentMemberships": sortJsonArray(currentMemberships, "ActivityDescription"),
-                "pastMemberships":	pastMemberships,
+                "pastMemberships": pastMemberships,
                 "currentMembershipsFilled": currentMembershipsFilled,
                 "pastMembershipsFilled": pastMembershipsFilled,
                 "currentSupervisionsFilled": currentSupervisionsFilled,
@@ -219,15 +220,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "pastSupervisionsFilled": pastSupervisionsFilled,
                 "pastSupervisions": pastSupervisions,
                 "nothingToShow": nothingToShow,
-                "slides" : slides,
-                "eventsPercent" : eventsPercent,
-                "numEvents" : numEvents,
-                "required" : required,
-                "requiredEventsString" : requiredEventsString,
-                "daysLeft" : daysLeft,
-                "daysPercent" : daysPercent,
-                "offset2" : offset2,
-                "offset" : offset
+                "slides": slides,
+                "eventsPercent": eventsPercent,
+                "numEvents": numEvents,
+                "required": required,
+                "requiredEventsString": requiredEventsString,
+                "daysLeft": daysLeft,
+                "daysPercent": daysPercent,
+                "offset2": offset2,
+                "offset": offset
 
             };
         };
@@ -236,19 +237,19 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         /* Compose the promises ♫♫♫♫♫♫ Music to my eyes*/
         return loadCurrentSession()
-        .then(initializeCurrentSession)
-        .then(loadMemberships)
-        .then(initializeMemberships)
-        .then(arrangeMemberships)
-        .then(arrangeSupervisions)
-        .then(loadSlides)
-        .then(initializeSlides)
-        .then(chapelProgress)
-        .then(loadSwitches)
-        .then(loadDaysLeft)
-        .then(toggleProgress)
-        .then(toggleDays)
-        .then(loadModel);
+            .then(initializeCurrentSession)
+            .then(loadMemberships)
+            .then(initializeMemberships)
+            .then(arrangeMemberships)
+            .then(arrangeSupervisions)
+            .then(loadSlides)
+            .then(initializeSlides)
+            .then(chapelProgress)
+            .then(loadSwitches)
+            .then(loadDaysLeft)
+            .then(toggleProgress)
+            .then(toggleDays)
+            .then(loadModel);
 
     }
 });
@@ -264,36 +265,34 @@ function sortSupervisions(currentSession, allSupervisions, currentSupervisions, 
         allSupervisions[i].ActivityCode = allSupervisions[i].ActivityCode.trim();
 
         /* If the current session matches one of the supervision sessions - Set it as a current advisorships
-        * Else - Set it as a past supervision
-        */
+         * Else - Set it as a past supervision
+         */
         if (allSupervisions[i].SessionCode === currentSession.SessionCode) {
             currentSupervisions.push(allSupervisions[i]);
-        }
-        else {
+        } else {
             // Arrange past supervisions in order by session code
             let placeFound = false;
             let j = 0;
 
             while (!placeFound && j < pastSupervisions.length) {
 
-              //console.log("Past session already listed: " + pastSupervisions[j].SessionCode);
-              if (allSupervisions[i].SessionCode >= pastSupervisions[j].SessionCode) {
-                //console.log("Session code: " + allSupervisions[i].SessionCode + " is greater than past session" +
-                 //pastSupervisions[j].SessionCode + " at index " + j );
-                pastSupervisions.splice(j, 0, allSupervisions[i]);
-                //console.log("Now at index " + j + ": " + pastSupervisions[j].SessionCode);
-                //console.log("Now at index " +(j+1) + ": " + pastSupervisions[j+1].SessionCode)
-                placeFound = true;
-              }
-              else {
-                j++;
-              }
+                //console.log("Past session already listed: " + pastSupervisions[j].SessionCode);
+                if (allSupervisions[i].SessionCode >= pastSupervisions[j].SessionCode) {
+                    //console.log("Session code: " + allSupervisions[i].SessionCode + " is greater than past session" +
+                    //pastSupervisions[j].SessionCode + " at index " + j );
+                    pastSupervisions.splice(j, 0, allSupervisions[i]);
+                    //console.log("Now at index " + j + ": " + pastSupervisions[j].SessionCode);
+                    //console.log("Now at index " +(j+1) + ": " + pastSupervisions[j+1].SessionCode)
+                    placeFound = true;
+                } else {
+                    j++;
+                }
             }
             if (!placeFound) {
-            // If it wasn't greater than any sessions already in the list, add it to the end
-            pastSupervisions.push(allSupervisions[i]);
-          }
-          //pastSupervisions.push(allSupervisions[i]);
+                // If it wasn't greater than any sessions already in the list, add it to the end
+                pastSupervisions.push(allSupervisions[i]);
+            }
+            //pastSupervisions.push(allSupervisions[i]);
         }
     }
 }
@@ -304,12 +303,11 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
 
     for (let i = 0; i < allMemberships.length; i++) {
         /* If the current session matches the membership session - Set it as a current membership
-        * Else - Set it as a past membership
-        */
+         * Else - Set it as a past membership
+         */
         if (allMemberships[i].SessionCode === currentSession.SessionCode) {
             currentMemberships.push(allMemberships[i]);
-        }
-        else {
+        } else {
 
             // Sort past activities into groups by sessionCode, starting with most recent (i.e. greatest sessionCode)
             let session = allMemberships[i].SessionDescription;
@@ -317,27 +315,25 @@ function sortMemberships(currentSession, allMemberships, currentMemberships, pas
             let place = null;
             let j = 0;
             while (place === null && j < pastMemberships.length) {
-              if (allMemberships[i].SessionCode > pastMemberships[j].sessionCode) {
-                pastMemberships.splice(j, 0, {
-                  "session": session,
-                  "sessionCode": sessionCode,
-                  "activities": []
-                });
-              }
-              else if (allMemberships[i].SessionCode === pastMemberships[j].sessionCode) {
-                place = j;
-              }
-              else {
-                j++;
-              }
+                if (allMemberships[i].SessionCode > pastMemberships[j].sessionCode) {
+                    pastMemberships.splice(j, 0, {
+                        "session": session,
+                        "sessionCode": sessionCode,
+                        "activities": []
+                    });
+                } else if (allMemberships[i].SessionCode === pastMemberships[j].sessionCode) {
+                    place = j;
+                } else {
+                    j++;
+                }
             }
             if (place === null) {
-              pastMemberships.push({
-                     "session": session,
-                     "sessionCode": sessionCode,
-                     "activities": []
-                 });
-              place = j;
+                pastMemberships.push({
+                    "session": session,
+                    "sessionCode": sessionCode,
+                    "activities": []
+                });
+                place = j;
             }
             pastMemberships[place].activities.push(allMemberships[i]);
         }
