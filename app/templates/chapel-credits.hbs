@@ -7,7 +7,7 @@
       </h4>
     </div>
   </div>
-  <div class="whitebox menu-block">
+  <div class="whitebox ">
     <div class="row ">
       <div class="event-search col-xs-11 col-sm-4 col-md-4">
         {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
@@ -35,7 +35,7 @@
         <!-- <h5>Future</h5> -->
       </div>
     </form>
-    <div class="moble-eventbox ">
+    <div class=" moble-eventbox ">
       <div id="category-bar" class="row mobile-row">
         <div class="progress event-progress visible-xs col-xs-6" style="height: 32px; float:right;">
           <div class="progress-bar " role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.numEvents}}%; background-color:  #b2bb1c"></div>
@@ -44,14 +44,14 @@
       </div>
     </div>
     </div>
-    <div class="header-container moble-eventbox visible-xs">
+    <div class="header-container menu-block moble-eventbox visible-xs">
       {{button1}}
      {{#if model.bool1}} <span class="glyphicon glyphicon-calendar" style = "color: white; float: right;" aria-hidden="true"></span>
      {{else}} <span class="glyphicon glyphicon-ok" style = "color: white; float: right;" aria-hidden="true"></span> {{/if}}
     </div>
   
 
-  <div class="event-cyanbox navybox">
+  <div class="event-cyanbox  navybox">
     <div id="category-bar" class="row">
       <div class="event-labels col-sm-3 col-md-3" onclick={{action "sortItems" "Event_Title"}}><h4 >Event <span class="glyphicon {{if (and (eq model.sort.type "Event_Title") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Event_Title") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
       <div class="event-labels col-sm-4 col-md-5" onclick={{action "sortItems" "Location"}}><h4>Location <span class="glyphicon {{if (and (eq model.sort.type "Location") (eq model.sort.direction "down")) "glyphicon-triangle-bottom"}} {{if (and (eq model.sort.type "Location") (eq model.sort.direction "up")) "glyphicon-triangle-top"}}" style = "color: white;" aria-hidden="true"></span></h4></div>
