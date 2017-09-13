@@ -10,7 +10,7 @@
   </div>
 
 
-  <div class=" row whitebox menu-block">
+  <div class=" row whitebox">
     <!-- search bar -->
     <div class="input-group event-search col-xs-10 col-sm-4 ">
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
@@ -59,7 +59,7 @@
     </div> --}}
   
   <!-- same switches but formated for mobile -->
-  <div class="moble-eventbox events-underline">
+  <div class="moble-eventbox">
    
     <div id="category-bar" class="row">
         <form {{action "chapelSwitch" on="change"}}>
@@ -76,6 +76,7 @@
             </button>
         </div>
     </div>
+  </div>
   </div>
 
   <div class="filter-container">
@@ -156,9 +157,9 @@
       </div>
     </form>
   </div>
-  </div>
+  
 
-  <div class=" row header-container lightgraybox moble-eventbox visible-xs">
+  <div class=" menu-block row header-container lightgraybox moble-eventbox visible-xs">
     <div class = "event-header col-xs-9">{{eventsHeader}}</div>
      {{#if model.onlyChapel}}
    <img src="images\Church-Icon-300x185.png"style="width: 50px; float:right; padding-bottom: 10px; color: white;">

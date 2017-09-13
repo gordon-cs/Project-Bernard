@@ -352,10 +352,7 @@
         margin-left: 15px;
     }
     .menu-block {
-        border-bottom: 20px solid #EBEAEA;
-    }
-    .events-underline {
-        border-bottom: 3px solid #EBEAEA;
+        border-top: 20px solid #EBEAEA;
     }
     .events .mobile-toggle-all-events label {
         margin-left: 5px !important;
