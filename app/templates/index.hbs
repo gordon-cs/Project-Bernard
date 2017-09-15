@@ -2,7 +2,7 @@
   <div class="row hey">
 
           <div class="progress visible-xs" id="progress-bars">
-              <div class="progress-bar id=one" role="progressbar" style="width: {{model.numEvents}}%; background-color:  #b2bb1c" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar id=one" role="progressbar" style="width: {{model.eventsPercent}}%; background-color:  #b2bb1c" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
                 {{#link-to "chapel-credits"}}<span><h5 class="progress-text">{{model.requiredEventsString}}</h5></span> {{/link-to}}
               </div>
           </div>
@@ -14,7 +14,8 @@
           </div>
 
       <div class="col-sm-4 col-md-3 progress-container container">
-
+        <div class = "row whitebox chartbox hidden-xs">
+          <h3 class = "graphHeader navybox"> Christian Life & Worship Credits</h3>
         {{#link-to "chapel-credits"}}
         <div class="hidden-xs circle-progress">
             <svg width="200" height="200">
@@ -39,15 +40,17 @@
             		</filter>
 
             	</defs>
-                  <circle r="70" cx="100" cy="100" fill="#ebebea" stroke="#ebebea" stroke-width="20" filter="url(#innershadow)"></circle>
-                  <circle r="90" cx="100" cy="100" fill="transparent" stroke="#cccccb" stroke-width="20"></circle>
+                  <circle r="70" cx="100" cy="100" fill="white" stroke="white" stroke-width="20" filter="url(#innershadow)"></circle>
+                  <circle r="90" cx="100" cy="100" fill="transparent" stroke="#31342B" stroke-width="20"></circle>
                   <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke="#0aaeef" stroke-width="20" style="stroke-dashoffset:{{model.offset}}px" stroke-dasharray="565.48" transform="rotate(-90, 100, 100)"></circle>
-
-                  <text x="100" y="105" font-size="13" text-anchor="middle">{{model.numEvents}} CL&W Credits</text>
+                  <text x="100" y="100" font-size="20"  text-anchor="middle">{{model.requiredEventsString}}</text>
             </svg>
-      </div>
+            </div>
         {{/link-to}}
+          </div>
 
+        <div class = "row whitebox chartbox hidden-xs">
+        <h3 class = "graphHeader navybox">{{model.currentSession.SessionDescription}}</h3>
         <div class="hidden-xs circle-progress">
             <svg width="200" height="200">
                 <defs>
@@ -71,21 +74,21 @@
             		</filter>
 
             	</defs>
-                  <circle r="70" cx="100" cy="100" fill="#ebebea" stroke="#ebebea" stroke-width="20" filter="url(#innershadow)"></circle>
-                  <circle r="90" cx="100" cy="100" fill="transparent" stroke="#cccccb" stroke-width="20"></circle>
-                  <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke="#0aaeef" stroke-width="20" style="stroke-dashoffset:{{model.offset2}}px" stroke-dasharray="565.48" transform="rotate(-90, 100, 100)"></circle>
+                  <circle r="70" cx="100" cy="100" fill="white" stroke="white" stroke-width="20" filter="url(#innershadow)"></circle>
+                  <circle r="90" cx="100" cy="100" fill="transparent" stroke="#31342B" stroke-width="20"></circle>
+                  <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke="#bcc61e" stroke-width="20" style="stroke-dashoffset:{{model.offset2}}px" stroke-dasharray="565.48" transform="rotate(-90, 100, 100)"></circle>
 
-                  <text x="100" y="100" font-size="13" text-anchor="middle">{{model.daysLeft}} Days Until End of</text>
-                  <text x="100" y="120" font-size="13" text-anchor="middle"> {{model.currentSession.SessionDescription}}</text>
+                  <text x="100" y="100" font-size="20" text-anchor="middle">{{model.daysLeft}} Days Left</text>
             </svg>
       </div>
+      </div>
 
 
 
       </div>
 
 
-				<div class="col-sm-6 col-md-8 progress-container main-content">
+				<div class="col-sm-6 col-md-8 slider-container main-content">
 					{{homepage-banner slides=model.slides}}
 				</div>
 

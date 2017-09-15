@@ -11,6 +11,16 @@
     padding: 0;
 }
 
+.graphHeader {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* font-weight: bold; */
+    margin-top: 0px;
+    border-bottom: 5px solid #0aaeef;
+    /* color: #00aeef; */
+}
+
 .progress-text {
     font-weight: bold;
     font-size: 11px;
@@ -33,6 +43,19 @@ svg circle {
 #svg #bar {
     stroke: #00aeef;
     stroke-width: 20;
+}
+
+.chartbox {
+    padding: 0px;
+    /* border-bottom: 5px solid #014983; */
+    margin-bottom: 20%;
+}
+
+@media screen and (max-width: 1150) {
+    .chartbox {
+        margin: 10px!important;
+        margin-bottom: 20%;
+    }
 }
 
 
@@ -87,6 +110,9 @@ svg circle {
 
 @media screen and (min-width: 767px) {
     .progress-container {
+        margin: 20px;
+    }
+    .slider-container {
         margin: 20px;
     }
 }

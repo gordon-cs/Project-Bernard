@@ -22,7 +22,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let allEvents = [];
         let required;
         let requiredEventsString;
-
+        let currentDate = new Date();
+        let futureEvents = [];
 
         //subtract a year if it is the spring semester,
         //take away the first two digits of the year ie. (yyyy -> yy)
@@ -138,6 +139,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
                         chapelEvents[i].Month = fullMonth[startMonth];
                         chapelEvents[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
+
                     }
                     return {
                         //return all the deseired information
@@ -159,7 +161,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                     let endClock;
                     allEvents.sort(sortDate);
 
-
                     for (let i = 0; i < numEvents; ++i) {
 
                         allEvents[i].Start_Time = allEvents[i].Occurrences[0][0];
@@ -173,7 +174,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         let startMonth = startDate.getMonth();
                         let startDay = startDate.getDate();
 
-
                         allEvents[i].Description = formatDiscription(allEvents[i].Description);
                         allEvents[i].End_Time = formatClock(allEvents[i].Start_Time, allEvents[i].End_Time, startClock, endClock);
 
@@ -182,10 +182,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         }
                         allEvents[i].Month = fullMonth[startMonth];
                         allEvents[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
+
+
+                        if (startDate.getTime() > currentDate.getTime()) {
+                            futureEvents.push(allEvents[i]);
+                        }
                     }
+
+
                     return {
                         //return all the deseired information
-                        "allEvents": allEvents
+                        "allEvents": allEvents,
+                        "futureEvents": futureEvents
                     };
 
                 });
@@ -196,14 +204,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return {
                 //return all the deseired information
                 "chapelEvents": chapelEvents,
-                "allEvents": allEvents,
+                "allEvents": futureEvents,
                 "required": required,
                 "eventShown": chapelEvents,
                 "eventsPercent": eventsPercent,
                 "searchValue": searchValue,
                 "numEvents": numEvents,
                 "requiredEventsString": requiredEventsString,
-                "sort": sort
+                "sort": sort,
+                "bool1": false
             };
         };
 

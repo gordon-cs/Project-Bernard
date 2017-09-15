@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
             let events = this.get("model.eventShown");
             let sorted = [];
             let previousSort = this.get("model.sort");
-            events.forEach(function(item, index){
+            events.forEach(function(item, index) {
                 item["idx"] = index;
             });
 
@@ -37,8 +37,7 @@ export default Ember.Controller.extend({
                     }
                     if (a["idx"] < b["idx"]) {
                         return -1;
-                    }
-                    else {
+                    } else {
                         return 1;
                     }
                 });
@@ -56,8 +55,7 @@ export default Ember.Controller.extend({
                     }
                     if (a["idx"] < b["idx"]) {
                         return -1;
-                    }
-                    else {
+                    } else {
                         return 1;
                     }
                 });
@@ -72,17 +70,17 @@ export default Ember.Controller.extend({
 
         //change the button names when this action is called
         switchList() {
-            if (this.get('bool1')) {
-                this.set('bool1', false);
+            if (this.get('model.bool1')) {
+                this.set('model.bool1', false);
                 this.send('displayALLEvents');
             } else {
-                this.set('bool1', true);
+                this.set('model.bool1', true);
                 this.send('displayALLEvents');
             }
         },
         //display list of all past events events
         displayALLEvents() {
-            if (this.get('bool1')) {
+            if (this.get('model.bool1')) {
                 this.set('button1', 'Upcoming Events');
                 this.set('option1', 'Show Attended Events');
                 this.send('filterEvents');
@@ -171,7 +169,7 @@ export default Ember.Controller.extend({
                 return events;
             };
 
-            if (this.get('bool1')) {
+            if (this.get('model.bool1')) {
                 oldList = this.get("model.allEvents");
             } else {
                 oldList = this.get("model.chapelEvents");
