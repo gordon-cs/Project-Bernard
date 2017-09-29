@@ -476,12 +476,14 @@
         height: 400px;
         /* Could be more or less, depending on screen size */
     }
+    .put-behind {
+        z-index: -1;
+    }
     .events.event-box {
         background-color: #FFFFFF !important;
         margin-top: 30px !important;
         padding-bottom: 10px;
-        padding-left: 15px;
-        padding-right: 15px;
+   
     }
     .event-modal-body {
         min-height: 240px;

@@ -206,13 +206,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "chapelEvents": chapelEvents,
                 "allEvents": futureEvents,
                 "required": required,
-                "eventShown": chapelEvents,
+                "eventShown": futureEvents,
                 "eventsPercent": eventsPercent,
                 "searchValue": searchValue,
                 "numEvents": numEvents,
                 "requiredEventsString": requiredEventsString,
                 "sort": sort,
-                "bool1": false
+                "bool1": true
             };
         };
 
