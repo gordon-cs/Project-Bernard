@@ -38,9 +38,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             if (first.startTimeObject === second.startTimeObject)
                 return 0;
             if (first.startTimeObject < second.startTimeObject)
-                return 1;
-            else
                 return -1;
+            else
+                return 11;
         }
 
         //formate the event discription and get rid of all html tags
@@ -151,7 +151,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
         };
 
-        //get all the chapel evcents in the future and then formate the responses
+        //get all the chapel events in the future and then formate the responses
         let loadAllChapel = function() {
             return getAsync("/events/25Live/CLAW", context)
                 .then(function(result) {
@@ -184,12 +184,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         allEvents[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
 
 
-                        if (startDate.getTime() > currentDate.getTime()) {
+                        if (startDate.getTime() >= currentDate.getTime()) {
                             futureEvents.push(allEvents[i]);
                         }
                     }
 
-
+                    futureEvents.sort(sortDate);
                     return {
                         //return all the deseired information
                         "allEvents": allEvents,
