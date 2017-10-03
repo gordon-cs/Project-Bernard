@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
 
     onlyChapel: false,
     button1: 'All Event Types',
-    button2: 'Upcoming Events',
+    button2: 'Show Upcoming Events',
     option1: 'Show CL&W Only',
     option2: 'Include Past Events',
     showfutureEvents: false,
@@ -66,12 +66,10 @@ export default Ember.Controller.extend({
         chapelSwitch() {
             if (this.get('model.onlyChapel')) {
                 this.set('eventsHeader', 'Christian Life & Worship Events');
-                this.set('button1', 'Only CL&W Events');
                 this.set('option1', 'Show All Types');
                 this.send('filterEvents');
             } else {
                 this.set('eventsHeader', 'All Events');
-                this.set('button1', 'All Event Types');
                 this.set('option1', 'Show Only CL&W Events');
                 this.send('filterEvents');
             }
@@ -83,13 +81,11 @@ export default Ember.Controller.extend({
             if (this.get('model.onlyChapel') === false) {
                 this.set('model.onlyChapel', true);
                 this.set('eventsHeader', 'Christian Life & Worship Events');
-                this.set('button1', 'Only CL&W Events');
                 this.set('option1', 'Show All Types');
                 this.send('filterEvents');
             } else {
                 this.set('eventsHeader', ' All Events');
                 this.set('model.onlyChapel', false);
-                this.set('button1', 'All Event Types');
                 this.set('option1', 'Show Only CL&W Events');
                 this.send('filterEvents');
             }
@@ -101,12 +97,10 @@ export default Ember.Controller.extend({
         showfutureEvents() {
             if (this.get('showfutureEvents') === false) {
                 this.set('showfutureEvents', true);
-                this.set('button2', 'All Event Dates');
-                this.set('option2', 'Upcoming Events');
+                this.set('option2', 'Show Upcoming Events');
                 this.send('filterEvents');
             } else {
                 this.set('showfutureEvents', false);
-                this.set('button2', 'Upcoming Events');
                 this.set('option2', 'Include Past Events');
                 this.send('filterEvents');
             }
