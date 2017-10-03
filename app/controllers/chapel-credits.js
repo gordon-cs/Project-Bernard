@@ -9,8 +9,8 @@ import deleteAsync from "gordon360/utils/delete-async";
  * by settting it back to the list of chapel events attended or upcoming events.
  */
 export default Ember.Controller.extend({
-    button1: 'Attended Events',
-    option1: 'Show Upcoming Events',
+    button1: 'Upcoming Events',
+    option1: 'Show Attended Events',
     selectList: 'ALL',
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
