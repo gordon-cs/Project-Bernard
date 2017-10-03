@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
     onlyChapel: false,
     button1: 'All Event Types',
     button2: 'Upcoming Events',
-    option1: 'Show Only CL&W Events',
+    option1: 'Show CL&W Only',
     option2: 'Include Past Events',
     showfutureEvents: false,
     filterButton: 'Show Filters',

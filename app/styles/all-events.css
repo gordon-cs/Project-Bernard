@@ -4,6 +4,11 @@
     padding: 0;
 }
 
+.header-image{
+    float:left;
+    position: relative;
+    border-bottom: 5px solid #0aaeef;
+}
 .events .form-check .checkbox-container {
     padding: 0!important;
 }
@@ -228,7 +233,7 @@
     margin-right: 20px;
     margin-left: 20px;
     margin-top: 0px;
-    align-items:
+
 }
 
 .events .highlight-box {
@@ -268,18 +273,6 @@
     color: white;
 }
 
-.events .event-p {
-    margin-top: 0px !important;
-    margin-bottom: 0px!important;
-    padding-top: 0px !important;
-}
-
-.events .event-title {
-    font-style: strong !important;
-    font-size: 5em;
-    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
-    text-align: center;
-}
 
 .events .event-id {
     padding: 10px;
@@ -348,11 +341,27 @@
     }
     .events.event-box {
         background-color: #FFFFFF !important;
-        margin-top: 30px !important;
         padding-bottom: 10px;
         padding-left: 0px;
         padding-right: 0px;
     }
+
+    .events .event-title {
+	    /* styling bellow */
+        margin-top: 10px;
+	    color:white;
+        font-style: strong;
+        font-size: 6em;
+        font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+        text-align: center;
+        margin-bottom: 0px!important;
+        padding-top: 0px !important;
+    }
+    .header-image{
+        float:left;
+        position: relative;
+        border-bottom: 0px;
+    }  
     .events .eventHeader {
         text-align: center;
         font-weight: bold;
@@ -406,7 +415,9 @@
     }
     .events .event-title {
         font-size: 20px;
+        margin-top: 10px;
         color: white;
+        font-weight: bold;
     }
     .events .event-id {
         font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
@@ -492,7 +503,7 @@
         z-index: -1;
     }
     .events.event-box {
-        background-color: #FFFFFF !important;
+        background-color: #FFFFFF;
         margin-top: 30px !important;
         padding-bottom: 10px;
    
@@ -532,4 +543,23 @@
         display: none !important;
         float: right !important;
     }
+    .eventHeader{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .events .event-title {
+    position:absolute; /* absolute position (so we can position it where we want)*/
+	bottom:20px; /* position will be on bottom */
+	/* styling bellow */
+    background-color: rgba(0,0,0,0.4);
+	color:white;
+    font-style: strong;
+    font-size: 5em;
+    font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B", sans-serif;
+    text-align: center;
+    margin-top: 0px !important;
+    margin-bottom: 0px!important;
+    padding-top: 0px !important;
+}
 }
