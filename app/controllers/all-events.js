@@ -70,7 +70,7 @@ export default Ember.Controller.extend({
                 this.send('filterEvents');
             } else {
                 this.set('eventsHeader', 'All Events');
-                this.set('option1', 'Show Only CL&W Events');
+                this.set('option1', 'Show Only CL&W');
                 this.send('filterEvents');
             }
         },
@@ -86,7 +86,7 @@ export default Ember.Controller.extend({
             } else {
                 this.set('eventsHeader', ' All Events');
                 this.set('model.onlyChapel', false);
-                this.set('option1', 'Show Only CL&W Events');
+                this.set('option1', 'Show Only CL&W');
                 this.send('filterEvents');
             }
 
