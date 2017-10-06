@@ -24,7 +24,7 @@
         <div class="mobile-phone-privacy-button-mobile"><a>{{button1}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
       </div>
       <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
-        <div class="dropdown-item" {{action "checkForChaple"}}>{{option1}}</div>
+        <div class="dropdown-item" {{action "checkForChaple"}}>{{model.chapelButton}}</div>
       </div>
     </div>
 
@@ -34,7 +34,7 @@
         <div class="mobile-phone-privacy-button-mobile"><a>{{button2}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
       </div>
       <div class="dropdown-menu mobilePhonePrivacyDropdown right-button-dropdown" aria-labelledby="dropdownMenuButton">
-        <div class="dropdown-item" {{action "showfutureEvents"}}>{{option2}}</div>
+        <div class="dropdown-item" {{action "showfutureEvents"}}>{{model.pastButton}}</div>
       </div>
     </div>
 </div>--}}
@@ -43,20 +43,20 @@
 
       <div>
         <button class="btn btn-secondary filterBtn button-padding " type="button" aria-haspopup="true" aria-expanded="false" {{action "checkForChaple"}}>
-          {{option1}}
+          {{model.chapelButton}}
         </button>
       </div>
 
       <div>
         <button class="btn btn-secondary filterBtn button-padding " type="button" aria-haspopup="true" aria-expanded="false"{{action "showfutureEvents"}}>
-          {{option2}}
+          {{model.pastButton}}
         </button>
       </div>
 
           <!-- Filter button and its dropdown menu -->
       <div class="dropdown">
         <button type="button" class="btn filterBtn filter-button btn-primary"  {{action "showFilters"}}>
-          {{filterButton}}
+          {{model.filterButton}}
         </button>
       </div>
 
@@ -67,20 +67,20 @@
     <div class="row mobile-event-menu">
       <div>
         <button class="btn visible-xs col-xs-6 mobile-events-button button-padding" type="button" aria-haspopup="true" aria-expanded="false" {{action "checkForChaple"}}>
-          {{option1}}
+          {{model.chapelButton}}
         </button>
       </div>
 
       <div>
         <button class="btn visible-xs col-xs-5 mobile-events-button button-padding " type="button" aria-haspopup="true" aria-expanded="false"{{action "showfutureEvents"}}>
-          {{option2}}
+          {{model.pastButton}}
         </button>
       </div>
       </div>
       
         <div class="dropdown show col-xs-4 visible-xs" style="margin-right: 10px; margin-right: 0;">
             <button type="button" class="btn filter-button btn-primary" {{action "showFilters"}}>
-                {{filterButton}}
+                {{model.filterButton}}
             </button>
         </div>
   
@@ -168,7 +168,7 @@
   
 
   <div class=" menu-block row header-container lightgraybox moble-eventbox visible-xs">
-    <div class = "event-header col-xs-9">{{eventsHeader}}</div>
+    <div class = "event-header col-xs-9">{{model.eventsHeader}}</div>
      {{#if model.onlyChapel}}
    <img src="images\Church-Icon-300x185.png"style="width: 50px; float:right; padding-bottom: 10px; color: white;">
       {{else}}<span class="glyphicon glyphicon-calendar" style = "color: white; float: right; padding-right: 10px;" aria-hidden="true"></span>{{/if}}  
