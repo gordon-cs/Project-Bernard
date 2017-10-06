@@ -12,6 +12,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let context = this;
         let searchValue;
         let eventList;
+        let eventsHeader = "All Events";
+        let chapelOnlyButton="Show CL&W Only";
+        let pastEventsButton="Include Past Events";
+        let filterButton = "Show Filters";
+        let onlyChapel = false;
         let futureEvents = [];
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -160,7 +165,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "futureEvents": futureEvents,
                 "searchValue": searchValue,
                 "sort": sort,
-                "onlyChapel": false
+                "onlyChapel": false,
+                'chapelButton': chapelOnlyButton,
+                'pastButton': pastEventsButton,
+                'eventsHeader': eventsHeader,
+                'filterButton': filterButton
             };
 
         };

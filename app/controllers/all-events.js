@@ -6,16 +6,8 @@ import deleteAsync from "gordon360/utils/delete-async";
  *  Sends requests to the model to retrieve and/or modify data.
  */
 export default Ember.Controller.extend({
-
-    onlyChapel: false,
-    button1: 'All Event Types',
-    button2: 'Show Upcoming Events',
-    option1: 'Show CL&W Only',
-    option2: 'Include Past Events',
+    
     showfutureEvents: false,
-    filterButton: 'Show Filters',
-    eventsHeader: 'All Events',
-
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
     requestsRecieved: Ember.computed.alias('applicationController.requestsRecieved'),
@@ -60,33 +52,19 @@ export default Ember.Controller.extend({
         },
 
 
-
-        //upon list change, changes the names of the button and the header
-        //this is activated byt the switch on mobile
-        chapelSwitch() {
-            if (this.get('model.onlyChapel')) {
-                this.set('eventsHeader', 'Christian Life & Worship Events');
-                this.set('option1', 'Show All Types');
-                this.send('filterEvents');
-            } else {
-                this.set('eventsHeader', 'All Events');
-                this.set('option1', 'Show Only CL&W Events');
-                this.send('filterEvents');
-            }
-        },
         //if the claw credits button is clicked only display chapel with the CL&W creddit tag
-        //if also switches the bool for the checkbox used for mobile, this allows the switch
+        //it also switches the bool for the checkbox used for mobile, this allows the switch
         //to change even when it is not being shown. (the bool is change automatically on mobile)
         checkForChaple() {
             if (this.get('model.onlyChapel') === false) {
                 this.set('model.onlyChapel', true);
-                this.set('eventsHeader', 'Christian Life & Worship Events');
-                this.set('option1', 'Show All Types');
+                this.set('model.eventsHeader', 'Christian Life & Worship Events');
+                this.set('model.chapelButton', 'Show All Types');
                 this.send('filterEvents');
             } else {
-                this.set('eventsHeader', ' All Events');
+                this.set('model.eventsHeader', ' All Events');
                 this.set('model.onlyChapel', false);
-                this.set('option1', 'Show Only CL&W Events');
+                this.set('model.chapelButton', 'Show Only CL&W');
                 this.send('filterEvents');
             }
 
@@ -97,11 +75,11 @@ export default Ember.Controller.extend({
         showfutureEvents() {
             if (this.get('showfutureEvents') === false) {
                 this.set('showfutureEvents', true);
-                this.set('option2', 'Show Upcoming Events');
+                this.set('model.pastButton', 'Show Upcoming Events');
                 this.send('filterEvents');
             } else {
                 this.set('showfutureEvents', false);
-                this.set('option2', 'Include Past Events');
+                this.set('model.pastButton', 'Include Past Events');
                 this.send('filterEvents');
             }
         },
