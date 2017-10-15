@@ -13,11 +13,13 @@
       <div class="event-search no-padding col-xs-5 col-sm-4 col-md-4">
         {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
       </div>
+
+      {{#unless model.noChapel}}
       <div class="progress event-progress hidden-xs col-sm-offset-1 col-sm-3 col-md-4" style="height: 32px;">
         <div class="progress-bar " role="progressbar " aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;"></div>
         <span><h5>{{model.requiredEventsString}}</h5></span>
       </div>
-
+      {{/unless}}
       <div class="col-xs-3 col-sm-3 col-md-3">
         <button class="btn btn-secondary button-padding " type="button" aria-haspopup="true" aria-expanded="false" {{action "switchList"}}>
           {{option1}}
@@ -35,10 +37,12 @@
     </form>--}}
     <div class=" moble-eventbox ">
       <div id="category-bar" class="row mobile-row">
+        {{#unless model.noChapel}}
         <div class="progress event-progress visible-xs col-xs-11" style="height: 32px; float:right;">
           <div class="progress-bar " role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%; background-color:  #b2bb1c"></div>
           <span><h5>{{model.requiredEventsString}}</h5></span>
         </div>
+        {{/unless}}
       </div>
     </div>
     </div>
