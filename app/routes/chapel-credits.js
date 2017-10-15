@@ -6,7 +6,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         //initialize variables
         let context = this;
-
+        let college_role = this.get('session.data.authenticated.token_data.college_role');
+        let noChapel = false;
         let id_name = this.get("session.data.authenticated.token_data.user_name");
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -24,6 +25,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let requiredEventsString;
         let currentDate = new Date();
         let futureEvents = [];
+
+        let setUserType = function() {
+            let IsFaculty = ( college_role.includes("fac"));
+            let IsAlumni = ( college_role.includes("alu"));
+            if(IsAlumni || IsFaculty){
+                noChapel = true;
+            }
+            
+        }
 
         //subtract a year if it is the spring semester,
         //take away the first two digits of the year ie. (yyyy -> yy)
@@ -212,13 +222,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "numEvents": numEvents,
                 "requiredEventsString": requiredEventsString,
                 "sort": sort,
+                'noChapel': noChapel,
                 "bool1": true
+                
             };
         };
 
         //send to the front end
 
         return loadAllChapel()
+            .then(setUserType)
             .then(loadChapel)
             .then(loadModel)
     },

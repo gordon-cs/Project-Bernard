@@ -65,8 +65,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let daysPercent;
         let offset2;
 
+        let college_role = this.get('session.data.authenticated.token_data.college_role');
+        let noChapel = false;
 
-
+        let setUserType = function() {
+            let IsFaculty = ( college_role.includes("fac"));
+            let IsAlumni = ( college_role.includes("alu"));
+            if(IsAlumni || IsFaculty){
+                noChapel = true;
+            }
+            
+        }
         /* Promises */
         let loadCurrentSession = function() {
             return getAsync("/sessions/current", context)
@@ -228,6 +237,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "daysLeft": daysLeft,
                 "daysPercent": daysPercent,
                 "offset2": offset2,
+                'noChapel': noChapel,
                 "offset": offset
 
             };
@@ -249,6 +259,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             .then(loadDaysLeft)
             .then(toggleProgress)
             .then(toggleDays)
+            .then(setUserType)
             .then(loadModel);
 
     }
