@@ -10,7 +10,7 @@ import deleteAsync from "gordon360/utils/delete-async";
  */
 export default Ember.Controller.extend({
     button1: 'Upcoming Events',
-    option1: 'Show Attended Events',
+    attendedButton: 'Show Attended Events',
     selectList: 'ALL',
     session: Ember.inject.service("session"),
     applicationController: Ember.inject.controller('application'),
@@ -81,12 +81,10 @@ export default Ember.Controller.extend({
         //display list of all past events events
         displayALLEvents() {
             if (this.get('model.bool1')) {
-                this.set('button1', 'Upcoming Events');
-                this.set('option1', 'Show Attended Events');
+                this.set('model.attendedButton', 'Show Attended Events');
                 this.send('filterEvents');
             } else {
-                this.set('button1', 'Attended Events');
-                this.set('option1', 'Show Upcoming Events');
+                this.set('model.attendedButton', 'Show Upcoming Events');
                 this.send('filterEvents');
             }
         },

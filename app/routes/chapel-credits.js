@@ -8,6 +8,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let context = this;
         let college_role = this.get('session.data.authenticated.token_data.college_role');
         let noChapel = false;
+        let attendedButton ="Show Attended Events";
         let id_name = this.get("session.data.authenticated.token_data.user_name");
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -224,7 +225,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "requiredEventsString": requiredEventsString,
                 "sort": sort,
                 'noChapel': noChapel,
-                "bool1": true
+                "bool1": true,
+                "attendedButton": attendedButton
                 
             };
         };
