@@ -198,6 +198,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                             futureEvents.push(allEvents[i]);
                         }
                     }
+                    
 
                     futureEvents.sort(sortDate);
                     return {
