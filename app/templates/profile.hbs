@@ -177,7 +177,7 @@
                                         <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
                                             <div class="row col-no-padding">
                                                 <div class="md-hide col-lg-6 col-no-padding">
-                                                    {{#if (and model.userLoggedIn (not model.userInfo.IsFaculty))}}
+                                                    {{#if (and model.userLoggedIn )}}
                                                         <div class="mobile-phone-privacy-button-mobile-container  dropdown">
                                                             <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Hidden" "Visible"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>

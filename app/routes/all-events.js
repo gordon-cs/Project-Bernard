@@ -171,6 +171,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 'eventsHeader': eventsHeader,
                 'filterButton': filterButton
             };
+            
 
         };
         //load everything
