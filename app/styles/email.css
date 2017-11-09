@@ -8,6 +8,11 @@
     margin-top: 20px;
     height: 300px !important;
 }
+.email #attempting-msg {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
 .email #success-msg {
     display: none;
     text-align: center;
