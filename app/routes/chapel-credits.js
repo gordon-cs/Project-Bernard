@@ -6,7 +6,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         //initialize variables
         let context = this;
-
+        let college_role = this.get('session.data.authenticated.token_data.college_role');
+        let noChapel = false;
+        let attendedButton ="Show Attended Events";
         let id_name = this.get("session.data.authenticated.token_data.user_name");
         let monthArry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -25,6 +27,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         let currentDate = new Date();
         let futureEvents = [];
 
+        let setUserType = function() {
+            let IsFaculty = ( college_role.includes("fac"));
+            let IsAlumni = ( college_role.includes("alu"));
+            if(IsAlumni || IsFaculty){
+                noChapel = true;
+            }
+            
+        }
+
         //subtract a year if it is the spring semester,
         //take away the first two digits of the year ie. (yyyy -> yy)
         //create termcode based on month,and shorten year
@@ -38,9 +49,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             if (first.startTimeObject === second.startTimeObject)
                 return 0;
             if (first.startTimeObject < second.startTimeObject)
-                return 1;
-            else
                 return -1;
+            else
+                return 11;
         }
 
         //formate the event discription and get rid of all html tags
@@ -151,7 +162,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 });
         };
 
-        //get all the chapel evcents in the future and then formate the responses
+        //get all the chapel events in the future and then formate the responses
         let loadAllChapel = function() {
             return getAsync("/events/25Live/CLAW", context)
                 .then(function(result) {
@@ -184,12 +195,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                         allEvents[i].Start_Time = monthArry[startMonth] + ". " + startDay + ", " + startYear;
 
 
-                        if (startDate.getTime() > currentDate.getTime()) {
+                        if (startDate.getTime() >= currentDate.getTime()) {
                             futureEvents.push(allEvents[i]);
                         }
                     }
+                    
 
-
+                    futureEvents.sort(sortDate);
                     return {
                         //return all the deseired information
                         "allEvents": allEvents,
@@ -206,19 +218,23 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
                 "chapelEvents": chapelEvents,
                 "allEvents": futureEvents,
                 "required": required,
-                "eventShown": chapelEvents,
+                "eventShown": futureEvents,
                 "eventsPercent": eventsPercent,
                 "searchValue": searchValue,
                 "numEvents": numEvents,
                 "requiredEventsString": requiredEventsString,
                 "sort": sort,
-                "bool1": false
+                'noChapel': noChapel,
+                "bool1": true,
+                "attendedButton": attendedButton
+                
             };
         };
 
         //send to the front end
 
         return loadAllChapel()
+            .then(setUserType)
             .then(loadChapel)
             .then(loadModel)
     },

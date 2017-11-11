@@ -1,9 +1,9 @@
 <div class="container events event-box">
-
- <img src="images\2015_Event_Fall_Highland_Games-9369_2015_12_11_03_44_45.jpg" class = "visible-xs"style="width:100%">
+ <img src="images\22135728_10159367512040635_962132086300657395_o.jpg" class = "visible-xs"style="width:100%">
   <div class=" row whitebox eventHeader">
     <div class="col-xs-12 col-sm-12 col-md-12">
-      <h4 class="event-p heading-text event-title">
+      <img src="images\22135728_10159367512040635_962132086300657395_o.jpg" class = "hidden-xs header-image"style="width:100%">
+       <h4 class="event-title">
         CAMPUS EVENTS
       </h4>
     </div>
@@ -12,19 +12,19 @@
 
   <div class=" row whitebox">
     <!-- search bar -->
-    <div class="input-group event-search col-xs-10 col-sm-4 ">
+    <div class="input-group event-search col-xs-11 col-sm-3 col-md-4">
       {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
     </div>
 
     <!-- switches to change the displayed list -->
-    <div class = " hidden-xs col-offset-md-1 col-sm-6 col-md-6">
+    {{!--<div class = " hidden-xs col-offset-md-1 col-sm-6 col-md-6">
     <div class="dropdown button-padding">
       <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <div class="mobile-phone-privacy-button-mobile"><a>{{button1}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
       </div>
       <div class="dropdown-menu mobilePhonePrivacyDropdown" aria-labelledby="dropdownMenuButton">
-        <div class="dropdown-item" {{action "checkForChaple"}}>{{option1}}</div>
+        <div class="dropdown-item" {{action "checkForChaple"}}>{{model.chapelButton}}</div>
       </div>
     </div>
 
@@ -34,49 +34,57 @@
         <div class="mobile-phone-privacy-button-mobile"><a>{{button2}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
       </div>
       <div class="dropdown-menu mobilePhonePrivacyDropdown right-button-dropdown" aria-labelledby="dropdownMenuButton">
-        <div class="dropdown-item" {{action "showfutureEvents"}}>{{option2}}</div>
+        <div class="dropdown-item" {{action "showfutureEvents"}}>{{model.pastButton}}</div>
       </div>
     </div>
-</div>
+</div>--}}
 
-    <!-- Filter button and its dropdown menu -->
-    <div class="dropdown show hidden-xs col-sm-1" style="margin-right: 10px;">
-      <button type="button" class="btn filter-button btn-danger"  {{action "showFilters"}}>
-        {{filterButton}}
-      </button>
+    <div class = " no-padding hidden-xs col-sm-8 col-md-7">
+
+      <div>
+        <button class="btn btn-secondary filterBtn button-padding " type="button" aria-haspopup="true" aria-expanded="false" {{action "checkForChaple"}}>
+          {{model.chapelButton}}
+        </button>
+      </div>
+
+      <div>
+        <button class="btn btn-secondary filterBtn button-padding " type="button" aria-haspopup="true" aria-expanded="false"{{action "showfutureEvents"}}>
+          {{model.pastButton}}
+        </button>
+      </div>
+
+          <!-- Filter button and its dropdown menu -->
+      <div class="dropdown">
+        <button type="button" class="btn filterBtn filter-button btn-primary"  {{action "showFilters"}}>
+          {{model.filterButton}}
+        </button>
+      </div>
+
     </div>
-    {{!--
-    <div class="material-switch no-padding hidden-xs col-sm-1">
-      <input id="switch2" type="checkbox" onclick={{action "checkForChaple"}}/>
-      <label for="switch2" class="label-default"></label>
-      <h4>ALL&nbspCL&W</h4>
-    </div> --}}
-
-    {{!-- <div class="material-switch no-padding hidden-xs col-sm-1">
-      <input id="switch2" type="checkbox" onclick={{action "showfutureEvents"}}/>
-      <label for="switch2" class="label-default"></label>
-      <h4>Include&nbsp;Past&nbsp;Events</h4>
-    </div> --}}
   
   <!-- same switches but formated for mobile -->
-  <div class="moble-eventbox">
    
-    <div id="category-bar" class="row">
-        <form {{action "chapelSwitch" on="change"}}>
-            <div class="material-switch no-padding visible-xs col-xs-offset-1 col-xs-2 mobile-toggle mobile-toggle-all-events">
-                {{input id="switch3" type="checkbox" checked= model.onlyChapel}}
-                <label for="switch3" class="label-default"></label>
-                <!-- <div class="mobile-toggle-label"><h5>All</h5><h5>CL&W <br>Only</h5></div> -->
-                <h5><span>All</span><span>CL&W&nbsp;Only</span></h5>
-            </div>
-        </form>
-        <div class="dropdown show col-xs-offset-3 col-xs-4 visible-xs" style="margin-right: 10px; margin-right: 0;">
+    <div class="row mobile-event-menu">
+      <div>
+        <button class="btn visible-xs col-xs-6 mobile-events-button button-padding" type="button" aria-haspopup="true" aria-expanded="false" {{action "checkForChaple"}}>
+          {{model.chapelButton}}
+        </button>
+      </div>
+
+      <div>
+        <button class="btn visible-xs col-xs-5 mobile-events-button button-padding " type="button" aria-haspopup="true" aria-expanded="false"{{action "showfutureEvents"}}>
+          {{model.pastButton}}
+        </button>
+      </div>
+      </div>
+      
+        <div class="dropdown show col-xs-4 visible-xs" style="margin-right: 10px; margin-right: 0;">
             <button type="button" class="btn filter-button btn-primary" {{action "showFilters"}}>
-                {{filterButton}}
+                {{model.filterButton}}
             </button>
         </div>
-    </div>
-  </div>
+  
+  
   </div>
 
   <div class="filter-container">
@@ -160,7 +168,7 @@
   
 
   <div class=" menu-block row header-container lightgraybox moble-eventbox visible-xs">
-    <div class = "event-header col-xs-9">{{eventsHeader}}</div>
+    <div class = "event-header col-xs-9">{{model.eventsHeader}}</div>
      {{#if model.onlyChapel}}
    <img src="images\Church-Icon-300x185.png"style="width: 50px; float:right; padding-bottom: 10px; color: white;">
       {{else}}<span class="glyphicon glyphicon-calendar" style = "color: white; float: right; padding-right: 10px;" aria-hidden="true"></span>{{/if}}  

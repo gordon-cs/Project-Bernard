@@ -84,7 +84,7 @@
             </div>
             {{#if model.userLoggedIn}}
                 <div class="row profile-action-block md-show">
-                    <div class="{{if model.userInfo.IsFaculty "col-xs-6" "col-xs-4"}} profile-action-button-container">
+                    <div class="col-xs-4 profile-action-button-container">
                         <div class="profile-action-button" onclick={{action "showEditLinksModal"}}>
                             <div class="action-icon">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -92,7 +92,7 @@
                             <div class="action-link">Edit your social media links</div>
                         </div>
                     </div>
-                    <div class="{{if model.userInfo.IsFaculty "col-xs-6" "col-xs-4"}} profile-action-button-container">
+                    <div class="col-xs-4 profile-action-button-container">
                         <div class="profile-action-button" onclick={{action "showEditProfilePictureModal" true}}>
                             <div class="action-icon">
                                 <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
@@ -100,7 +100,6 @@
                             <div class="action-link">Update your profile picture</div>
                         </div>
                     </div>
-                    {{#unless model.userInfo.IsFaculty}}
                     <div class="col-xs-4 profile-action-button-container">
                         <div class="profile-action-button" onclick={{action "toggleMobilePhonePrivacy"}}>
                             <div class="action-icon">
@@ -109,7 +108,6 @@
                             <div class="action-link">{{if model.userInfo.IsMobilePhonePrivate "Show mobile phone number" "Hide mobile phone number"}}</div>
                         </div>
                     </div>
-                    {{/unless}}
                 </div>
             {{/if}}
         </div>
@@ -179,7 +177,7 @@
                                         <div class="col-xs-8 col-no-padding personal-information-entry-value cell-phone-value">
                                             <div class="row col-no-padding">
                                                 <div class="md-hide col-lg-6 col-no-padding">
-                                                    {{#if (and model.userLoggedIn (not model.userInfo.IsFaculty))}}
+                                                    {{#if (and model.userLoggedIn )}}
                                                         <div class="mobile-phone-privacy-button-mobile-container  dropdown">
                                                             <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 <div class="mobile-phone-privacy-button-mobile">{{if model.userInfo.IsMobilePhonePrivate "Hidden" "Visible"}} <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>

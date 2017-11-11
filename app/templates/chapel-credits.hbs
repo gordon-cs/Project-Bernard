@@ -1,32 +1,32 @@
 <div class="container events event-box">
-  <img src="images\chapel-sunset-hero_2016_08_19_02_01_38.jpg" class = "visible-xs"style="width:100%">
+  <img src="images\chapel-sunset-hero_2016_08_19_02_01_38.jpg" class = "visible-xs header-image"style="width:100%">
   <div class=" row whitebox eventHeader">
     <div class="col-xs-12 col-sm-12 col-md-12">
-      <h4 class="event-title">
-        Christian Life & Worship Events
-      </h4>
+      <img src="images\chapel-sunset-hero_2016_08_19_02_01_38.jpg" class = "hidden-xs header-image"style="width:100%">
+        <h4 class="event-title" >
+          Christian Life & Worship Events
+        </h4>
     </div>
   </div>
   <div class="whitebox ">
     <div class="row ">
-      <div class="event-search col-xs-11 col-sm-4 col-md-4">
+      <div class="event-search no-padding col-xs-5 col-sm-4 col-md-4">
         {{input value=model.searchValue key-up=(action "filterEvents") class="form-control" placeholder="Search for..."}}
       </div>
+
+      {{#unless model.noChapel}}
       <div class="progress event-progress hidden-xs col-sm-offset-1 col-sm-3 col-md-4" style="height: 32px;">
         <div class="progress-bar " role="progressbar " aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%;"></div>
         <span><h5>{{model.requiredEventsString}}</h5></span>
       </div>
-      <div class=" hidden-xs  no-padding button-padding dropdown">
-        <div class="social-media-buttons dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          <div class="mobile-phone-privacy-button-mobile"><a>{{button1}}</a> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
-        </div>
-        <div class="dropdown-menu mobilePhonePrivacyDropdown right-button-dropdown" aria-labelledby="dropdownMenuButton">
-          <div class="dropdown-item"  {{action "switchList"}}>{{option1}}</div>
-        </div>
+      {{/unless}}
+      <div class="col-xs-3 col-sm-3 col-md-3">
+        <button class="btn btn-secondary button-padding " type="button" aria-haspopup="true" aria-expanded="false" {{action "switchList"}}>
+          {{model.attendedButton}}
+        </button>
       </div>
     </div>
-    <form {{action "displayALLEvents" on="change"}}>
+    {{!--<form {{action "displayALLEvents" on="change"}}>
       <div class="material-switch visible-xs col-xs-2 mobile-toggle" style="padding-top: 10px;" id="mobile-toggle">
           <!-- <h5>Past</h5> -->
         {{input id="switch" type="checkbox" checked= model.bool1}}
@@ -34,13 +34,15 @@
         <h5><span>Attended</span><span>Future</span></h5>
         <!-- <h5>Future</h5> -->
       </div>
-    </form>
+    </form>--}}
     <div class=" moble-eventbox ">
       <div id="category-bar" class="row mobile-row">
-        <div class="progress event-progress visible-xs col-xs-6" style="height: 32px; float:right;">
-          <div class="progress-bar " role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.numEvents}}%; background-color:  #b2bb1c"></div>
+        {{#unless model.noChapel}}
+        <div class="progress event-progress visible-xs col-xs-11" style="height: 32px; float:right;">
+          <div class="progress-bar " role="progressbar" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="30" style="width: {{model.eventsPercent}}%; background-color:  #b2bb1c"></div>
           <span><h5>{{model.requiredEventsString}}</h5></span>
         </div>
+        {{/unless}}
       </div>
     </div>
     </div>

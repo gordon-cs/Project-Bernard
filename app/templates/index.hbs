@@ -1,19 +1,21 @@
 <div class="container-fluid index">
   <div class="row hey">
-
+          {{#unless model.noChapel}}
           <div class="progress visible-xs" id="progress-bars">
-              <div class="progress-bar id=one" role="progressbar" style="width: {{model.eventsPercent}}%; background-color:  #b2bb1c" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar id=one" role="progressbar" style="width: {{model.eventsPercent}}%;" aria-valuenow="{{model.numEvents}}" aria-valuemin="0" aria-valuemax="100">
                 {{#link-to "chapel-credits"}}<span><h5 class="progress-text">{{model.requiredEventsString}}</h5></span> {{/link-to}}
               </div>
           </div>
+          {{/unless}}
 
-          <div class="progress visible-xs">
+          <div class="progress visible-xs"id="progress-bars">
               <div class="progress-bar id=one" role="progressbar" style="width: {{model.daysPercent}}%; background-color:  #b2bb1c" aria-valuenow="{{model.totalDays}}" aria-valuemin="0" aria-valuemax="100">
                 <span><h5 class="progress-text">{{model.daysLeft}} Days Until End of {{model.currentSession.SessionDescription}}</h5></span>
               </div>
           </div>
-
+          
       <div class="col-sm-4 col-md-3 progress-container container">
+        {{#unless model.noChapel}}
         <div class = "row whitebox chartbox hidden-xs">
           <h3 class = "graphHeader navybox"> Christian Life & Worship Credits</h3>
         {{#link-to "chapel-credits"}}
@@ -43,11 +45,12 @@
                   <circle r="70" cx="100" cy="100" fill="white" stroke="white" stroke-width="20" filter="url(#innershadow)"></circle>
                   <circle r="90" cx="100" cy="100" fill="transparent" stroke="#31342B" stroke-width="20"></circle>
                   <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke="#0aaeef" stroke-width="20" style="stroke-dashoffset:{{model.offset}}px" stroke-dasharray="565.48" transform="rotate(-90, 100, 100)"></circle>
-                  <text x="100" y="100" font-size="20"  text-anchor="middle">{{model.requiredEventsString}}</text>
+                  <text x="100" y="100" font-size="18"  text-anchor="middle">{{model.requiredEventsString}}</text>
             </svg>
             </div>
         {{/link-to}}
           </div>
+        {{/unless}}
 
         <div class = "row whitebox chartbox hidden-xs">
         <h3 class = "graphHeader navybox">{{model.currentSession.SessionDescription}}</h3>
@@ -78,7 +81,7 @@
                   <circle r="90" cx="100" cy="100" fill="transparent" stroke="#31342B" stroke-width="20"></circle>
                   <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke="#bcc61e" stroke-width="20" style="stroke-dashoffset:{{model.offset2}}px" stroke-dasharray="565.48" transform="rotate(-90, 100, 100)"></circle>
 
-                  <text x="100" y="100" font-size="20" text-anchor="middle">{{model.daysLeft}} Days Left</text>
+                  <text x="100" y="100" font-size="18" text-anchor="middle">{{model.daysLeft}} Days Left</text>
             </svg>
       </div>
       </div>

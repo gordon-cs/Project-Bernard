@@ -1,4 +1,4 @@
-/* jshint node: true */
+﻿/* jshint node: true */
 
 module.exports = function(environment) {
     var ENV = {
@@ -17,6 +17,7 @@ module.exports = function(environment) {
             // Here you can pass flags/options to your application instance
             // when it is created
             apiUrl: 'https://360ApiTrain.gordon.edu/api',
+            // baseUrl: 'https://360ApiTrain.gordon.edu'
             baseUrl: 'https://360ApiTrain.gordon.edu'
 
         },
