@@ -23,6 +23,8 @@ export default Ember.Controller.extend({
     },
     actions: {
         send() {
+            $("#email-div").hide();
+            $("#attempting-msg").show();
             // Make Request for Access Token
             let makeRequest = function(credentials) {
                 let context = this;
@@ -62,10 +64,10 @@ export default Ember.Controller.extend({
                         "Subject": emailSubject,
                         "Content": emailContent,
                         "Password": password
-                    }
+                    } 
                     putAsync("/emails", data, context)
                     .then(function(){
-                        $("#email-div").hide();
+                        $("#attempting-msg").hide();
                         $("#success-msg").show();
                     })
                 }
@@ -80,7 +82,7 @@ export default Ember.Controller.extend({
                     }
                     putAsync("/emails/activity/" + activityCode + "/session/" + sessionCode , data, context)
                     .then(function(){
-                        $("#email-div").hide();
+                        $("#attempting-msg").hide();
                         $("#success-msg").show();
                     })
                 }
