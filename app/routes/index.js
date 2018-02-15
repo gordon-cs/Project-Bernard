@@ -120,7 +120,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
         //chapel progress bar promise
         let chapelProgress = function() {
-            return getAsync("/events/chapel/" + id_name + "/" + "17FA", context)
+            return getAsync("/events/chapel/" + id_name + "/" + "17SP", context)
                 .then(function(result) {
                     chapelEvents = result;
                     numEvents = chapelEvents.length;
